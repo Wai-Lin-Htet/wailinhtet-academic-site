@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cambridge IGCSE Computer Science (0478) - Syllabus Explorer</title>
+  <style>
+    :root {
+      /* Apple-inspired Light Theme Colors */
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-card: #f8fafc;
+      --border: #d2d2d7;
+      --text-main: #1d1d1f;
+      --text-muted: #86868b;
+      
+      /* Course Accents for Papers */
+      --accent-p1: #0066cc; /* Classic Blue */
+      --accent-p1-glow: #e8f0fe;
+      --accent-p2: #5e5ce6; /* Indigo */
+      --accent-p2-glow: #f0efff;
+      
+      /* Typography */
+      --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-system);
+      line-height: 1.5;
+      padding-bottom: 5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Glassmorphism Header */
+    header {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0.8rem 1.5rem;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-tag {
+      font-family: var(--font-mono);
+      background: #1d1d1f;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* Minimal Inputs & Buttons */
+    .search-input {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 0.55rem 0.95rem;
+      color: var(--text-main);
+      font-family: var(--font-system);
+      font-size: 0.85rem;
+      outline: none;
+      min-width: 220px;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      background: #ffffff;
+      border-color: var(--accent-p1);
+      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 0.45rem 0.85rem;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      background: rgba(0, 0, 0, 0.04);
+      color: var(--text-main);
+    }
+
+    .filter-btn.active[data-filter="all"] {
+      background: #1d1d1f;
+      color: #ffffff;
+    }
+
+    .filter-btn.active-p1 {
+      background: var(--accent-p1-glow);
+      color: var(--accent-p1);
+    }
+
+    .filter-btn.active-p2 {
+      background: var(--accent-p2-glow);
+      color: var(--accent-p2);
+    }
+
+    /* Container Layout */
+    .container {
+      max-width: 1200px;
+      margin: 2.5rem auto 0;
+      padding: 0 1.5rem;
+    }
+
+    /* Soft Cards for Assessment Matrix */
+    .exam-overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .exam-card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.04);
+      position: relative;
+    }
+
+    .exam-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .badge {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 12px;
+    }
+
+    .badge-p1 { background: var(--accent-p1-glow); color: var(--accent-p1); }
+    .badge-p2 { background: var(--accent-p2-glow); color: var(--accent-p2); }
+
+    .exam-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .exam-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Section Headings */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 3rem 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .section-title .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-p1 { background: var(--accent-p1); }
+    .dot-p2 { background: var(--accent-p2); }
+
+    /* Topic Cards Grid */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .topic-card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .topic-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .topic-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+
+    .topic-num {
+      font-family: var(--font-system);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .topic-title-text {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .subtopics-list {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .subtopics-list li {
+      display: flex;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+
+    /* Minimal SVG Chevron for lists */
+    .subtopics-list li::before {
+      content: url('data:image/svg+xml;utf8,<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%2386868b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>');
+      margin-right: 6px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .view-btn {
+      width: 100%;
+      margin-top: 1.25rem;
+      background: rgba(0, 0, 0, 0.03);
+      border: none;
+      font-weight: 500;
+      font-size: 0.85rem;
+      padding: 0.7rem;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .topic-card:not(.paper-2) .view-btn { color: var(--accent-p1); }
+    .topic-card.paper-2 .view-btn { color: var(--accent-p2); }
+
+    .view-btn:hover {
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    /* Modal Layout */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: var(--surface);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 800px;
+      max-height: 85vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+
+    .modal-header-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .close-btn {
+      background: rgba(0,0,0,0.05);
+      border: none;
+      color: var(--text-muted);
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .close-btn:hover {
+      background: rgba(0,0,0,0.1);
+      color: var(--text-main);
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .sub-section {
+      margin-bottom: 2rem;
+    }
+
+    .sub-section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .modal-p1 .sub-section-title { color: var(--accent-p1); }
+    .modal-p2 .sub-section-title { color: var(--accent-p2); }
+
+    .objectives-block, .guidance-block {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .block-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .content-list {
+      list-style-type: none;
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .content-list li {
+      position: relative;
+      padding-left: 1.25rem;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    .content-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0.35rem;
+      color: var(--text-muted);
+    }
+
+    .modal-p1 .guidance-list li::before { color: var(--accent-p1); }
+    .modal-p2 .guidance-list li::before { color: var(--accent-p2); }
+
+    @media (max-width: 768px) {
+      .header-container { flex-direction: column; align-items: stretch; }
+      .search-input { width: 100%; }
+      .topics-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Footer styling */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .header-container { flex-direction: column; align-items: stretch; }
+      .search-input { width: 100%; }
+      .topics-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="brand">
+        <span class="brand-tag">0478</span>
+        <div class="brand-title">IGCSE Computer Science Hub</div>
+      </div>
+      <div class="filter-group">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search topics, keywords...">
+        <button class="filter-btn active" data-filter="all">All Topics</button>
+        <button class="filter-btn" data-filter="p1">Paper 1</button>
+        <button class="filter-btn" data-filter="p2">Paper 2</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Assessment Overview Cards -->
+    <section class="exam-overview-grid">
+      <div class="exam-card p1">
+        <div class="exam-title">
+          <span>Paper 1: Computer Systems</span>
+          <span class="badge badge-p1">50% Weight</span>
+        </div>
+        <div class="exam-meta">
+          <span>⏱ 1h 45m</span>
+          <span>📊 75 Marks</span>
+          <span>🚫 No Calculator</span>
+        </div>
+        <p class="exam-desc">Covers Topics 1–6: Data Representation, Data Transmission, Hardware, Software, The Internet & Emerging Tech.</p>
+      </div>
+
+      <div class="exam-card p2">
+        <div class="exam-title">
+          <span>Paper 2: Algorithms, Programming & Logic</span>
+          <span class="badge badge-p2">50% Weight</span>
+        </div>
+        <div class="exam-meta">
+          <span>⏱ 1h 45m</span>
+          <span>📊 75 Marks</span>
+          <span>⚡ 15-Mark Scenario</span>
+        </div>
+        <p class="exam-desc">Covers Topics 7–10: Algorithms, Practical Coding & Trace Tables, Databases, and Boolean Circuits.</p>
+      </div>
+    </section>
+
+    <!-- Syllabus Sections -->
+    <div id="topicsContainer">
+      <!-- Injected via JavaScript -->
+    </div>
+  </main>
+
+   <footer>
+    <div class="footer-container">
+      Created by wailinhtet
+    </div>
+  </footer>
+
+  <!-- Detail Modal -->
+  <div class="modal-overlay" id="detailModal">
+    <div class="modal-content" id="modalContent">
+      <div class="modal-header">
+        <div class="modal-header-title" id="modalTitle">Topic Details</div>
+        <button class="close-btn" id="closeModal">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Detailed Syllabus Dataset
+    const syllabusData = [
+      {
+        id: "t1",
+        paper: "p1",
+        number: "Topic 1",
+        title: "Data Representation",
+        subsections: [
+          {
+            code: "1.1",
+            title: "Number Systems",
+            objectives: [
+              "Understand how and why computers use binary to represent all forms of data.",
+              "Understand denary (base 10), binary (base 2), and hexadecimal (base 16) systems.",
+              "Convert between positive denary, binary, and hexadecimal integers (up to 16-bit binary).",
+              "Understand reasons for using hexadecimal (shorter, easier for humans to read/debug).",
+              "Add two positive 8-bit binary integers and identify overflow errors (>255 in 8-bit).",
+              "Perform logical binary shifts (left multiplies, right divides) and track bit losses.",
+              "Represent positive and negative 8-bit integers using two's complement."
+            ],
+            guidance: [
+              "Calculations use integer values only.",
+              "Overflow occurs when a computed value exceeds the register's predefined capacity limit.",
+              "Shift rules: bits shifted off the end are discarded; zeros are shifted in from opposite side."
+            ]
+          },
+          {
+            code: "1.2",
+            title: "Text, Sound and Images",
+            objectives: [
+              "Represent text using character sets (ASCII vs Unicode).",
+              "Explain sound representation, sample rate, and sample resolution effects.",
+              "Explain image representation using pixels, resolution, and colour depth."
+            ],
+            guidance: [
+              "Unicode supports international scripts and emojis but requires more bits per character.",
+              "Sample rate = samples per second; Sample resolution = bits per sample.",
+              "Increasing resolution and colour depth enhances quality but proportionally increases file size."
+            ]
+          },
+          {
+            code: "1.3",
+            title: "Data Storage and Compression",
+            objectives: [
+              "Measure data storage (bit, nibble, byte, KiB, MiB, GiB, TiB, PiB, EiB).",
+              "Calculate image and sound file sizes using given specifications.",
+              "Understand the need for compression (bandwidth, storage, transmission time).",
+              "Differentiate between lossy and lossless compression (e.g., Run Length Encoding - RLE)."
+            ],
+            guidance: [
+              "Must use 1024-based binary prefix conversions (1 KiB = 1024 Bytes), not 1000.",
+              "Lossy permanently discards redundant data; lossless compresses without data loss."
+            ]
+          }
+        ]
+      },
+      {
+        id: "t2",
+        paper: "p1",
+        number: "Topic 2",
+        title: "Data Transmission",
+        subsections: [
+          {
+            code: "2.1",
+            title: "Types and Methods of Transmission",
+            objectives: [
+              "Describe packet structure (header, payload, trailer) and packet switching.",
+              "Compare transmission directions: Simplex, Half-duplex, and Full-duplex.",
+              "Compare transmission methods: Serial vs. Parallel.",
+              "Explain the operation, advantages, and drawbacks of the USB interface."
+            ],
+            guidance: [
+              "Packet header contains destination IP, source IP, and packet sequence number.",
+              "Routers route packets independently; packets reassembled upon final arrival."
+            ]
+          },
+          {
+            code: "2.2",
+            title: "Methods of Error Detection",
+            objectives: [
+              "Understand causes of transmission interference (data loss, gain, corruption).",
+              "Describe detection algorithms: parity checks (odd/even), checksums, and echo checks.",
+              "Explain check digits in data entry (ISBN, Barcodes).",
+              "Describe Automatic Repeat Query (ARQ) using acknowledgments and timeouts."
+            ],
+            guidance: [
+              "Parity byte and block checks allow identification of both corrupted bit positions.",
+              "ARQ retransmits if positive acknowledgement is missing before timeout expires."
+            ]
+          },
+          {
+            code: "2.3",
+            title: "Encryption",
+            objectives: [
+              "Understand the necessity of encryption for secure data transfer.",
+              "Distinguish between symmetric and asymmetric encryption (public/private key pairs)."
+            ],
+            guidance: [
+              "Symmetric encryption uses a single shared secret key.",
+              "Asymmetric encryption uses matching public and private keys."
+            ]
+          }
+        ]
+      },
+      {
+        id: "t3",
+        paper: "p1",
+        number: "Topic 3",
+        title: "Hardware",
+        subsections: [
+          {
+            code: "3.1",
+            title: "Computer Architecture",
+            objectives: [
+              "Understand the CPU role and microprocessors.",
+              "Von Neumann architecture components: ALU, CU, System Buses, and Registers (PC, MAR, MDR, CIR, ACC).",
+              "Explain the Fetch-Decode-Execute (FDE) cycle step-by-step.",
+              "Analyze CPU performance factors: clock speed, cache size, and multiple cores.",
+              "Identify characteristics of embedded systems vs general-purpose computers."
+            ],
+            guidance: [
+              "Buses: Address bus (unidirectional), Data bus (bidirectional), Control bus (bidirectional).",
+              "Instruction set: Machine code commands supported by the CPU."
+            ]
+          },
+          {
+            code: "3.2",
+            title: "Input and Output Devices",
+            objectives: [
+              "Explain operational mechanics of input devices (scanners, touchscreens, mic, etc.).",
+              "Explain operational mechanics of output devices (actuators, DLP/LCD projectors, printers, displays).",
+              "Identify types of sensors and evaluate suitability for specific environments."
+            ],
+            guidance: [
+              "Touchscreens: Resistive, Capacitive, and Infra-red.",
+              "Sensor scope: acoustic, accelerometer, flow, gas, humidity, IR, level, light, magnetic, moisture, pH, pressure, proximity, temperature."
+            ]
+          },
+          {
+            code: "3.3",
+            title: "Data Storage",
+            objectives: [
+              "Compare Primary storage (RAM vs ROM) and Secondary storage.",
+              "Explain operational technologies: Magnetic (HDD), Optical (CD/DVD/Blu-ray), Solid-State (NAND/NOR flash).",
+              "Describe virtual memory paging mechanisms.",
+              "Evaluate cloud storage vs local on-premise storage."
+            ],
+            guidance: [
+              "Optical uses lasers reading reflective pits and lands; Solid-state uses floating/control gates."
+            ]
+          },
+          {
+            code: "3.4",
+            title: "Network Hardware",
+            objectives: [
+              "Role of Network Interface Cards (NICs) and MAC addresses.",
+              "Structure of MAC addresses (Manufacturer code + Serial number).",
+              "Understand IP addresses: Static vs Dynamic, and IPv4 vs IPv6.",
+              "Role of routers in managing network routing and IP assignment."
+            ],
+            guidance: [
+              "MAC is burned-in hexadecimal; IP is assigned dynamically or statically by the network."
+            ]
+          }
+        ]
+      },
+      {
+        id: "t4",
+        paper: "p1",
+        number: "Topic 4",
+        title: "Software",
+        subsections: [
+          {
+            code: "4.1",
+            title: "Types of Software & Interrupts",
+            objectives: [
+              "Distinguish System Software (OS, utilities) from Application Software.",
+              "Explain core OS roles (file, memory, process/multitasking, peripherals, security).",
+              "Explain the software stack: Hardware -> Bootloader/Firmware -> OS -> Applications.",
+              "Explain hardware vs software interrupts and the Interrupt Service Routine (ISR)."
+            ],
+            guidance: [
+              "Hardware interrupts: keyboard, mouse click, printer out-of-paper.",
+              "Software interrupts: division by zero, null pointer, memory conflict."
+            ]
+          },
+          {
+            code: "4.2",
+            title: "Languages, Translators & IDEs",
+            objectives: [
+              "Compare High-level vs Low-level languages (abstraction vs direct hardware control).",
+              "Role of Assembly language, mnemonics, and Assemblers.",
+              "Contrast Compilers and Interpreters (translation time, execution speed, error detection).",
+              "Identify common IDE utilities (prettyprint, auto-complete, debugging, runtime environment)."
+            ],
+            guidance: [
+              "Compilers produce standalone executables; Interpreters execute line-by-line during development."
+            ]
+          }
+        ]
+      },
+      {
+        id: "t5",
+        paper: "p1",
+        number: "Topic 5",
+        title: "The Internet and its Uses",
+        subsections: [
+          {
+            code: "5.1",
+            title: "The Internet & The World Wide Web",
+            objectives: [
+              "Distinguish the Internet (infrastructure) from the WWW (content & hypertext).",
+              "Break down Uniform Resource Locators (URL protocol, domain, file path).",
+              "Explain HTTP and HTTPS (SSL/TLS security).",
+              "Trace how pages are retrieved: Browser -> DNS -> Web Server -> HTML render.",
+              "Analyze session vs persistent cookies."
+            ],
+            guidance: [
+              "DNS translates human-readable domain names into routable machine IP addresses."
+            ]
+          },
+          {
+            code: "5.2",
+            title: "Digital Currency",
+            objectives: [
+              "Understand digital currencies and electronic exchange.",
+              "Explain blockchain structure: decentralized, time-stamped, immutable digital ledger."
+            ],
+            guidance: [
+              "Blocks link via cryptographic hashes; records cannot be retroactively tampered with."
+            ]
+          },
+          {
+            code: "5.3",
+            title: "Cyber Security",
+            objectives: [
+              "Recognize cyber threats: brute-force, DDoS, malware types, pharming, phishing, social engineering.",
+              "Apply defense mechanisms: Firewalls, anti-malware, biometrics, 2FA, proxy servers."
+            ],
+            guidance: [
+              "Phishing relies on deceptive emails; pharming redirects traffic via altered DNS/host cache."
+            ]
+          }
+        ]
+      },
+      {
+        id: "t6",
+        paper: "p1",
+        number: "Topic 6",
+        title: "Automated & Emerging Technologies",
+        subsections: [
+          {
+            code: "6.1",
+            title: "Automated Systems",
+            objectives: [
+              "Describe integration of Sensors, Microprocessors, and Actuators in control loops.",
+              "Evaluate advantages and limitations in industry, agriculture, and transport."
+            ],
+            guidance: [
+              "Sensor readings convert via ADC, microprocessor assesses against rules, actuator triggers actions."
+            ]
+          },
+          {
+            code: "6.2",
+            title: "Robotics",
+            objectives: [
+              "Define robotics and characteristics of robots (mechanical frame, electrical sensors, programmable).",
+              "Assess benefits and trade-offs of robotic deployment across domains."
+            ],
+            guidance: [
+              "Robots perform dangerous or repetitive work continuously with high consistency."
+            ]
+          },
+          {
+            code: "6.3",
+            title: "Artificial Intelligence",
+            objectives: [
+              "Define AI and characteristics: reasoning, learning, and adaptability.",
+              "Examine Expert Systems: Knowledge base, Rule base, Inference engine, and User interface.",
+              "Understand Machine Learning algorithms and automatic rule/model adaptation."
+            ],
+            guidance: [
+              "Scope is strictly limited to expert systems and basic principles of machine learning."
+            ]
+          }
+        ]
+      },
+      {
+        id: "t7",
+        paper: "p2",
+        number: "Topic 7",
+        title: "Algorithm Design & Problem-Solving",
+        subsections: [
+          {
+            code: "7.1",
+            title: "Development Life Cycle & Decomposition",
+            objectives: [
+              "Describe Program Development Life Cycle: Analysis, Design, Coding, and Testing.",
+              "Apply problem decomposition and construct structure diagrams.",
+              "Represent algorithms using standard Flowcharts and Cambridge pseudocode notation."
+            ],
+            guidance: [
+              "Analysis involves abstraction; Design includes flowcharts, pseudocode, structure diagrams."
+            ]
+          },
+          {
+            code: "7.2",
+            title: "Standard Algorithms & Validation",
+            objectives: [
+              "Implement standard algorithms: Linear search, Bubble sort, Totalling, Counting, Extremes (Min/Max/Avg).",
+              "Distinguish Validation (Range, Length, Type, Presence, Format, Check digit) from Verification (Visual, Double entry).",
+              "Design comprehensive test cases: Normal, Abnormal, Extreme, and Boundary data.",
+              "Trace algorithms using dry-run Trace Tables."
+            ],
+            guidance: [
+              "Extreme data: outermost valid values.",
+              "Boundary data: adjacent pair at the edge (largest valid + smallest rejected)."
+            ]
+          }
+        ]
+      },
+      {
+        id: "t8",
+        paper: "p2",
+        number: "Topic 8",
+        title: "Programming Concepts",
+        subsections: [
+          {
+            code: "8.1",
+            title: "Core Syntax & Structures",
+            objectives: [
+              "Declare and assign variables and constants across base data types.",
+              "Apply basic programming constructs: Sequence, Selection (IF, CASE), Iteration (Count, Pre/Post-conditioned).",
+              "Execute string manipulation: length, substring, upper, lower.",
+              "Apply arithmetic, relational (<, <=, >, >=, =, <>), and Boolean operators (AND, OR, NOT).",
+              "Construct nested control structures (up to 3 levels deep).",
+              "Declare Procedures and Functions with up to 3 parameters; handle local vs global scope.",
+              "Employ standard library functions (DIV, MOD, ROUND, RANDOM)."
+            ],
+            guidance: [
+              "Strings can be 0-indexed or 1-indexed depending on context.",
+              "DIV gives integer division; MOD computes the remainder."
+            ]
+          },
+          {
+            code: "8.2",
+            title: "Arrays",
+            objectives: [
+              "Declare and iterate through 1D and 2D arrays.",
+              "Read, populate, and process nested data matrices."
+            ],
+            guidance: [
+              "Candidate code will be examined for algorithmic logic over specific language syntax."
+            ]
+          },
+          {
+            code: "8.3",
+            title: "File Handling",
+            objectives: [
+              "Open, read, write, and close sequential text files.",
+              "Read/write individual data lines and values."
+            ],
+            guidance: [
+              "Ensures data persistence between individual program runs."
+            ]
+          }
+        ]
+      },
+      {
+        id: "t9",
+        paper: "p2",
+        number: "Topic 9",
+        title: "Databases",
+        subsections: [
+          {
+            code: "9.1",
+            title: "Relational Concepts & SQL",
+            objectives: [
+              "Design flat-file single-table database structures (fields, records, appropriate data types).",
+              "Select appropriate Primary Keys for entity identification.",
+              "Write and interpret basic SQL queries: SELECT, FROM, WHERE, ORDER BY (ASC/DESC), SUM, COUNT, AND, OR."
+            ],
+            guidance: [
+              "Syllabus focuses strictly on single-table operations; multi-table joins are excluded."
+            ]
+          }
+        ]
+      },
+      {
+        id: "t10",
+        paper: "p2",
+        number: "Topic 10",
+        title: "Boolean Logic",
+        subsections: [
+          {
+            code: "10.1",
+            title: "Logic Gates & Truth Tables",
+            objectives: [
+              "Recognize standard symbols and behavior for NOT, AND, OR, NAND, NOR, and XOR gates.",
+              "Construct logic circuits from problem statements, logic expressions, or truth tables.",
+              "Derive complete truth tables (up to 3 inputs and 1 output).",
+              "Formulate boolean expressions directly from circuits without boolean simplification."
+            ],
+            guidance: [
+              "NOT is single-input; all other gates take 2 inputs. Maximum 3 inputs per combined circuit."
+            ]
+          }
+        ]
+      }
+    ];
+
+    // Rendering Logic
+    const topicsContainer = document.getElementById('topicsContainer');
+    const searchInput = document.getElementById('searchInput');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function renderTopics() {
+      topicsContainer.innerHTML = '';
+
+      const filteredData = syllabusData.filter(item => {
+        const matchesFilter = (currentFilter === 'all') || (item.paper === currentFilter);
+        const searchMatches = 
+          item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.subsections.some(sub => 
+            sub.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            sub.objectives.some(obj => obj.toLowerCase().includes(searchQuery.toLowerCase()))
+          );
+        return matchesFilter && searchMatches;
+      });
+
+      if (filteredData.length === 0) {
+        topicsContainer.innerHTML = `
+          <div style="text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
+            <h3>No topics found</h3>
+            <p>Try searching for a different keyword or reset the filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Group by Paper
+      const p1Items = filteredData.filter(i => i.paper === 'p1');
+      const p2Items = filteredData.filter(i => i.paper === 'p2');
+
+      if (p1Items.length > 0) {
+        const p1Title = document.createElement('h2');
+        p1Title.className = 'section-title';
+        p1Title.innerHTML = `<span class="dot dot-p1"></span> Paper 1: Computer Systems`;
+        topicsContainer.appendChild(p1Title);
+
+        const p1Grid = document.createElement('div');
+        p1Grid.className = 'topics-grid';
+        p1Items.forEach(topic => p1Grid.appendChild(createTopicCard(topic)));
+        topicsContainer.appendChild(p1Grid);
+      }
+
+      if (p2Items.length > 0) {
+        const p2Title = document.createElement('h2');
+        p2Title.className = 'section-title';
+        p2Title.style.marginTop = '3rem';
+        p2Title.innerHTML = `<span class="dot dot-p2"></span> Paper 2: Algorithms, Programming & Logic`;
+        topicsContainer.appendChild(p2Title);
+
+        const p2Grid = document.createElement('div');
+        p2Grid.className = 'topics-grid';
+        p2Items.forEach(topic => p2Grid.appendChild(createTopicCard(topic)));
+        topicsContainer.appendChild(p2Grid);
+      }
+    }
+
+    function createTopicCard(topic) {
+      const card = document.createElement('div');
+      card.className = `topic-card ${topic.paper === 'p2' ? 'paper-2' : ''}`;
+
+      const badgeClass = topic.paper === 'p1' ? 'badge-p1' : 'badge-p2';
+      const badgeText = topic.paper === 'p1' ? 'Paper 1' : 'Paper 2';
+
+      let subListItems = topic.subsections
+        .map(sub => `<li><strong>${sub.code}</strong> ${sub.title}</li>`)
+        .join('');
+
+      card.innerHTML = `
+        <div>
+          <div class="topic-header">
+            <span class="topic-num">${topic.number}</span>
+            <span class="badge ${badgeClass}">${badgeText}</span>
+          </div>
+          <h3 class="topic-title-text">${topic.title}</h3>
+          <ul class="subtopics-list">
+            ${subListItems}
+          </ul>
+        </div>
+        <button class="view-btn" onclick="openTopicModal('${topic.id}')">
+          Explore Objectives & Guidance
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      `;
+
+      return card;
+    }
+
+    // Filter Listeners
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('active', 'active-p1', 'active-p2');
+        });
+        btn.classList.add('active');
+        if (btn.dataset.filter === 'p1') btn.classList.add('active-p1');
+        if (btn.dataset.filter === 'p2') btn.classList.add('active-p2');
+
+        currentFilter = btn.dataset.filter;
+        renderTopics();
+      });
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      renderTopics();
+    });
+
+    // Modal Logic
+    const modal = document.getElementById('detailModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    const closeModal = document.getElementById('closeModal');
+
+    window.openTopicModal = function(id) {
+      const topic = syllabusData.find(t => t.id === id);
+      if (!topic) return;
+
+      const isP2 = topic.paper === 'p2';
+      modal.className = `modal-overlay active ${isP2 ? 'modal-p2' : 'modal-p1'}`;
+      modalTitle.innerText = `${topic.number}: ${topic.title}`;
+
+      let html = '';
+      topic.subsections.forEach(sub => {
+        html += `
+          <div class="sub-section">
+            <h4 class="sub-section-title">${sub.code} ${sub.title}</h4>
+            
+            <div class="objectives-block">
+              <div class="block-label">Candidates should be able to:</div>
+              <ul class="content-list">
+                ${sub.objectives.map(o => `<li>${o}</li>`).join('')}
+              </ul>
+            </div>
+
+            <div class="guidance-block">
+              <div class="block-label">Notes and guidance:</div>
+              <ul class="content-list guidance-list">
+                ${sub.guidance.map(g => `<li>${g}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+        `;
+      });
+
+      modalBody.innerHTML = html;
+    };
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+      }
+    });
+
+    // Initial render
+    renderTopics();
+  </script>
+</body>
+</html>

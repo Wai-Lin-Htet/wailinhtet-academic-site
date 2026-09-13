@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cambridge IGCSE ICT (0417) - Interactive Syllabus Explorer</title>
+  <style>
+    :root {
+      /* Apple-inspired Light Theme Colors */
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-card: #f8fafc;
+      --border: #d2d2d7;
+      --text-main: #1d1d1f;
+      --text-muted: #86868b;
+      
+      /* Course Accents for Papers */
+      --theme-p1: #0066cc; /* Classic Blue for Theory */
+      --theme-p1-glow: #e8f0fe;
+      --theme-p2: #34c759; /* Green for Practical A */
+      --theme-p2-glow: #eaffe4;
+      --theme-p3: #ff9500; /* Orange for Practical B */
+      --theme-p3-glow: #fff4e5;
+      
+      /* Typography */
+      --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-system);
+      line-height: 1.5;
+      padding-bottom: 5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Glassmorphism Header */
+    header {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0.8rem 1.5rem;
+    }
+
+    .header-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-code {
+      font-family: var(--font-mono);
+      background: #1d1d1f;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+
+    .controls-wrapper {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* Minimal Inputs & Buttons */
+    .search-input {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 0.55rem 0.95rem;
+      color: var(--text-main);
+      font-family: var(--font-system);
+      font-size: 0.85rem;
+      outline: none;
+      min-width: 240px;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      background: #ffffff;
+      border-color: var(--theme-p1);
+      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 0.45rem 0.85rem;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      background: rgba(0, 0, 0, 0.04);
+      color: var(--text-main);
+    }
+
+    .filter-btn.active[data-filter="all"] {
+      background: #1d1d1f;
+      color: #ffffff;
+    }
+
+    .filter-btn.active[data-filter="p1"] {
+      background: var(--theme-p1-glow);
+      color: var(--theme-p1);
+    }
+
+    .filter-btn.active[data-filter="p2"] {
+      background: var(--theme-p2-glow);
+      color: var(--theme-p2);
+    }
+
+    .filter-btn.active[data-filter="p3"] {
+      background: var(--theme-p3-glow);
+      color: var(--theme-p3);
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 2.5rem auto 0;
+      padding: 0 1.5rem;
+    }
+
+    /* Soft Cards for Assessment Matrix */
+    .exam-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .exam-card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.04);
+      position: relative;
+    }
+
+    .exam-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .exam-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .badge {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 12px;
+    }
+
+    .badge-p1 { background: var(--theme-p1-glow); color: var(--theme-p1); }
+    .badge-p2 { background: var(--theme-p2-glow); color: var(--theme-p2); }
+    .badge-p3 { background: var(--theme-p3-glow); color: var(--theme-p3); }
+
+    .exam-stats {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .exam-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Section Headings */
+    .section-heading {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 3rem 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .dot-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-p1 { background: var(--theme-p1); }
+    .dot-p2 { background: var(--theme-p2); }
+    .dot-p3 { background: var(--theme-p3); }
+
+    /* Topic Cards Grid */
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .topic-card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .topic-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .topic-card-top {
+      margin-bottom: 1.5rem;
+    }
+
+    .topic-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .topic-code {
+      font-family: var(--font-system);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .topic-heading {
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .subsections-preview {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .subsections-preview li {
+      display: flex;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+
+    /* Minimal SVG Chevron for lists */
+    .subsections-preview li::before {
+      content: url('data:image/svg+xml;utf8,<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%2386868b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>');
+      margin-right: 6px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .open-btn {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.03);
+      border: none;
+      font-weight: 500;
+      font-size: 0.85rem;
+      padding: 0.7rem;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .topic-card.paper-p1 .open-btn { color: var(--theme-p1); }
+    .topic-card.paper-p2 .open-btn { color: var(--theme-p2); }
+    .topic-card.paper-p3 .open-btn { color: var(--theme-p3); }
+
+    .open-btn:hover {
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    /* Modal Layout */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-dialog {
+      background: var(--surface);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 800px;
+      max-height: 85vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .modal-top {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+
+    .modal-heading {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .dismiss-btn {
+      background: rgba(0,0,0,0.05);
+      border: none;
+      color: var(--text-muted);
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .dismiss-btn:hover {
+      background: rgba(0,0,0,0.1);
+      color: var(--text-main);
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .sub-item {
+      margin-bottom: 2rem;
+    }
+
+    .sub-item-header {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .modal-p1 .sub-item-header { color: var(--theme-p1); }
+    .modal-p2 .sub-item-header { color: var(--theme-p2); }
+    .modal-p3 .sub-item-header { color: var(--theme-p3); }
+
+    .block-box {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .block-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .syllabus-bullets {
+      list-style-type: none;
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .syllabus-bullets li {
+      position: relative;
+      padding-left: 1.25rem;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    .syllabus-bullets li::before {
+      content: '•';
+      position: absolute;
+      left: 0.35rem;
+      color: var(--text-muted);
+    }
+
+    .modal-p1 .guidance-bullets li::before { color: var(--theme-p1); }
+    .modal-p2 .guidance-bullets li::before { color: var(--theme-p2); }
+    .modal-p3 .guidance-bullets li::before { color: var(--theme-p3); }
+
+    @media (max-width: 768px) {
+      .header-inner { flex-direction: column; align-items: stretch; }
+      .search-input { width: 100%; }
+      .topic-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-code">0417</span>
+        <div class="brand-title">IGCSE ICT Syllabus Hub</div>
+      </div>
+      <div class="controls-wrapper">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search syllabus, keywords...">
+        <button class="filter-btn active" data-filter="all">All Sections</button>
+        <button class="filter-btn" data-filter="p1">Paper 1 (Theory)</button>
+        <button class="filter-btn" data-filter="p2">Paper 2 (Docs/DB/Pres)</button>
+        <button class="filter-btn" data-filter="p3">Paper 3 (Spreadsheets/Web)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="exam-grid">
+      <div class="exam-card p1">
+        <div class="exam-title-row">
+          <span class="exam-name">Paper 1: Theory</span>
+          <span class="badge badge-p1">40% Weight</span>
+        </div>
+        <div class="exam-stats">
+          <span>⏱ 1h 30m</span>
+          <span>📊 80 Marks</span>
+          <span>📝 Written</span>
+        </div>
+        <p class="exam-desc">Covers Sections 1–10: Computer Systems, Input/Output, Storage, Networks, Effects of IT, Applications, Systems Life Cycle, Safety & Security, Audience, and Communication.</p>
+      </div>
+
+      <div class="exam-card p2">
+        <div class="exam-title-row">
+          <span class="exam-name">Paper 2: Practical A</span>
+          <span class="badge badge-p2">30% Weight</span>
+        </div>
+        <div class="exam-stats">
+          <span>⏱ 2h 15m</span>
+          <span>📊 70 Marks</span>
+          <span>💻 Practical</span>
+        </div>
+        <p class="exam-desc">Tests practical application across Section 17 (Document production), Section 18 (Databases), and Section 19 (Presentations), with underlying core skills from Sections 11–16.</p>
+      </div>
+
+      <div class="exam-card p3">
+        <div class="exam-title-row">
+          <span class="exam-name">Paper 3: Practical B</span>
+          <span class="badge badge-p3">30% Weight</span>
+        </div>
+        <div class="exam-stats">
+          <span>⏱ 2h 15m</span>
+          <span>📊 70 Marks</span>
+          <span>💻 Practical</span>
+        </div>
+        <p class="exam-desc">Tests practical execution of Section 20 (Data Analysis / Spreadsheets) and Section 21 (Website Authoring / HTML & CSS), incorporating core management and editing skills.</p>
+      </div>
+    </section>
+
+    <div id="contentSections">
+      <!-- Populated via JavaScript -->
+    </div>
+  </main>
+
+  <div class="modal-backdrop" id="topicModal">
+    <div class="modal-dialog" id="modalContainer">
+      <div class="modal-top">
+        <div class="modal-heading" id="modalHeading">Section Details</div>
+        <button class="dismiss-btn" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body" id="modalContainerBody">
+        <!-- Populated via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ictSyllabus = [
+      {
+        id: "s1",
+        paper: "p1",
+        number: "Section 1",
+        title: "Types and Components of Computer Systems",
+        subsections: [
+          {
+            code: "1.1",
+            title: "Hardware and Software",
+            objectives: [
+              "Hardware: physical components, internal hardware (CPU, processor, motherboard, RAM, ROM, graphics card, sound card, NIC) and external hardware/peripherals.",
+              "Software: programs for controlling operations; Applications software (word processing, spreadsheets, DBMS, CAD, editing suites) vs System software (compilers, linkers, device drivers, OS, utilities).",
+              "Analogue and digital data characteristics and conversion needs (ADC for computer processing, DAC to control external actuators/devices)."
+            ],
+            guidance: [
+              "Candidates must distinguish clearly between tasks solved by applications software vs background services managed by system software."
+            ]
+          },
+          {
+            code: "1.2",
+            title: "Main Components of Computer Systems",
+            objectives: [
+              "Role of the Central Processing Unit (CPU) in processing input instructions to produce output.",
+              "Characteristics and detailed differences between RAM (volatile, read/write) and ROM (non-volatile, read-only).",
+              "Characteristics and differences between input and output devices.",
+              "Backing storage characteristics and distinctions from internal memory (capacity, persistence, speed)."
+            ],
+            guidance: ["Focus on volatility, accessibility by CPU, and permanence of data."]
+          },
+          {
+            code: "1.3",
+            title: "Operating Systems",
+            objectives: [
+              "Characteristics of Command Line Interface (CLI), Graphical User Interface (GUI), dialogue-based, and gesture-based interfaces.",
+              "Comparative advantages and disadvantages of each user interface for specific scenarios."
+            ],
+            guidance: ["Evaluate user experience, resource utilization, and operational speed for novice vs power users."]
+          },
+          {
+            code: "1.4",
+            title: "Types of Computer",
+            objectives: [
+              "Characteristics and uses of desktop computers (office, education, gaming).",
+              "Characteristics and uses of mobile computers (laptops, smartphones, tablets, phablets).",
+              "Trade-offs regarding portability, processing power, battery life, and expandability."
+            ],
+            guidance: ["Relate form factors directly to user mobility and computing requirements."]
+          },
+          {
+            code: "1.5",
+            title: "Emerging Technologies",
+            objectives: [
+              "Understand the impact of emerging technologies on everyday life.",
+              "Evaluate Artificial Intelligence (AI) and Extended Reality (Virtual Reality - VR and Augmented Reality - AR)."
+            ],
+            guidance: ["Consider ethical, social, and industrial transformations caused by autonomous and immersive systems."]
+          }
+        ]
+      },
+      {
+        id: "s2",
+        paper: "p1",
+        number: "Section 2",
+        title: "Input and Output Devices",
+        subsections: [
+          {
+            code: "2.1",
+            title: "Input Devices and Their Uses",
+            objectives: [
+              "Keyboards, numeric keypads, pointing devices (mouse, touchpad, trackerball), remote control, joystick/driving wheel.",
+              "Touchscreens (as input), optical scanners, digital cameras, microphones, sensors, light pens.",
+              "Suitability, advantages, and limitations in real-world contexts."
+            ],
+            guidance: ["Select input methods based on data volume, input speed, and environmental constraints."]
+          },
+          {
+            code: "2.2",
+            title: "Direct Data Entry Devices",
+            objectives: [
+              "Magnetic stripe readers, Chip and PIN readers, RFID readers.",
+              "Optical Mark Recognition (OMR), Optical Character Recognition (OCR), barcode readers, and QR code scanners."
+            ],
+            guidance: ["Analyze efficiency, accuracy, and potential error points compared to manual keying."]
+          },
+          {
+            code: "2.3",
+            title: "Output Devices and Their Uses",
+            objectives: [
+              "Monitors, touchscreens (as output), multimedia projectors.",
+              "Printers: Laser, Inkjet, Dot matrix, 3D printers, and Graph plotters.",
+              "Audio output (speakers) and Actuators (motors, valves, relays, pistons)."
+            ],
+            guidance: ["Compare print speed, running costs, media compatibility, and physical movement control."]
+          }
+        ]
+      },
+      {
+        id: "s3",
+        paper: "p1",
+        number: "Section 3",
+        title: "Storage Devices and Media",
+        subsections: [
+          {
+            code: "3.1",
+            title: "Storage Technologies & Media",
+            objectives: [
+              "Magnetic drives & media: fixed/portable hard drives (HDD), magnetic tape (sequential access for backup).",
+              "Optical discs: CD, DVD, Blu-ray (read-only, recordable, rewritable).",
+              "Solid-state media: Solid-state drives (SSD), USB pen drives, flash memory cards (SD, xD, CFast).",
+              "Comparative evaluation: capacity, transfer rate, durability, portability, and cost per gigabyte."
+            ],
+            guidance: ["Differentiate clearly between physical storage devices (drives) and the recording media."]
+          }
+        ]
+      },
+      {
+        id: "s4",
+        paper: "p1",
+        number: "Section 4",
+        title: "Networks and the Effects of Using Them",
+        subsections: [
+          {
+            code: "4.1",
+            title: "Networks & Topologies",
+            objectives: [
+              "Role of routers: routing data packets, IP routing tables, connecting internal networks to the internet.",
+              "Network hardware: Network Interface Cards (NIC), hubs, bridges, switches.",
+              "Wireless networking: Wi-Fi vs. Bluetooth (range, transfer speed, power, paired connections).",
+              "Cloud computing: data access, collaborative storage, multi-tenancy issues, and vendor reliance.",
+              "Network classifications: LAN, WLAN, WAN; Intranet, Extranet, and Internet comparisons."
+            ],
+            guidance: ["Detail packet routing and hardware functionality in data management."]
+          },
+          {
+            code: "4.2",
+            title: "Network Security & Electronic Conferencing",
+            objectives: [
+              "Confidentiality during transmission, anti-spyware, password rules (weak vs strong).",
+              "Authentication: zero login, biometrics, smart cards, security tokens.",
+              "Anti-malware software operation: real-time monitoring, quarantine, heuristics, signature updates.",
+              "Electronic conferencing: video, audio, and web-conferencing (hardware, bandwidth, and protocol requirements)."
+            ],
+            guidance: ["Compare social and practical considerations of remote conferencing vs face-to-face meetings."]
+          }
+        ]
+      },
+      {
+        id: "s5",
+        paper: "p1",
+        number: "Section 5",
+        title: "The Effects of Using IT",
+        subsections: [
+          {
+            code: "5.1",
+            title: "Microprocessor-Controlled Devices",
+            objectives: [
+              "Impact of smart domestic appliances on lifestyle, physical activity, leisure time, social interaction, and data security.",
+              "Impact on transport: automated monitoring, telemetry, traffic management, and autonomous vehicles."
+            ],
+            guidance: ["Weigh benefits (convenience, energy efficiency) against dependency and security threats."]
+          },
+          {
+            code: "5.2",
+            title: "Health & Ergonomics",
+            objectives: [
+              "Identify repetitive strain injury (RSI), posture/back problems, eye strain, and persistent headaches.",
+              "Causes and preventive ergonomic strategies (wrist rests, ergonomic seating, screen positioning, breaks)."
+            ],
+            guidance: ["Link specific physical disorders directly to distinct physical equipment causes."]
+          }
+        ]
+      },
+      {
+        id: "s6",
+        paper: "p1",
+        number: "Section 6",
+        title: "ICT Applications",
+        subsections: [
+          {
+            code: "6.1-6.3",
+            title: "Media, Modelling & Control Systems",
+            objectives: [
+              "Communication media: newsletters, posters, websites, presentations, multimedia streaming, VoIP.",
+              "Computer modelling: personal finance, structural/bridge design, flood management, weather simulations.",
+              "Computer-controlled systems: industrial robotics, automated assembly lines, autonomous vehicle navigation."
+            ],
+            guidance: ["Evaluate computer modeling vs real testing in terms of safety, speed, and cost."]
+          },
+          {
+            code: "6.4-6.7",
+            title: "Management, Booking, Banking & Medicine",
+            objectives: [
+              "School management systems: attendance logging, progress tracking, computer-aided learning.",
+              "Online booking systems: cinema, transport, accommodation, events.",
+              "Banking applications: ATMs (cash, checks, PIN validation), EFT, internet banking.",
+              "Computers in medicine: electronic medical records (EMR), pharmacy databases, 3D printing of prosthetics/tissue."
+            ],
+            guidance: ["Understand how transaction processing and database consistency prevent double-booking/fraud."]
+          },
+          {
+            code: "6.8-6.11",
+            title: "Expert Systems, Retail, Recognition & Satellites",
+            objectives: [
+              "Expert systems: user interface, inference engine, knowledge base, rules base, explanation facility.",
+              "Retail technologies: POS and EFTPOS terminals, automated stock replenishment, contactless NFC payments.",
+              "Recognition systems: OMR (exams), OCR (ANPR systems), RFID tracking, biometric validation.",
+              "Satellite services: Global Positioning Systems (GPS), GIS mapping, telecommunications."
+            ],
+            guidance: ["Detail the inferencing mechanism using facts and rules to output diagnostic probabilities."]
+          }
+        ]
+      },
+      {
+        id: "s7",
+        paper: "p1",
+        number: "Section 7",
+        title: "The Systems Life Cycle",
+        subsections: [
+          {
+            code: "7.1-7.2",
+            title: "Analysis & System Design",
+            objectives: [
+              "Investigation methods: observation, interviews, questionnaires, document analysis (trade-offs of each).",
+              "Identify system requirements (inputs, outputs, processing, constraints) and hardware/software specifications.",
+              "Design stage: file structures, data types, input formats (forms), output formats (reports/screens), and validation rules."
+            ],
+            guidance: ["Validation checks: range, character, length, type, format, presence, and check digits."]
+          },
+          {
+            code: "7.3-7.6",
+            title: "Testing, Implementation, Documentation & Review",
+            objectives: [
+              "Testing strategies: modular, functional, and whole-system testing using normal, extreme, and abnormal data.",
+              "Implementation methods: direct changeover, parallel running, pilot running, phased adoption.",
+              "Documentation: technical documentation (for maintenance) vs user documentation (for system operators).",
+              "Evaluation: assessing efficiency, usability, requirement match, and identifying future enhancements."
+            ],
+            guidance: ["Distinguish between Extreme data (boundary edges) and Abnormal data (invalid inputs)."]
+          }
+        ]
+      },
+      {
+        id: "s8",
+        paper: "p1",
+        number: "Section 8",
+        title: "Safety and Security",
+        subsections: [
+          {
+            code: "8.1-8.2",
+            title: "Physical Safety & eSafety",
+            objectives: [
+              "Physical hazards: electrocution (liquids/damaged wires), fire (overloaded sockets), trips (trailing cables), heavy falling items.",
+              "Data protection principles: legal rights, keeping personal data accurate, secure, and lawfully held.",
+              "eSafety guidelines: protecting personal identity across social media, emails, messaging, and gaming."
+            ],
+            guidance: ["Connect physical precautions directly to each specific workplace hazard."]
+          },
+          {
+            code: "8.3",
+            title: "Data Security Threats & Countermeasures",
+            objectives: [
+              "Threats: hacking, phishing, pharming, smishing, vishing, spyware, ransomware, shoulder surfing, card cloning.",
+              "Protection mechanisms: firewalls, SSL/TLS, symmetric/asymmetric encryption, digital certificates, biometrics, 2FA."
+            ],
+            guidance: ["Phishing involves social deception emails; pharming redirects traffic by modifying DNS/host files."]
+          }
+        ]
+      },
+      {
+        id: "s9-10",
+        paper: "p1",
+        number: "Sections 9 & 10",
+        title: "Audience & User Communication",
+        subsections: [
+          {
+            code: "9.1-9.2",
+            title: "Audience Appreciation & Copyright",
+            objectives: [
+              "Audience analysis: designing age, skill, and culturally appropriate ICT solutions.",
+              "Software copyright legislation, intellectual property, software piracy prevention (product keys, DRM, dongles)."
+            ],
+            guidance: ["Analyze tailoring font sizes, color contrasts, and terminology to audience demographics."]
+          },
+          {
+            code: "10.1-10.2",
+            title: "Email & Internet Protocols",
+            objectives: [
+              "Email practices: etiquette, spam defenses, mailing groups, cc vs bcc conventions.",
+              "Internet fundamentals: ISPs, URL structure, web browsers vs search engines, website evaluation (bias, currency).",
+              "Protocols: HTTP, HTTPS, FTP, SSL."
+            ],
+            guidance: ["Evaluate web search credibility and differentiate browser engines from web indexing engines."]
+          }
+        ]
+      },
+      {
+        id: "s11-16",
+        paper: "p2",
+        number: "Sections 11–16",
+        title: "Core Practical Skills Foundation",
+        subsections: [
+          {
+            code: "11-13",
+            title: "File Management, Images & Layouts",
+            objectives: [
+              "File management: hierarchical structures, generic formats (.csv, .rtf, .txt, .pdf) vs proprietary formats (.docx, .accdb).",
+              "File compression (.zip, .rar) to minimize transmission bandwidth and storage foot-print.",
+              "Image manipulation: aspect-ratio resizing, cropping, flipping, brightness/contrast, grouping, and layer stacking.",
+              "Document layout: wrapping, text manipulation, tables, cell alignment, headers and footers with automated fields."
+            ],
+            guidance: ["Fundamental competencies assessed across both practical examinations (Paper 2 and Paper 3)."]
+          },
+          {
+            code: "14-16",
+            title: "Styles, Proofing & Data Charts",
+            objectives: [
+              "Styles: corporate house style creation, serif vs sans-serif fonts, paragraph spacing, line leads, custom bullets.",
+              "Proofing & verification: automated spell checkers, validation rules, manual visual comparison, double data entry.",
+              "Charts: bar, line, pie (extracting sectors), dual-axis charts, secondary series, formatting scales and axis legends."
+            ],
+            guidance: ["Proofreading requires detecting transposition mistakes and styling anomalies missed by software checks."]
+          }
+        ]
+      },
+      {
+        id: "s17",
+        paper: "p2",
+        number: "Section 17",
+        title: "Document Production",
+        subsections: [
+          {
+            code: "17.1",
+            title: "Page Setup & Advanced Formatting",
+            objectives: [
+              "Configure page layout: margins, gutter margins, orientations, multiple columns, section breaks, and column breaks.",
+              "Formatting text: precise line spacing (single, 1.5, double), paragraph spacing before/after, tab stops (decimal, centered).",
+              "Text enhancement, numbered/bulleted lists, find & replace, bookmarks, and internal/external hyperlinks."
+            ],
+            guidance: ["Ensure columns balance cleanly and section breaks preserve separate header/footer numbering."]
+          }
+        ]
+      },
+      {
+        id: "s18",
+        paper: "p2",
+        number: "Section 18",
+        title: "Databases",
+        subsections: [
+          {
+            code: "18.1",
+            title: "Database Structure & Form Design",
+            objectives: [
+              "Import flat files (.csv, .txt), define field types (text, numeric, currency, date/time, Boolean).",
+              "Primary keys, foreign keys, and establish one-to-many relational joins.",
+              "Build user-friendly data entry forms: drop-downs, radio buttons, check boxes, navigation controls, and balanced whitespace."
+            ],
+            guidance: ["Check boolean display formats (Yes/No, True/False, Checkbox) and field length limits."]
+          },
+          {
+            code: "18.2-18.3",
+            title: "Data Manipulation & Reporting",
+            objectives: [
+              "Calculated fields (run-time arithmetic) and summary statistics (Sum, Avg, Min, Max, Count).",
+              "Multi-level sorting and complex query filtering (wildcards, comparison operators, AND, OR, NOT).",
+              "Report design: columnar/tabular layouts, grouped reports, headers/footers, and suppressing duplicate labels."
+            ],
+            guidance: ["Verify that all labels and data values are visible in full without truncation on printed reports."]
+          }
+        ]
+      },
+      {
+        id: "s19",
+        paper: "p2",
+        number: "Section 19",
+        title: "Presentations",
+        subsections: [
+          {
+            code: "19.1-19.2",
+            title: "Master Slides, Slides & Outputs",
+            objectives: [
+              "Master slide setup: persistent logos, unified fonts, placeholders, background color, auto-numbering.",
+              "Slide elements: multimedia (video/audio clips), action buttons, custom animation triggers, transitions.",
+              "Output options: automated looped kiosks, speaker presenter notes, multi-slide handouts (2, 3, 6 per page)."
+            ],
+            guidance: ["Changes applied to the master slide must propagate cleanly without overriding slide-level overrides."]
+          }
+        ]
+      },
+      {
+        id: "s20",
+        paper: "p3",
+        number: "Section 20",
+        title: "Spreadsheets (Data Analysis)",
+        subsections: [
+          {
+            code: "20.1",
+            title: "Formulas, Functions & Modelling",
+            objectives: [
+              "Cell referencing: relative, absolute ($A$1), and named ranges.",
+              "Mathematical operators and operator precedence (BODMAS).",
+              "Functions: SUM, AVERAGE, MIN, MAX, INT, ROUND, COUNT, COUNTA, COUNTIF.",
+              "Lookup operations: LOOKUP, VLOOKUP, HLOOKUP, XLOOKUP, nested IF conditions."
+            ],
+            guidance: ["Understand the distinction between user formulas and built-in functions."]
+          },
+          {
+            code: "20.2-20.3",
+            title: "Data Manipulation & Display Layouts",
+            objectives: [
+              "Multi-key sorting and custom filtering using comparison and wildcard operators.",
+              "Conditional formatting rules based on formula triggers and cell values.",
+              "Print setups: switching between formula view and value view, showing row/column headers, fitting to page counts."
+            ],
+            guidance: ["Formula printouts must show formulas in their entirety without clipping or truncation."]
+          }
+        ]
+      },
+      {
+        id: "s21",
+        paper: "p3",
+        number: "Section 21",
+        title: "Website Authoring",
+        subsections: [
+          {
+            code: "21.1-21.2",
+            title: "Web Layers & HTML Content",
+            objectives: [
+              "Three layers: Content (HTML), Presentation (CSS), and Behaviour (JavaScript).",
+              "Head section: meta tags (charset, author, description, keywords, viewport), page titles, stylesheet links.",
+              "Body elements: structural tables, cell spans (colspan, rowspan), audio/video embedding, bookmarks, relative/absolute links."
+            ],
+            guidance: ["Never use absolute file paths for local assets; use relative file paths for portability."]
+          },
+          {
+            code: "21.3",
+            title: "CSS Presentation Layer",
+            objectives: [
+              "External stylesheets, internal styles, and inline style attributes.",
+              "Hierarchy of styles and CSS specificity rules.",
+              "Formatting fonts, tables (border-collapse, padding, spacing), backgrounds, list tags, and reusable class selectors."
+            ],
+            guidance: ["Attached stylesheets must be linked in correct precedence; comments formatted as /* comment */."]
+          }
+        ]
+      }
+    ];
+
+    const contentArea = document.getElementById('contentSections');
+    const searchInput = document.getElementById('searchInput');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    let activeFilter = 'all';
+    let queryText = '';
+
+    function renderSyllabus() {
+      contentArea.innerHTML = '';
+
+      const matched = ictSyllabus.filter(sec => {
+        const matchesFilter = (activeFilter === 'all') || (sec.paper === activeFilter);
+        const matchesQuery = 
+          sec.title.toLowerCase().includes(queryText.toLowerCase()) ||
+          sec.number.toLowerCase().includes(queryText.toLowerCase()) ||
+          sec.subsections.some(sub => 
+            sub.title.toLowerCase().includes(queryText.toLowerCase()) ||
+            sub.objectives.some(o => o.toLowerCase().includes(queryText.toLowerCase()))
+          );
+        return matchesFilter && matchesQuery;
+      });
+
+      if (matched.length === 0) {
+        contentArea.innerHTML = `
+          <div style="text-align:center; padding: 4rem 1rem; color: var(--text-muted);">
+            <h3>No syllabus sections match your filter</h3>
+            <p>Try clearing your search query or selecting "All Sections".</p>
+          </div>
+        `;
+        return;
+      }
+
+      const p1List = matched.filter(s => s.paper === 'p1');
+      const p2List = matched.filter(s => s.paper === 'p2');
+      const p3List = matched.filter(s => s.paper === 'p3');
+
+      if (p1List.length > 0) {
+        appendSectionGroup("Paper 1: Theory Content (Sections 1–10)", "dot-p1", p1List);
+      }
+      if (p2List.length > 0) {
+        appendSectionGroup("Paper 2: Practical Skills & Software (Sections 11–19)", "dot-p2", p2List);
+      }
+      if (p3List.length > 0) {
+        appendSectionGroup("Paper 3: Data Analysis & Web Authoring (Sections 20–21)", "dot-p3", p3List);
+      }
+    }
+
+    function appendSectionGroup(title, dotClass, items) {
+      const h2 = document.createElement('h2');
+      h2.className = 'section-heading';
+      h2.innerHTML = `<span class="dot-indicator ${dotClass}"></span> ${title}`;
+      contentArea.appendChild(h2);
+
+      const grid = document.createElement('div');
+      grid.className = 'topic-grid';
+      items.forEach(sec => grid.appendChild(createSectionCard(sec)));
+      contentArea.appendChild(grid);
+    }
+
+    function createSectionCard(sec) {
+      const card = document.createElement('div');
+      card.className = `topic-card paper-${sec.paper}`;
+
+      let badgeClass = 'badge-p1';
+      let badgeLabel = 'Paper 1';
+      if (sec.paper === 'p2') { badgeClass = 'badge-p2'; badgeLabel = 'Paper 2'; }
+      if (sec.paper === 'p3') { badgeClass = 'badge-p3'; badgeLabel = 'Paper 3'; }
+
+      const previewSubs = sec.subsections.map(sub => 
+        `<li><strong>${sub.code}</strong> ${sub.title}</li>`
+      ).join('');
+
+      card.innerHTML = `
+        <div class="topic-card-top">
+          <div class="topic-meta">
+            <span class="topic-code">${sec.number}</span>
+            <span class="badge ${badgeClass}">${badgeLabel}</span>
+          </div>
+          <h3 class="topic-heading">${sec.title}</h3>
+          <ul class="subsections-preview">
+            ${previewSubs}
+          </ul>
+        </div>
+        <button class="open-btn" onclick="openDetails('${sec.id}')">
+          View Objectives & Notes
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      `;
+      return card;
+    }
+
+    // Modal Interaction
+    const modalBackdrop = document.getElementById('topicModal');
+    const modalContainer = document.getElementById('modalContainer');
+    const modalHeading = document.getElementById('modalHeading');
+    const modalBody = document.getElementById('modalContainerBody');
+    const modalClose = document.getElementById('modalClose');
+
+    window.openDetails = function(id) {
+      const section = ictSyllabus.find(s => s.id === id);
+      if (!section) return;
+
+      modalContainer.className = `modal-dialog modal-${section.paper}`;
+      modalHeading.innerText = `${section.number}: ${section.title}`;
+
+      let html = '';
+      section.subsections.forEach(sub => {
+        html += `
+          <div class="sub-item">
+            <h4 class="sub-item-header">${sub.code} ${sub.title}</h4>
+            <div class="block-box">
+              <div class="block-title">Candidates should know and understand / be able to:</div>
+              <ul class="syllabus-bullets">
+                ${sub.objectives.map(o => `<li>${o}</li>`).join('')}
+              </ul>
+            </div>
+            <div class="block-box">
+              <div class="block-title">Notes and Guidance:</div>
+              <ul class="syllabus-bullets guidance-bullets">
+                ${sub.guidance.map(g => `<li>${g}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+        `;
+      });
+
+      modalBody.innerHTML = html;
+      modalBackdrop.classList.add('active');
+    };
+
+    function closeModal() {
+      modalBackdrop.classList.remove('active');
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) closeModal();
+    });
+
+    // Filters & Search Setup
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        renderSyllabus();
+      });
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      queryText = e.target.value.trim();
+      renderSyllabus();
+    });
+
+    // Initial Execution
+    renderSyllabus();
+  </script>
+</body>
+</html>

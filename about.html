@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X74PEWZMJV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X74PEWZMJV');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wai Lin Htet — Computer Science Educator & Academic Researcher</title>
+  
+  <!-- Fonts: Inter for Apple UI feel + Newsreader for Medium-like editorial nuance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #fbfbfd;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --text-main: #1d1d1f;
+      --text-muted: #6e6e73;
+      --text-subtle: #86868b;
+      --border: rgba(0, 0, 0, 0.08);
+      --border-hover: rgba(0, 0, 0, 0.16);
+      --accent: #0071e3; /* Apple signature blue */
+      --accent-soft: rgba(0, 113, 227, 0.08);
+      --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.03);
+      --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.06);
+      --radius-lg: 20px;
+      --radius-md: 12px;
+      --radius-pill: 980px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Background Glow (Apple keynote style) */
+    .ambient-glow {
+      position: fixed;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 750px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(0, 113, 227, 0.05) 0%, rgba(251, 251, 253, 0) 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Apple-like Frosted Glass Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(251, 251, 253, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+    }
+
+    nav {
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 1.5rem;
+    }
+
+    .brand {
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #34c759; /* Available status green */
+      border-radius: 50%;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 6rem;
+    }
+
+    section {
+      padding-top: 5rem;
+      margin-top: -3rem;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding-top: 2rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      padding: 0.35rem 0.85rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    h1 {
+      font-size: 3.25rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      background: linear-gradient(180deg, #1d1d1f 0%, #434344 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-tagline {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 1.75rem;
+      line-height: 1.35;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .apple-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--text-main);
+      color: #fff;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .apple-btn:hover {
+      background-color: #000;
+      transform: scale(1.02);
+    }
+
+    .location-pill {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.65rem 1rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+    }
+
+    /* TYPOGRAPHY & SECTION HEADERS */
+    .section-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+    }
+
+    /* MEDIUM-INSPIRED EDITORIAL SUMMARY */
+    .lead-story {
+      font-size: 1.22rem;
+      line-height: 1.75;
+      color: #292929;
+      font-weight: 400;
+      margin-bottom: 2.5rem;
+      border-left: 2.5px solid var(--text-main);
+      padding-left: 1.5rem;
+    }
+
+    /* CREDENTIAL TILES (APPLE BENTO-STYLE) */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .bento-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .bento-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-hover);
+    }
+
+    .bento-card .tag-indicator {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.75rem;
+    }
+
+    .bento-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.01em;
+    }
+
+    .bento-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ACCORDION / STREAMLINED TIMELINE */
+    .streamline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .stream-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 2rem;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+    }
+
+    .stream-card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .stream-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.4rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .stream-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .stream-badge {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-subtle);
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-pill);
+    }
+
+    .stream-inst {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .bullet-list li {
+      font-size: 0.92rem;
+      color: #38383a;
+      position: relative;
+      padding-left: 1.3rem;
+      line-height: 1.6;
+    }
+
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      left: 0.1rem;
+      top: 0.6rem;
+      width: 5px;
+      height: 5px;
+      background-color: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* CERTIFICATION PILL TILES */
+    .cert-group {
+      margin-top: 1.5rem;
+    }
+
+    .cert-group-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.75rem;
+    }
+
+    .chips-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .chip {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .chip:hover {
+      border-color: #a1a1a6;
+      transform: translateY(-1px);
+    }
+
+    .chip strong {
+      font-weight: 600;
+      color: #000;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      color: var(--text-subtle);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 2.4rem; }
+      .hero-tagline { font-size: 1.3rem; }
+      .stream-card { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <!-- Header / Navigation -->
+  <header>
+    <nav>
+      <a href="#home" class="brand">
+        <span class="brand-dot"></span>
+        <span>Wai Lin Htet</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="my_course.html">My Courses</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HOME SECTION -->
+    <section id="home" class="hero">
+      <div class="hero-badge">
+        <span>Educator &bull; Teacher &bull; Researcher &bull;</span>
+      </div>
+      <h1>Wai Lin Htet</h1>
+      <p class="hero-tagline">
+        Computer Science Educator &amp; Academic Researcher bridging artificial intelligence and pedagogy.
+      </p>
+      
+      <div class="hero-actions">
+        <a href="mailto:tr.wailinhtet@gmail.com" class="apple-btn">
+          <span>Get in Touch</span>
+          <span>&rarr;</span>
+        </a>
+        <span class="location-pill">📍 </span>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+      <div class="section-eyebrow">Biography</div>
+      <h2>About &amp; Research Focus</h2>
+      
+      <p class="lead-story">
+        Experienced Computer Science and ICT educator with over a decade of teaching within Cambridge (IGCSE &amp; A-Level) and Ontario Secondary School Diploma (OSSD) frameworks. Currently pursuing doctoral research on Applied Artificial Intelligence and modern instruction methodology, complemented by an MBA and a BS in Computer Science.
+      </p>
+
+      <!-- Bento-box Highlights -->
+      <div class="bento-grid">
+        <div class="bento-card">
+          <span class="tag-indicator">Doctoral Research</span>
+          <h3>Ph.D. (Thesis)</h3>
+          <p> &bull; Applied AI &amp; Advanced Teaching Methods</p>
+        </div>
+        <div class="bento-card">
+          <span class="tag-indicator">Strategy &amp; Ops</span>
+          <h3>MBA</h3>
+          <p>&bull; IT Management &bull; Digital Transformation &bull; Strategic Management</p>
+        </div>
+        <div class="bento-card">
+          <span class="tag-indicator">Computing Foundations</span>
+          <h3>B.S. Computer Science</h3>
+          <p> &bull; Software Eng. &amp; Systems Architecture</p>
+        </div>
+        <div class="bento-card">
+          <span class="tag-indicator">Tech Innovation</span>
+          <h3>U.S.–ASEAN STIC</h3>
+          <p>Arizona State University &bull; AI, IT &amp; Entrepreneurship</p>
+        </div>
+      </div>
+
+      <!-- Formal Education Timeline -->
+      <div class="section-eyebrow">Academic Background</div>
+      <h2>Education &amp; Credentials</h2>
+
+      <div class="streamline-list" style="margin-bottom: 3.5rem;">
+        <div class="stream-card">
+          <div class="stream-meta">
+            <span class="stream-title">Doctor of Philosophy (Ph.D.) (Thesis)</span>
+            <span class="stream-badge"></span>
+          </div>
+          <div class="stream-inst"></div>
+          <ul class="bullet-list">
+            <li>Specialization: Advanced Teaching Methods and Applied Artificial Intelligence (AI).</li>
+          </ul>
+        </div>
+
+        <div class="stream-card">
+          <div class="stream-meta">
+            <span class="stream-title">Master of Business Administration (MBA)</span>
+            <span class="stream-badge"></span>
+          </div>
+          <div class="stream-inst"></div>
+          <ul class="bullet-list">
+            <li>Core Areas: Digital Transformation, Strategic Management, Operations Management, Entrepreneurship, Organizational Behavior, Marketing Management, and Research Methodology.</li>
+          </ul>
+        </div>
+
+        <div class="stream-card">
+          <div class="stream-meta">
+            <span class="stream-title">Bachelor of Science in Computer Science (B.S.C.S.)</span>
+            <span class="stream-badge"></span>
+          </div>
+          <div class="stream-inst"></div>
+          <ul class="bullet-list">
+            <li>Core Subjects: Data Structures, Systems Architecture, Operating Systems, Networks, Databases, Machine Learning, AI, Cybersecurity, and Software Engineering.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Professional Certifications -->
+      <div class="section-eyebrow">Industry Recognition</div>
+      <h2>Certifications &amp; Diplomas</h2>
+
+      <div class="cert-group">
+        <div class="cert-group-label">Industry Professional Badges</div>
+        <div class="chips-container">
+          <span class="chip"><strong>Google</strong> IT Support</span>
+          <span class="chip"><strong>Google</strong> Advanced Data Analytics</span>
+          <span class="chip"><strong>Google</strong> Cybersecurity</span>
+          <span class="chip"><strong>Google</strong> Agile Project Management</span>
+          <span class="chip"><strong>Google</strong> Digital Marketing &amp; E-Commerce</span>
+          <span class="chip"><strong>IBM</strong> Full-Stack Software Development</span>
+          <span class="chip"><strong>IBM</strong> IT Project Management</span>
+          <span class="chip"><strong>Meta</strong> Full-Stack Software Engineering</span>
+          <span class="chip"><strong>Meta</strong> Front-End &amp; Back-End Development</span>
+          <span class="chip"><strong>Meta</strong> Database Engineering</span>
+        </div>
+      </div>
+
+      <div class="cert-group" style="margin-top: 1.5rem;">
+        <div class="cert-group-label">Diplomas &amp; Specialized Programs</div>
+        <div class="chips-container">
+          <span class="chip"><strong>U.S.–ASEAN STIC (ASU)</strong> AI &amp; Entrepreneurship</span>
+          <span class="chip"><strong>Diploma in Computing </strong> </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MY COURSES SECTION -->
+    <section id="courses">
+      <div class="section-eyebrow">Curriculum Delivery</div>
+      <h2>My Courses &amp; Experience</h2>
+
+      <div class="streamline-list">
+        <!-- OSSD -->
+        <div class="stream-card">
+          <div class="stream-meta">
+            <span class="stream-title">Computer Science Educator (Canadian OSSD Program)</span>
+            <span class="stream-badge">2024 – Present</span>
+          </div>
+          <div class="stream-inst">Courses: Ontario Secondary School Diploma (OSSD) — ICS3U (Grade 11) &amp; ICS4U (Grade 12)</div>
+          <ul class="bullet-list">
+            <li>Deliver university-preparation curricula strictly aligned with Ontario Ministry of Education guidelines.</li>
+            <li>Teach advanced software engineering in Python: Object-Oriented Programming (OOP), dynamic data structures, modular architecture, and recursion.</li>
+            <li>Mentor full Software Development Life Cycle (SDLC) capstone projects prepared for university admissions portfolios.</li>
+          </ul>
+        </div>
+
+         <!-- Cambridge -->
+        <div class="stream-card">
+          <div class="stream-meta">
+            <span class="stream-title">Computer Science &amp; ICT Educator (Cambridge Program)</span>
+            <span class="stream-badge">2016 – Present</span>
+          </div>
+          <div class="stream-inst">
+            Cambridge Assessment International Education (CAIE) — IGCSE / O-Level &amp; International AS / A-Level
+          </div>
+          <ul class="bullet-list">
+            <li>
+              <strong>IGCSE / O-Level Computer Science (0478 / 2210):</strong> 
+              Covers Theory of Computer Science (Data Representation, Transmission, Hardware, Software, Internet &amp; Automated Technologies) and Practical Problem-Solving (Algorithms, Programming Concepts, Databases, Boolean Logic).
+            </li>
+            <li>
+              <strong>IGCSE Information and Communication Technology (0417):</strong> 
+              Instructs comprehensive Theoretical Knowledge (Computer Systems, Storage, Networks, System Life Cycle, Security) alongside Practical Skills (Word Processing, Web Authoring in HTML/CSS, Spreadsheets, and Database Manipulation).
+            </li>
+            <li>
+              <strong>International AS &amp; A-Level Computer Science (9618):</strong> 
+              Delivers Advanced Theory and Practical Applications, including complex Data Structures, Algorithm Design, Object-Oriented Programming, and Software Engineering Principles.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Foundational -->
+        <div class="stream-card">
+          <div class="stream-meta">
+            <span class="stream-title">ICT &amp; Digital Studies Instructor</span>
+            <span class="stream-badge">2012 – 2016</span>
+          </div>
+          <div class="stream-inst">Specialization: Relational Databases &amp; Systems Administration</div>
+          <ul class="bullet-list">
+            <li>Designed hands-on courses covering database management systems (DBMS), workplace automation, and foundational computer literacy.</li>
+            <li>Maintained hardware environments and networked computing labs.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; Wai Lin Htet &bull; Yangon, Myanmar &bull; Computer Science Educator &amp; Researcher</p>
+  </footer>
+
+</body>
+</html>

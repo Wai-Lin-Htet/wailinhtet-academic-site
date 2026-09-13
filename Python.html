@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X74PEWZMJV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X74PEWZMJV');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Basics Cheat Sheet - by WaiLinHtet</title>
+  <style>
+    :root {
+      --bg-color: #f1f5f9;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --code-bg: #1e1e2e;
+      --code-text: #cdd6f4;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --secondary: #04aa6d;
+      --secondary-hover: #038052;
+      --border-color: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .title-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    .title-wrapper h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #0f172a;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 800px;
+      margin: 0 auto 18px;
+    }
+
+    /* Resource Action Buttons */
+    .links-bar {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease-in-out;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+
+    .btn-w3schools {
+      background-color: var(--secondary);
+      color: #ffffff;
+    }
+
+    .btn-w3schools:hover {
+      background-color: var(--secondary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-compiler {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-compiler:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Cards Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }
+
+    .badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+    }
+
+    .card-body {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Category Specific Header Colors */
+    .blue-bg   { background-color: #1d4ed8; }
+    .teal-bg   { background-color: #059669; }
+    .purple-bg { background-color: #7c3aed; }
+    .pink-bg   { background-color: #db2777; }
+    .orange-bg { background-color: #ea580c; }
+    .sky-bg    { background-color: #0284c7; }
+
+    /* Code Blocks */
+    pre {
+      background-color: var(--code-bg);
+      color: var(--code-text);
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-family: "Fira Code", "Courier New", Courier, monospace;
+      font-size: 0.88rem;
+      overflow-x: auto;
+      line-height: 1.45;
+    }
+
+    .comment { color: #6c7086; }
+    .keyword { color: #cba6f7; }
+    .string  { color: #a6e3a1; }
+    .output  { color: #fab387; font-weight: bold; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border-color);
+      padding: 6px 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f8fafc;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .op-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 24px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header Section -->
+    <header>
+      <div class="title-wrapper">
+        <h1>PYTHON BASICS</h1>
+      </div>
+      <p>Data Type, Operator, Variable, Constant, If-elif-else, Loop, Count, Totaling, Max, Min, List, 1D Array, 2D Array, Upper/Lower, File Handling</p>
+      
+      <!-- Resource Navigation Links -->
+      <div class="links-bar">
+        <a href="https://www.w3schools.com/python/" target="_blank" rel="noopener noreferrer" class="btn-link btn-w3schools">
+          📖 W3Schools Python Tutorial
+        </a>
+        <a href="https://www.w3schools.com/python/trypython.asp?filename=demo_default" target="_blank" rel="noopener noreferrer" class="btn-link btn-compiler">
+          ▶ Run Online Python Compiler
+        </a>
+      </div>
+    </header>
+
+    <!-- Content Grid -->
+    <main class="grid">
+
+      <!-- 1. DATA TYPES -->
+      <section class="card">
+        <div class="card-header blue-bg">
+          <span class="badge">1</span>
+          <span>Data Types</span>
+        </div>
+        <div class="card-body">
+          <table>
+            <thead>
+              <tr><th>Type</th><th>Example</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>int</code></td><td><code>25</code></td><td>Whole numbers</td></tr>
+              <tr><td><code>float</code></td><td><code>3.14</code></td><td>Decimal numbers</td></tr>
+              <tr><td><code>str</code></td><td><code>"Hello"</code></td><td>Text / String</td></tr>
+              <tr><td><code>bool</code></td><td><code>True</code></td><td>True or False</td></tr>
+              <tr><td><code>list</code></td><td><code>[1, 2, 3]</code></td><td>Ordered collection</td></tr>
+              <tr><td><code>tuple</code></td><td><code>(1, 2, 3)</code></td><td>Ordered (immutable)</td></tr>
+              <tr><td><code>set</code></td><td><code>{1, 2, 3}</code></td><td>Unordered, unique</td></tr>
+              <tr><td><code>dict</code></td><td><code>{'a': 1}</code></td><td>Key-value pairs</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 2. OPERATORS -->
+      <section class="card">
+        <div class="card-header teal-bg">
+          <span class="badge">2</span>
+          <span>Operators</span>
+        </div>
+        <div class="card-body">
+          <div class="op-grid">
+            <div>
+              <strong>Arithmetic</strong>
+              <pre><code>+  Addition
+-  Subtraction
+*  Multiplication
+/  Division
+// Floor Division
+%  Modulus
+** Exponent</code></pre>
+            </div>
+            <div>
+              <strong>Comparison</strong>
+              <pre><code>== Equal
+!= Not equal
+&gt;  Greater than
+&lt;  Less than
+&gt;= Greater/equal
+&lt;= Less/equal</code></pre>
+            </div>
+          </div>
+          <div class="op-grid">
+            <div>
+              <strong>Logical</strong>
+              <pre><code>and  Logical AND
+or   Logical OR
+not  Logical NOT</code></pre>
+            </div>
+            <div>
+              <strong>Assignment</strong>
+              <pre><code>=   Assign
++=  Add & assign
+-=  Sub & assign
+*=  Mul & assign</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. VARIABLE & CONSTANT -->
+      <section class="card">
+        <div class="card-header purple-bg">
+          <span class="badge">3</span>
+          <span>Variable & Constant</span>
+        </div>
+        <div class="card-body">
+          <p><strong>Variable:</strong> Name given to a value.</p>
+          <pre><code>x = 10
+name = <span class="string">"Alice"</span>
+price = 19.99</code></pre>
+          <p><strong>Constant:</strong> Value that should not change (UPPER_CASE).</p>
+          <pre><code>PI = 3.14159
+MAX_SIZE = 100</code></pre>
+        </div>
+      </section>
+
+      <!-- 4. IF - ELIF - ELSE -->
+      <section class="card">
+        <div class="card-header pink-bg">
+          <span class="badge">4</span>
+          <span>If – Elif – Else</span>
+        </div>
+        <div class="card-body">
+          <pre><code>x = 10
+
+<span class="keyword">if</span> x &gt; 0:
+    <span class="keyword">print</span>(<span class="string">"Positive"</span>)
+<span class="keyword">elif</span> x == 0:
+    <span class="keyword">print</span>(<span class="string">"Zero"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"Negative"</span>)</code></pre>
+        </div>
+      </section>
+
+      <!-- 5. FOR LOOP -->
+      <section class="card">
+        <div class="card-header orange-bg">
+          <span class="badge">5</span>
+          <span>For Loop</span>
+        </div>
+        <div class="card-body">
+          <pre><code><span class="keyword">for</span> i <span class="keyword">in</span> range(1, 6):
+    <span class="keyword">print</span>(i)
+
+<span class="comment"># Output: 1 2 3 4 5</span>
+
+<span class="comment"># Loop through list:</span>
+<span class="keyword">for</span> item <span class="keyword">in</span> [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>]:
+    <span class="keyword">print</span>(item)</code></pre>
+        </div>
+      </section>
+
+      <!-- 6. WHILE LOOP -->
+      <section class="card">
+        <div class="card-header sky-bg">
+          <span class="badge">6</span>
+          <span>While Loop</span>
+        </div>
+        <div class="card-body">
+          <pre><code>i = 1
+<span class="keyword">while</span> i &lt;= 5:
+    <span class="keyword">print</span>(i)
+    i += 1
+
+<span class="comment"># Output: 1 2 3 4 5</span></code></pre>
+        </div>
+      </section>
+
+      <!-- 7. COUNTING -->
+      <section class="card">
+        <div class="card-header teal-bg">
+          <span class="badge">7</span>
+          <span>Counting</span>
+        </div>
+        <div class="card-body">
+          <p>Count how many times an item appears in a list:</p>
+          <pre><code>lst = [1, 2, 2, 3, 2, 4]
+count = lst.count(2)
+
+<span class="keyword">print</span>(count)  <span class="output"># Output: 3</span></code></pre>
+        </div>
+      </section>
+
+      <!-- 8. TOTALING (SUM) -->
+      <section class="card">
+        <div class="card-header purple-bg">
+          <span class="badge">8</span>
+          <span>Totaling (Sum)</span>
+        </div>
+        <div class="card-body">
+          <p>Sum of numbers in a list:</p>
+          <pre><code>nums = [10, 20, 30, 40]
+total = sum(nums)
+
+<span class="keyword">print</span>(total)  <span class="output"># 100</span></code></pre>
+        </div>
+      </section>
+
+      <!-- 9. MAXIMUM -->
+      <section class="card">
+        <div class="card-header pink-bg">
+          <span class="badge">9</span>
+          <span>Maximum</span>
+        </div>
+        <div class="card-body">
+          <p>Find maximum value:</p>
+          <pre><code>nums = [12, 5, 33, 7]
+m = max(nums)
+
+<span class="keyword">print</span>(m)  <span class="output"># 33</span></code></pre>
+        </div>
+      </section>
+
+      <!-- 10. MINIMUM -->
+      <section class="card">
+        <div class="card-header blue-bg">
+          <span class="badge">10</span>
+          <span>Minimum</span>
+        </div>
+        <div class="card-body">
+          <p>Find minimum value:</p>
+          <pre><code>nums = [12, 5, 33, 7]
+m = min(nums)
+
+<span class="keyword">print</span>(m)  <span class="output"># 5</span></code></pre>
+        </div>
+      </section>
+
+      <!-- 11. LIST -->
+      <section class="card">
+        <div class="card-header teal-bg">
+          <span class="badge">11</span>
+          <span>List</span>
+        </div>
+        <div class="card-body">
+          <p>Create and access list:</p>
+          <pre><code>fruits = [<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"cherry"</span>]
+<span class="keyword">print</span>(fruits[0])  <span class="comment"># apple</span>
+
+fruits.append(<span class="string">"orange"</span>)
+<span class="keyword">print</span>(fruits)</code></pre>
+        </div>
+      </section>
+
+      <!-- 12. 1D ARRAY (LIST) -->
+      <section class="card">
+        <div class="card-header orange-bg">
+          <span class="badge">12</span>
+          <span>1D Array (List)</span>
+        </div>
+        <div class="card-body">
+          <p>1D array is just a list:</p>
+          <pre><code>arr = [5, 10, 15, 20, 25]
+<span class="keyword">print</span>(arr[2])  <span class="output"># 15</span></code></pre>
+        </div>
+      </section>
+
+      <!-- 13. 2D ARRAY -->
+      <section class="card">
+        <div class="card-header purple-bg">
+          <span class="badge">13</span>
+          <span>2D Array (List of Lists)</span>
+        </div>
+        <div class="card-body">
+          <p>Matrix / Table (Rows &times; Cols):</p>
+          <pre><code>matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+
+<span class="keyword">print</span>(matrix[1][2])  <span class="output"># 6</span></code></pre>
+        </div>
+      </section>
+
+      <!-- 14. UPPER & LOWER -->
+      <section class="card">
+        <div class="card-header orange-bg">
+          <span class="badge">14</span>
+          <span>Upper & Lower</span>
+        </div>
+        <div class="card-body">
+          <p>String case conversion:</p>
+          <pre><code>text = <span class="string">"Hello Python"</span>
+
+<span class="keyword">print</span>(text.upper())  <span class="output"># HELLO PYTHON</span>
+<span class="keyword">print</span>(text.lower())  <span class="output"># hello python</span></code></pre>
+        </div>
+      </section>
+
+      <!-- 15. FILE HANDLING -->
+      <section class="card">
+        <div class="card-header blue-bg">
+          <span class="badge">15</span>
+          <span>File Handling</span>
+        </div>
+        <div class="card-body">
+          <strong>Read a file:</strong>
+          <pre><code><span class="keyword">with open</span>(<span class="string">"data.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> f:
+    content = f.read()
+    <span class="keyword">print</span>(content)</code></pre>
+          
+          <strong>Write / Append to a file:</strong>
+          <pre><code><span class="comment"># Write (overwrite)</span>
+<span class="keyword">with open</span>(<span class="string">"out.txt"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> f:
+    f.write(<span class="string">"Hello Python!\n"</span>)
+
+<span class="comment"># Append</span>
+<span class="keyword">with open</span>(<span class="string">"out.txt"</span>, <span class="string">"a"</span>) <span class="keyword">as</span> f:
+    f.write(<span class="string">"Append this line."</span>)</code></pre>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+      <div>
+        Practice in browser: 
+        <a href="https://www.w3schools.com/python/trypython.asp?filename=demo_default" target="_blank" rel="noopener noreferrer">Python Online Compiler</a> | 
+        Learn in detail: 
+        <a href="https://www.w3schools.com/python/" target="_blank" rel="noopener noreferrer">W3Schools Python Docs</a>
+      </div>
+      <div>
+        Created with &hearts; by <strong>WaiLinHtet</strong>
+      </div>
+    </footer>
+  </div>
+
+</body>
+</html>

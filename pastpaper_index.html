@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X74PEWZMJV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X74PEWZMJV');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Past Papers Resource Portal</title>
+  
+  <!-- PapaParse for parsing CSV directly in browser -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 2rem 1rem 3rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      color: #0f172a;
+      margin-bottom: 0.4rem;
+    }
+
+    .creator-tag {
+      display: inline-block;
+      margin-bottom: 0.6rem;
+      padding: 0.25rem 0.75rem;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1d4ed8;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    header p {
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    /* Filters Section */
+    .controls {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      margin-bottom: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .control-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    select, input {
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.9rem;
+      outline: none;
+      background: #fff;
+    }
+
+    select:focus, input:focus {
+      border-color: var(--primary);
+    }
+
+    /* Table Section */
+    .table-container {
+      background: var(--card-bg);
+      border-radius: 10px;
+      overflow-x: auto;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    tr:hover {
+      background-color: #f8fafc;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.45rem 0.9rem;
+      background-color: var(--primary);
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    #loading, #no-data {
+      text-align: center;
+      padding: 2.5rem;
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      color: #94a3b8;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Past Papers & Resources Portal</h1>
+    <div class="creator-tag">Created by Tr. Wai Lin Htet</div>
+    <p>Filter and search examination materials by Board, Subject, and Year</p>
+  </header>
+
+  <!-- Filter & Search Controls -->
+  <div class="controls">
+    <div class="control-group">
+      <label for="boardFilter">Exam Board</label>
+      <select id="boardFilter">
+        <option value="">All Boards</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label for="subjectFilter">Subject</label>
+      <select id="subjectFilter">
+        <option value="">All Subjects</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label for="yearFilter">Year</label>
+      <select id="yearFilter">
+        <option value="">All Years</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label for="searchInput">Search Keyword</label>
+      <input type="text" id="searchInput" placeholder="e.g. 0417, 0478, Paper 1, MS">
+    </div>
+  </div>
+
+  <!-- Data Display Table -->
+  <div class="table-container">
+    <div id="loading">Loading resources from Google Sheet... Please wait.</div>
+    <table id="papersTable" style="display: none;">
+      <thead>
+        <tr>
+          <th>Board</th>
+          <th>Subject</th>
+          <th>Year & Session</th>
+          <th>Paper & Variant</th>
+          <th>Type</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+    <div id="no-data" style="display: none;">No matching past papers found.</div>
+  </div>
+
+  <footer>
+    Past Papers Portal • Created by Tr. Wai Lin Htet
+  </footer>
+</div>
+
+<script>
+  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7f_Kf_OwB0G8V3V1BBW9II-fG9vB86-dogsux84Wauf8NYTRp7xE4DOrI0wDENu2lpCAAdNHfpcn8/pub?output=csv';
+
+  let papersData = [];
+
+  function formatDriveUrl(url) {
+    if (!url) return '#';
+    const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+    if (match && match[1]) {
+      return `https://drive.google.com/file/d/${match[1]}/preview`;
+    }
+    return url;
+  }
+
+  function loadSheetData() {
+    Papa.parse(SHEET_CSV_URL, {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: function(results) {
+        papersData = results.data.filter(row => row.drive_link && row.paper !== '.DS_Store');
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('papersTable').style.display = 'table';
+        
+        populateDropdowns();
+        renderTable(papersData);
+      },
+      error: function(err) {
+        document.getElementById('loading').innerText = 'Failed to load sheet data. Please verify your CSV URL permissions.';
+        console.error(err);
+      }
+    });
+  }
+
+  function populateDropdowns() {
+    const boards = [...new Set(papersData.map(item => item.board).filter(Boolean))];
+    const subjects = [...new Set(papersData.map(item => item.subject).filter(Boolean))];
+    const years = [...new Set(papersData.map(item => item.year).filter(Boolean))].sort((a, b) => b - a);
+
+    const boardSelect = document.getElementById('boardFilter');
+    const subjectSelect = document.getElementById('subjectFilter');
+    const yearSelect = document.getElementById('yearFilter');
+
+    boards.forEach(b => boardSelect.innerHTML += `<option value="${b}">${b}</option>`);
+    subjects.forEach(s => subjectSelect.innerHTML += `<option value="${s}">${s}</option>`);
+    years.forEach(y => yearSelect.innerHTML += `<option value="${y}">${y}</option>`);
+
+    boardSelect.addEventListener('change', applyFilters);
+    subjectSelect.addEventListener('change', applyFilters);
+    yearSelect.addEventListener('change', applyFilters);
+    document.getElementById('searchInput').addEventListener('input', applyFilters);
+  }
+
+  function applyFilters() {
+    const selectedBoard = document.getElementById('boardFilter').value.toLowerCase();
+    const selectedSubject = document.getElementById('subjectFilter').value.toLowerCase();
+    const selectedYear = document.getElementById('yearFilter').value.toLowerCase();
+    const query = document.getElementById('searchInput').value.toLowerCase();
+
+    const filtered = papersData.filter(item => {
+      const matchBoard = !selectedBoard || (item.board || '').toLowerCase() === selectedBoard;
+      const matchSubject = !selectedSubject || (item.subject || '').toLowerCase() === selectedSubject;
+      const matchYear = !selectedYear || (item.year || '').toLowerCase() === selectedYear;
+
+      const searchableString = `${item.board} ${item.subject} ${item.year} ${item.session} ${item.paper} ${item.type}`.toLowerCase();
+      const matchQuery = !query || searchableString.includes(query);
+
+      return matchBoard && matchSubject && matchYear && matchQuery;
+    });
+
+    renderTable(filtered);
+  }
+
+  function renderTable(data) {
+    const tbody = document.getElementById('tableBody');
+    const noDataDiv = document.getElementById('no-data');
+    tbody.innerHTML = '';
+
+    if (data.length === 0) {
+      noDataDiv.style.display = 'block';
+      return;
+    } else {
+      noDataDiv.style.display = 'none';
+    }
+
+    data.forEach(item => {
+      const tr = document.createElement('tr');
+      const previewUrl = formatDriveUrl(item.drive_link);
+
+      const yearSession = item.year || item.session 
+        ? `${item.year || ''} ${item.session ? '(' + item.session + ')' : ''}`
+        : '-';
+
+      tr.innerHTML = `
+        <td><b>${item.board || '-'}</b></td>
+        <td>${item.subject || '-'}</td>
+        <td>${yearSession}</td>
+        <td>${item.paper || '-'}</td>
+        <td><span class="badge">${item.type || 'Paper'}</span></td>
+        <td>
+          <a href="${previewUrl}" target="_blank" rel="noopener noreferrer" class="btn">View / Open</a>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', loadSheetData);
+</script>
+
+</body>
+</html>

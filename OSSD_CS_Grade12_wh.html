@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSSD Computer Science (ICS3U & ICS4U) - Curriculum Hub</title>
+  <style>
+    :root {
+      /* Apple-inspired Light Theme Colors */
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-card: #f8fafc;
+      --border: #d2d2d7;
+      --text-main: #1d1d1f;
+      --text-muted: #86868b;
+      
+      /* Course Accents */
+      --accent-ics3u: #0066cc; /* Classic Blue */
+      --accent-ics3u-glow: #e8f0fe;
+      --accent-ics4u: #5e5ce6; /* Indigo */
+      --accent-ics4u-glow: #f0efff;
+      
+      /* Typography */
+      --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-system);
+      line-height: 1.5;
+      padding-bottom: 5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Glassmorphism Header */
+    header {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0.8rem 1.5rem;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-tag {
+      font-family: var(--font-mono);
+      background: #1d1d1f;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+
+    .controls-wrapper {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* Minimal Inputs & Buttons */
+    .search-input {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 0.55rem 0.95rem;
+      color: var(--text-main);
+      font-family: var(--font-system);
+      font-size: 0.85rem;
+      outline: none;
+      min-width: 240px;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      background: #ffffff;
+      border-color: var(--accent-ics3u);
+      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 0.45rem 0.85rem;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      background: rgba(0, 0, 0, 0.04);
+      color: var(--text-main);
+    }
+
+    .filter-btn.active[data-filter="all"] {
+      background: #1d1d1f;
+      color: #ffffff;
+    }
+
+    .filter-btn.active[data-filter="ics3u"] {
+      background: var(--accent-ics3u-glow);
+      color: var(--accent-ics3u);
+    }
+
+    .filter-btn.active[data-filter="ics4u"] {
+      background: var(--accent-ics4u-glow);
+      color: var(--accent-ics4u);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2.5rem auto 0;
+      padding: 0 1.5rem;
+    }
+
+    /* Soft Cards */
+    .course-overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .overview-card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.04);
+      position: relative;
+    }
+
+    .overview-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .overview-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .badge {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 12px;
+    }
+
+    .badge-ics3u {
+      background: var(--accent-ics3u-glow);
+      color: var(--accent-ics3u);
+    }
+
+    .badge-ics4u {
+      background: var(--accent-ics4u-glow);
+      color: var(--accent-ics4u);
+    }
+
+    .overview-stats {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .overview-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Section Headings */
+    .section-heading {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 3rem 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .dot-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-ics3u { background: var(--accent-ics3u); }
+    .dot-ics4u { background: var(--accent-ics4u); }
+
+    /* Module Grid & Cards */
+    .unit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .unit-card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .unit-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .unit-card-top {
+      margin-bottom: 1.5rem;
+    }
+
+    .unit-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .unit-tag {
+      font-family: var(--font-system);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .unit-heading {
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .topics-preview {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .topics-preview li {
+      display: flex;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+
+    /* Minimal SVG Chevron for lists */
+    .topics-preview li::before {
+      content: url('data:image/svg+xml;utf8,<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%2386868b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>');
+      margin-right: 6px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .open-btn {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.03);
+      border: none;
+      font-weight: 500;
+      font-size: 0.85rem;
+      padding: 0.7rem;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .unit-card.course-ics3u .open-btn { color: var(--accent-ics3u); }
+    .unit-card.course-ics4u .open-btn { color: var(--accent-ics4u); }
+
+    .open-btn:hover {
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    /* Details Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-dialog {
+      background: var(--surface);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 800px;
+      max-height: 85vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .modal-top {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+
+    .modal-heading {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .dismiss-btn {
+      background: rgba(0,0,0,0.05);
+      border: none;
+      color: var(--text-muted);
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .dismiss-btn:hover {
+      background: rgba(0,0,0,0.1);
+      color: var(--text-main);
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .modal-item-section {
+      margin-bottom: 2rem;
+    }
+
+    .modal-item-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .modal-ics3u .modal-item-title { color: var(--accent-ics3u); }
+    .modal-ics4u .modal-item-title { color: var(--accent-ics4u); }
+
+    .block-box {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .block-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .bullets-list {
+      list-style-type: none;
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .bullets-list li {
+      position: relative;
+      padding-left: 1.25rem;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    /* Standard bullet */
+    .bullets-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0.35rem;
+      color: var(--text-muted);
+    }
+
+    /* Colored guidance bullets based on course */
+    .modal-ics3u .guidance-list li::before { color: var(--accent-ics3u); }
+    .modal-ics4u .guidance-list li::before { color: var(--accent-ics4u); }
+
+    @media (max-width: 768px) {
+      .header-inner { flex-direction: column; align-items: stretch; }
+      .search-input { width: 100%; }
+      .unit-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-tag">OSSD</span>
+        <div class="brand-title">Computer Science Curriculum</div>
+      </div>
+      <div class="controls-wrapper">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search curriculum topics, algorithms...">
+        <button class="filter-btn active" data-filter="all">All Courses</button>
+        <button class="filter-btn" data-filter="ics3u">ICS3U (Grade 11)</button>
+        <button class="filter-btn" data-filter="ics4u">ICS4U (Grade 12)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Course Pathway Overview -->
+    <section class="course-overview-grid">
+      <div class="overview-card ics3u">
+        <div class="overview-title-row">
+          <span class="overview-name">ICS3U: Introduction to Computer Science</span>
+          <span class="badge badge-ics3u">Grade 11 • University Prep</span>
+        </div>
+        <div class="overview-stats">
+          <span>🎓 1.0 Credit</span>
+          <span>🐍 Python & Concepts</span>
+          <span>⚙️ Hardware & Networks</span>
+        </div>
+        <p class="overview-desc">Foundational software design, Python syntax, core data types, modular programming, computer architecture, digital logic, and network fundamentals.</p>
+      </div>
+
+      <div class="overview-card ics4u">
+        <div class="overview-title-row">
+          <span class="overview-name">ICS4U: Computer Science</span>
+          <span class="badge badge-ics4u">Grade 12 • University Prep</span>
+        </div>
+        <div class="overview-stats">
+          <span>🎓 1.0 Credit</span>
+          <span>⚡ Advanced Algorithms</span>
+          <span>🧱 Object-Oriented Design</span>
+        </div>
+        <p class="overview-desc">Advanced software project planning, rigorous searching and sorting algorithms, robust OOP architectures, runtime performance, and computing ethics/environmental impact.</p>
+      </div>
+    </section>
+
+    <!-- Content Sections injected here -->
+    <div id="courseContainer"></div>
+  </main>
+
+  <!-- Modal Details -->
+  <div class="modal-backdrop" id="curriculumModal">
+    <div class="modal-dialog" id="modalWindow">
+      <div class="modal-top">
+        <div class="modal-heading" id="modalHeading">Unit Details</div>
+        <button class="dismiss-btn" id="modalDismiss">&times;</button>
+      </div>
+      <div class="modal-body" id="modalWindowBody"></div>
+    </div>
+  </div>
+
+  <script>
+    const ossdCurriculum = [
+      // ICS3U
+      {
+        id: "ics3u_u1",
+        course: "ics3u",
+        unitNum: "Unit 1",
+        title: "Computer Architecture, Hardware & Network",
+        topics: [
+          "Computer Architecture: CPU, ALU, Control Unit, and Registers",
+          "Internal & External Hardware: RAM, ROM, Motherboard, GPU, and Storage",
+          "Networking Fundamentals: LAN, WAN, IP Addressing, Routers, and Topology",
+          "Data Representation: Binary, Hexadecimal, ASCII, and Logic Gates"
+        ],
+        details: [
+          {
+            sectionTitle: "1.1 Computer Architecture & Microprocessors",
+            objectives: [
+              "Understand internal components of a computer system and their primary functions.",
+              "Trace the fetch-decode-execute cycle within the central processing unit.",
+              "Analyze the roles of registers, internal system buses, and CPU clock speed."
+            ],
+            notes: [
+              "Focus on how hardware limitations impact software design decisions.",
+              "Contrast primary memory (volatile RAM, persistent ROM) with secondary backing storage."
+            ]
+          },
+          {
+            sectionTitle: "1.2 Network Topologies & Communication",
+            objectives: [
+              "Examine how client-server and peer-to-peer network infrastructures operate.",
+              "Understand fundamental network hardware including routers, switches, and NICs.",
+              "Explain basic network protocols and data packet transmission."
+            ],
+            notes: [
+              "Emphasize packet structure, routing pathways, and local vs wide area network configurations."
+            ]
+          }
+        ]
+      },
+      {
+        id: "ics3u_u2",
+        course: "ics3u",
+        unitNum: "Unit 2",
+        title: "Programming Basics & Logic",
+        topics: [
+          "Data Types & Identifiers: Integer, Float, Boolean, String, Char",
+          "Control Structures: Sequence, Selection (if-elif-else), and Iteration",
+          "Looping Mechanics: Count-controlled and Condition-controlled loops",
+          "Problem Decomposition & Pseudocode Construction"
+        ],
+        details: [
+          {
+            sectionTitle: "2.1 Variables, Data Types & Control Flow",
+            objectives: [
+              "Declare, initialize, and manipulate standard primitive data structures.",
+              "Construct robust conditional logic using boolean operators (AND, OR, NOT).",
+              "Execute repetition structures (for and while loops) with proper termination conditions."
+            ],
+            notes: [
+              "Ensure students eliminate infinite loop hazards and understand variable scope."
+            ]
+          },
+          {
+            sectionTitle: "2.2 Algorithm Design & Logic Formulation",
+            objectives: [
+              "Deconstruct programming problems into sequential logic blocks.",
+              "Utilize pseudocode and flowcharts to plan software before coding.",
+              "Perform manual trace table dry runs to debug logic errors."
+            ],
+            notes: [
+              "Focus on clean code conventions, structured design, and test assertions."
+            ]
+          }
+        ]
+      },
+      {
+        id: "ics3u_u3",
+        course: "ics3u",
+        unitNum: "Unit 3",
+        title: "Python Programming & Modular Software",
+        topics: [
+          "Python Syntax & Core Libraries",
+          "User-Defined Functions, Parameters & Return Values",
+          "Data Structures: Lists, Tuples, and Dictionaries",
+          "Basic File I/O & Exception Handling"
+        ],
+        details: [
+          {
+            sectionTitle: "3.1 Modular Coding with Functions",
+            objectives: [
+              "Build modular programs by decomposing tasks into discrete reusable functions.",
+              "Pass arguments by value/reference and manage returned values cleanly.",
+              "Distinguish clearly between local scope and global scope variables."
+            ],
+            notes: [
+              "Limit global variable dependency; emphasize pure functions and side-effect isolation."
+            ]
+          },
+          {
+            sectionTitle: "3.2 Collection Structures & Sequential File Operations",
+            objectives: [
+              "Create and manipulate 1D lists, indexing, slicing, and list operations.",
+              "Read from and append to external text/data files (.txt, .csv).",
+              "Implement fundamental runtime error handling using try-except blocks."
+            ],
+            notes: [
+              "Reinforce proper file closure routines and persistent data storage."
+            ]
+          }
+        ]
+      },
+      {
+        id: "ics3u_u4",
+        course: "ics3u",
+        unitNum: "Unit 4",
+        title: "University Preparation & Software Lifecycle",
+        topics: [
+          "Software Development Life Cycle (SDLC): Analysis, Design, Implementation, Testing",
+          "Code Quality: Naming Conventions, Comments, and Refactoring",
+          "Unit Testing & Boundary Test Data",
+          "Exploration of Post-Secondary Computer Science & Engineering Fields"
+        ],
+        details: [
+          {
+            sectionTitle: "4.1 Software Engineering Principles",
+            objectives: [
+              "Document code using inline comments, docstrings, and comprehensive test logs.",
+              "Apply boundary, normal, and abnormal test data sets to identify edge failures.",
+              "Collaborate and maintain version control awareness across project milestones."
+            ],
+            notes: [
+              "Prepares students directly for the academic rigor of university CS curricula."
+            ]
+          }
+        ]
+      },
+
+      // ICS4U
+      {
+        id: "ics4u_u1",
+        course: "ics4u",
+        unitNum: "Unit 1",
+        title: "Fundamental Skills",
+        topics: [
+          "Software project planning & requirements breakdown",
+          "Type conversions & Unicode representations",
+          "Number precision, floating-point math & rounding errors",
+          "Reading/writing data files & structured persistence",
+          "Software documentation standards & thorough testing"
+        ],
+        details: [
+          {
+            sectionTitle: "1.1 Project Architecture & Precision Handling",
+            objectives: [
+              "Design a comprehensive software project plan complete with milestones and deliverables.",
+              "Handle type conversions cleanly and explore Unicode character set encoding.",
+              "Analyze the causes and implications of floating-point rounding errors and precision limits."
+            ],
+            notes: [
+              "Floating-point representation limitations (e.g. IEEE 754 standards) and accumulation of errors in loops."
+            ]
+          },
+          {
+            sectionTitle: "1.2 File I/O, Documentation & Verification",
+            objectives: [
+              "Read and write complex structured files for persistent application data.",
+              "Author professional technical documentation and user guides.",
+              "Design systematic unit and integration testing suites covering extreme edge cases."
+            ],
+            notes: [
+              "Emphasis on fault-tolerant I/O operations and robust data validation."
+            ]
+          }
+        ]
+      },
+      {
+        id: "ics4u_u2",
+        course: "ics4u",
+        unitNum: "Unit 2",
+        title: "Search & Sort Algorithms",
+        topics: [
+          "Search Algorithms: Linear Search, Binary Search",
+          "Quadratic Sorts: Bubble Sort, Selection Sort, Insertion Sort",
+          "Divide-and-Conquer Sorts: Merge Sort, Quick Sort",
+          "Algorithm Efficiency & Runtime Profiling"
+        ],
+        details: [
+          {
+            sectionTitle: "2.1 Searching Techniques",
+            objectives: [
+              "Implement and trace Linear Search across unordered datasets.",
+              "Implement and trace Binary Search on ordered arrays.",
+              "Compare best, average, and worst-case comparisons between linear and binary searches."
+            ],
+            notes: [
+              "Binary search requires a sorted collection; understand prerequisites and recursive/iterative approaches."
+            ]
+          },
+          {
+            sectionTitle: "2.2 Sorting Techniques & Divide-and-Conquer",
+            objectives: [
+              "Implement elementary sorting methods: Bubble Sort, Selection Sort, Insertion Sort.",
+              "Implement advanced divide-and-conquer algorithms: Merge Sort and Quick Sort.",
+              "Trace partition logic in Quick Sort and recursive merging passes in Merge Sort."
+            ],
+            notes: [
+              "Analyze comparative pass counts, data movement, and time complexity implications."
+            ]
+          }
+        ]
+      },
+      {
+        id: "ics4u_u3",
+        course: "ics4u",
+        unitNum: "Unit 3",
+        title: "Object Oriented Programming (OOP)",
+        topics: [
+          "Introduction to OOP: Classes, Objects, Fields, and Methods",
+          "UML Class Diagrams & Functional Decomposition",
+          "Encapsulation, Reusability & Upgradeability",
+          "Pre-conditions, Post-conditions & Method Contracts",
+          "Run-time Performance & Memory Model"
+        ],
+        details: [
+          {
+            sectionTitle: "3.1 OOP Principles & Architecture",
+            objectives: [
+              "Design and instantiate cohesive classes demonstrating encapsulation and data hiding.",
+              "Model software structures using standard UML class and relationship diagrams.",
+              "Engineer reusable and extensible classes with modular interfaces."
+            ],
+            notes: [
+              "Focus on access modifiers (private, protected, public) and getter/setter design."
+            ]
+          },
+          {
+            sectionTitle: "3.2 Contracts, Runtime & Method Validation",
+            objectives: [
+              "Formulate formal pre-conditions and post-conditions for object methods.",
+              "Evaluate runtime implications of object creation, memory references, and garbage collection.",
+              "Protect object invariants against improper state mutations."
+            ],
+            notes: [
+              "Enforce assertive method contracts to guarantee predictable object behavior."
+            ]
+          }
+        ]
+      },
+      {
+        id: "ics4u_u4",
+        course: "ics4u",
+        unitNum: "Unit 4",
+        title: "Careers, Ethical Issues & Environmental Impact",
+        topics: [
+          "Ethical issues in software, data privacy, and algorithm bias",
+          "Professional codes of ethics (ACM / IEEE standards)",
+          "Environmental impact of computing (e-waste, server farm energy)",
+          "Emerging fields: AI, Quantum, Cybersecurity, and Robotics",
+          "Collaborative multidisciplinary careers in technology"
+        ],
+        details: [
+          {
+            sectionTitle: "4.1 Ethics & Professional Codes",
+            objectives: [
+              "Analyze societal impacts of computational systems, biometric tracking, and algorithm decision-making.",
+              "Evaluate professional computing codes of ethics and software engineer liability.",
+              "Assess intellectual property, software licensing, and digital sovereignty."
+            ],
+            notes: [
+              "Case study approach analyzing historical software failures and ethical dilemmas."
+            ]
+          },
+          {
+            sectionTitle: "4.2 Environmental Sustainability & Future Tech Careers",
+            objectives: [
+              "Evaluate the life cycle of hardware: toxic e-waste disposal and rare-earth mineral usage.",
+              "Examine carbon costs of high-performance computing centers and AI model training.",
+              "Explore emerging career paths and multidisciplinary team dynamics."
+            ],
+            notes: [
+              "Connect sustainable technology development with evolving engineering roles."
+            ]
+          }
+        ]
+      }
+    ];
+
+    const courseContainer = document.getElementById('courseContainer');
+    const searchInput = document.getElementById('searchInput');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function renderCurriculum() {
+      courseContainer.innerHTML = '';
+
+      const filtered = ossdCurriculum.filter(unit => {
+        const matchesFilter = (currentFilter === 'all') || (unit.course === currentFilter);
+        const matchesQuery = 
+          unit.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          unit.unitNum.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          unit.topics.some(t => t.toLowerCase().includes(searchQuery.toLowerCase())) ||
+          unit.details.some(d => 
+            d.sectionTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            d.objectives.some(o => o.toLowerCase().includes(searchQuery.toLowerCase()))
+          );
+        return matchesFilter && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        courseContainer.innerHTML = `
+          <div style="text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
+            <h3>No curriculum units match your search</h3>
+            <p>Try searching for other keywords (e.g., "Sort", "OOP", "Architecture", "Python").</p>
+          </div>
+        `;
+        return;
+      }
+
+      const ics3uUnits = filtered.filter(u => u.course === 'ics3u');
+      const ics4uUnits = filtered.filter(u => u.course === 'ics4u');
+
+      if (ics3uUnits.length > 0) {
+        renderUnitSection("ICS3U: Grade 11 Computer Science", "dot-ics3u", ics3uUnits);
+      }
+
+      if (ics4uUnits.length > 0) {
+        renderUnitSection("ICS4U: Grade 12 Computer Science", "dot-ics4u", ics4uUnits);
+      }
+    }
+
+    function renderUnitSection(title, dotClass, units) {
+      const h2 = document.createElement('h2');
+      h2.className = 'section-heading';
+      h2.innerHTML = `<span class="dot-indicator ${dotClass}"></span> ${title}`;
+      courseContainer.appendChild(h2);
+
+      const grid = document.createElement('div');
+      grid.className = 'unit-grid';
+      units.forEach(unit => grid.appendChild(createUnitCard(unit)));
+      courseContainer.appendChild(grid);
+    }
+
+    function createUnitCard(unit) {
+      const card = document.createElement('div');
+      card.className = `unit-card course-${unit.course}`;
+
+      const is3u = unit.course === 'ics3u';
+      const badgeClass = is3u ? 'badge-ics3u' : 'badge-ics4u';
+      const badgeText = is3u ? 'ICS3U' : 'ICS4U';
+
+      const topicsPreview = unit.topics.slice(0, 4).map(topic => 
+        `<li>${topic}</li>`
+      ).join('');
+
+      card.innerHTML = `
+        <div class="unit-card-top">
+          <div class="unit-meta">
+            <span class="unit-tag">${unit.unitNum}</span>
+            <span class="badge ${badgeClass}">${badgeText}</span>
+          </div>
+          <h3 class="unit-heading">${unit.title}</h3>
+          <ul class="topics-preview">
+            ${topicsPreview}
+          </ul>
+        </div>
+        <button class="open-btn" onclick="showUnitModal('${unit.id}')">
+          View Detailed Curriculum
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      `;
+      return card;
+    }
+
+    // Modal Interaction
+    const modalBackdrop = document.getElementById('curriculumModal');
+    const modalWindow = document.getElementById('modalWindow');
+    const modalHeading = document.getElementById('modalHeading');
+    const modalWindowBody = document.getElementById('modalWindowBody');
+    const modalDismiss = document.getElementById('modalDismiss');
+
+    window.showUnitModal = function(id) {
+      const unit = ossdCurriculum.find(u => u.id === id);
+      if (!unit) return;
+
+      modalWindow.className = `modal-dialog modal-${unit.course}`;
+      modalHeading.innerText = `${unit.unitNum}: ${unit.title} (${unit.course.toUpperCase()})`;
+
+      let html = '';
+      unit.details.forEach(item => {
+        html += `
+          <div class="modal-item-section">
+            <h4 class="modal-item-title">${item.sectionTitle}</h4>
+            
+            <div class="block-box">
+              <div class="block-title">Key Learning Expectations & Competencies:</div>
+              <ul class="bullets-list">
+                ${item.objectives.map(obj => `<li>${obj}</li>`).join('')}
+              </ul>
+            </div>
+
+            <div class="block-box">
+              <div class="block-title">Curriculum Notes & Pedagogical Focus:</div>
+              <ul class="bullets-list guidance-list">
+                ${item.notes.map(note => `<li>${note}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+        `;
+      });
+
+      modalWindowBody.innerHTML = html;
+      modalBackdrop.classList.add('active');
+    };
+
+    function hideModal() {
+      modalBackdrop.classList.remove('active');
+    }
+
+    modalDismiss.addEventListener('click', hideModal);
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) hideModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) hideModal();
+    });
+
+    // Filter and Search Event Handlers
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderCurriculum();
+      });
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      renderCurriculum();
+    });
+
+    // Initial Execution
+    renderCurriculum();
+  </script>
+</body>
+</html>

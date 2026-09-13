@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML & CSS Cheat Sheet - by Syr.WaiLinHtet</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --code-bg: #f1f5f9;
+      --code-border: #cbd5e1;
+      
+      /* Section Colors */
+      --blue: #2563eb;
+      --green: #16a34a;
+      --purple: #7c3aed;
+      --orange: #ea580c;
+      --cyan: #0891b2;
+      --pink: #db2777;
+      --yellow: #ca8a04;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 20px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .html-badge {
+      background: #e34f26;
+      color: #fff;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 1.4rem;
+    }
+
+    .css-badge {
+      background: #1572b6;
+      color: #fff;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 1.4rem;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 14px;
+    }
+
+    /* Links Bar */
+    .links-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    .btn-w3-html { background: #04aa6d; color: #fff; }
+    .btn-w3-css  { background: #1572b6; color: #fff; }
+    .btn-compiler{ background: #e11d48; color: #fff; }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(0.95);
+    }
+
+    /* Section Subheadings */
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #334155;
+      margin: 28px 0 16px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Layout Grids */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 16px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      padding: 8px 14px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }
+
+    .blue-bg   { background-color: var(--blue); }
+    .green-bg  { background-color: var(--green); }
+    .purple-bg { background-color: var(--purple); }
+    .orange-bg { background-color: var(--orange); }
+    .cyan-bg   { background-color: var(--cyan); }
+    .pink-bg   { background-color: var(--pink); }
+    .yellow-bg { background-color: var(--yellow); }
+    .dark-bg   { background-color: #334155; }
+
+    .card-body {
+      padding: 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 6px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #f8fafc;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    code {
+      font-family: "Fira Code", Consolas, Courier, monospace;
+      background: var(--code-bg);
+      color: #0f172a;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: 6px;
+      padding: 10px;
+      font-family: "Fira Code", Consolas, Courier, monospace;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      line-height: 1.4;
+      color: #334155;
+    }
+
+    .sub-head {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* CSS Box Model Visualizer */
+    .box-model-demo {
+      border: 2px dashed #a855f7;
+      background: #faf5ff;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #7e22ce;
+    }
+
+    .border-layer {
+      border: 2px solid #22c55e;
+      background: #f0fdf4;
+      padding: 12px;
+      border-radius: 6px;
+      color: #15803d;
+    }
+
+    .padding-layer {
+      border: 2px solid #eab308;
+      background: #fefce8;
+      padding: 12px;
+      border-radius: 4px;
+      color: #a16207;
+    }
+
+    .content-layer {
+      border: 2px solid #3b82f6;
+      background: #eff6ff;
+      padding: 10px;
+      border-radius: 2px;
+      color: #1d4ed8;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 24px 10px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    footer strong {
+      color: #0f172a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo-title">
+        <span class="html-badge">HTML5</span>
+        <span class="css-badge">CSS3</span>
+        <h1>CHEAT SHEET</h1>
+      </div>
+      <p>Quick Reference Guide for HTML Essentials &amp; Core CSS Properties</p>
+
+      <!-- Quick Action Navigation Links -->
+      <div class="links-bar">
+        <a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer" class="btn btn-w3-html">
+          📖 W3Schools HTML
+        </a>
+        <a href="https://www.w3schools.com/css/" target="_blank" rel="noopener noreferrer" class="btn btn-w3-css">
+          🎨 W3Schools CSS
+        </a>
+        <a href="https://www.w3schools.com/html/tryit.asp?filename=tryhtml_intro" target="_blank" rel="noopener noreferrer" class="btn btn-compiler">
+          ▶ Online HTML/CSS Compiler
+        </a>
+      </div>
+    </header>
+
+    <!-- ==================== PART 1: HTML ESSENTIALS ==================== -->
+    <h2 class="section-title"><span>🌐</span> Part 1: HTML Essentials</h2>
+    <main class="grid">
+
+      <!-- 1. Document Structure -->
+      <section class="card">
+        <div class="card-header blue-bg">1. Document Structure</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>Element</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td>Declares HTML5 document type</td></tr>
+              <tr><td><code>&lt;html&gt;</code></td><td>Root element of an HTML page</td></tr>
+              <tr><td><code>&lt;head&gt;</code></td><td>Contains metadata &amp; page info</td></tr>
+              <tr><td><code>&lt;title&gt;</code></td><td>Sets page title in browser tab</td></tr>
+              <tr><td><code>&lt;body&gt;</code></td><td>Contains visible content</td></tr>
+              <tr><td><code>&lt;meta&gt;</code></td><td>Viewport, charset &amp; SEO tags</td></tr>
+              <tr><td><code>&lt;link&gt;</code></td><td>Links external CSS or favicons</td></tr>
+              <tr><td><code>&lt;script&gt;</code></td><td>Embeds or links JavaScript</td></tr>
+            </tbody>
+          </table>
+          <div class="sub-head">Example</div>
+          <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;My Page&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello, World!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- 2. Text & Content -->
+      <section class="card">
+        <div class="card-header green-bg">2. Text &amp; Content</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>Element</th><th>Description</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;h1&gt; - &lt;h6&gt;</code></td><td>Headings (h1 highest)</td><td><code>&lt;h1&gt;Heading&lt;/h1&gt;</code></td></tr>
+              <tr><td><code>&lt;p&gt;</code></td><td>Paragraph block</td><td><code>&lt;p&gt;Text&lt;/p&gt;</code></td></tr>
+              <tr><td><code>&lt;a&gt;</code></td><td>Hyperlink</td><td><code>&lt;a href="..."&gt;Link&lt;/a&gt;</code></td></tr>
+              <tr><td><code>&lt;img&gt;</code></td><td>Image tag</td><td><code>&lt;img src="x.jpg" alt="pic"&gt;</code></td></tr>
+              <tr><td><code>&lt;br&gt; / &lt;hr&gt;</code></td><td>Line break / Horizontal rule</td><td><code>&lt;br&gt; / &lt;hr&gt;</code></td></tr>
+              <tr><td><code>&lt;strong&gt;</code></td><td>Important text (bold)</td><td><code>&lt;strong&gt;Bold&lt;/strong&gt;</code></td></tr>
+              <tr><td><code>&lt;em&gt;</code></td><td>Emphasized text (italic)</td><td><code>&lt;em&gt;Italic&lt;/em&gt;</code></td></tr>
+              <tr><td><code>&lt;span&gt; / &lt;div&gt;</code></td><td>Inline / Block container</td><td><code>&lt;div class="box"&gt;</code></td></tr>
+            </tbody>
+          </table>
+          <div class="sub-head">Example</div>
+          <pre><code>&lt;h1&gt;Welcome&lt;/h1&gt;
+&lt;p&gt;This is &lt;strong&gt;bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt; text.&lt;/p&gt;
+&lt;a href="https://example.com" target="_blank"&gt;Visit Example&lt;/a&gt;
+&lt;img src="image.jpg" alt="Sample Image" width="200"&gt;
+&lt;div class="box"&gt;This is a div container.&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- 3. Lists -->
+      <section class="card">
+        <div class="card-header purple-bg">3. Lists</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>Element</th><th>Description</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;ul&gt;</code></td><td>Unordered list (bullets)</td><td><code>&lt;ul&gt;...&lt;/ul&gt;</code></td></tr>
+              <tr><td><code>&lt;ol&gt;</code></td><td>Ordered list (numbers)</td><td><code>&lt;ol&gt;...&lt;/ol&gt;</code></td></tr>
+              <tr><td><code>&lt;li&gt;</code></td><td>List item entry</td><td><code>&lt;li&gt;Item&lt;/li&gt;</code></td></tr>
+            </tbody>
+          </table>
+          <div class="sub-head">Example</div>
+          <pre><code>&lt;!-- Unordered List --&gt;
+&lt;ul&gt;
+  &lt;li&gt;Apple&lt;/li&gt;
+  &lt;li&gt;Banana&lt;/li&gt;
+  &lt;li&gt;Cherry&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Ordered List --&gt;
+&lt;ol&gt;
+  &lt;li&gt;First&lt;/li&gt;
+  &lt;li&gt;Second&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- 4. Tables -->
+      <section class="card">
+        <div class="card-header orange-bg">4. Tables</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>Element</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;table&gt;</code></td><td>Table container</td></tr>
+              <tr><td><code>&lt;tr&gt;</code></td><td>Table row</td></tr>
+              <tr><td><code>&lt;th&gt;</code></td><td>Table header cell (bold/centered)</td></tr>
+              <tr><td><code>&lt;td&gt;</code></td><td>Table data cell</td></tr>
+              <tr><td><code>&lt;caption&gt;</code></td><td>Table caption / title</td></tr>
+            </tbody>
+          </table>
+          <div class="sub-head">Example</div>
+          <pre><code>&lt;table border="1"&gt;
+  &lt;caption&gt;Student Info&lt;/caption&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Name&lt;/th&gt;
+    &lt;th&gt;Age&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Alice&lt;/td&gt;
+    &lt;td&gt;20&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- 5. Forms -->
+      <section class="card">
+        <div class="card-header cyan-bg">5. Forms</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>Element</th><th>Description</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;form&gt;</code></td><td>Form container</td><td><code>&lt;form action="#"&gt;</code></td></tr>
+              <tr><td><code>&lt;input&gt;</code></td><td>User input control</td><td><code>&lt;input type="text"&gt;</code></td></tr>
+              <tr><td><code>&lt;label&gt;</code></td><td>Label for form element</td><td><code>&lt;label for="name"&gt;</code></td></tr>
+              <tr><td><code>&lt;select&gt; / &lt;option&gt;</code></td><td>Drop-down list</td><td><code>&lt;option value="1"&gt;</code></td></tr>
+              <tr><td><code>&lt;textarea&gt;</code></td><td>Multi-line input</td><td><code>&lt;textarea rows="4"&gt;</code></td></tr>
+              <tr><td><code>&lt;button&gt;</code></td><td>Clickable button</td><td><code>&lt;button type="submit"&gt;</code></td></tr>
+            </tbody>
+          </table>
+          <div class="sub-head">Example</div>
+          <pre><code>&lt;form action="/submit" method="post"&gt;
+  &lt;label for="name"&gt;Name:&lt;/label&gt;
+  &lt;input type="text" id="name" required&gt;&lt;br&gt;
+
+  &lt;select name="country"&gt;
+    &lt;option value="mm"&gt;Myanmar&lt;/option&gt;
+    &lt;option value="us"&gt;USA&lt;/option&gt;
+  &lt;/select&gt;&lt;br&gt;
+
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- 6. Semantic Elements -->
+      <section class="card">
+        <div class="card-header blue-bg">6. Semantic Elements (HTML5)</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>Element</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;header&gt;</code></td><td>Top banner / introductory content</td></tr>
+              <tr><td><code>&lt;nav&gt;</code></td><td>Navigation menu links</td></tr>
+              <tr><td><code>&lt;main&gt;</code></td><td>Central content of the document</td></tr>
+              <tr><td><code>&lt;section&gt;</code></td><td>Thematic section of content</td></tr>
+              <tr><td><code>&lt;article&gt;</code></td><td>Independent, self-contained post</td></tr>
+              <tr><td><code>&lt;aside&gt;</code></td><td>Sidebar or supplementary info</td></tr>
+              <tr><td><code>&lt;footer&gt;</code></td><td>Footer info, copyright, contact</td></tr>
+            </tbody>
+          </table>
+          <div class="sub-head">Example</div>
+          <pre><code>&lt;header&gt;&lt;h1&gt;Header&lt;/h1&gt;&lt;/header&gt;
+&lt;nav&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/nav&gt;
+&lt;main&gt;
+  &lt;section&gt;Main Article Content&lt;/section&gt;
+  &lt;aside&gt;Related Links&lt;/aside&gt;
+&lt;/main&gt;
+&lt;footer&gt;Footer Info&lt;/footer&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- 7. Common Attributes -->
+      <section class="card">
+        <div class="card-header pink-bg">7. Commonly Used Attributes</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>Attribute</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><code>id</code></td><td>Unique identifier for single element</td></tr>
+              <tr><td><code>class</code></td><td>Reusable class names for styling</td></tr>
+              <tr><td><code>style</code></td><td>Inline CSS definitions</td></tr>
+              <tr><td><code>href</code></td><td>Link URL destination</td></tr>
+              <tr><td><code>src</code></td><td>Path to media resource (img, script)</td></tr>
+              <tr><td><code>alt</code></td><td>Alternative text for screen readers</td></tr>
+              <tr><td><code>target</code></td><td>Where to open link (e.g. <code>_blank</code>)</td></tr>
+            </tbody>
+          </table>
+          <div class="sub-head">Example</div>
+          <pre><code>&lt;a href="https://example.com" target="_blank" title="Visit Example"&gt;
+  Example Link
+&lt;/a&gt;
+
+&lt;div id="main" class="container" style="color: blue;"&gt;
+  Content
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- 8. Comments & Quick Tips -->
+      <section class="card">
+        <div class="card-header dark-bg">8. Comments &amp; Quick Tips</div>
+        <div class="card-body">
+          <div class="sub-head">HTML Comment Syntax</div>
+          <pre><code>&lt;!-- This is a comment --&gt;
+&lt;p&gt;This text is visible.&lt;/p&gt;
+&lt;!-- Another comment --&gt;</code></pre>
+          <div class="sub-head">Quick Tips</div>
+          <ul style="padding-left: 18px; font-size: 0.85rem; color: var(--text-main); display: flex; flex-direction: column; gap: 6px;">
+            <li>Always close tags cleanly and properly.</li>
+            <li>Use semantic HTML tags for better SEO &amp; accessibility.</li>
+            <li>Validate markup using the official W3C Validator.</li>
+            <li>Keep structure (HTML) and presentation (CSS) separated.</li>
+          </ul>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ==================== PART 2: CSS BASICS ==================== -->
+    <h2 class="section-title"><span>🎨</span> Part 2: CSS Basics &amp; Properties</h2>
+    <main class="grid">
+
+      <!-- CSS Box Model -->
+      <section class="card">
+        <div class="card-header pink-bg">CSS Box Model</div>
+        <div class="card-body">
+          <div class="box-model-demo">
+            Margin
+            <div class="border-layer">
+              Border
+              <div class="padding-layer">
+                Padding
+                <div class="content-layer">
+                  Content
+                </div>
+              </div>
+            </div>
+          </div>
+          <pre><code>.box {
+  margin: 20px;       /* Outer spacing */
+  border: 2px solid;  /* Outline border */
+  padding: 15px;      /* Inner spacing */
+  width: 200px;       /* Content size */
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Fonts & Text -->
+      <section class="card">
+        <div class="card-header blue-bg">Fonts and Text</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>Property</th><th>Values / Syntax</th></tr></thead>
+            <tbody>
+              <tr><td><code>font-family</code></td><td><code>Arial, sans-serif, monospace</code></td></tr>
+              <tr><td><code>font-size</code></td><td><code>16px, 1.2rem, 100%</code></td></tr>
+              <tr><td><code>letter-spacing</code></td><td><code>1px, 2px, -0.5px</code></td></tr>
+              <tr><td><code>line-height</code></td><td><code>1.5, 24px, normal</code></td></tr>
+              <tr><td><code>font-weight</code></td><td><code>bold, normal, 600, 700</code></td></tr>
+              <tr><td><code>font-style</code></td><td><code>italic, normal, oblique</code></td></tr>
+              <tr><td><code>text-decoration</code></td><td><code>underline, line-through, none</code></td></tr>
+              <tr><td><code>text-align</code></td><td><code>left, right, center, justify</code></td></tr>
+              <tr><td><code>text-transform</code></td><td><code>capitalize, uppercase, lowercase</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Positions & Layout -->
+      <section class="card">
+        <div class="card-header orange-bg">Positioning &amp; Layout</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>Property</th><th>Common Values</th></tr></thead>
+            <tbody>
+              <tr><td><code>position</code></td><td><code>static, relative, absolute, fixed, sticky</code></td></tr>
+              <tr><td><code>display</code></td><td><code>block, inline, inline-block, flex, grid, none</code></td></tr>
+              <tr><td><code>top / right / bottom / left</code></td><td><code>0, 10px, 50%, auto</code></td></tr>
+              <tr><td><code>z-index</code></td><td><code>1, 10, 999, auto</code></td></tr>
+              <tr><td><code>float / clear</code></td><td><code>left, right, both, none</code></td></tr>
+              <tr><td><code>overflow</code></td><td><code>visible, hidden, scroll, auto</code></td></tr>
+              <tr><td><code>visibility</code></td><td><code>visible, hidden, collapse</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Colors -->
+      <section class="card">
+        <div class="card-header green-bg">CSS Color Formats</div>
+        <div class="card-body">
+          <p style="font-size: 0.85rem;">CSS accepts color values in multiple notations:</p>
+          <pre><code>/* Color Name */
+color: red;
+
+/* Hexadecimal */
+color: #ff0000;
+background-color: #f1f5f9;
+
+/* RGB & RGBA (with opacity) */
+color: rgb(255, 0, 0);
+background-color: rgba(0, 0, 0, 0.5);
+
+/* HSL */
+color: hsl(0, 100%, 50%);</code></pre>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>Created by <strong>Syr.WaiLinHtet</strong></p>
+      <p style="margin-top: 6px; font-size: 0.8rem;">
+        Resources: 
+        <a href="https://www.w3schools.com/html/" target="_blank" style="color:var(--blue);">W3Schools HTML</a> &bull; 
+        <a href="https://www.w3schools.com/css/" target="_blank" style="color:var(--blue);">W3Schools CSS</a> &bull; 
+        <a href="https://www.w3schools.com/tryit/" target="_blank" style="color:var(--blue);">TryIt Online Editor</a>
+      </p>
+    </footer>
+  </div>
+
+</body>
+</html>

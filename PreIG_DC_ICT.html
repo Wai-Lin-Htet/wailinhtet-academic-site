@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pre-IGCSE Computer Science Course Portal</title>
+  <style>
+    :root {
+      /* Apple-inspired Light Theme Colors */
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-card: #f8fafc;
+      --border: #d2d2d7;
+      --text-main: #1d1d1f;
+      --text-muted: #86868b;
+      
+      /* Accent Colors */
+      --accent: #0066cc; /* Classic Blue */
+      --accent-glow: #e8f0fe;
+      
+      /* Typography */
+      --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-system);
+      line-height: 1.5;
+      padding-bottom: 2rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Glassmorphism Header */
+    header {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0.8rem 1.5rem;
+    }
+
+    .header-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-tag {
+      font-family: var(--font-mono);
+      background: #1d1d1f;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      margin: 3rem 0;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    /* Modules Layout */
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Accordion Details Styling */
+    details {
+      background: var(--surface);
+      border: 1px solid transparent;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
+    }
+
+    details:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    details[open] {
+      border-color: rgba(0, 102, 204, 0.2);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    summary {
+      padding: 1.25rem 1.5rem;
+      font-weight: 600;
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+      background: var(--surface);
+      list-style: none;
+      letter-spacing: -0.01em;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .summary-content {
+      display: flex;
+      align-items: center;
+    }
+
+    /* SVG Plus/Minus Icon */
+    summary::after {
+      content: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%230066cc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>');
+      display: block;
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    details[open] summary::after {
+      content: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%230066cc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>');
+      transform: rotate(180deg);
+    }
+
+    .module-badge {
+      display: inline-block;
+      background: var(--accent-glow);
+      color: var(--accent);
+      padding: 0.25rem 0.65rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      margin-right: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .content {
+      padding: 0 1.5rem 1.5rem 4.5rem;
+      color: var(--text-main);
+    }
+
+    .content ul {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .content li {
+      position: relative;
+      padding-left: 1rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .content li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Resources Section */
+    .resources-section {
+      background: var(--surface-card);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .resources-section h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+    }
+
+    .resources-section ul {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .resources-section li {
+      background: var(--surface);
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .resources-section strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Footer styling */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      margin-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        padding: 0 1.25rem 1.5rem 1.25rem;
+      }
+      .summary-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      .module-badge {
+        margin-bottom: 0.25rem;
+      }
+      summary {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Glassmorphism Header -->
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-tag">Pre-IGCSE</span>
+        <div class="brand-title">Computer Science Portal</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <section class="hero">
+      <h1>Discovering Computers</h1>
+      <p>Digital Technology, Data, and Devices</p>
+    </section>
+
+    <main class="grid">
+      <details>
+        <summary>
+          <div class="summary-content">
+            <span class="module-badge">Module 1</span> 
+            <span>Today's Technologies: Computers, Devices, and the Web</span>
+          </div>
+        </summary>
+        <div class="content">
+          <ul>
+            <li>Laptops, Tablets, Desktops, Servers</li>
+            <li>Mobile and Game Devices (Smartphones, Wearables)</li>
+            <li>Data and Information: Input, Output, Memory & Storage</li>
+            <li>The Web, Digital Security, Software, and Networks</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="summary-content">
+            <span class="module-badge">Module 2</span> 
+            <span>Connecting Online: Internet, Websites, and Media</span>
+          </div>
+        </summary>
+        <div class="content">
+          <ul>
+            <li>Evolution of the Internet & ISPs</li>
+            <li>IP Addresses and Domain Names</li>
+            <li>World Wide Web, Web Apps, and Search Engines</li>
+            <li>Digital Media: Graphics, Audio, Video, Plug-ins</li>
+            <li>Internet Services (Email, Messaging, VoIP, FTP) & Netiquette</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="summary-content">
+            <span class="module-badge">Module 3</span> 
+            <span>Computers & Mobile Devices: Options for Home & Work</span>
+          </div>
+        </summary>
+        <div class="content">
+          <ul>
+            <li>Mobile Computers, Desktops, and Servers</li>
+            <li>Terminals, ATMs, and Kiosks</li>
+            <li>Embedded Computers and Cloud Computing</li>
+            <li>Ports, Connections, and Hardware Protection</li>
+            <li>Health Concerns and Ergonomics</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="summary-content">
+            <span class="module-badge">Module 4</span> 
+            <span>Programs & Apps: Productivity, Graphics, and Tools</span>
+          </div>
+        </summary>
+        <div class="content">
+          <ul>
+            <li>Operating System Roles and App Distribution</li>
+            <li>Productivity Apps (Word Processing, Spreadsheets, Databases)</li>
+            <li>Graphics and Media Applications</li>
+            <li>Security Tools (Firewalls, Antivirus, Spyware Removers)</li>
+            <li>File, Disk, and System Management Utilities</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="summary-content">
+            <span class="module-badge">Module 5</span> 
+            <span>Digital Security, Ethics, and Privacy</span>
+          </div>
+        </summary>
+        <div class="content">
+          <ul>
+            <li>Cybercrime, Malware, Botnets, and DoS Attacks</li>
+            <li>Access Controls, Passwords, and Biometrics</li>
+            <li>Information Theft, Encryption, and Digital Certificates</li>
+            <li>Hardware Theft and Backup Strategies</li>
+            <li>Ethics, Intellectual Property, and Information Privacy</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="summary-content">
+            <span class="module-badge">Module 6</span> 
+            <span>Computing Components: Processors, Memory, and Cloud</span>
+          </div>
+        </summary>
+        <div class="content">
+          <ul>
+            <li>Motherboard, Control Unit, and ALU Operations</li>
+            <li>The Machine Cycle, Registers, and System Clock</li>
+            <li>Data Representation (Bits, Bytes, Binary, Coding Schemes)</li>
+            <li>RAM, Cache, ROM, and Flash Memory</li>
+            <li>Buses, Power Supplies, and Mobile Device Care</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="summary-content">
+            <span class="module-badge">Module 7</span> 
+            <span>Input and Output: Extending Capabilities</span>
+          </div>
+        </summary>
+        <div class="content">
+          <ul>
+            <li>Keyboards, Pointing Devices, and Touchscreens</li>
+            <li>Pen Input, Voice, Audio, and Video Input</li>
+            <li>Scanners, Bar Code, and RFID Readers</li>
+            <li>Displays, Printers (Ink-Jet, Laser, 3-D), and Speakers</li>
+            <li>Assistive Technology for Input and Output</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="summary-content">
+            <span class="module-badge">Module 8</span> 
+            <span>Digital Storage: Local and Cloud Solutions</span>
+          </div>
+        </summary>
+        <div class="content">
+          <ul>
+            <li>Storage Capacity, Storage vs. Memory</li>
+            <li>Hard Disks, SSDs, External Drives, and RAID</li>
+            <li>Flash Memory Cards and USB Flash Drives</li>
+            <li>Cloud Storage Services and Backup Strategies</li>
+            <li>Optical Discs, Enterprise Storage (SAN/NAS), Smart Cards</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="summary-content">
+            <span class="module-badge">Module 9</span> 
+            <span>Operating Systems: Resource Coordination</span>
+          </div>
+        </summary>
+        <div class="content">
+          <ul>
+            <li>OS Functions: Starting, User Interfaces, Task Management</li>
+            <li>Memory Management and Device Configuration</li>
+            <li>Desktop OS (Windows, macOS, UNIX, Linux, Chrome OS)</li>
+            <li>Server OS and Mobile OS (Android, iOS)</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="summary-content">
+            <span class="module-badge">Module 10</span> 
+            <span>Communicating Digital Content: Networks & Devices</span>
+          </div>
+        </summary>
+        <div class="content">
+          <ul>
+            <li>LANs, MANs, WANs, and PANs</li>
+            <li>Network Protocols (Ethernet, TCP/IP, Wi-Fi, Bluetooth, LTE)</li>
+            <li>Hardware: Modems, Wireless Access Points, Routers, Switches</li>
+            <li>Physical vs. Wireless Transmission Media</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="summary-content">
+            <span class="module-badge">Module 11</span> 
+            <span>Building Solutions: Databases and Dev Tools</span>
+          </div>
+        </summary>
+        <div class="content">
+          <ul>
+            <li>Data Hierarchy, File Processing vs. Databases</li>
+            <li>Database Management Systems (DBMS) and Big Data</li>
+            <li>System Development Life Cycle (SDLC) Phases</li>
+            <li>Programming Languages and App Development Frameworks</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="summary-content">
+            <span class="module-badge">Module 12</span> 
+            <span>Enterprise Systems, Certifications, and Careers</span>
+          </div>
+        </summary>
+        <div class="content">
+          <ul>
+            <li>Enterprise Resource Planning (ERP) and CMS</li>
+            <li>IT Careers and Department Roles</li>
+            <li>Technology Certifications (Hardware, Software, Security, Network)</li>
+            <li>Job Searching and Building an Online Presence</li>
+          </ul>
+        </div>
+      </details>
+    </main>
+
+    <section class="resources-section">
+      <h2>Course Reference Materials</h2>
+      <ul>
+        <li><strong>Focus On:</strong> Web Development</li>
+        <li><strong>Appendix A:</strong> Technology Acronyms</li>
+        <li><strong>Appendix B:</strong> Troubleshooting Computer and Mobile Device Problems</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <footer>
+    Created by wailinhtet
+  </footer>
+
+</body>
+</html>

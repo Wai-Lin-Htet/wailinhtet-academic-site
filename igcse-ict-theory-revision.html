@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X74PEWZMJV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X74PEWZMJV');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IGCSE ICT Theory Revision (Chapters 1–10) | Created by wailinhtet</title>
+  <style>
+    :root {
+      /* Apple-inspired Light Theme Colors */
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-alt: #f8fafc;
+      --border: #d2d2d7;
+      --border-light: #e5e5ea;
+      --text-main: #1d1d1f;
+      --text-muted: #86868b;
+      
+      /* Accents */
+      --accent: #0066cc; /* Classic Blue */
+      --accent-glow: #e8f0fe;
+      
+      /* Typography */
+      --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-system);
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      display: flex;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Sidebar Navigation */
+    aside {
+      width: 280px;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      color: var(--text-main);
+      position: sticky;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      padding: 1.5rem 1.25rem 1rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .sidebar-header h2 {
+      font-size: 1.15rem;
+      color: var(--text-main);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+
+    .sidebar-header .author-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      background: var(--surface-alt);
+      color: var(--text-muted);
+      border: 1px solid var(--border-light);
+      padding: 0.2rem 0.6rem;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+
+    .search-box {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background: rgba(0, 0, 0, 0.04);
+      color: var(--text-main);
+      font-family: var(--font-system);
+      font-size: 0.85rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-box input:focus {
+      background: var(--surface);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+    }
+
+    .nav-links {
+      overflow-y: auto;
+      flex: 1;
+      padding: 1rem 0.75rem;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-bottom: 0.25rem;
+    }
+
+    .nav-links a {
+      display: block;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.6rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(0, 0, 0, 0.04);
+      color: var(--text-main);
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
+      background: var(--accent-glow);
+      font-weight: 600;
+    }
+
+    /* Main Content Area */
+    main {
+      flex: 1;
+      max-width: 960px;
+      padding: 3rem 4rem 5rem;
+      margin: 0 auto;
+    }
+
+    header.main-header {
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .creator-pill {
+      display: inline-block;
+      padding: 0.25rem 0.8rem;
+      background: var(--accent-glow);
+      color: var(--accent);
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+
+    .main-header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .main-header p {
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* Chapter Cards */
+    .chapter-card {
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02), 0 1px 3px rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    /* Featured Chapter Images */
+    .chapter-img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+    }
+
+    .chapter-header {
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .chapter-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .chapter-card h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--text-main);
+    }
+
+    .chapter-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin: 2rem 0 1rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    li strong {
+      font-weight: 600;
+    }
+
+    .note-box {
+      background: var(--surface-alt);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    .flow-diagram {
+      display: inline-block;
+      background: var(--bg);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-main);
+      margin: 1rem 0;
+      border: 1px solid var(--border-light);
+    }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    th {
+      background-color: var(--surface-alt);
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-light);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* Mobile Drawer Button */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      color: var(--accent);
+      border: 1px solid var(--border-light);
+      padding: 0.85rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+      z-index: 1000;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .menu-toggle:active {
+      transform: scale(0.96);
+    }
+
+    @media (max-width: 900px) {
+      aside {
+        position: fixed;
+        left: -280px;
+        transition: left 0.3s ease;
+      }
+      aside.open {
+        left: 0;
+      }
+      main {
+        padding: 2rem 1.5rem 5rem;
+        width: 100%;
+      }
+      .chapter-card {
+        padding: 1.5rem;
+        border-radius: 16px;
+      }
+      .chapter-img {
+        height: 180px;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <h2>IGCSE ICT Theory</h2>
+      <div class="author-tag">Revision Notes</div>
+    </div>
+    <div class="search-box">
+      <input type="text" id="quickFilter" placeholder="Search keywords..." oninput="filterContent()">
+    </div>
+    <ul class="nav-links">
+      <li><a href="#ch1" class="active">Ch 1: Types & Components</a></li>
+      <li><a href="#ch2">Ch 2: Input & Output Devices</a></li>
+      <li><a href="#ch3">Ch 3: Storage Devices & Media</a></li>
+      <li><a href="#ch4">Ch 4: Networks & Communication</a></li>
+      <li><a href="#ch5">Ch 5: Effects of Using IT</a></li>
+      <li><a href="#ch6">Ch 6: ICT Applications</a></li>
+      <li><a href="#ch7">Ch 7: Systems Life Cycle</a></li>
+      <li><a href="#ch8">Ch 8: Safety & Security</a></li>
+      <li><a href="#ch9">Ch 9: Audience & Copyright</a></li>
+      <li><a href="#ch10">Ch 10: Communication & Protocols</a></li>
+    </ul>
+  </aside>
+
+  <!-- Mobile Menu Button -->
+  <button class="menu-toggle" onclick="toggleSidebar()">☰ Chapters</button>
+
+  <!-- Main Content -->
+  <main>
+    <header class="main-header">
+      <div class="creator-pill">Created by wailinhtet</div>
+      <h1>IGCSE ICT Theory Complete Revision</h1>
+      <p>Comprehensive revision guide covering Chapters 1 through 10 with illustrated concepts and exam summaries.</p>
+    </header>
+
+    <!-- CHAPTER 1 -->
+    <section id="ch1" class="chapter-card">
+      <img class="chapter-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" alt="Computer Motherboard and CPU">
+      <div class="chapter-header">
+        <span class="chapter-badge">Chapter 1</span>
+        <h2>Types & Components of Computer Systems</h2>
+      </div>
+
+      <h3>1.1 Hardware & Software</h3>
+      <p><strong>Hardware:</strong> Physical, electronic components that make up a computer system.</p>
+      <ul>
+        <li><strong>Internal Hardware:</strong> CPU (interprets and executes instructions), Processor, Motherboard (main circuit board), Internal Memory (RAM/ROM), Graphics/Sound cards, Internal Storage (HDD/SSD), Network Interface Card (NIC).</li>
+        <li><strong>External Hardware:</strong> Peripherals such as Monitor, Keyboard, Mouse, Printer, and external storage drives.</li>
+      </ul>
+
+      <p><strong>Software:</strong> Programs, commands, and techniques directing the hardware.</p>
+      <ul>
+        <li><strong>Application Software:</strong> Enables users to perform specific tasks. Includes general-purpose (word processors, spreadsheets) and specialist custom software.</li>
+        <li><strong>System Software:</strong> Manages computer resources. Includes Compilers (translates high-level code to machine code), Linkers (combines modules into executable programs), Device Drivers (enables hardware communication), Utilities (antivirus, defragmenters), and Operating Systems (OS).</li>
+      </ul>
+
+      <div class="note-box">
+        <strong>Analogue vs. Digital Data:</strong> Computers process discrete binary signals (0s and 1s), whereas real-world data varies continuously.
+        <ul>
+          <li><strong>ADC (Analogue-to-Digital Converter):</strong> Converts continuous physical signals into digital data.</li>
+          <li><strong>DAC (Digital-to-Analogue Converter):</strong> Converts digital signals back to analogue for physical actuators.</li>
+        </ul>
+      </div>
+
+      <h3>1.2 Main Components of Computer Systems</h3>
+      <ul>
+        <li><strong>Central Processing Unit (CPU):</strong> The core microprocessor containing:
+          <ul>
+            <li><strong>Control Unit (CU):</strong> Directs execution and data flow.</li>
+            <li><strong>Arithmetic Logic Unit (ALU):</strong> Handles calculations and logical decisions.</li>
+            <li><strong>Registers:</strong> High-speed internal memory locations.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Memory Type</th><th>Volatility</th><th>Access</th><th>Primary Function</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>RAM</strong></td><td>Volatile (lost on power-off)</td><td>Read & Write</td><td>Stores active data, running programs, and loaded OS parts.</td></tr>
+            <tr><td><strong>ROM</strong></td><td>Non-Volatile (permanent)</td><td>Read-Only</td><td>Stores start-up instructions (BIOS) and basic boot firmware.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Internal Memory vs. Backing Storage:</strong> RAM is volatile while backing storage is permanent; backing storage has larger capacity and lower cost per GB, but slower data access than internal memory.</p>
+
+      <h3>1.3 Operating Systems (OS) & User Interfaces</h3>
+      <ul>
+        <li><strong>CLI (Command Line Interface):</strong> Text-only commands; minimal memory usage, fast for experts, but high learning curve.</li>
+        <li><strong>GUI (Graphical User Interface):</strong> Uses WIMP (Windows, Icons, Menus, Pointer); intuitive and user-friendly, but resource-heavy.</li>
+        <li><strong>Dialogue-Based:</strong> Human voice input; hands-free accessibility, but prone to background noise errors.</li>
+        <li><strong>Gesture-Based:</strong> Sensor/camera detection of body movements without physical contact.</li>
+      </ul>
+
+      <h3>1.4 Types of Computers</h3>
+      <ul>
+        <li><strong>Desktop Computers:</strong> High performance per cost, easy to upgrade/repair, mains-powered; bulky and not portable.</li>
+        <li><strong>Laptops:</strong> Portable, integrated units; difficult to upgrade, limited battery life, higher risk of theft.</li>
+        <li><strong>Mobile Devices:</strong> Smartphones, Tablets, and Phablets (hybrids bridging phone cellular calls and tablet-sized screens).</li>
+      </ul>
+
+      <h3>1.5 Emerging Technologies</h3>
+      <ul>
+        <li><strong>Artificial Intelligence (AI):</strong> Machine simulation of human decision-making, diagnostics, and automated workflows.</li>
+        <li><strong>Extended Reality (XR):</strong> Augmented Reality (AR) overlays digital objects onto the real world; Virtual Reality (VR) creates an immersive computer-generated simulated environment.</li>
+      </ul>
+    </section>
+
+    <!-- CHAPTER 2 -->
+    <section id="ch2" class="chapter-card">
+      <img class="chapter-img" src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=80" alt="Keyboard and Hardware Peripherals">
+      <div class="chapter-header">
+        <span class="chapter-badge">Chapter 2</span>
+        <h2>Input & Output Devices</h2>
+      </div>
+
+      <h3>2.1 Input Devices</h3>
+      <ul>
+        <li><strong>Keyboards & Numeric Keypads:</strong> Fast text/numerical input; risk of RSI, slower than direct entry.</li>
+        <li><strong>Pointing Devices:</strong> Mouse, Touchpad, Tracker Ball (ideal for users with RSI or restricted wrist movement).</li>
+        <li><strong>Touchscreens:</strong> Direct selection; versatile but prone to screen smudges and fatigue.</li>
+        <li><strong>Scanners & Digital Cameras:</strong> Digitizes paper documents or captures photos; used with OCR software.</li>
+        <li><strong>Sensors:</strong> Continuous automatic monitoring (Temperature, Pressure, Light, Sound, Humidity, pH). More accurate than humans; require ADCs for computer processing.</li>
+      </ul>
+
+      <h3>2.2 Direct Data Entry (DDE)</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Device</th><th>Primary Uses</th><th>Key Advantage</th><th>Key Disadvantage</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Magnetic Stripe</strong></td><td>ATMs, hotel access cards</td><td>Fast, error-free, robust</td><td>Data erased by strong magnets</td></tr>
+            <tr><td><strong>Chip & PIN</strong></td><td>Card payment POS</td><td>PIN acts as a second security layer</td><td>Must shield PIN from view</td></tr>
+            <tr><td><strong>RFID</strong></td><td>Stock/livestock tracking</td><td>No line-of-sight required; bulk scan</td><td>Radio collision/interference</td></tr>
+            <tr><td><strong>OMR</strong></td><td>MCQ exams, lottery forms</td><td>Ultra-fast, accurate marking</td><td>Mismarked forms need manual review</td></tr>
+            <tr><td><strong>OCR / ANPR</strong></td><td>Passports, number plates</td><td>Converts text into editable data</td><td>Struggles with handwriting</td></tr>
+            <tr><td><strong>Barcodes</strong></td><td>Supermarket inventory</td><td>Proven, automated stock control</td><td>Easily damaged/scratched</td></tr>
+            <tr><td><strong>QR Codes</strong></td><td>URLs, mobile boarding passes</td><td>Holds vastly more data than barcodes</td><td>Can link to malicious websites</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2.3 Output Devices</h3>
+      <ul>
+        <li><strong>Monitors:</strong> LCD (thin, power-efficient, flicker-free) vs CRT (heavy, bulky, wide viewing angles).</li>
+        <li><strong>Multimedia Projectors:</strong> Large audience presentations; image washed out in bright light.</li>
+        <li><strong>Printers:</strong>
+          <ul>
+            <li><em>Laser:</em> High-speed, high-volume, quiet; expensive toner, produces ozone.</li>
+            <li><em>Inkjet:</em> High-quality photo prints, cheap hardware; slow, expensive ink refills.</li>
+            <li><em>Dot Matrix:</em> Multi-part carbon copies; operates in dusty/harsh environments; noisy.</li>
+            <li><em>3D Printers:</em> Custom prototypes and prosthetics; risk of counterfeit or dangerous items.</li>
+          </ul>
+        </li>
+        <li><strong>Actuators:</strong> Motors, buzzers, and valves allowing computers to control physical mechanical hardware (requires DACs).</li>
+      </ul>
+    </section>
+
+    <!-- CHAPTER 3 -->
+    <section id="ch3" class="chapter-card">
+      <img class="chapter-img" src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=1200&q=80" alt="Solid State Drives and Storage">
+      <div class="chapter-header">
+        <span class="chapter-badge">Chapter 3</span>
+        <h2>Storage Devices & Media</h2>
+      </div>
+
+      <h3>3.1 Backing Up Data</h3>
+      <p>Copying data to a separate medium to protect against hardware failure, accidental deletion, or hacker corruption.</p>
+
+      <h3>3.2 Data Access Methods</h3>
+      <ul>
+        <li><strong>Serial Access:</strong> Traverses records sequentially from start to end. Slow; used for batch processing (payroll, utility billing).</li>
+        <li><strong>Direct Access:</strong> Jumps directly to calculate records using key fields. Fast; essential for real-time systems.</li>
+      </ul>
+
+      <h3>3.3 Storage Technologies</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Technology</th><th>Examples</th><th>Mechanisms / Characteristics</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Magnetic</strong></td>
+              <td>HDD, Magnetic Tape</td>
+              <td>Magnetizes surface bits. High capacity, economical; vulnerable to magnetic fields and mechanical wear.</td>
+            </tr>
+            <tr>
+              <td><strong>Optical</strong></td>
+              <td>CD, DVD, Blu-Ray</td>
+              <td>Lasers read/burn pits and lands. Blu-Ray uses 405nm blue laser for 5× DVD capacity. Read-only (ROM), write-once (R), rewriteable (RW).</td>
+            </tr>
+            <tr>
+              <td><strong>Solid-State</strong></td>
+              <td>SSD, Pen Drives, SD Cards</td>
+              <td>Flash memory with zero moving parts. Ultra-fast access (0.1ms), silent, low power; higher cost per GB, finite write endurance.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CHAPTER 4 -->
+    <section id="ch4" class="chapter-card">
+      <img class="chapter-img" src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80" alt="Server Racks and Network Cables">
+      <div class="chapter-header">
+        <span class="chapter-badge">Chapter 4</span>
+        <h2>Networks & The Effects of Using Them</h2>
+      </div>
+
+      <h3>4.1 Network Devices</h3>
+      <ul>
+        <li><strong>NIC (Network Interface Card):</strong> Converts data into signals; holds a unique MAC address.</li>
+        <li><strong>Hub:</strong> Broadcasts packets to every port indiscriminately (causes network traffic and security concerns).</li>
+        <li><strong>Switch:</strong> Intelligent hub; inspects packets and routes them solely to the target MAC address.</li>
+        <li><strong>Router:</strong> Transfers packets across distinct networks (e.g., LAN to Internet) using routing tables.</li>
+        <li><strong>Bridge:</strong> Links two local LAN segments using the same protocol.</li>
+      </ul>
+
+      <h3>4.2 Network Architectures & Environments</h3>
+      <ul>
+        <li><strong>LAN vs WLAN vs WAN:</strong> Local Area Network (single building) vs Wireless LAN (uses WAPs) vs Wide Area Network (geographically dispersed, connects LANs via leased lines/routers).</li>
+        <li><strong>Internet:</strong> Global network of networks. <strong>WWW:</strong> Interlinked web pages accessed via browsers.</li>
+        <li><strong>Intranet vs Extranet:</strong> Private internal network behind a firewall (Intranet) vs Intranet extended to authorized external partners/clients (Extranet).</li>
+        <li><strong>Cloud Computing:</strong> Remote servers accessed via the internet (Public, Private, Hybrid). Scalable with automatic backups; dependent on stable internet.</li>
+      </ul>
+
+      <h3>4.3 Network Security & Conferencing</h3>
+      <ul>
+        <li><strong>Threats:</strong> Hacking (unauthorized access), Phishing (fraudulent emails), Pharming (domain redirection to fake sites), Viruses (corrupts files).</li>
+        <li><strong>Conferencing:</strong> Video, Audio, and Web Conferencing reduce international travel expenses and time; impacted by latency and internet stability.</li>
+      </ul>
+    </section>
+
+    <!-- CHAPTER 5 -->
+    <section id="ch5" class="chapter-card">
+      <img class="chapter-img" src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80" alt="Smart Home Automation">
+      <div class="chapter-header">
+        <span class="chapter-badge">Chapter 5</span>
+        <h2>The Effects of Using IT</h2>
+      </div>
+
+      <h3>5.1 Microprocessor-Controlled Devices</h3>
+      <ul>
+        <li><strong>Benefits:</strong> Eliminates manual labor, frees up leisure time, enables remote home automation, smart fridges reduce food waste.</li>
+        <li><strong>Drawbacks:</strong> Encourages sedentary habits, causes deskilling, smart appliances introduce IoT security vulnerabilities.</li>
+      </ul>
+
+      <h3>5.2 Health Issues & Ergonomic Solutions</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Health Hazard</th><th>Causes</th><th>Preventative Measure</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>RSI (Repetitive Strain Injury)</strong></td><td>Repetitive keyboard/mouse movements</td><td>Ergonomic keyboards, wrist rests, regular breaks</td></tr>
+            <tr><td><strong>Back / Neck Strain</strong></td><td>Prolonged poor posture</td><td>Adjustable chairs, tiltable monitors, footrests</td></tr>
+            <tr><td><strong>Eyestrain & Headaches</strong></td><td>Screen glare, screen flicker</td><td>Anti-glare filters, proper lighting, LCD monitors</td></tr>
+            <tr><td><strong>Ozone Irritation</strong></td><td>Laser printer emissions in offices</td><td>Proper ventilation, dedicated print rooms</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CHAPTER 6 -->
+    <section id="ch6" class="chapter-card">
+      <img class="chapter-img" src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80" alt="Robotics and Automation Technology">
+      <div class="chapter-header">
+        <span class="chapter-badge">Chapter 6</span>
+        <h2>ICT Applications</h2>
+      </div>
+
+      <h3>6.1 Communication & Modelling</h3>
+      <ul>
+        <li><strong>Media:</strong> Websites (interactive, global), Multimedia presentations, Streaming (buffered media), e-Publications, VoIP (internet audio calls).</li>
+        <li><strong>Computer Modelling:</strong> Software simulations (flood management, structural engineering, finance, weather). Cheaper, safer, and allows scenario testing without real-world risk.</li>
+      </ul>
+
+      <h3>6.2 Automation & Expert Systems</h3>
+      <ul>
+        <li><strong>Industrial Robotics:</strong> Automated precision manufacturing; operates 24/7 in hazardous conditions; causes assembly-line unemployment.</li>
+        <li><strong>Expert Systems:</strong> AI emulating human expertise (e.g., medical diagnostics, mineral prospecting).
+          <div class="flow-diagram">User Interface ⇄ Inference Engine ⇄ [Knowledge Base + Rules Base] ⇄ Explanation System</div>
+        </li>
+      </ul>
+
+      <h3>6.3 Banking & Retail Applications</h3>
+      <ul>
+        <li><strong>ATMs:</strong> Secure cash withdrawal, PIN authentication, automated fund balance verification.</li>
+        <li><strong>EFT & EFTPOS:</strong> Direct money transfer between bank computers; retail terminals calculate totals and run stock deductions.</li>
+        <li><strong>Internet Shopping:</strong> 24/7 global market access; lacks hands-on inspection, risk of fraud and delayed delivery.</li>
+        <li><strong>Recognition Systems:</strong> ANPR (car plate tracking with OCR), RFID (bulk stock tracking), GPS (satellite routing), GIS (spatial mapping).</li>
+      </ul>
+    </section>
+
+    <!-- CHAPTER 7 -->
+    <section id="ch7" class="chapter-card">
+      <img class="chapter-img" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" alt="Systems Analysis and Planning">
+      <div class="chapter-header">
+        <span class="chapter-badge">Chapter 7</span>
+        <h2>The Systems Life Cycle</h2>
+      </div>
+
+      <div class="flow-diagram">
+        1. Analysis ➔ 2. Design ➔ 3. Development & Testing ➔ 4. Implementation ➔ 5. Documentation ➔ 6. Evaluation
+      </div>
+
+      <h3>7.1 Analysis</h3>
+      <p>Research methods: Observation, Interviews, Questionnaires, Document Review. Produces the Requirements Specification.</p>
+
+      <h3>7.2 Design & Validation Checks</h3>
+      <p>Designs field structures, screen layouts, and automated validation rules:</p>
+      <ul>
+        <li><strong>Range Check:</strong> Data sits between minimum/maximum limits.</li>
+        <li><strong>Length Check:</strong> Matches a predetermined number of characters.</li>
+        <li><strong>Type / Character Check:</strong> Checks correct data type (numeric, alphabetic).</li>
+        <li><strong>Format Check:</strong> Matches set masks (e.g., DD/MM/YYYY).</li>
+        <li><strong>Presence Check:</strong> Ensures fields are not left blank.</li>
+        <li><strong>Check Digit:</strong> Appended digit verifying mathematical accuracy.</li>
+      </ul>
+
+      <h3>7.3 Testing</h3>
+      <ul>
+        <li><strong>Normal Data:</strong> Expected, valid inputs within range (e.g., 5 for months 1–12).</li>
+        <li><strong>Extreme Data:</strong> Boundary limits of acceptability (e.g., 1 or 12).</li>
+        <li><strong>Abnormal Data:</strong> Invalid inputs outside boundaries or wrong types (e.g., -1, 15, "July").</li>
+      </ul>
+
+      <h3>7.4 System Implementation Methods</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Method</th><th>Description</th><th>Pros / Cons</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Direct Changeover</strong></td><td>Old stops, new starts immediately.</td><td>Fast & cheap; catastrophic risk if it fails.</td></tr>
+            <tr><td><strong>Parallel Running</strong></td><td>Both systems run side-by-side.</td><td>Lowest risk, backup available; double workload & costly.</td></tr>
+            <tr><td><strong>Pilot Running</strong></td><td>Introduced to one branch/department first.</td><td>Errors isolated to one unit; long organization rollout.</td></tr>
+            <tr><td><strong>Phased Implementation</strong></td><td>Introduced module-by-module gradually.</td><td>Gradual training; system integration problems.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>7.5 Documentation & Evaluation</h3>
+      <ul>
+        <li><strong>Technical Documentation:</strong> For maintenance engineers (program code, flowcharts, data structures, validation rules).</li>
+        <li><strong>User Documentation:</strong> For end users (how to run tasks, troubleshooting, error handling, glossary).</li>
+        <li><strong>Evaluation:</strong> Assesses speed, efficiency, usability, and feedback against initial task goals.</li>
+      </ul>
+    </section>
+
+    <!-- CHAPTER 8 -->
+    <section id="ch8" class="chapter-card">
+      <img class="chapter-img" src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80" alt="Cybersecurity and Data Protection">
+      <div class="chapter-header">
+        <span class="chapter-badge">Chapter 8</span>
+        <h2>Safety & Security</h2>
+      </div>
+
+      <h3>8.1 Physical Safety Hazards</h3>
+      <ul>
+        <li><strong>Electrocution:</strong> Liquid spills, damaged wiring. Prevent via circuit breakers and insulation.</li>
+        <li><strong>Fire:</strong> Overloaded wall sockets, blocked vents. Prevent with clear ventilation and CO₂ fire extinguishers.</li>
+        <li><strong>Trailing Cables:</strong> Trip hazards. Tidy via cable ducts and conduit covers.</li>
+        <li><strong>Falling Equipment:</strong> Heavy equipment placed on desk edges. Use large, stable desks.</li>
+      </ul>
+
+      <h3>8.2 Security & Data Protection</h3>
+      <ul>
+        <li><strong>Data Protection Principles (e.g., GDPR):</strong> Data must be fairly and lawfully processed, limited to necessary purposes, kept accurate, and secured.</li>
+        <li><strong>Security Measures:</strong>
+          <ul>
+            <li><strong>Encryption:</strong> Scrambles data with algorithms; unreadable without decryption keys.</li>
+            <li><strong>Firewall:</strong> Monitors and filters incoming/outgoing network packets based on security rules.</li>
+            <li><strong>SSL / TLS:</strong> Encrypts communications between web browsers and secure servers.</li>
+            <li><strong>2FA (Two-Factor Authentication):</strong> Requires two independent verification elements (e.g., password + OTP token).</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- CHAPTER 9 -->
+    <section id="ch9" class="chapter-card">
+      <img class="chapter-img" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" alt="Audience and Collaboration">
+      <div class="chapter-header">
+        <span class="chapter-badge">Chapter 9</span>
+        <h2>Audience & Copyright</h2>
+      </div>
+
+      <h3>9.1 Audience Appreciation</h3>
+      <p>Adapting interfaces for target age, technical skill, and accessibility needs (high contrast, screen reader compatibility, voice output).</p>
+
+      <h3>9.2 Software Copyright & Anti-Piracy</h3>
+      <p>Laws safeguarding software creators against illegal copying, reproduction, or redistribution.</p>
+      <ul>
+        <li><strong>Product Activation Keys:</strong> Unique serial keys validated on installation.</li>
+        <li><strong>Digital Rights Management (DRM):</strong> Controls unauthorized playback and distribution.</li>
+        <li><strong>Cloud Updates:</strong> Checks software licensing before issuing patches.</li>
+      </ul>
+    </section>
+
+    <!-- CHAPTER 10 -->
+    <section id="ch10" class="chapter-card">
+      <img class="chapter-img" src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80" alt="Internet Protocols and Matrix Data">
+      <div class="chapter-header">
+        <span class="chapter-badge">Chapter 10</span>
+        <h2>Communication & Internet Protocols</h2>
+      </div>
+
+      <h3>10.1 Email Communication</h3>
+      <ul>
+        <li><strong>Cc vs. Bcc:</strong> Carbon Copy (visible recipients) vs. Blind Carbon Copy (recipient addresses kept hidden).</li>
+        <li><strong>Spam:</strong> Unsolicited mass emails; managed via spam filter rules.</li>
+        <li><strong>Netiquette:</strong> Online etiquette (avoiding writing in ALL CAPS shouting and offensive language).</li>
+      </ul>
+
+      <h3>10.2 Internet Architecture & Protocols</h3>
+      <p><strong>URL Architecture:</strong> <code>Protocol (https://) ➔ Domain (www.cambridge.org) ➔ Path/Filename (/ict/paper1.html)</code></p>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Protocol</th><th>Full Meaning</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>HTTP</strong></td><td>Hypertext Transfer Protocol</td><td>Transmits hypermedia web pages across the internet.</td></tr>
+            <tr><td><strong>HTTPS</strong></td><td>HTTP Secure</td><td>Encrypted HTTP session using SSL/TLS encryption.</td></tr>
+            <tr><td><strong>FTP</strong></td><td>File Transfer Protocol</td><td>Transfers files directly between clients and remote web servers.</td></tr>
+            <tr><td><strong>SSL</strong></td><td>Secure Sockets Layer</td><td>Cryptographic protocol establishing an encrypted web link.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      Created by wailinhtet
+    </footer>
+  </main>
+
+  <script>
+    function filterContent() {
+      const query = document.getElementById('quickFilter').value.toLowerCase();
+      const cards = document.querySelectorAll('.chapter-card');
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(query)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('.chapter-card');
+      const navLinks = document.querySelectorAll('.nav-links a');
+      let current = '';
+
+      sections.forEach(sec => {
+        const top = window.scrollY;
+        const offset = sec.offsetTop - 120;
+        const height = sec.offsetHeight;
+        if (top >= offset && top < offset + height) {
+          current = sec.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
