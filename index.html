@@ -278,6 +278,24 @@
       nav { gap: 1.25rem; }
       .course-grid { grid-template-columns: 1fr; }
     }
+    .btn-more {
+  display: inline-block;
+  padding: 10px 22px;
+  background-color: #4f46e5; /* Modern Indigo/Purple */
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+  transition: all 0.25s ease;
+}
+
+.btn-more:hover {
+  background-color: #4338ca;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+}
   </style>
 </head>
 <body>
@@ -298,7 +316,8 @@
       <span class="badge">Academic Portfolio</span>
       <h1>Wai Lin Htet</h1>
       <p class="lead-text">Senior Lecturer & Academic Researcher bridging computer science, artificial intelligence, and modern pedagogy.</p>
-
+      <a href="about.html" class="btn-more">More About Me &rarr;</a>
+      
       <div class="philosophy-card">
         <h3>Why Study Computer Science & ICT?</h3>
         <p>Technology shapes every aspect of modern life. Studying Computer Science goes beyond syntax; it builds structured problem-solving, logical discipline, and systems-level thinking—empowering students to transition from passive consumers of technology to active creators.</p>
@@ -314,7 +333,7 @@
     <section id="about">
       <h2>About Me</h2>
       <p>As an experienced Computer Science Instructor and freelance Educator, I specialize in preparing learners for academic and professional success through tailored, curriculum-aligned computing courses. My approach emphasizes practical application—leveraging industry-standard development tools and interactive frameworks to make complex computational principles intuitive and accessible.</p>
-      <h2> <a href="about.html"> More information </a><h2>
+      <a href="about.html" class="btn-more">More About Me &rarr;</a>
       <h3>Academic Credentials</h3>
       <ul class="timeline-list">
         <li class="timeline-item">
