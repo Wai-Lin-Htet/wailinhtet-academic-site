@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS Paper 2 Revision | Tr.WaiLinHtet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #fafafa;
+      --card-bg: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --code-bg: #f8fafc;
+      --code-border: #e2e8f0;
+      --code-text: #1e293b;
+      --table-header-bg: #f8fafc;
+      --diagram-stroke: #1a1a1a;
+      --diagram-fill: #ffffff;
+      --nav-active-bg: #1a1a1a;
+      --nav-active-text: #ffffff;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --accent: #60a5fa;
+      --accent-light: rgba(37, 99, 235, 0.15);
+      --code-bg: #0b1120;
+      --code-border: #1e293b;
+      --code-text: #cbd5e1;
+      --table-header-bg: #162032;
+      --diagram-stroke: #f1f5f9;
+      --diagram-fill: #1e293b;
+      --nav-active-bg: #38bdf8;
+      --nav-active-text: #0f172a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0 1rem;
+    }
+
+    header {
+      max-width: 1000px;
+      margin: 2.5rem auto 2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .header-content {
+      flex: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.65rem;
+      background-color: var(--accent-light);
+      color: var(--accent);
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+    }
+
+    header h1 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.9rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--accent);
+    }
+
+    nav {
+      max-width: 1000px;
+      margin: 0 auto 2.5rem;
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .nav-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 0.55rem 1.15rem;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover {
+      color: var(--text);
+      border-color: #94a3b8;
+    }
+
+    .nav-btn.active {
+      background: var(--nav-active-bg);
+      color: var(--nav-active-text);
+      border-color: var(--nav-active-bg);
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto 4rem;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card p, .card li {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .card ul {
+      padding-left: 1.25rem;
+      margin: 0.5rem 0;
+    }
+
+    pre, code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.84rem;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: 6px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+      color: var(--code-text);
+      line-height: 1.5;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      background: var(--card-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-weight: 600;
+      background: var(--table-header-bg);
+      color: var(--text);
+    }
+
+    .symbol-shape {
+      display: inline-block;
+      width: 70px;
+      text-align: center;
+      font-size: 0.75rem;
+      padding: 4px;
+      border: 1.5px solid var(--text);
+      font-weight: 500;
+    }
+
+    .terminator { border-radius: 12px; }
+    .process { border-radius: 0; }
+    .io { transform: skew(-15deg); }
+    .decision { transform: rotate(45deg); width: 24px; height: 24px; margin: 8px auto; }
+
+    /* Logic Gates Grid */
+    .gate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gate-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gate-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .gate-header h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .gate-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      min-height: 2.2rem;
+    }
+
+    .gate-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+
+    .gate-svg-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gate-svg-container svg {
+      width: 120px;
+      height: 60px;
+      stroke: var(--diagram-stroke);
+      fill: var(--diagram-fill);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .truth-table-mini {
+      width: auto;
+      margin-top: 0;
+      border: 1px solid var(--border);
+      font-size: 0.75rem;
+    }
+
+    .truth-table-mini th, .truth-table-mini td {
+      padding: 0.25rem 0.5rem;
+      text-align: center;
+    }
+
+    footer {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 0 3.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 600px) {
+      header { flex-direction: column; }
+      .theme-toggle-btn { align-self: flex-start; }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="badge">Paper 2 &bull; Computer Science</div>
+      <h1>Algorithms, Pseudocode & Data Structures</h1>
+      <p>CS revision created by Tr.WaiLinHtet</p>
+    </div>
+    
+    <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()" title="Switch Light/Dark Mode">
+      <span id="themeIcon">&#9790;</span>
+      <span id="themeLabel">Dark Mode</span>
+    </button>
+  </header>
+
+  <nav>
+    <button class="nav-btn active" onclick="switchTab(event, 'core-algorithms')">1. Core Algorithms</button>
+    <button class="nav-btn" onclick="switchTab(event, 'arrays-data')">2. Arrays & Strings</button>
+    <button class="nav-btn" onclick="switchTab(event, 'file-handling')">3. File Handling</button>
+    <button class="nav-btn" onclick="switchTab(event, 'pseudocode-basics')">4. Pseudocode Syntax</button>
+    <button class="nav-btn" onclick="switchTab(event, 'flowcharts')">5. Flowcharts</button>
+    <button class="nav-btn" onclick="switchTab(event, 'databases')">6. Databases</button>
+    <button class="nav-btn" onclick="switchTab(event, 'logic-gates')">7. Logic Gates</button>
+  </nav>
+
+  <main>
+    <!-- TAB 1: CORE ALGORITHMS -->
+    <section id="core-algorithms" class="tab-content active">
+      <div class="grid">
+        <!-- BUBBLE SORT -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Bubble Sort Algorithm</h3>
+          <p>Sorts an array into ascending order by iteratively comparing adjacent elements and swapping them until fully ordered.</p>
+          <pre>First &larr; 1
+Last &larr; 10
+REPEAT
+  Swap &larr; FALSE
+  FOR Index &larr; First TO Last - 1
+    IF Array[Index] > Array[Index + 1] THEN
+      Temp &larr; Array[Index]
+      Array[Index] &larr; Array[Index + 1]
+      Array[Index + 1] &larr; Temp
+      Swap &larr; TRUE
+    ENDIF
+  NEXT Index
+  Last &larr; Last - 1
+UNTIL (NOT Swap) OR Last = 1</pre>
+        </div>
+
+        <!-- MAXIMUM & MINIMUM -->
+        <div class="card">
+          <h3>Maximum & Minimum Finder</h3>
+          <p>Initializes both values to the first element and updates them sequentially.</p>
+          <pre>MaximumValue &larr; Array[1]
+MinimumValue &larr; Array[1]
+
+FOR Counter &larr; 2 TO LoopLimit
+  IF Array[Counter] > MaximumValue THEN
+    MaximumValue &larr; Array[Counter]
+  ENDIF
+  IF Array[Counter] &lt; MinimumValue THEN
+    MinimumValue &larr; Array[Counter]
+  ENDIF
+NEXT Counter</pre>
+        </div>
+
+        <!-- TOTALING & COUNTING -->
+        <div class="card">
+          <h3>Totalling, Counting & Average</h3>
+          <p>Standard loop patterns for accumulation and filtering conditions.</p>
+          <pre>Total &larr; 0
+PassCount &larr; 0
+
+FOR Counter &larr; 1 TO NumberOfValues
+  Total &larr; Total + StudentMark[Counter]
+  IF StudentMark[Counter] >= 50 THEN
+    PassCount &larr; PassCount + 1
+  ENDIF
+NEXT Counter
+
+Average &larr; Total / NumberOfValues
+OUTPUT "Total: ", Total
+OUTPUT "Average: ", Average
+OUTPUT "Passed: ", PassCount</pre>
+        </div>
+
+        <!-- LINEAR SEARCH -->
+        <div class="card">
+          <h3>Linear Search</h3>
+          <p>Searches through the array until the target value is found or the end is reached.</p>
+          <pre>INPUT TargetValue
+Found &larr; FALSE
+Counter &larr; 1
+
+REPEAT
+  IF TargetValue = Array[Counter] THEN
+    Found &larr; TRUE
+  ELSE
+    Counter &larr; Counter + 1
+  ENDIF
+UNTIL Found OR Counter > NumberOfValues
+
+IF Found THEN
+  OUTPUT "Found at position: ", Counter
+ELSE
+  OUTPUT "Not found."
+ENDIF</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: ARRAYS & STRING HANDLING -->
+    <section id="arrays-data" class="tab-content">
+      <div class="grid">
+        <!-- 1D ARRAYS -->
+        <div class="card">
+          <h3>1D Arrays (Declaration & Iteration)</h3>
+          <pre>// Declaration: 1D Array of size 10
+DECLARE StudentNames : ARRAY[1:10] OF STRING
+DECLARE Scores : ARRAY[1:10] OF INTEGER
+
+// Populating array
+FOR Index &larr; 1 TO 10
+  INPUT StudentNames[Index]
+  INPUT Scores[Index]
+NEXT Index
+
+// Accessing Nth element
+OUTPUT "First student is: ", StudentNames[1]</pre>
+        </div>
+
+        <!-- 2D ARRAYS -->
+        <div class="card">
+          <h3>2D Arrays (Nested Loops)</h3>
+          <pre>// Declaration: 2D Array (e.g. 5 rows, 10 columns)
+DECLARE Amount : ARRAY[1:5, 1:10] OF INTEGER
+DECLARE GrandTotal : INTEGER
+GrandTotal &larr; 0
+
+FOR Row &larr; 1 TO 5
+  RowTotal &larr; 0
+  FOR Column &larr; 1 TO 10
+    RowTotal &larr; RowTotal + Amount[Row, Column]
+  NEXT Column
+  OUTPUT "Total for Row ", Row, " is ", RowTotal
+  GrandTotal &larr; GrandTotal + RowTotal
+NEXT Row
+
+OUTPUT "Grand Total: ", GrandTotal</pre>
+        </div>
+
+        <!-- STRING HANDLING -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>String Handling Functions</h3>
+          <div class="grid" style="margin-bottom: 0;">
+            <div>
+              <p><strong>LENGTH(string)</strong></p>
+              <pre>DECLARE Name : STRING
+Name &larr; "Computer Science"
+OUTPUT LENGTH(Name) // Outputs 16</pre>
+            </div>
+            <div>
+              <p><strong>SUBSTRING(string, start, length)</strong></p>
+              <pre>// SUBSTRING(str, pos, count)
+OUTPUT SUBSTRING("Computer Science", 10, 7)
+// Outputs "Science"</pre>
+            </div>
+            <div>
+              <p><strong>UCASE(string) & LCASE(string)</strong></p>
+              <pre>OUTPUT UCASE("hello") // Outputs "HELLO"
+OUTPUT LCASE("WORLD") // Outputs "world"</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: FILE HANDLING -->
+    <section id="file-handling" class="tab-content">
+      <div class="grid">
+        <div class="card">
+          <h3>File Handling Modes</h3>
+          <ul>
+            <li><code>READ</code>: Opens file for data retrieval from the beginning.</li>
+            <li><code>WRITE</code>: Creates a new file or overwrites an existing file.</li>
+            <li><code>APPEND</code>: Adds new data to the end of an existing file.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Writing to a Text File</h3>
+          <pre>OPENFILE "StudentData.txt" FOR WRITE
+WRITEFILE "StudentData.txt", "Bob, Smith, 90"
+WRITEFILE "StudentData.txt", "Ada, Lovelace, 100"
+CLOSEFILE "StudentData.txt"</pre>
+        </div>
+
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Reading Lines from File until EOF</h3>
+          <p>Reads every line of a text file sequentially until EOF (End Of File) is reached.</p>
+          <pre>DECLARE LineOfText : STRING
+
+OPENFILE "StudentData.txt" FOR READ
+
+WHILE NOT EOF("StudentData.txt") DO
+  READFILE "StudentData.txt", LineOfText
+  OUTPUT LineOfText
+ENDWHILE
+
+CLOSEFILE "StudentData.txt"</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: PSEUDOCODE BASICS & VALIDATION -->
+    <section id="pseudocode-basics" class="tab-content">
+      <div class="grid">
+        <div class="card">
+          <h3>Selection Structures</h3>
+          <pre>IF Age &lt; 18 THEN
+  OUTPUT "Child"
+ELSE
+  OUTPUT "Adult"
+ENDIF
+
+CASE OF Move
+  'W' : Position &larr; Position - 10
+  'S' : Position &larr; Position + 10
+  OTHERWISE : CALL Beep
+ENDCASE</pre>
+        </div>
+
+        <div class="card">
+          <h3>Validation Checks</h3>
+          <p><strong>Range Check:</strong></p>
+          <pre>REPEAT
+  INPUT Mark
+  IF Mark &lt; 0 OR Mark > 100 THEN
+    OUTPUT "Mark must be between 0 and 100"
+  ENDIF
+UNTIL Mark >= 0 AND Mark &lt;= 100</pre>
+          <p><strong>Length Check:</strong></p>
+          <pre>REPEAT
+  INPUT Password
+UNTIL LENGTH(Password) >= 8</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: FLOWCHARTS -->
+    <section id="flowcharts" class="tab-content">
+      <div class="card">
+        <h3>Standard Flowchart Symbols</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Name</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="symbol-shape terminator">START</div></td>
+              <td><strong>Terminator</strong></td>
+              <td>Shows the start and end termination points of an algorithm.</td>
+            </tr>
+            <tr>
+              <td><div class="symbol-shape process">Process</div></td>
+              <td><strong>Process</strong></td>
+              <td>Calculations, data assignments, and internal tasks.</td>
+            </tr>
+            <tr>
+              <td><div class="symbol-shape io">Input/Output</div></td>
+              <td><strong>Input / Output</strong></td>
+              <td>Prompts input from keyboard or prints output to monitor.</td>
+            </tr>
+            <tr>
+              <td><div class="symbol-shape decision"></div></td>
+              <td><strong>Decision</strong></td>
+              <td>Conditional branching check with Yes/No exit paths.</td>
+            </tr>
+            <tr>
+              <td><div class="symbol-shape">&rarr;</div></td>
+              <td><strong>Flowline</strong></td>
+              <td>Defines directional sequence of execution.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 6: DATABASES -->
+    <section id="databases" class="tab-content">
+      <div class="grid">
+        <div class="card">
+          <h3>Relational Concepts</h3>
+          <ul>
+            <li><strong>Flat File:</strong> Single table containing all data.</li>
+            <li><strong>Relational Database:</strong> Multiple linked tables reducing redundancy.</li>
+            <li><strong>Primary Key:</strong> Unique identifier field for a record.</li>
+            <li><strong>Foreign Key:</strong> Links to another table's primary key.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Standard Query (SELECT)</h3>
+          <pre>SELECT Forename, Lastname
+FROM Students
+WHERE StudentID &lt; 10
+ORDER BY Lastname ASC;</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Modifying Tables (SQL)</h3>
+        <div class="grid" style="margin-bottom: 0;">
+          <div>
+            <p><strong>INSERT</strong></p>
+            <pre>INSERT INTO Students (ID, Name)
+VALUES (1, 'Adam');</pre>
+          </div>
+          <div>
+            <p><strong>UPDATE</strong></p>
+            <pre>UPDATE Students
+SET Class = '11A'
+WHERE StudentID = 1;</pre>
+          </div>
+          <div>
+            <p><strong>DELETE</strong></p>
+            <pre>DELETE FROM Students
+WHERE StudentID = 1;</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 7: LOGIC GATES -->
+    <section id="logic-gates" class="tab-content">
+      <div class="gate-grid">
+        
+        <!-- AND -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>AND Gate</h4>
+            <code>OUT = A AND B</code>
+          </div>
+          <p>Output 1 only when <strong>all</strong> inputs are 1.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="45" y2="22" />
+                <line x1="10" y1="48" x2="45" y2="48" />
+                <path d="M 45,10 L 80,10 A 25,25 0 0,1 80,60 L 45,60 Z" />
+                <line x1="105" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td></tr>
+              <tr><td>1</td><td>1</td><td>1</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- NAND -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>NAND Gate</h4>
+            <code>OUT = NOT (A AND B)</code>
+          </div>
+          <p>Opposite of AND. Output is 0 only when both inputs are 1.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="45" y2="22" />
+                <line x1="10" y1="48" x2="45" y2="48" />
+                <path d="M 45,10 L 78,10 A 25,25 0 0,1 78,60 L 45,60 Z" />
+                <circle cx="107" cy="35" r="4" />
+                <line x1="111" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- OR -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>OR Gate</h4>
+            <code>OUT = A OR B</code>
+          </div>
+          <p>Output is 1 if <strong>at least one</strong> input is 1.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="52" y2="22" />
+                <line x1="10" y1="48" x2="52" y2="48" />
+                <path d="M 40,10 Q 60,35 40,60 Q 80,60 105,35 Q 80,10 40,10 Z" />
+                <line x1="105" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>1</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- NOR -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>NOR Gate</h4>
+            <code>OUT = NOT (A OR B)</code>
+          </div>
+          <p>Opposite of OR. Output is 1 only when both inputs are 0.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="50" y2="22" />
+                <line x1="10" y1="48" x2="50" y2="48" />
+                <path d="M 38,10 Q 58,35 38,60 Q 75,60 98,35 Q 75,10 38,10 Z" />
+                <circle cx="102" cy="35" r="4" />
+                <line x1="106" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- XOR -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>XOR Gate</h4>
+            <code>OUT = A XOR B</code>
+          </div>
+          <p>Output 1 only when inputs are <strong>different</strong>.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="48" y2="22" />
+                <line x1="10" y1="48" x2="48" y2="48" />
+                <path d="M 33,10 Q 53,35 33,60" fill="none" />
+                <path d="M 43,10 Q 63,35 43,60 Q 80,60 105,35 Q 80,10 43,10 Z" />
+                <line x1="105" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- XNOR -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>XNOR Gate</h4>
+            <code>OUT = NOT (A XOR B)</code>
+          </div>
+          <p>Output 1 when both inputs are <strong>identical</strong>.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="44" y2="22" />
+                <line x1="10" y1="48" x2="44" y2="48" />
+                <path d="M 30,10 Q 50,35 30,60" fill="none" />
+                <path d="M 39,10 Q 59,35 39,60 Q 75,60 98,35 Q 75,10 39,10 Z" />
+                <circle cx="102" cy="35" r="4" />
+                <line x1="106" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td></tr>
+              <tr><td>1</td><td>1</td><td>1</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- NOT -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>NOT Gate</h4>
+            <code>OUT = NOT A</code>
+          </div>
+          <p>Inverts input (1 becomes 0, 0 becomes 1).</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="15" y1="35" x2="45" y2="35" />
+                <polygon points="45,15 45,55 85,35" />
+                <circle cx="89" cy="35" r="4" />
+                <line x1="93" y1="35" x2="130" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>OUT</th></tr>
+              <tr><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td></tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>Computer Science Paper 2 Revision</div>
+    <div>CS revision created by <strong>Tr.WaiLinHtet</strong></div>
+  </footer>
+
+  <script>
+    function switchTab(event, tabId) {
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    const htmlEl = document.documentElement;
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+
+    function applyTheme(theme) {
+      htmlEl.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        themeIcon.innerHTML = '&#9788;';
+        themeLabel.textContent = 'Light Mode';
+      } else {
+        themeIcon.innerHTML = '&#9790;';
+        themeLabel.textContent = 'Dark Mode';
+      }
+      localStorage.setItem('cs_theme', theme);
+    }
+
+    function toggleTheme() {
+      const currentTheme = htmlEl.getAttribute('data-theme') || 'light';
+      applyTheme(currentTheme === 'light' ? 'dark' : 'light');
+    }
+
+    const savedTheme = localStorage.getItem('cs_theme') || 'light';
+    applyTheme(savedTheme);
+  </script>
+</body>
+</html>
