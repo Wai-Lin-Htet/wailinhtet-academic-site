@@ -13,53 +13,62 @@
       --border: #d2d2d7;
       --text-main: #1d1d1f;
       --text-muted: #86868b;
-      --header-bg: rgba(255, 255, 255, 0.72);
-      --header-border: rgba(0, 0, 0, 0.08);
-      --input-bg: rgba(0, 0, 0, 0.04);
-      --input-focus-bg: #ffffff;
-      --btn-hover: rgba(0, 0, 0, 0.05);
-      --btn-active-all-bg: #1d1d1f;
-      --btn-active-all-text: #ffffff;
-      --modal-bg: rgba(255, 255, 255, 0.9);
       
       /* Course Accents for Papers */
-      --accent-p1: #0066cc;
+      --accent-p1: #0066cc; /* Classic Blue */
       --accent-p1-glow: #e8f0fe;
-      --accent-p2: #5e5ce6;
+      --accent-p2: #5e5ce6; /* Indigo */
       --accent-p2-glow: #f0efff;
       
       /* Typography */
       --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+      /* Header and Control Dynamic Elements */
+      --header-bg: rgba(255, 255, 255, 0.72);
+      --header-border: rgba(0, 0, 0, 0.08);
+      --input-bg: rgba(0, 0, 0, 0.04);
+      --input-focus-bg: #ffffff;
+      --btn-hover: rgba(0, 0, 0, 0.04);
+      --active-btn-bg: #1d1d1f;
+      --active-btn-text: #ffffff;
+      --modal-bg: rgba(255, 255, 255, 0.9);
+      --modal-close-hover: rgba(0, 0, 0, 0.1);
+      --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.04);
+      --card-hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.04);
     }
 
+    /* Dark Theme */
     [data-theme="dark"] {
       --bg: #000000;
       --surface: #1c1c1e;
       --surface-card: #2c2c2e;
       --border: #38383a;
       --text-main: #f5f5f7;
-      --text-muted: #a1a1a6;
-      --header-bg: rgba(28, 28, 30, 0.75);
-      --header-border: rgba(255, 255, 255, 0.12);
-      --input-bg: rgba(255, 255, 255, 0.08);
-      --input-focus-bg: #1c1c1e;
-      --btn-hover: rgba(255, 255, 255, 0.1);
-      --btn-active-all-bg: #f5f5f7;
-      --btn-active-all-text: #000000;
-      --modal-bg: rgba(28, 28, 30, 0.95);
+      --text-muted: #86868b;
       
       --accent-p1: #2997ff;
-      --accent-p1-glow: rgba(41, 151, 255, 0.18);
+      --accent-p1-glow: rgba(41, 151, 255, 0.15);
       --accent-p2: #7d7aff;
-      --accent-p2-glow: rgba(125, 122, 255, 0.18);
+      --accent-p2-glow: rgba(125, 122, 255, 0.15);
+
+      --header-bg: rgba(28, 28, 30, 0.75);
+      --header-border: rgba(255, 255, 255, 0.1);
+      --input-bg: rgba(255, 255, 255, 0.08);
+      --input-focus-bg: #1c1c1e;
+      --btn-hover: rgba(255, 255, 255, 0.08);
+      --active-btn-bg: #f5f5f7;
+      --active-btn-text: #000000;
+      --modal-bg: rgba(28, 28, 30, 0.95);
+      --modal-close-hover: rgba(255, 255, 255, 0.15);
+      --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      --card-hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
     }
 
     body {
@@ -69,6 +78,7 @@
       line-height: 1.5;
       padding-bottom: 5rem;
       -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     /* Glassmorphism Header */
@@ -81,6 +91,7 @@
       top: 0;
       z-index: 100;
       padding: 0.8rem 1.5rem;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
     }
 
     .header-container {
@@ -101,13 +112,18 @@
 
     .brand-tag {
       font-family: var(--font-mono);
-      background: var(--btn-active-all-bg);
-      color: var(--btn-active-all-text);
+      background: #1d1d1f;
+      color: #fff;
       font-size: 0.75rem;
       font-weight: 600;
       padding: 0.25rem 0.6rem;
       border-radius: 6px;
       letter-spacing: 0.03em;
+    }
+
+    [data-theme="dark"] .brand-tag {
+      background: #f5f5f7;
+      color: #000;
     }
 
     .brand-title {
@@ -116,21 +132,14 @@
       letter-spacing: -0.015em;
     }
 
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
     .filter-group {
       display: flex;
-      gap: 0.4rem;
+      gap: 0.5rem;
       align-items: center;
       flex-wrap: wrap;
     }
 
-    /* Search & Action Buttons */
+    /* Minimal Inputs & Buttons */
     .search-input {
       background: var(--input-bg);
       border: 1px solid transparent;
@@ -140,17 +149,17 @@
       font-family: var(--font-system);
       font-size: 0.85rem;
       outline: none;
-      min-width: 200px;
+      min-width: 220px;
       transition: all 0.2s ease;
     }
 
     .search-input:focus {
       background: var(--input-focus-bg);
       border-color: var(--accent-p1);
-      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.25);
+      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
     }
 
-    .filter-btn, .notes-link-btn, .theme-toggle-btn {
+    .filter-btn {
       background: transparent;
       border: 1px solid transparent;
       color: var(--text-muted);
@@ -159,21 +168,20 @@
       font-size: 0.85rem;
       font-weight: 500;
       cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      text-decoration: none;
-      transition: all 0.2s ease;
     }
 
-    .filter-btn:hover, .notes-link-btn:hover, .theme-toggle-btn:hover {
+    .filter-btn:hover {
       background: var(--btn-hover);
       color: var(--text-main);
     }
 
     .filter-btn.active[data-filter="all"] {
-      background: var(--btn-active-all-bg);
-      color: var(--btn-active-all-text);
+      background: var(--active-btn-bg);
+      color: var(--active-btn-text);
     }
 
     .filter-btn.active-p1 {
@@ -186,25 +194,44 @@
       color: var(--accent-p2);
     }
 
-    .notes-link-btn {
+    /* CS Paper 2 Notes Link Button */
+    .notes-nav-btn {
       background: var(--accent-p2-glow);
       color: var(--accent-p2);
+      padding: 0.45rem 0.85rem;
+      border-radius: 16px;
+      font-size: 0.85rem;
       font-weight: 600;
-      border: 1px solid rgba(94, 92, 230, 0.2);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s ease;
     }
 
-    .notes-link-btn:hover {
-      background: var(--accent-p2);
-      color: #ffffff;
+    .notes-nav-btn:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
     }
 
+    /* Theme Toggle Button */
     .theme-toggle-btn {
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      padding: 0;
-      justify-content: center;
+      background: var(--input-bg);
       border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 0.45rem 0.75rem;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--btn-hover);
     }
 
     /* Container Layout */
@@ -214,7 +241,7 @@
       padding: 0 1.5rem;
     }
 
-    /* Assessment Matrix Cards */
+    /* Soft Cards for Assessment Matrix */
     .exam-overview-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -224,11 +251,11 @@
 
     .exam-card {
       background: var(--surface);
-      border: 1px solid var(--border);
       border-radius: 20px;
       padding: 1.5rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.04);
+      box-shadow: var(--card-shadow);
       position: relative;
+      transition: background-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     .exam-title {
@@ -244,9 +271,6 @@
     .exam-title a {
       color: inherit;
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
     }
 
     .exam-title a:hover {
@@ -309,19 +333,18 @@
 
     .topic-card {
       background: var(--surface);
-      border: 1px solid var(--border);
       border-radius: 20px;
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.25s ease;
     }
 
     .topic-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.06);
+      box-shadow: var(--card-hover-shadow);
     }
 
     .topic-header {
@@ -365,12 +388,10 @@
     }
 
     .subtopics-list li::before {
-      content: '›';
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-right: 8px;
-      line-height: 1;
-      color: var(--text-muted);
+      content: url('data:image/svg+xml;utf8,<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%2386868b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>');
+      margin-right: 6px;
+      margin-top: 2px;
+      flex-shrink: 0;
     }
 
     .view-btn {
@@ -401,9 +422,9 @@
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -411,7 +432,7 @@
       padding: 1.5rem;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.25s ease;
+      transition: opacity 0.3s ease;
     }
 
     .modal-overlay.active {
@@ -421,7 +442,6 @@
 
     .modal-content {
       background: var(--surface);
-      border: 1px solid var(--border);
       border-radius: 24px;
       width: 100%;
       max-width: 800px;
@@ -429,7 +449,8 @@
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      transition: background-color 0.25s ease;
     }
 
     .modal-header {
@@ -442,7 +463,6 @@
       top: 0;
       background: var(--modal-bg);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       z-index: 10;
     }
 
@@ -456,19 +476,19 @@
       background: var(--input-bg);
       border: none;
       color: var(--text-muted);
-      width: 32px;
-      height: 32px;
-      border-radius: 16px;
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       cursor: pointer;
       transition: background-color 0.2s, color 0.2s;
     }
 
     .close-btn:hover {
-      background: var(--btn-hover);
+      background: var(--modal-close-hover);
       color: var(--text-main);
     }
 
@@ -493,10 +513,10 @@
 
     .objectives-block, .guidance-block {
       background: var(--bg);
-      border: 1px solid var(--border);
       border-radius: 14px;
       padding: 1.25rem;
       margin-bottom: 1rem;
+      transition: background-color 0.25s ease;
     }
 
     .block-label {
@@ -542,6 +562,7 @@
       color: var(--text-muted);
       font-size: 0.85rem;
       font-weight: 500;
+      transition: border-color 0.25s ease;
     }
 
     .footer-container {
@@ -549,9 +570,8 @@
       margin: 0 auto;
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 768px) {
       .header-container { flex-direction: column; align-items: stretch; }
-      .nav-actions { justify-content: space-between; }
       .search-input { width: 100%; }
       .topics-grid { grid-template-columns: 1fr; }
     }
@@ -565,668 +585,19 @@
         <span class="brand-tag">0478</span>
         <div class="brand-title">IGCSE Computer Science Hub</div>
       </div>
-      
-      <div class="nav-actions">
-        <div class="filter-group">
-          <input type="text" id="searchInput" class="search-input" placeholder="Search topics, keywords...">
-          <button class="filter-btn active" data-filter="all">All Topics</button>
-          <button class="filter-btn" data-filter="p1">Paper 1</button>
-          <button class="filter-btn" data-filter="p2">Paper 2</button>
-        </div>
+      <div class="filter-group">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search topics, keywords...">
+        <button class="filter-btn active" data-filter="all">All Topics</button>
+        <button class="filter-btn" data-filter="p1">Paper 1</button>
+        <button class="filter-btn" data-filter="p2">Paper 2</button>
         
-        <!-- Direct CS Paper 2 Notes Link -->
-        <a href="CS_Paper2_rev.html" class="notes-link-btn" title="Open CS Paper 2 Revision Notes">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          CS Paper 2 Notes
-        </a>
-
-        <!-- Dark / Light Theme Toggle Button -->
-        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Dark / Light Mode" title="Toggle Theme">
-          <span id="themeIcon">🌙</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main class="container">
-    <!-- Assessment Overview Cards -->
-    <section class="exam-overview-grid">
-      <div class="exam-card p1">
-        <div class="exam-title">
-          <span>Paper 1: Computer Systems</span>
-          <span class="badge badge-p1">50% Weight</span>
-        </div>
-        <div class="exam-meta">
-          <span>⏱ 1h 45m</span>
-          <span>📊 75 Marks</span>
-          <span>🚫 No Calculator</span>
-        </div>
-        <p class="exam-desc">Covers Topics 1–6: Data Representation, Data Transmission, Hardware, Software, The Internet & Emerging Tech.</p>
-      </div>
-
-      <div class="exam-card p2">
-        <div class="exam-title">
-          <span>
-            <a href="CS_Paper2_rev.html" title="Jump to Paper 2 Notes">
-              Paper 2: Algorithms, Programming & Logic
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 Here is the complete, updated HTML file. 
-
-### Key Updates Applied:
-* **Dark / Light Theme Engine**: Added complete dark palette variables (`--bg`, `--surface`, `--surface-card`, `--border`, `--text-main`, `--text-muted`, etc.) applied via `data-theme="dark"` on `<html>`. It automatically detects system preferences (`prefers-color-scheme`) and persists user choices via `localStorage`.
-* **Theme Toggle Button**: Added an Apple-style switcher in the header displaying sun/moon icons.
-* **Navigation & Notes Link**: Configured a dedicated, styled **CS Paper 2 Notes** link pointing directly to `CS_Paper2_rev.html` both in the header toolbar and within the Paper 2 overview card.
-
-```html
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cambridge IGCSE Computer Science (0478) - Syllabus Explorer</title>
-  <style>
-    :root {
-      /* Apple-inspired Light Theme Colors */
-      --bg: #f5f5f7;
-      --surface: #ffffff;
-      --surface-card: #f8fafc;
-      --border: #d2d2d7;
-      --text-main: #1d1d1f;
-      --text-muted: #86868b;
-      --input-bg: rgba(0, 0, 0, 0.04);
-      --hover-bg: rgba(0, 0, 0, 0.05);
-      --header-bg: rgba(255, 255, 255, 0.72);
-      --header-border: rgba(0, 0, 0, 0.08);
-      --block-bg: #f0f2f5;
-
-      /* Course Accents for Papers */
-      --accent-p1: #0066cc;
-      --accent-p1-glow: #e8f0fe;
-      --accent-p2: #5e5ce6;
-      --accent-p2-glow: #f0efff;
-      
-      /* Typography */
-      --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    }
-
-    /* Apple-inspired Dark Theme Colors */
-    [data-theme="dark"] {
-      --bg: #000000;
-      --surface: #1c1c1e;
-      --surface-card: #2c2c2e;
-      --border: #38383a;
-      --text-main: #f5f5f7;
-      --text-muted: #98989d;
-      --input-bg: rgba(255, 255, 255, 0.08);
-      --hover-bg: rgba(255, 255, 255, 0.08);
-      --header-bg: rgba(28, 28, 30, 0.75);
-      --header-border: rgba(255, 255, 255, 0.12);
-      --block-bg: #252528;
-
-      --accent-p1: #2997ff;
-      --accent-p1-glow: rgba(41, 151, 255, 0.16);
-      --accent-p2: #7d7aff;
-      --accent-p2-glow: rgba(125, 122, 255, 0.16);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      font-family: var(--font-system);
-      line-height: 1.5;
-      padding-bottom: 5rem;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* Glassmorphism Header */
-    header {
-      background: var(--header-bg);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid var(--header-border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 0.8rem 1.5rem;
-    }
-
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .brand-section {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .brand-tag {
-      font-family: var(--font-mono);
-      background: var(--text-main);
-      color: var(--bg);
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
-      letter-spacing: 0.03em;
-    }
-
-    .brand-title {
-      font-size: 1.15rem;
-      font-weight: 600;
-      letter-spacing: -0.015em;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .filter-group {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    /* Link button styling */
-    .notes-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: var(--accent-p2-glow);
-      color: var(--accent-p2);
-      border: 1px solid transparent;
-      padding: 0.45rem 0.85rem;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .notes-link:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
-    }
-
-    /* Search & Filters */
-    .search-input {
-      background: var(--input-bg);
-      border: 1px solid transparent;
-      border-radius: 8px;
-      padding: 0.55rem 0.95rem;
-      color: var(--text-main);
-      font-family: var(--font-system);
-      font-size: 0.85rem;
-      outline: none;
-      min-width: 200px;
-      transition: all 0.2s ease;
-    }
-
-    .search-input:focus {
-      background: var(--surface);
-      border-color: var(--accent-p1);
-      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
-    }
-
-    .filter-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-muted);
-      padding: 0.45rem 0.85rem;
-      border-radius: 16px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .filter-btn:hover {
-      background: var(--hover-bg);
-      color: var(--text-main);
-    }
-
-    .filter-btn.active[data-filter="all"] {
-      background: var(--text-main);
-      color: var(--bg);
-    }
-
-    .filter-btn.active-p1 {
-      background: var(--accent-p1-glow);
-      color: var(--accent-p1);
-    }
-
-    .filter-btn.active-p2 {
-      background: var(--accent-p2-glow);
-      color: var(--accent-p2);
-    }
-
-    /* Dark Mode Toggle Button */
-    .theme-toggle-btn {
-      background: var(--input-bg);
-      border: 1px solid var(--border);
-      color: var(--text-main);
-      padding: 0.45rem;
-      border-radius: 10px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-    }
-
-    .theme-toggle-btn:hover {
-      background: var(--hover-bg);
-    }
-
-    /* Container Layout */
-    .container {
-      max-width: 1200px;
-      margin: 2.5rem auto 0;
-      padding: 0 1.5rem;
-    }
-
-    /* Soft Cards for Assessment Matrix */
-    .exam-overview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .exam-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.04);
-      position: relative;
-    }
-
-    .exam-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.5rem;
-    }
-
-    .exam-title a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .exam-title a:hover {
-      text-decoration: underline;
-    }
-
-    .badge {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 0.25rem 0.6rem;
-      border-radius: 12px;
-    }
-
-    .badge-p1 { background: var(--accent-p1-glow); color: var(--accent-p1); }
-    .badge-p2 { background: var(--accent-p2-glow); color: var(--accent-p2); }
-
-    .exam-meta {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-      font-weight: 500;
-      flex-wrap: wrap;
-    }
-
-    .exam-desc {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .card-footer-link {
-      margin-top: 1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-size: 0.85rem;
-      color: var(--accent-p2);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .card-footer-link:hover {
-      text-decoration: underline;
-    }
-
-    /* Section Headings */
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin: 3rem 0 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-    }
-
-    .section-title .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    .dot-p1 { background: var(--accent-p1); }
-    .dot-p2 { background: var(--accent-p2); }
-
-    /* Topic Cards Grid */
-    .topics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .topic-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .topic-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
-    }
-
-    .topic-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 0.75rem;
-    }
-
-    .topic-num {
-      font-family: var(--font-system);
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .topic-title-text {
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--text-main);
-      line-height: 1.3;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.01em;
-    }
-
-    .subtopics-list {
-      list-style: none;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .subtopics-list li {
-      display: flex;
-      align-items: flex-start;
-      line-height: 1.4;
-    }
-
-    .subtopics-list li::before {
-      content: "›";
-      margin-right: 8px;
-      font-weight: bold;
-      color: var(--text-muted);
-    }
-
-    .view-btn {
-      width: 100%;
-      margin-top: 1.25rem;
-      background: var(--input-bg);
-      border: 1px solid var(--border);
-      font-weight: 500;
-      font-size: 0.85rem;
-      padding: 0.7rem;
-      border-radius: 12px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      transition: all 0.2s ease;
-    }
-
-    .topic-card:not(.paper-2) .view-btn { color: var(--accent-p1); }
-    .topic-card.paper-2 .view-btn { color: var(--accent-p2); }
-
-    .view-btn:hover {
-      background: var(--hover-bg);
-    }
-
-    /* Modal Layout */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 1.5rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal-content {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      width: 100%;
-      max-width: 800px;
-      max-height: 85vh;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
-    }
-
-    .modal-header {
-      padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      background: var(--surface);
-      z-index: 10;
-    }
-
-    .modal-header-title {
-      font-size: 1.15rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-
-    .close-btn {
-      background: var(--input-bg);
-      border: none;
-      color: var(--text-muted);
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: background-color 0.2s, color 0.2s;
-    }
-
-    .close-btn:hover {
-      background: var(--hover-bg);
-      color: var(--text-main);
-    }
-
-    .modal-body {
-      padding: 1.5rem;
-    }
-
-    .sub-section {
-      margin-bottom: 2rem;
-    }
-
-    .sub-section-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.5rem;
-    }
-
-    .modal-p1 .sub-section-title { color: var(--accent-p1); }
-    .modal-p2 .sub-section-title { color: var(--accent-p2); }
-
-    .objectives-block, .guidance-block {
-      background: var(--block-bg);
-      border-radius: 14px;
-      padding: 1.25rem;
-      margin-bottom: 1rem;
-    }
-
-    .block-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .content-list {
-      list-style-type: none;
-      font-size: 0.9rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .content-list li {
-      position: relative;
-      padding-left: 1.25rem;
-      color: var(--text-main);
-      line-height: 1.4;
-    }
-
-    .content-list li::before {
-      content: '•';
-      position: absolute;
-      left: 0.35rem;
-      color: var(--text-muted);
-    }
-
-    .modal-p1 .guidance-list li::before { color: var(--accent-p1); }
-    .modal-p2 .guidance-list li::before { color: var(--accent-p2); }
-
-    footer {
-      text-align: center;
-      padding: 2.5rem 1.5rem;
-      margin-top: 4rem;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-
-    @media (max-width: 768px) {
-      .header-container { flex-direction: column; align-items: stretch; }
-      .header-actions { flex-direction: column; align-items: stretch; }
-      .search-input { width: 100%; }
-      .topics-grid { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <div class="header-container">
-      <div class="brand-section">
-        <a href="#" class="brand">
-          <span class="brand-tag">0478</span>
-          <span class="brand-title">IGCSE CS Hub</span>
-        </a>
-        <a href="CS_Paper2_rev.html" class="notes-link" title="Open CS Paper 2 Revision Notes">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
-          </svg>
-          CS Paper 2 Notes
-        </a>
-      </div>
-
-      <div class="header-actions">
-        <div class="filter-group">
-          <input type="text" id="searchInput" class="search-input" placeholder="Search syllabus...">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="p1">Paper 1</button>
-          <button class="filter-btn" data-filter="p2">Paper 2</button>
-        </div>
-        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Theme">
-          <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Rendered by JavaScript -->
-          </svg>
+        <!-- Inserted Link: CS Paper 2 Notes -->
+        <a href="CS_Paper2_rev.html" class="notes-nav-btn">CS Paper 2 Notes</a>
+
+        <!-- Inserted Buttons: White & Dark Theme Switcher -->
+        <button class="theme-toggle-btn" id="themeToggleBtn">
+          <span id="themeToggleIcon">🌙</span>
+          <span id="themeToggleText">Dark</span>
         </button>
       </div>
     </div>
@@ -1259,9 +630,6 @@
           <span>⚡ 15-Mark Scenario</span>
         </div>
         <p class="exam-desc">Covers Topics 7–10: Algorithms, Practical Coding & Trace Tables, Databases, and Boolean Circuits.</p>
-        <a href="CS_Paper2_rev.html" class="card-footer-link">
-          Open CS Paper 2 Notes &rarr;
-        </a>
       </div>
     </section>
 
@@ -1273,7 +641,7 @@
 
   <footer>
     <div class="footer-container">
-      Cambridge IGCSE™ Computer Science (0478) Explorer
+      Created by wailinhtet
     </div>
   </footer>
 
@@ -1291,30 +659,40 @@
   </div>
 
   <script>
-    // Theme Switcher Logic
-    const htmlEl = document.documentElement;
+    // Theme Switcher Logic (White / Dark)
     const themeToggleBtn = document.getElementById('themeToggleBtn');
-    const themeIcon = document.getElementById('themeIcon');
+    const themeToggleIcon = document.getElementById('themeToggleIcon');
+    const themeToggleText = document.getElementById('themeToggleText');
+    const htmlEl = document.documentElement;
 
-    const sunIconSvg = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
-    const moonIconSvg = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
-
-    function applyTheme(theme) {
-      htmlEl.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      themeIcon.innerHTML = theme === 'dark' ? sunIconSvg : moonIconSvg;
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        htmlEl.setAttribute('data-theme', 'dark');
+        themeToggleIcon.textContent = '☀️';
+        themeToggleText.textContent = 'White';
+        localStorage.setItem('site_theme', 'dark');
+      } else {
+        htmlEl.removeAttribute('data-theme');
+        themeToggleIcon.textContent = '🌙';
+        themeToggleText.textContent = 'Dark';
+        localStorage.setItem('site_theme', 'light');
+      }
     }
 
-    const savedTheme = localStorage.getItem('theme') || 
-      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    applyTheme(savedTheme);
+    // Check saved theme or system preference
+    const savedTheme = localStorage.getItem('site_theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
 
     themeToggleBtn.addEventListener('click', () => {
-      const current = htmlEl.getAttribute('data-theme');
-      applyTheme(current === 'dark' ? 'light' : 'dark');
+      const isDark = htmlEl.getAttribute('data-theme') === 'dark';
+      setTheme(isDark ? 'light' : 'dark');
     });
 
-    // Syllabus Dataset
+    // Detailed Syllabus Dataset
     const syllabusData = [
       {
         id: "t1",
@@ -1757,6 +1135,7 @@
         return;
       }
 
+      // Group by Paper
       const p1Items = filteredData.filter(i => i.paper === 'p1');
       const p2Items = filteredData.filter(i => i.paper === 'p2');
 
@@ -1794,7 +1173,7 @@
       const badgeText = topic.paper === 'p1' ? 'Paper 1' : 'Paper 2';
 
       let subListItems = topic.subsections
-        .map(sub => `<li><strong>${sub.code}</strong>&nbsp;${sub.title}</li>`)
+        .map(sub => `<li><strong>${sub.code}</strong> ${sub.title}</li>`)
         .join('');
 
       card.innerHTML = `
