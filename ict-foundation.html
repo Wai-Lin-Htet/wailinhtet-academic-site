@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tr. WaiLinHtet — ICT Notebook (Complete Edition)</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --tag-bg: #eff6ff;
+      --q-bg: #f8fafc;
+      --sidebar-bg: #ffffff;
+      --table-header: #f1f5f9;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --tag-bg: #1e3a8a;
+      --q-bg: #0f172a;
+      --sidebar-bg: #1e293b;
+      --table-header: #334155;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    /* Passcode Screen */
+    #lock-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lock-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 36px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 360px;
+      width: 90%;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+    }
+    .lock-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 18px 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 16px;
+      text-align: center;
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
+    }
+    .lock-box button {
+      width: 100%;
+      padding: 12px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    /* Sidebar Layout */
+    aside {
+      width: 320px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+    .sidebar-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sidebar-header h2 { font-size: 16px; font-weight: 700; }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .nav-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .chapter-list {
+      flex: 1;
+      overflow-y: auto;
+      list-style: none;
+      padding: 12px;
+    }
+    .chapter-item {
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13.5px;
+      margin-bottom: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      transition: background 0.15s;
+    }
+    .chapter-item:hover { background: var(--border); }
+    .chapter-item.active {
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .chapter-item .subtext {
+      font-size: 11.5px;
+      opacity: 0.8;
+    }
+
+    /* Content Area */
+    main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+    .content-container {
+      max-width: 900px;
+      width: 100%;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--tag-bg);
+      color: var(--accent);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .chapter-title {
+      font-size: 28px;
+      margin-bottom: 24px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 14px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card h4 {
+      font-size: 15px;
+      margin: 16px 0 8px 0;
+    }
+    .card p { margin-bottom: 12px; }
+    .card ul, .card ol {
+      margin-left: 20px;
+      margin-bottom: 14px;
+    }
+    .card li { margin-bottom: 6px; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13.5px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+    }
+    th {
+      background: var(--table-header);
+      font-weight: 600;
+    }
+
+    /* Q&A Accordion */
+    .qa-box {
+      margin-top: 16px;
+      background: var(--q-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    details {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    details:last-child { border-bottom: none; }
+    summary {
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      font-size: 14.5px;
+    }
+    .answer {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 850px) {
+      body { flex-direction: column; }
+      aside { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+      .chapter-list { display: flex; overflow-x: auto; padding: 8px; }
+      .chapter-item { white-space: nowrap; flex-shrink: 0; }
+      main { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="lock-screen">
+    <div class="lock-box">
+      <h3 style="font-size: 18px; margin-bottom: 6px;">ICT/CS Theory Foundation</h3>
+      <p style="font-size: 13px; color: var(--text-muted);">Instructor: Tr. WLH</p>
+      <input type="password" id="pass-val" placeholder="Passcode (Default: TrName)" autofocus>
+      <button onclick="unlock()">Unlock Notes</button>
+    </div>
+  </div>
+
+  <aside>
+    <div class="sidebar-header">
+      <h2>ICT Notebook</h2>
+      <div class="header-actions">
+        <a href="index.html" class="nav-btn" title="Back to Academic Portal">← Portal</a>
+        <button class="nav-btn" id="theme-toggle" onclick="toggleTheme()">Dark</button>
+      </div>
+    </div>
+    <ul class="chapter-list" id="nav-list"></ul>
+  </aside>
+
+  <main>
+    <div class="content-container" id="content-display"></div>
+  </main>
+
+  <script>
+    const PASSCODE = "trwailinhtet";
+    function unlock() {
+      const val = document.getElementById("pass-val").value;
+      if (val === PASSCODE) {
+        document.getElementById("lock-screen").style.display = "none";
+      } else {
+        alert("Incorrect passcode! Try: trName");
+      }
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute("data-theme");
+      const next = current === "light" ? "dark" : "light";
+      html.setAttribute("data-theme", next);
+      document.getElementById("theme-toggle").textContent = next === "light" ? "Dark" : "Light";
+    }
+
+    // Complete Database for Chapters 1-10
+    const chaptersData = [
+      {
+        id: 1,
+        title: "Introducing Today's Technologies",
+        topics: [
+          {
+            title: "1.1 – 1.3 Basics & Information Processing",
+            content: `
+              <p><b>Digital Literacy:</b> Having current knowledge and understanding of computers, mobile devices, the web, and related technologies.</p>
+              <p><b>Computer:</b> An electronic device operating under instructions stored in its memory that performs the Information Processing Cycle:</p>
+              <ul>
+                <li><b>Input:</b> Accepts raw data.</li>
+                <li><b>Processing:</b> Manipulates and computes data.</li>
+                <li><b>Output:</b> Produces meaningful information.</li>
+                <li><b>Storage:</b> Retains data and instructions for future use.</li>
+              </ul>
+              <p><b>Data vs. Information:</b> Data represents raw facts and figures (e.g., 25, $500, John, 15/09/2026). Information is processed data that is structured, meaningful, and useful.</p>
+            `
+          },
+          {
+            title: "1.4 – 1.8 Hardware: Devices, I/O, & Storage",
+            content: `
+              <h4>Categories of Computers & Devices</h4>
+              <ul>
+                <li><b>Laptops & Desktops:</b> Portable notebook PCs vs. stationary desk installations (including All-in-Ones).</li>
+                <li><b>Servers:</b> Computers dedicated to providing services, data, or resources to network clients.</li>
+                <li><b>Mobile & Wearables:</b> Smartphones, e-book readers, digital cameras, smartwatches, and gaming devices.</li>
+              </ul>
+              <h4>Input & Output Devices</h4>
+              <ul>
+                <li><b>Input:</b> Keyboards, Scanners (light-sensing digitizers), Pointing devices (mouse, touchpad), Voice/Video input.</li>
+                <li><b>Output:</b> Displays, Standard Paper Printers, 3-D Printers (prototypes, prosthetics, components), Speakers, and Headphones.</li>
+              </ul>
+              <h4>Memory vs. Storage</h4>
+              <p><b>Memory (RAM):</b> Electronic components temporarily holding instructions awaiting execution. <b>Storage:</b> Non-volatile media (Hard drives, SSDs, USB drives, Memory cards, Cloud storage) permanently recording data.</p>
+            `
+          },
+          {
+            title: "1.9 – 1.15 Web, Software, & Green Computing",
+            content: `
+              <h4>The Internet vs. The World Wide Web</h4>
+              <p><b>The Internet:</b> The global physical infrastructure of interconnected networks. <b>The Web (WWW):</b> A global service of multimedia electronic documents (webpages) hosted on web servers.</p>
+              <h4>Digital Security & Green Computing</h4>
+              <ul>
+                <li><b>Threats:</b> Malware (viruses, worms, trojans, ransomware, spyware), privacy infringements, health problems (eye strain, RSI), and e-waste.</li>
+                <li><b>Green Computing:</b> Minimizing power use and e-waste via recycling, power management, energy-efficient hardware, and extending machine lifespan.</li>
+              </ul>
+              <h4>Software Classifications</h4>
+              <p><b>System Software:</b> Controls hardware and operational tasks (Operating Systems, Utilities). <b>Application Software:</b> End-user productivity programs (Word processors, browsers, games).</p>
+            `
+          },
+          {
+            title: "1.16 – 1.21 Networks & Technology in Society",
+            content: `
+              <h4>User Profiles</h4>
+              <ul>
+                <li><b>Home User:</b> Entertainment, banking, communication, shopping.</li>
+                <li><b>Small/Home Office (SOHO):</b> Basic business accounting, document workflows.</li>
+                <li><b>Mobile User:</b> Working remotely on laptops, tablets, and phones.</li>
+                <li><b>Power User:</b> Demands high processing power (Engineers, graphic artists, video editors, programmers).</li>
+                <li><b>Enterprise User:</b> Operates within massive corporate client/server networks.</li>
+              </ul>
+              <h4>Societal Domains</h4>
+              <p>Technology drives Education (LMS, digital texts), Government (online portals, biometric identification), Finance (ATMs, online banking), Retail (POS, e-commerce), Healthcare (telemedicine, EHR), and Manufacturing (robotics, CAD/CAM).</p>
+            `
+          }
+        ],
+        questions: [
+          { q: "1. Differentiate between data and information with examples.", a: "Data represents unorganized, raw figures without context (e.g., '25', '$500'). Information is processed, organized data that holds context and meaning (e.g., 'Class average score: 25', 'Monthly budget balance: $500')." },
+          { q: "2. What are the four core steps of the information processing cycle?", a: "Input (accepting data), Processing (manipulating data), Output (presenting information), and Storage (retaining data for future access)." },
+          { q: "3. Explain the difference between the Internet and the World Wide Web.", a: "The Internet is the physical worldwide network of connected computers and transmission lines. The World Wide Web (WWW) is an information-sharing service consisting of webpages and websites running on top of the Internet." },
+          { q: "4. What is Green Computing and what are two methods to practice it?", a: "Green Computing involves reducing electrical power consumption and environmental waste from electronic devices. Practices include recycling old computer parts (preventing e-waste) and using energy-saving hardware settings." },
+          { q: "5. How does system software differ from application software?", a: "System software (such as the OS and utility tools) manages and coordinates hardware and background tasks. Application software helps end users perform specific productive tasks (e.g., word processing, browsing, image editing)." }
+        ]
+      },
+      {
+        id: 2,
+        title: "The Internet & World Wide Web",
+        topics: [
+          {
+            title: "2.1 – 2.8 Internet Evolution & Addressing",
+            content: `
+              <p><b>ARPANET (Sept 1969):</b> Created with two core objectives: 1) Enable researchers at dispersed locations to collaborate; 2) Maintain communications even if parts of the network were disabled.</p>
+              <h4>Internet Connections & ISPs</h4>
+              <ul>
+                <li><b>Wired:</b> Cable, DSL, FTTP (Fiber to the Premises).</li>
+                <li><b>Wireless:</b> Wi-Fi, Mobile broadband (4G/5G), Fixed wireless, Satellite.</li>
+                <li><b>ISP:</b> An Internet Service Provider provisioning network access.</li>
+              </ul>
+              <h4>IP Addresses and DNS</h4>
+              <p>Every connected device requires a unique IP address: <b>IPv4</b> (32-bit dotted-decimal, e.g., 72.14.207.99) vs. <b>IPv6</b> (128-bit hexadecimal, e.g., 2001:4860:4860::8844). The <b>Domain Name System (DNS)</b> translates human-readable domain names (google.com) into numerical IP addresses.</p>
+              <h4>Webpage Loading Cycle</h4>
+              <ol>
+                <li>User enters domain URL in browser.</li>
+                <li>DNS server resolves domain to IP address.</li>
+                <li>Browser initiates an HTTP/HTTPS handshake with the host web server.</li>
+                <li>Web server streams page resources; browser renders the HTML/CSS/JS.</li>
+              </ol>
+            `
+          },
+          {
+            title: "2.9 – 2.15 Top-Level Domains & Search Operators",
+            content: `
+              <table>
+                <thead><tr><th>TLD</th><th>Designated Purpose</th></tr></thead>
+                <tbody>
+                  <tr><td>.com</td><td>Commercial organizations and businesses</td></tr>
+                  <tr><td>.edu</td><td>Accredited educational institutions</td></tr>
+                  <tr><td>.gov</td><td>Governmental agencies</td></tr>
+                  <tr><td>.mil</td><td>Military units and departments</td></tr>
+                  <tr><td>.org</td><td>Non-profit organizations</td></tr>
+                  <tr><td>.net</td><td>Network systems or infrastructure providers</td></tr>
+                </tbody>
+              </table>
+              <h4>Search Engine Refinement Operators</h4>
+              <ul>
+                <li><b>Space or +:</b> Returns results containing all terms (e.g., <code>art + music</code>).</li>
+                <li><b>OR:</b> Matches either specified term (e.g., <code>dog OR puppy</code>).</li>
+                <li><b>- (Minus):</b> Excludes terms (e.g., <code>automobile -convertible</code>).</li>
+                <li><b>" " (Quotes):</b> Searches for exact phrasing (e.g., <code>"19th century literature"</code>).</li>
+                <li><b>* (Wildcard):</b> Substitutes missing letters or terms (e.g., <code>writer*</code>).</li>
+              </ul>
+            `
+          },
+          {
+            title: "2.16 – 2.25 Web Publishing & Multimedia",
+            content: `
+              <h4>5 Steps of Web Publishing</h4>
+              <ol>
+                <li><b>Plan:</b> Define purpose, target audience, site architecture.</li>
+                <li><b>Design:</b> Create wireframes, UI layouts, select color themes and typography.</li>
+                <li><b>Create:</b> Author content and write/compile webpages.</li>
+                <li><b>Host:</b> Publish files to an active web server (web host).</li>
+                <li><b>Maintain:</b> Continually update information, patch bugs, and fix broken links.</li>
+              </ol>
+              <h4>Web Media Formats</h4>
+              <p>Graphics (BMP, GIF, JPEG, PNG, TIFF), Animation (sequences of still frames), Audio (compressed formats like MP3/AAC played on media players), Video, Virtual Reality (3D simulated interactive environments), and Plug-ins (browser extensions enhancing native functionality).</p>
+            `
+          },
+          {
+            title: "2.26 – 2.34 Internet Communication & Netiquette",
+            content: `
+              <h4>Communication Services</h4>
+              <p>Email (traveling across outgoing SMTP servers to incoming POP3/IMAP servers), Mailing lists, Instant Messaging (real-time chat), Discussion Forums, VoIP (voice communications packetized over IP), and FTP (File Transfer Protocol for bulk file management).</p>
+              <h4>Rules of Netiquette</h4>
+              <ul>
+                <li>Treat others respectfully (Golden Rule).</li>
+                <li>Avoid flames (offensive remarks) and flame wars.</li>
+                <li>Never write in <b>ALL CAPITAL LETTERS</b> (equated with shouting).</li>
+                <li>Use emoticons to convey tone; clearly tag content with spoiler warnings.</li>
+                <li>Consult the FAQ (Frequently Asked Questions) before asking basic questions.</li>
+              </ul>
+            `
+          }
+        ],
+        questions: [
+          { q: "1. What were the original development goals of ARPANET?", a: "To enable scientific researchers at different physical sites to share information and work together, and to build a distributed network capable of surviving partial node destruction during a disaster." },
+          { q: "2. Explain the role of a DNS server during web browsing.", a: "A DNS (Domain Name System) server acts as a directory that translates human-friendly domain names (e.g., google.com) into numerical, routable IP addresses used by networking hardware." },
+          { q: "3. How does IPv4 differ from IPv6?", a: "IPv4 uses 32-bit addresses formatted as four decimal octets (providing ~4.3 billion unique addresses), whereas IPv6 uses 128-bit hexadecimal notation to provide an inexhaustible address pool." },
+          { q: "4. What does the search query [jaguar -car] accomplish?", a: "It returns web search results mentioning 'jaguar' while filtering out and excluding any pages that mention the term 'car'." },
+          { q: "5. State three core guidelines of Netiquette.", a: "1) Never use all capital letters (shouting). 2) Avoid abusive language or flames. 3) Warn other users before posting spoilers." }
+        ]
+      },
+      {
+        id: 3,
+        title: "Computers and Mobile Devices",
+        topics: [
+          {
+            title: "3.1 – 3.8 Device Categories, Servers, & Kiosks",
+            content: `
+              <h4>Personal Computers & Servers</h4>
+              <ul>
+                <li><b>Desktop & Laptops:</b> Stationary towers vs. portable integrated systems.</li>
+                <li><b>Tablets:</b> Slate (pure touch slate) vs. Convertible (keyboard hinge).</li>
+                <li><b>Server Hardware:</b> Rack server (mounted inside server cabinets), Blade server (dense sliding blades inside a chassis), Tower server (standalone tower casing).</li>
+              </ul>
+              <h4>Terminals & Kiosks</h4>
+              <ul>
+                <li><b>POS Terminal:</b> Processes checkout billing, scanning, and debit/credit transactions.</li>
+                <li><b>ATM:</b> Automated banking terminal handling cash withdrawals, balance audits, and deposits.</li>
+                <li><b>Self-Service Kiosks:</b> Freestanding touch terminals for ticketing, photo printing, visitor registration, or vending.</li>
+              </ul>
+            `
+          },
+          {
+            title: "3.9 – 3.14 Mobile, Embedded, & Cloud Systems",
+            content: `
+              <p><b>Embedded Computers:</b> Dedicated microcontrollers built into larger machines (cars, washing machines, microwaves, medical hardware) designed to control dedicated tasks rather than general computing.</p>
+              <p><b>Cloud Computing:</b> An infrastructure of remote networked servers delivering storage, applications, and compute cycles over the Internet, allowing device synchronization and scalable off-premise processing.</p>
+            `
+          },
+          {
+            title: "3.15 – 3.18 Ports, Connectors, & Wireless Standards",
+            content: `
+              <p><b>Port vs. Connector:</b> A port is the interface receptacle on a computer; a connector is the physical plug terminating a peripheral cable.</p>
+              <table>
+                <thead><tr><th>Technology</th><th>Primary Application</th><th>Operating Range</th></tr></thead>
+                <tbody>
+                  <tr><td>Bluetooth</td><td>Peripheral pairing (mice, headsets, wearables)</td><td>Short range (~10–100m)</td></tr>
+                  <tr><td>Wi-Fi</td><td>Broadband network and Internet access</td><td>Short to medium range</td></tr>
+                  <tr><td>NFC</td><td>Contactless mobile payments, access tags</td><td>Very short (under 2 inches)</td></tr>
+                </tbody>
+              </table>
+            `
+          },
+          {
+            title: "3.19 – 3.21 Hardware Security & Ergonomics",
+            content: `
+              <h4>Hardware Protection Safeguards</h4>
+              <p>Prevent theft/damage through cable locks, access-controlled security rooms, CCTV, surge suppressors, regular dusting, and proper ventilation.</p>
+              <h4>Workstation Ergonomics</h4>
+              <p>Ergonomics is the science of designing equipment and workplaces to enhance user safety, efficiency, and posture, avoiding Repetitive Strain Injuries (RSI).</p>
+              <ul>
+                <li>Display screen placed 18–28 inches away, top of screen at or slightly below eye level.</li>
+                <li>Elbows flexed at approximately 90 degrees; wrists flat and relaxed.</li>
+                <li>Feet resting flat on the floor or on an adjustable footrest.</li>
+              </ul>
+            `
+          }
+        ],
+        questions: [
+          { q: "1. What is an embedded computer and where is it found?", a: "An embedded computer is a special-purpose processor integrated inside a larger system (such as an automobile engine, microwave, or medical monitor) designed to automate specific tasks." },
+          { q: "2. Distinguish a port from a connector.", a: "A port is an input/output slot built directly into a computer case; a connector is the plug located at the end of a cable that attaches into that port." },
+          { q: "3. Compare the operational ranges and uses of Bluetooth and NFC.", a: "Bluetooth operates at short ranges (10–100m) for pairing peripheral hardware; NFC operates at very short ranges (under 2 inches) primarily for secure contactless payments and tag scans." },
+          { q: "4. What is a POS terminal?", a: "A Point-of-Sale terminal is a specialized retail computer system used to record sales, scan barcodes, take card payments, and print customer receipts." },
+          { q: "5. List three ergonomic guidelines for a computer workstation.", a: "1) Position monitor 18–28 inches away at or slightly below eye level. 2) Keep elbows bent at roughly 90 degrees. 3) Sit with feet resting flat on the floor." }
+        ]
+      },
+      {
+        id: 4,
+        title: "Programs and Apps",
+        topics: [
+          {
+            title: "4.1 – 4.3 Software Distribution Types",
+            content: `
+              <table>
+                <thead><tr><th>Software Type</th><th>Licensing & Operational Model</th></tr></thead>
+                <tbody>
+                  <tr><td>Retail</td><td>Purchased commercially from developers or vendors</td></tr>
+                  <tr><td>Custom</td><td>Bespoke software developed specifically for an enterprise</td></tr>
+                  <tr><td>Web App</td><td>Application hosted on cloud servers and run inside web browsers</td></tr>
+                  <tr><td>Mobile App</td><td>Native apps compiled for smartphones and tablets</td></tr>
+                  <tr><td>Open-Source</td><td>Software whose underlying source code is freely viewable and modifiable</td></tr>
+                  <tr><td>Shareware</td><td>Copyrighted software distributed on a free trial basis</td></tr>
+                  <tr><td>Freeware</td><td>Copyrighted software provided permanently free of charge</td></tr>
+                  <tr><td>Public Domain</td><td>Software donated to the public with no copyright claims</td></tr>
+                </tbody>
+              </table>
+            `
+          },
+          {
+            title: "4.4 – 4.18 Productivity & Enterprise Applications",
+            content: `
+              <h4>Core Productivity Tools</h4>
+              <p>Word Processors (documents, typography, clip art), Spreadsheets (rows, columns, formulas, graphs), Database Software (organized collections of tables, records, query systems), Presentation Software, and Note-taking apps.</p>
+              <h4>Suites & Specialized Business Systems</h4>
+              <p><b>Software Suite:</b> Multiple related applications packaged and sold as a unified bundle (e.g., Microsoft 365). Enterprise tools manage multi-department tasks: ERP, Accounting, Human Resources (HR), CAD (Computer-Aided Design for engineering), and Desktop Publishing (brochures, print layouts).</p>
+            `
+          },
+          {
+            title: "4.19 – 4.36 Media & Security Tools",
+            content: `
+              <h4>Digital Media Applications</h4>
+              <p>Image/Paint Editors, Photo Enhancers, Video and Audio multi-track DAW editors, Multimedia Authoring software, and Disc Burning utilities.</p>
+              <h4>Security Software</h4>
+              <ul>
+                <li><b>Personal Firewall:</b> Inspects and filters incoming/outgoing network packets to block intrusion.</li>
+                <li><b>Antivirus:</b> Identifies, quarantines, and eradicates malicious files from memory and storage.</li>
+                <li><b>Spyware & Adware Removers:</b> Discovers and removes tracking agents and unauthorized pop-up adware.</li>
+                <li><b>Internet & Phishing Filters:</b> Blocks fraudulent websites attempting credential theft.</li>
+              </ul>
+            `
+          },
+          {
+            title: "4.37 – 4.47 File & Storage Management Tools",
+            content: `
+              <ul>
+                <li><b>File Manager:</b> Navigates, copies, renames, deletes, and organizes disk directories.</li>
+                <li><b>Disk Cleanup:</b> Identifies and purges temporary files, cache, and empty recycle bin data.</li>
+                <li><b>Disk Defragmenter:</b> Reorganizes fragmented, non-contiguous sectors on traditional HDDs to improve read performance (not used on SSDs).</li>
+                <li><b>File Compression:</b> Compresses files to conserve drive capacity and shorten network transmission times.</li>
+                <li><b>Backup Utility:</b> Clones disk partitions or selected folders to off-site or secondary storage media.</li>
+              </ul>
+            `
+          }
+        ],
+        questions: [
+          { q: "1. What is the fundamental difference between Shareware and Freeware?", a: "Shareware is copyrighted software distributed on a trial basis (after which payment or removal is required); Freeware is copyrighted software offered free permanently, though its source code remains closed." },
+          { q: "2. Why is disk defragmentation recommended for HDDs but not SSDs?", a: "Mechanical HDDs suffer read delays when moving heads across fragmented platters. SSDs use electronic flash memory with zero seek latency, and defragmentation causes unnecessary write cycles that wear down flash memory cells." },
+          { q: "3. What is a software suite?", a: "A collection of individual productivity applications bundled together into a single package (e.g., Microsoft Office), providing consistent interfaces and easy data interchange." },
+          { q: "4. How does a personal firewall protect a computer?", a: "It actively monitors all incoming and outgoing network traffic, blocking unauthorized connections and suspicious data transmissions based on security rules." },
+          { q: "5. What is the purpose of CAD software?", a: "Computer-Aided Design (CAD) software creates precise 2D engineering schematics and 3D architectural/industrial models." }
+        ]
+      },
+      {
+        id: 5,
+        title: "Digital Safety and Security",
+        topics: [
+          {
+            title: "5.1 – 5.3 Cyberthreats & Attack Vectors",
+            content: `
+              <h4>Threat Actors</h4>
+              <p>Hackers, Crackers (malicious hackers), Script Kiddies (inexperienced attackers using automated scripts), Corporate Spies, Unethical Employees, Cyberextortionists, and Cyberterrorists.</p>
+              <h4>Malware & Network Attacks</h4>
+              <ul>
+                <li><b>Malware Types:</b> Viruses (attach to files), Worms (self-replicating across networks), Trojan horses (hidden inside legitimate programs), Ransomware (encrypts files for extortion), Spyware (collects data secretly).</li>
+                <li><b>Botnet & Zombies:</b> Networks of compromised zombie computers orchestrated to conduct distributed attacks.</li>
+                <li><b>DoS & DDoS:</b> Flooding target servers with bogus requests to exhaust bandwidth; DDoS leverages multiple distributed nodes (botnets).</li>
+                <li><b>Spoofing & Back Doors:</b> Falsifying transmission identities; back doors bypass normal authentication controls.</li>
+              </ul>
+            `
+          },
+          {
+            title: "5.4 – 5.8 Access Control & Encryption",
+            content: `
+              <h4>Authentication Factors</h4>
+              <ul>
+                <li><b>Something you know:</b> Passwords, PINs, passphrases.</li>
+                <li><b>Something you have (Possessed object):</b> Smart cards, hardware tokens, RFID badges.</li>
+                <li><b>Something you are (Biometrics):</b> Fingerprints, facial geometry, iris recognition, voiceprints.</li>
+              </ul>
+              <h4>Cryptography & Certificates</h4>
+              <p><b>Encryption:</b> Scrambles readable <b>plaintext</b> into unreadable <b>ciphertext</b> using mathematical keys. <b>Digital Signatures</b> authenticate sender identity and verify message integrity. <b>Digital Certificates</b> validate the identity of domains and institutions on secure websites (HTTPS).</p>
+            `
+          },
+          {
+            title: "5.9 – 5.11 Backup Policies & Wireless Security",
+            content: `
+              <h4>Backup Schemes</h4>
+              <ul>
+                <li><b>Full:</b> Clones all selected datasets.</li>
+                <li><b>Differential:</b> Copies files altered since the last full backup.</li>
+                <li><b>Incremental:</b> Copies files altered since the most recent backup (full or incremental).</li>
+                <li><b>Continuous Data Protection (CDP):</b> Instantly logs and saves changes in real time.</li>
+              </ul>
+              <p><b>Three-Generation Scheme:</b> Grandparent (oldest full archive), Parent (intermediate backup), Child (latest daily incremental backup).</p>
+            `
+          },
+          {
+            title: "5.12 – 5.23 Ethics, Privacy, & Social Engineering",
+            content: `
+              <p><b>Social Engineering:</b> Exploiting human psychology to trick individuals into divulging passwords or private information.</p>
+              <p><b>Phishing vs. Clickjacking:</b> Phishing sends spoofed emails/messages to steal account credentials; clickjacking overlays transparent malicious buttons over seemingly harmless links.</p>
+              <p><b>Cookies:</b> Text files saved by browsers to preserve website sessions, user state, and tracking profiles.</p>
+              <p><b>Intellectual Property (IP):</b> Legal rights protecting artistic, written, or structural creations via Copyright and <b>DRM (Digital Rights Management)</b>.</p>
+            `
+          }
+        ],
+        questions: [
+          { q: "1. Distinguish between a Denial-of-Service (DoS) and a DDoS attack.", a: "A DoS attack floods a target machine from a single system, while a DDoS (Distributed DoS) attack coordinates thousands of compromised computers (a botnet of zombies) to overwhelm the victim." },
+          { q: "2. Define plaintext and ciphertext in the encryption process.", a: "Plaintext is original unencrypted readable data; ciphertext is the scrambled, unreadable output generated after encryption that requires a key to decrypt." },
+          { q: "3. Explain the Grandparent-Parent-Child backup policy.", a: "It is a rotation backup strategy where Grandparent is the oldest full archival copy, Parent is the intermediate backup, and Child is the most recent daily backup." },
+          { q: "4. What is social engineering in digital security?", a: "The psychological manipulation and deception of individuals to trick them into voluntarily surrendering passwords, keys, or confidential information." },
+          { q: "5. Describe the difference between phishing and clickjacking.", a: "Phishing uses deceptive emails or websites that impersonate legitimate organizations to harvest credentials; clickjacking tricks users into clicking concealed malicious links layered under harmless buttons." }
+        ]
+      },
+      {
+        id: 6,
+        title: "Inside Computers and Mobile Devices",
+        topics: [
+          {
+            title: "6.1 – 6.4 The Processor & Machine Cycle",
+            content: `
+              <p><b>Motherboard:</b> The central circuit board containing chips, buses, and sockets. <b>Processor (CPU):</b> Interprets and executes system instructions.</p>
+              <h4>Components of the CPU</h4>
+              <ul>
+                <li><b>Control Unit (CU):</b> Manages, directs, and schedules system operations.</li>
+                <li><b>Arithmetic Logic Unit (ALU):</b> Performs arithmetic (+, -, *, /) and logical comparisons (&lt;, &gt;, =).</li>
+                <li><b>Registers:</b> High-speed temporary working storage locations inside the CPU.</li>
+              </ul>
+              <h4>The 4 Steps of the Machine Cycle</h4>
+              <ol>
+                <li><b>Fetch:</b> Retrieves an instruction from memory (RAM).</li>
+                <li><b>Decode:</b> Control Unit translates the instruction into binary signals.</li>
+                <li><b>Execute:</b> ALU carries out the computational or logic operation.</li>
+                <li><b>Store:</b> Writes the computed result back to a register or memory location.</li>
+              </ol>
+              <p><b>System Clock & Cooling:</b> Emits regular electrical pulses measured in Gigahertz (GHz) to synchronize operations. CPUs use heat sinks, thermal paste, liquid cooling, or fans to dissipate heat.</p>
+            `
+          },
+          {
+            title: "6.5 – 6.13 Data Representation & Memory Systems",
+            content: `
+              <p><b>Data Representation:</b> Digital systems evaluate binary bits (0 or 1). 8 bits equal 1 Byte (representing a single character/symbol).</p>
+              <h4>Volatile vs. Non-Volatile Memory</h4>
+              <ul>
+                <li><b>RAM (Volatile):</b> Loses contents on power loss. Divided into <b>DRAM</b> (main memory, requires constant electric refresh) and <b>SRAM</b> (faster static RAM, does not require refreshing, used for cache).</li>
+                <li><b>ROM (Non-Volatile):</b> Read-Only Memory retaining permanent startup firmware (BIOS/UEFI).</li>
+                <li><b>Flash Memory:</b> Electrically erasable and rewritable non-volatile solid-state memory.</li>
+                <li><b>CMOS:</b> Battery-backed non-volatile chip storing system time, date, and hardware settings.</li>
+              </ul>
+            `
+          },
+          {
+            title: "6.14 – 6.20 Buses, Expansion, & Power",
+            content: `
+              <h4>System Buses</h4>
+              <p>Buses are electrical pathways transferring signals between components. <b>Data Bus</b> moves binary data; <b>Address Bus</b> identifies memory locations; <b>Expansion Bus</b> connects expansion slots.</p>
+              <p><b>Word Size:</b> The number of bits a CPU can process concurrently (e.g., 64-bit architecture).</p>
+              <p><b>Power Systems:</b> Power supply units (PSUs) convert alternating current (AC) from wall outlets into direct current (DC) required by internal microelectronics. Mobile units run on rechargeable Lithium-ion batteries.</p>
+            `
+          }
+        ],
+        questions: [
+          { q: "1. Name the four stages of the CPU Machine Cycle in correct order.", a: "1) Fetch (get instruction from RAM), 2) Decode (translate by CU), 3) Execute (process by ALU), and 4) Store (write result to register/memory)." },
+          { q: "2. Compare the roles of the Control Unit (CU) and the Arithmetic Logic Unit (ALU).", a: "The Control Unit coordinates and manages all computer operations; the Arithmetic Logic Unit performs mathematical computations and logical comparison operations." },
+          { q: "3. Why is RAM termed 'volatile' while ROM is considered 'non-volatile'?", a: "RAM loses all its data when power is switched off; ROM permanently keeps its data and instructions intact without requiring power." },
+          { q: "4. Differentiate between DRAM and SRAM.", a: "DRAM (Dynamic RAM) is used for main system memory and must be refreshed constantly; SRAM (Static RAM) is faster, does not need constant refreshing, and is used for high-speed cache memory." },
+          { q: "5. What is the role of an Address Bus versus a Data Bus?", a: "The Address Bus carries the physical memory addresses that indicate where data is located; the Data Bus carries the actual data bytes between the CPU, memory, and devices." }
+        ]
+      },
+      {
+        id: 7,
+        title: "Input and Output",
+        topics: [
+          {
+            title: "7.1 – 7.9 Input Devices & Pointing Hardware",
+            content: `
+              <p><b>Input:</b> Data or instructions entered into computer memory. Methods include standard, gaming, and ergonomic keyboards (designed to reduce repetitive strain injuries).</p>
+              <p><b>Pointing Devices:</b> Optical/laser mice, touchpads, touchscreens, pointing sticks, and trackballs. Pen input includes styluses and digitizer graphics tablets. Motion/voice input utilizes gesture recognition and speech recognition software.</p>
+            `
+          },
+          {
+            title: "7.10 – 7.15 Scanners & Automated Reading Devices",
+            content: `
+              <ul>
+                <li><b>Optical Scanners:</b> Convert physical documents into digital files.</li>
+                <li><b>OCR vs. OMR:</b> Optical Character Recognition reads printed letters; Optical Mark Recognition reads pencil/pen check marks (test forms).</li>
+                <li><b>Barcodes & QR Codes:</b> Barcode readers scan 1D striped codes; QR codes encode information in 2D (horizontal and vertical) matrices.</li>
+                <li><b>RFID:</b> Uses radio signals to read data tags on inventory, livestock, or badges without direct line of sight.</li>
+                <li><b>Magstripe & MICR:</b> Magstripe readers read magnetic strips on cards; <b>MICR (Magnetic Ink Character Recognition)</b> reads magnetic characters on bank cheques.</li>
+              </ul>
+            `
+          },
+          {
+            title: "7.16 – 7.22 Output Devices, Displays, & Printers",
+            content: `
+              <h4>Displays & Quality Metrics</h4>
+              <p>Monitors package display technology connected via HDMI, DisplayPort, or DVI. Quality factors: <b>Resolution</b> (total pixel count), <b>Response Time</b> (refresh speed in ms), <b>Brightness</b>, <b>Contrast Ratio</b>, and <b>Dot Pitch</b>.</p>
+              <h4>Printers: Impact vs. Non-Impact</h4>
+              <ul>
+                <li><b>Non-Impact Printers:</b> Print without touching paper mechanically. Includes <b>Ink-jet</b> (sprays ink droplets, measured in PPM), <b>Laser</b> (uses toner powder and a laser beam for high speed/volume), <b>Thermal</b> (heat-sensitive paper), and <b>Plotters</b> (high-precision blueprints).</li>
+                <li><b>Impact Printers:</b> Form characters by striking a physical mechanism against an inked ribbon onto paper.</li>
+                <li><b>Audio & Assistive:</b> Speakers, headphones, earbuds, data projectors, and force-feedback controllers (providing physical resistance/recoil). Assistive devices include Braille printers and head-mounted pointers.</li>
+              </ul>
+            `
+          }
+        ],
+        questions: [
+          { q: "1. In which industry is MICR technology primarily used and why?", a: "In the banking industry; it reads routing and account numbers printed in magnetized ink on the bottom of cheques to speed up processing and prevent fraud." },
+          { q: "2. How does an RFID reading system operate?", a: "An RFID reader emits radio waves that activate an antenna and chip embedded in an RFID tag, transmitting identifier data back wirelessly without requiring direct line-of-sight." },
+          { q: "3. Contrast non-impact printers with impact printers.", a: "Non-impact printers (inkjet, laser) produce text and graphics without physical contact between the print head and paper; impact printers physically strike an inked ribbon against the paper." },
+          { q: "4. List four specifications that determine monitor display quality.", a: "Resolution (pixel count), contrast ratio, brightness (luminance), and response time." },
+          { q: "5. What is force-feedback technology?", a: "An output feature in gamepads, steering wheels, and joysticks that sends physical resistance, vibrations, or recoil forces back to the user based on software actions." }
+        ]
+      },
+      {
+        id: 8,
+        title: "Digital Storage",
+        topics: [
+          {
+            title: "8.1 – 8.12 Magnetic Hard Disks & RAID",
+            content: `
+              <p><b>Storage vs. Memory:</b> Storage media are non-volatile and retain data permanently when powered off. Memory (RAM) is volatile temporary working space.</p>
+              <h4>Hard Disk Drive (HDD) Mechanics</h4>
+              <ul>
+                <li>Consists of rotating magnetic platters divided into circular <b>tracks</b> and subdivided into <b>sectors</b>.</li>
+                <li><b>Head Crash:</b> Occurs if a read/write head touches the platter surface, scratching the magnetic layer and destroying data.</li>
+                <li><b>Disk Cache:</b> High-speed memory chip on the hard drive holding frequently accessed data.</li>
+                <li><b>RAID:</b> Redundant Array of Independent Disks; combines multiple physical drives for performance, mirroring, and fault tolerance.</li>
+              </ul>
+            `
+          },
+          {
+            title: "8.13 – 8.17 Solid-State Drives & Flash Storage",
+            content: `
+              <table>
+                <thead><tr><th>Feature</th><th>Magnetic Hard Disk (HDD)</th><th>Solid-State Drive (SSD)</th></tr></thead>
+                <tbody>
+                  <tr><td>Storage Technology</td><td>Spinning magnetic platters</td><td>Flash memory microchips</td></tr>
+                  <tr><td>Moving Parts</td><td>Yes (spindle motors, actuator arms)</td><td>No moving parts</td></tr>
+                  <tr><td>Access Speed</td><td>Slower (mechanical seek times)</td><td>Significantly faster access</td></tr>
+                  <tr><td>Durability / Shock</td><td>Vulnerable to physical impacts</td><td>Highly shock resistant</td></tr>
+                  <tr><td>Noise & Heat</td><td>Audible spin; generates heat</td><td>Completely silent; cooler operation</td></tr>
+                </tbody>
+              </table>
+              <p>Other flash options: Memory Cards (SDHC, SDXC, microSD) and portable USB Flash Drives.</p>
+            `
+          },
+          {
+            title: "8.18 – 8.29 Optical, Cloud, & Enterprise Storage",
+            content: `
+              <h4>Optical Storage Types</h4>
+              <ul>
+                <li><b>CD-ROM / DVD-ROM:</b> Read-only; stamped at manufacture.</li>
+                <li><b>CD-R / DVD-R:</b> Recordable once; data cannot be erased.</li>
+                <li><b>CD-RW / DVD-RW:</b> Rewritable; data can be written, erased, and rewritten multiple times.</li>
+              </ul>
+              <h4>Enterprise Storage Infrastructure</h4>
+              <p><b>NAS (Network Attached Storage):</b> A dedicated storage server attached to a local network providing file-level sharing. <b>SAN (Storage Area Network):</b> A high-speed, specialized sub-network offering block-level storage directly to enterprise servers. <b>Magnetic Tape:</b> Plastic magnetic ribbons used for low-cost, high-volume archiving and long-term backups.</p>
+            `
+          }
+        ],
+        questions: [
+          { q: "1. What is a hard drive head crash?", a: "A mechanical failure where the read/write head touches the surface of a spinning platter, scratching the recording surface and permanently destroying stored data." },
+          { q: "2. State three key benefits of SSDs over conventional HDDs.", a: "Faster data read/write speeds, greater durability/shock resistance (no moving parts), and silent, low-power operation." },
+          { q: "3. What is the primary purpose of a RAID storage array?", a: "To combine two or more physical drives to improve performance, provide redundancy (fault tolerance), and keep data accessible if a drive fails." },
+          { q: "4. Differentiate between NAS and SAN systems.", a: "NAS (Network Attached Storage) is a single storage device connected to a LAN providing file-level sharing. A SAN (Storage Area Network) is a dedicated high-speed network providing block-level data storage to multiple enterprise servers." },
+          { q: "5. What is the difference between DVD-R and DVD-RW media?", a: "DVD-R is recordable once (data cannot be deleted or rewritten), whereas DVD-RW is rewritable (data can be erased and overwritten multiple times)." }
+        ]
+      },
+      {
+        id: 9,
+        title: "Operating Systems",
+        topics: [
+          {
+            title: "9.1 – 9.6 Kernel Roles & Program Management",
+            content: `
+              <p>An <b>Operating System (OS)</b> coordinates all hardware, system utilities, and application software. Core responsibilities include start-up/shutdown, UI provision, memory allocation, process scheduling, device configuration, and file management.</p>
+              <h4>Power Modes</h4>
+              <ul>
+                <li><b>Sleep Mode:</b> Retains running programs in low-power RAM for quick resumption.</li>
+                <li><b>Hibernate:</b> Writes active memory data to the storage drive and turns power off completely.</li>
+              </ul>
+              <h4>User Interfaces & Multitasking</h4>
+              <p><b>GUI:</b> Graphical User Interface with windows, icons, menus, and pointers. <b>CLI:</b> Command-Line Interface where users type keyword commands. <b>Multitasking:</b> Running multiple applications simultaneously, managing processes between foreground (active user window) and background.</p>
+            `
+          },
+          {
+            title: "9.7 – 9.13 Memory Management & Utilities",
+            content: `
+              <p><b>Virtual Memory:</b> The OS allocates drive storage space to serve as auxiliary RAM when physical RAM is exhausted. (Heavy reliance can cause thrashing and system slowdowns).</p>
+              <p><b>Device Drivers:</b> Small specialized programs that allow the OS to communicate with connected hardware devices.</p>
+              <p><b>Performance Monitor:</b> Diagnoses and logs CPU load, RAM utilization, disk activity, and network bandwidth in real time.</p>
+            `
+          },
+          {
+            title: "9.14 – 9.18 Desktop, Server, & Mobile Operating Systems",
+            content: `
+              <h4>Desktop OS</h4>
+              <p><b>Windows</b> (broad hardware support), <b>macOS</b> (Apple Mac desktop environment), <b>UNIX</b> (multitasking foundation), <b>Linux</b> (open-source UNIX-like kernel), and <b>ChromeOS</b> (cloud-focused operating system).</p>
+              <h4>Server & Mobile OS</h4>
+              <p><b>Server OS:</b> Windows Server, Linux, and UNIX variants designed to manage network accounts, centralized security, client permissions, and directory services.</p>
+              <p><b>Mobile OS:</b> Android (Google open-source Linux-based OS) and iOS (Apple proprietary mobile OS for iPhone and iPad).</p>
+            `
+          }
+        ],
+        questions: [
+          { q: "1. What is the primary role of an Operating System?", a: "To serve as the core platform bridging application programs and physical hardware, managing memory, files, hardware devices, tasks, and user interfaces." },
+          { q: "2. Explain the purpose and drawback of Virtual Memory.", a: "It uses storage drive space as an extension of RAM when physical memory fills up. Its main drawback is that drive access is much slower than RAM, which can slow down system performance." },
+          { q: "3. How does Sleep Mode differ from Hibernate Mode?", a: "Sleep keeps open sessions in RAM using a small amount of electrical power for fast resumption; Hibernate writes all active RAM data to the storage drive and powers off completely." },
+          { q: "4. What is a device driver?", a: "A specialized software utility that provides the instructions an operating system needs to recognize, communicate with, and control a specific hardware device." },
+          { q: "5. Compare a Graphical User Interface (GUI) with a Command-Line Interface (CLI).", a: "A GUI provides visual interaction via windows, icons, and menus clicked with a pointer; a CLI requires users to type text-based commands and syntax into a terminal." }
+        ]
+      },
+      {
+        id: 10,
+        title: "Communications and Networks",
+        topics: [
+          {
+            title: "10.1 – 10.5 Network Types & Topologies",
+            content: `
+              <h4>Geographic Network Scales</h4>
+              <ul>
+                <li><b>PAN (Personal Area Network):</b> Workspace devices within a few meters (e.g., Bluetooth).</li>
+                <li><b>LAN (Local Area Network):</b> Devices within a limited area (home, classroom, office).</li>
+                <li><b>WLAN:</b> A wireless LAN operating via radio signals (Wi-Fi).</li>
+                <li><b>MAN (Metropolitan Area Network):</b> Connects LANs across an entire city.</li>
+                <li><b>WAN (Wide Area Network):</b> Spans broad regions, countries, or the globe (e.g., the Internet).</li>
+              </ul>
+              <h4>Network Topologies</h4>
+              <ul>
+                <li><b>Star:</b> All nodes connect to a central hub/switch. If one cable fails, only that node is disconnected.</li>
+                <li><b>Bus:</b> All devices tap into a single shared backbone cable.</li>
+                <li><b>Ring:</b> Cable forms a closed loop; data flows in one direction from node to node.</li>
+              </ul>
+              <h4>Architectures: Client/Server vs. P2P</h4>
+              <p><b>Client/Server:</b> Central server controls shared resources, storage, and user credentials. <b>Peer-to-Peer (P2P):</b> Every connected computer shares resources directly without a central server.</p>
+            `
+          },
+          {
+            title: "10.6 – 10.10 Standards, Protocols, & Hardware",
+            content: `
+              <h4>Standards and Protocols</h4>
+              <p><b>Ethernet:</b> Defines wired network communications. <b>TCP/IP:</b> Core Internet protocol dictating how data packets are broken down, addressed, and routed. <b>Wi-Fi (802.11):</b> Over-the-air wireless networking standard. <b>Other wireless standards:</b> Bluetooth, RFID, NFC, UWB, IrDA, and WiMAX.</p>
+              <h4>Communications Hardware</h4>
+              <ul>
+                <li><b>Broadband Modem:</b> Converts signals between digital network lines and local setups (Cable/DSL).</li>
+                <li><b>Router:</b> Examines packet destination addresses and routes traffic between separate networks.</li>
+                <li><b>Wireless Access Point (WAP):</b> Broadcasts wireless radio signals to link wireless devices to a wired network.</li>
+                <li><b>Switch / Hub:</b> Central connection point for twisted-pair cables within a local LAN.</li>
+              </ul>
+            `
+          },
+          {
+            title: "10.11 – 10.13 Transmission Media & Channels",
+            content: `
+              <p><b>Bandwidth:</b> The total volume of data that can travel across a communications medium over a given time. <b>Latency:</b> The time delay for a data packet to travel from sender to receiver.</p>
+              <h4>Physical (Wired) Media</h4>
+              <ul>
+                <li><b>Twisted-Pair Cable:</b> Bundles of insulated copper wires twisted together to reduce crosstalk (Ethernet Cat5e/Cat6).</li>
+                <li><b>Coaxial Cable:</b> Single copper conductor shielded by insulation and braided metal foil.</li>
+                <li><b>Fiber-Optic Cable:</b> Strands of glass or plastic transferring data as light pulses; provides very high bandwidth, long range, and immunity to electrical noise.</li>
+              </ul>
+              <h4>Wireless Media</h4>
+              <p>Broadcast Radio, Cellular Radio, Terrestrial Microwaves (line-of-sight towers), Communications Satellites (space stations amplifying microwave signals), and GPS (satellite navigation for precise location pinpointing).</p>
+            `
+          }
+        ],
+        questions: [
+          { q: "1. Explain the setup and advantage of a Star network topology.", a: "In a star topology, each device connects directly to a central hub or switch. Its main advantage is reliability: if a single connection fails, only that device goes offline while the rest of the network continues working." },
+          { q: "2. Why are fiber-optic cables superior to copper twisted-pair cables?", a: "Fiber-optic cables transmit data using pulses of light, which allows for much higher bandwidth, longer transmission distances, and complete immunity to electromagnetic interference." },
+          { q: "3. What is the role of a Router on a network?", a: "A router reads destination IP addresses on data packets and forwards them across interconnected networks to ensure they reach their intended destination." },
+          { q: "4. Differentiate between Bandwidth and Latency.", a: "Bandwidth is the capacity or amount of data that can travel through a transmission line over a period of time; latency is the round-trip time delay it takes for a signal to reach its destination." },
+          { q: "5. Contrast a Client/Server network with a Peer-to-Peer (P2P) network.", a: "A Client/Server network uses a dedicated central server to manage files, security, and permissions for client computers; a P2P network allows individual devices to share files and resources directly with each other without a central server." }
+        ]
+      }
+    ];
+
+    // Navigation & Rendering Engine
+    const navList = document.getElementById("nav-list");
+    const contentDisplay = document.getElementById("content-display");
+
+    function renderChapter(index) {
+      const chap = chaptersData[index];
+
+      // Update sidebar state
+      document.querySelectorAll(".chapter-item").forEach((item, idx) => {
+        item.classList.toggle("active", idx === index);
+      });
+
+      // Render cards
+      const topicsHtml = chap.topics.map(t => `
+        <div class="card">
+          <h3>${t.title}</h3>
+          ${t.content}
+        </div>
+      `).join("");
+
+      // Render Q&A section
+      const questionsHtml = chap.questions.map(qa => `
+        <details>
+          <summary>${qa.q}</summary>
+          <div class="answer">${qa.a}</div>
+        </details>
+      `).join("");
+
+      contentDisplay.innerHTML = `
+        <span class="badge">Instructor: Tr. WaiLinHtet — Chapter ${chap.id}</span>
+        <h1 class="chapter-title">Chapter ${chap.id}: ${chap.title}</h1>
+        ${topicsHtml}
+        <div class="card">
+          <h3>Review & Sample Exam Questions (5 Qs)</h3>
+          <p style="color: var(--text-muted); font-size: 13.5px;">Click any question to view the model answer:</p>
+          <div class="qa-box">
+            ${questionsHtml}
+          </div>
+        </div>
+      `;
+
+      // Reset scroll position to top
+      document.querySelector("main").scrollTop = 0;
+    }
+
+    // Initialize Sidebar Navigation
+    chaptersData.forEach((c, idx) => {
+      const li = document.createElement("li");
+      li.className = "chapter-item" + (idx === 0 ? " active" : "");
+      li.innerHTML = `
+        <span>Chapter ${c.id}</span>
+        <span class="subtext">${c.title}</span>
+      `;
+      li.onclick = () => renderChapter(idx);
+      navList.appendChild(li);
+    });
+
+    // Initial render
+    renderChapter(0);
+  </script>
+</body>
+</html>
