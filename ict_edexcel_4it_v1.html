@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ICT Notebook — Tr.WaiLinHtet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Literata:ital,opsz,wght@0,18..144,400;0,18..144,500;0,18..144,600;1,18..144,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f7f3e9;
+  --paper-line:#d9cfb8;
+  --margin-line:#d99a92;
+  --ink:#2b2620;
+  --ink-soft:#5a5348;
+  --accent:#a1432e;
+  --accent-soft:#c98a3a;
+  --card:#fffdf7;
+  --card-border:#e3d9bf;
+  --tape:#ecdfb8;
+  --answer-bg:#eee3c8;
+  --shadow: 2px 3px 0 rgba(43,38,32,0.08);
+  --base-font-size: 17px;
+  box-sizing:border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+:root[data-fontsize="small"]{ --base-font-size: 14px; }
+:root[data-fontsize="large"]{ --base-font-size: 20px; }
+
+:root:not([data-theme="light"]){
+  @media (prefers-color-scheme: dark){
+    --paper:#1c1e1b;
+    --paper-line:#33362f;
+    --margin-line:#5a3b38;
+    --ink:#e8e4d6;
+    --ink-soft:#a9a493;
+    --accent:#e8a26b;
+    --accent-soft:#8fb28a;
+    --card:#22251f;
+    --card-border:#3a3d34;
+    --tape:#2e3128;
+    --answer-bg:#2a2d24;
+    --shadow: 2px 3px 0 rgba(0,0,0,0.35);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#1c1e1b;
+  --paper-line:#33362f;
+  --margin-line:#5a3b38;
+  --ink:#e8e4d6;
+  --ink-soft:#a9a493;
+  --accent:#e8a26b;
+  --accent-soft:#8fb28a;
+  --card:#22251f;
+  --card-border:#3a3d34;
+  --tape:#2e3128;
+  --answer-bg:#2a2d24;
+  --shadow: 2px 3px 0 rgba(0,0,0,0.35);
+}
+html,body{height:100%; margin:0;}
+*{-webkit-tap-highlight-color:transparent;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Literata', Georgia, serif;
+  font-size: var(--base-font-size);
+  line-height:1.6;
+  background-image:
+    repeating-linear-gradient(var(--paper) 0 34px, var(--paper-line) 34px 35px);
+  background-attachment:local;
+}
+h1,h2,h3,h4,.hand{ font-family:'Kalam', cursive; }
+a{ color:var(--accent); text-decoration:none; }
+
+/* ---------- LOGIN GATE ---------- */
+#gate{
+  position:fixed; inset:0; z-index:100;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--paper);
+  padding:24px;
+}
+.gate-card{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  box-shadow:var(--shadow);
+  padding:34px 30px;
+  max-width:360px; width:100%;
+  border-radius:2px;
+  position:relative;
+}
+.gate-card::before{
+  content:"";
+  position:absolute; top:14px; left:50%; transform:translateX(-50%) rotate(-2deg);
+  width:70px; height:22px; background:var(--tape); opacity:.8;
+}
+.gate-card h1{ font-size:1.5rem; margin:10px 0 4px; }
+.gate-card p.sub{ color:var(--ink-soft); margin:0 0 20px; font-size:.95rem; }
+#gate input{
+  width:100%; padding:11px 12px; font-size:1rem;
+  border:1px solid var(--card-border); background:transparent; color:var(--ink);
+  border-radius:2px; font-family:'Literata', serif;
+  margin-bottom:12px; box-sizing: border-box;
+}
+#gate button{
+  width:100%; padding:11px 12px; font-size:1rem; cursor:pointer;
+  background:#27C5F5; color:#fff; border:none; border-radius:2px;
+  font-family:'Kalam', cursive; font-weight:700; letter-spacing:.02em;
+}
+#gate button:hover{ opacity:.9; }
+#gate input:focus{ outline:none; border-color:#27C5F5; box-shadow:0 0 0 2px rgba(39,197,245,.25); }
+#gate-error{ color:var(--accent); font-size:.85rem; min-height:1.2em; margin-top:8px; }
+
+/* ---------- APP LAYOUT (10% SIDEBAR / 90% CONTENT) ---------- */
+#app{ display:none; min-height:100vh; }
+.app-container{
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR NAV (10%) */
+aside.sidebar{
+  flex: 0 0 10%;
+  min-width: 220px;
+  max-width: 300px;
+  background: var(--card);
+  border-right: 1px solid var(--card-border);
+  position: fixed;
+  top: 0; bottom: 0; left: 0;
+  overflow-y: auto;
+  padding: 24px 14px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+.sidebar-header h2{
+  font-family:'Kalam', cursive;
+  font-size: 1.25rem;
+  margin: 0 0 14px 0;
+  color: var(--accent);
+}
+nav.toc .unit-label{ 
+  font-family:'Kalam',cursive; 
+  color:var(--accent-soft); 
+  font-size:0.8rem; 
+  margin:14px 0 4px; 
+}
+nav.toc .unit-label:first-child{ margin-top:0; }
+nav.toc ul{ list-style:none; margin:0; padding:0; }
+nav.toc li{ margin:2px 0; }
+nav.toc a{
+  display:flex; align-items:center;
+  padding:4px 6px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  color:var(--ink);
+  text-align: left;
+  transition: background 0.1s, color 0.1s;
+}
+nav.toc a:hover{ background: var(--answer-bg); color:var(--accent); }
+nav.toc .num{ color:var(--accent); font-family:'Kalam',cursive; margin-right:6px; font-weight: 700; }
+
+/* MAIN CONTENT (90%) */
+main.main-content{
+  margin-left: 260px; /* matches flexible sidebar space */
+  flex: 1;
+  padding: 30px 45px 100px;
+  max-width: 1100px;
+  box-sizing: border-box;
+}
+
+header.top{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:14px;
+  padding-bottom:18px; margin-bottom:20px; border-bottom:2px solid var(--card-border);
+}
+header.top .title h1{ font-size:1.9rem; margin:0 0 2px; }
+header.top .title .byline{ color:var(--ink-soft); font-size:.95rem; }
+.controls{ display:flex; gap:8px; align-items:center; flex-wrap: wrap; }
+.icon-btn{
+  border:1px solid var(--card-border); background:var(--card); color:var(--ink);
+  border-radius:2px; padding:6px 10px; cursor:pointer; font-family:'Literata',serif; font-size:0.8rem;
+}
+.icon-btn:hover{ border-color:var(--accent); }
+
+.hero-art{ margin:6px 0 24px; }
+.hero-art svg{ width:100%; height:auto; max-height:140px; display:block; }
+.hero-line{ stroke:var(--ink-soft); stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.hero-accent{ stroke:#27C5F5; stroke-width:2.4; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+
+section.unit{ margin:56px 0 10px; }
+section.unit > h2{
+  font-size:1.5rem; color:var(--accent); margin-bottom:2px;
+  padding:4px 10px; display:inline-block; background:var(--tape); transform:rotate(-.4deg);
+}
+section.unit > .unit-sub{ color:var(--ink-soft); margin:6px 0 20px; font-size:.95rem; }
+
+article.chapter{
+  background:var(--card); border:1px solid var(--card-border);
+  border-radius:2px; box-shadow:var(--shadow); padding:22px 24px; margin:0 0 30px;
+  scroll-margin-top:20px;
+}
+article.chapter h3{ font-size:1.3rem; margin:0 0 4px; color:var(--ink); display:flex; align-items:center; gap:8px; }
+article.chapter h3 .chnum{ color:var(--accent); margin-right:2px; }
+.ch-icon{ width:26px; height:26px; flex:0 0 auto; stroke:var(--accent-soft); fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+
+/* ---------- MIND MAP ---------- */
+.mindmap-wrap{ margin:0 0 26px; }
+figure.mindmap{
+  margin:0; background:var(--card); border:1px solid var(--card-border);
+  border-radius:2px; box-shadow:var(--shadow); padding:6px 6px 2px;
+}
+figure.mindmap svg{ width:100%; height:auto; display:block; max-height:420px; }
+figure.mindmap figcaption{
+  text-align:center; color:var(--ink-soft); font-size:.8rem; padding:6px 0 10px;
+  font-family:'Kalam',cursive;
+}
+.mm-link{ fill:none; stroke:var(--card-border); stroke-width:1.6; stroke-dasharray:1 5; stroke-linecap:round; }
+.mm-center-circle{ fill:var(--tape); stroke:var(--accent); stroke-width:1.6; }
+.mm-center-label{
+  font-family:'Kalam',cursive; font-size:15px; fill:var(--ink); font-weight:700;
+}
+.mm-node{ cursor:pointer; }
+.mm-circle{ fill:var(--card); stroke:var(--accent-soft); stroke-width:1.6; transition:fill .15s, stroke .15s; }
+.mm-node:hover .mm-circle{ fill:var(--tape); stroke:var(--accent); }
+.mm-icon{ width:22px; height:22px; stroke:var(--accent); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.mm-label{
+  font-family:'Literata',serif; font-size:11px; fill:var(--ink-soft); transition:fill .15s;
+}
+.mm-node:hover .mm-label{ fill:var(--accent); }
+
+article.chapter .content h4{ font-size:1rem; margin:18px 0 6px; color:var(--accent-soft); }
+article.chapter .content p{ margin:8px 0; }
+article.chapter .content ul{ margin:6px 0; padding-left:22px; }
+article.chapter .content li{ margin:3px 0; }
+article.chapter .content table{ width:100%; border-collapse:collapse; margin:12px 0; font-size:.92rem; }
+article.chapter .content th, article.chapter .content td{
+  border:1px solid var(--card-border); padding:6px 8px; text-align:left; vertical-align:top;
+}
+article.chapter .content th{ background:var(--tape); }
+article.chapter details.vocab{ margin-top:16px; }
+article.chapter details.vocab summary{
+  cursor:pointer; font-family:'Kalam',cursive; color:var(--accent); font-size:.95rem;
+}
+article.chapter details.vocab dl{ margin:10px 0 0; }
+article.chapter details.vocab dt{ font-weight:600; color:var(--ink); }
+article.chapter details.vocab dd{ margin:0 0 8px 0; color:var(--ink-soft); font-size:.92rem; }
+
+.recap-note{
+  margin:16px 0 4px; background:var(--tape); border-radius:2px; padding:12px 14px;
+  transform:rotate(-.3deg); box-shadow:1px 2px 0 rgba(0,0,0,0.06);
+}
+.recap-note .recap-title{ font-family:'Kalam',cursive; color:var(--accent); font-size:.95rem; margin-bottom:6px; }
+.recap-note ul{ margin:0; padding-left:20px; }
+.recap-note li{ margin:3px 0; font-size:.92rem; }
+
+.qa-block{ margin-top:24px; border-top:2px dashed var(--card-border); padding-top:16px; }
+.qa-block > .qa-title{ font-family:'Kalam',cursive; color:var(--accent); font-size:1.1rem; margin-bottom:10px; }
+.q-item{ margin:0 0 10px; }
+.q-item .q-text{ margin:0; }
+.q-item .q-num{ color:var(--accent); font-weight:700; margin-right:4px; }
+.q-item button.reveal{
+  margin-top:6px; font-family:'Literata',serif; font-size:.85rem; cursor:pointer;
+  background:transparent; border:1px solid var(--card-border); color:var(--accent);
+  padding:4px 10px; border-radius:12px;
+}
+.q-item button.reveal:hover{ border-color:var(--accent); }
+.q-item .a-text{
+  display:none; margin:8px 0 0; padding:10px 12px; background:var(--answer-bg);
+  border-left:3px solid var(--accent); font-size:.95rem; border-radius:0 2px 2px 0;
+}
+.q-item.open .a-text{ display:block; }
+.q-item.open button.reveal{ background:var(--accent); color:#fff; border-color:var(--accent); }
+
+footer.end{ text-align:center; color:var(--ink-soft); margin-top:60px; font-size:.9rem; }
+
+/* ---------- EXAM PREP ---------- */
+section.examprep{ margin:38px 0 50px; }
+.exam-h2{
+  font-size:1.5rem; color:var(--accent); margin-bottom:2px;
+  padding:4px 10px; display:inline-block; background:var(--tape); transform:rotate(.4deg);
+}
+.exam-card{
+  background:var(--card); border:1px solid var(--card-border); border-radius:2px;
+  box-shadow:var(--shadow); padding:18px 20px; margin:16px 0;
+}
+.exam-sub{ font-size:1.1rem; margin:0 0 10px; color:var(--ink); }
+table.cmd-table{ width:100%; border-collapse:collapse; font-size:.92rem; }
+table.cmd-table th, table.cmd-table td{ border:1px solid var(--card-border); padding:7px 9px; text-align:left; vertical-align:top; }
+table.cmd-table th{ background:var(--tape); }
+ul.tip-list{ margin:0; padding-left:20px; }
+ul.tip-list li{ margin:6px 0; }
+.checklist-sub{ color:var(--ink-soft); font-size:.9rem; margin:0 0 12px; }
+.cl-group{ margin:0 0 14px; }
+.cl-unit{ font-family:'Kalam',cursive; color:var(--accent-soft); font-size:.95rem; margin-bottom:4px; }
+label.cl-row{ display:flex; align-items:center; gap:8px; padding:4px 0; cursor:pointer; font-size:.95rem; }
+label.cl-row input{ width:16px; height:16px; accent-color:#27C5F5; cursor:pointer; }
+
+.top-link{ display:inline-block; margin-top:14px; font-size:.85rem; color:var(--ink-soft); text-decoration:none; }
+.top-link:hover{ color:var(--accent); }
+
+@media (max-width:768px){
+  aside.sidebar {
+    position: relative;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--card-border);
+  }
+  main.main-content {
+    margin-left: 0;
+    padding: 20px 16px 80px;
+  }
+  .app-container {
+    flex-direction: column;
+  }
+  header.top{ flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <form class="gate-card" id="gate-form" autocomplete="off">
+    <h1>ICT Notebook</h1>
+    <p class="sub">Tr.WaiLinHtet · Unit 1–4 study notes<br>Enter the password to open your notebook.</p>
+    <input type="password" id="pw" placeholder="Password" autocomplete="current-password">
+    <button type="submit">Open notebook</button>
+    <div id="gate-error"></div>
+  </form>
+</div>
+
+<div id="app">
+  <div class="app-container">
+    <!-- LEFT SIDEBAR TOC (10% Width ratio) -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>ICT Notebook</h2>
+      </div>
+      <nav class="toc" id="toc"></nav>
+    </aside>
+
+    <!-- RIGHT CONTENT (90% Width ratio) -->
+    <main class="main-content">
+      <header class="top">
+        <div class="title">
+          <h1>Information &amp; Communication Technology</h1>
+          <div class="byline">Notes by Tr.WaiLinHtet</div>
+        </div>
+        <div class="controls">
+          <button class="icon-btn" id="font-decrease">A-</button>
+          <button class="icon-btn" id="font-increase">A+</button>
+          <button class="icon-btn" id="theme-toggle">☀ / ☾</button>
+          <button class="icon-btn" id="lock-btn">Lock</button>
+        </div>
+      </header>
+
+      <figure class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 600 170" role="img" aria-label="Illustration of a notebook, laptop and pencil on a desk">
+          <rect x="18" y="70" width="150" height="90" rx="4" class="hero-line" fill="none"/>
+          <line x1="18" y1="95" x2="168" y2="95" class="hero-line"/>
+          <line x1="18" y1="115" x2="168" y2="115" class="hero-line"/>
+          <line x1="18" y1="135" x2="168" y2="135" class="hero-line"/>
+          <line x1="35" y1="70" x2="35" y2="160" class="hero-accent"/>
+          <path d="M40 105 l14 14 l22 -26" class="hero-accent" fill="none"/>
+
+          <rect x="215" y="58" width="150" height="95" rx="6" class="hero-line" fill="none"/>
+          <circle cx="290" cy="105" r="26" class="hero-accent" fill="none"/>
+          <path d="M278 105 h24 M290 93 v24" class="hero-line"/>
+          <path d="M205 158 h180 l-14 18 h-152 z" class="hero-line" fill="none"/>
+
+          <g transform="translate(410,55) rotate(28)">
+            <rect x="0" y="0" width="10" height="90" rx="4" class="hero-line" fill="none"/>
+            <path d="M0 90 l5 16 l5 -16 z" class="hero-accent" fill="none"/>
+            <path d="M0 6 l10 0" class="hero-line"/>
+          </g>
+
+          <circle cx="500" cy="45" r="16" class="hero-accent" fill="none"/>
+          <ellipse cx="500" cy="45" rx="7" ry="16" class="hero-accent" fill="none"/>
+          <line x1="484" y1="45" x2="516" y2="45" class="hero-accent"/>
+
+          <path d="M525 110 a10 10 0 0 1 2 -20 13 13 0 0 1 24 5 8 8 0 0 1 -2 15 z" class="hero-line" fill="none"/>
+        </svg>
+      </figure>
+
+      <section class="examprep" id="examprep">
+        <h2 class="exam-h2">Exam Preparation — Edexcel International GCSE ICT (4IT0)</h2>
+        <p class="unit-sub">Command words, technique tips, and a revision checklist to work through before the exam.</p>
+
+        <div class="exam-card">
+          <h3 class="exam-sub">Command words &amp; how many marks they're worth</h3>
+          <table class="cmd-table">
+            <tr><th>Word</th><th>What it asks you to do</th><th>Typical marks</th></tr>
+            <tr><td>State / Give / Name</td><td>Recall one fact — no explanation needed.</td><td>1 mark per point</td></tr>
+            <tr><td>Identify</td><td>Pick out a key detail from the question or a resource.</td><td>1 mark</td></tr>
+            <tr><td>Define</td><td>Give a precise meaning of a term.</td><td>1 mark</td></tr>
+            <tr><td>Describe</td><td>Give an account of what something is or how it works.</td><td>2–4 marks</td></tr>
+            <tr><td>Explain</td><td>State a point <i>and</i> give a reason — look for "because"/"so that".</td><td>2–4 marks</td></tr>
+            <tr><td>Compare</td><td>Give both similarities and differences between things.</td><td>levels-marked</td></tr>
+            <tr><td>Discuss</td><td>Explore more than one side of an issue, then reach a conclusion.</td><td>8 marks</td></tr>
+            <tr><td>Justify</td><td>Give reasons that support a decision or opinion.</td><td>levels-marked</td></tr>
+          </table>
+        </div>
+
+        <div class="exam-card">
+          <h3 class="exam-sub">Technique tips</h3>
+          <ul class="tip-list">
+            <li>Match your answer's length to the mark allocation — one clear point per mark for "state" questions.</li>
+            <li>For "Explain", always add the reasoning: what happens <i>and why/what the effect is</i>.</li>
+            <li>For "Discuss", cover a benefit <i>and</i> a drawback, then finish with a short conclusion.</li>
+            <li>Use precise ICT vocabulary from the notebook (e.g. "bandwidth", not "internet speed").</li>
+            <li>Read the number of marks before you answer — it tells you how many separate points are needed.</li>
+            <li>Don't repeat the question back — spend every line on new, creditable information.</li>
+          </ul>
+        </div>
+
+        <div class="exam-card">
+          <h3 class="exam-sub">Revision checklist</h3>
+          <p class="checklist-sub">Tick off each chapter as you revise it — your progress is saved on this device.</p>
+          <div id="checklist"></div>
+        </div>
+      </section>
+
+      <div id="units"></div>
+
+      <footer class="end">— end of notebook —</footer>
+    </main>
+  </div>
+</div>
+
+<script>
+const DATA = [
+{
+  unit:"Unit 1", title:"Digital Devices", sub:"Hardware, software, memory and processors",
+  chapters:[
+    {
+      id:"c1", num:1, title:"Digital Devices",
+      html:`
+      <h4>Types of digital devices</h4>
+      <p>Digital devices range from powerful <b>mainframe computers</b> used by large organisations for complex tasks, down to <b>microprocessors</b> embedded in appliances like washing machines. Personal computers include desktops, laptops and desktop replacements. Single-board computers (SBCs) such as the Raspberry Pi are affordable and used in education and embedded/physical computing projects.</p>
+      <p>Mobile phones use a <b>SIM card</b> to connect to a network. Specialist phones meet accessibility needs (emergency buttons, spoken-feedback phones, larger buttons). Smartphones combine phone, camera, media player and internet access with a touch screen and virtual keyboard, but use more power. Tablets are bigger than smartphones with similar touch/Wi-Fi features, some with SIM slots.</p>
+      <p>Other digital devices: cameras/camcorders (lens quality, image processor, sensor resolution), televisions (resolution measured in pixels — 720p, 1080p, 4K/8K), sound systems, personal video recorders, Blu-ray/DVD players, games consoles (including handheld and motion/VR controllers), media players, navigation aids (GPS + orientation sensors), and home automation/smart assistants.</p>
+      <h4>Multifunctional devices &amp; convergence</h4>
+      <p>A <b>multifunctional device</b> performs many jobs (e.g. a smartphone is a phone, camera, GPS and games console). <b>Convergence</b> is when different device types adopt each other's features and become more alike (smartphones and tablets, "phablets").</p>
+      <h4>Features of digital devices</h4>
+      <p>Portability, performance (processor + RAM + storage speed), storage capacity, user interface type (CLI, menu-driven, GUI/WIMP, voice, gesture), connectivity, media support, energy consumption, expansion capability, and security features (passwords/PINs, biometrics, physical locks).</p>
+      <h4>Input peripherals</h4>
+      <p>Keyboard, mouse/tracker ball/track pad, joystick, graphics tablet, scanner (OCR/OMR), barcode/QR scanner, webcam, microphone, touch screen (resistive vs capacitive), biometric scanner, card reader (magnetic stripe, chip &amp; PIN, RFID/NFC), and environmental sensors (light, moisture, temperature, proximity, motion, pressure).</p>
+      <h4>Output peripherals</h4>
+      <p>Monitor (size, resolution), printer (dot matrix, inkjet, laser, 3D), plotter, data projector, speaker, and control devices/actuators (motors, valves, heaters).</p>
+      <table><tr><th>Printer</th><th>Speed</th><th>Cost/copy</th><th>Best for</th></tr>
+      <tr><td>Dot matrix</td><td>Slowest</td><td>Low</td><td>Multiple carbon copies</td></tr>
+      <tr><td>Inkjet</td><td>Fast</td><td>High</td><td>Home printing, photos</td></tr>
+      <tr><td>Laser</td><td>Fastest</td><td>Medium</td><td>High-volume office printing</td></tr></table>
+      <h4>Storage types &amp; media</h4>
+      <p>Secondary storage is non-volatile. Types: hard disk drives (HDD), solid state drives (SSD)/flash media, optical media (CD/DVD/Blu-ray), and magnetic tape. Storage can be internal or external.</p>
+      <table><tr><th>Unit</th><th>Bytes</th></tr>
+      <tr><td>KB</td><td>1,000</td></tr><tr><td>MB</td><td>1,000 KB</td></tr>
+      <tr><td>GB</td><td>1,000 MB</td></tr><tr><td>TB</td><td>1,000 GB</td></tr>
+      <tr><td>PB / EB / ZB / YB</td><td>each 1,000× the last</td></tr></table>`,
+      vocab:[
+        ["mainframe computer","a large, powerful computer used by many people at once for complex jobs."],
+        ["microprocessor","the device that controls what a computer does — takes input, processes it, gives output."],
+        ["peripheral device","equipment connected to and used with a computer."],
+        ["embedded computing","hardware fixed into position that carries out one specialist task."],
+        ["convergence","when devices adopt each other's features and become more similar."],
+        ["multifunctional device","a device that can perform a range of different functions."],
+        ["RAM","memory used to run currently active software."],
+        ["virtual memory","storage used as overflow once RAM is full."],
+        ["biometric scanner","reads a unique physical trait to identify a user."],
+        ["flash memory","non-volatile memory storing data as electrical charge in cells."]
+      ],
+      recap:[
+        "Multifunctional = one device does many jobs. Convergence = different devices becoming more alike.",
+        "Performance depends on processor speed, RAM size and storage speed together — not just one factor.",
+        "Know the capacity ladder: 1 GB = 1000 MB, 1 TB = 1000 GB — conversion questions come up often."
+      ],
+      qa:[
+        ["State one benefit of using barcodes in a supermarket.","Speeds up checkout and improves accuracy of pricing/stock control, reducing human error."],
+        ["State one reason why small, built-in microphones are used in smartphones and laptops.","They allow voice input (calls, voice recognition) while taking up very little space in a compact device."],
+        ["Explain why capacitive touch screens do not work when you are wearing woollen gloves.","Capacitive screens detect touch through a small electrical charge transferring from a conductive finger. Wool is an insulator, so it blocks the charge transfer and the screen cannot register a touch."],
+        ["State three computer systems that do not use monitors.","A washing machine controller, a digital watch/calculator, and a mainframe computer (which is usually accessed via a separate terminal)."],
+        ["State two benefits of using laser printers rather than inkjet printers.","Laser printers print much faster, and they have a lower cost per copy for large print runs."],
+        ["State two types of business that use plotters.","Architects and engineers (also product designers and cartographers)."],
+        ["Explain why some 3D printers use biodegradable materials to create models.","3D-printed prototypes/models are often discarded after use, so biodegradable material breaks down naturally, reducing landfill waste and environmental harm."],
+        ["List two sensors used in smartphones. For each one, describe one way in which it is used.","GPS sensor — used by navigation apps to determine the device's location. Accelerometer/orientation sensor — used to detect the phone's orientation and rotate the screen display."],
+        ["Discuss the advantages and disadvantages of using sensors in smart cars.","Advantages: sensors improve safety through collision avoidance and parking assistance; they enable automation such as adaptive cruise control; they monitor continuously without fatigue; they can detect hazards (e.g. tyre pressure, proximity) that a human might miss. Disadvantages: sensors can fail or give false readings, which is risky; they add expense to buy and repair; drivers may over-rely on them and become less attentive; and the data they collect can raise privacy concerns."],
+        ["Explain one reason why Blu-ray disks are used to store modern console games.","Blu-ray disks hold up to 50 GB, far more than a DVD's 18 GB, which is needed to store the large amount of high-definition graphics and audio data in modern games."]
+      ]
+    },
+    {
+      id:"c2", num:2, title:"Software",
+      html:`
+      <h4>System vs application software</h4>
+      <p><b>System software</b> manages and maintains the computer; <b>application software</b> lets users perform specific tasks.</p>
+      <h4>Utility software</h4>
+      <ul>
+        <li><b>Backup</b> — copies files/programs, scheduled or manual.</li>
+        <li><b>Defragmentation</b> — reorders fragmented data on a disk so files load faster.</li>
+        <li><b>Compression</b> — reduces file size (e.g. run-length encoding); can decompress again.</li>
+        <li><b>Formatting</b> — prepares storage media for first use, erasing existing data.</li>
+      </ul>
+      <h4>Operating systems</h4>
+      <p>Single-user OS vs network OS (adds login authentication, separate user accounts, and access to shared network resources).</p>
+      <p><b>Roles of the OS:</b> memory management (allocating RAM, creating virtual memory), resource management (processor, graphics card, printers), security (usernames/passwords, biometrics, firewalls), and print spooling (queuing pages ready to print).</p>
+      <h4>Application software</h4>
+      <p>Office productivity: word processing, DTP, spreadsheets, database management. Also: web authoring (HTML, WYSIWYG editors), image/graphics editing (bitmap vs vector), photo editing, sound editing, presentation software, control applications (sensor → decision → actuator), and project management (timelines, critical path, milestones).</p>
+      <h4>Communication software</h4>
+      <p>Web browsers, email, social media, SMS, MMS, instant messaging.</p>
+      <h4>Software licensing</h4>
+      <p><b>Free/open-source software</b> — users may study, modify, copy or distribute it (free = freedom, not necessarily price). <b>Proprietary software</b> — owned and controlled by a company; <b>freeware</b> is proprietary software given away free.</p>
+      <h4>Software updates</h4>
+      <p>Released to fix bugs/security vulnerabilities, improve compatibility, boost performance, add features, and improve usability.</p>`,
+      vocab:[
+        ["utility software","system software that carries out configuration and maintenance tasks."],
+        ["firewall","hardware or software that protects a network from unauthorised access."],
+        ["print spooling","queuing pages in order ready to be printed."],
+        ["open-source software","software whose source code is made available so users can modify it."],
+        ["freeware","proprietary software provided free of charge."],
+        ["bugs","errors in a program's source code."],
+        ["compatibility","the ability of software/hardware to work correctly with other systems."]
+      ],
+      recap:[
+        "System software runs the computer itself; application software lets the user complete a task.",
+        "The OS's 4 core jobs: memory management, resource management, security, print spooling.",
+        "'Free software' means freedom to modify/share — it is not always free of charge."
+      ],
+      qa:[
+        ["State what is meant by the term 'application software'.","Software that allows a user to perform a specific end-user task, rather than managing the computer itself."],
+        ["State three types of utility software.","Backup, disk defragmentation and file compression (or disk formatting)."],
+        ["Describe the role of the operating system.","It manages the computer's hardware and resources — including memory, other resources, security and print spooling — and provides a user interface for interacting with the computer."],
+        ["Explain why utility software allows the user to schedule backup processes.","Scheduling lets backups run automatically at a convenient time (e.g. when the system isn't in use), so users don't have to remember to do it manually and important files are less likely to be lost."],
+        ["Explain the benefit of using compression utilities to archive files.","Compression reduces the size of files, saving storage space and making the files faster to transfer or upload."],
+        ["Describe how presentation software can help a presenter to give a talk.","It lets the presenter build slides containing text, images, animation and video that illustrate and support what they are saying, helping to engage the audience."],
+        ["Describe one use of control software in a relevant industry.","In home automation, control software takes input from a temperature sensor and automatically switches a heater or air conditioner on or off to maintain the desired temperature."],
+        ["Discuss why a building company might use project management software.","It lets the company visualise all tasks on a timeline, identify dependencies and the critical path so delays can be foreseen, set milestones to track progress, allocate tasks and resources (workers, materials, subcontractors) efficiently, and track costs — helping ensure a large, multi-team project is completed on time and within budget."],
+        ["State three types of service provided by communication software.","Web browsing, email and instant messaging (or social media, SMS/MMS)."],
+        ["State two reasons for updating software.","To fix bugs and security vulnerabilities, and to improve compatibility with new hardware or operating systems."]
+      ]
+    },
+    {
+      id:"c3", num:3, title:"Memory and Processors",
+      html:`
+      <h4>RAM, ROM and flash memory</h4>
+      <p><b>RAM</b> is volatile temporary memory used to run active programs — more RAM allows more programs to run at once and reduces reliance on slower virtual memory. <b>ROM</b> is non-volatile permanent memory used for start-up instructions/firmware (PROM, EPROM, EEPROM are variants that can be written to, some erasable via UV light or voltage). <b>Flash memory</b> is a type of EEPROM: non-volatile, fast, low power, no moving parts — used in SSDs, USB drives and mobile devices.</p>
+      <table><tr><th>Feature</th><th>RAM</th><th>ROM</th></tr>
+      <tr><td>Stores data when powered off?</td><td>No (volatile)</td><td>Yes (non-volatile)</td></tr>
+      <tr><td>Can swap instructions?</td><td>Yes</td><td>No</td></tr>
+      <tr><td>Stores...</td><td>Temporary data</td><td>Permanent data</td></tr>
+      <tr><td>Upgradeable?</td><td>Yes</td><td>No</td></tr></table>
+      <h4>Processors</h4>
+      <p>A processor is made of one or more CPU cores; multi-core processors (dual, quad) can do more work per cycle while running cooler and using less power. Processor speed is measured in clock cycles per second — Hz, kHz, MHz, GHz.</p>`,
+      vocab:[
+        ["boot","start up a computer."],
+        ["firmware","software that controls a hardware device, often stored in ROM."],
+        ["processor cycle","fetch, decode and execute one instruction."],
+      ],
+      recap:[
+        "RAM is volatile and temporary; ROM is non-volatile and permanent — this is a favourite exam contrast.",
+        "Virtual memory is secondary storage used as RAM overflow, and it is much slower than RAM.",
+        "Clock speed (Hz/GHz) = cycles per second; more cores lets a processor do more work per cycle."
+      ],
+      qa:[
+        ["State what is meant by 'ROM'.","Read Only Memory — non-volatile memory that permanently stores data/instructions, such as start-up firmware."],
+        ["State what is meant by 'RAM'.","Random Access Memory — volatile memory used to temporarily store the instructions and data of programs currently running."],
+        ["Explain why increasing the amount of RAM in a system improves the user experience.","More RAM lets more programs/files run at the same time and reduces how often the system has to use slower virtual memory on secondary storage, so the system feels faster and multitasks better."],
+        ["Describe what virtual memory is and why it is used.","Virtual memory is an area of secondary storage used as overflow once RAM is full, so the operating system can keep more instructions available to the processor than would fit in physical RAM alone."],
+        ["List three characteristics of RAM that make it different to ROM.","RAM is volatile (loses data when power is off) while ROM is non-volatile; RAM can be written to and read many times while most ROM cannot be rewritten; RAM stores temporary, changeable data while ROM stores permanent, fixed instructions."],
+        ["Explain two reasons why the characteristics of flash memory make it suitable for use as secondary storage in smartphones.","It has no moving parts, giving fast access times; and it has low power consumption, which helps preserve battery life in a portable device."],
+        ["Which one of these describes the term 'clock cycle'?","A — The number of times per second that a processor can carry out instructions."]
+      ]
+    }
+  ]
+},
+{
+  unit:"Unit 2", title:"Connectivity", sub:"Digital communication and networks",
+  chapters:[
+    {
+      id:"c4", num:4, title:"Digital Communication",
+      html:`
+      <h4>Speed &amp; volume of data transfer</h4>
+      <p><b>Bandwidth</b> is the amount of data a connection can carry per second (like the width of a water pipe). Higher bandwidth = faster uploads/downloads and supports gaming/HD streaming. <b>Latency</b> is the delay/lag in sending data (measured by "pinging" a server) — high latency causes laggy gaming and delayed live video, even with good bandwidth. Video streaming uses a <b>buffer</b>: playback starts once enough data has downloaded, and pauses if the buffer empties.</p>
+      <h4>Factors affecting transfer</h4>
+      <p>Transfer method (wired usually carries more bandwidth than wireless), electromagnetic interference, physical blockages (walls/furniture), and distance.</p>
+      <h4>Networks &amp; device-to-device</h4>
+      <p><b>PAN</b> (personal area network, e.g. tethering), <b>LAN</b> (local area network, one building), <b>WAN</b> (wide area network — the internet is the largest WAN).</p>
+      <h4>Communication technologies</h4>
+      <p>Satellite (GPS, satellite TV/phone — always available but blocked by tunnels/weather), broadcast (DVB-T digital TV, DAB digital radio), wired (HDMI, S/PDIF, minijack, USB, Ethernet), wireless (Wi-Fi, Bluetooth, 3G/4G, infra-red, NFC).</p>
+      <table><tr><th></th><th>Wi-Fi</th><th>Bluetooth</th></tr>
+      <tr><td>Range</td><td>Long</td><td>Short</td></tr>
+      <tr><td>Bandwidth</td><td>High</td><td>Low</td></tr>
+      <tr><td>Power use</td><td>High</td><td>Low</td></tr>
+      <tr><td>Security</td><td>High</td><td>Low</td></tr></table>`,
+      vocab:[
+        ["bandwidth","the number of bits a connection can carry per second."],
+        ["latency","the delay in sending data between devices."],
+        ["buffer","an area of memory used to temporarily store streamed data before playback."],
+        ["PAN / LAN / WAN","personal / local / wide area network, by geographic scope."]
+      ],
+      recap:[
+        "Bandwidth = how much data can be sent per second; latency = the delay before it arrives.",
+        "Wired connections usually beat wireless for bandwidth and security; wireless wins on portability.",
+        "Know the scope order: PAN (near you) &lt; LAN (one site) &lt; WAN (many sites — the internet)."
+      ],
+      qa:[]
+    },
+    {
+      id:"c5", num:5, title:"Networks",
+      html:`
+      <h4>Network operating systems</h4>
+      <p>Add functionality over a stand-alone OS: checking usernames/passwords at login, separating user accounts, and providing access to shared network storage/printers.</p>
+      <h4>Identifying devices</h4>
+      <ul>
+        <li><b>IP address</b> — unique address for routing data (IPv4 dotted decimal vs IPv6 hex); assigned statically or dynamically via DHCP.</li>
+        <li><b>MAC address</b> — a fixed, manufacturer-assigned hardware ID on the NIC; used for filtering, hotspot limits, tracking, and static IP binding.</li>
+        <li><b>Device name</b> — a user-friendly label, not unique/routable.</li>
+      </ul>
+      <h4>Network hardware</h4>
+      <p>Cat5e/Cat6 cable, fibre optic cable (fastest, longest distance), wireless access points (WAPs), and switches (direct traffic to the correct port using MAC addresses).</p>
+      <h4>Network architectures</h4>
+      <p><b>Client-server</b> — centralised management, security, shared storage/printers, automated backups. <b>Peer-to-peer</b> — equal-status nodes, simple to set up but less secure.</p>`,
+      vocab:[
+        ["protocol","rules that allow data exchange between devices."],
+        ["DHCP","a service that dynamically assigns IP addresses."],
+        ["switch","connects wired devices and directs data using MAC addresses."]
+      ],
+      recap:[
+        "IP address = used to route data and can change (often dynamically, via DHCP).",
+        "MAC address = fixed by the manufacturer and never changes — used for filtering/tracking.",
+        "Client-server = centralised and more secure; peer-to-peer = simple to set up but less secure."
+      ],
+      qa:[
+        ["Explain one reason why some games console controllers use Bluetooth rather than infra-red to connect to the console.","Bluetooth doesn't need line-of-sight, so the controller works from any angle or position without needing to be pointed directly at the console."],
+        ["State one way in which using infra-red in games console controllers could affect the experience of the person playing the game.","Because infra-red needs a clear line-of-sight, if the signal is blocked the controller can become unresponsive or laggy, disrupting gameplay."],
+        ["Describe how video streaming works.","Data is downloaded continuously into a temporary storage area called a buffer. Playback begins once enough data has been buffered, and while it plays, more data keeps downloading to refill the buffer — if the buffer empties, playback pauses until enough new data arrives."],
+        ["Explain why streaming is more convenient for the user than downloading.","With streaming, playback can start almost immediately without waiting for the whole file to download, and the content doesn't need to be permanently saved to local storage, saving space."],
+        ["State three types of wired connection.","USB, HDMI and Ethernet (or minijack, S/PDIF)."],
+        ["Which one of these best describes the internet?","B — WAN."],
+        ["Explain why global games companies use games servers in multiple countries to ensure that the experience of users is not negatively affected when playing online games.","Placing servers closer to players reduces the distance data has to travel, which lowers latency and keeps the game responsive and smooth rather than laggy."]
+      ]
+    }
+  ]
+},
+{
+  unit:"Unit 3", title:"Operating Online", sub:"Data risks, internet impact, communities, implications, information",
+  chapters:[
+    {
+      id:"c6", num:6, title:"Risks to Data and Personal Information",
+      html:`
+      <h4>Risks</h4>
+      <ul>
+        <li><b>Unauthorised access</b> — direct attempts or automated login attacks; devices can be recruited into botnets.</li>
+        <li><b>Deliberate damage by malware</b> — including ransomware, which locks/threatens to delete files until payment is made.</li>
+        <li><b>Accidental deletion</b> — mistaken key presses, formatting the wrong drive, sudden power loss.</li>
+        <li><b>Theft of personal data</b> — <b>phishing</b> (fake emails/sites tricking users into giving details — spear phishing targets individuals, smishing uses SMS) and <b>pharming</b> (redirecting traffic to fake sites via altered DNS or look-alike URLs).</li>
+      </ul>
+      <h4>Securing data</h4>
+      <p>Firewalls, encryption, passwords/PINs/biometrics/CAPTCHA/security questions, anti-malware (anti-virus, anti-adware, anti-spyware), access rights &amp; file permissions, secure websites (HTTPS), avoiding suspicious attachments/links, and backups (full, differential, incremental).</p>
+      <h4>Online payment</h4>
+      <p>Third-party processors (PayPal), bank cards (card number, expiry date, CVC), contactless/NFC cards, protected using systems like HTTPS and SecureCode-style verification.</p>`,
+      vocab:[
+        ["malware","software created with the intention to do harm."],
+        ["phishing","tricking someone via email/website into giving away personal information."],
+        ["pharming","redirecting a user to a fake website to steal login details."],
+        ["encryption","scrambling data into an unreadable form using a key."],
+        ["CAPTCHA","a test used to tell humans and bots apart."]
+      ],
+      recap:[
+        "Phishing = fake message trying to trick you; pharming = fake website via redirected traffic.",
+        "HTTPS means the connection is encrypted — look for the padlock icon.",
+        "Backup types: full (everything), differential (since last full), incremental (since the last backup of any kind)."
+      ],
+      qa:[
+        ["Which one of these is used to control internet traffic entering a network?","C — Firewall."],
+        ["Explain why CAPTCHA tests work.","They present a task — such as reading distorted text or picking specific images — that is easy for a human to solve but very difficult for an automated bot to solve correctly."],
+        ["State the purpose of pharming and phishing.","Both are used to trick users into revealing personal or financial information, by directing them to fake emails or websites that look legitimate."],
+        ["List three pieces of data from a bank card that a user is asked to enter when making an online payment.","The card number, the expiry date, and the card security code (CVC/CSC)."],
+        ["Describe one way in which incremental backup differs from differential backup.","Incremental backup only copies files changed since the last backup (full or incremental), whereas differential backup copies all files changed since the last full backup, so differential backups grow larger each time."],
+        ["Describe how encryption secures data on a network.","It scrambles data into an unreadable form using a key, so that even if the data is intercepted, it cannot be read or used without the correct key to decrypt it."],
+        ["State two methods used by an online system to authenticate a user.","A password/PIN, and biometric verification such as a fingerprint scan."],
+        ["State two methods used by criminals to get users to visit fake sites.","Phishing emails containing fake links, and pharming (redirecting traffic via altered domain name servers)."],
+        ["Explain one disadvantage of using online storage for backups rather than local storage.","It relies on having an internet connection — if the connection is slow, unavailable, or the third-party provider has issues, the backup cannot be accessed, and it also raises data protection/security concerns since the data sits on someone else's servers."]
+      ]
+    },
+    {
+      id:"c7", num:7, title:"Impact of the Internet",
+      html:`
+      <h4>Internet vs WWW</h4>
+      <p>The internet is the network of connected computers; the World Wide Web is just one service that runs on it (others include email/imap, file transfer/ftp, remote login/ssh, voice calls/voip).</p>
+      <h4>Employment &amp; working practices</h4>
+      <p>New job opportunities are created (device maintenance, software/content development) but employees must continuously update their skills or risk job loss. <b>Collaborative working</b> lets teams split tasks or edit shared documents (faster, 24/7, peer-reviewed — but harder to see the whole picture and coordinate). <b>Flexible/mobile working</b> allows work from anywhere (better work-life balance, access to data anywhere — but risk of overwork and less face-to-face contact).</p>
+      <h4>Social impacts</h4>
+      <p>Reduced face-to-face social interaction; increased <b>cyberbullying</b> (spreads faster/wider than offline bullying but can be traced); reduced physical activity (though location-based games and fitness apps can increase it).</p>
+      <h4>Staying safe online — Zip it, Block it, Flag it</h4>
+      <p><b>Zip it</b> — keep personal details private, use privacy settings. <b>Block it</b> — block strangers/suspicious links. <b>Flag it</b> — tell a trusted adult or report anything uncomfortable.</p>
+      <h4>Working from home</h4>
+      <p>Benefits to individuals: no commute, flexible hours, comfort; to organisations: access to a wider talent pool, lower overheads. Drawbacks to individuals: distractions, isolation; to organisations: security concerns, harder to manage staff.</p>
+      <h4>Impact on organisations</h4>
+      <p>Improved communication, access to global markets/workforce, use of big data, but also greater security risk and competition (traditional industries like video rental and print media have had to adapt or decline).</p>
+      <h4>The digital divide</h4>
+      <p>The gap between those with and without ICT access, caused by economy/infrastructure, location, politics/religion and social factors (age, income, education, disability) — leading to an "information rich" vs "information poor" divide.</p>`,
+      vocab:[
+        ["on-demand","available whenever required, not at a fixed broadcast time."],
+        ["digital footprint","the permanent trace left by a person's online activity."],
+        ["digital divide","the gap between those with and without ICT access."]
+      ],
+      recap:[
+        "The digital divide is the gap between those with and without reliable ICT access.",
+        "For working-from-home questions, always separate the effect on individuals from the effect on organisations.",
+        "Remember the online safety rule: Zip it (keep info private), Block it, Flag it."
+      ],
+      qa:[
+        ["Which one of these activities is only possible when using the internet?","C — Streaming."],
+        ["State two benefits to employees of working from home.","No time or money spent commuting, and more flexible working hours that improve work-life balance."],
+        ["State two drawbacks to organisations of employees working from home.","Increased data security risks, and greater difficulty supporting and managing remote staff."],
+        ["Explain one reason why the use of the internet may affect the ability of individuals to interact with other people face-to-face.","People increasingly communicate through messaging apps and social media instead of meeting in person, which reduces the amount of practice and opportunity they have for direct face-to-face interaction."],
+        ["Explain one reason why cyberbullying can be more distressing than in-person bullying.","It can follow the victim everywhere via their own devices, be seen instantly by a huge audience, and is difficult to permanently remove once shared, unlike an isolated in-person incident."],
+        ["State what is meant by the term 'collaborative working'.","Working together as a team, often by splitting tasks between members or working on the same document at the same time."],
+        ["State three factors that affect unequal access to ICT.","Economic wealth/cost of infrastructure, geographic location (e.g. rural areas), and social factors such as age, income or disability."],
+        ["State three examples of services that are not available to those with limited or no access to digital technologies.","Online banking, online shopping, and online/e-learning."],
+        ["Describe two ways in which greater access to networks has affected society.","It has enabled more flexible and remote working, and it has widened access to information and services for people who previously had none."],
+        ["Describe the effect of the internet on the information gap.","It can widen the gap: those with reliable internet access become more informed and gain more opportunities (information rich), while those without access fall further behind (information poor)."],
+        ["Discuss the impact of the internet on how individuals socialise.","Positively, the internet lets people stay in touch across long distances, join niche communities of shared interest, and communicate instantly. Negatively, heavy online communication can reduce face-to-face interaction, weaken real-world social skills, enable anonymity that leads to cyberbullying, and reduce time spent physically with others. The overall effect depends heavily on how and how much the technology is used."],
+        ["Describe two ways in which individuals can stay safe online.","Keep personal information private using strong privacy settings (Zip it), and block or report suspicious users/content and tell a trusted adult (Block it/Flag it)."],
+        ["Explain why organisations' use of the internet increases the risk to data security.","Connecting systems to the internet and allowing remote access creates more possible entry points for hackers, and data transmitted online can potentially be intercepted."]
+      ]
+    },
+    {
+      id:"c8", num:8, title:"Online Communities",
+      html:`
+      <h4>Social networking features</h4>
+      <p>Promoted/sponsored posts, groups/lists/circles, tags, user suggestions, reactions/likes/upvotes, sharing (going viral), comments, third-party integration, and analytics. This data enables <b>targeted marketing</b>.</p>
+      <h4>Types of online community</h4>
+      <ul>
+        <li><b>Online gaming communities</b> — profiles, forums for tactics, experience tracking (e.g. Xbox Live, MMORPGs).</li>
+        <li><b>Online work spaces</b> — cloud storage, real-time document editing, shared calendars, video conferencing (e.g. Slack, SharePoint).</li>
+        <li><b>Virtual learning environments (VLEs)</b> — course materials, quizzes, assignment submission, gradebooks, SSO (e.g. Google Classroom, Moodle).</li>
+        <li><b>User-generated reference sites</b> — wikis (e.g. Wikipedia), collaboratively edited pages.</li>
+        <li><b>Forums</b> — threads, moderators, sticky posts, reporting tools.</li>
+        <li><b>User-generated content sites</b> — video/photo sharing, blogs/vlogs.</li>
+        <li><b>Social bookmarking sites</b> — tagging and sharing web links (e.g. Pinterest, Reddit).</li>
+      </ul>
+      <h4>Safety, anonymity &amp; disclosure</h4>
+      <p>Anonymity can protect privacy but enables <b>misrepresentation</b>. Disclosing personal info or geotagged photos can reveal a user's location. Recommendations: check privacy settings, avoid sharing location-revealing content, report suspicious users, and never meet an online contact alone.</p>`,
+      vocab:[
+        ["targeted marketing","advertising matched to users based on their data/behaviour."],
+        ["misrepresentation","pretending to be someone or something you are not, online."],
+        ["geotag","adding location data to a piece of content."],
+        ["moderate","review and decide whether posted content is appropriate."]
+      ],
+      recap:[
+        "Know one real example for each community type: gaming, workspace, VLE, wiki, forum, content-sharing, bookmarking.",
+        "Shared user data drives targeted marketing — tags, likes and searches all feed into it.",
+        "Anonymity cuts both ways: it protects privacy but also enables misrepresentation."
+      ],
+      qa:[
+        ["Which one of these is used to set the rules for an online community?","D — Acceptable use policies."],
+        ["Describe the use of tags in online communities.","Tags let users label or categorise content or people, so that the content can be found again by others searching for that same tag."],
+        ["Describe how social networking services benefit from members sharing content.","Shared content spreads (goes viral), attracting more users and engagement to the platform, and it generates more data that the platform can analyse and sell to advertisers for targeted marketing."],
+        ["Explain why some online communities have administrators and moderators.","To enforce the community's acceptable use policy, remove inappropriate or harmful content, resolve disputes between users, and keep the community safe."],
+        ["State three ways in which a user can personalise their online profile.","Adding a profile picture, writing a bio/description, and setting a cover photo (or adjusting privacy settings)."],
+        ["State the function of social bookmarking.","To let users tag, save and share links to web pages so they and others can easily find them again."],
+        ["Explain why online work spaces could benefit a large international organisation.","They let employees in different countries and time zones collaborate on shared documents in real time, communicate instantly, and access company resources remotely without needing to travel."],
+        ["Describe how social networking sites are able to make suggestions to members about people that they may want to connect with.","By analysing a user's existing contacts, interests, and mutual/shared connections."],
+        ["Describe how some social networking sites are able to decide which advertisements to show to different members.","They analyse data such as a member's browsing history, likes, and profile information to match relevant, targeted adverts to their interests."],
+        ["State four ways in which students can use the features of VLEs to support their learning.","Accessing course materials and notes, submitting assignments online, taking auto-graded quizzes, and communicating with teachers/peers through forums or chat."],
+        ["State three examples of interactions that social network users can have with a member's post.","Liking/reacting to it, commenting on it, and sharing it."],
+        ["Discuss the factors that users of social networking sites should consider when sharing personal information.","Users should think about their privacy settings and who can actually see the content, the risk of revealing their location, the fact that content can remain online permanently (their digital footprint), the risk of being misrepresented or groomed by anonymous users, the risk of identity theft, and how the content might affect their reputation later (e.g. with future employers)."]
+      ]
+    },
+    {
+      id:"c9", num:9, title:"Implications of Digital Technologies",
+      html:`
+      <h4>Data protection</h4>
+      <p>Legislation (e.g. the UK Data Protection Act) requires data to be used fairly, lawfully, for limited stated purposes, kept accurate and secure, and not kept longer than necessary. Individuals have rights to access their data, object to processing, and have inaccurate data corrected or erased.</p>
+      <h4>Copyright</h4>
+      <p>Gives a creator sole authority to use/distribute their work. Exemptions (fair use) include library/education copying, archiving broadcasts, use for disabled people, non-commercial research, and parody. Owners protect content using DRM or geoblocking.</p>
+      <h4>Monitoring individuals</h4>
+      <p>Movements can be tracked via CCTV/facial recognition, ANPR, travel/ID cards, and GPS. Benefits: finding lost people, locating criminals, verifying transactions. Drawbacks: privacy loss, expense, energy use, feeling distrusted. Communications can also be monitored (e.g. under laws like the UK Investigatory Powers Act).</p>
+      <h4>Sustainability</h4>
+      <p>Device power use, data-centre cooling, and toxic e-waste chemicals harm the environment; mitigated by renewable energy, energy-efficient devices, cold-climate data centres, recycling schemes and legislation (e.g. EU WEEE Directive).</p>
+      <h4>Health and safety</h4>
+      <table><tr><th>Risk</th><th>Cause</th><th>Minimise by</th></tr>
+      <tr><td>Eye strain</td><td>Long screen use</td><td>Breaks, larger screens, blue-light filters</td></tr>
+      <tr><td>RSI</td><td>Repetitive/poor use</td><td>Ergonomic equipment</td></tr>
+      <tr><td>Back/neck ache</td><td>Poor posture</td><td>Correct seating posture</td></tr>
+      <tr><td>Trip hazards</td><td>Trailing wires</td><td>Cable management/trunking</td></tr>
+      <tr><td>Electric shock</td><td>Damaged cables/liquid</td><td>RCDs, inspections</td></tr>
+      <tr><td>Fire</td><td>Overloaded sockets</td><td>Fuses, extinguishers</td></tr></table>`,
+      vocab:[
+        ["copyright","legal sole authority for a creator to use/distribute their work."],
+        ["CCTV","closed circuit television used to monitor an area."],
+        ["sustainability","not using up natural resources; maintaining balance."],
+        ["RSI","repetitive strain injury — pain from repeating the same movement."]
+      ],
+      recap:[
+        "Copyright protects original work automatically — no registration needed. Exemptions include education and parody.",
+        "Monitoring questions almost always want both a security benefit and a privacy drawback.",
+        "Learn the health &amp; safety table in threes: risk → cause → how to minimise it."
+      ],
+      qa:[
+        ["Which one of these is used to reduce the risk to health and safety?","C — Using an RCD."],
+        ["Explain why free software licences have helped to reduce the digital divide.","Free/open-source software removes the cost of buying software, making technology more affordable and accessible to people and communities with lower incomes."],
+        ["Explain why users should be able to give their consent before an app shares their location.","It protects the individual's privacy and safety — without consent, their location data could be misused, for example for stalking or unwanted tracking."],
+        ["State three types of digital information that can be protected by copyright.","Music/audio, images/photographs, and video (or written text, software)."],
+        ["State one method of monitoring an individual's movements and describe how it is used.","CCTV with facial recognition software — used to identify and track individuals' movements in public places for security purposes."],
+        ["Explain why owners of digital information may decide to use copyright.","It protects their original work from being copied, used or distributed without permission, allowing them to control and profit from their own creation."],
+        ["State one benefit to individuals of having their location monitored.","It can help find lost people, especially children, or let them locate nearby friends."],
+        ["State one benefit to individuals of having their communications monitored.","It can help detect and prevent crime, improving public safety."],
+        ["State one drawback to individuals of monitoring their location and communications.","It invades their privacy and can make them feel they are not trusted."],
+        ["State three ways in which organisations should act responsibly to make sure that they protect the data they hold about individuals.","Encrypt sensitive data, restrict access using permissions and passwords, and only collect/use data lawfully and for the stated purpose, in line with data protection legislation."],
+        ["Explain why the large-scale use of online storage and applications can have a negative effect on the environment.","Data centres that host cloud storage and hosted applications consume huge amounts of electricity for running and cooling servers, much of it from non-renewable sources, producing significant greenhouse gas emissions, and growing demand means more data centres need to be built."],
+        ["Describe one way in which individuals can reduce the effect of their use of digital devices on the environment.","Recycle old devices responsibly through proper e-waste schemes instead of throwing them away, and choose energy-efficient devices."]
+      ]
+    },
+    {
+      id:"c10", num:10, title:"Online Information",
+      html:`
+      <h4>Information sources</h4>
+      <p><b>Primary sources</b> are things you created yourself (your own photos, interviews, recordings). <b>Secondary sources</b> are created by someone else (books, websites, broadcasts).</p>
+      <h4>Search engines &amp; syntax</h4>
+      <p>Use focused keywords; filter by size, colour, type, date, country, usage rights. Search syntax: <b>+</b> (AND, must include), <b>-</b> (NOT, exclude), <b>" "</b> (exact phrase match).</p>
+      <h4>Evaluating information</h4>
+      <table><tr><th>Check</th><th>Otherwise it might...</th></tr>
+      <tr><td>Accuracy — trustworthy source, evidence-based</td><td>Be incomplete or false</td></tr>
+      <tr><td>Age — publication date</td><td>Be outdated</td></tr>
+      <tr><td>Relevance — matches your topic</td><td>Not answer your question</td></tr>
+      <tr><td>Reliability — cross-check other sources</td><td>Not match other results</td></tr>
+      <tr><td>Bias — range of viewpoints, funding</td><td>Be one-sided/prejudiced</td></tr></table>
+      <h4>Plagiarism</h4>
+      <p>Avoid it by paraphrasing information in your own words and citing the original source, author and access date.</p>`,
+      vocab:[
+        ["primary source","information you created yourself."],
+        ["secondary source","information created by someone else."],
+        ["plagiarism","using someone else's work and presenting it as your own."],
+        ["bias","unfairly favouring one point of view."]
+      ],
+      recap:[
+        "Primary source = made by you; secondary source = made by someone else.",
+        "Search syntax: + means AND, - means NOT, \"  \" means an exact phrase.",
+        "Always check five things: accuracy, age, relevance, reliability, bias."
+      ],
+      qa:[
+        ["Which one of these is used to match a full phrase in a search?","D — \"\" (quotation marks)."],
+        ["State two ways in which an image search can be refined.","By size and by colour (or by usage rights/licence, or type/date)."],
+        ["State one reason why you should check whether information is biased before using it.","To make sure the information gives a fair, balanced view rather than only one side, so you can trust its accuracy."],
+        ["Describe how a search engine works.","The user enters keywords; the search engine matches these against its index of web pages; results are ranked by relevance using algorithms (e.g. considering links and popularity); the ranked results are then displayed to the user, often with options to filter them further."],
+        ["Explain why it is important to check whether information is protected by copyright before using it in your own work.","To avoid legal action for breaching copyright law by using someone else's protected work without their permission."],
+        ["State one benefit to students of rewriting information rather than copying it word-for-word.","It avoids plagiarism and shows the student's own understanding of the material."],
+        ["State three examples of search syntax.","+ (AND), - (NOT), and \"\" (exact phrase match)."]
+      ]
+    }
+  ]
+},
+{
+  unit:"Unit 4", title:"Online Goods and Services", sub:"Online services and the cloud",
+  chapters:[
+    {
+      id:"c11", num:11, title:"Online Services",
+      html:`
+      <h4>Types of online service</h4>
+      <ul>
+        <li><b>Shopping sites</b> — product catalogue, basket/checkout, secure payment, voucher codes.</li>
+        <li><b>Booking systems</b> — travel, leisure, entertainment; e-tickets via QR code/app.</li>
+        <li><b>Banks</b> — checking balances, transfers, loan applications, balance alerts.</li>
+        <li><b>Education &amp; training providers</b> — VLEs, online journals, remote support.</li>
+        <li><b>Gaming sites</b> — remote-hosted, real-time multiplayer.</li>
+        <li><b>News &amp; information providers</b> — subscriptions, real-time alerts.</li>
+        <li><b>Auction sites</b> — bidding with buyer/seller ratings.</li>
+        <li><b>Entertainment providers</b> — on-demand streaming and downloads.</li>
+      </ul>
+      <h4>Impact on lifestyle</h4>
+      <p>Benefits: convenience, time saved, safer (less cash carried), real-time alerts. Drawbacks: reduced patience, isolation, less memorisation/attention to detail, reduced physical activity.</p>
+      <h4>Impact on organisations</h4>
+      <p>Improved communication, access to global markets/workforce, use of big data, new security needs, and increased competition.</p>
+      <h4>Transactional data &amp; cookies</h4>
+      <p>Cookies store data such as time/date, IP address, items viewed/bought and form entries. <b>Session cookies</b> are deleted when the browser closes; <b>persistent cookies</b> remain over time; <b>third-party cookies</b> track users across sites for targeted adverts via ad servers.</p>`,
+      vocab:[
+        ["product catalogue","a list of products that can be bought online."],
+        ["cookies","information a website stores on a user's computer to recognise them later."],
+        ["e-ticket","an electronic version of a paper ticket."]
+      ],
+      recap:[
+        "Cookies: session (deleted when browser closes), persistent (stored long-term), third-party (tracks across sites for ads).",
+        "For each online service type, learn one real feature example (e.g. e-tickets for booking sites).",
+        "Split 'impact' answers into two: effect on individuals' lifestyle vs effect on how organisations do business."
+      ],
+      qa:[
+        ["Which one of these is not provided by banks as an online service?","A — Paying in cheques."],
+        ["State two ways in which education providers can use online services to help learners.","Providing access to online libraries/journal archives, and offering online support and communication with teachers and other learners."],
+        ["State three features of shopping sites.","A product catalogue, an online basket/checkout, and a secure payment system."],
+        ["Explain why auction sites provide ratings for buyers.","Ratings help other users judge how trustworthy and reliable a buyer or seller is likely to be before completing a transaction with them."],
+        ["Explain why banks use HTTPS for their online services.","HTTPS encrypts data sent between the user and the bank's server, protecting sensitive financial and personal information from being intercepted by criminals."],
+        ["Explain the benefit of e-ticketing for airline flights.","It's more convenient — passengers don't need to print or carry a paper ticket, there's less risk of losing it, and it can speed up check-in."],
+        ["State one drawback of the use of third-party cookies.","They can track a user's behaviour across many different websites without the user fully realising, raising privacy concerns."],
+        ["State three examples of data that can be stored in cookies.","The time/date of a transaction, the user's IP address, and items viewed or added to a basket."],
+        ["State the difference between session cookies and persistent cookies.","Session cookies are deleted as soon as the browser is closed, while persistent cookies remain stored on the device and are used across multiple visits over time."],
+        ["State the way in which news services can use a feature of smartphone apps to keep users up to date.","By sending push notifications to alert users to breaking news stories."],
+        ["Discuss how the use of cookies by organisations impacts on individuals.","Cookies can benefit users by personalising their experience — remembering logins/preferences and showing more relevant adverts — but they also raise privacy concerns, since browsing behaviour is tracked, potentially shared with third parties or sold, and users may feel constantly monitored; tracked data can also be used to vary prices shown to different users."]
+      ]
+    },
+    {
+      id:"c12", num:12, title:"The Cloud",
+      html:`
+      <h4>Hosted applications (SaaS)</h4>
+      <p>Web apps run on a remote server and display in a browser. Performance depends on internet connection quality, latency and bandwidth. The client-server model enables real-time collaboration (shared editing, edit tracking, built-in chat).</p>
+      <table><tr><th>Benefits</th><th>Drawbacks</th></tr>
+      <tr><td>Accessible from many devices</td><td>Only works with an internet connection</td></tr>
+      <tr><td>Enables collaboration</td><td>High latency/low bandwidth hurts experience</td></tr>
+      <tr><td>Can use online storage to save files</td><td>Fewer features than local software</td></tr></table>
+      <h4>Online data storage</h4>
+      <table><tr><th>Benefits</th><th>Drawbacks</th></tr>
+      <tr><td>Automatic backups, scalable</td><td>Possible data protection issues abroad</td></tr>
+      <tr><td>Easy sharing/collaboration</td><td>Dependent on the provider's security</td></tr>
+      <tr><td>Frees up local storage</td><td>Slower than local file transfer; needs internet; may need paid upgrades</td></tr></table>
+      <h4>Impact of the cloud</h4>
+      <p>Enables cheap, low-spec devices (e.g. Chromebooks, netbooks) since heavy processing/storage happens remotely — helping to reduce the digital divide. Powers online services (shopping, banking, VLEs/MOOCs, gaming, streaming) and online communities (social networks, workspaces, wikis, content-sharing, bookmarking sites).</p>`,
+      vocab:[
+        ["cloud","using the internet to provide software or storage space rather than local storage."],
+        ["hosted application","software that runs on a remote server and is accessed via a browser."],
+        ["scalable","able to grow or shrink to meet demand."]
+      ],
+      recap:[
+        "The cloud = using the internet for storage/software instead of relying on local hardware.",
+        "Hosted apps need a good connection and usually have fewer features than installed software.",
+        "Cheap cloud-reliant devices (e.g. Chromebooks) can help reduce the digital divide."
+      ],
+      qa:[
+        ["Which one of these is used to store hosted applications?","C — Server."],
+        ["State three benefits of using online data storage.","Automatic backups, scalable storage, and easier file sharing/collaboration."],
+        ["State three online services provided by cloud-based services.","Online shopping/auctions, online banking, and VLEs/e-learning (or on-demand streaming)."],
+        ["State what is meant by the term 'cloud'.","A term describing the internet when it is used to provide software or storage space remotely, rather than relying on a device's local storage."]
+      ]
+    }
+  ]
+}
+];
+
+function el(tag, attrs, html){
+  const e = document.createElement(tag);
+  if(attrs) for(const k in attrs) e.setAttribute(k, attrs[k]);
+  if(html !== undefined) e.innerHTML = html;
+  return e;
+}
+
+const ICONS = {
+  c1:  `<rect x="4" y="6" width="24" height="15" rx="2"/><rect x="11" y="24" width="10" height="3" rx="1"/><line x1="16" y1="21" x2="16" y2="24"/>`,
+  c2:  `<circle cx="16" cy="16" r="7"/><circle cx="16" cy="16" r="2.4"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="16" y1="25" x2="16" y2="29"/><line x1="3" y1="16" x2="7" y2="16"/><line x1="25" y1="16" x2="29" y2="16"/><line x1="7" y1="7" x2="10" y2="10"/><line x1="22" y1="22" x2="25" y2="25"/><line x1="25" y1="7" x2="22" y2="10"/><line x1="10" y1="22" x2="7" y2="25"/>`,
+  c3:  `<rect x="8" y="8" width="16" height="16" rx="2"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="20" y1="2" x2="20" y2="8"/><line x1="12" y1="24" x2="12" y2="30"/><line x1="20" y1="24" x2="20" y2="30"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="2" y1="20" x2="8" y2="20"/><line x1="24" y1="12" x2="30" y2="12"/><line x1="24" y1="20" x2="30" y2="20"/>`,
+  c4:  `<circle cx="16" cy="24" r="2"/><path d="M10 18a8 8 0 0 1 12 0"/><path d="M5 13a15 15 0 0 1 22 0"/>`,
+  c5:  `<circle cx="8" cy="8" r="3"/><circle cx="24" cy="8" r="3"/><circle cx="16" cy="25" r="3"/><line x1="8" y1="11" x2="15" y2="22"/><line x1="24" y1="11" x2="17" y2="22"/><line x1="11" y1="8" x2="21" y2="8"/>`,
+  c6:  `<path d="M16 3 L27 8 V17 C27 24 22 28 16 30 C10 28 5 24 5 17 V8 Z"/><path d="M11 16 L15 20 L22 12"/>`,
+  c7:  `<circle cx="16" cy="16" r="12"/><ellipse cx="16" cy="16" rx="5" ry="12"/><line x1="4" y1="16" x2="28" y2="16"/>`,
+  c8:  `<circle cx="11" cy="11" r="4"/><circle cx="21" cy="11" r="4"/><path d="M4 27c0-5 4-8 7-8s7 3 7 8"/><path d="M14 27c0-5 4-8 7-8s7 3 7 8"/>`,
+  c9:  `<line x1="16" y1="3" x2="16" y2="27"/><line x1="6" y1="9" x2="26" y2="9"/><path d="M2 9 L10 9 L6 18 Z"/><path d="M22 9 L30 9 L26 18 Z"/><rect x="10" y="27" width="12" height="2.5"/>`,
+  c10: `<circle cx="13" cy="13" r="9"/><line x1="20" y1="20" x2="29" y2="29"/>`,
+  c11: `<path d="M8 12h16l-2 16H10z"/><path d="M12 12v-3a4 4 0 0 1 8 0v3"/>`,
+  c12: `<path d="M9 22a6 6 0 0 1 1-12 8 8 0 0 1 15 3 5 5 0 0 1-1 9z"/>`
+};
+function iconSVG(id, cls){
+  return `<svg class="${cls||''}" viewBox="0 0 32 32" aria-hidden="true">${ICONS[id]||''}</svg>`;
+}
+
+function wrapLabel(text, max){
+  max = max || 12;
+  const words = text.split(' ');
+  const lines = [];
+  let cur = '';
+  words.forEach(w=>{
+    const test = cur ? cur + ' ' + w : w;
+    if(test.length > max && cur){ lines.push(cur); cur = w; }
+    else cur = test;
+  });
+  if(cur) lines.push(cur);
+  return lines.slice(0,2);
+}
+
+function buildMindMap(unit){
+  const n = unit.chapters.length;
+  const cx = 190, cy = 190, R = 138;
+  const vbW = 380, vbH = 380;
+  let linksSvg = '', nodesSvg = '';
+  unit.chapters.forEach((ch,i)=>{
+    const angle = (-90 + i*(360/n)) * Math.PI/180;
+    const x = cx + R*Math.cos(angle);
+    const y = cy + R*Math.sin(angle);
+    const mx = (cx+x)/2, my = (cy+y)/2;
+    const dx = x-cx, dy = y-cy;
+    const norm = Math.sqrt(dx*dx+dy*dy) || 1;
+    const ux = -dy/norm, uy = dx/norm;
+    const off = (i%2===0? 1:-1) * 16;
+    const qx = mx + ux*off, qy = my + uy*off;
+    linksSvg += `<path class="mm-link" d="M ${cx} ${cy} Q ${qx.toFixed(1)} ${qy.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}"/>`;
+    const lines = wrapLabel(ch.title, 13);
+    const textSvg = lines.map((ln,li)=>`<tspan x="${x.toFixed(1)}" dy="${li===0? '2.6em':'1.1em'}">${ln}</tspan>`).join('');
+    nodesSvg += `
+      <a class="mm-node" href="#${ch.id}">
+        <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="27" class="mm-circle"/>
+        <g transform="translate(${(x-11).toFixed(1)}, ${(y-11).toFixed(1)}) scale(0.7)">${iconSVG(ch.id,'mm-icon')}</g>
+        <text class="mm-label" text-anchor="middle">${textSvg}</text>
+      </a>`;
+  });
+  const centerLines = wrapLabel(unit.title, 11);
+  const centerText = centerLines.map((ln,li)=>`<tspan x="${cx}" dy="${li===0? '-0.1em':'1.1em'}">${ln}</tspan>`).join('');
+  return `
+  <figure class="mindmap">
+    <svg viewBox="0 0 ${vbW} ${vbH}" role="img" aria-label="Mind map of ${unit.title} chapters">
+      ${linksSvg}
+      <circle cx="${cx}" cy="${cy}" r="46" class="mm-center-circle"/>
+      <text class="mm-center-label" text-anchor="middle" y="${cy}">${centerText}</text>
+      ${nodesSvg}
+    </svg>
+    <figcaption>Tap a bubble to jump to that chapter</figcaption>
+  </figure>`;
+}
+
+function buildTOC(){
+  const nav = document.getElementById('toc');
+  const examLi = el('li');
+  examLi.innerHTML = `<a href="#examprep"><span class="num">✎</span>Exam Prep</a>`;
+  const examUl = el('ul');
+  examUl.appendChild(examLi);
+  nav.appendChild(el('div',{class:'unit-label'}, 'Start'));
+  nav.appendChild(examUl);
+  DATA.forEach(unit=>{
+    const label = el('div',{class:'unit-label'}, `${unit.unit}`);
+    nav.appendChild(label);
+    const ul = el('ul');
+    unit.chapters.forEach(ch=>{
+      const li = el('li');
+      li.innerHTML = `<a href="#${ch.id}"><span class="num">Ch.${ch.num}</span>${ch.title}</a>`;
+      ul.appendChild(li);
+    });
+    nav.appendChild(ul);
+  });
+}
+
+function buildUnits(){
+  const root = document.getElementById('units');
+  DATA.forEach(unit=>{
+    const sec = el('section',{class:'unit'});
+    sec.appendChild(el('h2',null,`${unit.unit}: ${unit.title}`));
+    sec.appendChild(el('p',{class:'unit-sub'}, unit.sub));
+    sec.appendChild(el('div',{class:'mindmap-wrap'}, buildMindMap(unit)));
+    unit.chapters.forEach(ch=>{
+      const art = el('article',{class:'chapter', id:ch.id});
+      art.appendChild(el('h3',null,`${iconSVG(ch.id,'ch-icon')}<span class="chnum">Ch.${ch.num}</span>${ch.title}`));
+      art.appendChild(el('div',{class:'content'}, ch.html));
+
+      if(ch.recap && ch.recap.length){
+        const note = el('div',{class:'recap-note'});
+        note.appendChild(el('div',{class:'recap-title'},'✎ Quick recap'));
+        const ul = el('ul');
+        ch.recap.forEach(r=> ul.appendChild(el('li',null,r)));
+        note.appendChild(ul);
+        art.appendChild(note);
+      }
+
+      if(ch.vocab && ch.vocab.length){
+        const det = el('details',{class:'vocab'});
+        det.appendChild(el('summary',null,'Key vocabulary'));
+        const dl = el('dl');
+        ch.vocab.forEach(([term,def])=>{
+          dl.appendChild(el('dt',null,term));
+          dl.appendChild(el('dd',null,def));
+        });
+        det.appendChild(dl);
+        art.appendChild(det);
+      }
+
+      if(ch.qa && ch.qa.length){
+        const qa = el('div',{class:'qa-block'});
+        qa.appendChild(el('div',{class:'qa-title'},'Chapter review — questions & answers'));
+        ch.qa.forEach(([q,a],i)=>{
+          const item = el('div',{class:'q-item'});
+          item.appendChild(el('p',{class:'q-text'}, `<span class="q-num">${i+1}.</span>${q}`));
+          const btn = el('button',{class:'reveal',type:'button'}, 'Show answer');
+          const ans = el('div',{class:'a-text'}, a);
+          btn.addEventListener('click', ()=>{
+            item.classList.toggle('open');
+            btn.textContent = item.classList.contains('open') ? 'Hide answer' : 'Show answer';
+          });
+          item.appendChild(btn);
+          item.appendChild(ans);
+          qa.appendChild(item);
+        });
+        art.appendChild(qa);
+      }
+      art.appendChild(el('a',{class:'top-link', href:'#toc'},'↑ back to contents'));
+      sec.appendChild(art);
+    });
+    root.appendChild(sec);
+  });
+}
+
+function buildChecklist(){
+  const root = document.getElementById('checklist');
+  let done = {};
+  try{ done = JSON.parse(localStorage.getItem('ict-checklist') || '{}'); }catch(e){}
+  DATA.forEach(unit=>{
+    const group = el('div',{class:'cl-group'});
+    group.appendChild(el('div',{class:'cl-unit'}, `${unit.unit}: ${unit.title}`));
+    unit.chapters.forEach(ch=>{
+      const row = el('label',{class:'cl-row'});
+      const cb = el('input',{type:'checkbox'});
+      cb.checked = !!done[ch.id];
+      cb.addEventListener('change', ()=>{
+        done[ch.id] = cb.checked;
+        try{ localStorage.setItem('ict-checklist', JSON.stringify(done)); }catch(e){}
+      });
+      row.appendChild(cb);
+      row.appendChild(el('span',null, `Ch.${ch.num} — ${ch.title}`));
+      group.appendChild(row);
+    });
+    root.appendChild(group);
+  });
+}
+
+buildTOC();
+buildUnits();
+buildChecklist();
+
+/* ============ FONT SIZE CONTROLS ============ */
+const fontInc = document.getElementById('font-increase');
+const fontDec = document.getElementById('font-decrease');
+function applyFontSize(size){
+  if(size) document.documentElement.setAttribute('data-fontsize', size);
+  else document.documentElement.removeAttribute('data-fontsize');
+}
+try{
+  const savedSize = localStorage.getItem('ict-fontsize');
+  if(savedSize) applyFontSize(savedSize);
+}catch(e){}
+
+fontInc.addEventListener('click', ()=>{
+  const cur = document.documentElement.getAttribute('data-fontsize');
+  const next = cur === 'small' ? null : 'large';
+  applyFontSize(next);
+  try{ localStorage.setItem('ict-fontsize', next || ''); }catch(e){}
+});
+fontDec.addEventListener('click', ()=>{
+  const cur = document.documentElement.getAttribute('data-fontsize');
+  const next = cur === 'large' ? null : 'small';
+  applyFontSize(next);
+  try{ localStorage.setItem('ict-fontsize', next || ''); }catch(e){}
+});
+
+/* ============ THEME TOGGLE ============ */
+const themeBtn = document.getElementById('theme-toggle');
+function applyTheme(t){
+  if(t) document.documentElement.setAttribute('data-theme', t);
+  else document.documentElement.removeAttribute('data-theme');
+}
+try{
+  const saved = localStorage.getItem('ict-theme');
+  if(saved) applyTheme(saved);
+}catch(e){}
+themeBtn.addEventListener('click', ()=>{
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : (current === 'light' ? null : 'dark');
+  applyTheme(next);
+  try{ localStorage.setItem('ict-theme', next || ''); }catch(e){}
+});
+
+/* ============ LOGIN GATE ============ */
+const PASSWORD = "trwailinhtet";
+const gate = document.getElementById('gate');
+const app = document.getElementById('app');
+const form = document.getElementById('gate-form');
+const pwInput = document.getElementById('pw');
+const errEl = document.getElementById('gate-error');
+const lockBtn = document.getElementById('lock-btn');
+
+function unlock(){
+  gate.style.display = 'none';
+  app.style.display = 'block';
+}
+function lock(){
+  app.style.display = 'none';
+  gate.style.display = 'flex';
+  pwInput.value = '';
+}
+
+try{
+  if(sessionStorage.getItem('ict-unlocked') === '1'){ unlock(); }
+}catch(e){}
+
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  if(pwInput.value === PASSWORD){
+    errEl.textContent = '';
+    try{ sessionStorage.setItem('ict-unlocked','1'); }catch(err){}
+    unlock();
+  }else{
+    errEl.textContent = 'Incorrect password — try again.';
+  }
+});
+
+lockBtn.addEventListener('click', ()=>{
+  try{ sessionStorage.removeItem('ict-unlocked'); }catch(e){}
+  lock();
+});
+</script>
+</body>
+</html>
