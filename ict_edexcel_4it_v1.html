@@ -6,396 +6,274 @@
 <title>ICT Notebook — Tr.WaiLinHtet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Literata:ital,opsz,wght@0,18..144,400;0,18..144,500;0,18..144,600;1,18..144,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&family=Literata:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#f7f3e9;
-  --paper-line:#d9cfb8;
-  --margin-line:#d99a92;
-  --ink:#2b2620;
-  --ink-soft:#5a5348;
-  --accent:#a1432e;
-  --accent-soft:#c98a3a;
-  --card:#fffdf7;
-  --card-border:#e3d9bf;
-  --tape:#ecdfb8;
-  --answer-bg:#eee3c8;
-  --shadow: 2px 3px 0 rgba(43,38,32,0.08);
-  --base-font-size: 17px;
+  --paper:#FBF8F1; --paper-2:#F5F0E4; --card:#ffffff; --line:#DCD4C0;
+  --ink:#272B33; --ink-soft:#5C6070;
+  --pen:#2F4B7C; --pen-light:#5C7AAE; --on-pen:#ffffff;
+  --highlight:#F4D35E; --highlight-soft:#FCEFC0; --margin:#C1495B;
+  --tip:#4F7A5B; --tip-soft:#E4EEE2; --warn:#B5442E; --warn-soft:#F7E3DD;
+  --tab:#EFE7D4; --shadow:0 2px 10px rgba(39,43,51,0.08); --radius:3px;
+  --base-font-size:17px;
   box-sizing:border-box;
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
-:root[data-fontsize="small"]{ --base-font-size: 14px; }
-:root[data-fontsize="large"]{ --base-font-size: 20px; }
-
-:root:not([data-theme="light"]){
-  @media (prefers-color-scheme: dark){
-    --paper:#1c1e1b;
-    --paper-line:#33362f;
-    --margin-line:#5a3b38;
-    --ink:#e8e4d6;
-    --ink-soft:#a9a493;
-    --accent:#e8a26b;
-    --accent-soft:#8fb28a;
-    --card:#22251f;
-    --card-border:#3a3d34;
-    --tape:#2e3128;
-    --answer-bg:#2a2d24;
-    --shadow: 2px 3px 0 rgba(0,0,0,0.35);
+:root[data-fontsize="small"]{ --base-font-size:14.5px; }
+:root[data-fontsize="large"]{ --base-font-size:20px; }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#1c1e1b; --paper-2:#24271f; --card:#22251f; --line:#3a3d34;
+    --ink:#e8e4d6; --ink-soft:#a9a493; --pen:#8fb0e8; --pen-light:#6d8fc7; --on-pen:#1c1e1b;
+    --highlight:#b8942a; --highlight-soft:#3a3420; --margin:#e07a8a;
+    --tip:#8fb28a; --tip-soft:#22301f; --warn:#e8a26b; --warn-soft:#3a2a22;
+    --tab:#262920; --shadow:0 2px 10px rgba(0,0,0,0.4);
   }
 }
 :root[data-theme="dark"]{
-  --paper:#1c1e1b;
-  --paper-line:#33362f;
-  --margin-line:#5a3b38;
-  --ink:#e8e4d6;
-  --ink-soft:#a9a493;
-  --accent:#e8a26b;
-  --accent-soft:#8fb28a;
-  --card:#22251f;
-  --card-border:#3a3d34;
-  --tape:#2e3128;
-  --answer-bg:#2a2d24;
-  --shadow: 2px 3px 0 rgba(0,0,0,0.35);
+  --paper:#1c1e1b; --paper-2:#24271f; --card:#22251f; --line:#3a3d34;
+  --ink:#e8e4d6; --ink-soft:#a9a493; --pen:#8fb0e8; --pen-light:#6d8fc7; --on-pen:#1c1e1b;
+  --highlight:#b8942a; --highlight-soft:#3a3420; --margin:#e07a8a;
+  --tip:#8fb28a; --tip-soft:#22301f; --warn:#e8a26b; --warn-soft:#3a2a22;
+  --tab:#262920; --shadow:0 2px 10px rgba(0,0,0,0.4);
 }
-html,body{height:100%; margin:0;}
-*{-webkit-tap-highlight-color:transparent;}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
 body{
-  background:var(--paper);
-  color:var(--ink);
-  font-family:'Literata', Georgia, serif;
-  font-size: var(--base-font-size);
-  line-height:1.6;
-  background-image:
-    repeating-linear-gradient(var(--paper) 0 34px, var(--paper-line) 34px 35px);
-  background-attachment:local;
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:'Literata', Georgia, serif; font-size:var(--base-font-size); line-height:1.65;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
-h1,h2,h3,h4,.hand{ font-family:'Kalam', cursive; }
-a{ color:var(--accent); text-decoration:none; }
+h1,h2,h3,h4{ font-family:'Zilla Slab', Georgia, serif; color:var(--ink); margin:0 0 .5em; line-height:1.2; }
+p{ margin:0 0 1em; max-width:70ch; }
+.hand{ font-family:'Caveat', cursive; }
+a{ color:var(--pen); }
+::selection{ background:var(--highlight); color:#272B33; }
 
-/* ---------- LOGIN GATE ---------- */
-#gate{
-  position:fixed; inset:0; z-index:100;
-  display:flex; align-items:center; justify-content:center;
-  background:var(--paper);
-  padding:24px;
-}
-.gate-card{
-  background:var(--card);
-  border:1px solid var(--card-border);
-  box-shadow:var(--shadow);
-  padding:34px 30px;
-  max-width:360px; width:100%;
-  border-radius:2px;
-  position:relative;
-}
-.gate-card::before{
-  content:"";
-  position:absolute; top:14px; left:50%; transform:translateX(-50%) rotate(-2deg);
-  width:70px; height:22px; background:var(--tape); opacity:.8;
-}
-.gate-card h1{ font-size:1.5rem; margin:10px 0 4px; }
-.gate-card p.sub{ color:var(--ink-soft); margin:0 0 20px; font-size:.95rem; }
-#gate input{
-  width:100%; padding:11px 12px; font-size:1rem;
-  border:1px solid var(--card-border); background:transparent; color:var(--ink);
-  border-radius:2px; font-family:'Literata', serif;
-  margin-bottom:12px; box-sizing: border-box;
-}
-#gate button{
-  width:100%; padding:11px 12px; font-size:1rem; cursor:pointer;
-  background:#27C5F5; color:#fff; border:none; border-radius:2px;
-  font-family:'Kalam', cursive; font-weight:700; letter-spacing:.02em;
-}
-#gate button:hover{ opacity:.9; }
-#gate input:focus{ outline:none; border-color:#27C5F5; box-shadow:0 0 0 2px rgba(39,197,245,.25); }
-#gate-error{ color:var(--accent); font-size:.85rem; min-height:1.2em; margin-top:8px; }
+/* ===== Shell ===== */
+#app{ display:none; }
+.shell{ display:grid; grid-template-columns:230px 1fr; min-height:100vh; }
+@media (max-width:900px){ .shell{ grid-template-columns:1fr; } }
 
-/* ---------- APP LAYOUT (10% SIDEBAR / 90% CONTENT) ---------- */
-#app{ display:none; min-height:100vh; }
-.app-container{
-  display: flex;
-  min-height: 100vh;
+/* ===== Sidebar ===== */
+.sidebar{
+  background:var(--tab); border-right:2px solid var(--line);
+  position:sticky; top:0; height:100vh; overflow-y:auto;
+  padding:22px 0 22px 18px;
+  background-image:radial-gradient(circle 4px, var(--paper) 4px, transparent 4px);
+  background-size:100% 34px; background-position:-4px 10px;
 }
+@media (max-width:900px){
+  .sidebar{ position:relative; height:auto; padding:14px; background-image:none; border-right:none; border-bottom:2px solid var(--line); overflow-x:auto; }
+}
+.side-title{ padding:0 14px 16px 20px; font-family:'Caveat',cursive; font-size:1.5rem; color:var(--pen); border-bottom:1px dashed var(--line); margin-bottom:10px; }
+@media (max-width:900px){ .side-title{ display:none; } }
+.side-nav{ list-style:none; margin:0; padding:0 10px 0 20px; }
+@media (max-width:900px){ .side-nav{ display:flex; gap:8px; padding:0; white-space:nowrap; } }
+.side-nav li{ margin:2px 0; }
+.side-nav a{
+  display:block; text-decoration:none; color:var(--ink-soft);
+  font-family:'Zilla Slab',serif; font-size:.86rem; font-weight:600;
+  padding:8px 10px; border-radius:4px 0 0 4px; border-left:3px solid transparent;
+}
+.side-nav a:hover{ color:var(--pen); border-left-color:var(--pen-light); }
+.side-nav a.active{ color:var(--pen); background:var(--paper); border-left-color:var(--pen); }
+.side-nav .n{ color:var(--margin); font-family:'Caveat',cursive; font-size:1.05rem; margin-right:4px; }
 
-/* SIDEBAR NAV (10%) */
-aside.sidebar{
-  flex: 0 0 10%;
-  min-width: 220px;
-  max-width: 300px;
-  background: var(--card);
-  border-right: 1px solid var(--card-border);
-  position: fixed;
-  top: 0; bottom: 0; left: 0;
-  overflow-y: auto;
-  padding: 24px 14px;
-  box-sizing: border-box;
-  z-index: 10;
+/* ===== Page ===== */
+main{ padding:0; min-width:0; }
+.page{
+  position:relative; max-width:840px; margin:0 auto; padding:56px 48px 60px 56px;
+  border-left:2px solid var(--margin); min-height:100vh;
+  background-image:repeating-linear-gradient(var(--paper) 0 33px, var(--line) 33px 34px);
+  background-position:0 200px;
 }
-.sidebar-header h2{
-  font-family:'Kalam', cursive;
-  font-size: 1.25rem;
-  margin: 0 0 14px 0;
-  color: var(--accent);
-}
-nav.toc .unit-label{ 
-  font-family:'Kalam',cursive; 
-  color:var(--accent-soft); 
-  font-size:0.8rem; 
-  margin:14px 0 4px; 
-}
-nav.toc .unit-label:first-child{ margin-top:0; }
-nav.toc ul{ list-style:none; margin:0; padding:0; }
-nav.toc li{ margin:2px 0; }
-nav.toc a{
-  display:flex; align-items:center;
-  padding:4px 6px;
-  border-radius: 3px;
-  font-size: 0.8rem;
-  color:var(--ink);
-  text-align: left;
-  transition: background 0.1s, color 0.1s;
-}
-nav.toc a:hover{ background: var(--answer-bg); color:var(--accent); }
-nav.toc .num{ color:var(--accent); font-family:'Kalam',cursive; margin-right:6px; font-weight: 700; }
+@media (max-width:640px){ .page{ padding:36px 20px 44px 26px; border-left-width:1.5px; } }
 
-/* MAIN CONTENT (90%) */
-main.main-content{
-  margin-left: 260px; /* matches flexible sidebar space */
-  flex: 1;
-  padding: 30px 45px 100px;
-  max-width: 1100px;
-  box-sizing: border-box;
+/* ===== Cover ===== */
+.cover{ padding-top:6vh; padding-bottom:40px; }
+.cover .kicker{ font-family:'Caveat',cursive; color:var(--margin); font-size:1.3rem; transform:rotate(-2deg); display:inline-block; margin-bottom:6px; }
+.cover h1{ font-size:3.4rem; letter-spacing:-.5px; font-weight:700; }
+.cover h1 span{ color:var(--pen); }
+@media (max-width:640px){ .cover h1{ font-size:2.4rem; } }
+.cover .subtitle{ font-family:'Zilla Slab',serif; font-size:1.15rem; color:var(--ink-soft); margin-top:6px; }
+.cover .byline{
+  margin-top:26px; display:inline-flex; align-items:center; gap:10px; padding:10px 18px;
+  background:var(--highlight-soft); border:1px solid var(--highlight); border-radius:var(--radius);
+  font-family:'Zilla Slab',serif; font-weight:600; font-size:.95rem;
 }
+.avatar{ width:34px; height:34px; border-radius:50%; background:var(--pen); color:var(--on-pen); display:flex; align-items:center; justify-content:center; font-family:'Caveat',cursive; font-size:1.2rem; font-weight:700; }
+.cover .meta-row{ margin-top:22px; display:flex; gap:22px; flex-wrap:wrap; font-size:.85rem; color:var(--ink-soft); font-family:'Zilla Slab',serif; }
+.cover .meta-row b{ color:var(--ink); }
+.toc{ margin-top:38px; display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+@media (max-width:640px){ .toc{ grid-template-columns:1fr; } }
+.toc a{
+  text-decoration:none; color:var(--ink); display:flex; align-items:baseline; gap:10px;
+  padding:10px 12px; background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius);
+  font-family:'Zilla Slab',serif; font-size:.92rem; font-weight:600;
+}
+.toc a:hover{ border-color:var(--pen); color:var(--pen); }
+.toc a .num{ font-family:'Caveat',cursive; font-size:1.4rem; color:var(--margin); }
 
-header.top{
-  display:flex; align-items:flex-start; justify-content:space-between; gap:14px;
-  padding-bottom:18px; margin-bottom:20px; border-bottom:2px solid var(--card-border);
-}
-header.top .title h1{ font-size:1.9rem; margin:0 0 2px; }
-header.top .title .byline{ color:var(--ink-soft); font-size:.95rem; }
-.controls{ display:flex; gap:8px; align-items:center; flex-wrap: wrap; }
-.icon-btn{
-  border:1px solid var(--card-border); background:var(--card); color:var(--ink);
-  border-radius:2px; padding:6px 10px; cursor:pointer; font-family:'Literata',serif; font-size:0.8rem;
-}
-.icon-btn:hover{ border-color:var(--accent); }
+/* ===== Boxes ===== */
+.box{ margin:1.3em 0; padding:14px 18px; border-radius:var(--radius); border:1px solid var(--line); background:var(--paper-2); }
+.box h4{ margin-top:0; font-size:.82rem; text-transform:uppercase; letter-spacing:.06em; }
+.box.tip{ background:var(--tip-soft); border-color:var(--tip); }
+.box.tip h4{ color:var(--tip); }
+.box p:last-child{ margin-bottom:0; }
+strong, .content b{ color:var(--ink); background:linear-gradient(transparent 60%, var(--highlight-soft) 60%); font-weight:600; }
 
-.hero-art{ margin:6px 0 24px; }
-.hero-art svg{ width:100%; height:auto; max-height:140px; display:block; }
-.hero-line{ stroke:var(--ink-soft); stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
-.hero-accent{ stroke:#27C5F5; stroke-width:2.4; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+/* ===== Unit band + chapters ===== */
+.unit-band{
+  margin:54px 0 0; padding:14px 0 4px; border-top:3px double var(--pen-light);
+  font-family:'Caveat',cursive; font-size:1.9rem; color:var(--margin);
+}
+.unit-band small{ display:block; font-family:'Zilla Slab',serif; font-size:.9rem; color:var(--ink-soft); }
+.chapter{ padding:48px 0 30px; border-top:1px dashed var(--line); }
+.unit-band + .chapter{ border-top:none; padding-top:26px; }
+.chapter-head{ display:flex; align-items:center; gap:16px; margin-bottom:6px; }
+.chapter-head .badge{
+  flex:0 0 auto; width:54px; height:54px; border-radius:50%; background:var(--pen); color:var(--on-pen);
+  display:flex; align-items:center; justify-content:center; font-family:'Caveat',cursive; font-weight:700; font-size:1.7rem; box-shadow:var(--shadow);
+}
+.chapter-head h2{ font-size:1.7rem; margin:0; }
+.chapter-intro{ color:var(--ink-soft); font-style:italic; margin-bottom:22px; }
+.content h3{ font-size:1.18rem; margin-top:1.6em; color:var(--pen); }
+.content h4{ font-size:1.05rem; margin-top:1.4em; color:var(--pen); }
+.content ul, .content ol{ padding-left:1.3em; max-width:70ch; }
+.content li{ margin-bottom:.45em; }
 
-section.unit{ margin:56px 0 10px; }
-section.unit > h2{
-  font-size:1.5rem; color:var(--accent); margin-bottom:2px;
-  padding:4px 10px; display:inline-block; background:var(--tape); transform:rotate(-.4deg);
-}
-section.unit > .unit-sub{ color:var(--ink-soft); margin:6px 0 20px; font-size:.95rem; }
+table{ width:100%; border-collapse:collapse; margin:1.3em 0; font-size:.92rem; background:var(--card); box-shadow:var(--shadow); }
+th,td{ border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top; }
+th{ background:var(--pen); color:var(--on-pen); font-family:'Zilla Slab',serif; font-weight:600; }
+tr:nth-child(even) td{ background:var(--paper-2); }
+.tbl-scroll{ overflow-x:auto; }
 
-article.chapter{
-  background:var(--card); border:1px solid var(--card-border);
-  border-radius:2px; box-shadow:var(--shadow); padding:22px 24px; margin:0 0 30px;
-  scroll-margin-top:20px;
-}
-article.chapter h3{ font-size:1.3rem; margin:0 0 4px; color:var(--ink); display:flex; align-items:center; gap:8px; }
-article.chapter h3 .chnum{ color:var(--accent); margin-right:2px; }
-.ch-icon{ width:26px; height:26px; flex:0 0 auto; stroke:var(--accent-soft); fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.checklist{ list-style:none; padding-left:0; margin:1em 0; max-width:70ch; }
+.checklist li{ padding-left:30px; position:relative; margin-bottom:8px; font-size:.96rem; }
+.checklist li::before{ content:""; position:absolute; left:0; top:3px; width:18px; height:18px; border:2px solid var(--pen); border-radius:3px; }
+.recap{ margin-top:26px; padding:18px 20px; background:var(--tab); border:1px dashed var(--pen-light); border-radius:var(--radius); }
+.recap h4{ color:var(--pen); margin-top:0; font-size:.95rem; text-transform:uppercase; letter-spacing:.05em; }
+.recap .checklist{ margin-bottom:0; }
 
-/* ---------- MIND MAP ---------- */
-.mindmap-wrap{ margin:0 0 26px; }
-figure.mindmap{
-  margin:0; background:var(--card); border:1px solid var(--card-border);
-  border-radius:2px; box-shadow:var(--shadow); padding:6px 6px 2px;
-}
-figure.mindmap svg{ width:100%; height:auto; display:block; max-height:420px; }
-figure.mindmap figcaption{
-  text-align:center; color:var(--ink-soft); font-size:.8rem; padding:6px 0 10px;
-  font-family:'Kalam',cursive;
-}
-.mm-link{ fill:none; stroke:var(--card-border); stroke-width:1.6; stroke-dasharray:1 5; stroke-linecap:round; }
-.mm-center-circle{ fill:var(--tape); stroke:var(--accent); stroke-width:1.6; }
-.mm-center-label{
-  font-family:'Kalam',cursive; font-size:15px; fill:var(--ink); font-weight:700;
-}
-.mm-node{ cursor:pointer; }
-.mm-circle{ fill:var(--card); stroke:var(--accent-soft); stroke-width:1.6; transition:fill .15s, stroke .15s; }
-.mm-node:hover .mm-circle{ fill:var(--tape); stroke:var(--accent); }
-.mm-icon{ width:22px; height:22px; stroke:var(--accent); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
-.mm-label{
-  font-family:'Literata',serif; font-size:11px; fill:var(--ink-soft); transition:fill .15s;
-}
-.mm-node:hover .mm-label{ fill:var(--accent); }
+/* vocab */
+details.vocab{ margin-top:22px; }
+details.vocab > summary{ cursor:pointer; font-family:'Zilla Slab',serif; font-weight:700; color:var(--pen); font-size:1.05rem; }
+.glossary{ display:grid; gap:10px; grid-template-columns:1fr 1fr; margin:1em 0; }
+@media (max-width:640px){ .glossary{ grid-template-columns:1fr; } }
+.g-item{ background:var(--card); border:1px solid var(--line); border-left:4px solid var(--pen); padding:10px 14px; border-radius:var(--radius); box-shadow:var(--shadow); }
+.g-item b{ display:block; font-family:'Zilla Slab',serif; margin-bottom:2px; font-size:.95rem; background:none; }
+.g-item span{ font-size:.9rem; color:var(--ink-soft); }
 
-article.chapter .content h4{ font-size:1rem; margin:18px 0 6px; color:var(--accent-soft); }
-article.chapter .content p{ margin:8px 0; }
-article.chapter .content ul{ margin:6px 0; padding-left:22px; }
-article.chapter .content li{ margin:3px 0; }
-article.chapter .content table{ width:100%; border-collapse:collapse; margin:12px 0; font-size:.92rem; }
-article.chapter .content th, article.chapter .content td{
-  border:1px solid var(--card-border); padding:6px 8px; text-align:left; vertical-align:top;
-}
-article.chapter .content th{ background:var(--tape); }
-article.chapter details.vocab{ margin-top:16px; }
-article.chapter details.vocab summary{
-  cursor:pointer; font-family:'Kalam',cursive; color:var(--accent); font-size:.95rem;
-}
-article.chapter details.vocab dl{ margin:10px 0 0; }
-article.chapter details.vocab dt{ font-weight:600; color:var(--ink); }
-article.chapter details.vocab dd{ margin:0 0 8px 0; color:var(--ink-soft); font-size:.92rem; }
+/* Q&A */
+.exam-questions{ margin-top:34px; padding-top:20px; border-top:2px dashed var(--line); }
+.exam-questions h3{ color:var(--margin); font-size:1.25rem; margin-bottom:14px; }
+.qa-card{ background:var(--card); border:1px solid var(--line); border-left:4px solid var(--margin); border-radius:var(--radius); padding:14px 16px; margin-bottom:14px; box-shadow:var(--shadow); }
+.qa-card .q-title{ font-family:'Zilla Slab',serif; font-weight:700; font-size:.98rem; margin-bottom:6px; color:var(--margin); }
+.qa-card .q-text{ font-size:.95rem; margin-bottom:10px; }
+.qa-card details{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius); padding:8px 12px; font-size:.9rem; }
+.qa-card summary{ cursor:pointer; font-family:'Zilla Slab',serif; font-weight:700; color:var(--pen); user-select:none; outline:none; }
+.qa-card summary:hover{ color:var(--margin); }
+.qa-card .ms{ margin:10px 0 4px; color:var(--ink); }
+.mk{ color:var(--margin); font-size:.82em; font-weight:600; white-space:nowrap; }
+.mk-table{ margin:.6em 0 0; box-shadow:none; }
+.q-note{ font-size:.85rem; color:var(--ink-soft); font-style:italic; margin:-4px 0 14px; }
+.top-link{ display:inline-block; margin-top:10px; font-family:'Zilla Slab',serif; font-size:.85rem; text-decoration:none; }
 
-.recap-note{
-  margin:16px 0 4px; background:var(--tape); border-radius:2px; padding:12px 14px;
-  transform:rotate(-.3deg); box-shadow:1px 2px 0 rgba(0,0,0,0.06);
+/* Exam prep */
+.cmd-table td:first-child{ font-weight:600; font-family:'Zilla Slab',serif; white-space:nowrap; }
+.tip-list li::marker{ color:var(--tip); }
+.cl-group{ margin-bottom:14px; }
+.cl-unit{ font-family:'Caveat',cursive; font-size:1.3rem; color:var(--margin); }
+.cl-row{ display:flex; gap:10px; align-items:center; padding:3px 0; font-size:.95rem; cursor:pointer; }
+.cl-row input{ width:18px; height:18px; accent-color:var(--pen); }
+
+footer{ text-align:center; padding:50px 20px 70px; color:var(--ink-soft); font-size:.85rem; border-top:1px dashed var(--line); margin-top:40px; }
+
+/* ===== Widget (top right) ===== */
+.auth-widget{ position:fixed; top:16px; right:18px; z-index:60; display:flex; align-items:center; gap:8px; }
+.auth-user{
+  display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--line); box-shadow:var(--shadow);
+  padding:6px 8px 6px 8px; border-radius:20px; font-family:'Zilla Slab',serif; font-size:.85rem;
 }
-.recap-note .recap-title{ font-family:'Kalam',cursive; color:var(--accent); font-size:.95rem; margin-bottom:6px; }
-.recap-note ul{ margin:0; padding-left:20px; }
-.recap-note li{ margin:3px 0; font-size:.92rem; }
-
-.qa-block{ margin-top:24px; border-top:2px dashed var(--card-border); padding-top:16px; }
-.qa-block > .qa-title{ font-family:'Kalam',cursive; color:var(--accent); font-size:1.1rem; margin-bottom:10px; }
-.q-item{ margin:0 0 10px; }
-.q-item .q-text{ margin:0; }
-.q-item .q-num{ color:var(--accent); font-weight:700; margin-right:4px; }
-.q-item button.reveal{
-  margin-top:6px; font-family:'Literata',serif; font-size:.85rem; cursor:pointer;
-  background:transparent; border:1px solid var(--card-border); color:var(--accent);
-  padding:4px 10px; border-radius:12px;
+.auth-user .avatar{ width:26px; height:26px; font-size:1.05rem; }
+.auth-user button, .tool-btn{
+  border:none; background:none; cursor:pointer; color:var(--margin); font-family:'Zilla Slab',serif; font-weight:600; font-size:.8rem;
 }
-.q-item button.reveal:hover{ border-color:var(--accent); }
-.q-item .a-text{
-  display:none; margin:8px 0 0; padding:10px 12px; background:var(--answer-bg);
-  border-left:3px solid var(--accent); font-size:.95rem; border-radius:0 2px 2px 0;
+#lock-btn{ text-decoration:underline; }
+.tool-btn{ background:var(--card); border:1px solid var(--line); border-radius:20px; padding:7px 11px; color:var(--pen); box-shadow:var(--shadow); }
+@media (max-width:640px){ .auth-widget{ top:auto; bottom:14px; right:14px; } }
+
+/* ===== Gate ===== */
+.auth-overlay{
+  display:flex; position:fixed; inset:0; z-index:999999; background:rgba(20,24,33,.85); backdrop-filter:blur(6px);
+  align-items:center; justify-content:center; padding:20px;
 }
-.q-item.open .a-text{ display:block; }
-.q-item.open button.reveal{ background:var(--accent); color:#fff; border-color:var(--accent); }
-
-
-.mk{ color:var(--accent); font-size:.82em; font-weight:600; white-space:nowrap; }
-.q-item .a-text table.mk-table{ border-collapse:collapse; margin-top:4px; width:100%; }
-.q-item .a-text table.mk-table th, .q-item .a-text table.mk-table td{ border:1px solid var(--card-border); padding:4px 8px; text-align:left; font-size:.9rem; }
-.q-note{ font-size:.82rem; color:var(--ink-soft); font-style:italic; margin:6px 0 0; }
-
-footer.end{ text-align:center; color:var(--ink-soft); margin-top:60px; font-size:.9rem; }
-
-/* ---------- EXAM PREP ---------- */
-section.examprep{ margin:38px 0 50px; }
-.exam-h2{
-  font-size:1.5rem; color:var(--accent); margin-bottom:2px;
-  padding:4px 10px; display:inline-block; background:var(--tape); transform:rotate(.4deg);
-}
-.exam-card{
-  background:var(--card); border:1px solid var(--card-border); border-radius:2px;
-  box-shadow:var(--shadow); padding:18px 20px; margin:16px 0;
-}
-.exam-sub{ font-size:1.1rem; margin:0 0 10px; color:var(--ink); }
-table.cmd-table{ width:100%; border-collapse:collapse; font-size:.92rem; }
-table.cmd-table th, table.cmd-table td{ border:1px solid var(--card-border); padding:7px 9px; text-align:left; vertical-align:top; }
-table.cmd-table th{ background:var(--tape); }
-ul.tip-list{ margin:0; padding-left:20px; }
-ul.tip-list li{ margin:6px 0; }
-.checklist-sub{ color:var(--ink-soft); font-size:.9rem; margin:0 0 12px; }
-.cl-group{ margin:0 0 14px; }
-.cl-unit{ font-family:'Kalam',cursive; color:var(--accent-soft); font-size:.95rem; margin-bottom:4px; }
-label.cl-row{ display:flex; align-items:center; gap:8px; padding:4px 0; cursor:pointer; font-size:.95rem; }
-label.cl-row input{ width:16px; height:16px; accent-color:#27C5F5; cursor:pointer; }
-
-.top-link{ display:inline-block; margin-top:14px; font-size:.85rem; color:var(--ink-soft); text-decoration:none; }
-.top-link:hover{ color:var(--accent); }
-
-@media (max-width:768px){
-  aside.sidebar {
-    position: relative;
-    width: 100%;
-    max-width: none;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--card-border);
-  }
-  main.main-content {
-    margin-left: 0;
-    padding: 20px 16px 80px;
-  }
-  .app-container {
-    flex-direction: column;
-  }
-  header.top{ flex-direction:column; }
-}
+.auth-card{ width:100%; max-width:400px; background:var(--paper); border:1px solid var(--line); border-left:6px solid var(--pen); border-radius:6px; box-shadow:0 15px 40px rgba(0,0,0,.35); padding:30px 28px; }
+.auth-card h3{ margin-top:0; font-size:1.7rem; font-family:'Caveat',cursive; color:var(--pen); font-weight:700; }
+.auth-card p.sub{ color:var(--ink-soft); font-size:.92rem; margin:0 0 18px; }
+.auth-field label{ display:block; font-family:'Zilla Slab',serif; font-size:.82rem; font-weight:600; color:var(--ink-soft); margin-bottom:4px; text-transform:uppercase; letter-spacing:.04em; }
+.auth-field input{ width:100%; padding:10px 12px; border:1px solid var(--line); background:var(--card); border-radius:4px; font-family:'Literata',serif; font-size:.98rem; color:var(--ink); outline:none; }
+.auth-field input:focus{ border-color:var(--pen); }
+.auth-submit{ margin-top:14px; width:100%; background:var(--pen); color:var(--on-pen); border:none; padding:12px 16px; border-radius:20px; cursor:pointer; font-family:'Zilla Slab',serif; font-weight:600; font-size:.95rem; box-shadow:var(--shadow); }
+.auth-submit:hover{ background:var(--pen-light); }
+#gate-error{ color:var(--warn); font-family:'Zilla Slab',serif; font-size:.85rem; min-height:1.3em; margin-top:8px; }
 </style>
 </head>
 <body>
 
-<div id="gate">
-  <form class="gate-card" id="gate-form" autocomplete="off">
-    <h1>ICT Notebook</h1>
+<div class="auth-overlay" id="gate">
+  <form class="auth-card" id="gate-form" autocomplete="off">
+    <h3>ICT Notebook 📓</h3>
     <p class="sub">Tr.WaiLinHtet · Unit 1–4 study notes<br>Enter the password to open your notebook.</p>
-    <input type="password" id="pw" placeholder="Password" autocomplete="current-password">
-    <button type="submit">Open notebook</button>
+    <div class="auth-field"><label for="pw">Password</label><input type="password" id="pw" autocomplete="current-password"></div>
     <div id="gate-error"></div>
+    <button type="submit" class="auth-submit">Open notebook</button>
   </form>
 </div>
 
 <div id="app">
-  <div class="app-container">
-    <!-- LEFT SIDEBAR TOC (10% Width ratio) -->
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <h2>ICT Notebook</h2>
-      </div>
-      <nav class="toc" id="toc"></nav>
-    </aside>
+  <div class="auth-widget">
+    <button class="tool-btn" id="font-decrease" type="button">A-</button>
+    <button class="tool-btn" id="font-increase" type="button">A+</button>
+    <button class="tool-btn" id="theme-toggle" type="button">☀ / ☾</button>
+    <div class="auth-user">
+      <div class="avatar">W</div>
+      <span>Student</span>
+      <button id="lock-btn" type="button">Lock</button>
+    </div>
+  </div>
 
-    <!-- RIGHT CONTENT (90% Width ratio) -->
-    <main class="main-content">
-      <header class="top">
-        <div class="title">
-          <h1>Information &amp; Communication Technology</h1>
-          <div class="byline">Notes by Tr.WaiLinHtet</div>
-        </div>
-        <div class="controls">
-          <button class="icon-btn" id="font-decrease">A-</button>
-          <button class="icon-btn" id="font-increase">A+</button>
-          <button class="icon-btn" id="theme-toggle">☀ / ☾</button>
-          <button class="icon-btn" id="lock-btn">Lock</button>
-        </div>
-      </header>
+  <div class="shell">
+    <nav class="sidebar" aria-label="Chapter navigation">
+      <div class="side-title">ICT Notebook</div>
+      <ul class="side-nav" id="sideNav"></ul>
+    </nav>
 
-      <figure class="hero-art" aria-hidden="true">
-        <svg viewBox="0 0 600 170" role="img" aria-label="Illustration of a notebook, laptop and pencil on a desk">
-          <rect x="18" y="70" width="150" height="90" rx="4" class="hero-line" fill="none"/>
-          <line x1="18" y1="95" x2="168" y2="95" class="hero-line"/>
-          <line x1="18" y1="115" x2="168" y2="115" class="hero-line"/>
-          <line x1="18" y1="135" x2="168" y2="135" class="hero-line"/>
-          <line x1="35" y1="70" x2="35" y2="160" class="hero-accent"/>
-          <path d="M40 105 l14 14 l22 -26" class="hero-accent" fill="none"/>
+    <main>
+      <div class="page">
+        <section class="cover" id="cover">
+          <span class="kicker hand">Edexcel International GCSE</span>
+          <h1>ICT <span>Edexcel 4IT0</span></h1>
+          <div class="subtitle">Exam Revision Notebook — Theory Notes, Chapters 1–12</div>
+          <div class="byline"><div class="avatar">W</div><div>Notes by <strong>Tr.WaiLinHtet</strong></div></div>
+          <div class="meta-row">
+            <div><b>Syllabus:</b> Edexcel International GCSE ICT 4IT0</div>
+            <div><b>Format:</b> Notebook-style revision notes</div>
+            <div><b>Use:</b> Read, revise, tick off before the exam</div>
+          </div>
+          <div class="box tip" style="margin-top:30px; max-width:70ch;">
+            <h4>How to use this notebook</h4>
+            <p>Go chapter by chapter. <strong>Bold highlighted words</strong> are key terms — learn the full definition, not just the word, because examiners give marks for detail, not for repeating the word back. Each chapter ends with a quick recap, key vocabulary and review questions with full mark-scheme answers. Tick off chapters in the revision checklist as you go.</p>
+          </div>
+          <div class="toc" id="coverToc"></div>
+        </section>
 
-          <rect x="215" y="58" width="150" height="95" rx="6" class="hero-line" fill="none"/>
-          <circle cx="290" cy="105" r="26" class="hero-accent" fill="none"/>
-          <path d="M278 105 h24 M290 93 v24" class="hero-line"/>
-          <path d="M205 158 h180 l-14 18 h-152 z" class="hero-line" fill="none"/>
+        <section class="chapter" id="examprep">
+          <div class="chapter-head"><div class="badge">✎</div><h2>Exam Preparation — Edexcel International GCSE ICT (4IT0)</h2></div>
+          <p class="chapter-intro">Command words, technique tips, and a revision checklist to work through before the exam.</p>
 
-          <g transform="translate(410,55) rotate(28)">
-            <rect x="0" y="0" width="10" height="90" rx="4" class="hero-line" fill="none"/>
-            <path d="M0 90 l5 16 l5 -16 z" class="hero-accent" fill="none"/>
-            <path d="M0 6 l10 0" class="hero-line"/>
-          </g>
-
-          <circle cx="500" cy="45" r="16" class="hero-accent" fill="none"/>
-          <ellipse cx="500" cy="45" rx="7" ry="16" class="hero-accent" fill="none"/>
-          <line x1="484" y1="45" x2="516" y2="45" class="hero-accent"/>
-
-          <path d="M525 110 a10 10 0 0 1 2 -20 13 13 0 0 1 24 5 8 8 0 0 1 -2 15 z" class="hero-line" fill="none"/>
-        </svg>
-      </figure>
-
-      <section class="examprep" id="examprep">
-        <h2 class="exam-h2">Exam Preparation — Edexcel International GCSE ICT (4IT0)</h2>
-        <p class="unit-sub">Command words, technique tips, and a revision checklist to work through before the exam.</p>
-
-        <div class="exam-card">
-          <h3 class="exam-sub">Command words &amp; how many marks they're worth</h3>
-          <table class="cmd-table">
+          <h3 style="color:var(--pen)">Command words &amp; how many marks they're worth</h3>
+          <div class="tbl-scroll"><table class="cmd-table">
             <tr><th>Word</th><th>What it asks you to do</th><th>Typical marks</th></tr>
             <tr><td>State / Give / Name</td><td>Recall one fact — no explanation needed.</td><td>1 mark per point</td></tr>
             <tr><td>Identify</td><td>Pick out a key detail from the question or a resource.</td><td>1 mark</td></tr>
@@ -405,31 +283,29 @@ label.cl-row input{ width:16px; height:16px; accent-color:#27C5F5; cursor:pointe
             <tr><td>Compare</td><td>Give both similarities and differences between things.</td><td>levels-marked</td></tr>
             <tr><td>Discuss</td><td>Explore more than one side of an issue, then reach a conclusion.</td><td>8 marks</td></tr>
             <tr><td>Justify</td><td>Give reasons that support a decision or opinion.</td><td>levels-marked</td></tr>
-          </table>
-        </div>
+          </table></div>
 
-        <div class="exam-card">
-          <h3 class="exam-sub">Technique tips</h3>
-          <ul class="tip-list">
-            <li>Match your answer's length to the mark allocation — one clear point per mark for "state" questions.</li>
-            <li>For "Explain", always add the reasoning: what happens <i>and why/what the effect is</i>.</li>
-            <li>For "Discuss", cover a benefit <i>and</i> a drawback, then finish with a short conclusion.</li>
-            <li>Use precise ICT vocabulary from the notebook (e.g. "bandwidth", not "internet speed").</li>
-            <li>Read the number of marks before you answer — it tells you how many separate points are needed.</li>
-            <li>Don't repeat the question back — spend every line on new, creditable information.</li>
-          </ul>
-        </div>
+          <div class="box tip">
+            <h4>Technique tips</h4>
+            <ul class="tip-list">
+              <li>Match your answer's length to the mark allocation — one clear point per mark for "state" questions.</li>
+              <li>For "Explain", always add the reasoning: what happens <i>and why/what the effect is</i>.</li>
+              <li>For "Discuss", cover a benefit <i>and</i> a drawback, then finish with a short conclusion.</li>
+              <li>Use precise ICT vocabulary from the notebook (e.g. "bandwidth", not "internet speed").</li>
+              <li>Read the number of marks before you answer — it tells you how many separate points are needed.</li>
+              <li>Don't repeat the question back — spend every line on new, creditable information.</li>
+            </ul>
+          </div>
 
-        <div class="exam-card">
-          <h3 class="exam-sub">Revision checklist</h3>
-          <p class="checklist-sub">Tick off each chapter as you revise it — your progress is saved on this device.</p>
+          <h3 style="color:var(--pen)">Revision checklist</h3>
+          <p>Tick off each chapter as you revise it — your progress is saved on this device.</p>
           <div id="checklist"></div>
-        </div>
-      </section>
+        </section>
 
-      <div id="units"></div>
+        <div id="units"></div>
 
-      <footer class="end">— end of notebook —</footer>
+        <footer>— end of notebook —</footer>
+      </div>
     </main>
   </div>
 </div>
@@ -962,158 +838,72 @@ function el(tag, attrs, html){
   return e;
 }
 
-const ICONS = {
-  c1:  `<rect x="4" y="6" width="24" height="15" rx="2"/><rect x="11" y="24" width="10" height="3" rx="1"/><line x1="16" y1="21" x2="16" y2="24"/>`,
-  c2:  `<circle cx="16" cy="16" r="7"/><circle cx="16" cy="16" r="2.4"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="16" y1="25" x2="16" y2="29"/><line x1="3" y1="16" x2="7" y2="16"/><line x1="25" y1="16" x2="29" y2="16"/><line x1="7" y1="7" x2="10" y2="10"/><line x1="22" y1="22" x2="25" y2="25"/><line x1="25" y1="7" x2="22" y2="10"/><line x1="10" y1="22" x2="7" y2="25"/>`,
-  c3:  `<rect x="8" y="8" width="16" height="16" rx="2"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="20" y1="2" x2="20" y2="8"/><line x1="12" y1="24" x2="12" y2="30"/><line x1="20" y1="24" x2="20" y2="30"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="2" y1="20" x2="8" y2="20"/><line x1="24" y1="12" x2="30" y2="12"/><line x1="24" y1="20" x2="30" y2="20"/>`,
-  c4:  `<circle cx="16" cy="24" r="2"/><path d="M10 18a8 8 0 0 1 12 0"/><path d="M5 13a15 15 0 0 1 22 0"/>`,
-  c5:  `<circle cx="8" cy="8" r="3"/><circle cx="24" cy="8" r="3"/><circle cx="16" cy="25" r="3"/><line x1="8" y1="11" x2="15" y2="22"/><line x1="24" y1="11" x2="17" y2="22"/><line x1="11" y1="8" x2="21" y2="8"/>`,
-  c6:  `<path d="M16 3 L27 8 V17 C27 24 22 28 16 30 C10 28 5 24 5 17 V8 Z"/><path d="M11 16 L15 20 L22 12"/>`,
-  c7:  `<circle cx="16" cy="16" r="12"/><ellipse cx="16" cy="16" rx="5" ry="12"/><line x1="4" y1="16" x2="28" y2="16"/>`,
-  c8:  `<circle cx="11" cy="11" r="4"/><circle cx="21" cy="11" r="4"/><path d="M4 27c0-5 4-8 7-8s7 3 7 8"/><path d="M14 27c0-5 4-8 7-8s7 3 7 8"/>`,
-  c9:  `<line x1="16" y1="3" x2="16" y2="27"/><line x1="6" y1="9" x2="26" y2="9"/><path d="M2 9 L10 9 L6 18 Z"/><path d="M22 9 L30 9 L26 18 Z"/><rect x="10" y="27" width="12" height="2.5"/>`,
-  c10: `<circle cx="13" cy="13" r="9"/><line x1="20" y1="20" x2="29" y2="29"/>`,
-  c11: `<path d="M8 12h16l-2 16H10z"/><path d="M12 12v-3a4 4 0 0 1 8 0v3"/>`,
-  c12: `<path d="M9 22a6 6 0 0 1 1-12 8 8 0 0 1 15 3 5 5 0 0 1-1 9z"/>`
-};
-function iconSVG(id, cls){
-  return `<svg class="${cls||''}" viewBox="0 0 32 32" aria-hidden="true">${ICONS[id]||''}</svg>`;
-}
-
-function wrapLabel(text, max){
-  max = max || 12;
-  const words = text.split(' ');
-  const lines = [];
-  let cur = '';
-  words.forEach(w=>{
-    const test = cur ? cur + ' ' + w : w;
-    if(test.length > max && cur){ lines.push(cur); cur = w; }
-    else cur = test;
+/* ---------- build navigation + cover grid ---------- */
+(function(){
+  const nav = document.getElementById('sideNav');
+  const toc = document.getElementById('coverToc');
+  const items = [['#cover','',  'Cover'], ['#examprep','✎','Exam Prep']];
+  DATA.forEach(u=>u.chapters.forEach(c=>items.push(['#'+c.id, c.num, c.title])));
+  items.forEach(([href,n,t])=>{
+    const li = el('li'); li.innerHTML = `<a href="${href}"><span class="n">${n}</span>${t}</a>`; nav.appendChild(li);
   });
-  if(cur) lines.push(cur);
-  return lines.slice(0,2);
-}
+  DATA.forEach(u=>u.chapters.forEach(c=>{
+    const a = el('a',{href:'#'+c.id}); a.innerHTML = `<span class="num">${c.num}</span> ${c.title}`; toc.appendChild(a);
+  }));
+})();
 
-function buildMindMap(unit){
-  const n = unit.chapters.length;
-  const cx = 190, cy = 190, R = 138;
-  const vbW = 380, vbH = 380;
-  let linksSvg = '', nodesSvg = '';
-  unit.chapters.forEach((ch,i)=>{
-    const angle = (-90 + i*(360/n)) * Math.PI/180;
-    const x = cx + R*Math.cos(angle);
-    const y = cy + R*Math.sin(angle);
-    const mx = (cx+x)/2, my = (cy+y)/2;
-    const dx = x-cx, dy = y-cy;
-    const norm = Math.sqrt(dx*dx+dy*dy) || 1;
-    const ux = -dy/norm, uy = dx/norm;
-    const off = (i%2===0? 1:-1) * 16;
-    const qx = mx + ux*off, qy = my + uy*off;
-    linksSvg += `<path class="mm-link" d="M ${cx} ${cy} Q ${qx.toFixed(1)} ${qy.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}"/>`;
-    const lines = wrapLabel(ch.title, 13);
-    const textSvg = lines.map((ln,li)=>`<tspan x="${x.toFixed(1)}" dy="${li===0? '2.6em':'1.1em'}">${ln}</tspan>`).join('');
-    nodesSvg += `
-      <a class="mm-node" href="#${ch.id}">
-        <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="27" class="mm-circle"/>
-        <g transform="translate(${(x-11).toFixed(1)}, ${(y-11).toFixed(1)}) scale(0.7)">${iconSVG(ch.id,'mm-icon')}</g>
-        <text class="mm-label" text-anchor="middle">${textSvg}</text>
-      </a>`;
-  });
-  const centerLines = wrapLabel(unit.title, 11);
-  const centerText = centerLines.map((ln,li)=>`<tspan x="${cx}" dy="${li===0? '-0.1em':'1.1em'}">${ln}</tspan>`).join('');
-  return `
-  <figure class="mindmap">
-    <svg viewBox="0 0 ${vbW} ${vbH}" role="img" aria-label="Mind map of ${unit.title} chapters">
-      ${linksSvg}
-      <circle cx="${cx}" cy="${cy}" r="46" class="mm-center-circle"/>
-      <text class="mm-center-label" text-anchor="middle" y="${cy}">${centerText}</text>
-      ${nodesSvg}
-    </svg>
-    <figcaption>Tap a bubble to jump to that chapter</figcaption>
-  </figure>`;
-}
-
-function buildTOC(){
-  const nav = document.getElementById('toc');
-  const examLi = el('li');
-  examLi.innerHTML = `<a href="#examprep"><span class="num">✎</span>Exam Prep</a>`;
-  const examUl = el('ul');
-  examUl.appendChild(examLi);
-  nav.appendChild(el('div',{class:'unit-label'}, 'Start'));
-  nav.appendChild(examUl);
-  DATA.forEach(unit=>{
-    const label = el('div',{class:'unit-label'}, `${unit.unit}`);
-    nav.appendChild(label);
-    const ul = el('ul');
-    unit.chapters.forEach(ch=>{
-      const li = el('li');
-      li.innerHTML = `<a href="#${ch.id}"><span class="num">Ch.${ch.num}</span>${ch.title}</a>`;
-      ul.appendChild(li);
-    });
-    nav.appendChild(ul);
-  });
-}
-
-function buildUnits(){
+/* ---------- build chapters ---------- */
+(function(){
   const root = document.getElementById('units');
   DATA.forEach(unit=>{
-    const sec = el('section',{class:'unit'});
-    sec.appendChild(el('h2',null,`${unit.unit}: ${unit.title}`));
-    sec.appendChild(el('p',{class:'unit-sub'}, unit.sub));
-    sec.appendChild(el('div',{class:'mindmap-wrap'}, buildMindMap(unit)));
+    root.appendChild(el('div',{class:'unit-band'}, `${unit.unit}: ${unit.title}<small>${unit.sub}</small>`));
     unit.chapters.forEach(ch=>{
-      const art = el('article',{class:'chapter', id:ch.id});
-      art.appendChild(el('h3',null,`${iconSVG(ch.id,'ch-icon')}<span class="chnum">Ch.${ch.num}</span>${ch.title}`));
-      art.appendChild(el('div',{class:'content'}, ch.html));
+      const sec = el('section',{class:'chapter', id:ch.id});
+      sec.appendChild(el('div',{class:'chapter-head'}, `<div class="badge">${ch.num}</div><h2>${ch.title}</h2>`));
+      sec.appendChild(el('p',{class:'chapter-intro'}, `${unit.unit} · ${unit.sub}`));
+      const content = el('div',{class:'content'}, ch.html);
+      content.querySelectorAll('table').forEach(t=>{
+        const w = el('div',{class:'tbl-scroll'}); t.parentNode.insertBefore(w,t); w.appendChild(t);
+      });
+      sec.appendChild(content);
 
       if(ch.recap && ch.recap.length){
-        const note = el('div',{class:'recap-note'});
-        note.appendChild(el('div',{class:'recap-title'},'✎ Quick recap'));
-        const ul = el('ul');
-        ch.recap.forEach(r=> ul.appendChild(el('li',null,r)));
-        note.appendChild(ul);
-        art.appendChild(note);
+        const r = el('div',{class:'recap'});
+        r.appendChild(el('h4',null,'✎ Quick recap'));
+        const ul = el('ul',{class:'checklist'});
+        ch.recap.forEach(x=>ul.appendChild(el('li',null,x)));
+        r.appendChild(ul); sec.appendChild(r);
       }
-
       if(ch.vocab && ch.vocab.length){
-        const det = el('details',{class:'vocab'});
-        det.appendChild(el('summary',null,'Key vocabulary'));
-        const dl = el('dl');
-        ch.vocab.forEach(([term,def])=>{
-          dl.appendChild(el('dt',null,term));
-          dl.appendChild(el('dd',null,def));
-        });
-        det.appendChild(dl);
-        art.appendChild(det);
+        const d = el('details',{class:'vocab'});
+        d.appendChild(el('summary',null,`Key vocabulary (${ch.vocab.length} terms)`));
+        const g = el('div',{class:'glossary'});
+        ch.vocab.forEach(([t,def])=> g.appendChild(el('div',{class:'g-item'}, `<b>${t}</b><span>${def}</span>`)));
+        d.appendChild(g); sec.appendChild(d);
       }
-
       if(ch.qa && ch.qa.length){
-        const qa = el('div',{class:'qa-block'});
-        qa.appendChild(el('div',{class:'qa-title'},'Chapter review — questions & answers'));
-        if(ch.id==='c5') qa.appendChild(el('p',{class:'q-note'},'† Question wording reconstructed from the official mark scheme (the question sheet for this chapter was not in the notes). Numbers in brackets are marks.'));
+        const box = el('div',{class:'exam-questions'});
+        box.appendChild(el('h3',null,'Chapter review — questions &amp; answers'));
+        if(ch.id==='c5') box.appendChild(el('p',{class:'q-note'},'† Question wording reconstructed from the official mark scheme (the question sheet for this chapter was not in the notes). Numbers in brackets are marks.'));
         ch.qa.forEach(([q,a],i)=>{
-          const item = el('div',{class:'q-item'});
-          item.appendChild(el('p',{class:'q-text'}, `<span class="q-num">${i+1}.</span>${q}`));
-          const btn = el('button',{class:'reveal',type:'button'}, 'Show answer');
-          const ans = el('div',{class:'a-text'}, a);
-          btn.addEventListener('click', ()=>{
-            item.classList.toggle('open');
-            btn.textContent = item.classList.contains('open') ? 'Hide answer' : 'Show answer';
-          });
-          item.appendChild(btn);
-          item.appendChild(ans);
-          qa.appendChild(item);
+          const card = el('div',{class:'qa-card'});
+          card.appendChild(el('div',{class:'q-title'},`Question ${i+1}`));
+          card.appendChild(el('div',{class:'q-text'}, q));
+          const d = el('details');
+          d.appendChild(el('summary',null,'Show mark scheme answer'));
+          d.appendChild(el('div',{class:'ms'}, a));
+          card.appendChild(d); box.appendChild(card);
         });
-        art.appendChild(qa);
+        sec.appendChild(box);
       }
-      art.appendChild(el('a',{class:'top-link', href:'#toc'},'↑ back to contents'));
-      sec.appendChild(art);
+      sec.appendChild(el('a',{class:'top-link',href:'#cover'},'↑ back to cover'));
+      root.appendChild(sec);
     });
-    root.appendChild(sec);
   });
-}
+})();
 
-function buildChecklist(){
+/* ---------- checklist ---------- */
+(function(){
   const root = document.getElementById('checklist');
   let done = {};
   try{ done = JSON.parse(localStorage.getItem('ict-checklist') || '{}'); }catch(e){}
@@ -1129,60 +919,61 @@ function buildChecklist(){
         try{ localStorage.setItem('ict-checklist', JSON.stringify(done)); }catch(e){}
       });
       row.appendChild(cb);
-      row.appendChild(el('span',null, `Ch.${ch.num} — ${ch.title}`));
+      row.appendChild(el('span',null,`Ch.${ch.num} — ${ch.title}`));
       group.appendChild(row);
     });
     root.appendChild(group);
   });
-}
+})();
 
-buildTOC();
-buildUnits();
-buildChecklist();
+/* ---------- scroll spy ---------- */
+(function(){
+  const links = Array.from(document.querySelectorAll('#sideNav a'));
+  const sections = links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  function onScroll(){
+    let current = sections[0];
+    const y = window.scrollY + 140;
+    for(const s of sections){ if(s.offsetTop <= y) current = s; }
+    links.forEach(a=>a.classList.toggle('active', a.getAttribute('href') === '#'+current.id));
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  window.__spy = onScroll;
+  onScroll();
+})();
 
-/* ============ FONT SIZE CONTROLS ============ */
+/* ---------- font size ---------- */
 const fontInc = document.getElementById('font-increase');
 const fontDec = document.getElementById('font-decrease');
 function applyFontSize(size){
   if(size) document.documentElement.setAttribute('data-fontsize', size);
   else document.documentElement.removeAttribute('data-fontsize');
 }
-try{
-  const savedSize = localStorage.getItem('ict-fontsize');
-  if(savedSize) applyFontSize(savedSize);
-}catch(e){}
-
+try{ const s = localStorage.getItem('ict-fontsize'); if(s) applyFontSize(s); }catch(e){}
 fontInc.addEventListener('click', ()=>{
   const cur = document.documentElement.getAttribute('data-fontsize');
   const next = cur === 'small' ? null : 'large';
-  applyFontSize(next);
-  try{ localStorage.setItem('ict-fontsize', next || ''); }catch(e){}
+  applyFontSize(next); try{ localStorage.setItem('ict-fontsize', next || ''); }catch(e){}
 });
 fontDec.addEventListener('click', ()=>{
   const cur = document.documentElement.getAttribute('data-fontsize');
   const next = cur === 'large' ? null : 'small';
-  applyFontSize(next);
-  try{ localStorage.setItem('ict-fontsize', next || ''); }catch(e){}
+  applyFontSize(next); try{ localStorage.setItem('ict-fontsize', next || ''); }catch(e){}
 });
 
-/* ============ THEME TOGGLE ============ */
+/* ---------- theme ---------- */
 const themeBtn = document.getElementById('theme-toggle');
 function applyTheme(t){
   if(t) document.documentElement.setAttribute('data-theme', t);
   else document.documentElement.removeAttribute('data-theme');
 }
-try{
-  const saved = localStorage.getItem('ict-theme');
-  if(saved) applyTheme(saved);
-}catch(e){}
+try{ const s = localStorage.getItem('ict-theme'); if(s) applyTheme(s); }catch(e){}
 themeBtn.addEventListener('click', ()=>{
-  const current = document.documentElement.getAttribute('data-theme');
-  const next = current === 'dark' ? 'light' : (current === 'light' ? null : 'dark');
-  applyTheme(next);
-  try{ localStorage.setItem('ict-theme', next || ''); }catch(e){}
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : (cur === 'light' ? null : 'dark');
+  applyTheme(next); try{ localStorage.setItem('ict-theme', next || ''); }catch(e){}
 });
 
-/* ============ LOGIN GATE ============ */
+/* ---------- login gate ---------- */
 const PASSWORD = "trwailinhtet";
 const gate = document.getElementById('gate');
 const app = document.getElementById('app');
@@ -1190,32 +981,17 @@ const form = document.getElementById('gate-form');
 const pwInput = document.getElementById('pw');
 const errEl = document.getElementById('gate-error');
 const lockBtn = document.getElementById('lock-btn');
-
-function unlock(){
-  gate.style.display = 'none';
-  app.style.display = 'block';
-}
-function lock(){
-  app.style.display = 'none';
-  gate.style.display = 'flex';
-  pwInput.value = '';
-}
-
-try{
-  if(sessionStorage.getItem('ict-unlocked') === '1'){ unlock(); }
-}catch(e){}
-
-form.addEventListener('submit', (e)=>{
+function unlock(){ gate.style.display='none'; app.style.display='block'; if(window.__spy) window.__spy(); }
+function lock(){ app.style.display='none'; gate.style.display='flex'; pwInput.value=''; }
+try{ if(sessionStorage.getItem('ict-unlocked') === '1') unlock(); }catch(e){}
+form.addEventListener('submit', e=>{
   e.preventDefault();
   if(pwInput.value === PASSWORD){
-    errEl.textContent = '';
+    errEl.textContent='';
     try{ sessionStorage.setItem('ict-unlocked','1'); }catch(err){}
     unlock();
-  }else{
-    errEl.textContent = 'Incorrect password — try again.';
-  }
+  }else{ errEl.textContent='Incorrect password — try again.'; }
 });
-
 lockBtn.addEventListener('click', ()=>{
   try{ sessionStorage.removeItem('ict-unlocked'); }catch(e){}
   lock();
