@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICT Database (Microsoft Access) | Tr. Wai Lin Htet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta+Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-rose-500 selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-500 to-pink-500 flex items-center justify-center text-white shadow-md shadow-rose-500/20">
+                    <i data-lucide="database" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-lg tracking-tight text-slate-900 block leading-tight">ICT Database</span>
+                    <span class="text-xs text-rose-600 font-semibold tracking-wider uppercase">Microsoft Access</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 sm:space-x-4">
+                <span class="hidden md:inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-rose-50 text-rose-700 border border-rose-200">
+                    <i data-lucide="award" class="w-3.5 h-3.5 mr-1.5 text-rose-500"></i> Created by Tr. Wai Lin Htet
+                </span>
+                <a href="https://drive.google.com/file/d/1ecnqGAdcidtvHXR_L5-Hs4cnGIHBTnRs/view?usp=sharing" target="_blank" class="hidden sm:inline-flex items-center space-x-1.5 text-sm font-medium text-slate-700 hover:text-rose-600 transition-colors">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>MindMap PDF</span>
+                </a>
+                <a href="#workflow" class="text-sm font-medium text-slate-600 hover:text-rose-600 transition-colors hidden lg:inline-block">Workflow</a>
+                <a href="#insert-guide" class="text-sm font-semibold bg-slate-900 text-white px-4 py-2 rounded-xl hover:bg-rose-600 transition-all shadow-sm">Insert Data Guide</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-24 border-b border-slate-200 bg-white">
+        <div class="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px] opacity-60"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-3xl mx-auto">
+                <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-rose-50 border border-rose-100 text-rose-600 text-xs font-semibold uppercase tracking-wider mb-6 animate-pulse">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>IGCSE / ICT Revision & Guide</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-6">
+                    Mastering Microsoft Access <span class="bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent">Database</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-slate-600 mb-8 leading-relaxed">
+                    A comprehensive, minimalist guide based on the 8-step database curriculum. Learn table structures, data types, relationships, and queries with absolute clarity.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#workflow" class="px-6 py-3.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-semibold shadow-lg shadow-rose-600/25 transition-all flex items-center space-x-2">
+                        <span>Explore 8-Step Workflow</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ecnqGAdcidtvHXR_L5-Hs4cnGIHBTnRs/view?usp=sharing" target="_blank" class="px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-semibold transition-all flex items-center space-x-2 shadow-sm">
+                        <i data-lucide="external-link" class="w-4 h-4 text-rose-500"></i>
+                        <span>Download MindMap</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="workflow" class="py-12 bg-slate-100 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                        <i data-lucide="git-commit" class="text-rose-600 w-6 h-6"></i> The Complete 8-Step Workflow
+                    </h2>
+                    <p class="text-sm text-slate-500 mt-1">Your exact checklist for tackling practical database exam tasks.</p>
+                </div>
+                <span class="text-xs font-bold uppercase tracking-wider text-rose-600 bg-rose-100 px-3 py-1 rounded-lg">Interactive Flow</span>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center hover:border-rose-300 transition-all">
+                    <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 font-bold flex items-center justify-center text-sm mb-2">1</div>
+                    <span class="text-xs font-semibold text-slate-800">Import CSV</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center hover:border-rose-300 transition-all">
+                    <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 font-bold flex items-center justify-center text-sm mb-2">2</div>
+                    <span class="text-xs font-semibold text-slate-800">Data Types & Properties</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center hover:border-rose-300 transition-all">
+                    <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 font-bold flex items-center justify-center text-sm mb-2">3</div>
+                    <span class="text-xs font-semibold text-slate-800">Primary Key</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center hover:border-rose-300 transition-all">
+                    <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 font-bold flex items-center justify-center text-sm mb-2">4</div>
+                    <span class="text-xs font-semibold text-slate-800">Relationships</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center hover:border-rose-300 transition-all">
+                    <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 font-bold flex items-center justify-center text-sm mb-2">5</div>
+                    <span class="text-xs font-semibold text-slate-800">Queries</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center hover:border-rose-300 transition-all">
+                    <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 font-bold flex items-center justify-center text-sm mb-2">6</div>
+                    <span class="text-xs font-semibold text-slate-800">Sort & Filter</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center hover:border-rose-300 transition-all">
+                    <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 font-bold flex items-center justify-center text-sm mb-2">7</div>
+                    <span class="text-xs font-semibold text-slate-800">Calculated Fields</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center hover:border-rose-300 transition-all">
+                    <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 font-bold flex items-center justify-center text-sm mb-2">8</div>
+                    <span class="text-xs font-semibold text-slate-800">Reports / Forms</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+
+        <!-- Sections 1 & 2: Database Basics & Flat-File vs Relational -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Section 1 -->
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-rose-50 rounded-bl-full pointer-events-none -z-0"></div>
+                <div class="flex items-center space-x-3 mb-6 relative z-10">
+                    <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center">
+                        <i data-lucide="database" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900">1. What is a Database?</h2>
+                </div>
+                <ul class="space-y-3.5 text-slate-600 relative z-10">
+                    <li class="flex items-start space-x-3">
+                        <i data-lucide="check-circle-2" class="w-5 h-5 text-rose-500 shrink-0 mt-0.5"></i>
+                        <span>Stores data in a structured way using tables, fields, and records.</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i data-lucide="check-circle-2" class="w-5 h-5 text-rose-500 shrink-0 mt-0.5"></i>
+                        <span>Helps organise, find, update, and manage data efficiently without redundancy.</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i data-lucide="check-circle-2" class="w-5 h-5 text-rose-500 shrink-0 mt-0.5"></i>
+                        <span><strong class="text-slate-900">Microsoft Access</strong> is a Relational Database Management System (RDBMS).</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-sky-50 rounded-bl-full pointer-events-none -z-0"></div>
+                <div class="flex items-center space-x-3 mb-6 relative z-10">
+                    <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center">
+                        <i data-lucide="table" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900">2. Flat-File vs Relational</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <h3 class="font-bold text-slate-900 mb-2 flex items-center gap-1.5">
+                            <i data-lucide="file" class="w-4 h-4 text-slate-500"></i> Flat-File Database
+                        </h3>
+                        <p class="text-xs text-slate-600 mb-2">Single table only. No relationships. Less secure and flexible (e.g., CSV file).</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-rose-50/50 border border-rose-100">
+                        <h3 class="font-bold text-rose-900 mb-2 flex items-center gap-1.5">
+                            <i data-lucide="layers" class="w-4 h-4 text-rose-600"></i> Relational Database
+                        </h3>
+                        <p class="text-xs text-slate-700 mb-2">Multiple linked tables. Uses primary & foreign keys. More secure & efficient (e.g., MS Access).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Data Types & Field Properties -->
+        <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                        <i data-lucide="list-tree" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">3. Data Types & Field Properties</h2>
+                        <p class="text-sm text-slate-500">Crucial settings for accurate data entry and storage validation in ICT 0417.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-500 bg-slate-50">
+                            <th class="py-3 px-4 rounded-l-xl">Data Type</th>
+                            <th class="py-3 px-4">Use in ICT 0417</th>
+                            <th class="py-3 px-4 rounded-r-xl">Key Properties</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-sm">
+                        <tr class="hover:bg-slate-50/50">
+                            <td class="py-3.5 px-4 font-semibold text-slate-900">Short Text</td>
+                            <td class="py-3.5 px-4 text-slate-600">Names, codes, emails, categories</td>
+                            <td class="py-3.5 px-4 text-slate-500">Field Size, Required, Indexed</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/50">
+                            <td class="py-3.5 px-4 font-semibold text-slate-900">Long Text</td>
+                            <td class="py-3.5 px-4 text-slate-600">Comments, long descriptions</td>
+                            <td class="py-3.5 px-4 text-slate-500">Usually no indexing</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/50">
+                            <td class="py-3.5 px-4 font-semibold text-slate-900">Number</td>
+                            <td class="py-3.5 px-4 text-slate-600">Quantity, counts, numeric identifiers</td>
+                            <td class="py-3.5 px-4 text-slate-500">Field Size (Integer/Long), Decimal Places</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/50">
+                            <td class="py-3.5 px-4 font-semibold text-slate-900">Date/Time</td>
+                            <td class="py-3.5 px-4 text-slate-600">DOB, order date, deadline</td>
+                            <td class="py-3.5 px-4 text-slate-500">Format (Short Date), Input Mask</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/50">
+                            <td class="py-3.5 px-4 font-semibold text-slate-900">Currency</td>
+                            <td class="py-3.5 px-4 text-slate-600">Price, fee, cost</td>
+                            <td class="py-3.5 px-4 text-slate-500">Format Currency, Decimal Places (2)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/50">
+                            <td class="py-3.5 px-4 font-semibold text-slate-900">Yes/No</td>
+                            <td class="py-3.5 px-4 text-slate-600">Flags like Paid / Active</td>
+                            <td class="py-3.5 px-4 text-slate-500">Default Value (if specified)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Sections 4 & 5: Primary Key & Relationships -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Section 4 -->
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
+                        <i data-lucide="key" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900">4. Primary Key</h2>
+                </div>
+                <ul class="space-y-3.5 text-slate-600">
+                    <li class="flex items-start space-x-3">
+                        <i data-lucide="check" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
+                        <span>Must be unique and stable for every single record.</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i data-lucide="check" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
+                        <span>Prefer the provided ID field given in the task specifications.</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i data-lucide="check" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
+                        <span>If no ID field exists, create a surrogate key only if allowed.</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i data-lucide="x" class="w-5 h-5 text-rose-500 shrink-0 mt-0.5"></i>
+                        <span>Avoid using names, towns, or categories as primary keys due to possible duplication.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Section 5 -->
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                        <i data-lucide="link" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900">5. Relationships</h2>
+                </div>
+                <ul class="space-y-3.5 text-slate-600">
+                    <li class="flex items-start space-x-3">
+                        <i data-lucide="check" class="w-5 h-5 text-indigo-600 shrink-0 mt-0.5"></i>
+                        <span>Connect Primary Key in parent table <span class="text-slate-900 font-semibold">→</span> Foreign Key in child table.</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i data-lucide="check" class="w-5 h-5 text-indigo-600 shrink-0 mt-0.5"></i>
+                        <span>Linked fields must be of the exact same data type and meaning.</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i data-lucide="check" class="w-5 h-5 text-indigo-600 shrink-0 mt-0.5"></i>
+                        <span>Enable <strong class="text-slate-900">Enforce Referential Integrity</strong> when prompted.</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i data-lucide="check" class="w-5 h-5 text-indigo-600 shrink-0 mt-0.5"></i>
+                        <span>Save and capture clear evidence screenshots of your relationship window.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <section id="insert-guide" class="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 sm:p-12 rounded-3xl shadow-xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-12 opacity-10 pointer-events-none">
+                <i data-lucide="database" class="w-64 h-64 text-white"></i>
+            </div>
+            <div class="relative z-10">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-rose-500/20 border border-rose-400/30 text-rose-300 text-xs font-semibold uppercase tracking-wider mb-4">
+                    <i data-lucide="terminal" class="w-3.5 h-3.5"></i>
+                    <span>Practical Data Entry Guide</span>
+                </div>
+                <h2 class="text-3xl font-extrabold tracking-tight mb-4">How to Insert Data into Microsoft Access</h2>
+                <p class="text-slate-300 max-w-2xl mb-8 leading-relaxed">
+                    Follow this step-by-step procedure to create tables, define attributes, and input data seamlessly into your Access database.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:border-rose-500/50 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-rose-500 text-white font-bold flex items-center justify-center text-lg mb-4 shadow-lg">1</div>
+                        <h3 class="font-bold text-lg mb-2 text-white">Create Database & Table</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Open MS Access, click <strong class="text-white">Blank Database</strong>. Go to the <strong class="text-white">Create</strong> tab, click <strong class="text-white">Table Design</strong> to build your structure from scratch.
+                        </p>
+                    </div>
+
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:border-rose-500/50 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-rose-500 text-white font-bold flex items-center justify-center text-lg mb-4 shadow-lg">2</div>
+                        <h3 class="font-bold text-lg mb-2 text-white">Define Fields & Data Types</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Enter your field names in column one, choose appropriate data types from the dropdown, and set your Primary Key using the key icon on the top ribbon. Save the table.
+                        </p>
+                    </div>
+
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:border-rose-500/50 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-rose-500 text-white font-bold flex items-center justify-center text-lg mb-4 shadow-lg">3</div>
+                        <h3 class="font-bold text-lg mb-2 text-white">Switch to Datasheet & Insert</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Switch from Design View to <strong class="text-white">Datasheet View</strong> by clicking the View icon. Type or paste your records row by row carefully ensuring proper formatting.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sections 6, 7, 8, 9: Creating a Field, Queries, Sort & Filter, Reports/Forms -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Section 6 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4">
+                        <i data-lucide="plus-circle" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-lg mb-2">6. Creating New Field</h3>
+                    <p class="text-sm text-slate-600 mb-4">Define field name and data type. Set brackets and order of operations for calculated results like totals.</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl text-xs font-mono text-slate-700 border border-slate-200">
+                    Total: [Quantity] * [UnitPrice]
+                </div>
+            </div>
+
+            <!-- Section 7 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mb-4">
+                        <i data-lucide="search" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-lg mb-2">7. Queries</h3>
+                    <p class="text-sm text-slate-600 mb-4">Use correct criteria rows. Same row = AND, separate rows = OR. Use wildcards like <code class="bg-slate-100 px-1 rounded text-purple-700">*</code> correctly.</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl text-xs font-mono text-slate-700 border border-slate-200">
+                    [Town] In ("London", "Birmingham")
+                </div>
+            </div>
+
+            <!-- Section 8 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center mb-4">
+                        <i data-lucide="arrow-up-down" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-lg mb-2">8. Sort & Filter</h3>
+                    <p class="text-sm text-slate-600 mb-4">Check which field is being sorted. Use secondary sorts if specified. Ensure records match exact subsets.</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl text-xs font-mono text-slate-700 border border-slate-200">
+                    ORDER BY Name ASC, Date DESC
+                </div>
+            </div>
+
+            <!-- Section 9 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center mb-4">
+                        <i data-lucide="file-spreadsheet" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-lg mb-2">9. Reports & Forms</h3>
+                    <p class="text-sm text-slate-600 mb-4">Design clean reports with grouping and sorting. Create intuitive forms with validation rules and input masks.</p>
+                </div>
+                <div class="p-3 bg-rose-50 rounded-xl text-xs text-rose-800 font-medium border border-rose-100">
+                    Capture clear evidence screenshots without cropping!
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Tips Banner -->
+        <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200/80 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-amber-500/20">
+                    <i data-lucide="star" class="w-6 h-6 fill-white"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-amber-900 mb-1">Key Exam Tips from Tr. Wai Lin Htet</h3>
+                    <p class="text-sm text-amber-800 leading-relaxed">
+                        Follow instructions precisely. Avoid structural mistakes and capture clear evidence screenshots. Don't just make the final output look correct — the database structure and settings must also be accurate!
+                    </p>
+                </div>
+            </div>
+            <div class="shrink-0">
+                <span class="inline-flex items-center px-4 py-2 rounded-xl bg-amber-500 text-white font-semibold text-sm shadow-sm">
+                    Build it right. Get the marks!
+                </span>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-8 text-center text-sm text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <span class="font-bold text-slate-900">ICT Database Guide</span>
+                <span>•</span>
+                <a href="https://drive.google.com/file/d/1ecnqGAdcidtvHXR_L5-Hs4cnGIHBTnRs/view?usp=sharing" target="_blank" class="text-rose-600 hover:underline inline-flex items-center space-x-1">
+                    <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                    <span>Database MindMap Link</span>
+                </a>
+            </div>
+            <div class="flex items-center space-x-2 text-rose-600 font-semibold">
+                <i data-lucide="heart" class="w-4 h-4 fill-rose-600"></i>
+                <span>Created by Tr. Wai Lin Htet</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
