@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Object-Oriented Programming | Created by TrWaiLinHtet</title>
+<style>
+  :root{
+    --paper:#F3F5F1;
+    --paper-raised:#FFFFFF;
+    --ink:#182022;
+    --ink-soft:#4B5A5C;
+    --line:#D8DED7;
+    --accent:#2E6E6E;
+    --accent-ink:#0F3D3D;
+    --amber:#B0763D;
+    --amber-bg:#F7ECDD;
+    --green:#4C7A52;
+    --green-bg:#E9F1E6;
+    --code-bg:#101A1C;
+    --code-ink:#E7F3EE;
+    --shadow: 0 1px 0 rgba(0,0,0,0.04);
+    --radius: 4px;
+    --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono: 'IBM Plex Mono', 'JetBrains Mono', SFMono-Regular, Consolas, monospace;
+  }
+  html[data-theme="dark"]{
+    --paper:#12181A;
+    --paper-raised:#182123;
+    --ink:#E9EFEC;
+    --ink-soft:#9FB0AC;
+    --line:#2A3436;
+    --accent:#6FC6B6;
+    --accent-ink:#BDEDE1;
+    --amber:#E0A968;
+    --amber-bg:#2C2416;
+    --green:#8FC298;
+    --green-bg:#1B2A1D;
+    --code-bg:#0A1112;
+    --code-ink:#DCEDE6;
+    --shadow: 0 1px 0 rgba(0,0,0,0.4);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    transition:background .25s ease, color .25s ease;
+  }
+  a{color:var(--accent); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  img,svg{max-width:100%;}
+
+  header.masthead{
+    border-bottom:1px solid var(--line);
+    padding:2.6rem 1.5rem 2rem;
+    max-width:920px;
+    margin:0 auto;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--accent);
+    letter-spacing:0.02em;
+    font-weight:600;
+  }
+  h1.title{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(2rem, 5vw, 3.1rem);
+    line-height:1.08;
+    margin:0.5rem 0 0.7rem;
+    max-width:16ch;
+  }
+  .byline{
+    color:var(--ink-soft);
+    font-size:1.02rem;
+    max-width:62ch;
+  }
+  .byline b{color:var(--ink); font-weight:600;}
+  .theme-toggle{
+    position:absolute;
+    top:2.6rem;
+    right:1.5rem;
+    display:flex;
+    border:1px solid var(--line);
+    border-radius:20px;
+    overflow:hidden;
+    background:var(--paper-raised);
+  }
+  .theme-toggle button{
+    border:none;
+    background:transparent;
+    color:var(--ink-soft);
+    font-family:var(--mono);
+    font-size:0.75rem;
+    padding:0.45rem 0.85rem;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+    transition:background .2s ease, color .2s ease;
+  }
+  .theme-toggle button.active{
+    background:var(--accent);
+    color:var(--paper);
+  }
+  .theme-toggle svg{width:14px;height:14px;}
+
+  .layout{
+    max-width:920px;
+    margin:0 auto;
+    display:flex;
+    gap:2.5rem;
+    padding:0 1.5rem 6rem;
+    align-items:flex-start;
+  }
+  nav.toc{
+    width:220px;
+    flex-shrink:0;
+    position:sticky;
+    top:1.5rem;
+    font-size:0.86rem;
+    padding-top:2.6rem;
+  }
+  nav.toc .toc-label{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    margin-bottom:0.6rem;
+  }
+  nav.toc ol{
+    list-style:none;
+    margin:0; padding:0;
+    border-left:1px solid var(--line);
+  }
+  nav.toc li{margin:0;}
+  nav.toc a{
+    display:block;
+    color:var(--ink-soft);
+    padding:0.32rem 0 0.32rem 0.85rem;
+    border-left:2px solid transparent;
+    margin-left:-1px;
+  }
+  nav.toc a:hover{color:var(--ink); text-decoration:none; border-left-color:var(--line);}
+  nav.toc a.active{color:var(--accent); border-left-color:var(--accent);}
+
+  main{flex:1; min-width:0; padding-top:2.6rem;}
+
+  section{
+    padding-top:2.2rem;
+    margin-top:2.2rem;
+    border-top:1px solid var(--line);
+  }
+  section:first-of-type{border-top:none; margin-top:0; padding-top:0;}
+
+  .unit-tag{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--accent);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    font-weight:600;
+  }
+  h2{
+    font-family:var(--serif);
+    font-size:1.75rem;
+    font-weight:600;
+    margin:0.3rem 0 1rem;
+  }
+  h3{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:1.15rem;
+    margin:1.8rem 0 0.6rem;
+    color:var(--ink);
+  }
+  p{max-width:70ch;}
+  ul,ol{max-width:70ch; padding-left:1.3rem;}
+  li{margin:0.3rem 0;}
+
+  .box{
+    border-radius:var(--radius);
+    padding:0.95rem 1.1rem;
+    margin:1.1rem 0;
+    max-width:70ch;
+    font-size:0.95rem;
+    border:1px solid var(--line);
+  }
+  .box-title{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    margin-bottom:0.35rem;
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+  }
+  .box.watch{background:var(--amber-bg); border-color:var(--amber);}
+  .box.watch .box-title{color:var(--amber);}
+
+  pre{
+    background:var(--code-bg);
+    color:var(--code-ink);
+    border-radius:var(--radius);
+    padding:1rem 1.15rem;
+    overflow-x:auto;
+    font-family:var(--mono);
+    font-size:0.86rem;
+    line-height:1.55;
+    max-width:100%;
+    margin:1rem 0;
+  }
+  code{
+    font-family:var(--mono);
+    background:var(--paper-raised);
+    padding:0.1rem 0.35rem;
+    border-radius:2px;
+    font-size:0.88em;
+    border:1px solid var(--line);
+  }
+  pre code{background:none; border:none; padding:0; font-size:1em;}
+  .out-label{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    margin:0.7rem 0 -0.4rem;
+  }
+
+  table{
+    border-collapse:collapse;
+    width:100%;
+    max-width:72ch;
+    margin:1rem 0;
+    font-size:0.9rem;
+  }
+  th,td{
+    text-align:left;
+    padding:0.55rem 0.7rem;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  th{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    letter-spacing:0.03em;
+    border-bottom:1px solid var(--ink-soft);
+  }
+  td code{white-space:nowrap;}
+
+  .diagram{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:1.2rem;
+    margin:1.4rem 0;
+    max-width:74ch;
+  }
+  .diagram-cap{
+    font-family:var(--mono);
+    font-size:0.74rem;
+    color:var(--ink-soft);
+    margin-top:0.6rem;
+  }
+  .svg-fill-paper{fill:var(--paper-raised);}
+  .svg-fill-accent{fill:var(--accent);}
+  .svg-fill-amber{fill:var(--amber);}
+  .svg-stroke{stroke:var(--ink-soft);}
+  .svg-text{fill:var(--ink); font-family:var(--sans);}
+  .svg-text-inv{fill:var(--paper); font-family:var(--sans);}
+  .svg-mono{font-family:var(--mono);}
+  .svg-line{stroke:var(--line);}
+  .svg-arrow{stroke:var(--ink-soft); fill:none;}
+
+  .grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.2rem;
+    max-width:76ch;
+    margin:1.2rem 0;
+  }
+  @media (max-width:640px){.grid2{grid-template-columns:1fr;}}
+  .card{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:1.1rem 1.2rem;
+    background:var(--paper-raised);
+  }
+  .card h4{margin:0 0 0.4rem; font-size:1rem; font-family:var(--sans); font-weight:600;}
+  .card .tag{font-family:var(--mono); font-size:0.7rem; color:var(--accent);}
+
+  /* ---------- Quiz Styles ---------- */
+  .quiz-item{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:1.2rem;
+    margin:1.4rem 0;
+    max-width:74ch;
+  }
+  .quiz-q-title{
+    font-weight:600;
+    font-size:1.05rem;
+    margin-bottom:0.6rem;
+    color:var(--ink);
+  }
+  .quiz-options{
+    list-style:none;
+    padding:0;
+    margin:0.8rem 0;
+  }
+  .quiz-options li{
+    margin:0.45rem 0;
+    padding:0.45rem 0.75rem;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--paper);
+    font-size:0.92rem;
+  }
+  details.quiz-ans{
+    margin-top:0.8rem;
+    border-top:1px dashed var(--line);
+    padding-top:0.6rem;
+  }
+  details.quiz-ans summary{
+    cursor:pointer;
+    font-family:var(--mono);
+    font-size:0.8rem;
+    color:var(--accent);
+    user-select:none;
+    font-weight:600;
+  }
+  .quiz-explain{
+    margin-top:0.6rem;
+    padding:0.8rem;
+    background:var(--green-bg);
+    border-left:3px solid var(--green);
+    border-radius:2px;
+    font-size:0.9rem;
+  }
+  .quiz-explain strong{
+    color:var(--green);
+    display:block;
+    margin-bottom:0.3rem;
+  }
+
+  footer{
+    max-width:920px;
+    margin:0 auto;
+    padding:2.5rem 1.5rem 4rem;
+    color:var(--ink-soft);
+    font-size:0.85rem;
+    border-top:1px solid var(--line);
+    line-height:1.7;
+  }
+
+  @media (max-width:800px){
+    .layout{flex-direction:column;}
+    nav.toc{position:static; width:100%; padding-top:0; margin-bottom:1rem;}
+    nav.toc ol{columns:2; border-left:none;}
+    nav.toc a{border-left:none; padding-left:0;}
+    .theme-toggle{position:static; margin-top:1rem;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="theme-toggle" id="themeToggle">
+    <button data-mode="light" class="active" aria-label="Light mode">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/></g></svg>
+      Light
+    </button>
+    <button data-mode="dark" aria-label="Dark mode">
+      <svg viewBox="0 0 24 24"><path fill="currentColor" d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      Dark
+    </button>
+  </div>
+  <div class="eyebrow">Created by TrWaiLinHtet · Unit 3: Object-Oriented Programming</div>
+  <h1 class="title">Object-Oriented Programming in Python</h1>
+  <p class="byline">Authored and structured by <b>TrWaiLinHtet</b>. Aligned with <b>OSSD ICS4U</b> (Ontario Grade 12 Computer Science) and <b>Cambridge AS/A Level Computer Science (9618)</b> frameworks.</p>
+</header>
+
+<div class="layout">
+  <nav class="toc" id="toc">
+    <div class="toc-label">Contents</div>
+    <ol>
+      <li><a href="#intro">What is OOP?</a></li>
+      <li><a href="#classes">Classes &amp; objects</a></li>
+      <li><a href="#constructors">Constructors &amp; self</a></li>
+      <li><a href="#self-default">Default arguments</a></li>
+      <li><a href="#encapsulation">Encapsulation</a></li>
+      <li><a href="#inheritance">Inheritance</a></li>
+      <li><a href="#polymorphism">Polymorphism</a></li>
+      <li><a href="#abstraction">Abstraction</a></li>
+      <li><a href="#dunder">Dunder method reference</a></li>
+      <li><a href="#iterators">Iterators</a></li>
+      <li><a href="#project">Project: banking system</a></li>
+      <li><a href="#ossd">OSSD ICS4U track</a></li>
+      <li><a href="#alevel">AS/A Level 9618 track</a></li>
+      <li><a href="#teaching">Teaching sequence</a></li>
+      <li><a href="#quiz">OOP Mastery Quiz</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <section id="intro">
+      <div class="unit-tag">01 · Foundations</div>
+      <h2>What is object-oriented programming?</h2>
+      <p>OOP organises a program around <b>objects</b> — bundles of data (attributes) and behaviour (methods) — instead of a long list of separate functions and variables. A <b>class</b> is a blueprint that defines what attributes and methods its objects will have. An <b>object</b> (instance) is a concrete instance built from that blueprint, holding its own values in memory.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 720 210" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="55" width="190" height="100" rx="4" class="svg-fill-paper svg-stroke" stroke-width="1.4" stroke-dasharray="5 4"/>
+          <text x="115" y="45" text-anchor="middle" class="svg-text svg-mono" font-size="12">CLASS (blueprint)</text>
+          <text x="115" y="95" text-anchor="middle" class="svg-text" font-size="13" font-weight="600">Dog</text>
+          <line x1="45" y1="108" x2="185" y2="108" class="svg-line"/>
+          <text x="115" y="126" text-anchor="middle" class="svg-text" font-size="11">name, age</text>
+          <text x="115" y="142" text-anchor="middle" class="svg-text" font-size="11">bark()</text>
+
+          <path d="M225 105 L305 105" class="svg-arrow" stroke-width="1.6" marker-end="url(#arrow)"/>
+          <text x="265" y="95" text-anchor="middle" class="svg-text" font-size="10" fill="var(--ink-soft)">instantiate</text>
+
+          <g>
+            <rect x="320" y="35" width="180" height="80" rx="4" class="svg-fill-accent"/>
+            <text x="410" y="60" text-anchor="middle" class="svg-text-inv" font-size="12" font-weight="600">dog1</text>
+            <text x="410" y="80" text-anchor="middle" class="svg-text-inv" font-size="11">name="Buddy"</text>
+            <text x="410" y="96" text-anchor="middle" class="svg-text-inv" font-size="11">age=3</text>
+          </g>
+          <g>
+            <rect x="320" y="128" width="180" height="70" rx="4" class="svg-fill-amber"/>
+            <text x="410" y="153" text-anchor="middle" class="svg-text-inv" font-size="12" font-weight="600">dog2</text>
+            <text x="410" y="173" text-anchor="middle" class="svg-text-inv" font-size="11">name="Milo", age=5</text>
+          </g>
+          <path d="M225 105 L305 160" class="svg-arrow" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+          <text x="600" y="60" class="svg-text" font-size="11">Each object has</text>
+          <text x="600" y="76" class="svg-text" font-size="11">its own data, but</text>
+          <text x="600" y="92" class="svg-text" font-size="11">shares the class's</text>
+          <text x="600" y="108" class="svg-text" font-size="11">methods.</text>
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="var(--ink-soft)"/>
+            </marker>
+          </defs>
+        </svg>
+        <div class="diagram-cap">Fig. 1 — A class is a blueprint; objects are the instances made from it.</div>
+      </div>
+
+      <p>OOP rests on four core pillars: <b>encapsulation</b> (bundle data and methods, control access), <b>inheritance</b> (share and extend behaviour through a hierarchy), <b>polymorphism</b> (the same interface behaves differently across object types), and <b>abstraction</b> (hide implementation detail, expose interfaces).</p>
+    </section>
+
+    <section id="classes">
+      <div class="unit-tag">02 · Foundations</div>
+      <h2>Classes &amp; objects</h2>
+      <p>Attributes in Python are public by default and accessed using the dot operator. Access restriction is handled by naming conventions (<code>_protected</code>, <code>__private</code>) and property setters.</p>
+
+      <h3>Defining a class</h3>
+      <pre><code>class Dog:
+    species = "Canine"          # class attribute — shared by every instance
+
+    def __init__(self, name, age):
+        self.name = name        # instance attribute — unique per object
+        self.age = age          # instance attribute
+
+
+dog1 = Dog("Buddy", 3)
+print(dog1.name)
+print(dog1.species)</code></pre>
+      <div class="out-label">Output</div>
+      <pre><code>Buddy
+Canine</code></pre>
+
+      <h3>Class attributes vs instance attributes</h3>
+      <p>A class attribute belongs to the class, not to any single instance. This is useful for constants, but requires caution with mutable containers.</p>
+      <pre><code>class Basket:
+    items = []              # class attribute — ONE list shared by all baskets
+
+    def add(self, item):
+        self.items.append(item)
+
+b1, b2 = Basket(), Basket()
+b1.add("apple")
+print(b2.items)   # ['apple'] — b2 sees b1's change because the list is shared.</code></pre>
+      <div class="box watch">
+        <div class="box-title">Important design pattern</div>
+        <p style="margin:0;">Always initialize mutable containers (lists, dictionaries) inside <code>__init__</code> as instance attributes — <code>self.items = []</code> — unless sharing state across all instances is explicitly intended.</p>
+      </div>
+    </section>
+
+    <section id="constructors">
+      <div class="unit-tag">03 · Foundations</div>
+      <h2>Constructors &amp; <code>self</code></h2>
+      <p><code>__init__</code> runs automatically right after an object is created to set up its starting attribute values. Behind the scenes, <code>__new__</code> creates the instance, then <code>__init__</code> initialises it.</p>
+
+      <table>
+        <tr><th>Feature</th><th><code>__new__</code></th><th><code>__init__</code></th></tr>
+        <tr><td>Purpose</td><td>Creates the object</td><td>Initialises the object</td></tr>
+        <tr><td>Runs</td><td>Before creation finishes</td><td>After the object exists</td></tr>
+        <tr><td>Returns</td><td>An object instance</td><td>Nothing (<code>None</code>)</td></tr>
+        <tr><td>Typical use</td><td>Singletons, immutable types</td><td>Setting initial state</td></tr>
+      </table>
+
+      <h3>Default vs parameterised constructors</h3>
+      <pre><code>class Car:
+    def __init__(self, make="Toyota", model="Corolla", year=2020):
+        self.make = make
+        self.model = model
+        self.year = year
+
+car = Car()
+print(car.make, car.model, car.year)   # Toyota Corolla 2020
+
+car2 = Car("Honda", "Civic", 2023)
+print(car2.make, car2.model, car2.year)   # Honda Civic 2023</code></pre>
+
+      <h3>What <code>self</code> actually is</h3>
+      <p><code>self</code> is not a reserved keyword in Python; it is the conventional name for a method's first parameter, representing the instance invoking the method.</p>
+      <pre><code>class Car:
+    def __init__(self, brand, model):
+        self.brand = brand
+        self.model = model
+
+    def display(self):
+        return self.brand, self.model
+
+car1 = Car("Toyota", "Corolla")
+
+# These two calls are equivalent:
+print(car1.display())          # Instance call syntax
+print(Car.display(car1))        # Explicit class-level call passing instance</code></pre>
+      <div class="out-label">Output</div>
+      <pre><code>('Toyota', 'Corolla')
+('Toyota', 'Corolla')</code></pre>
+    </section>
+
+    <section id="self-default">
+      <div class="unit-tag">04 · Foundations</div>
+      <h2>Default arguments in initialisation</h2>
+      <p>Parameters in <code>__init__</code> can define default values, allowing objects to be instantiated with optional arguments.</p>
+      <pre><code>class Player:
+    def __init__(self, name="Unknown", score=0):
+        self.name = name
+        self.score = score
+
+p1 = Player()                 # Uses defaults
+p2 = Player("Aye")            # Overrides name
+p3 = Player("Zaw", 15)        # Overrides both
+
+for p in (p1, p2, p3):
+    print(p.name, p.score)</code></pre>
+      <div class="out-label">Output</div>
+      <pre><code>Unknown 0
+Aye 0
+Zaw 15</code></pre>
+    </section>
+
+    <section id="encapsulation">
+      <div class="unit-tag">05 · Four pillars</div>
+      <h2>Encapsulation</h2>
+      <p>Encapsulation bundles data and the methods that mutate it into a single unit, controlling access to protect integrity.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 700 190" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="150" cy="95" r="80" class="svg-fill-paper svg-stroke" stroke-width="1.3"/>
+          <circle cx="150" cy="95" r="55" class="svg-fill-paper svg-stroke" stroke-width="1.3"/>
+          <circle cx="150" cy="95" r="28" class="svg-fill-accent"/>
+          <text x="150" y="99" text-anchor="middle" class="svg-text-inv svg-mono" font-size="10">private</text>
+          <text x="150" y="45" text-anchor="middle" class="svg-text svg-mono" font-size="10">protected</text>
+          <text x="150" y="20" text-anchor="middle" class="svg-text svg-mono" font-size="10">public</text>
+
+          <g class="svg-text" font-size="12">
+            <text x="330" y="45" font-weight="600">Public</text>
+            <text x="330" y="63" font-size="11" fill="var(--ink-soft)">self.name — accessible from anywhere</text>
+
+            <text x="330" y="112" font-weight="600">Protected</text>
+            <text x="330" y="130" font-size="11" fill="var(--ink-soft)">self._age — convention: internal to class &amp; subclasses</text>
+
+            <text x="330" y="179" font-weight="600">Private</text>
+            <text x="470" y="179" class="svg-text" font-size="11" fill="var(--ink-soft)">self.__salary — name-mangled to prevent accidental access</text>
+          </g>
+        </svg>
+        <div class="diagram-cap">Fig. 2 — Python's access levels are established conventions rather than hardware memory locks.</div>
+      </div>
+
+      <h3>Access levels &amp; name mangling</h3>
+      <pre><code>class Employee:
+    def __init__(self, name, age, salary):
+        self.name = name          # Public
+        self._age = age           # Protected (convention)
+        self.__salary = salary    # Private (mangled to _Employee__salary)
+
+    def show_salary(self):
+        print("Salary:", self.__salary)
+
+emp = Employee("Robert", 34, 60000)
+print(emp.name)               # Accessible
+print(emp._age)               # Accessible (conventionally avoided externally)
+emp.show_salary()             # Accessible via public interface
+# emp.__salary                # Raises AttributeError</code></pre>
+
+      <h3>Using <code>@property</code> for managed attributes</h3>
+      <p>Python provides the <code>@property</code> decorator to define getters, setters, and deleters, keeping interface syntax clean while providing input validation.</p>
+      <pre><code>class Account:
+    def __init__(self, owner, balance=0):
+        self.owner = owner
+        self.__balance = 0
+        self.balance = balance            # Routed through setter validation
+
+    @property
+    def balance(self):
+        return self.__balance
+
+    @balance.setter
+    def balance(self, v):
+        if v &lt; 0:
+            raise ValueError("Balance cannot be negative")
+        self.__balance = v
+
+acc = Account("Aye", 500)
+acc.balance = 800
+print(acc.balance)   # 800</code></pre>
+    </section>
+
+    <section id="inheritance">
+      <div class="unit-tag">06 · Four pillars</div>
+      <h2>Inheritance</h2>
+      <p>Inheritance allows a subclass to reuse and extend code from a superclass. <code>super()</code> invokes methods defined on the parent class.</p>
+
+      <pre><code>class Animal:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def speak(self):
+        raise NotImplementedError("Subclasses must implement speak()")
+
+    def get_info(self):
+        return f"{self.name} is {self.age} years old"
+
+
+class Dog(Animal):
+    def __init__(self, name, age, breed):
+        super().__init__(name, age)
+        self.breed = breed
+
+    def speak(self):
+        return "Woof"
+
+
+class Cat(Animal):
+    def speak(self):
+        return "Meow"
+
+
+d = Dog("Buddy", 3, "Labrador")
+c = Cat("Kitty", 2)
+
+print(d.get_info())
+print(c.get_info())
+print(d.speak(), c.speak())</code></pre>
+      <div class="out-label">Output</div>
+      <pre><code>Buddy is 3 years old
+Kitty is 2 years old
+Woof Meow</code></pre>
+
+      <h3>Method Resolution Order (MRO)</h3>
+      <p>In complex hierarchies or multiple inheritance, Python resolves attribute lookups through the C3 linearization algorithm, exposed via <code>__mro__</code>.</p>
+      <pre><code>class Computer:
+    def __init__(self, cpu, ram_gb):
+        self.cpu = cpu
+        self.ram_gb = ram_gb
+
+    def specs(self):
+        return f"CPU: {self.cpu}, RAM: {self.ram_gb}GB"
+
+
+class Laptop(Computer):
+    def __init__(self, cpu, ram_gb, battery_mah):
+        super().__init__(cpu, ram_gb)
+        self.battery_mah = battery_mah
+
+    def specs(self):
+        return f"{super().specs()}, Battery: {self.battery_mah}mAh"
+
+
+class MacBook(Laptop):
+    def __init__(self, model_name, chip, ram_gb, battery_mah):
+        super().__init__(cpu=chip, ram_gb=ram_gb, battery_mah=battery_mah)
+        self.model_name = model_name
+
+print([c.__name__ for c in MacBook.__mro__])</code></pre>
+      <div class="out-label">Output</div>
+      <pre><code>['MacBook', 'Laptop', 'Computer', 'object']</code></pre>
+
+      <h3>Inheritance vs composition</h3>
+      <p>Inheritance represents an <b>is-a</b> relationship (a <code>Dog</code> is an <code>Animal</code>). If the relationship represents <b>has-a</b> (a <code>Bank</code> has accounts), composition should be used by storing objects inside instance attributes.</p>
+    </section>
+
+    <section id="polymorphism">
+      <div class="unit-tag">07 · Four pillars</div>
+      <h2>Polymorphism</h2>
+      <p>Polymorphism allows different classes to expose the same interface while providing different underlying implementations.</p>
+
+      <h3>Method overriding &amp; flexible signatures</h3>
+      <pre><code>class Animal:
+    def sound(self):
+        return "Generic sound"
+
+class Dog(Animal):
+    def sound(self):
+        return "Bark"
+
+class Cat(Animal):
+    def sound(self):
+        return "Meow"
+
+animals = [Dog(), Cat(), Animal()]
+for animal in animals:
+    print(animal.sound())</code></pre>
+      <div class="out-label">Output</div>
+      <pre><code>Bark
+Meow
+Generic sound</code></pre>
+
+      <h3>Operator overloading via dunder methods</h3>
+      <p>Python allows user-defined classes to overload arithmetic and comparison operators by implementing special double-underscore methods.</p>
+      <pre><code>class Point:
+    def __init__(self, x, y):
+        self.x, self.y = x, y
+
+    def __add__(self, other):
+        return Point(self.x + other.x, self.y + other.y)
+
+    def __repr__(self):
+        return f"Point({self.x}, {self.y})"
+
+print(Point(1, 2) + Point(3, 4))   # Point(4, 6)</code></pre>
+    </section>
+
+    <section id="abstraction">
+      <div class="unit-tag">08 · Four pillars</div>
+      <h2>Abstraction</h2>
+      <p>Abstraction enforces contract specifications across subclasses using the <code>abc</code> (Abstract Base Classes) module.</p>
+      <pre><code>from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+class Rectangle(Shape):
+    def __init__(self, w, h):
+        self.w, self.h = w, h
+
+    def area(self):
+        return self.w * self.h
+
+rect = Rectangle(4, 5)
+print("Area:", rect.area())</code></pre>
+    </section>
+
+    <section id="dunder">
+      <div class="unit-tag">09 · Reference</div>
+      <h2>Dunder method reference</h2>
+      <table>
+        <tr><th>Method</th><th>Triggered by</th><th>Purpose</th></tr>
+        <tr><td><code>__init__</code></td><td><code>ClassName(...)</code></td><td>Initialises instance state</td></tr>
+        <tr><td><code>__str__</code></td><td><code>print(obj)</code>, <code>str(obj)</code></td><td>User-facing readable string</td></tr>
+        <tr><td><code>__repr__</code></td><td>Interactive shell, <code>repr(obj)</code></td><td>Unambiguous code representation</td></tr>
+        <tr><td><code>__eq__</code></td><td><code>a == b</code></td><td>Value equality check</td></tr>
+        <tr><td><code>__len__</code></td><td><code>len(obj)</code></td><td>Returns object length</td></tr>
+        <tr><td><code>__add__</code></td><td><code>a + b</code></td><td>Defines behavior for <code>+</code></td></tr>
+        <tr><td><code>__iter__</code>, <code>__next__</code></td><td><code>for</code> loops, <code>next()</code></td><td>Iterator protocol</td></tr>
+      </table>
+    </section>
+
+    <section id="iterators">
+      <div class="unit-tag">10 · Advanced Python</div>
+      <h2>Iterators</h2>
+      <p>Custom iterables implement <code>__iter__</code> (returning the iterator itself) and <code>__next__</code> (returning elements sequentially until raising <code>StopIteration</code>).</p>
+      <pre><code>class Countdown:
+    def __init__(self, start):
+        self.current = start
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.current &lt;= 0:
+            raise StopIteration
+        val = self.current
+        self.current -= 1
+        return val
+
+print(list(Countdown(3)))   # [3, 2, 1]</code></pre>
+    </section>
+
+    <section id="project">
+      <div class="unit-tag">11 · Project</div>
+      <h2>Project: banking system</h2>
+      <p>A comprehensive implementation demonstrating abstraction, inheritance, encapsulation, and composition.</p>
+      <pre><code>from abc import ABC, abstractmethod
+
+class InsufficientFunds(Exception):
+    pass
+
+class Account(ABC):
+    _next_id = 1000
+
+    def __init__(self, owner, balance=0):
+        self.owner = owner
+        self._balance = balance
+        self.id = Account._next_id
+        Account._next_id += 1
+
+    @property
+    def balance(self):
+        return self._balance
+
+    def deposit(self, amount):
+        if amount &lt;= 0:
+            raise ValueError("Deposit must be positive")
+        self._balance += amount
+
+    def withdraw(self, amount):
+        if amount &lt;= 0:
+            raise ValueError("Withdrawal must be positive")
+        if amount &gt; self._available():
+            raise InsufficientFunds(f"Cannot withdraw {amount}")
+        self._balance -= amount
+
+    @abstractmethod
+    def _available(self):
+        pass
+
+    def __str__(self):
+        return f"{type(self).__name__} {self.id} ({self.owner}): ${self._balance:.2f}"
+
+
+class Savings(Account):
+    def __init__(self, owner, balance=0, rate=0.02):
+        super().__init__(owner, balance)
+        self.rate = rate
+
+    def _available(self):
+        return self._balance
+
+    def add_interest(self):
+        self._balance += self._balance * self.rate
+
+
+class Current(Account):
+    def __init__(self, owner, balance=0, overdraft=500):
+        super().__init__(owner, balance)
+        self.overdraft = overdraft
+
+    def _available(self):
+        return self._balance + self.overdraft
+
+
+class Bank:
+    def __init__(self):
+        self._accounts = {}
+
+    def open(self, acc):
+        self._accounts[acc.id] = acc
+        return acc.id
+
+    def transfer(self, src_id, dst_id, amount):
+        self._accounts[src_id].withdraw(amount)
+        self._accounts[dst_id].deposit(amount)
+
+
+bank = Bank()
+sid = bank.open(Savings("Aye", 1000))
+cid = bank.open(Current("Zaw", 500))
+
+bank.transfer(sid, cid, 250)
+print(bank._accounts[sid])
+print(bank._accounts[cid])</code></pre>
+      <div class="out-label">Output</div>
+      <pre><code>Savings 1000 (Aye): $750.00
+Current 1001 (Zaw): $750.00</code></pre>
+    </section>
+
+    <section id="ossd">
+      <div class="unit-tag">12 · Curriculum</div>
+      <h2>OSSD ICS4U track</h2>
+      <p><b>ICS4U</b> focuses on software architecture and design justification alongside syntax.</p>
+      <div class="grid2">
+        <div class="card">
+          <div class="tag">Design focus</div>
+          <h4>UML before implementation</h4>
+          <p style="margin:0;">Diagram class definitions, properties, access modifiers, and associations prior to writing Python modules.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Design focus</div>
+          <h4>Pillar justification</h4>
+          <p style="margin:0;">Articulate why a design uses composition instead of inheritance to model relationships cleanly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="alevel">
+      <div class="unit-tag">13 · Curriculum</div>
+      <h2>Cambridge AS/A Level (9618) track</h2>
+      <p>Cambridge 9618 assesses OOP primarily through structured pseudocode with explicit visibility specifiers.</p>
+      <table>
+        <tr><th>Python</th><th>Cambridge 9618 pseudocode</th></tr>
+        <tr>
+          <td><pre style="margin:0;"><code>class Pet:
+    def __init__(self, name):
+        self.name = name</code></pre></td>
+          <td><pre style="margin:0;"><code>CLASS Pet
+  PRIVATE Name : STRING
+  PUBLIC PROCEDURE NEW(GivenName : STRING)
+    Name ← GivenName
+  ENDPROCEDURE
+ENDCLASS</code></pre></td>
+        </tr>
+      </table>
+    </section>
+
+    <section id="teaching">
+      <div class="unit-tag">14 · Pedagogy</div>
+      <h2>Instructional sequence</h2>
+      <ol>
+        <li>Classes &amp; Objects: Blueprints vs. instances</li>
+        <li>Attributes, methods, and <code>__init__</code></li>
+        <li>String representation: <code>__str__</code> and <code>__repr__</code></li>
+        <li>Encapsulation &amp; properties</li>
+        <li>Inheritance hierarchies &amp; <code>super()</code></li>
+        <li>Polymorphism and duck typing</li>
+        <li>Abstraction via interfaces and ABCs</li>
+        <li>System integration via composition</li>
+      </ol>
+    </section>
+
+    <!-- Interactive Quiz Section -->
+    <section id="quiz">
+      <div class="unit-tag">15 · Assessment</div>
+      <h2>Python OOP Mastery Quiz</h2>
+      <p>Test your understanding of core and advanced OOP mechanics. Click <b>"Show Answer &amp; Explanation"</b> under each question to verify your reasoning.</p>
+
+      <!-- Q1 -->
+      <div class="quiz-item">
+        <div class="quiz-q-title">Question 1: Class vs. Instance Attributes</div>
+        <pre><code>class Dog:
+    tricks = []
+
+    def __init__(self, name):
+        self.name = name
+
+    def add_trick(self, trick):
+        self.tricks.append(trick)
+
+d1 = Dog("Fido")
+d2 = Dog("Buddy")
+d1.add_trick("roll over")
+
+print(d2.tricks)</code></pre>
+        <ul class="quiz-options">
+          <li>A) <code>[]</code></li>
+          <li>B) <code>['roll over']</code></li>
+          <li>C) <code>AttributeError: 'Dog' object has no trick</code></li>
+          <li>D) <code>None</code></li>
+        </ul>
+        <details class="quiz-ans">
+          <summary>Show Answer &amp; Explanation</summary>
+          <div class="quiz-explain">
+            <strong>Correct Answer: B</strong>
+            <code>tricks</code> is defined at the class scope, making it a class attribute shared across all instances of <code>Dog</code>. Modifying the mutable list via <code>d1</code> mutates the single shared list object referenced by both <code>d1</code> and <code>d2</code>. To give each dog its own list, initialize it inside <code>__init__</code> as <code>self.tricks = []</code>.
+          </div>
+        </details>
+      </div>
+
+      <!-- Q2 -->
+      <div class="quiz-item">
+        <div class="quiz-q-title">Question 2: Name Mangling and Private Attributes</div>
+        <pre><code>class Account:
+    def __init__(self):
+        self.__balance = 100
+
+acc = Account()
+print(acc._Account__balance)</code></pre>
+        <ul class="quiz-options">
+          <li>A) <code>100</code></li>
+          <li>B) <code>AttributeError: 'Account' object has no attribute '_Account__balance'</code></li>
+          <li>C) <code>AttributeError: Private variable cannot be accessed outside class</code></li>
+          <li>D) <code>None</code></li>
+        </ul>
+        <details class="quiz-ans">
+          <summary>Show Answer &amp; Explanation</summary>
+          <div class="quiz-explain">
+            <strong>Correct Answer: A</strong>
+            Python does not enforce true private memory boundaries. Identifiers with two leading underscores (and at most one trailing underscore), like <code>__balance</code>, undergo name mangling: the interpreter renames them to <code>_ClassName__attributeName</code>. Thus, <code>acc._Account__balance</code> accesses the value directly.
+          </div>
+        </details>
+      </div>
+
+      <!-- Q3 -->
+      <div class="quiz-item">
+        <div class="quiz-q-title">Question 3: Method Resolution Order (MRO) with Diamond Inheritance</div>
+        <pre><code>class A:
+    def greet(self):
+        return "A"
+
+class B(A):
+    def greet(self):
+        return "B"
+
+class C(A):
+    def greet(self):
+        return "C"
+
+class D(B, C):
+    pass
+
+obj = D()
+print(obj.greet())</code></pre>
+        <ul class="quiz-options">
+          <li>A) <code>A</code></li>
+          <li>B) <code>B</code></li>
+          <li>C) <code>C</code></li>
+          <li>D) <code>TypeError: Cannot create a consistent method resolution order</code></li>
+        </ul>
+        <details class="quiz-ans">
+          <summary>Show Answer &amp; Explanation</summary>
+          <div class="quiz-explain">
+            <strong>Correct Answer: B</strong>
+            Python uses the C3 Linearization algorithm to resolve method calls. For <code>class D(B, C)</code>, the MRO is <code>D -> B -> C -> A -> object</code>. When <code>obj.greet()</code> is called, Python checks <code>D</code>, finds no override, and moves to <code>B</code>, which immediately returns <code>"B"</code>.
+          </div>
+        </details>
+      </div>
+
+      <!-- Q4 -->
+      <div class="quiz-item">
+        <div class="quiz-q-title">Question 4: @classmethod vs. @staticmethod</div>
+        <pre><code>class MathUtils:
+    multiplier = 2
+
+    @classmethod
+    def apply_multiplier(cls, x):
+        return x * cls.multiplier
+
+    @staticmethod
+    def add(a, b):
+        return a + b</code></pre>
+        <p>Which statement accurately describes the difference between these two decorators?</p>
+        <ul class="quiz-options">
+          <li>A) <code>@classmethod</code> receives the class object <code>cls</code> as its first parameter; <code>@staticmethod</code> receives no implicit first argument.</li>
+          <li>B) <code>@staticmethod</code> can modify class state, whereas <code>@classmethod</code> cannot.</li>
+          <li>C) <code>@classmethod</code> can only be invoked on instances; <code>@staticmethod</code> can only be invoked on the class directly.</li>
+          <li>D) <code>@staticmethod</code> passes the instance <code>self</code> implicitly behind the scenes.</li>
+        </ul>
+        <details class="quiz-ans">
+          <summary>Show Answer &amp; Explanation</summary>
+          <div class="quiz-explain">
+            <strong>Correct Answer: A</strong>
+            A <code>@classmethod</code> receives the class itself (<code>cls</code>) as its implicit first argument, allowing it to inspect or modify class-level state or serve as alternative constructors. A <code>@staticmethod</code> behaves like a plain function placed inside a class's namespace, taking neither <code>self</code> nor <code>cls</code>.
+          </div>
+        </details>
+      </div>
+
+      <!-- Q5 -->
+      <div class="quiz-item">
+        <div class="quiz-q-title">Question 5: Modifying Attribute Access via Properties</div>
+        <pre><code>class Temperature:
+    def __init__(self, celsius):
+        self._celsius = celsius
+
+    @property
+    def fahrenheit(self):
+        return (self._celsius * 9 / 5) + 32
+
+t = Temperature(0)
+t.fahrenheit = 100</code></pre>
+        <ul class="quiz-options">
+          <li>A) It updates <code>self._celsius</code> to approximately 37.78.</li>
+          <li>B) It dynamically overrides the <code>fahrenheit</code> method with the integer 100.</li>
+          <li>C) <code>AttributeError: property 'fahrenheit' of 'Temperature' object has no setter</code></li>
+          <li>D) <code>TypeError: property object is not callable</code></li>
+        </ul>
+        <details class="quiz-ans">
+          <summary>Show Answer &amp; Explanation</summary>
+          <div class="quiz-explain">
+            <strong>Correct Answer: C</strong>
+            Decorating a method with <code>@property</code> defines a getter, creating a read-only property by default. Without an explicit setter defined via <code>@fahrenheit.setter</code>, mutating the property raises an <code>AttributeError</code>.
+          </div>
+        </details>
+      </div>
+
+      <!-- Q6 -->
+      <div class="quiz-item">
+        <div class="quiz-q-title">Question 6: The __repr__ vs. __str__ Protocol</div>
+        <pre><code>class Item:
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return f"Item({self.name!r})"
+
+item = Item("Book")
+print(str(item))</code></pre>
+        <ul class="quiz-options">
+          <li>A) <code>&lt;__main__.Item object at 0x...&gt;</code></li>
+          <li>B) <code>Item('Book')</code></li>
+          <li>C) <code>Book</code></li>
+          <li>D) <code>TypeError: __str__ returned non-string</code></li>
+        </ul>
+        <details class="quiz-ans">
+          <summary>Show Answer &amp; Explanation</summary>
+          <div class="quiz-explain">
+            <strong>Correct Answer: B</strong>
+            When <code>str()</code> or <code>print()</code> is invoked on an object, Python checks for <code>__str__</code>. If <code>__str__</code> is not defined, Python falls back to <code>__repr__</code>. Since <code>__repr__</code> is implemented, it returns <code>Item('Book')</code>.
+          </div>
+        </details>
+      </div>
+
+      <!-- Q7 -->
+      <div class="quiz-item">
+        <div class="quiz-q-title">Question 7: Memory Optimization with __slots__</div>
+        <pre><code>class Coordinate:
+    __slots__ = ('x', 'y')
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+c = Coordinate(1, 2)
+c.z = 3</code></pre>
+        <ul class="quiz-options">
+          <li>A) <code>c.z</code> is created and assigned the value 3.</li>
+          <li>B) <code>AttributeError: 'Coordinate' object has no attribute 'z'</code></li>
+          <li>C) <code>TypeError: __slots__ cannot be modified</code></li>
+          <li>D) <code>SyntaxError: invalid syntax</code></li>
+        </ul>
+        <details class="quiz-ans">
+          <summary>Show Answer &amp; Explanation</summary>
+          <div class="quiz-explain">
+            <strong>Correct Answer: B</strong>
+            Defining <code>__slots__</code> prevents the creation of a dynamic per-instance <code>__dict__</code>, saving memory by fixing attribute allocations to those specified (<code>'x'</code> and <code>'y'</code>). Setting an unlisted attribute raises an <code>AttributeError</code>.
+          </div>
+        </details>
+      </div>
+
+      <!-- Q8 -->
+      <div class="quiz-item">
+        <div class="quiz-q-title">Question 8: Behavior of super() in Single Inheritance</div>
+        <pre><code>class Base:
+    def __init__(self):
+        print("Base Init")
+
+class Derived(Base):
+    def __init__(self):
+        print("Derived Init")
+        super().__init__()
+
+d = Derived()</code></pre>
+        <ul class="quiz-options">
+          <li>A)<br><code>Base Init</code><br><code>Derived Init</code></li>
+          <li>B)<br><code>Derived Init</code><br><code>Base Init</code></li>
+          <li>C)<br><code>Derived Init</code></li>
+          <li>D) <code>TypeError: super() requires at least 1 argument</code></li>
+        </ul>
+        <details class="quiz-ans">
+          <summary>Show Answer &amp; Explanation</summary>
+          <div class="quiz-explain">
+            <strong>Correct Answer: B</strong>
+            Python executes statements in method bodies sequentially. <code>print("Derived Init")</code> runs first. Then, <code>super().__init__()</code> delegates to the parent class constructor, executing <code>print("Base Init")</code> second.
+          </div>
+        </details>
+      </div>
+
+      <!-- Q9 -->
+      <div class="quiz-item">
+        <div class="quiz-q-title">Question 9: isinstance() vs. type() Checking</div>
+        <pre><code>class Vehicle:
+    pass
+
+class Car(Vehicle):
+    pass
+
+c = Car()
+print(type(c) == Vehicle, isinstance(c, Vehicle))</code></pre>
+        <ul class="quiz-options">
+          <li>A) <code>True True</code></li>
+          <li>B) <code>False False</code></li>
+          <li>C) <code>False True</code></li>
+          <li>D) <code>True False</code></li>
+        </ul>
+        <details class="quiz-ans">
+          <summary>Show Answer &amp; Explanation</summary>
+          <div class="quiz-explain">
+            <strong>Correct Answer: C</strong>
+            <code>type(c)</code> checks the exact class of the object (<code>&lt;class '__main__.Car'&gt;</code>), which does not equal <code>Vehicle</code> (evaluating to <code>False</code>). <code>isinstance(c, Vehicle)</code> accounts for inheritance hierarchies, evaluating to <code>True</code>.
+          </div>
+        </details>
+      </div>
+
+      <!-- Q10 -->
+      <div class="quiz-item">
+        <div class="quiz-q-title">Question 10: Abstract Base Classes (ABCs)</div>
+        <pre><code>from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+class Circle(Shape):
+    def __init__(self, r):
+        self.r = r
+
+c = Circle(5)</code></pre>
+        <ul class="quiz-options">
+          <li>A) The instance <code>c</code> is created successfully with <code>r = 5</code>.</li>
+          <li>B) <code>TypeError: Can't instantiate abstract class Circle without an implementation for abstract method 'area'</code></li>
+          <li>C) <code>NotImplementedError: Method area is abstract</code></li>
+          <li>D) <code>Circle</code> automatically returns <code>None</code> for <code>area()</code>.</li>
+        </ul>
+        <details class="quiz-ans">
+          <summary>Show Answer &amp; Explanation</summary>
+          <div class="quiz-explain">
+            <strong>Correct Answer: B</strong>
+            Any subclass extending an <code>ABC</code> containing <code>@abstractmethod</code> decorators cannot be instantiated unless it provides concrete implementations for all declared abstract methods. Failing to do so triggers a <code>TypeError</code> upon instantiation.
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  Unit 3: Object-Oriented Programming · Created and curated by TrWaiLinHtet · Verified against Python 3.12 syntax standards · Built for OSSD ICS4U and Cambridge 9618 preparation.
+</footer>
+
+<script>
+  (function(){
+    var root = document.documentElement;
+    var buttons = document.querySelectorAll('#themeToggle button');
+    function setTheme(mode){
+      root.setAttribute('data-theme', mode);
+      buttons.forEach(function(b){
+        b.classList.toggle('active', b.getAttribute('data-mode') === mode);
+      });
+    }
+    buttons.forEach(function(b){
+      b.addEventListener('click', function(){ setTheme(b.getAttribute('data-mode')); });
+    });
+    try{
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+        setTheme('dark');
+      }
+    }catch(e){}
+
+    var sections = document.querySelectorAll('main section[id]');
+    var links = document.querySelectorAll('nav.toc a');
+    function onScroll(){
+      var pos = window.scrollY + 120;
+      var current = sections[0] ? sections[0].id : null;
+      sections.forEach(function(s){ if (s.offsetTop <= pos) current = s.id; });
+      links.forEach(function(l){
+        l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+      });
+    }
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+  })();
+</script>
+
+</body>
+</html>
