@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wai Lin Htet — Lecturer & Academic Researcher</title>
+  <meta name="description" content="Wai Lin Htet — Senior Lecturer and Academic Researcher teaching Cambridge IGCSE/A-Level Computer Science & ICT, OSSD, Python, and AI-integrated curricula in Yangon, Myanmar.">
+  <meta property="og:title" content="Wai Lin Htet — Lecturer & Academic Researcher">
+  <meta property="og:description" content="Cambridge IGCSE/A-Level Computer Science & ICT teaching resources, course outlines, and revision notes.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
   <style>
     :root {
       --bg: #ffffff;
@@ -146,45 +151,38 @@
       margin-bottom: 0;
     }
 
-    /* Structured Experience & Degree Lists */
-    .timeline-list {
-      list-style: none;
-      margin-top: 1rem;
+    /* About teaser */
+    .about-teaser {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin-top: 0.5rem;
     }
 
-    .timeline-item {
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
+    .about-teaser p {
+      margin-bottom: 1rem;
     }
 
-    .timeline-item:last-child {
-      border-bottom: none;
+    .about-teaser p:last-of-type {
+      margin-bottom: 0;
     }
 
-    .item-header {
+    .credential-row {
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
       flex-wrap: wrap;
       gap: 0.5rem;
+      margin: 1rem 0 1.25rem;
     }
 
-    .item-title {
+    .credential-pill {
+      font-size: 0.78rem;
       font-weight: 600;
-      font-size: 0.98rem;
-      color: var(--text-main);
-    }
-
-    .item-date {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .item-sub {
-      font-size: 0.9rem;
       color: var(--text-secondary);
-      margin-top: 0.2rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.3rem 0.75rem;
     }
 
     /* Course Cards Grid */
@@ -230,6 +228,17 @@
       color: var(--accent);
     }
 
+    .group-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin: 2rem 0 0.6rem;
+    }
+
+    .group-label:first-of-type { margin-top: 0.5rem; }
+
     /* Contact Details */
     .contact-grid {
       display: grid;
@@ -239,6 +248,24 @@
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 1.75rem;
+    }
+
+    .contact-entry {
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+
+    .contact-icon {
+      flex: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--accent-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
     }
 
     .contact-entry dt {
@@ -264,6 +291,61 @@
       text-decoration: underline;
     }
 
+    .contact-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 0.35rem;
+    }
+
+    .btn-telegram {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 9px 18px;
+      background-color: #26A5E4;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-telegram:hover {
+      background-color: #1e8ec4;
+      transform: translateY(-2px);
+    }
+
+    .btn-copy {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 9px 16px;
+      background: var(--bg);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s ease;
+    }
+
+    .btn-copy:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .response-note {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
     /* Footer */
     footer {
       padding: 3rem 0;
@@ -278,24 +360,41 @@
       nav { gap: 1.25rem; }
       .course-grid { grid-template-columns: 1fr; }
     }
-    .btn-more {
-  display: inline-block;
-  padding: 10px 22px;
-  background-color: #737373; /* light gray*/
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 15px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
-  transition: all 0.25s ease;
-}
 
-.btn-more:hover {
-  background-color: #4338ca;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
-}
+    .btn-more {
+      display: inline-block;
+      padding: 10px 22px;
+      background-color: #4338ca;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+      transition: all 0.25s ease;
+    }
+
+    .btn-more:hover {
+      background-color: #372da3;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+    }
+
+    .btn-more.ghost {
+      background-color: transparent;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      box-shadow: none;
+      padding: 9px 20px;
+    }
+
+    .btn-more.ghost:hover {
+      background-color: var(--accent-subtle);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: none;
+      box-shadow: none;
+    }
   </style>
 </head>
 <body>
@@ -317,7 +416,7 @@
       <h1>Wai Lin Htet</h1>
       <p class="lead-text">Senior Lecturer & Academic Researcher bridging computer science, artificial intelligence, and modern pedagogy.</p>
       <a href="about.html" class="btn-more">More About Me &rarr;</a>
-      
+
       <div class="philosophy-card">
         <h3>Why Study Computer Science & ICT?</h3>
         <p>Technology shapes every aspect of modern life. Studying Computer Science goes beyond syntax; it builds structured problem-solving, logical discipline, and systems-level thinking—empowering students to transition from passive consumers of technology to active creators.</p>
@@ -329,57 +428,19 @@
       </div>
     </section>
 
-    <!-- ABOUT SECTION -->
+    <!-- ABOUT SECTION (short teaser — full detail lives on about.html) -->
     <section id="about">
       <h2>About Me</h2>
-      <p>As an experienced Computer Science Instructor and freelance Educator, I specialize in preparing learners for academic and professional success through tailored, curriculum-aligned computing courses. My approach emphasizes practical application—leveraging industry-standard development tools and interactive frameworks to make complex computational principles intuitive and accessible.</p>
-      <a href="about.html" class="btn-more">More About Me &rarr;</a>
-      <h3>Academic Credentials</h3>
-      <ul class="timeline-list">
-        <li class="timeline-item">
-          <div class="item-header">
-            <span class="item-title">Ph.D.(Thesis)</span>
-          </div>
-          <div class="item-sub">Focus: Applied AI & Advanced Teaching Methods</div>
-        </li>
-        <li class="timeline-item">
-          <div class="item-header">
-            <span class="item-title">Master of Business Administration (MBA)</span>
-          </div>
-          <div class="item-sub">Focus: IT Management & Digital Transformation</div>
-        </li>
-        <li class="timeline-item">
-          <div class="item-header">
-            <span class="item-title">Bachelor of Science in Computer Science (B.S.C.S.)</span>
-          </div>
-          <div class="item-sub">Focus: Software Engineering & Systems Architecture</div>
-        </li>
-      </ul>
-
-      <h3>Teaching Experience</h3>
-      <ul class="timeline-list">
-        <li class="timeline-item">
-          <div class="item-header">
-            <span class="item-title">Senior Lecturer (OSSD & Cambridge Frameworks)</span>
-            <span class="item-date">2024 – Present</span>
-          </div>
-          <div class="item-sub">Guarantee International College, Yangon</div>
-        </li>
-        <li class="timeline-item">
-          <div class="item-header">
-            <span class="item-title">Computer Science & ICT Educator</span>
-            <span class="item-date">2016 – Present</span>
-          </div>
-          <div class="item-sub">Cambridge Assessment International Education (CAIE)</div>
-        </li>
-        <li class="timeline-item">
-          <div class="item-header">
-            <span class="item-title">ICT & Digital Studies Instructor</span>
-            <span class="item-date">2012 – 2016</span>
-          </div>
-          <div class="item-sub">Specializing in Relational Databases & Lab Administration</div>
-        </li>
-      </ul>
+      <div class="about-teaser">
+        <p>Experienced Computer Science instructor and freelance educator preparing learners for academic and professional success through tailored, curriculum-aligned computing courses — emphasizing practical, industry-standard tools over rote syntax.</p>
+        <div class="credential-row">
+          <span class="credential-pill">Ph.D. (Thesis) — Applied AI & Teaching Methods</span>
+          <span class="credential-pill">MBA — IT Management</span>
+          <span class="credential-pill">B.S.C.S. — Software Engineering</span>
+        </div>
+        <p>10+ years teaching Cambridge IGCSE/A-Level, OSSD, and AI-integrated curricula, currently at Guarantee International College, Yangon.</p>
+        <a href="about.html" class="btn-more ghost">Full credentials & teaching history &rarr;</a>
+      </div>
     </section>
 
     <!-- COURSES SECTION -->
@@ -387,6 +448,7 @@
       <h2>Teaching & Curriculum</h2>
       <p>Select a subject below to explore course outlines, syllabus breakdowns, and teaching resources.</p>
 
+      <div class="group-label">Cambridge IGCSE & A-Level</div>
       <div class="course-grid">
         <a href="CS_0478_IGCSE_wh.html" class="course-card">
           <span class="course-code">Cambridge IGCSE</span>
@@ -403,14 +465,22 @@
           <div class="course-title">A-Level CS (9618)</div>
         </a>
 
+        <a href="CS_Paper2_rev.html" class="course-card">
+          <span class="course-code">Cambridge IGCSE</span>
+          <div class="course-title">CS Paper 2 Revision</div>
+        </a>
+
+        <a href="ict_edexcel_4it_v1.html" class="course-card">
+          <span class="course-code">Edexcel</span>
+          <div class="course-title">IGCSE ICT (4IT0)</div>
+        </a>
+      </div>
+
+      <div class="group-label">Other Curricula & Foundations</div>
+      <div class="course-grid">
         <a href="OSSD_CS_Grade12_wh.html" class="course-card">
           <span class="course-code">Ontario Curriculum</span>
           <div class="course-title">OSSD (ICS3U / ICS4U)</div>
-        </a>
-
-         <a href="ict_edexcel_4it_v1.html" class="course-card">
-          <span class="course-code">ICT Edexcel</span>
-          <div class="course-title">IGCSE ICT 4IT</div>
         </a>
 
         <a href="PreIG_DC_ICT.html" class="course-card">
@@ -418,22 +488,35 @@
           <div class="course-title">Pre-IGCSE ICT & CS</div>
         </a>
 
-        <a href="ict-foundation.html" class="course-card">
-            <span class="course-code">Foundations</span>
-          <div class="course-title">ICT Theory Foundation Notebook</div>
-          </a>
+        <a href="PreIG_DC_ICT_1.html" class="course-card">
+          <span class="course-code">Foundations</span>
+          <div class="course-title">Pre-IGCSE ICT & CS — Part 2</div>
+        </a>
 
-          <a href="pastpaper_index.html" class="course-card">
+        <a href="ict-foundation.html" class="course-card">
+          <span class="course-code">Foundations</span>
+          <div class="course-title">ICT Theory Foundation Notebook</div>
+        </a>
+
+        <a href="my_course.html" class="course-card">
+          <span class="course-code">Overview</span>
+          <div class="course-title">My Course Guide</div>
+        </a>
+
+        <a href="pastpaper_index.html" class="course-card">
           <span class="course-code">Resources</span>
           <div class="course-title">Past Papers & Schemes</div>
         </a>
-        
+      </div>
+
+      <div class="group-label">Programming & Applied Skills</div>
+      <div class="course-grid">
         <a href="Python.html" class="course-card">
           <span class="course-code">Programming</span>
           <div class="course-title">Python Practical Track</div>
         </a>
 
-          <a href="OOP_Programming_trwailinhtet.html" class="course-card">
+        <a href="OOP_Programming_trwailinhtet.html" class="course-card">
           <span class="course-code">Programming</span>
           <div class="course-title">OOP Programming</div>
         </a>
@@ -442,15 +525,16 @@
           <span class="course-code">Web Development</span>
           <div class="course-title">HTML Web Authoring</div>
         </a>
-         <a href="excel_spreadsheet_guide.html" class="course-card">
+
+        <a href="excel_spreadsheet_guide.html" class="course-card">
           <span class="course-code">Spreadsheets</span>
-          <div class="course-title">Spreadsheets Excel</div>
+          <div class="course-title">Spreadsheets — Excel</div>
         </a>
-         <a href="ms_access_database_guide.html" class="course-card">
+
+        <a href="ms_access_database_guide.html" class="course-card">
           <span class="course-code">Database</span>
-          <div class="course-title">Database MS Access</div>
+          <div class="course-title">Database — MS Access</div>
         </a>
-      
       </div>
     </section>
 
@@ -459,18 +543,49 @@
       <h2>Contact & Collaboration</h2>
       <dl class="contact-grid">
         <div class="contact-entry">
-          <dt>Direct Email</dt>
-          <dd><a href="mailto:tr.wailinhtet@gmail.com">tr.wailinhtet@gmail.com</a></dd>
+          <span class="contact-icon">💬</span>
+          <div>
+            <dt>Telegram — fastest way to reach me</dt>
+            <dd>
+              <div class="contact-cta-row">
+                <a href="https://t.me/SayarWaiLin" class="btn-telegram" target="_blank" rel="noopener">
+                  ✈️ Message @SayarWaiLin
+                </a>
+              </div>
+            </dd>
+          </div>
         </div>
+
         <div class="contact-entry">
-          <dt>Location</dt>
-          <dd>Yangon, Myanmar</dd>
+          <span class="contact-icon">📧</span>
+          <div>
+            <dt>Direct Email</dt>
+            <dd>
+              <div class="contact-cta-row">
+                <a href="mailto:tr.wailinhtet@gmail.com">tr.wailinhtet@gmail.com</a>
+                <button type="button" class="btn-copy" onclick="copyEmail(this)">📋 Copy</button>
+              </div>
+            </dd>
+          </div>
         </div>
+
         <div class="contact-entry">
-          <dt>Professional Inquiries</dt>
-          <dd>Available for institutional teaching, private/group programming tutoring (Python & Algorithms), curriculum advising, UCAS references, and educational AI research.</dd>
+          <span class="contact-icon">📍</span>
+          <div>
+            <dt>Location</dt>
+            <dd>Yangon, Myanmar</dd>
+          </div>
+        </div>
+
+        <div class="contact-entry">
+          <span class="contact-icon">🎓</span>
+          <div>
+            <dt>Professional Inquiries</dt>
+            <dd>Available for institutional teaching, private/group programming tutoring (Python & Algorithms), curriculum advising, UCAS references, and educational AI research.</dd>
+          </div>
         </div>
       </dl>
+      <p class="response-note">Students and parents — Telegram is the quickest way to reach me and usually gets a reply within 24 hours.</p>
     </section>
 
   </main>
@@ -478,6 +593,19 @@
   <footer>
     &copy; 2026 Wai Lin Htet. All rights reserved.
   </footer>
+
+  <script>
+    function copyEmail(btn) {
+      const email = "tr.wailinhtet@gmail.com";
+      navigator.clipboard.writeText(email).then(function () {
+        const original = btn.textContent;
+        btn.textContent = "✓ Copied";
+        setTimeout(function () { btn.textContent = original; }, 1800);
+      }).catch(function () {
+        btn.textContent = "Copy failed";
+      });
+    }
+  </script>
 
 </body>
 </html>
