@@ -247,18 +247,60 @@
 
     /* Notebook full-screen view (shown after unlock) */
     #notebook-view {
-      display: none;
+      display: none;           /* switched to flex on unlock */
+      flex-direction: column;
       height: 100vh;
       overflow: hidden;
     }
+    /* Full-width bar pinned to the top of the notebook */
     .notebook-topbar {
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
       padding: 10px 16px;
       background: var(--card-bg);
       border-bottom: 1px solid var(--border);
       font-size: 0.85rem;
+      z-index: 20;
+    }
+    .topbar-left, .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .topbar-left .nb-title {
+      font-weight: 700;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 32px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .icon-btn:hover { background: var(--tag-bg); border-color: var(--accent); }
+    .icon-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* Row that holds the sidebar + reading area */
+    .nb-body {
+      flex: 1;
+      display: flex;
+      min-height: 0;
+      overflow: hidden;
     }
     .notebook-topbar .student-greeting {
       font-weight: 600;
@@ -276,6 +318,7 @@
     }
 
     /* Sidebar Layout */
+    #notebook-view.sidebar-hidden aside { display: none; }
     aside {
       width: 320px;
       background: var(--sidebar-bg);
@@ -429,11 +472,17 @@
     }
 
     @media (max-width: 850px) {
-      #notebook-view { flex-direction: column; }
-      aside { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+      .nb-body { flex-direction: column; }
+      aside { width: 100%; height: auto; max-height: 42vh; border-right: none; border-bottom: 1px solid var(--border); }
       .chapter-list { display: flex; overflow-x: auto; padding: 8px; }
       .chapter-item { white-space: nowrap; flex-shrink: 0; }
       main { padding: 20px; }
+      .topbar-left .nb-title { display: none; }
+      .btn-back { padding: 6px 9px; }
+    }
+    @media (max-width: 520px) {
+      .notebook-topbar { padding: 8px 10px; }
+      .student-greeting { max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     }
     @media (max-width: 600px) {
       .landing-hero h1 { font-size: 1.7rem; }
@@ -527,21 +576,32 @@
 
   <!-- ============ FULL NOTEBOOK (unlocked) ============ -->
   <div id="notebook-view">
-    <aside>
-      <div class="sidebar-header">
-        <h2>ICT Notebook</h2>
-        <button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">Dark Mode</button>
-      </div>
-      <ul class="chapter-list" id="nav-list"></ul>
-    </aside>
-
-    <main>
-      <div class="notebook-topbar">
+    <div class="notebook-topbar">
+      <div class="topbar-left">
+        <button class="icon-btn active" id="sidebar-toggle" onclick="toggleSidebar()"
+                title="Show / hide chapter list" aria-label="Toggle chapter list" aria-expanded="true">&#9776;</button>
+        <span class="nb-title">ICT Notebook</span>
         <span class="student-greeting" id="student-greeting"></span>
+      </div>
+      <div class="topbar-right">
+        <button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">Dark Mode</button>
         <button class="btn-back" onclick="closeNotebook()">&larr; Back to Preview</button>
       </div>
-      <div class="content-container" id="content-display"></div>
-    </main>
+    </div>
+
+    <div class="nb-body">
+      <aside>
+        <div class="sidebar-header">
+          <h2>Chapters</h2>
+          <button class="theme-btn" onclick="toggleSidebar()">Hide</button>
+        </div>
+        <ul class="chapter-list" id="nav-list"></ul>
+      </aside>
+
+      <main>
+        <div class="content-container" id="content-display"></div>
+      </main>
+    </div>
   </div>
 
   <script>
@@ -567,6 +627,7 @@
       document.getElementById("student-greeting").textContent = "👋 " + name;
       document.getElementById("landing-view").style.display = "none";
       document.getElementById("notebook-view").style.display = "flex";
+      try { if (localStorage.getItem("nbSidebarHidden") === "1") toggleSidebar(true); } catch (e) {}
       document.body.style.overflow = "hidden";
       renderChapter(0);
     }
@@ -575,6 +636,16 @@
       document.getElementById("notebook-view").style.display = "none";
       document.getElementById("landing-view").style.display = "block";
       document.body.style.overflow = "";
+    }
+
+    function toggleSidebar(force) {
+      const view = document.getElementById("notebook-view");
+      const hide = (typeof force === "boolean") ? force : !view.classList.contains("sidebar-hidden");
+      view.classList.toggle("sidebar-hidden", hide);
+      const btn = document.getElementById("sidebar-toggle");
+      btn.classList.toggle("active", !hide);
+      btn.setAttribute("aria-expanded", String(!hide));
+      try { localStorage.setItem("nbSidebarHidden", hide ? "1" : "0"); } catch (e) {}
     }
 
     function toggleTheme() {
@@ -2112,7 +2183,10 @@
         <span>Chapter ${c.id}</span>
         <span class="subtext">${c.title}</span>
       `;
-      li.onclick = () => renderChapter(idx);
+      li.onclick = () => {
+        renderChapter(idx);
+        if (window.innerWidth <= 850) toggleSidebar(true);
+      };
       navList.appendChild(li);
     });
 
