@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tr. WaiLinHtet — ICT Notebook (Complete Edition)</title>
+  <title>Pre-IGCSE ICT / CS Notebook — Tr. WaiLinHtet</title>
   <style>
     :root {
       --bg: #f8fafc;
@@ -34,41 +34,184 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      display: flex;
-      height: 100vh;
-      overflow: hidden;
       transition: background 0.2s, color 0.2s;
     }
 
-    /* Passcode Screen */
-    #lock-screen {
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      z-index: 9999;
+    /* ===== LANDING / PREVIEW PAGE ===== */
+    #landing-view {
+      min-height: 100vh;
+    }
+
+    .landing-header {
+      position: sticky;
+      top: 0;
+      background: rgba(248, 250, 252, 0.85);
+      backdrop-filter: saturate(180%) blur(16px);
+      -webkit-backdrop-filter: saturate(180%) blur(16px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+    [data-theme="dark"] .landing-header {
+      background: rgba(15, 23, 42, 0.85);
+    }
+    .landing-header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 1.5rem;
+    }
+    .landing-brand {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .landing-nav {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 1.25rem;
     }
-    .lock-box {
+    .landing-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .landing-nav a:hover { color: var(--text); }
+
+    .landing-main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+    }
+
+    .landing-hero {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .landing-hero .badge {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--accent);
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .landing-hero h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .landing-hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
+
+    .landing-section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0 0 1rem;
+    }
+
+    .module-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 3rem;
+    }
+    .module-list details {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.2s ease;
+      padding: 0;
+    }
+    .module-list details[open] {
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+    .module-list summary {
+      padding: 1rem 1.25rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      list-style: none;
+    }
+    .module-list summary::-webkit-details-marker { display: none; }
+    .module-list summary::after {
+      content: '+';
+      margin-left: auto;
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .module-list details[open] summary::after { content: '–'; }
+    .module-badge {
+      flex-shrink: 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: var(--tag-bg);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+    }
+    .module-list .content {
+      padding: 0 1.25rem 1.1rem 3.1rem;
+    }
+    .module-list .content ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .module-list .content li {
+      position: relative;
+      padding-left: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .module-list .content li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Unlock card (was #lock-screen) */
+    .unlock-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       padding: 36px;
-      border-radius: 12px;
+      border-radius: 16px;
       text-align: center;
-      max-width: 360px;
-      width: 90%;
+      max-width: 400px;
+      width: 100%;
+      margin: 0 auto;
       box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
     }
-    .lock-box input {
+    .unlock-card input {
       width: 100%;
       padding: 12px;
-      margin: 18px 0;
+      margin-bottom: 12px;
       border: 1px solid var(--border);
       border-radius: 8px;
       font-size: 16px;
@@ -77,7 +220,7 @@
       color: var(--text);
       outline: none;
     }
-    .lock-box button {
+    .unlock-card button {
       width: 100%;
       padding: 12px;
       background: var(--accent);
@@ -87,6 +230,49 @@
       cursor: pointer;
       font-weight: 600;
       font-size: 15px;
+      margin-top: 4px;
+    }
+    .unlock-error {
+      color: #dc2626;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 12px;
+      display: none;
+    }
+    .unlock-hint {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 14px;
+    }
+
+    /* Notebook full-screen view (shown after unlock) */
+    #notebook-view {
+      display: none;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .notebook-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+    .notebook-topbar .student-greeting {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .btn-back {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 12.5px;
+      font-weight: 600;
     }
 
     /* Sidebar Layout */
@@ -99,36 +285,22 @@
       flex-shrink: 0;
     }
     .sidebar-header {
-      padding: 16px 20px;
+      padding: 20px;
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     .sidebar-header h2 { font-size: 16px; font-weight: 700; }
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .nav-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+    .theme-btn {
       background: var(--bg);
       border: 1px solid var(--border);
-      padding: 6px 10px;
+      padding: 6px 12px;
       border-radius: 6px;
+      cursor: pointer;
       color: var(--text);
       font-size: 12px;
       font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.15s, border-color 0.15s;
-    }
-    .nav-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
     }
     .chapter-list {
       flex: 1;
@@ -257,49 +429,152 @@
     }
 
     @media (max-width: 850px) {
-      body { flex-direction: column; }
+      #notebook-view { flex-direction: column; }
       aside { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
       .chapter-list { display: flex; overflow-x: auto; padding: 8px; }
       .chapter-item { white-space: nowrap; flex-shrink: 0; }
       main { padding: 20px; }
     }
+    @media (max-width: 600px) {
+      .landing-hero h1 { font-size: 1.7rem; }
+    }
+
+    /* ===== Illustration figures ===== */
+    .figgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+      gap: 12px;
+      margin: 16px 0 18px;
+    }
+    .figgrid.wide { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    .fig {
+      background: var(--q-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 8px 8px;
+      text-align: center;
+      margin: 0;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .fig:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.07); }
+    .fig svg { width: 100%; height: auto; display: block; color: var(--text-muted); }
+    .fig .s-fill { fill: var(--accent); }
+    .fig .s-soft { fill: var(--tag-bg); }
+    .fig figcaption {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 7px;
+      line-height: 1.35;
+    }
+    .keyline {
+      background: var(--tag-bg);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      margin: 14px 0;
+      font-size: 13.5px;
+    }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+    .split > div {
+      background: var(--q-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .split h5 { font-size: 13.5px; margin-bottom: 6px; }
+    .split ul { margin: 0 0 0 18px; font-size: 13px; }
+    @media (max-width: 600px) { .split { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
-  <div id="lock-screen">
-    <div class="lock-box">
-      <h3 style="font-size: 18px; margin-bottom: 6px;">ICT/CS Theory Foundation</h3>
-      <p style="font-size: 13px; color: var(--text-muted);">Instructor: Tr. WLH</p>
-      <input type="password" id="pass-val" placeholder="Passcode (Default: TrName)" autofocus>
-      <button onclick="unlock()">Unlock Notes</button>
+  <!-- ============ LANDING / PREVIEW PAGE ============ -->
+  <div id="landing-view">
+    <header class="landing-header">
+      <div class="landing-header-inner">
+        <a href="index.html" class="landing-brand">Wai Lin Htet</a>
+        <nav class="landing-nav">
+          <a href="index.html">Home</a>
+          <a href="my_course.html">My Courses</a>
+          <button class="theme-btn" id="theme-toggle-landing" onclick="toggleTheme()">Dark Mode</button>
+        </nav>
+      </div>
+    </header>
+
+    <div class="landing-main">
+      <div class="landing-hero">
+        <span class="badge">Pre-IGCSE &bull; Discovering Computers</span>
+        <h1>ICT / Computer Science Notebook</h1>
+        <p>Digital Technology, Data, and Devices — Instructor: Tr. WaiLinHtet</p>
+      </div>
+
+      <h2 class="landing-section-title">Chapter List (Preview)</h2>
+      <div class="module-list" id="module-preview-list"></div>
+
+      <h2 class="landing-section-title">Access Full Notes &amp; Practice Questions</h2>
+      <div class="unlock-card">
+        <h3 style="font-size: 18px; margin-bottom: 6px;">Student Sign-In</h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Enter your name and class passcode to unlock the full notes.</p>
+        <input type="text" id="student-name" placeholder="Student Name" style="margin-top: 18px;">
+        <input type="password" id="pass-val" placeholder="Passcode">
+        <button onclick="unlock()">Unlock Notes</button>
+        <p class="unlock-error" id="unlock-error"></p>
+        <p class="unlock-hint">Ask your instructor for the class passcode if you don't have it.</p>
+      </div>
     </div>
   </div>
 
-  <aside>
-    <div class="sidebar-header">
-      <h2>ICT Notebook</h2>
-      <div class="header-actions">
-        <a href="index.html" class="nav-btn" title="Back to Academic Portal">← Portal</a>
-        <button class="nav-btn" id="theme-toggle" onclick="toggleTheme()">Dark</button>
+  <!-- ============ FULL NOTEBOOK (unlocked) ============ -->
+  <div id="notebook-view">
+    <aside>
+      <div class="sidebar-header">
+        <h2>ICT Notebook</h2>
+        <button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">Dark Mode</button>
       </div>
-    </div>
-    <ul class="chapter-list" id="nav-list"></ul>
-  </aside>
+      <ul class="chapter-list" id="nav-list"></ul>
+    </aside>
 
-  <main>
-    <div class="content-container" id="content-display"></div>
-  </main>
+    <main>
+      <div class="notebook-topbar">
+        <span class="student-greeting" id="student-greeting"></span>
+        <button class="btn-back" onclick="closeNotebook()">&larr; Back to Preview</button>
+      </div>
+      <div class="content-container" id="content-display"></div>
+    </main>
+  </div>
 
   <script>
     const PASSCODE = "trwailinhtet";
+
     function unlock() {
+      const name = document.getElementById("student-name").value.trim();
       const val = document.getElementById("pass-val").value;
-      if (val === PASSCODE) {
-        document.getElementById("lock-screen").style.display = "none";
-      } else {
-        alert("Incorrect passcode! Try: trName");
+      const errorEl = document.getElementById("unlock-error");
+
+      if (!name) {
+        errorEl.textContent = "Please enter your name first.";
+        errorEl.style.display = "block";
+        return;
       }
+      if (val !== PASSCODE) {
+        errorEl.textContent = "Incorrect passcode. Please check with your instructor.";
+        errorEl.style.display = "block";
+        return;
+      }
+
+      errorEl.style.display = "none";
+      document.getElementById("student-greeting").textContent = "👋 " + name;
+      document.getElementById("landing-view").style.display = "none";
+      document.getElementById("notebook-view").style.display = "flex";
+      document.body.style.overflow = "hidden";
+      renderChapter(0);
+    }
+
+    function closeNotebook() {
+      document.getElementById("notebook-view").style.display = "none";
+      document.getElementById("landing-view").style.display = "block";
+      document.body.style.overflow = "";
     }
 
     function toggleTheme() {
@@ -307,7 +582,95 @@
       const current = html.getAttribute("data-theme");
       const next = current === "light" ? "dark" : "light";
       html.setAttribute("data-theme", next);
-      document.getElementById("theme-toggle").textContent = next === "light" ? "Dark" : "Light";
+      const label = next === "light" ? "Dark Mode" : "Light Mode";
+      document.getElementById("theme-toggle").textContent = label;
+      document.getElementById("theme-toggle-landing").textContent = label;
+    }
+
+    // Chapter list preview (shown before sign-in, module 1-12 overview)
+    const previewModules = [
+      { badge: "Module 1", title: "Today's Technologies: Computers, Devices, and the Web", points: ["Laptops, Tablets, Desktops, Servers", "Mobile and Game Devices (Smartphones, Wearables)", "Data and Information: Input, Output, Memory & Storage", "The Web, Digital Security, Software, and Networks"] },
+      { badge: "Module 2", title: "Connecting Online: Internet, Websites, and Media", points: ["Evolution of the Internet & ISPs", "IP Addresses and Domain Names", "World Wide Web, Web Apps, and Search Engines", "Digital Media: Graphics, Audio, Video, Plug-ins", "Internet Services (Email, Messaging, VoIP, FTP) & Netiquette"] },
+      { badge: "Module 3", title: "Computers & Mobile Devices: Options for Home & Work", points: ["Mobile Computers, Desktops, and Servers", "Terminals, ATMs, and Kiosks", "Embedded Computers and Cloud Computing", "Ports, Connections, and Hardware Protection", "Health Concerns and Ergonomics"] },
+      { badge: "Module 4", title: "Programs & Apps: Productivity, Graphics, and Tools", points: ["Operating System Roles and App Distribution", "Productivity Apps (Word Processing, Spreadsheets, Databases)", "Graphics and Media Applications", "Security Tools (Firewalls, Antivirus, Spyware Removers)", "File, Disk, and System Management Utilities"] },
+      { badge: "Module 5", title: "Digital Security, Ethics, and Privacy", points: ["Cybercrime, Malware, Botnets, and DoS Attacks", "Access Controls, Passwords, and Biometrics", "Information Theft, Encryption, and Digital Certificates", "Hardware Theft and Backup Strategies", "Ethics, Intellectual Property, and Information Privacy"] },
+      { badge: "Module 6", title: "Computing Components: Processors, Memory, and Cloud", points: ["Motherboard, Control Unit, and ALU Operations", "The Machine Cycle, Registers, and System Clock", "Data Representation (Bits, Bytes, Binary, Coding Schemes)", "RAM, Cache, ROM, and Flash Memory", "Buses, Power Supplies, and Mobile Device Care"] },
+      { badge: "Module 7", title: "Input and Output: Extending Capabilities", points: ["Keyboards, Pointing Devices, and Touchscreens", "Pen Input, Voice, Audio, and Video Input", "Scanners, Bar Code, and RFID Readers", "Displays, Printers (Ink-Jet, Laser, 3-D), and Speakers", "Assistive Technology for Input and Output"] },
+      { badge: "Module 8", title: "Digital Storage: Local and Cloud Solutions", points: ["Storage Capacity, Storage vs. Memory", "Hard Disks, SSDs, External Drives, and RAID", "Flash Memory Cards and USB Flash Drives", "Cloud Storage Services and Backup Strategies", "Optical Discs, Enterprise Storage (SAN/NAS), Smart Cards"] },
+      { badge: "Module 9", title: "Operating Systems: Resource Coordination", points: ["OS Functions: Starting, User Interfaces, Task Management", "Memory Management and Device Configuration", "Desktop OS (Windows, macOS, UNIX, Linux, Chrome OS)", "Server OS and Mobile OS (Android, iOS)"] },
+      { badge: "Module 10", title: "Communicating Digital Content: Networks & Devices", points: ["LANs, MANs, WANs, and PANs", "Network Protocols (Ethernet, TCP/IP, Wi-Fi, Bluetooth, LTE)", "Hardware: Modems, Wireless Access Points, Routers, Switches", "Physical vs. Wireless Transmission Media"] },
+      { badge: "Module 11", title: "Building Solutions: Databases and Dev Tools", points: ["Data Hierarchy, File Processing vs. Databases", "Database Management Systems (DBMS) and Big Data", "System Development Life Cycle (SDLC) Phases", "Programming Languages and App Development Frameworks"] },
+      { badge: "Module 12", title: "Enterprise Systems, Certifications, and Careers", points: ["Enterprise Resource Planning (ERP) and CMS", "IT Careers and Department Roles", "Technology Certifications (Hardware, Software, Security, Network)", "Job Searching and Building an Online Presence"] }
+    ];
+
+    const previewList = document.getElementById("module-preview-list");
+    previewModules.forEach(m => {
+      const d = document.createElement("details");
+      d.innerHTML = `
+        <summary><span class="module-badge">${m.badge}</span><span>${m.title}</span></summary>
+        <div class="content"><ul>${m.points.map(p => `<li>${p}</li>`).join("")}</ul></div>
+      `;
+      previewList.appendChild(d);
+    });
+
+    const FIG = {
+      barcode: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="16" y="20" width="88" height="44" rx="4" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="24" y="28" width="5" height="28" fill="currentColor" fill-opacity=".55"/><rect x="33" y="28" width="3" height="28" fill="currentColor" fill-opacity=".55"/><rect x="42" y="28" width="5" height="28" fill="currentColor" fill-opacity=".55"/><rect x="51" y="28" width="3" height="28" fill="currentColor" fill-opacity=".55"/><rect x="60" y="28" width="5" height="28" fill="currentColor" fill-opacity=".55"/><rect x="69" y="28" width="3" height="28" fill="currentColor" fill-opacity=".55"/><rect x="78" y="28" width="5" height="28" fill="currentColor" fill-opacity=".55"/><rect x="87" y="28" width="3" height="28" fill="currentColor" fill-opacity=".55"/><rect x="96" y="28" width="5" height="28" fill="currentColor" fill-opacity=".55"/><rect x="16" y="40" width="88" height="3" rx="1.5" fill="#ef4444"/><path d="M30 72 h60" stroke="currentColor" stroke-opacity=".3" stroke-width="2"/></svg>`,
+      bluray: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><circle cx="60" cy="45" r="38" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><circle cx="60" cy="45" r="30" fill="currentColor" fill-opacity=".2"/><circle cx="60" cy="45" r="19" class="s-fill"/><circle cx="60" cy="45" r="7" fill="var(--card-bg)"/><text x="60" y="36" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" fill="var(--card-bg)">BD</text></svg>`,
+      bridge: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><circle cx="22" cy="60" r="8" fill="currentColor" fill-opacity=".35"/><circle cx="98" cy="60" r="8" fill="currentColor" fill-opacity=".35"/><path d="M22 52 C 38 12, 82 12, 98 52" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/><path d="M6 72 h34 M80 72 h34" stroke="currentColor" stroke-opacity=".35" stroke-width="3"/><rect x="50" y="18" width="20" height="12" rx="3" class="s-fill"/></svg>`,
+      cd: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><circle cx="60" cy="45" r="38" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><circle cx="60" cy="45" r="30" fill="currentColor" fill-opacity=".2"/><circle cx="60" cy="45" r="19" class="s-fill"/><circle cx="60" cy="45" r="7" fill="var(--card-bg)"/><text x="60" y="36" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" fill="var(--card-bg)">CD</text></svg>`,
+      cli: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="10" y="16" width="100" height="58" rx="6" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="10" y="16" width="100" height="12" rx="6" fill="currentColor" fill-opacity=".25"/><path d="M22 42 l8 6 l-8 6" stroke="var(--accent)" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="36" y="46" width="30" height="4" rx="2" class="s-fill"/><rect x="22" y="60" width="52" height="4" rx="2" fill="currentColor" fill-opacity=".3"/></svg>`,
+      cpu: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="38" y="14" width="3" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="46" y="14" width="3" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="54" y="14" width="3" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="62" y="14" width="3" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="70" y="14" width="3" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="78" y="14" width="3" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="38" y="71" width="3" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="46" y="71" width="3" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="54" y="71" width="3" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="62" y="71" width="3" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="70" y="71" width="3" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="78" y="71" width="3" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="25" y="38" width="5" height="3" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="25" y="46" width="5" height="3" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="25" y="54" width="5" height="3" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="25" y="62" width="5" height="3" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="90" y="38" width="5" height="3" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="90" y="46" width="5" height="3" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="90" y="54" width="5" height="3" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="90" y="62" width="5" height="3" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="30" y="19" width="60" height="52" rx="7" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="41" y="30" width="38" height="30" rx="5" class="s-fill"/><text x="60" y="50" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="var(--card-bg)">CPU</text></svg>`,
+      desktop: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="12" y="18" width="62" height="42" rx="4" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="18" y="24" width="50" height="30" rx="2" class="s-fill"/><path d="M36 60 h14 v8 h-14 z" fill="currentColor" fill-opacity=".35"/><rect x="26" y="68" width="34" height="4" rx="2" fill="currentColor" fill-opacity=".35"/><rect x="84" y="14" width="26" height="60" rx="4" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><circle cx="97" cy="24" r="3" class="s-fill"/><rect x="90" y="34" width="14" height="4" rx="2" fill="currentColor" fill-opacity=".35"/><rect x="90" y="42" width="14" height="4" rx="2" fill="currentColor" fill-opacity=".35"/></svg>`,
+      dvd: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><circle cx="60" cy="45" r="38" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><circle cx="60" cy="45" r="30" fill="currentColor" fill-opacity=".2"/><circle cx="60" cy="45" r="19" class="s-fill"/><circle cx="60" cy="45" r="7" fill="var(--card-bg)"/><text x="60" y="36" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" fill="var(--card-bg)">DVD</text></svg>`,
+      gateway: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="6" y="28" width="34" height="34" rx="6" fill="currentColor" fill-opacity=".18" stroke="currentColor" stroke-opacity=".35"/><rect x="80" y="28" width="34" height="34" rx="6" fill="currentColor" fill-opacity=".18" stroke="currentColor" stroke-opacity=".35"/><rect x="48" y="24" width="24" height="42" rx="5" class="s-fill"/><path d="M40 45 h8 M72 45 h8" stroke="currentColor" stroke-opacity=".5" stroke-width="3"/><text x="23" y="49" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="currentColor">A</text><text x="97" y="49" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="currentColor">B</text></svg>`,
+      gpu: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="10" y="22" width="92" height="46" rx="5" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><circle cx="36" cy="45" r="14" fill="none" stroke="currentColor" stroke-opacity=".45" stroke-width="2"/><circle cx="36" cy="45" r="4" class="s-fill"/><circle cx="72" cy="45" r="14" fill="none" stroke="currentColor" stroke-opacity=".45" stroke-width="2"/><circle cx="72" cy="45" r="4" class="s-fill"/><rect x="100" y="16" width="9" height="58" rx="2" fill="currentColor" fill-opacity=".35"/><rect x="16" y="68" width="5" height="6" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="24" y="68" width="5" height="6" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="32" y="68" width="5" height="6" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="40" y="68" width="5" height="6" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="48" y="68" width="5" height="6" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="56" y="68" width="5" height="6" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="64" y="68" width="5" height="6" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="72" y="68" width="5" height="6" rx="1" fill="currentColor" fill-opacity=".45"/></svg>`,
+      gui: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="10" y="16" width="100" height="58" rx="6" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="10" y="16" width="100" height="12" rx="6" fill="currentColor" fill-opacity=".25"/><circle cx="20" cy="22" r="2.5" class="s-fill"/><circle cx="28" cy="22" r="2.5" fill="currentColor" fill-opacity=".4"/><rect x="18" y="36" width="20" height="16" rx="3" class="s-fill"/><rect x="46" y="36" width="20" height="16" rx="3" fill="currentColor" fill-opacity=".3"/><rect x="74" y="36" width="20" height="16" rx="3" fill="currentColor" fill-opacity=".3"/><path d="M70 58 l10 12 l2 -5 l5 -1 z" fill="currentColor" fill-opacity=".6"/></svg>`,
+      hdd: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="16" y="16" width="88" height="58" rx="6" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><circle cx="54" cy="45" r="24" fill="none" stroke="currentColor" stroke-opacity=".45" stroke-width="2"/><circle cx="54" cy="45" r="16" fill="currentColor" fill-opacity=".12"/><circle cx="54" cy="45" r="5" class="s-fill"/><path d="M92 24 L70 40 l6 6 L96 30 Z" class="s-fill"/><circle cx="94" cy="26" r="4" fill="currentColor" fill-opacity=".45"/></svg>`,
+      headphones: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><path d="M22 58 V46 a38 38 0 0 1 76 0 v12" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="2"/><rect x="14" y="52" width="18" height="28" rx="8" class="s-fill"/><rect x="88" y="52" width="18" height="28" rx="8" class="s-fill"/></svg>`,
+      hub: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><circle cx="60" cy="45" r="16" class="s-fill"/><text x="60" y="49" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" fill="var(--card-bg)">HUB</text><path d="M60 29 V12 M60 61 V78 M44 45 H16 M76 45 H104 M48 33 L28 18 M72 57 L92 74" stroke="currentColor" stroke-opacity=".4" stroke-width="2"/><circle cx="60" cy="8" r="5" fill="currentColor" fill-opacity=".35"/><circle cx="60" cy="82" r="5" fill="currentColor" fill-opacity=".35"/><circle cx="12" cy="45" r="5" fill="currentColor" fill-opacity=".35"/><circle cx="108" cy="45" r="5" fill="currentColor" fill-opacity=".35"/></svg>`,
+      inputoutput: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="44" y="30" width="32" height="30" rx="5" class="s-fill"/><text x="60" y="49" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" fill="var(--card-bg)">CPU</text><rect x="4" y="34" width="26" height="22" rx="4" fill="currentColor" fill-opacity=".3"/><rect x="90" y="34" width="26" height="22" rx="4" fill="currentColor" fill-opacity=".3"/><path d="M32 45 h10" stroke="var(--accent)" stroke-width="3"/><path d="M42 45 l-6 -4 v8 z" fill="var(--accent)"/><path d="M78 45 h10" stroke="var(--accent)" stroke-width="3"/><path d="M88 45 l-6 -4 v8 z" fill="var(--accent)"/><text x="17" y="70" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="700" fill="currentColor">IN</text><text x="103" y="70" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="700" fill="currentColor">OUT</text></svg>`,
+      joystick: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><path d="M24 76 h72 l-8 -14 H32 z" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="56" y="26" width="8" height="38" rx="4" fill="currentColor" fill-opacity=".45"/><circle cx="60" cy="20" r="12" class="s-fill"/><circle cx="82" cy="66" r="5" fill="currentColor" fill-opacity=".4"/></svg>`,
+      keyboard: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="8" y="24" width="104" height="46" rx="6" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="15" y="32" width="8" height="7" rx="1.5" class="s-fill"/><rect x="26" y="32" width="8" height="7" rx="1.5" class="s-fill"/><rect x="37" y="32" width="8" height="7" rx="1.5" class="s-fill"/><rect x="48" y="32" width="8" height="7" rx="1.5" class="s-fill"/><rect x="59" y="32" width="8" height="7" rx="1.5" class="s-fill"/><rect x="70" y="32" width="8" height="7" rx="1.5" class="s-fill"/><rect x="81" y="32" width="8" height="7" rx="1.5" class="s-fill"/><rect x="92" y="32" width="8" height="7" rx="1.5" class="s-fill"/><rect x="103" y="32" width="8" height="7" rx="1.5" class="s-fill"/><rect x="18" y="43" width="8" height="7" rx="1.5" fill="currentColor" fill-opacity=".3"/><rect x="29" y="43" width="8" height="7" rx="1.5" fill="currentColor" fill-opacity=".3"/><rect x="40" y="43" width="8" height="7" rx="1.5" fill="currentColor" fill-opacity=".3"/><rect x="51" y="43" width="8" height="7" rx="1.5" fill="currentColor" fill-opacity=".3"/><rect x="62" y="43" width="8" height="7" rx="1.5" fill="currentColor" fill-opacity=".3"/><rect x="73" y="43" width="8" height="7" rx="1.5" fill="currentColor" fill-opacity=".3"/><rect x="84" y="43" width="8" height="7" rx="1.5" fill="currentColor" fill-opacity=".3"/><rect x="95" y="43" width="8" height="7" rx="1.5" fill="currentColor" fill-opacity=".3"/><rect x="34" y="54" width="52" height="8" rx="2" fill="currentColor" fill-opacity=".3"/></svg>`,
+      lan: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="46" y="36" width="28" height="18" rx="4" class="s-fill"/><path d="M60 36 V18 M60 54 v18 M46 45 H24 M74 45 h22" stroke="currentColor" stroke-opacity=".4" stroke-width="2"/><rect x="50" y="4" width="20" height="14" rx="3" fill="currentColor" fill-opacity=".3"/><rect x="50" y="72" width="20" height="14" rx="3" fill="currentColor" fill-opacity=".3"/><rect x="6" y="38" width="20" height="14" rx="3" fill="currentColor" fill-opacity=".3"/><rect x="94" y="38" width="20" height="14" rx="3" fill="currentColor" fill-opacity=".3"/><text x="60" y="49" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="700" fill="var(--card-bg)">LAN</text></svg>`,
+      laptop: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="24" y="16" width="72" height="46" rx="4" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="30" y="22" width="60" height="34" rx="2" class="s-fill"/><path d="M12 66 h96 l-6 8 H18 z" fill="currentColor" fill-opacity=".3"/><rect x="50" y="68" width="20" height="3" rx="1.5" fill="currentColor" fill-opacity=".5"/></svg>`,
+      memory: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="12" y="20" width="96" height="16" rx="4" fill="currentColor" fill-opacity=".15"/><rect x="12" y="20" width="52" height="16" rx="4" class="s-fill"/><rect x="12" y="42" width="96" height="16" rx="4" fill="currentColor" fill-opacity=".15"/><rect x="12" y="42" width="76" height="16" rx="4" class="s-fill"/><rect x="12" y="64" width="96" height="16" rx="4" fill="currentColor" fill-opacity=".15"/><rect x="12" y="64" width="30" height="16" rx="4" class="s-fill"/><text x="60" y="14" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="700" fill="currentColor">RAM ALLOCATION</text></svg>`,
+      microphone: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="48" y="10" width="24" height="40" rx="12" class="s-fill"/><path d="M38 42 a22 22 0 0 0 44 0" fill="none" stroke="currentColor" stroke-opacity=".45" stroke-width="2"/><path d="M60 64 v12 M44 78 h32" stroke="currentColor" stroke-opacity=".45" stroke-width="3"/><path d="M54 18 h16 M54 26 h16 M54 34 h16" stroke="var(--card-bg)" stroke-opacity=".6" stroke-width="1.5"/></svg>`,
+      modem: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="14" y="44" width="92" height="28" rx="6" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><circle cx="28" cy="58" r="4" class="s-fill"/><circle cx="42" cy="58" r="4" fill="currentColor" fill-opacity=".35"/><path d="M62 32 q8 -12 16 0 q8 12 16 0" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/><path d="M26 32 h24" stroke="currentColor" stroke-opacity=".4" stroke-width="3" stroke-dasharray="5 4"/></svg>`,
+      monitor: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="10" y="12" width="100" height="56" rx="5" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="18" y="19" width="84" height="42" rx="3" class="s-fill"/><path d="M50 68 h20 v8 h-20 z" fill="currentColor" fill-opacity=".35"/><rect x="38" y="76" width="44" height="5" rx="2.5" fill="currentColor" fill-opacity=".35"/></svg>`,
+      mouse: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="40" y="10" width="40" height="70" rx="20" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><path d="M40 40 h40" stroke="currentColor" stroke-opacity=".35" stroke-width="2"/><path d="M60 10 v30" stroke="currentColor" stroke-opacity=".35" stroke-width="2"/><rect x="57" y="20" width="6" height="12" rx="3" class="s-fill"/></svg>`,
+      network: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><circle cx="60" cy="45" r="14" class="s-fill"/><circle cx="18" cy="20" r="9" fill="currentColor" fill-opacity=".35"/><circle cx="102" cy="20" r="9" fill="currentColor" fill-opacity=".35"/><circle cx="18" cy="72" r="9" fill="currentColor" fill-opacity=".35"/><circle cx="102" cy="72" r="9" fill="currentColor" fill-opacity=".35"/><path d="M27 26 L48 38 M93 26 L72 38 M27 66 L48 54 M93 66 L72 54" stroke="currentColor" stroke-opacity=".4" stroke-width="2"/></svg>`,
+      nic: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="14" y="26" width="76" height="44" rx="4" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="90" y="18" width="10" height="56" rx="2" fill="currentColor" fill-opacity=".35"/><rect x="24" y="36" width="26" height="24" rx="3" class="s-fill"/><rect x="30" y="30" width="14" height="8" rx="2" class="s-fill"/><rect x="58" y="40" width="20" height="14" rx="2" fill="currentColor" fill-opacity=".25"/><rect x="20" y="70" width="4" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="27" y="70" width="4" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="34" y="70" width="4" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="41" y="70" width="4" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="48" y="70" width="4" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="55" y="70" width="4" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="62" y="70" width="4" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="69" y="70" width="4" height="5" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="76" y="70" width="4" height="5" rx="1" fill="currentColor" fill-opacity=".45"/></svg>`,
+      os: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="14" y="16" width="70" height="46" rx="5" fill="currentColor" fill-opacity=".15" stroke="currentColor" stroke-opacity=".3"/><rect x="26" y="26" width="70" height="46" rx="5" fill="currentColor" fill-opacity=".22" stroke="currentColor" stroke-opacity=".3"/><rect x="38" y="34" width="68" height="44" rx="5" class="s-fill"/><text x="72" y="61" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="var(--card-bg)">OS</text></svg>`,
+      pan: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><circle cx="60" cy="45" r="32" fill="none" stroke="currentColor" stroke-opacity=".28" stroke-width="2" stroke-dasharray="5 5"/><rect x="52" y="34" width="16" height="24" rx="3" class="s-fill"/><circle cx="60" cy="10" r="7" fill="currentColor" fill-opacity=".35"/><circle cx="24" cy="62" r="7" fill="currentColor" fill-opacity=".35"/><circle cx="96" cy="62" r="7" fill="currentColor" fill-opacity=".35"/></svg>`,
+      plotter: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="10" y="20" width="100" height="18" rx="4" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="52" y="22" width="12" height="14" rx="2" class="s-fill"/><rect x="18" y="38" width="84" height="40" rx="3" fill="var(--card-bg)" stroke="currentColor" stroke-opacity=".45"/><path d="M28 68 L46 50 L58 62 L76 44 L92 58" fill="none" stroke="currentColor" stroke-opacity=".45" stroke-width="2"/></svg>`,
+      printer: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="30" y="8" width="60" height="22" rx="2" fill="currentColor" fill-opacity=".18" stroke="currentColor" stroke-opacity=".35"/><rect x="16" y="30" width="88" height="32" rx="5" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="24" y="38" width="16" height="8" rx="2" class="s-fill"/><rect x="30" y="62" width="60" height="22" rx="3" fill="var(--card-bg)" stroke="currentColor" stroke-opacity=".45"/><path d="M40 70 h40 M40 77 h28" stroke="currentColor" stroke-opacity=".4" stroke-width="2"/></svg>`,
+      projector: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="8" y="34" width="46" height="28" rx="5" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><circle cx="50" cy="48" r="8" class="s-fill"/><path d="M58 48 L104 22 V74 Z" fill="currentColor" fill-opacity=".15"/><rect x="100" y="18" width="12" height="60" rx="2" fill="currentColor" fill-opacity=".35"/></svg>`,
+      ram: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="10" y="28" width="100" height="34" rx="4" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="18" y="34" width="16" height="16" rx="2" class="s-fill"/><rect x="39" y="34" width="16" height="16" rx="2" class="s-fill"/><rect x="60" y="34" width="16" height="16" rx="2" class="s-fill"/><rect x="81" y="34" width="16" height="16" rx="2" class="s-fill"/><rect x="14" y="58" width="4" height="4" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="21" y="58" width="4" height="4" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="28" y="58" width="4" height="4" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="35" y="58" width="4" height="4" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="42" y="58" width="4" height="4" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="49" y="58" width="4" height="4" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="56" y="58" width="4" height="4" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="63" y="58" width="4" height="4" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="70" y="58" width="4" height="4" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="77" y="58" width="4" height="4" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="84" y="58" width="4" height="4" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="91" y="58" width="4" height="4" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="98" y="58" width="4" height="4" rx="1" fill="currentColor" fill-opacity=".45"/><rect x="105" y="58" width="4" height="4" rx="1" fill="currentColor" fill-opacity=".45"/><path d="M56 62 v4" stroke="currentColor" stroke-width="3" stroke-opacity=".5"/><text x="60" y="24" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="currentColor">RAM</text></svg>`,
+      router: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="16" y="46" width="88" height="26" rx="6" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><path d="M38 46 V16 M82 46 V16" stroke="currentColor" stroke-opacity=".5" stroke-width="3" stroke-linecap="round"/><circle cx="30" cy="59" r="4" class="s-fill"/><circle cx="44" cy="59" r="4" fill="currentColor" fill-opacity=".35"/><path d="M56 62 h36" stroke="currentColor" stroke-opacity=".3" stroke-width="3"/><path d="M50 24 a14 14 0 0 1 20 0" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+      scanner: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="10" y="34" width="100" height="34" rx="6" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="22" y="12" width="66" height="26" rx="3" fill="currentColor" fill-opacity=".15" stroke="currentColor" stroke-opacity=".35"/><rect x="20" y="44" width="80" height="6" rx="3" class="s-fill"/><path d="M30 20 h40 M30 27 h28" stroke="currentColor" stroke-opacity=".45" stroke-width="2"/></svg>`,
+      sdcard: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><path d="M36 10 h40 a4 4 0 0 1 4 4 v62 a4 4 0 0 1 -4 4 H36 a4 4 0 0 1 -4 -4 V26 z" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><path d="M36 10 L32 26" stroke="currentColor" stroke-opacity=".35" stroke-width="2"/><rect x="38" y="30" width="5" height="16" rx="2" class="s-fill"/><rect x="47" y="30" width="5" height="16" rx="2" class="s-fill"/><rect x="56" y="30" width="5" height="16" rx="2" class="s-fill"/><rect x="65" y="30" width="5" height="16" rx="2" class="s-fill"/><rect x="38" y="56" width="34" height="14" rx="3" fill="currentColor" fill-opacity=".2"/></svg>`,
+      security: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><path d="M60 8 L98 22 v26 c0 20 -18 32 -38 38 C40 80 22 68 22 48 V22 z" class="s-soft" stroke="currentColor" stroke-opacity=".4"/><path d="M60 18 L88 28 v20 c0 15 -13 24 -28 29 C45 72 32 63 32 48 V28 z" class="s-fill"/><rect x="50" y="44" width="20" height="16" rx="3" fill="var(--card-bg)"/><path d="M54 44 v-5 a6 6 0 0 1 12 0 v5" fill="none" stroke="var(--card-bg)" stroke-width="3"/></svg>`,
+      server: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="30" y="10" width="60" height="22" rx="4" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="30" y="36" width="60" height="22" rx="4" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="30" y="62" width="60" height="22" rx="4" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><circle cx="40" cy="21" r="3.5" class="s-fill"/><rect x="52" y="19" width="30" height="4" rx="2" fill="currentColor" fill-opacity=".3"/><circle cx="40" cy="47" r="3.5" class="s-fill"/><rect x="52" y="45" width="30" height="4" rx="2" fill="currentColor" fill-opacity=".3"/><circle cx="40" cy="73" r="3.5" class="s-fill"/><rect x="52" y="71" width="30" height="4" rx="2" fill="currentColor" fill-opacity=".3"/></svg>`,
+      smartphone: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="42" y="8" width="36" height="74" rx="7" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="46" y="18" width="28" height="50" rx="3" class="s-fill"/><rect x="53" y="12" width="14" height="2.5" rx="1.2" fill="currentColor" fill-opacity=".5"/><circle cx="60" cy="75" r="3.5" fill="currentColor" fill-opacity=".4"/></svg>`,
+      smartwatch: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="44" y="6" width="32" height="18" rx="5" fill="currentColor" fill-opacity=".3"/><rect x="44" y="66" width="32" height="18" rx="5" fill="currentColor" fill-opacity=".3"/><rect x="34" y="24" width="52" height="42" rx="10" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="41" y="31" width="38" height="28" rx="6" class="s-fill"/><rect x="86" y="38" width="5" height="10" rx="2" fill="currentColor" fill-opacity=".45"/></svg>`,
+      speaker: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="34" y="8" width="52" height="74" rx="6" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><circle cx="60" cy="32" r="14" class="s-fill"/><circle cx="60" cy="32" r="5" fill="var(--card-bg)" fill-opacity=".7"/><circle cx="60" cy="62" r="9" fill="currentColor" fill-opacity=".35"/></svg>`,
+      ssd: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="12" y="20" width="96" height="50" rx="6" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="22" y="30" width="22" height="16" rx="3" class="s-fill"/><rect x="49" y="30" width="22" height="16" rx="3" class="s-fill"/><rect x="76" y="30" width="22" height="16" rx="3" class="s-fill"/><rect x="22" y="52" width="76" height="8" rx="2" fill="currentColor" fill-opacity=".2"/><path d="M60 8 l-6 10 h5 l-4 8 10 -11 h-5 z" class="s-fill"/></svg>`,
+      switch: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="8" y="34" width="104" height="30" rx="5" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="16" y="42" width="10" height="14" rx="2" class="s-fill"/><rect x="30" y="42" width="10" height="14" rx="2" class="s-fill"/><rect x="44" y="42" width="10" height="14" rx="2" class="s-fill"/><rect x="58" y="42" width="10" height="14" rx="2" class="s-fill"/><rect x="72" y="42" width="10" height="14" rx="2" class="s-fill"/><rect x="86" y="42" width="10" height="14" rx="2" class="s-fill"/><rect x="100" y="42" width="10" height="14" rx="2" class="s-fill"/><path d="M20 34 V22 M62 34 V16 M104 34 V22" stroke="currentColor" stroke-opacity=".35" stroke-width="2"/><circle cx="20" cy="18" r="4" fill="currentColor" fill-opacity=".4"/><circle cx="62" cy="12" r="4" fill="currentColor" fill-opacity=".4"/><circle cx="104" cy="18" r="4" fill="currentColor" fill-opacity=".4"/></svg>`,
+      tablet: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="24" y="8" width="72" height="74" rx="7" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="30" y="16" width="60" height="58" rx="3" class="s-fill"/><rect x="14" y="30" width="6" height="20" rx="3" fill="currentColor" fill-opacity=".25"/></svg>`,
+      tape: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="12" y="18" width="96" height="54" rx="6" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><circle cx="42" cy="45" r="17" fill="none" stroke="currentColor" stroke-opacity=".45" stroke-width="2"/><circle cx="42" cy="45" r="7" class="s-fill"/><circle cx="80" cy="45" r="12" fill="none" stroke="currentColor" stroke-opacity=".45" stroke-width="2"/><circle cx="80" cy="45" r="5" class="s-fill"/><path d="M42 28 h38" stroke="currentColor" stroke-opacity=".5" stroke-width="2"/></svg>`,
+      touchscreen: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="18" y="10" width="62" height="70" rx="6" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><rect x="24" y="18" width="50" height="54" rx="3" class="s-fill"/><circle cx="62" cy="46" r="10" fill="var(--card-bg)" fill-opacity=".45"/><path d="M74 70 q10 -14 14 -26 q4 -10 -4 -12 q-7 -1 -9 9 l-3 12" fill="currentColor" fill-opacity=".45"/></svg>`,
+      usbdrive: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="14" y="34" width="24" height="22" rx="2" fill="currentColor" fill-opacity=".45"/><rect x="38" y="28" width="16" height="34" rx="2" fill="currentColor" fill-opacity=".25"/><rect x="54" y="22" width="52" height="46" rx="7" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><circle cx="96" cy="45" r="5" fill="none" stroke="currentColor" stroke-opacity=".35" stroke-width="1.5"/><rect x="64" y="38" width="22" height="14" rx="3" class="s-fill"/></svg>`,
+      wan: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><circle cx="60" cy="45" r="34" fill="none" stroke="currentColor" stroke-opacity=".3" stroke-width="2"/><ellipse cx="60" cy="45" rx="16" ry="34" fill="none" stroke="currentColor" stroke-opacity=".3" stroke-width="2"/><path d="M27 32 h66 M27 58 h66" stroke="currentColor" stroke-opacity=".3" stroke-width="2"/><circle cx="34" cy="26" r="6" class="s-fill"/><circle cx="88" cy="34" r="6" class="s-fill"/><circle cx="66" cy="72" r="6" class="s-fill"/><path d="M34 26 L88 34 L66 72 Z" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4 4"/></svg>`,
+      webcam: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><circle cx="60" cy="38" r="24" class="s-soft" stroke="currentColor" stroke-opacity=".35"/><circle cx="60" cy="38" r="13" class="s-fill"/><circle cx="60" cy="38" r="5" fill="var(--card-bg)" fill-opacity=".8"/><circle cx="60" cy="18" r="3" fill="currentColor" fill-opacity=".5"/><path d="M60 62 v10 M42 78 h36" stroke="currentColor" stroke-opacity=".45" stroke-width="3"/></svg>`,
+      wlan: `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect x="50" y="56" width="20" height="16" rx="4" class="s-fill"/><path d="M42 50 a26 26 0 0 1 36 0" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="3" stroke-linecap="round"/><path d="M32 38 a40 40 0 0 1 56 0" fill="none" stroke="currentColor" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/><path d="M22 26 a54 54 0 0 1 76 0" fill="none" stroke="currentColor" stroke-opacity=".22" stroke-width="3" stroke-linecap="round"/><rect x="14" y="66" width="16" height="12" rx="3" fill="currentColor" fill-opacity=".3"/><rect x="90" y="66" width="16" height="12" rx="3" fill="currentColor" fill-opacity=".3"/></svg>`
+    };
+
+    // Build a grid of labelled illustrations from the FIG library
+    function fg(items, wide) {
+      return '<div class="figgrid' + (wide ? ' wide' : '') + '">' + items.map(function (it) {
+        return '<figure class="fig">' + (FIG[it[0]] || '') +
+               '<figcaption>' + it[1] + '</figcaption></figure>';
+      }).join('') + '</div>';
     }
 
     // Complete Database for Chapters 1-10
@@ -316,6 +679,24 @@
         id: 1,
         title: "Introducing Today's Technologies",
         topics: [
+          {
+            title: "🎯 Chapter Objectives — What You Should Be Able To Do",
+            content: `
+              <ul>
+                <li>Differentiate among laptops, tablets, desktops, and servers</li>
+                <li>Describe the purpose and uses of smartphones, digital cameras, media players, e-book readers, wearable devices, and game devices</li>
+                <li>Describe the relationship between data and information</li>
+                <li>Briefly explain various input options</li>
+                <li>Differentiate the web from the Internet, and describe the relationship among the web, webpages, websites, and web servers</li>
+                <li>Explain the purpose of a browser, a search engine, and an online social network</li>
+                <li>Briefly describe digital security risks associated with viruses/malware, privacy, health, and the environment</li>
+                <li>Differentiate between an operating system and applications</li>
+                <li>Differentiate wired and wireless technologies, and identify reasons individuals/businesses use networks</li>
+                <li>Discuss how society uses technology across education, government, finance, retail, entertainment, health care, and manufacturing</li>
+                <li>Identify technology used by home, small/home office, mobile, power, and enterprise users</li>
+              </ul>
+            `
+          },
           {
             title: "1.1 – 1.3 Basics & Information Processing",
             content: `
@@ -376,6 +757,22 @@
               <h4>Societal Domains</h4>
               <p>Technology drives Education (LMS, digital texts), Government (online portals, biometric identification), Finance (ATMs, online banking), Retail (POS, e-commerce), Healthcare (telemedicine, EHR), and Manufacturing (robotics, CAD/CAM).</p>
             `
+          },
+          {
+            title: "📘 Extra Notes: Computer Types, Browsers & Social Networks",
+            content: `
+              <h4>Four Common Categories of Computers</h4>
+              <ul>
+                <li><b>Desktop:</b> Normally stays in one location; offers strong performance and easy upgradeability.</li>
+                <li><b>Laptop:</b> Portable; integrates screen, keyboard, pointing device, processor, storage, and battery in one unit.</li>
+                <li><b>Tablet:</b> Smaller and lighter than most laptops; primarily uses a touchscreen interface.</li>
+                <li><b>Server:</b> Provides resources or services (websites, files, databases) to other computers/devices over a network.</li>
+              </ul>
+              <h4>Browsers, Search Engines & Social Networks</h4>
+              <p>A <b>browser</b> is the software used to access and display webpages. A <b>search engine</b> indexes web content so users can locate information using keyword queries. An <b>online social network</b> lets users create profiles, publish media, and communicate with individuals or organizations.</p>
+              <h4>Operating System vs. Applications</h4>
+              <p>An <b>operating system</b> (e.g., Windows, macOS, Android, iOS) manages the computer's hardware and provides the platform on which programs run. An <b>application</b> (e.g., a word processor, browser, or game) is software that helps a user perform a specific task — applications run on top of, and depend on, the operating system.</p>
+            `
           }
         ],
         questions: [
@@ -390,6 +787,24 @@
         id: 2,
         title: "The Internet & World Wide Web",
         topics: [
+          {
+            title: "🎯 Chapter Objectives — What You Should Be Able To Do",
+            content: `
+              <ul>
+                <li>Discuss the evolution of the Internet</li>
+                <li>Briefly describe various broadband Internet connections</li>
+                <li>Describe the purpose of an IP address and its relationship to a domain name</li>
+                <li>Describe features of browsers and identify the components of a web address (URL)</li>
+                <li>Describe ways to enter effective search text and evaluate results</li>
+                <li>Explain benefits and risks of using social networking sites</li>
+                <li>Describe uses of various types of websites</li>
+                <li>Identify and briefly describe the steps required for web publishing</li>
+                <li>Explain how the web uses graphics, animation, audio, video, and virtual reality</li>
+                <li>Explain how email, messaging, forums, VoIP, and FTP work</li>
+                <li>Identify the rules of netiquette</li>
+              </ul>
+            `
+          },
           {
             title: "2.1 – 2.8 Internet Evolution & Addressing",
             content: `
@@ -464,6 +879,19 @@
                 <li>Consult the FAQ (Frequently Asked Questions) before asking basic questions.</li>
               </ul>
             `
+          },
+          {
+            title: "📘 Extra Notes: Broadband, Search Evaluation & Website Types",
+            content: `
+              <h4>Broadband Internet Connections</h4>
+              <p>High-speed access is delivered via <b>cable</b>, <b>fiber-optic</b> (very high bandwidth using light pulses), <b>DSL</b> (over phone lines), <b>fixed wireless</b>, <b>cellular (4G/5G)</b>, and <b>satellite</b> (useful where wired infrastructure is unavailable).</p>
+              <h4>Evaluating Search Results</h4>
+              <p>Effective searching uses specific keywords, avoids unnecessary filler words, and uses quotation marks for exact phrases. Retrieved information should be evaluated for <b>authority</b> (who published it), <b>currency</b> (how recent it is), <b>bias</b>, and <b>accuracy</b> before it is trusted or cited.</p>
+              <h4>Common Types of Websites</h4>
+              <p>Websites are commonly grouped by purpose: <b>portal</b> (a gateway offering many services), <b>news</b>, <b>informational</b>, <b>business/marketing</b>, <b>blog</b>, <b>wiki</b> (collaboratively edited), <b>online social network</b>, <b>educational</b>, <b>entertainment</b>, and <b>e-commerce</b> (buying and selling goods/services online).</p>
+              <h4>Social Networking: Benefits &amp; Risks</h4>
+              <p>Benefits include professional networking, staying connected, and sharing information quickly. Risks include identity theft, targeted social engineering, cyberbullying, and unintentionally exposing private information to a wide audience.</p>
+            `
           }
         ],
         questions: [
@@ -478,6 +906,23 @@
         id: 3,
         title: "Computers and Mobile Devices",
         topics: [
+          {
+            title: "🎯 Chapter Objectives — What You Should Be Able To Do",
+            content: `
+              <ul>
+                <li>Describe the characteristics and uses of laptops, tablets, desktops, and all-in-ones</li>
+                <li>Describe the characteristics and types of servers, including supercomputers and mainframes</li>
+                <li>Differentiate among POS terminals, ATMs, and self-service kiosks</li>
+                <li>Describe cloud computing and identify its uses</li>
+                <li>Describe the characteristics and uses of smartphones, digital cameras, media players, e-readers, and wearables</li>
+                <li>Describe game device interactions (gamepads, joysticks, motion controllers)</li>
+                <li>Identify uses of embedded computers</li>
+                <li>Differentiate a port from a connector; differentiate Bluetooth, Wi-Fi, and NFC</li>
+                <li>Identify safeguards against hardware theft, vandalism, and failure</li>
+                <li>Discuss ergonomic workplace setup and related health risks</li>
+              </ul>
+            `
+          },
           {
             title: "3.1 – 3.8 Device Categories, Servers, & Kiosks",
             content: `
@@ -529,6 +974,15 @@
                 <li>Feet resting flat on the floor or on an adjustable footrest.</li>
               </ul>
             `
+          },
+          {
+            title: "📘 Extra Notes: Supercomputers, Mainframes & Game Devices",
+            content: `
+              <h4>Supercomputers and Mainframes</h4>
+              <p>A <b>supercomputer</b> is the fastest, most powerful, and most expensive type of computer, used for large-scale scientific simulations (e.g., weather forecasting, nuclear research). A <b>mainframe</b> is a large, powerful, and expensive server that can handle thousands of connected users and process huge volumes of transactions at once — commonly used by banks, airlines, and government agencies.</p>
+              <h4>Game Device Interactions</h4>
+              <p>Dedicated gaming hardware includes <b>gamepads</b> (handheld controllers with buttons/joysticks), <b>joysticks and wheels</b> (used for flight/driving simulations), and <b>motion controllers</b> that translate a player's physical movement into on-screen action.</p>
+            `
           }
         ],
         questions: [
@@ -543,6 +997,22 @@
         id: 4,
         title: "Programs and Apps",
         topics: [
+          {
+            title: "🎯 Chapter Objectives — What You Should Be Able To Do",
+            content: `
+              <ul>
+                <li>Identify the general categories of programs and apps</li>
+                <li>Describe how an operating system interacts with applications and hardware</li>
+                <li>Differentiate ways to acquire software (retail, custom, web apps, shareware, freeware, open source)</li>
+                <li>Identify key features of productivity applications (word processing, spreadsheet, database, presentations)</li>
+                <li>Identify key features of graphics and media applications (CAD, desktop publishing, editing suites)</li>
+                <li>Identify the uses of personal interest applications</li>
+                <li>Identify communications software functionality</li>
+                <li>Identify key features of security tools (firewalls, antivirus, malware removers)</li>
+                <li>Identify key features of file, disk, and system management tools</li>
+              </ul>
+            `
+          },
           {
             title: "4.1 – 4.3 Software Distribution Types",
             content: `
@@ -595,6 +1065,15 @@
                 <li><b>Backup Utility:</b> Clones disk partitions or selected folders to off-site or secondary storage media.</li>
               </ul>
             `
+          },
+          {
+            title: "📘 Extra Notes: Personal Interest & Communications Software",
+            content: `
+              <h4>Personal Interest Applications</h4>
+              <p>Software designed for everyday personal use, including <b>lifestyle apps</b> (cooking, travel, fitness tracking), <b>convenience apps</b> (mapping, ride-sharing), <b>entertainment apps</b> (streaming, gaming), and <b>education/reference apps</b> (language learning, dictionaries).</p>
+              <h4>Communications Software</h4>
+              <p>Software that enables users to send and receive messages, files, and data — including <b>email clients</b>, <b>instant messaging &amp; video-call apps</b>, and <b>web/video conferencing</b> tools that allow real-time collaboration between people in different locations.</p>
+            `
           }
         ],
         questions: [
@@ -609,6 +1088,23 @@
         id: 5,
         title: "Digital Safety and Security",
         topics: [
+          {
+            title: "🎯 Chapter Objectives — What You Should Be Able To Do",
+            content: `
+              <ul>
+                <li>Define digital security risks and briefly describe cybercriminals</li>
+                <li>Describe Internet/network attacks (malware, botnets, DoS, spoofing) and safeguards (firewalls)</li>
+                <li>Discuss access control techniques (passwords, biometrics, possessed objects)</li>
+                <li>Explain software piracy and its protections</li>
+                <li>Discuss how encryption, digital signatures, and digital certificates work</li>
+                <li>Identify safeguards against hardware theft, vandalism, and failure</li>
+                <li>Explain backup options and strategies</li>
+                <li>Identify risks and safeguards associated with wireless communications</li>
+                <li>Recognize issues related to intellectual property, copyright, and green computing</li>
+                <li>Discuss information privacy issues (cookies, phishing, spyware, workplace monitoring)</li>
+              </ul>
+            `
+          },
           {
             title: "5.1 – 5.3 Cyberthreats & Attack Vectors",
             content: `
@@ -657,6 +1153,18 @@
               <p><b>Cookies:</b> Text files saved by browsers to preserve website sessions, user state, and tracking profiles.</p>
               <p><b>Intellectual Property (IP):</b> Legal rights protecting artistic, written, or structural creations via Copyright and <b>DRM (Digital Rights Management)</b>.</p>
             `
+          },
+          {
+            title: "📘 Extra Notes: Software Piracy & License Agreements",
+            content: `
+              <p><b>Software Piracy</b> is the unauthorized copying, distribution, or use of copyrighted software. It causes financial loss to developers and may expose pirated copies to hidden malware.</p>
+              <h4>Piracy Protections</h4>
+              <ul>
+                <li><b>End-User License Agreement (EULA):</b> The legal contract that specifies the terms under which software may be used and copied.</li>
+                <li><b>Product Activation / License Keys:</b> Unique codes that verify a legitimate, paid copy of the software before it can be fully used.</li>
+                <li><b>Digital Rights Management (DRM):</b> Technology that restricts copying, sharing, or unauthorized use of digital content and software.</li>
+              </ul>
+            `
           }
         ],
         questions: [
@@ -671,6 +1179,22 @@
         id: 6,
         title: "Inside Computers and Mobile Devices",
         topics: [
+          {
+            title: "🎯 Chapter Objectives — What You Should Be Able To Do",
+            content: `
+              <ul>
+                <li>Describe computer cases and the internal contents they protect</li>
+                <li>Describe multi-core processors, processor components, and the four steps of a machine cycle</li>
+                <li>Identify processor characteristics and cooling methods</li>
+                <li>Describe the Internet of Things (IoT)</li>
+                <li>Explain advantages and services of cloud computing</li>
+                <li>Define a bit and explain binary data representation</li>
+                <li>Explain how program instructions transfer in and out of memory</li>
+                <li>Differentiate memory types: RAM, cache, ROM, flash memory, and CMOS</li>
+                <li>Describe adapter cards, USB adapters, buses, power supplies, and batteries</li>
+              </ul>
+            `
+          },
           {
             title: "6.1 – 6.4 The Processor & Machine Cycle",
             content: `
@@ -712,6 +1236,135 @@
               <p><b>Word Size:</b> The number of bits a CPU can process concurrently (e.g., 64-bit architecture).</p>
               <p><b>Power Systems:</b> Power supply units (PSUs) convert alternating current (AC) from wall outlets into direct current (DC) required by internal microelectronics. Mobile units run on rechargeable Lithium-ion batteries.</p>
             `
+          },
+          {
+            title: "📘 Extra Notes: Computer Cases & The Internet of Things",
+            content: `
+              <h4>Computer Cases</h4>
+              <p>A <b>computer case</b> (chassis) is the physical enclosure that houses and protects internal components — the motherboard, processor, memory, storage drives, and power supply — while also providing mounting points, airflow for cooling, and ports for external connections.</p>
+              <h4>Internet of Things (IoT)</h4>
+              <p>The <b>Internet of Things</b> refers to everyday physical objects (thermostats, appliances, wearables, vehicles, security cameras) that connect to the Internet and to each other, collecting and exchanging data so they can be monitored or controlled remotely — often through a smartphone app.</p>
+            `
+          },
+          {
+            title: "🧩 Main Hardware Components — Illustrated Guide",
+            content: `
+              ${fg([['cpu','CPU — Processor'],['ram','RAM — Working memory'],['hdd','HDD — Magnetic disk'],['ssd','SSD — Flash storage'],['nic','NIC — Network card'],['gpu','GPU — Graphics']])}
+              <h4>1. CPU (Central Processing Unit)</h4>
+              <p>The CPU is often called the <b>brain of the computer</b>. It processes instructions and performs calculations.</p>
+              <ul>
+                <li>Executes instructions from programs.</li>
+                <li>Performs calculations and logical operations.</li>
+                <li>Controls the other components of the computer.</li>
+                <li>Processes data.</li>
+              </ul>
+              <p><b>Main parts:</b> Control Unit (CU) — controls and coordinates operations; Arithmetic Logic Unit (ALU) — performs arithmetic and logical operations; Registers — very small, high-speed storage locations inside the CPU.</p>
+              <div class="keyline">CPU speed is commonly measured in <b>GHz (gigahertz)</b>.</div>
+
+              <h4>2. RAM (Random Access Memory)</h4>
+              <p>RAM is the computer's <b>temporary working memory</b>. It stores the programs and data currently in use, lets the CPU reach that data quickly, and allows several applications to run at the same time.</p>
+              <div class="keyline">RAM is <b>volatile</b> memory — its contents are lost when the device is turned off.</div>
+              <p>More RAM generally allows more programs to run simultaneously, better multitasking, and smoother performance with memory-intensive applications.</p>
+
+              <h4>3. HDD (Hard Disk Drive)</h4>
+              <p>An HDD stores data on magnetic disks called <b>platters</b>.</p>
+              <div class="split">
+                <div><h5>Advantages</h5><ul><li>Available in large capacities</li><li>Usually lower cost per GB than an SSD</li><li>Suitable for storing large amounts of data</li></ul></div>
+                <div><h5>Disadvantages</h5><ul><li>Slower than most modern SSDs</li><li>Contains moving parts</li><li>More vulnerable to shocks and drops</li><li>Makes some noise while operating</li></ul></div>
+              </div>
+
+              <h4>4. SSD (Solid-State Drive)</h4>
+              <p>An SSD stores data using <b>flash memory</b> and has no moving mechanical parts.</p>
+              <div class="split">
+                <div><h5>Advantages</h5><ul><li>Faster than HDDs for most common tasks</li><li>Quiet operation</li><li>More resistant to physical shock</li><li>Usually uses less power</li></ul></div>
+                <div><h5>Disadvantages</h5><ul><li>Can cost more per GB than HDDs</li><li>Flash memory has a limited number of write cycles</li></ul></div>
+              </div>
+
+              <h4>5. NIC (Network Interface Card)</h4>
+              <p>A NIC is the hardware that allows a computer or other device to connect to a network. It sends and receives data over the network and provides the connection through Ethernet or wireless technology.</p>
+              <ul>
+                <li><b>Wired NIC:</b> uses an Ethernet cable.</li>
+                <li><b>Wireless NIC:</b> uses wireless technologies such as Wi-Fi.</li>
+              </ul>
+
+              <h4>6. GPU (Graphics Processing Unit)</h4>
+              <p>A GPU is a processor designed to handle graphics and highly parallel calculations — producing images for the display, running games and 3-D applications, video editing, and accelerating certain scientific and AI workloads.</p>
+              <ul>
+                <li><b>Integrated GPU:</b> built into or closely integrated with the CPU/system; usually shares system memory.</li>
+                <li><b>Dedicated GPU:</b> a separate graphics processor with its own high-speed memory.</li>
+              </ul>
+            `
+          },
+          {
+            title: "🖥️ Desktop vs Laptop",
+            content: `
+              ${fg([['desktop','Desktop computer'],['laptop','Laptop computer']], true)}
+              <p><b>Desktop:</b> a computer designed to remain in one location, normally with separate components such as a monitor, keyboard, and mouse. <b>Laptop:</b> a portable computer with a built-in screen, keyboard, touchpad, battery, and other components.</p>
+              <table>
+                <tr><th>Feature</th><th>Desktop</th><th>Laptop</th></tr>
+                <tr><td>Portability</td><td>Not designed to be easily moved</td><td>Easy to carry</td></tr>
+                <tr><td>Power</td><td>Uses mains electricity</td><td>Uses battery and mains power</td></tr>
+                <tr><td>Screen</td><td>Usually separate</td><td>Built-in</td></tr>
+                <tr><td>Keyboard</td><td>Usually separate</td><td>Built-in</td></tr>
+                <tr><td>Upgrading</td><td>Usually easier</td><td>Usually more limited</td></tr>
+                <tr><td>Performance</td><td>Can offer high performance</td><td>Balances performance and portability</td></tr>
+                <tr><td>Battery</td><td>Normally no built-in battery</td><td>Built-in battery</td></tr>
+                <tr><td>Size</td><td>Larger</td><td>Smaller</td></tr>
+                <tr><td>Typical use</td><td>Home, office, gaming, professional work</td><td>Travel, school, office, mobile work</td></tr>
+              </table>
+            `
+          },
+          {
+            title: "📱 Smartphone vs Tablet",
+            content: `
+              ${fg([['smartphone','Smartphone'],['tablet','Tablet']], true)}
+              <p><b>Smartphone:</b> a portable mobile device combining communication, computing, Internet access, photography, and many other functions. <b>Tablet:</b> a portable touchscreen computer with a larger screen than most smartphones.</p>
+              <table>
+                <tr><th>Feature</th><th>Smartphone</th><th>Tablet</th></tr>
+                <tr><td>Size</td><td>Smaller</td><td>Larger</td></tr>
+                <tr><td>Portability</td><td>Very easy to carry</td><td>Portable but generally larger</td></tr>
+                <tr><td>Screen</td><td>Smaller screen</td><td>Larger screen</td></tr>
+                <tr><td>Calling</td><td>Designed for voice calls on cellular networks</td><td>Some tablets support cellular calling/data</td></tr>
+                <tr><td>Typing</td><td>On-screen keyboard</td><td>Larger on-screen keyboard</td></tr>
+                <tr><td>Battery</td><td>Generally smaller</td><td>Often larger</td></tr>
+                <tr><td>Main uses</td><td>Calls, messaging, apps, photography</td><td>Reading, media, education, productivity</td></tr>
+                <tr><td>Pocket-friendly</td><td>Usually yes</td><td>Usually no</td></tr>
+              </table>
+            `
+          },
+          {
+            title: "🎒 Mobile Devices — Features, Advantages & Disadvantages",
+            content: `
+              <p>Mobile devices are portable electronic devices designed to be used while moving or away from a fixed location.</p>
+              ${fg([['smartphone','Smartphone'],['tablet','Tablet'],['smartwatch','Smartwatch'],['usbdrive','Portable media'],['joystick','Handheld gaming']])}
+              <h4>Common Features</h4>
+              <ul>
+                <li>Battery powered, portable, and lightweight.</li>
+                <li>Touchscreen or other compact input methods.</li>
+                <li>Wireless connectivity such as Wi-Fi and Bluetooth.</li>
+                <li>Can run applications.</li>
+                <li>Often include cameras, microphones, speakers, and sensors.</li>
+              </ul>
+              <div class="split">
+                <div><h5>✅ Advantages</h5><ul><li>Easy to carry</li><li>Access information from almost anywhere</li><li>Support communication and entertainment</li><li>Useful for education and work</li><li>Many functions in one device</li></ul></div>
+                <div><h5>⚠️ Disadvantages</h5><ul><li>Small screens make some tasks difficult</li><li>Limited battery life</li><li>Easy to lose or damage</li><li>Security and privacy risks</li><li>Limited storage/processing vs desktops</li></ul></div>
+              </div>
+              <h4>⚡ Quick Revision</h4>
+              <table>
+                <tr><th>Term</th><th>One-line meaning</th></tr>
+                <tr><td>CPU</td><td>Processes instructions</td></tr>
+                <tr><td>RAM</td><td>Temporary working memory</td></tr>
+                <tr><td>HDD</td><td>Magnetic storage</td></tr>
+                <tr><td>SSD</td><td>Flash storage</td></tr>
+                <tr><td>NIC</td><td>Connects a device to a network</td></tr>
+                <tr><td>GPU</td><td>Processes graphics and parallel workloads</td></tr>
+                <tr><td>Desktop</td><td>Powerful, stationary computer</td></tr>
+                <tr><td>Laptop</td><td>Portable computer</td></tr>
+                <tr><td>Smartphone</td><td>Small mobile computer with cellular communication</td></tr>
+                <tr><td>Tablet</td><td>Larger touchscreen mobile computer</td></tr>
+                <tr><td>Mobile device</td><td>Portable electronic computing/communication device</td></tr>
+              </table>
+            `
           }
         ],
         questions: [
@@ -719,13 +1372,32 @@
           { q: "2. Compare the roles of the Control Unit (CU) and the Arithmetic Logic Unit (ALU).", a: "The Control Unit coordinates and manages all computer operations; the Arithmetic Logic Unit performs mathematical computations and logical comparison operations." },
           { q: "3. Why is RAM termed 'volatile' while ROM is considered 'non-volatile'?", a: "RAM loses all its data when power is switched off; ROM permanently keeps its data and instructions intact without requiring power." },
           { q: "4. Differentiate between DRAM and SRAM.", a: "DRAM (Dynamic RAM) is used for main system memory and must be refreshed constantly; SRAM (Static RAM) is faster, does not need constant refreshing, and is used for high-speed cache memory." },
-          { q: "5. What is the role of an Address Bus versus a Data Bus?", a: "The Address Bus carries the physical memory addresses that indicate where data is located; the Data Bus carries the actual data bytes between the CPU, memory, and devices." }
+          { q: "5. What is the role of an Address Bus versus a Data Bus?", a: "The Address Bus carries the physical memory addresses that indicate where data is located; the Data Bus carries the actual data bytes between the CPU, memory, and devices." },
+          { q: "6. Why is more RAM useful, and what happens to RAM contents when the power is switched off?", a: "More RAM lets more programs run at the same time, improves multitasking, and keeps memory-intensive applications running smoothly. Because RAM is volatile, everything stored in it is lost as soon as the device is turned off." },
+          { q: "7. Give two advantages and two disadvantages of an SSD compared with an HDD.", a: "Advantages: an SSD is faster for most tasks and has no moving parts, so it is quieter and more shock-resistant (and usually uses less power). Disadvantages: it usually costs more per GB, and its flash memory has a limited number of write cycles." },
+          { q: "8. What is a NIC and what are its two main types?", a: "A Network Interface Card is the hardware that lets a device send and receive data over a network. A wired NIC connects using an Ethernet cable; a wireless NIC connects using wireless technology such as Wi-Fi." },
+          { q: "9. Distinguish an integrated GPU from a dedicated GPU.", a: "An integrated GPU is built into or closely integrated with the CPU/system and usually shares the computer's system memory. A dedicated GPU is a separate graphics processor with its own high-speed memory, giving better performance for games, 3-D work, and video editing." },
+          { q: "10. State three differences between a desktop and a laptop.", a: "A desktop stays in one place, runs from mains electricity, and normally has a separate monitor and keyboard, but it is easier to upgrade. A laptop is portable, has a built-in screen, keyboard, and battery, and is usually more limited for upgrading." }
         ]
       },
       {
         id: 7,
         title: "Input and Output",
         topics: [
+          {
+            title: "🎯 Chapter Objectives — What You Should Be Able To Do",
+            content: `
+              <ul>
+                <li>Differentiate among keyboard designs and pointing devices</li>
+                <li>Describe touchscreens, styluses, graphics tablets, and motion/voice/video input</li>
+                <li>Differentiate scanners, optical readers, RFID, magstripe, and MICR readers</li>
+                <li>Identify display characteristics (resolution, refresh rate, contrast, color depth)</li>
+                <li>Summarize printer types: ink-jet, laser, 3-D, thermal, plotters, and impact</li>
+                <li>Identify speakers, headphones, projectors, and interactive whiteboards</li>
+                <li>Identify assistive technology input and output methods</li>
+              </ul>
+            `
+          },
           {
             title: "7.1 – 7.9 Input Devices & Pointing Hardware",
             content: `
@@ -757,6 +1429,65 @@
                 <li><b>Audio & Assistive:</b> Speakers, headphones, earbuds, data projectors, and force-feedback controllers (providing physical resistance/recoil). Assistive devices include Braille printers and head-mounted pointers.</li>
               </ul>
             `
+          },
+          {
+            title: "📘 Extra Notes: Touchscreens, Graphics Tablets & Whiteboards",
+            content: `
+              <h4>Touch, Pen & Motion Input</h4>
+              <p>A <b>touchscreen</b> lets a user interact directly with what is displayed by touching the screen with a finger or stylus. A <b>graphics tablet</b> is a flat digital drawing pad used with a stylus for precise sketching or handwriting input. <b>Motion, voice, and video input</b> use built-in cameras and microphones to recognize gestures and spoken commands, letting users control a device hands-free.</p>
+              <h4>Interactive Whiteboards</h4>
+              <p>An <b>interactive whiteboard</b> is a large touch-sensitive display, often used in classrooms, that lets an instructor write, annotate, and interact with digital content directly on the board surface — frequently connected to a computer or projector.</p>
+            `
+          },
+          {
+            title: "⌨️ Input Devices — Illustrated",
+            content: `
+              <p>Input devices are hardware devices used to <b>enter data and instructions</b> into a computer.</p>
+              ${fg([['keyboard','Keyboard'],['mouse','Mouse'],['scanner','Scanner'],['microphone','Microphone'],['webcam','Webcam'],['touchscreen','Touchscreen'],['joystick','Joystick'],['barcode','Barcode / QR reader']])}
+              <ul>
+                <li><b>Keyboard:</b> enters text, numbers, and commands; contains alphabetic, numeric, function, and control keys. Example: typing a document.</li>
+                <li><b>Mouse:</b> a pointing device used to move the pointer, select, click, and drag. Common types include optical and wireless mice.</li>
+                <li><b>Scanner:</b> converts printed documents and images into digital form, useful for storing or editing paper documents electronically.</li>
+                <li><b>Microphone:</b> inputs sound or voice — used for video calls, voice recording, and speech recognition.</li>
+                <li><b>Webcam:</b> captures images and video for video conferencing, online classes, and streaming.</li>
+                <li><b>Touchscreen:</b> allows input by touching the screen; common in smartphones, tablets, ATMs, and information kiosks.</li>
+                <li><b>Joystick:</b> a control device mainly used for games and simulations to control movement or direction.</li>
+                <li><b>Barcode / QR code reader:</b> reads information stored in barcodes or QR codes; used in shops, libraries, and inventory systems.</li>
+              </ul>
+            `
+          },
+          {
+            title: "🖨️ Output Devices — Illustrated",
+            content: `
+              <p>Output devices are hardware devices that <b>present or produce information</b> from a computer.</p>
+              ${fg([['monitor','Monitor'],['printer','Printer'],['speaker','Speakers'],['headphones','Headphones'],['projector','Projector'],['plotter','Plotter']])}
+              <ul>
+                <li><b>Monitor:</b> displays text, images, videos, and graphics. Common types include LCD, LED, and OLED displays.</li>
+                <li><b>Printer:</b> produces a hard copy on paper. <i>Inkjet</i> sprays tiny drops of ink; <i>laser</i> uses a laser and toner; a <i>3-D printer</i> creates physical three-dimensional objects from digital designs.</li>
+                <li><b>Speakers:</b> produce sound for music, videos, games, and notifications.</li>
+                <li><b>Headphones:</b> produce sound directly for the user — useful when private or quiet listening is required.</li>
+                <li><b>Projector:</b> projects the computer's display onto a large screen or wall; common in classrooms, offices, and presentations.</li>
+                <li><b>Plotter:</b> produces large, precise drawings — engineering drawings, maps, and architectural plans.</li>
+              </ul>
+            `
+          },
+          {
+            title: "🔁 Input vs Output — Comparison & Memory Tip",
+            content: `
+              ${fg([['inputoutput','Input → Computer → Output']], true)}
+              <table>
+                <tr><th>Input Devices</th><th>Output Devices</th></tr>
+                <tr><td>Send data <i>to</i> the computer</td><td>Receive information <i>from</i> the computer</td></tr>
+                <tr><td>Used to enter data and commands</td><td>Used to display or produce results</td></tr>
+                <tr><td>Keyboard</td><td>Monitor</td></tr>
+                <tr><td>Mouse</td><td>Printer</td></tr>
+                <tr><td>Scanner</td><td>Speakers</td></tr>
+                <tr><td>Microphone</td><td>Projector</td></tr>
+                <tr><td>Webcam</td><td>Headphones</td></tr>
+                <tr><td>Joystick</td><td>Plotter</td></tr>
+              </table>
+              <div class="keyline"><b>Easy way to remember:</b> Input → Computer → Output. The keyboard provides the input, the computer processes it, and the monitor displays the output.</div>
+            `
           }
         ],
         questions: [
@@ -764,13 +1495,32 @@
           { q: "2. How does an RFID reading system operate?", a: "An RFID reader emits radio waves that activate an antenna and chip embedded in an RFID tag, transmitting identifier data back wirelessly without requiring direct line-of-sight." },
           { q: "3. Contrast non-impact printers with impact printers.", a: "Non-impact printers (inkjet, laser) produce text and graphics without physical contact between the print head and paper; impact printers physically strike an inked ribbon against the paper." },
           { q: "4. List four specifications that determine monitor display quality.", a: "Resolution (pixel count), contrast ratio, brightness (luminance), and response time." },
-          { q: "5. What is force-feedback technology?", a: "An output feature in gamepads, steering wheels, and joysticks that sends physical resistance, vibrations, or recoil forces back to the user based on software actions." }
+          { q: "5. What is force-feedback technology?", a: "An output feature in gamepads, steering wheels, and joysticks that sends physical resistance, vibrations, or recoil forces back to the user based on software actions." },
+          { q: "6. Define an input device and name four examples.", a: "An input device is hardware used to enter data and instructions into a computer. Examples include a keyboard, mouse, scanner, microphone, webcam, touchscreen, joystick, and barcode/QR reader." },
+          { q: "7. Compare inkjet, laser, and 3-D printers.", a: "An inkjet printer sprays tiny drops of ink onto paper; a laser printer uses a laser and toner to produce prints, usually faster and sharper for text; a 3-D printer builds physical three-dimensional objects from a digital design instead of printing on paper." },
+          { q: "8. Why would a school choose a projector rather than a monitor for a classroom?", a: "A projector displays the computer's output on a large screen or wall so a whole class can see it at once, whereas a monitor screen is only large enough for a few people sitting close to it." },
+          { q: "9. Which device would an engineer use to print a large architectural drawing, and why?", a: "A plotter, because it produces large, precise line drawings such as engineering plans, maps, and architectural designs more accurately than an ordinary printer." },
+          { q: "10. Explain, using an example, how input, processing, and output work together.", a: "A user types a sentence on the keyboard (input), the computer processes the keystrokes into characters in a document (processing), and the monitor displays the sentence or the printer produces a hard copy (output)." }
         ]
       },
       {
         id: 8,
         title: "Digital Storage",
         topics: [
+          {
+            title: "🎯 Chapter Objectives — What You Should Be Able To Do",
+            content: `
+              <ul>
+                <li>Differentiate between storage and memory</li>
+                <li>Describe internal hard disk drives (HDDs) and solid-state drive (SSD) benefits</li>
+                <li>Identify uses of external drives, RAID configurations, and flash storage</li>
+                <li>Discuss the benefits, uses, and security of cloud storage</li>
+                <li>Describe characteristics and longevity of optical media</li>
+                <li>Explain enterprise storage architectures (RAID, NAS, SAN, tape libraries)</li>
+                <li>Identify uses of smart cards, magnetic stripes, RFID, and NFC tags</li>
+              </ul>
+            `
+          },
           {
             title: "8.1 – 8.12 Magnetic Hard Disks & RAID",
             content: `
@@ -812,6 +1562,75 @@
               <h4>Enterprise Storage Infrastructure</h4>
               <p><b>NAS (Network Attached Storage):</b> A dedicated storage server attached to a local network providing file-level sharing. <b>SAN (Storage Area Network):</b> A high-speed, specialized sub-network offering block-level storage directly to enterprise servers. <b>Magnetic Tape:</b> Plastic magnetic ribbons used for low-cost, high-volume archiving and long-term backups.</p>
             `
+          },
+          {
+            title: "📘 Extra Notes: Smart Cards, Magnetic Stripes, RFID & NFC Tags",
+            content: `
+              <ul>
+                <li><b>Smart Card:</b> A card with an embedded microprocessor chip that stores and processes data — used for ID badges, transit passes, and secure payment cards.</li>
+                <li><b>Magnetic Stripe Card:</b> Stores data in a stripe of magnetic material on the back of a card (e.g., older debit/credit cards, hotel key cards) that is read by swiping through a magstripe reader.</li>
+                <li><b>RFID Tag:</b> A small chip with an antenna that transmits identifying data over radio waves to an RFID reader, without needing direct contact or line-of-sight — used for inventory tracking and access badges.</li>
+                <li><b>NFC Tag:</b> A short-range wireless tag (a type of RFID) that a phone or reader can scan from a few centimeters away — used for contactless payments and quick pairing/sharing.</li>
+              </ul>
+            `
+          },
+          {
+            title: "💾 Storage Devices — Illustrated Overview",
+            content: `
+              <p>Storage devices are hardware devices used to store digital data such as documents, photos, videos, programs, and operating systems.</p>
+              ${fg([['tape','Magnetic tape'],['ssd','SSD'],['sdcard','SD card'],['usbdrive','USB flash drive'],['cd','CD'],['dvd','DVD'],['bluray','Blu-ray']])}
+              <h4>1. Magnetic Storage — Magnetic Tape</h4>
+              <p>Magnetic tape stores data by magnetizing a thin layer of material on a long strip of tape. Examples: backup tapes and data archival systems.</p>
+              <div class="split">
+                <div><h5>Advantages</h5><ul><li>Stores a very large amount of data</li><li>Relatively inexpensive for large-scale storage</li><li>Good for long-term backup and archiving</li></ul></div>
+                <div><h5>Disadvantages</h5><ul><li>Very slow compared with SSDs</li><li>Accessed sequentially, so finding one file takes time</li><li>Requires a special tape drive</li></ul></div>
+              </div>
+              <p><b>Uses:</b> mainly used by organizations for backup and long-term archiving.</p>
+            `
+          },
+          {
+            title: "⚡ Solid-State Storage: SSD, SD Card & USB Flash Drive",
+            content: `
+              <p>Solid-state storage uses <b>flash memory</b> and has no moving mechanical parts.</p>
+              ${fg([['ssd','SSD — internal drive'],['sdcard','SD card — removable'],['usbdrive','USB flash drive']], true)}
+              <h4>A. SSD (Solid-State Drive)</h4>
+              <div class="split">
+                <div><h5>Advantages</h5><ul><li>Very fast read/write speeds</li><li>No moving parts — resists physical damage</li><li>Silent operation</li><li>Uses less power than a hard disk drive</li></ul></div>
+                <div><h5>Disadvantages</h5><ul><li>Usually more expensive per GB</li><li>Limited number of write cycles</li></ul></div>
+              </div>
+              <p><b>Uses:</b> operating systems, applications, games, and general computer storage.</p>
+              <h4>B. SD Card</h4>
+              <p>An SD (Secure Digital) card is a small removable flash-memory storage device used in digital cameras, smartphones, tablets, and other portable devices. It is small, lightweight, removable, and available in different capacities — but small cards are easily lost or damaged and are generally slower than internal SSDs.</p>
+              <h4>C. USB Flash Drive</h4>
+              <p>A USB flash drive is a small portable storage device that connects through a USB port. It is easy to carry, plug-and-play, and useful for transferring files between computers — but it can be lost easily, damaged through physical use, and is often slower than a modern SSD.</p>
+            `
+          },
+          {
+            title: "💿 Optical Storage: CD, DVD & Blu-ray",
+            content: `
+              <p>Optical storage uses a <b>laser</b> to read and/or write data on a disc.</p>
+              ${fg([['cd','CD — about 700 MB'],['dvd','DVD — about 4.7 GB'],['bluray','Blu-ray — about 25 GB']], true)}
+              <ul>
+                <li><b>CD (Compact Disc):</b> typical capacity about 700 MB; used for music, small software programs, and data. Available as CD-ROM, CD-R, and CD-RW.</li>
+                <li><b>DVD (Digital Versatile Disc):</b> stores more than a CD — a single-layer DVD commonly holds about 4.7 GB; used for movies, software, and data.</li>
+                <li><b>Blu-ray Disc:</b> uses a blue-violet laser, so a single layer commonly stores 25 GB; used especially for high-definition video and large amounts of data.</li>
+              </ul>
+              <div class="split">
+                <div><h5>Advantages</h5><ul><li>Portable and easy to distribute</li><li>Discs are inexpensive</li><li>Useful for media distribution and long-term storage when stored properly</li></ul></div>
+                <div><h5>Disadvantages</h5><ul><li>Lower capacity than modern SSDs and hard drives</li><li>Slower access than solid-state storage</li><li>Discs can be scratched or physically damaged</li></ul></div>
+              </div>
+              <h4>📊 Quick Comparison</h4>
+              <table>
+                <tr><th>Type</th><th>Technology</th><th>Main feature</th><th>Common uses</th></tr>
+                <tr><td>Magnetic tape</td><td>Magnetic</td><td>Very high-capacity archival storage</td><td>Backups, archives</td></tr>
+                <tr><td>SSD</td><td>Flash memory</td><td>Very fast</td><td>Computers, laptops</td></tr>
+                <tr><td>SD card</td><td>Flash memory</td><td>Small and removable</td><td>Cameras, phones</td></tr>
+                <tr><td>USB flash drive</td><td>Flash memory</td><td>Portable</td><td>File transfer</td></tr>
+                <tr><td>CD</td><td>Optical</td><td>~700 MB</td><td>Music, small data</td></tr>
+                <tr><td>DVD</td><td>Optical</td><td>~4.7 GB</td><td>Movies, software</td></tr>
+                <tr><td>Blu-ray</td><td>Optical</td><td>~25 GB or more</td><td>HD video, large data</td></tr>
+              </table>
+            `
           }
         ],
         questions: [
@@ -819,13 +1638,32 @@
           { q: "2. State three key benefits of SSDs over conventional HDDs.", a: "Faster data read/write speeds, greater durability/shock resistance (no moving parts), and silent, low-power operation." },
           { q: "3. What is the primary purpose of a RAID storage array?", a: "To combine two or more physical drives to improve performance, provide redundancy (fault tolerance), and keep data accessible if a drive fails." },
           { q: "4. Differentiate between NAS and SAN systems.", a: "NAS (Network Attached Storage) is a single storage device connected to a LAN providing file-level sharing. A SAN (Storage Area Network) is a dedicated high-speed network providing block-level data storage to multiple enterprise servers." },
-          { q: "5. What is the difference between DVD-R and DVD-RW media?", a: "DVD-R is recordable once (data cannot be deleted or rewritten), whereas DVD-RW is rewritable (data can be erased and overwritten multiple times)." }
+          { q: "5. What is the difference between DVD-R and DVD-RW media?", a: "DVD-R is recordable once (data cannot be deleted or rewritten), whereas DVD-RW is rewritable (data can be erased and overwritten multiple times)." },
+          { q: "6. Why do organizations still use magnetic tape for backups?", a: "Magnetic tape holds a very large amount of data at a relatively low cost and suits long-term archiving, even though it is slow and read sequentially, which makes finding a single file time-consuming." },
+          { q: "7. State the typical capacity of a CD, a single-layer DVD, and a single-layer Blu-ray disc.", a: "A CD holds about 700 MB, a single-layer DVD about 4.7 GB, and a single-layer Blu-ray disc about 25 GB." },
+          { q: "8. Give two advantages and two disadvantages of using a USB flash drive.", a: "Advantages: it is easy to carry and plug-and-play, making file transfer between computers simple. Disadvantages: it is easily lost or physically damaged, and it can be slower than a modern SSD." },
+          { q: "9. Why can a Blu-ray disc hold more data than a CD or DVD?", a: "A Blu-ray disc is read and written with a blue-violet laser, which has a shorter wavelength and can therefore work with much smaller, more tightly packed data marks on the disc surface." },
+          { q: "10. Which storage device would suit a photographer's camera, and why?", a: "An SD card, because it is small, lightweight, removable, available in different capacities, and designed for portable devices such as digital cameras and phones." }
         ]
       },
       {
         id: 9,
         title: "Operating Systems",
         topics: [
+          {
+            title: "🎯 Chapter Objectives — What You Should Be Able To Do",
+            content: `
+              <ul>
+                <li>Define an operating system and describe its core responsibilities</li>
+                <li>Describe the system startup sequence (booting) and shutdown modes</li>
+                <li>Explain UI management, process scheduling, memory allocation, and multitasking</li>
+                <li>Describe device driver configuration and network performance monitoring</li>
+                <li>Identify built-in file management and automated update utilities</li>
+                <li>Explain user permissions, network administration, and access security</li>
+                <li>Compare desktop, server, and mobile operating system environments</li>
+              </ul>
+            `
+          },
           {
             title: "9.1 – 9.6 Kernel Roles & Program Management",
             content: `
@@ -856,6 +1694,93 @@
               <p><b>Server OS:</b> Windows Server, Linux, and UNIX variants designed to manage network accounts, centralized security, client permissions, and directory services.</p>
               <p><b>Mobile OS:</b> Android (Google open-source Linux-based OS) and iOS (Apple proprietary mobile OS for iPhone and iPad).</p>
             `
+          },
+          {
+            title: "📘 Extra Notes: File Management, Updates & Access Security",
+            content: `
+              <h4>Built-in File Management &amp; Update Utilities</h4>
+              <p>Every OS includes a <b>file manager</b> for browsing, organizing, copying, and deleting files/folders, plus an <b>automatic update</b> service that downloads and installs OS and security patches to keep the system protected and stable.</p>
+              <h4>User Permissions &amp; Network Administration</h4>
+              <p><b>User accounts and permissions</b> control what each person can view, edit, install, or delete on a system — an <b>administrator account</b> has full control, while a <b>standard account</b> has limited rights. On a network, an <b>administrator</b> manages user accounts, shared resources, and access rules to keep the network secure and organized.</p>
+            `
+          },
+          {
+            title: "🖥️ Operating System & System Software",
+            content: `
+              ${fg([['os','Operating system'],['memory','Memory management'],['security','OS security']], true)}
+              <p>An <b>Operating System</b> is system software that manages the computer's hardware and software resources and provides an interface for users to interact with the computer. Examples: Windows, Linux, macOS, Android, iOS.</p>
+              <h4>Main Functions of an Operating System</h4>
+              <ul>
+                <li><b>Process management:</b> manages running programs and processes.</li>
+                <li><b>Memory management:</b> allocates and manages RAM.</li>
+                <li><b>File management:</b> organizes and controls files and folders.</li>
+                <li><b>Device management:</b> controls devices such as printers, keyboards, and storage devices.</li>
+                <li><b>Security:</b> protects data and controls access to the system.</li>
+                <li><b>User interface:</b> allows users to interact with the computer.</li>
+              </ul>
+              <h4>System Software</h4>
+              <p>System software operates and controls computer hardware and provides a platform for application software. Examples: operating systems, device drivers, utility programs, and language translators.</p>
+              <table>
+                <tr><th>System Software</th><th>Application Software</th></tr>
+                <tr><td>Controls and manages computer hardware</td><td>Performs specific tasks for users</td></tr>
+                <tr><td>Usually runs in the background</td><td>Used directly by users</td></tr>
+                <tr><td>Example: Windows, Linux</td><td>Example: Word, Chrome, Photoshop</td></tr>
+              </table>
+            `
+          },
+          {
+            title: "⌨️ CLI vs GUI",
+            content: `
+              ${fg([['cli','CLI — typed commands'],['gui','GUI — windows and icons']], true)}
+              <h4>CLI (Command-Line Interface)</h4>
+              <p>A CLI lets users interact with a computer by typing commands with the keyboard. Examples: Command Prompt, PowerShell, Linux Terminal.</p>
+              <div class="split">
+                <div><h5>Advantages</h5><ul><li>Fast for experienced users</li><li>Uses fewer system resources</li><li>Useful for automation and administration</li><li>Precise control through commands</li></ul></div>
+                <div><h5>Disadvantages</h5><ul><li>Commands must be remembered or looked up</li><li>Can be difficult for beginners</li><li>Mostly text-based</li></ul></div>
+              </div>
+              <div class="keyline">Example: typing <b>dir</b> in Windows Command Prompt displays the files and folders in the current location.</div>
+              <h4>GUI (Graphical User Interface)</h4>
+              <p>A GUI lets users interact with a computer using windows, icons, menus, buttons, and a pointer. Examples: the Windows desktop, macOS, Android.</p>
+              <div class="split">
+                <div><h5>Advantages</h5><ul><li>Easy to learn and use</li><li>No need to memorize many commands</li><li>Provides visual feedback</li><li>Suitable for beginners</li></ul></div>
+                <div><h5>Disadvantages</h5><ul><li>Uses more system resources than a basic CLI</li><li>Some advanced tasks are slower than commands</li><li>Requires graphical hardware and software</li></ul></div>
+              </div>
+              <table>
+                <tr><th>CLI</th><th>GUI</th></tr>
+                <tr><td>Uses typed commands</td><td>Uses graphics</td></tr>
+                <tr><td>Keyboard-focused</td><td>Mouse/touch and keyboard</td></tr>
+                <tr><td>Can be difficult for beginners</td><td>Generally easier to learn</td></tr>
+                <tr><td>Uses fewer resources</td><td>Usually uses more resources</td></tr>
+                <tr><td>Example: Terminal</td><td>Example: Windows desktop</td></tr>
+              </table>
+            `
+          },
+          {
+            title: "🧠 Memory Management, Virtual Memory & Security",
+            content: `
+              <h4>Memory Management</h4>
+              <p>Memory management is the operating-system function that controls and organizes the computer's main memory (RAM).</p>
+              <ul>
+                <li>Allocates memory to programs.</li>
+                <li>Frees memory when programs finish.</li>
+                <li>Keeps track of which parts of memory are in use.</li>
+                <li>Prevents programs from interfering with each other's memory.</li>
+                <li>Uses virtual memory when RAM is insufficient.</li>
+              </ul>
+              <div class="keyline"><b>Virtual memory</b> uses part of the storage drive as temporary memory when available RAM is low. It allows more programs to run, but it is slower than physical RAM.</div>
+              <h4>Operating System Security</h4>
+              <p>OS security protects the computer, its programs, and its data from unauthorized access, malware, and other threats.</p>
+              <ul>
+                <li><b>User accounts:</b> separate accounts for different users.</li>
+                <li><b>Passwords / PINs:</b> prevent unauthorized access.</li>
+                <li><b>Permissions:</b> control who can access files and resources.</li>
+                <li><b>Encryption:</b> converts data into a form unauthorized users cannot easily read.</li>
+                <li><b>Firewall:</b> helps control unwanted network traffic.</li>
+                <li><b>Updates:</b> fix security vulnerabilities and bugs.</li>
+                <li><b>Antivirus / anti-malware:</b> detects and removes malicious software.</li>
+              </ul>
+              <p><b>Why it matters:</b> security protects personal and confidential information, prevents unauthorized access, reduces the risk of malware infections, and helps maintain the integrity and availability of data.</p>
+            `
           }
         ],
         questions: [
@@ -863,13 +1788,32 @@
           { q: "2. Explain the purpose and drawback of Virtual Memory.", a: "It uses storage drive space as an extension of RAM when physical memory fills up. Its main drawback is that drive access is much slower than RAM, which can slow down system performance." },
           { q: "3. How does Sleep Mode differ from Hibernate Mode?", a: "Sleep keeps open sessions in RAM using a small amount of electrical power for fast resumption; Hibernate writes all active RAM data to the storage drive and powers off completely." },
           { q: "4. What is a device driver?", a: "A specialized software utility that provides the instructions an operating system needs to recognize, communicate with, and control a specific hardware device." },
-          { q: "5. Compare a Graphical User Interface (GUI) with a Command-Line Interface (CLI).", a: "A GUI provides visual interaction via windows, icons, and menus clicked with a pointer; a CLI requires users to type text-based commands and syntax into a terminal." }
+          { q: "5. Compare a Graphical User Interface (GUI) with a Command-Line Interface (CLI).", a: "A GUI provides visual interaction via windows, icons, and menus clicked with a pointer; a CLI requires users to type text-based commands and syntax into a terminal." },
+          { q: "6. List six main functions of an operating system.", a: "Process management, memory management, file management, device management, security, and providing a user interface." },
+          { q: "7. What is virtual memory and what is its drawback?", a: "Virtual memory uses part of the storage drive as temporary memory when RAM runs low, so more programs can keep running. The drawback is speed: storage drives are much slower than physical RAM, so performance drops." },
+          { q: "8. Give two situations where a CLI is more suitable than a GUI.", a: "A CLI suits automation and administration tasks — for example scripting repeated jobs or managing a server remotely — and it suits low-resource systems, because it uses far less memory and processing power than a graphical interface." },
+          { q: "9. Name four security features provided by an operating system.", a: "Separate user accounts, passwords or PINs, file and resource permissions, encryption, a firewall, regular updates, and antivirus/anti-malware protection (any four)." },
+          { q: "10. Distinguish system software from application software with an example of each.", a: "System software controls and manages the hardware and usually runs in the background — for example Windows or Linux. Application software performs specific tasks for the user and is used directly — for example Word, Chrome, or Photoshop." }
         ]
       },
       {
         id: 10,
         title: "Communications and Networks",
         topics: [
+          {
+            title: "🎯 Chapter Objectives — What You Should Be Able To Do",
+            content: `
+              <ul>
+                <li>Discuss network communication components (sending device, medium, receiving node)</li>
+                <li>Differentiate LANs, MANs, WANs, and PANs</li>
+                <li>Differentiate client/server and peer-to-peer network topologies</li>
+                <li>Explain network communication standards (Ethernet, TCP/IP, Wi-Fi, LTE, Bluetooth, NFC)</li>
+                <li>Describe communications equipment (broadband modems, switches, routers, access points)</li>
+                <li>Discuss secure residential network setup and administration</li>
+                <li>Differentiate physical media (twisted-pair, coaxial, fiber-optic) from wireless channels</li>
+              </ul>
+            `
+          },
           {
             title: "10.1 – 10.5 Network Types & Topologies",
             content: `
@@ -918,6 +1862,94 @@
               <h4>Wireless Media</h4>
               <p>Broadcast Radio, Cellular Radio, Terrestrial Microwaves (line-of-sight towers), Communications Satellites (space stations amplifying microwave signals), and GPS (satellite navigation for precise location pinpointing).</p>
             `
+          },
+          {
+            title: "📘 Extra Notes: Communication Components & Securing a Home Network",
+            content: `
+              <h4>Basic Components of Network Communication</h4>
+              <p>Every network communication requires: (1) a <b>sending device</b> that starts a message, (2) a <b>communications device</b> and <b>transmission medium</b> that carry the signal, and (3) a <b>receiving device</b> that accepts the message. In between, network hardware such as modems, switches, routers, and access points direct the signal to its destination.</p>
+              <h4>Securing a Home Network</h4>
+              <ul>
+                <li>Change the router's default administrator username and password.</li>
+                <li>Use strong Wi-Fi encryption (WPA2/WPA3) with a strong Wi-Fi password.</li>
+                <li>Rename the default network name (SSID) so it does not reveal the router model.</li>
+                <li>Keep router firmware updated, and disable remote administration when not needed.</li>
+                <li>Set up a separate guest network for visitors, isolated from personal devices.</li>
+              </ul>
+            `
+          },
+          {
+            title: "🔌 Network Hardware — Illustrated",
+            content: `
+              <p>A <b>computer network</b> is a group of computers and other devices connected together to share data, resources, and services — for example computers in a school laboratory, an office network, or the Internet.</p>
+              ${fg([['router','Router'],['switch','Switch'],['hub','Hub'],['gateway','Gateway'],['bridge','Bridge'],['modem','Modem']])}
+              <h4>A. Router</h4>
+              <p>Connects different networks and directs data packets to their destination: it links a local network to the Internet, determines the best path for data, can provide wireless connectivity, and often supplies basic network security. <i>Example: a home Wi-Fi router connecting phones and computers to the Internet.</i></p>
+              <h4>B. Switch</h4>
+              <p>Connects multiple devices <i>within</i> one network. It receives data from one device, sends it only to the intended device, and so helps reduce unnecessary traffic. <i>Example: connecting computers and printers in a school computer lab.</i></p>
+              <h4>C. Hub</h4>
+              <p>A basic device that connects multiple devices. When a hub receives data it sends that data to <b>all</b> connected devices, and the intended device accepts it. This creates unnecessary traffic, is less secure than a switch, and is less efficient than modern switches.</p>
+              <h4>D. Gateway</h4>
+              <p>Connects networks that may use different communication protocols or architectures. It acts as an entry and exit point between networks, can translate between protocols, and allows different types of networks to communicate.</p>
+              <h4>E. Bridge</h4>
+              <p>Connects and manages traffic between two network segments, usually within the same type of network — filtering traffic, forwarding data between segments, and reducing unnecessary traffic. <i>Note: modern switches perform many functions traditionally handled by bridges.</i></p>
+              <h4>F. Modem</h4>
+              <p><b>Mo</b>dulator-<b>dem</b>odulator. A modem converts signals so digital devices can communicate over certain types of communication links — connecting a network to an Internet service over cable, DSL, or other broadband connections.</p>
+            `
+          },
+          {
+            title: "🌐 Types of Computer Networks (LAN, WAN, WLAN, PAN)",
+            content: `
+              ${fg([['lan','LAN — Local Area'],['wan','WAN — Wide Area'],['wlan','WLAN — Wireless LAN'],['pan','PAN — Personal Area']])}
+              <h4>A. LAN — Local Area Network</h4>
+              <p>Connects computers and devices within a small geographical area such as a school computer lab, a home, or an office building. LANs offer high data-transfer speeds, easy file and resource sharing, and are usually easier to manage than larger networks.</p>
+              <h4>B. WAN — Wide Area Network</h4>
+              <p>Connects networks across a large geographical area — different cities, countries, or continents. It covers a large area, can connect multiple LANs, and often uses telecommunications infrastructure. The Internet is the largest example of an interconnected global network.</p>
+              <h4>C. WLAN — Wireless Local Area Network</h4>
+              <p>A LAN that uses wireless communication, usually Wi-Fi, instead of network cables — home Wi-Fi, school Wi-Fi, public Wi-Fi.</p>
+              <div class="split">
+                <div><h5>Advantages</h5><ul><li>No cables needed for connected devices</li><li>Devices can move within the coverage area</li><li>Easy to expand</li></ul></div>
+                <div><h5>Disadvantages</h5><ul><li>Signal affected by distance and obstacles</li><li>Needs appropriate wireless security</li><li>Interference can affect performance</li></ul></div>
+              </div>
+              <h4>D. PAN — Personal Area Network</h4>
+              <p>A small network used around an individual person — a smartphone connected to wireless headphones, a phone paired with a smartwatch, or a laptop with a wireless mouse. Common technologies are Bluetooth and USB.</p>
+              <div class="keyline"><b>Easy memory tip:</b> PAN → LAN → WAN (Personal area → Local area → Wide area).</div>
+            `
+          },
+          {
+            title: "🗄️ Servers, Advantages & Disadvantages of Networks",
+            content: `
+              ${fg([['server','Server rack'],['network','Client–server network']], true)}
+              <h4>What is a Server?</h4>
+              <p>A server is a computer or system that provides services, resources, or data to other computers, called <b>clients</b>, over a network.</p>
+              <table>
+                <tr><th>Type of server</th><th>What it does</th></tr>
+                <tr><td>File server</td><td>Stores and manages files for network users</td></tr>
+                <tr><td>Web server</td><td>Stores and delivers web pages to users</td></tr>
+                <tr><td>Print server</td><td>Manages printers and print requests on a network</td></tr>
+                <tr><td>Email server</td><td>Handles sending, receiving, and storing email messages</td></tr>
+                <tr><td>Database server</td><td>Stores and manages databases and provides data to applications or users</td></tr>
+              </table>
+              <div class="split">
+                <div><h5>✅ Advantages of networks</h5><ul><li>Resource sharing (printers, storage, hardware)</li><li>File sharing between computers</li><li>Communication: email, messaging, video calls</li><li>Internet sharing across many devices</li><li>Centralized management of data and accounts</li><li>Collaboration between users</li><li>Central backup of important data</li></ul></div>
+                <div><h5>⚠️ Disadvantages of networks</h5><ul><li>Security risks: malware, hacking, unauthorized access</li><li>Setup cost of equipment, cabling, and servers</li><li>Ongoing maintenance and updates</li><li>Network failure can cut off many users at once</li><li>Privacy risks if poorly protected</li><li>Malware can spread between connected devices</li></ul></div>
+              </div>
+              <h4>📋 Quick Revision Table</h4>
+              <table>
+                <tr><th>Term</th><th>Meaning</th><th>Example / use</th></tr>
+                <tr><td>Router</td><td>Connects different networks and directs data</td><td>Home Internet</td></tr>
+                <tr><td>Switch</td><td>Connects devices within a network</td><td>Office network</td></tr>
+                <tr><td>Hub</td><td>Sends received data to all connected devices</td><td>Basic/older networks</td></tr>
+                <tr><td>Gateway</td><td>Connects networks using different protocols</td><td>Network-to-network communication</td></tr>
+                <tr><td>Bridge</td><td>Connects network segments</td><td>Linking LAN segments</td></tr>
+                <tr><td>Modem</td><td>Converts signals for transmission links</td><td>Internet connection</td></tr>
+                <tr><td>LAN</td><td>Small geographical network</td><td>School lab</td></tr>
+                <tr><td>WAN</td><td>Large geographical network</td><td>The Internet</td></tr>
+                <tr><td>WLAN</td><td>Wireless LAN</td><td>Wi-Fi</td></tr>
+                <tr><td>PAN</td><td>Personal small-area network</td><td>Bluetooth devices</td></tr>
+                <tr><td>Server</td><td>Provides services/resources to clients</td><td>File or web server</td></tr>
+              </table>
+            `
           }
         ],
         questions: [
@@ -925,7 +1957,104 @@
           { q: "2. Why are fiber-optic cables superior to copper twisted-pair cables?", a: "Fiber-optic cables transmit data using pulses of light, which allows for much higher bandwidth, longer transmission distances, and complete immunity to electromagnetic interference." },
           { q: "3. What is the role of a Router on a network?", a: "A router reads destination IP addresses on data packets and forwards them across interconnected networks to ensure they reach their intended destination." },
           { q: "4. Differentiate between Bandwidth and Latency.", a: "Bandwidth is the capacity or amount of data that can travel through a transmission line over a period of time; latency is the round-trip time delay it takes for a signal to reach its destination." },
-          { q: "5. Contrast a Client/Server network with a Peer-to-Peer (P2P) network.", a: "A Client/Server network uses a dedicated central server to manage files, security, and permissions for client computers; a P2P network allows individual devices to share files and resources directly with each other without a central server." }
+          { q: "5. Contrast a Client/Server network with a Peer-to-Peer (P2P) network.", a: "A Client/Server network uses a dedicated central server to manage files, security, and permissions for client computers; a P2P network allows individual devices to share files and resources directly with each other without a central server." },
+          { q: "6. Explain the main difference between a hub and a switch.", a: "A hub forwards incoming data to every connected device, which creates unnecessary traffic and is less secure. A switch reads the destination and sends the data only to the intended device, so it is more efficient and more secure." },
+          { q: "7. What does a gateway do that a router does not?", a: "A gateway joins networks that use different protocols or architectures and can translate between them, acting as the entry and exit point between two different kinds of network." },
+          { q: "8. Give one example each of a PAN, a LAN, and a WAN.", a: "PAN: a phone connected to wireless headphones or a smartwatch by Bluetooth. LAN: a school computer lab or a home network. WAN: the Internet, or a company network linking offices in different cities." },
+          { q: "9. State three advantages and three disadvantages of using a computer network.", a: "Advantages: sharing hardware such as printers, sharing files, and communicating through email, messaging, or video calls (also Internet sharing, central management, collaboration, and central backup). Disadvantages: security risks such as hacking and malware, the cost of equipment and setup, and the need for maintenance (also network failure and privacy risks)." },
+          { q: "10. Name four types of server and state what each provides.", a: "A file server stores and manages files; a web server stores and delivers web pages; a print server manages printers and print requests; an email server handles sending, receiving, and storing email; a database server stores and manages databases (any four)." }
+        ]
+      },
+      {
+        id: 11,
+        title: "Building Solutions: Databases and Development Tools",
+        topics: [
+          {
+            title: "11.1 – 11.4 Data Hierarchy & Database Systems",
+            content: `
+              <h4>Data Hierarchy</h4>
+              <p>Data is organized in a hierarchy from smallest to largest unit: <b>Bit → Byte (Character) → Field → Record → Table (File) → Database.</b> A field holds a single data item; a record is a collection of related fields; a table (file) is a collection of related records.</p>
+              <h4>File Processing vs. Database Approach</h4>
+              <p>In a <b>file processing system</b>, each application maintains its own separate data files, often leading to duplicated and inconsistent data. A <b>Database Management System (DBMS)</b> centralizes data storage so multiple applications and users can access consistent, shared data through one system.</p>
+            `
+          },
+          {
+            title: "11.5 – 11.8 DBMS Functions & Big Data",
+            content: `
+              <ul>
+                <li><b>Data Dictionary:</b> Stores the structure/definition of the database (field names, types, sizes).</li>
+                <li><b>Query &amp; Report Tools:</b> Allow users to retrieve and present data using structured queries (e.g., SQL) without writing full programs.</li>
+                <li><b>Backup &amp; Recovery:</b> DBMS utilities that copy and restore data in case of hardware failure or corruption.</li>
+                <li><b>Big Data:</b> Extremely large, fast-growing datasets that traditional tools struggle to process — commonly generated by social media, sensors, and enterprise transactions.</li>
+              </ul>
+            `
+          },
+          {
+            title: "11.9 – 11.12 System Development Life Cycle (SDLC)",
+            content: `
+              <p>The SDLC is the structured process used to plan, build, and maintain information systems, typically in five phases:</p>
+              <ol>
+                <li><b>Planning:</b> Identify the need for a new/improved system and review feasibility.</li>
+                <li><b>Analysis:</b> Study the current system and gather detailed user requirements.</li>
+                <li><b>Design:</b> Build the technical blueprint — data structures, interfaces, and program design.</li>
+                <li><b>Implementation:</b> Develop, test, and roll out the system to users.</li>
+                <li><b>Support &amp; Maintenance:</b> Provide ongoing help, monitor performance, and fix/update the system.</li>
+              </ol>
+            `
+          },
+          {
+            title: "11.13 – 11.15 Programming Languages & Frameworks",
+            content: `
+              <p>Programs are written in <b>programming languages</b> (e.g., Python, Java, C++, JavaScript) and translated into machine-executable instructions by compilers or interpreters. <b>App development frameworks</b> (e.g., web and mobile frameworks) provide reusable libraries and tools that speed up building, testing, and deploying software solutions.</p>
+            `
+          }
+        ],
+        questions: [
+          { q: "1. List the data hierarchy from smallest to largest unit.", a: "Bit → Byte (character) → Field → Record → Table (File) → Database." },
+          { q: "2. What is the main advantage of a DBMS over a traditional file processing system?", a: "A DBMS centralizes data so multiple applications and users share one consistent, non-duplicated set of data, instead of each application keeping its own separate, inconsistent files." },
+          { q: "3. What is a data dictionary used for?", a: "It stores the structure of the database — field names, data types, and sizes — so the DBMS and users know how the data is organized." },
+          { q: "4. Name the five phases of the System Development Life Cycle.", a: "Planning, Analysis, Design, Implementation, and Support & Maintenance." },
+          { q: "5. What is the purpose of an app development framework?", a: "It provides reusable, pre-built libraries and tools that help developers build, test, and deploy software faster instead of coding everything from scratch." }
+        ]
+      },
+      {
+        id: 12,
+        title: "Enterprise Systems, Certifications, and Careers",
+        topics: [
+          {
+            title: "12.1 – 12.3 Enterprise Systems",
+            content: `
+              <ul>
+                <li><b>Enterprise Resource Planning (ERP):</b> Integrated software that manages core business processes — finance, HR, manufacturing, supply chain — in one connected system.</li>
+                <li><b>Content Management System (CMS):</b> Software used to create, manage, and publish digital content (e.g., websites, documents) without needing to write code for every page.</li>
+              </ul>
+            `
+          },
+          {
+            title: "12.4 – 12.6 IT Careers & Department Roles",
+            content: `
+              <p>Typical IT department roles include <b>Systems Analysts</b> (design solutions to business problems), <b>Network Administrators</b> (maintain and secure networks), <b>Database Administrators</b> (manage data and access), <b>Software Developers</b> (build applications), and <b>Technical Support / Help Desk</b> staff (assist end users with hardware/software issues).</p>
+            `
+          },
+          {
+            title: "12.7 – 12.9 Technology Certifications",
+            content: `
+              <p>Industry certifications validate specific technical skills and are grouped by area: <b>Hardware</b> (e.g., device repair/support), <b>Software</b> (application or platform-specific skills), <b>Security</b> (cybersecurity practices), and <b>Networking</b> (designing and maintaining networks). Certifications can improve job prospects and demonstrate verified expertise to employers.</p>
+            `
+          },
+          {
+            title: "12.10 – 12.12 Job Searching & Online Presence",
+            content: `
+              <p>Building a professional <b>online presence</b> (portfolio site, LinkedIn profile, GitHub for coding samples) helps job seekers showcase real work to employers. Effective job searching combines online job boards, professional networking, tailored résumés/CVs, and being mindful of one's public digital footprint, since employers often review candidates' online activity.</p>
+            `
+          }
+        ],
+        questions: [
+          { q: "1. What does an ERP system do?", a: "It integrates core business processes — such as finance, HR, manufacturing, and supply chain — into one connected software system so departments share consistent, real-time information." },
+          { q: "2. What is a Content Management System (CMS) used for?", a: "It lets users create, manage, and publish digital content such as website pages without needing to write code for each page." },
+          { q: "3. Name three common IT department job roles.", a: "Any three of: Systems Analyst, Network Administrator, Database Administrator, Software Developer, Technical Support/Help Desk staff." },
+          { q: "4. Why might someone pursue a technology certification?", a: "To validate and demonstrate a specific technical skill set (hardware, software, security, or networking) to employers, which can improve job prospects." },
+          { q: "5. Why is an online presence important when job searching in IT?", a: "A portfolio, LinkedIn profile, or coding samples (e.g., on GitHub) let employers see real evidence of a candidate's skills, and employers often review a candidate's public digital footprint before hiring." }
         ]
       }
     ];
