@@ -1,537 +1,669 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wai Lin Htet — Lecturer & Academic Researcher</title>
+<!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X74PEWZMJV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X74PEWZMJV');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wai Lin Htet — Lecturer &amp; Academic Researcher</title>
   <meta name="description" content="Wai Lin Htet — Senior Lecturer and Academic Researcher teaching Cambridge IGCSE/A-Level Computer Science & ICT, OSSD, Python, and AI-integrated curricula in Yangon, Myanmar.">
   <meta property="og:title" content="Wai Lin Htet — Lecturer & Academic Researcher">
   <meta property="og:description" content="Cambridge IGCSE/A-Level Computer Science & ICT teaching resources, course outlines, and revision notes.">
   <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+
+  <!-- Fonts: Inter for Apple UI feel + Newsreader for Medium-like editorial nuance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #ffffff;
-      --surface: #f9fafb;
-      --text-main: #111827;
-      --text-secondary: #4b5563;
-      --text-muted: #6b7280;
-      --border: #e5e7eb;
-      --accent: #2563eb;
-      --accent-subtle: #eff6ff;
+      --bg: #fbfbfd;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --text-main: #1d1d1f;
+      --text-muted: #6e6e73;
+      --text-subtle: #86868b;
+      --border: rgba(0, 0, 0, 0.08);
+      --border-hover: rgba(0, 0, 0, 0.16);
+      --accent: #0071e3; /* Apple signature blue */
+      --accent-soft: rgba(0, 113, 227, 0.08);
+      --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.03);
+      --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.06);
+      --radius-lg: 20px;
+      --radius-md: 12px;
+      --radius-pill: 980px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg);
+    }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg);
       color: var(--text-main);
-      line-height: 1.65;
-      padding: 0 1.5rem;
+      line-height: 1.6;
+      letter-spacing: -0.01em;
       -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      max-width: 760px;
-      margin: 0 auto;
+    /* Ambient Background Glow (Apple keynote style) */
+    .ambient-glow {
+      position: fixed;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 750px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(0, 113, 227, 0.05) 0%, rgba(251, 251, 253, 0) 70%);
+      z-index: -1;
+      pointer-events: none;
     }
 
-    /* Sticky Navigation */
+    /* Apple-like Frosted Glass Header */
     header {
       position: sticky;
       top: 0;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(8px);
+      background: rgba(251, 251, 253, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
       border-bottom: 1px solid var(--border);
-      z-index: 50;
+      z-index: 1000;
     }
 
     nav {
-      max-width: 760px;
+      max-width: 980px;
       margin: 0 auto;
       display: flex;
-      gap: 2rem;
-      padding: 1.1rem 0;
-      font-size: 0.9rem;
-      font-weight: 500;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 1.5rem;
     }
 
-    nav a {
-      color: var(--text-secondary);
+    .brand {
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
       text-decoration: none;
-      transition: color 0.15s ease;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    nav a:hover { color: var(--accent); }
+    .brand-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #34c759; /* Available status green */
+      border-radius: 50%;
+    }
 
-    /* Main Sections */
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 6rem;
+    }
+
     section {
-      padding: 4.5rem 0 2rem;
+      padding-top: 5rem;
+      margin-top: -3rem;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding-top: 2rem;
+      padding-bottom: 3rem;
       border-bottom: 1px solid var(--border);
     }
 
-    section:last-of-type {
-      border-bottom: none;
-    }
-
-    /* Hero / Intro */
-    .hero {
-      padding-top: 5rem;
-      padding-bottom: 3.5rem;
-    }
-
-    .badge {
-      display: inline-block;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
       font-weight: 600;
-      color: var(--accent);
-      background: var(--accent-subtle);
-      padding: 0.25rem 0.65rem;
-      border-radius: 4px;
-      margin-bottom: 1rem;
+      letter-spacing: 0.03em;
+      padding: 0.35rem 0.85rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
     }
 
     h1 {
-      font-size: 2.25rem;
+      font-size: 3.25rem;
       font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.2;
-      margin-bottom: 0.8rem;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      background: linear-gradient(180deg, #1d1d1f 0%, #434344 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .lead-text {
-      font-size: 1.15rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 2rem;
+    .hero-tagline {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 1.75rem;
+      line-height: 1.35;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .apple-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--text-main);
+      color: #fff;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .apple-btn:hover {
+      background-color: #000;
+      transform: scale(1.02);
+    }
+
+    .apple-btn.ghost {
+      background-color: transparent;
+      color: var(--accent);
+      border: 1px solid var(--border);
+    }
+
+    .apple-btn.ghost:hover {
+      background-color: var(--accent-soft);
+      border-color: var(--accent);
+      transform: none;
+    }
+
+    .location-pill {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.65rem 1rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+    }
+
+    /* TYPOGRAPHY & SECTION HEADERS */
+    .section-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
     }
 
     h2 {
-      font-size: 1.35rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
       margin-bottom: 1.5rem;
-      color: var(--text-main);
     }
 
-    h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin: 1.75rem 0 0.5rem;
-      color: var(--text-main);
+    .lead-story {
+      font-size: 1.1rem;
+      line-height: 1.75;
+      color: #292929;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      border-left: 2.5px solid var(--text-main);
+      padding-left: 1.5rem;
     }
 
-    p {
-      color: var(--text-secondary);
-      margin-bottom: 1.25rem;
-      font-size: 0.98rem;
+    /* CREDENTIAL TILES (APPLE BENTO-STYLE) */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
     }
 
-    /* Highlight Block */
-    .philosophy-card {
-      background: var(--surface);
-      border-left: 3px solid var(--accent);
-      padding: 1.25rem 1.5rem;
-      border-radius: 0 6px 6px 0;
-      margin: 1.5rem 0;
-    }
-
-    .philosophy-card h3 {
-      margin-top: 0;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-
-    .philosophy-card p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* About teaser */
-    .about-teaser {
-      background: var(--surface);
+    .bento-card {
+      background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem 1.75rem;
-      margin-top: 0.5rem;
+      border-radius: var(--radius-lg);
+      padding: 1.6rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--shadow-sm);
     }
 
-    .about-teaser p {
-      margin-bottom: 1rem;
+    .bento-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-hover);
     }
 
-    .about-teaser p:last-of-type {
-      margin-bottom: 0;
+    .bento-card .tag-indicator {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.75rem;
     }
 
-    .credential-row {
+    .bento-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.01em;
+    }
+
+    .bento-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* CHIPS (credential pills) */
+    .chips-container {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin: 1rem 0 1.25rem;
+      margin: 1rem 0 1.5rem;
     }
 
-    .credential-pill {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      background: var(--bg);
+    .chip {
+      background: #fff;
       border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 0.3rem 0.75rem;
-    }
-
-    /* Course Cards Grid */
-    .course-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-      gap: 0.85rem;
-      margin-top: 1.25rem;
-    }
-
-    .course-card {
-      display: block;
-      text-decoration: none;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1.1rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      color: var(--text-main);
       transition: all 0.2s ease;
     }
 
-    .course-card:hover {
-      border-color: var(--accent);
+    .chip:hover {
+      border-color: #a1a1a6;
+      transform: translateY(-1px);
+    }
+
+    /* COURSE TILES */
+    .course-group-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-subtle);
+      margin: 2.25rem 0 1rem;
+    }
+
+    .course-group-label:first-of-type { margin-top: 0.5rem; }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1rem;
+    }
+
+    .course-tile {
+      display: block;
+      text-decoration: none;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.1rem 1.25rem;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .course-tile:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-hover);
     }
 
     .course-code {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 600;
-      color: var(--text-muted);
+      color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
     }
 
     .course-title {
       font-weight: 600;
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       color: var(--text-main);
-      margin-top: 0.25rem;
+      margin-top: 0.3rem;
+      letter-spacing: -0.01em;
     }
 
-    .course-card:hover .course-title {
+    .course-tile.featured {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      margin-bottom: 1.75rem;
+    }
+
+    .course-tile.featured .course-code {
       color: var(--accent);
     }
 
-    .group-label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      margin: 2rem 0 0.6rem;
+    .course-arrow {
+      color: var(--accent);
+      font-size: 1.1rem;
+      flex: none;
     }
 
-    .group-label:first-of-type { margin-top: 0.5rem; }
-
-    /* Contact Details */
+    /* CONTACT SECTION */
     .contact-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.25rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.75rem;
     }
 
-    .contact-entry {
-      display: flex;
-      gap: 0.9rem;
-      align-items: flex-start;
+    .contact-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-hover);
     }
 
     .contact-icon {
-      flex: none;
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      background: var(--accent-subtle);
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--accent-soft);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
+      margin-bottom: 0.9rem;
     }
 
-    .contact-entry dt {
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--text-muted);
-      margin-bottom: 0.25rem;
-    }
-
-    .contact-entry dd {
+    .contact-card dt {
       font-size: 0.95rem;
+      font-weight: 600;
       color: var(--text-main);
+      margin-bottom: 0.5rem;
     }
 
-    .contact-entry a {
+    .contact-card dd a {
       color: var(--accent);
       text-decoration: none;
-    }
-
-    .contact-entry a:hover {
-      text-decoration: underline;
-    }
-
-    .contact-cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-top: 0.35rem;
-    }
-
-    .btn-telegram {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 9px 18px;
-      background-color: #26A5E4;
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 600;
       font-size: 0.92rem;
-      border-radius: 8px;
-      transition: all 0.2s ease;
     }
 
-    .btn-telegram:hover {
-      background-color: #1e8ec4;
-      transform: translateY(-2px);
+    .contact-card dd {
+      font-size: 0.92rem;
+      color: var(--text-muted);
     }
 
     .btn-copy {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 9px 16px;
-      background: var(--bg);
-      color: var(--text-secondary);
+      background: transparent;
       border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 500;
+      border-radius: var(--radius-pill);
+      padding: 0.3rem 0.75rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
       cursor: pointer;
-      font-family: inherit;
-      transition: all 0.15s ease;
-    }
-
-    .btn-copy:hover {
-      border-color: var(--accent);
-      color: var(--accent);
+      margin-left: 0.5rem;
     }
 
     .response-note {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-top: 1.25rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--border);
-    }
-
-    /* Footer */
-    footer {
-      padding: 3rem 0;
-      text-align: center;
       font-size: 0.85rem;
-      color: var(--text-muted);
+      color: var(--text-subtle);
+      margin-top: 1.5rem;
+      text-align: center;
     }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 1.85rem; }
-      .lead-text { font-size: 1.05rem; }
-      nav { gap: 1.25rem; }
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      color: var(--text-subtle);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 2.4rem; }
+      .hero-tagline { font-size: 1.3rem; }
       .course-grid { grid-template-columns: 1fr; }
-    }
-
-    .btn-more {
-      display: inline-block;
-      padding: 10px 22px;
-      background-color: #4338ca;
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 15px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
-      transition: all 0.25s ease;
-    }
-
-    .btn-more:hover {
-      background-color: #372da3;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
-    }
-
-    .btn-more.ghost {
-      background-color: transparent;
-      color: var(--accent);
-      border: 1px solid var(--border);
-      box-shadow: none;
-      padding: 9px 20px;
-    }
-
-    .btn-more.ghost:hover {
-      background-color: var(--accent-subtle);
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: none;
-      box-shadow: none;
     }
   </style>
 </head>
 <body>
 
+  <div class="ambient-glow"></div>
+
+  <!-- Header / Navigation -->
   <header>
     <nav>
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#courses">Courses</a>
-      <a href="#contact">Contact</a>
+      <a href="#home" class="brand">
+        <span class="brand-dot"></span>
+        <span>Wai Lin Htet</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
   </header>
 
-  <main class="container">
-
+  <main>
     <!-- HOME SECTION -->
     <section id="home" class="hero">
-      <span class="badge">Academic Portfolio</span>
+      <div class="hero-badge">
+        <span>Academic Portfolio &bull; Educator &bull; Researcher</span>
+      </div>
       <h1>Wai Lin Htet</h1>
-      <p class="lead-text">Senior Lecturer & Academic Researcher bridging computer science, artificial intelligence, and modern pedagogy.</p>
-      <a href="about.html" class="btn-more">More About Me &rarr;</a>
+      <p class="hero-tagline">
+        Senior Lecturer &amp; Academic Researcher bridging computer science, artificial intelligence, and modern pedagogy.
+      </p>
 
-      <div class="philosophy-card">
-        <h3>Why Study Computer Science & ICT?</h3>
-        <p>Technology shapes every aspect of modern life. Studying Computer Science goes beyond syntax; it builds structured problem-solving, logical discipline, and systems-level thinking—empowering students to transition from passive consumers of technology to active creators.</p>
+      <div class="hero-actions">
+        <a href="about.html" class="apple-btn">
+          <span>More About Me</span>
+          <span>&rarr;</span>
+        </a>
+        <span class="location-pill">📍 Yangon, Myanmar</span>
       </div>
 
-      <div class="philosophy-card">
-        <h3>The Importance of Artificial Intelligence</h3>
-        <p>AI is rapidly redefining research, industry, and education. Understanding AI is essential not just for building software applications, but for navigating modern economies. Integrating AI critically and ethically ensures we prepare forward-thinking, adaptable learners.</p>
+      <div class="bento-grid">
+        <div class="bento-card">
+          <span class="tag-indicator">Why Study CS &amp; ICT?</span>
+          <p>Technology shapes every aspect of modern life. Studying Computer Science goes beyond syntax; it builds structured problem-solving, logical discipline, and systems-level thinking — empowering students to transition from passive consumers of technology to active creators.</p>
+        </div>
+        <div class="bento-card">
+          <span class="tag-indicator">The Importance of AI</span>
+          <p>AI is rapidly redefining research, industry, and education. Understanding AI is essential not just for building software applications, but for navigating modern economies. Integrating AI critically and ethically ensures we prepare forward-thinking, adaptable learners.</p>
+        </div>
       </div>
     </section>
 
-    <!-- ABOUT SECTION (short teaser — full detail lives on about.html) -->
+    <!-- ABOUT TEASER SECTION -->
     <section id="about">
+      <div class="section-eyebrow">Biography</div>
       <h2>About Me</h2>
-      <div class="about-teaser">
-        <p>Experienced Computer Science instructor and freelance educator preparing learners for academic and professional success through tailored, curriculum-aligned computing courses — emphasizing practical, industry-standard tools over rote syntax.</p>
-        <div class="credential-row">
-          <span class="credential-pill">Ph.D. (Thesis) — Applied AI & Teaching Methods</span>
-          <span class="credential-pill">MBA — IT Management</span>
-          <span class="credential-pill">B.S.C.S. — Software Engineering</span>
-        </div>
-        <p>10+ years teaching Cambridge IGCSE/A-Level, OSSD, and AI-integrated curricula, currently at Guarantee International College, Yangon.</p>
-        <a href="about.html" class="btn-more ghost">Full credentials & teaching history &rarr;</a>
+
+      <p class="lead-story">
+        Experienced Computer Science instructor and freelance educator preparing learners for academic and professional success through tailored, curriculum-aligned computing courses — emphasizing practical, industry-standard tools over rote syntax.
+      </p>
+
+      <div class="chips-container">
+        <span class="chip"><strong>Ph.D.</strong> (Thesis) — Applied AI &amp; Teaching Methods</span>
+        <span class="chip"><strong>MBA</strong> — IT Management</span>
+        <span class="chip"><strong>B.S.C.S.</strong> — Software Engineering</span>
       </div>
+
+      <p class="lead-story" style="margin-bottom: 1.5rem;">
+        10+ years teaching Cambridge IGCSE/A-Level, OSSD, and AI-integrated curricula, currently at Guarantee International College, Yangon.
+      </p>
+
+      <a href="about.html" class="apple-btn ghost">
+        <span>Full credentials &amp; teaching history</span>
+        <span>&rarr;</span>
+      </a>
     </section>
 
     <!-- COURSES SECTION -->
     <section id="courses">
-      <h2>Teaching & Curriculum</h2>
-      <p>Select a subject below to explore course outlines, syllabus breakdowns, and teaching resources.</p>
+      <div class="section-eyebrow">Curriculum Delivery</div>
+      <h2>Teaching &amp; Curriculum</h2>
+      <p style="color: var(--text-muted); margin-bottom: 1.75rem;">Select a subject below to explore course outlines, syllabus breakdowns, and teaching resources.</p>
 
-      <div class="group-label">Cambridge IGCSE & A-Level</div>
+      <a href="my_course.html" class="course-tile featured">
+        <div>
+          <span class="course-code">Start Here — Overview</span>
+          <div class="course-title">My Course Guide</div>
+        </div>
+        <span class="course-arrow">&rarr;</span>
+      </a>
+
+      <div class="course-group-label">Cambridge IGCSE &amp; A-Level</div>
       <div class="course-grid">
-        <a href="CS_0478_IGCSE_wh.html" class="course-card">
+        <a href="CS_0478_IGCSE_wh.html" class="course-tile">
           <span class="course-code">Cambridge IGCSE</span>
           <div class="course-title">Computer Science (0478)</div>
         </a>
 
-        <a href="ICT_0417_IGCSE_wh.html" class="course-card">
+        <a href="ICT_0417_IGCSE_wh.html" class="course-tile">
           <span class="course-code">Cambridge IGCSE</span>
           <div class="course-title">ICT (0417)</div>
         </a>
 
-        <a href="CS_9618_Alevel_wh.html" class="course-card">
+        <a href="CS_9618_Alevel_wh.html" class="course-tile">
           <span class="course-code">Cambridge International</span>
           <div class="course-title">A-Level CS (9618)</div>
         </a>
 
-        <a href="CS_Paper2_rev.html" class="course-card">
+        <a href="CS_Paper2_rev.html" class="course-tile">
           <span class="course-code">Cambridge IGCSE</span>
           <div class="course-title">CS Paper 2 Revision</div>
         </a>
 
-        <a href="ict_edexcel_4it_v1.html" class="course-card">
+        <a href="ict_edexcel_4it_v1.html" class="course-tile">
           <span class="course-code">Edexcel</span>
           <div class="course-title">IGCSE ICT (4IT0)</div>
         </a>
       </div>
 
-      <div class="group-label">Other Curricula & Foundations</div>
+      <div class="course-group-label">Other Curricula &amp; Foundations</div>
       <div class="course-grid">
-        <a href="OSSD_CS_Grade12_wh.html" class="course-card">
+        <a href="OSSD_CS_Grade12_wh.html" class="course-tile">
           <span class="course-code">Ontario Curriculum</span>
           <div class="course-title">OSSD (ICS3U / ICS4U)</div>
         </a>
 
-        <a href="PreIG_DC_ICT.html" class="course-card">
+        <a href="PreIG_DC_ICT.html" class="course-tile">
           <span class="course-code">Foundations</span>
-          <div class="course-title">Pre-IGCSE ICT & CS</div>
+          <div class="course-title">Pre-IGCSE ICT &amp; CS</div>
         </a>
 
-        <a href="PreIG_DC_ICT_1.html" class="course-card">
+        <a href="PreIG_DC_ICT_1.html" class="course-tile">
           <span class="course-code">Foundations</span>
-          <div class="course-title">Pre-IGCSE ICT & CS — Part 2</div>
+          <div class="course-title">Pre-IGCSE ICT &amp; CS — Part 2</div>
         </a>
 
-        <a href="ict-foundation.html" class="course-card">
+        <a href="ict-foundation.html" class="course-tile">
           <span class="course-code">Foundations</span>
           <div class="course-title">ICT Theory Foundation Notebook</div>
         </a>
 
-        <a href="my_course.html" class="course-card">
-          <span class="course-code">Overview</span>
-          <div class="course-title">My Course Guide</div>
-        </a>
-
-        <a href="pastpaper_index.html" class="course-card">
+        <a href="pastpaper_index.html" class="course-tile">
           <span class="course-code">Resources</span>
-          <div class="course-title">Past Papers & Schemes</div>
+          <div class="course-title">Past Papers &amp; Schemes</div>
         </a>
       </div>
 
-      <div class="group-label">Programming & Applied Skills</div>
+      <div class="course-group-label">Programming &amp; Applied Skills</div>
       <div class="course-grid">
-        <a href="Python.html" class="course-card">
+        <a href="Python.html" class="course-tile">
           <span class="course-code">Programming</span>
           <div class="course-title">Python Practical Track</div>
         </a>
 
-        <a href="OOP_Programming_trwailinhtet.html" class="course-card">
+        <a href="OOP_Programming_trwailinhtet.html" class="course-tile">
           <span class="course-code">Programming</span>
           <div class="course-title">OOP Programming</div>
         </a>
 
-        <a href="web-html-css.html" class="course-card">
+        <a href="web-html-css.html" class="course-tile">
           <span class="course-code">Web Development</span>
           <div class="course-title">HTML Web Authoring</div>
         </a>
 
-        <a href="excel_spreadsheet_guide.html" class="course-card">
+        <a href="excel_spreadsheet_guide.html" class="course-tile">
           <span class="course-code">Spreadsheets</span>
           <div class="course-title">Spreadsheets — Excel</div>
         </a>
 
-        <a href="ms_access_database_guide.html" class="course-card">
+        <a href="ms_access_database_guide.html" class="course-tile">
           <span class="course-code">Database</span>
           <div class="course-title">Database — MS Access</div>
         </a>
@@ -540,58 +672,46 @@
 
     <!-- CONTACT SECTION -->
     <section id="contact">
-      <h2>Contact & Collaboration</h2>
+      <div class="section-eyebrow">Get in Touch</div>
+      <h2>Contact &amp; Collaboration</h2>
+
       <dl class="contact-grid">
-        <div class="contact-entry">
-          <span class="contact-icon">💬</span>
-          <div>
-            <dt>Telegram — fastest way to reach me</dt>
-            <dd>
-              <div class="contact-cta-row">
-                <a href="https://t.me/SayarWaiLin" class="btn-telegram" target="_blank" rel="noopener">
-                  ✈️ Message @SayarWaiLin
-                </a>
-              </div>
-            </dd>
-          </div>
+        <div class="contact-card">
+          <div class="contact-icon">💬</div>
+          <dt>Telegram — fastest way to reach me</dt>
+          <dd>
+            <a href="https://t.me/SayarWaiLin" target="_blank" rel="noopener">✈️ Message @SayarWaiLin</a>
+          </dd>
         </div>
 
-        <div class="contact-entry">
-          <span class="contact-icon">📧</span>
-          <div>
-            <dt>Direct Email</dt>
-            <dd>
-              <div class="contact-cta-row">
-                <a href="mailto:tr.wailinhtet@gmail.com">tr.wailinhtet@gmail.com</a>
-                <button type="button" class="btn-copy" onclick="copyEmail(this)">📋 Copy</button>
-              </div>
-            </dd>
-          </div>
+        <div class="contact-card">
+          <div class="contact-icon">📧</div>
+          <dt>Direct Email</dt>
+          <dd>
+            <a href="mailto:tr.wailinhtet@gmail.com">tr.wailinhtet@gmail.com</a>
+            <button type="button" class="btn-copy" onclick="copyEmail(this)">📋 Copy</button>
+          </dd>
         </div>
 
-        <div class="contact-entry">
-          <span class="contact-icon">📍</span>
-          <div>
-            <dt>Location</dt>
-            <dd>Yangon, Myanmar</dd>
-          </div>
+        <div class="contact-card">
+          <div class="contact-icon">📍</div>
+          <dt>Location</dt>
+          <dd>Yangon, Myanmar</dd>
         </div>
 
-        <div class="contact-entry">
-          <span class="contact-icon">🎓</span>
-          <div>
-            <dt>Professional Inquiries</dt>
-            <dd>Available for institutional teaching, private/group programming tutoring (Python & Algorithms), curriculum advising, UCAS references, and educational AI research.</dd>
-          </div>
+        <div class="contact-card">
+          <div class="contact-icon">🎓</div>
+          <dt>Professional Inquiries</dt>
+          <dd>Available for institutional teaching, private/group programming tutoring (Python &amp; Algorithms), curriculum advising, UCAS references, and educational AI research.</dd>
         </div>
       </dl>
+
       <p class="response-note">Students and parents — Telegram is the quickest way to reach me and usually gets a reply within 24 hours.</p>
     </section>
-
   </main>
 
   <footer>
-    &copy; 2026 Wai Lin Htet. All rights reserved.
+    <p>&copy; 2026 Wai Lin Htet &bull; Yangon, Myanmar &bull; Computer Science Educator &amp; Researcher</p>
   </footer>
 
   <script>
