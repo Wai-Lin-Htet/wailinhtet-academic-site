@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS Paper 2 Revision | Tr.WaiLinHtet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #F3F5F9;
+      --card-bg: #FFFFFF;
+      --text: #131C2E;
+      --text-muted: #556175;
+      --border: #DCE2EC;
+      --accent: #5E43D2;
+      --accent-light: #ECE8FB;
+      --code-bg: #F0F3F8;
+      --code-border: #DCE2EC;
+      --code-text: #1B2740;
+      --table-header-bg: #F7F9FC;
+      --diagram-stroke: #131C2E;
+      --diagram-fill: #FFFFFF;
+      --nav-active-bg: #131C2E;
+      --nav-active-text: #F3F5F9;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0C111B;
+      --card-bg: #141B29;
+      --text: #E8EDF5;
+      --text-muted: #9AA7BB;
+      --border: #26314A;
+      --accent: #A797FF;
+      --accent-light: rgba(167, 151, 255, 0.15);
+      --code-bg: #0B1120;
+      --code-border: #26314A;
+      --code-text: #CBD5E6;
+      --table-header-bg: #101623;
+      --diagram-stroke: #E8EDF5;
+      --diagram-fill: #141B29;
+      --nav-active-bg: #6AAAFF;
+      --nav-active-text: #0C111B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0 1rem;
+    }
+
+    header {
+      max-width: 1000px;
+      margin: 2.5rem auto 2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .header-content {
+      flex: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.65rem;
+      background-color: var(--accent-light);
+      color: var(--accent);
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+    }
+
+    header h1 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.9rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      min-width: 132px;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .home-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.9rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      min-width: 132px;
+    }
+
+    .home-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    nav {
+      max-width: 1000px;
+      margin: 0 auto 2.5rem;
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .nav-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 0.55rem 1.15rem;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover {
+      color: var(--text);
+      border-color: var(--text-muted);
+    }
+
+    .nav-btn.active {
+      background: var(--nav-active-bg);
+      color: var(--nav-active-text);
+      border-color: var(--nav-active-bg);
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto 4rem;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card p, .card li {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .card ul {
+      padding-left: 1.25rem;
+      margin: 0.5rem 0;
+    }
+
+    pre, code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.84rem;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: 10px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+      color: var(--code-text);
+      line-height: 1.5;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      background: var(--card-bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-weight: 600;
+      background: var(--table-header-bg);
+      color: var(--text);
+    }
+
+    .symbol-shape {
+      display: inline-block;
+      width: 70px;
+      text-align: center;
+      font-size: 0.75rem;
+      padding: 4px;
+      border: 1.5px solid var(--text);
+      font-weight: 500;
+    }
+
+    .terminator { border-radius: 12px; }
+    .process { border-radius: 0; }
+    .io { transform: skew(-15deg); }
+    .decision { transform: rotate(45deg); width: 24px; height: 24px; margin: 8px auto; }
+
+    /* Logic Gates Grid */
+    .gate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gate-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gate-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .gate-header h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .gate-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      min-height: 2.2rem;
+    }
+
+    .gate-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+    }
+
+    .gate-svg-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gate-svg-container svg {
+      width: 120px;
+      height: 60px;
+      stroke: var(--diagram-stroke);
+      fill: var(--diagram-fill);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .truth-table-mini {
+      width: auto;
+      margin-top: 0;
+      border: 1px solid var(--border);
+      font-size: 0.75rem;
+    }
+
+    .truth-table-mini th, .truth-table-mini td {
+      padding: 0.25rem 0.5rem;
+      text-align: center;
+    }
+
+    footer {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 0 3.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 600px) {
+      header { flex-direction: column; }
+      .header-actions { align-self: flex-start; }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="badge">Paper 2 &bull; Computer Science</div>
+      <h1>Algorithms, Pseudocode & Data Structures</h1>
+      <p>CS revision created by Tr.WaiLinHtet</p>
+    </div>
+    
+    <div class="header-actions">
+      <a class="home-btn" href="index.html" title="Back to Home">
+        <span>&#8962;</span>
+        <span>Home</span>
+      </a>
+      <a class="home-btn" href="paper1.html" title="Go to Paper 1">
+        <span>&#128196;</span>
+        <span>Paper 1</span>
+      </a>
+      <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()" title="Switch Light/Dark Mode">
+        <span id="themeIcon">&#9790;</span>
+        <span id="themeLabel">Dark Mode</span>
+      </button>
+    </div>
+  </header>
+
+  <nav>
+    <button class="nav-btn active" onclick="switchTab(event, 'sdlc-datatype')">1. SDLC &amp; Data Type</button>
+    <button class="nav-btn" onclick="switchTab(event, 'pseudocode')">2. Pseudocode</button>
+    <button class="nav-btn" onclick="switchTab(event, 'search-sort')">3. Search &amp; Sort</button>
+    <button class="nav-btn" onclick="switchTab(event, 'validation-testdata')">4. Validation &amp; Test Data</button>
+    <button class="nav-btn" onclick="switchTab(event, 'array-string-file')">5. Array, String &amp; File Handling</button>
+    <button class="nav-btn" onclick="switchTab(event, 'flowcharts')">6. Flowchart</button>
+    <button class="nav-btn" onclick="switchTab(event, 'trace-table')">7. Trace Table</button>
+    <button class="nav-btn" onclick="switchTab(event, 'programming')">8. Programming</button>
+    <button class="nav-btn" onclick="switchTab(event, 'databases')">9. Database</button>
+    <button class="nav-btn" onclick="switchTab(event, 'logic-gates')">10. Logic Gate</button>
+  </nav>
+
+  <main>
+    <!-- TAB 1: SDLC & DATA TYPE -->
+    <section id="sdlc-datatype" class="tab-content active">
+      <div class="grid">
+        <!-- SDLC -->
+        <div class="card">
+          <h3>Program Development Life Cycle (SDLC)</h3>
+          <p>The standard stages followed when developing a program:</p>
+          <ul>
+            <li><strong>Analysis:</strong> Understand the problem and define requirements.</li>
+            <li><strong>Design:</strong> Plan the solution using pseudocode, flowcharts or structure diagrams.</li>
+            <li><strong>Coding:</strong> Write the program in a programming language.</li>
+            <li><strong>Testing:</strong> Check the program works correctly using test data.</li>
+            <li><strong>Maintenance:</strong> Fix errors and improve the program after release.</li>
+          </ul>
+        </div>
+
+        <!-- IPO -->
+        <div class="card">
+          <h3>Program Structure: IPO</h3>
+          <p>Every program can be broken down into three stages:</p>
+          <ul>
+            <li><strong>Input:</strong> Data entered into the program (e.g. keyboard, sensor, file).</li>
+            <li><strong>Process:</strong> Calculations and decisions performed on the data.</li>
+            <li><strong>Output:</strong> Results displayed or stored (e.g. screen, file, printer).</li>
+          </ul>
+          <p>Design tools used to plan a solution before coding include <strong>flowcharts</strong> (symbols and flowlines showing the logic) and <strong>structure diagrams</strong> (hierarchical diagrams that break a problem down into smaller sub-tasks / modules).</p>
+        </div>
+
+        <!-- DATA TYPES -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Data Types</h3>
+          <table>
+            <thead>
+              <tr><th>Data Type</th><th>Keyword</th><th>Example</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Integer</td><td><code>INTEGER</code></td><td>5, -12, 100</td></tr>
+              <tr><td>Real / Float</td><td><code>REAL</code></td><td>3.14, -0.5, 99.9</td></tr>
+              <tr><td>Character</td><td><code>CHAR</code></td><td>'A', 'x', '7'</td></tr>
+              <tr><td>String</td><td><code>STRING</code></td><td>"Hello", "S1045"</td></tr>
+              <tr><td>Boolean</td><td><code>BOOLEAN</code></td><td>TRUE, FALSE</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- VARIABLES & CONSTANTS -->
+        <div class="card">
+          <h3>Variables &amp; Constants</h3>
+          <p><strong>Variable:</strong> A named storage location whose value <em>can change</em> while the program runs.</p>
+          <p><strong>Constant:</strong> A named storage location whose value <em>stays the same</em> throughout the program.</p>
+          <pre>DECLARE Score : INTEGER      // variable
+CONSTANT VAT = 0.20          // constant</pre>
+        </div>
+
+        <!-- OPERATORS -->
+        <div class="card">
+          <h3>Operators</h3>
+          <p><strong>Arithmetic:</strong> <code>+</code> add, <code>-</code> subtract, <code>*</code> multiply, <code>/</code> divide, <code>DIV</code> integer division, <code>MOD</code> remainder</p>
+          <p><strong>Comparison:</strong> <code>&gt;</code> <code>&lt;</code> <code>=</code> <code>&gt;=</code> <code>&lt;=</code> <code>&lt;&gt;</code></p>
+          <p><strong>Logical:</strong> <code>AND</code> (both true), <code>OR</code> (either true), <code>NOT</code> (opposite)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: PSEUDOCODE -->
+    <section id="pseudocode" class="tab-content">
+      <div class="grid">
+        <!-- SELECTION -->
+        <div class="card">
+          <h3>Selection: IF...THEN...ELSE...ENDIF</h3>
+          <pre>IF Age &lt; 18 THEN
+  OUTPUT "Child"
+ELSE
+  OUTPUT "Adult"
+ENDIF
+
+CASE OF Move
+  'W' : Position &larr; Position - 10
+  'S' : Position &larr; Position + 10
+  OTHERWISE : CALL Beep
+ENDCASE</pre>
+        </div>
+
+        <!-- ITERATION -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Iteration / Looping</h3>
+          <div class="grid" style="margin-bottom: 0;">
+            <div>
+              <p><strong>FOR...TO...NEXT</strong></p>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Used when the number of iterations is fixed / known in advance.</p>
+              <pre>FOR Counter &larr; 1 TO 10
+  OUTPUT Counter
+NEXT Counter</pre>
+            </div>
+            <div>
+              <p><strong>WHILE...DO...ENDWHILE</strong></p>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Condition checked <em>before</em> the loop runs - body may execute zero times.</p>
+              <pre>Total &larr; 0
+INPUT Mark
+WHILE Mark &lt;&gt; -1 DO
+  Total &larr; Total + Mark
+  INPUT Mark
+ENDWHILE</pre>
+            </div>
+            <div>
+              <p><strong>REPEAT...UNTIL</strong></p>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Condition checked <em>after</em> the loop runs - body always executes at least once.</p>
+              <pre>REPEAT
+  OUTPUT "Enter -1 to stop"
+  INPUT Option
+UNTIL Option = -1</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAXIMUM & MINIMUM -->
+        <div class="card">
+          <h3>Maximum &amp; Minimum Finder</h3>
+          <p>Initializes both values to the first element and updates them sequentially.</p>
+          <pre>MaximumValue &larr; Array[1]
+MinimumValue &larr; Array[1]
+
+FOR Counter &larr; 2 TO LoopLimit
+  IF Array[Counter] > MaximumValue THEN
+    MaximumValue &larr; Array[Counter]
+  ENDIF
+  IF Array[Counter] &lt; MinimumValue THEN
+    MinimumValue &larr; Array[Counter]
+  ENDIF
+NEXT Counter</pre>
+        </div>
+
+        <!-- TOTALING & COUNTING -->
+        <div class="card">
+          <h3>Totalling, Counting &amp; Average</h3>
+          <p>Standard loop patterns for accumulation and filtering conditions.</p>
+          <pre>Total &larr; 0
+PassCount &larr; 0
+
+FOR Counter &larr; 1 TO NumberOfValues
+  Total &larr; Total + StudentMark[Counter]
+  IF StudentMark[Counter] >= 50 THEN
+    PassCount &larr; PassCount + 1
+  ENDIF
+NEXT Counter
+
+Average &larr; Total / NumberOfValues
+OUTPUT "Total: ", Total
+OUTPUT "Average: ", Average
+OUTPUT "Passed: ", PassCount</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: SEARCH & SORT -->
+    <section id="search-sort" class="tab-content">
+      <div class="grid">
+        <!-- BUBBLE SORT -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Bubble Sort Algorithm</h3>
+          <p>Sorts an array into ascending order by iteratively comparing adjacent elements and swapping them until fully ordered.</p>
+          <pre>First &larr; 1
+Last &larr; 10
+REPEAT
+  Swap &larr; FALSE
+  FOR Index &larr; First TO Last - 1
+    IF Array[Index] > Array[Index + 1] THEN
+      Temp &larr; Array[Index]
+      Array[Index] &larr; Array[Index + 1]
+      Array[Index + 1] &larr; Temp
+      Swap &larr; TRUE
+    ENDIF
+  NEXT Index
+  Last &larr; Last - 1
+UNTIL (NOT Swap) OR Last = 1</pre>
+        </div>
+
+        <!-- LINEAR SEARCH -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Linear Search</h3>
+          <p>Searches through the array until the target value is found or the end is reached.</p>
+          <pre>INPUT TargetValue
+Found &larr; FALSE
+Counter &larr; 1
+
+REPEAT
+  IF TargetValue = Array[Counter] THEN
+    Found &larr; TRUE
+  ELSE
+    Counter &larr; Counter + 1
+  ENDIF
+UNTIL Found OR Counter > NumberOfValues
+
+IF Found THEN
+  OUTPUT "Found at position: ", Counter
+ELSE
+  OUTPUT "Not found."
+ENDIF</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: VALIDATION & TEST DATA -->
+    <section id="validation-testdata" class="tab-content">
+      <div class="grid">
+        <!-- BASIC CHECKS -->
+        <div class="card">
+          <h3>Range &amp; Length Check</h3>
+          <p><strong>Range Check:</strong></p>
+          <pre>REPEAT
+  INPUT Mark
+  IF Mark &lt; 0 OR Mark > 100 THEN
+    OUTPUT "Mark must be between 0 and 100"
+  ENDIF
+UNTIL Mark >= 0 AND Mark &lt;= 100</pre>
+          <p><strong>Length Check:</strong></p>
+          <pre>REPEAT
+  INPUT Password
+UNTIL LENGTH(Password) >= 8</pre>
+        </div>
+
+        <!-- MORE VALIDATION CHECKS -->
+        <div class="card">
+          <h3>Presence, Type, Format &amp; Check Digit</h3>
+          <p><strong>Presence Check</strong> &ndash; a required field is not left blank:</p>
+          <pre>REPEAT
+  INPUT Name
+  IF Name = "" THEN
+    OUTPUT "This field is required"
+  ENDIF
+UNTIL Name &lt;&gt; ""</pre>
+          <p><strong>Type Check</strong> &ndash; data is of the correct data type:</p>
+          <pre>REPEAT
+  INPUT Age
+  IF Age &lt;&gt; DIV(Age, 1) THEN
+    OUTPUT "Please enter a whole number"
+  ENDIF
+UNTIL Age = DIV(Age, 1)</pre>
+          <p><strong>Format Check</strong> &ndash; data follows a pre-defined pattern (e.g. DD/MM/YYYY dates, Student ID "S####").</p>
+          <p><strong>Check Digit</strong> &ndash; an extra digit calculated from the other digits to detect data entry errors (used in barcodes, ISBNs, VINs):</p>
+          <pre>IF CalculatedCheckDigit &lt;&gt; EnteredCheckDigit THEN
+  OUTPUT "Invalid code"
+ENDIF</pre>
+        </div>
+
+        <!-- VERIFICATION -->
+        <div class="card">
+          <h3>Verification</h3>
+          <p>Verification checks that data has been copied or entered <strong>accurately</strong>, usually by comparing it with the original source.</p>
+          <p><strong>Double Entry:</strong> The same data is entered twice (often by different operators) and compared.</p>
+          <pre>INPUT Password
+INPUT ConfirmPassword
+IF Password &lt;&gt; ConfirmPassword THEN
+  OUTPUT "Entries do not match"
+ENDIF</pre>
+          <p><strong>Visual Check:</strong> A person compares the data entered on screen with the original source document.</p>
+        </div>
+
+        <!-- TEST DATA -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Types of Test Data</h3>
+          <p>Suppose a program accepts marks from 0 to 100:</p>
+          <table>
+            <thead>
+              <tr><th>Type</th><th>Meaning</th><th>Example</th><th>Expected Result</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Normal</strong></td><td>Valid, typical data</td><td>65</td><td>Accepted</td></tr>
+              <tr><td><strong>Abnormal</strong></td><td>Invalid data</td><td>-10, 120</td><td>Rejected</td></tr>
+              <tr><td><strong>Extreme</strong></td><td>Valid data close to the limits</td><td>1, 99</td><td>Accepted</td></tr>
+              <tr><td><strong>Boundary</strong></td><td>Data exactly at (or just outside) the limits</td><td>0, 100 (accepted) &bull; -1, 101 (rejected)</td><td>See example</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- VALIDATION VS VERIFICATION -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Validation vs Verification</h3>
+          <table>
+            <thead>
+              <tr><th>Aspect</th><th>Validation</th><th>Verification</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Purpose</td><td>Checks whether data is reasonable / acceptable</td><td>Checks whether data was entered / copied accurately</td></tr>
+              <tr><td>Who performs it</td><td>Usually performed by the computer</td><td>Can involve a person, or repeated data entry</td></tr>
+              <tr><td>Methods</td><td>Range, length, presence, type, format, check digit</td><td>Double entry, visual check</td></tr>
+              <tr><td>Example</td><td>Mark must be 0&ndash;100</td><td>Checking an entered mark against the original paper</td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top: 0.75rem;"><strong>Easy way to remember:</strong> Validation = "Is this data acceptable?" &nbsp;|&nbsp; Verification = "Did I enter/copy the data correctly?"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: ARRAY, STRING & FILE HANDLING -->
+    <section id="array-string-file" class="tab-content">
+      <div class="grid">
+        <!-- 1D ARRAYS -->
+        <div class="card">
+          <h3>1D Arrays (Declaration &amp; Iteration)</h3>
+          <pre>// Declaration: 1D Array of size 10
+DECLARE StudentNames : ARRAY[1:10] OF STRING
+DECLARE Scores : ARRAY[1:10] OF INTEGER
+
+// Populating array
+FOR Index &larr; 1 TO 10
+  INPUT StudentNames[Index]
+  INPUT Scores[Index]
+NEXT Index
+
+// Accessing Nth element
+OUTPUT "First student is: ", StudentNames[1]</pre>
+        </div>
+
+        <!-- 2D ARRAYS -->
+        <div class="card">
+          <h3>2D Arrays (Nested Loops)</h3>
+          <pre>// Declaration: 2D Array (e.g. 5 rows, 10 columns)
+DECLARE Amount : ARRAY[1:5, 1:10] OF INTEGER
+DECLARE GrandTotal : INTEGER
+GrandTotal &larr; 0
+
+FOR Row &larr; 1 TO 5
+  RowTotal &larr; 0
+  FOR Column &larr; 1 TO 10
+    RowTotal &larr; RowTotal + Amount[Row, Column]
+  NEXT Column
+  OUTPUT "Total for Row ", Row, " is ", RowTotal
+  GrandTotal &larr; GrandTotal + RowTotal
+NEXT Row
+
+OUTPUT "Grand Total: ", GrandTotal</pre>
+        </div>
+
+        <!-- STRING HANDLING -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>String Handling Functions</h3>
+          <div class="grid" style="margin-bottom: 0;">
+            <div>
+              <p><strong>LENGTH(string)</strong></p>
+              <pre>DECLARE Name : STRING
+Name &larr; "Computer Science"
+OUTPUT LENGTH(Name) // Outputs 16</pre>
+            </div>
+            <div>
+              <p><strong>SUBSTRING(string, start, length)</strong></p>
+              <pre>// SUBSTRING(str, pos, count)
+OUTPUT SUBSTRING("Computer Science", 10, 7)
+// Outputs "Science"</pre>
+            </div>
+            <div>
+              <p><strong>UCASE(string) &amp; LCASE(string)</strong></p>
+              <pre>OUTPUT UCASE("hello") // Outputs "HELLO"
+OUTPUT LCASE("WORLD") // Outputs "world"</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- FILE HANDLING MODES -->
+        <div class="card">
+          <h3>File Handling Modes</h3>
+          <ul>
+            <li><code>READ</code>: Opens file for data retrieval from the beginning.</li>
+            <li><code>WRITE</code>: Creates a new file or overwrites an existing file.</li>
+            <li><code>APPEND</code>: Adds new data to the end of an existing file.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Writing to a Text File</h3>
+          <pre>OPENFILE "StudentData.txt" FOR WRITE
+WRITEFILE "StudentData.txt", "Bob, Smith, 90"
+WRITEFILE "StudentData.txt", "Ada, Lovelace, 100"
+CLOSEFILE "StudentData.txt"</pre>
+        </div>
+
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Reading Lines from File until EOF</h3>
+          <p>Reads every line of a text file sequentially until EOF (End Of File) is reached.</p>
+          <pre>DECLARE LineOfText : STRING
+
+OPENFILE "StudentData.txt" FOR READ
+
+WHILE NOT EOF("StudentData.txt") DO
+  READFILE "StudentData.txt", LineOfText
+  OUTPUT LineOfText
+ENDWHILE
+
+CLOSEFILE "StudentData.txt"</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: FLOWCHART -->
+    <section id="flowcharts" class="tab-content">
+      <div class="grid">
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Standard Flowchart Symbols</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Function</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="symbol-shape terminator">START</div></td>
+                <td><strong>Terminator</strong></td>
+                <td>Shows the start and end termination points of an algorithm.</td>
+              </tr>
+              <tr>
+                <td><div class="symbol-shape process">Process</div></td>
+                <td><strong>Process</strong></td>
+                <td>Calculations, data assignments, and internal tasks.</td>
+              </tr>
+              <tr>
+                <td><div class="symbol-shape io">Input/Output</div></td>
+                <td><strong>Input / Output</strong></td>
+                <td>Prompts input from keyboard or prints output to monitor.</td>
+              </tr>
+              <tr>
+                <td><div class="symbol-shape decision"></div></td>
+                <td><strong>Decision</strong></td>
+                <td>Conditional branching check with Yes/No exit paths.</td>
+              </tr>
+              <tr>
+                <td><div class="symbol-shape">&rarr;</div></td>
+                <td><strong>Flowline</strong></td>
+                <td>Defines directional sequence of execution.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- WORKED FLOWCHART EXAMPLE -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Worked Example: Odd or Even Number</h3>
+          <p>Flowchart equivalent of: <code>IF Num MOD 2 = 0 THEN OUTPUT "Even" ELSE OUTPUT "Odd" ENDIF</code></p>
+          <div style="display:flex; justify-content:center; padding: 1rem 0;">
+            <svg viewBox="0 0 320 560" style="width:260px; height:auto; stroke:var(--diagram-stroke); fill:var(--diagram-fill); stroke-width:2; stroke-linecap:round; stroke-linejoin:round;">
+              <!-- START -->
+              <rect x="90" y="10" width="140" height="45" rx="22" />
+              <text x="160" y="38" text-anchor="middle" font-size="15" stroke="none" fill="var(--diagram-stroke)">START</text>
+              <line x1="160" y1="55" x2="160" y2="85" marker-end="url(#arrow)" />
+
+              <!-- INPUT (parallelogram) -->
+              <polygon points="80,85 240,85 220,135 60,135" />
+              <text x="150" y="116" text-anchor="middle" font-size="14" stroke="none" fill="var(--diagram-stroke)">INPUT Num</text>
+              <line x1="150" y1="135" x2="150" y2="165" marker-end="url(#arrow)" />
+
+              <!-- DECISION (diamond) -->
+              <polygon points="150,165 260,235 150,305 40,235" />
+              <text x="150" y="230" text-anchor="middle" font-size="12.5" stroke="none" fill="var(--diagram-stroke)">Num MOD 2</text>
+              <text x="150" y="246" text-anchor="middle" font-size="12.5" stroke="none" fill="var(--diagram-stroke)">= 0 ?</text>
+
+              <!-- YES branch (right) -->
+              <line x1="260" y1="235" x2="300" y2="235" />
+              <line x1="300" y1="235" x2="300" y2="270" marker-end="url(#arrow)" />
+              <text x="272" y="228" font-size="12" stroke="none" fill="var(--diagram-stroke)">YES</text>
+              <polygon points="230,270 320,270 300,320 250,320" />
+              <text x="275" y="301" text-anchor="middle" font-size="13" stroke="none" fill="var(--diagram-stroke)">OUTPUT</text>
+              <text x="275" y="316" text-anchor="middle" font-size="13" stroke="none" fill="var(--diagram-stroke)">"Even"</text>
+
+              <!-- NO branch (down) -->
+              <line x1="150" y1="305" x2="150" y2="335" marker-end="url(#arrow)" />
+              <text x="160" y="325" font-size="12" stroke="none" fill="var(--diagram-stroke)">NO</text>
+              <polygon points="90,335 210,335 190,385 70,385" />
+              <text x="130" y="366" text-anchor="middle" font-size="13" stroke="none" fill="var(--diagram-stroke)">OUTPUT</text>
+              <text x="130" y="381" text-anchor="middle" font-size="13" stroke="none" fill="var(--diagram-stroke)">"Odd"</text>
+
+              <!-- Merge lines down to END -->
+              <line x1="275" y1="320" x2="275" y2="440" />
+              <line x1="130" y1="385" x2="130" y2="440" />
+              <line x1="130" y1="440" x2="275" y2="440" />
+              <line x1="200" y1="440" x2="200" y2="470" marker-end="url(#arrow)" />
+
+              <!-- END -->
+              <rect x="130" y="470" width="140" height="45" rx="22" />
+              <text x="200" y="498" text-anchor="middle" font-size="15" stroke="none" fill="var(--diagram-stroke)">END</text>
+
+              <defs>
+                <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 Z" fill="var(--diagram-stroke)" stroke="none" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 7: TRACE TABLE -->
+    <section id="trace-table" class="tab-content">
+      <div class="grid">
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Trace Tables</h3>
+          <p>A trace table follows the values of variables through a program, one instruction at a time, to check whether an algorithm produces the correct result.</p>
+          <pre>Total &larr; 0
+FOR Count &larr; 1 TO 3
+  INPUT Number
+  Total &larr; Total + Number
+NEXT Count
+OUTPUT Total</pre>
+          <p>Input values: 5, 7, 3</p>
+          <table>
+            <thead>
+              <tr><th>Step</th><th>Count</th><th>Number</th><th>Total</th><th>Action</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>-</td><td>-</td><td>0</td><td>Initial values</td></tr>
+              <tr><td>2</td><td>1</td><td>5</td><td>5</td><td>Total &larr; Total + Number</td></tr>
+              <tr><td>3</td><td>2</td><td>7</td><td>12</td><td>Total &larr; Total + Number</td></tr>
+              <tr><td>4</td><td>3</td><td>3</td><td>15</td><td>Total &larr; Total + Number</td></tr>
+              <tr><td>-</td><td>-</td><td>-</td><td>15</td><td>Output Total (final output: 15)</td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top:0.75rem;"><strong>How to trace:</strong> (1) Start with initial values &bull; (2) Execute each instruction in order &bull; (3) Record changes to variables &bull; (4) Continue until the algorithm finishes &bull; (5) Check the final output against the expected result.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 8: PROGRAMMING -->
+    <section id="programming" class="tab-content">
+      <div class="grid">
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Chapter 8 - Programming</h3>
+          <p>This section (translating pseudocode into an actual programming language, e.g. Python) hasn't been added yet. Let me know the topics or examples you'd like here and I'll fill this tab in.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 9: DATABASE -->
+    <section id="databases" class="tab-content">
+      <div class="grid">
+        <div class="card">
+          <h3>Relational Concepts</h3>
+          <ul>
+            <li><strong>Flat File:</strong> Single table containing all data.</li>
+            <li><strong>Relational Database:</strong> Multiple linked tables reducing redundancy.</li>
+            <li><strong>Primary Key:</strong> Unique identifier field for a record.</li>
+            <li><strong>Foreign Key:</strong> Links to another table's primary key.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Standard Query (SELECT)</h3>
+          <pre>SELECT Forename, Lastname
+FROM Students
+WHERE StudentID &lt; 10
+ORDER BY Lastname ASC;</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Modifying Tables (SQL)</h3>
+        <div class="grid" style="margin-bottom: 0;">
+          <div>
+            <p><strong>INSERT</strong></p>
+            <pre>INSERT INTO Students (ID, Name)
+VALUES (1, 'Adam');</pre>
+          </div>
+          <div>
+            <p><strong>UPDATE</strong></p>
+            <pre>UPDATE Students
+SET Class = '11A'
+WHERE StudentID = 1;</pre>
+          </div>
+          <div>
+            <p><strong>DELETE</strong></p>
+            <pre>DELETE FROM Students
+WHERE StudentID = 1;</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 10: LOGIC GATE -->
+    <section id="logic-gates" class="tab-content">
+      <div class="gate-grid">
+        
+        <!-- AND -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>AND Gate</h4>
+            <code>OUT = A AND B</code>
+          </div>
+          <p>Output 1 only when <strong>all</strong> inputs are 1.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="45" y2="22" />
+                <line x1="10" y1="48" x2="45" y2="48" />
+                <path d="M 45,10 L 80,10 A 25,25 0 0,1 80,60 L 45,60 Z" />
+                <line x1="105" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td></tr>
+              <tr><td>1</td><td>1</td><td>1</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- NAND -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>NAND Gate</h4>
+            <code>OUT = NOT (A AND B)</code>
+          </div>
+          <p>Opposite of AND. Output is 0 only when both inputs are 1.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="45" y2="22" />
+                <line x1="10" y1="48" x2="45" y2="48" />
+                <path d="M 45,10 L 78,10 A 25,25 0 0,1 78,60 L 45,60 Z" />
+                <circle cx="107" cy="35" r="4" />
+                <line x1="111" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- OR -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>OR Gate</h4>
+            <code>OUT = A OR B</code>
+          </div>
+          <p>Output is 1 if <strong>at least one</strong> input is 1.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="52" y2="22" />
+                <line x1="10" y1="48" x2="52" y2="48" />
+                <path d="M 40,10 Q 60,35 40,60 Q 80,60 105,35 Q 80,10 40,10 Z" />
+                <line x1="105" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>1</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- NOR -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>NOR Gate</h4>
+            <code>OUT = NOT (A OR B)</code>
+          </div>
+          <p>Opposite of OR. Output is 1 only when both inputs are 0.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="50" y2="22" />
+                <line x1="10" y1="48" x2="50" y2="48" />
+                <path d="M 38,10 Q 58,35 38,60 Q 75,60 98,35 Q 75,10 38,10 Z" />
+                <circle cx="102" cy="35" r="4" />
+                <line x1="106" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- XOR -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>XOR Gate</h4>
+            <code>OUT = A XOR B</code>
+          </div>
+          <p>Output 1 only when inputs are <strong>different</strong>.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="48" y2="22" />
+                <line x1="10" y1="48" x2="48" y2="48" />
+                <path d="M 33,10 Q 53,35 33,60" fill="none" />
+                <path d="M 43,10 Q 63,35 43,60 Q 80,60 105,35 Q 80,10 43,10 Z" />
+                <line x1="105" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- XNOR -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>XNOR Gate</h4>
+            <code>OUT = NOT (A XOR B)</code>
+          </div>
+          <p>Output 1 when both inputs are <strong>identical</strong>.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="44" y2="22" />
+                <line x1="10" y1="48" x2="44" y2="48" />
+                <path d="M 30,10 Q 50,35 30,60" fill="none" />
+                <path d="M 39,10 Q 59,35 39,60 Q 75,60 98,35 Q 75,10 39,10 Z" />
+                <circle cx="102" cy="35" r="4" />
+                <line x1="106" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td></tr>
+              <tr><td>1</td><td>1</td><td>1</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- NOT -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>NOT Gate</h4>
+            <code>OUT = NOT A</code>
+          </div>
+          <p>Inverts input (1 becomes 0, 0 becomes 1).</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="15" y1="35" x2="45" y2="35" />
+                <polygon points="45,15 45,55 85,35" />
+                <circle cx="89" cy="35" r="4" />
+                <line x1="93" y1="35" x2="130" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>OUT</th></tr>
+              <tr><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td></tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>Computer Science Paper 2 Revision</div>
+    <div>CS revision created by <strong>Tr.WaiLinHtet</strong></div>
+  </footer>
+
+  <script>
+    function switchTab(event, tabId) {
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    const htmlEl = document.documentElement;
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+
+    function applyTheme(theme) {
+      htmlEl.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        themeIcon.innerHTML = '&#9788;';
+        themeLabel.textContent = 'Light Mode';
+      } else {
+        themeIcon.innerHTML = '&#9790;';
+        themeLabel.textContent = 'Dark Mode';
+      }
+      localStorage.setItem('cs_theme', theme);
+    }
+
+    function toggleTheme() {
+      const currentTheme = htmlEl.getAttribute('data-theme') || 'light';
+      applyTheme(currentTheme === 'light' ? 'dark' : 'light');
+    }
+
+    const savedTheme = localStorage.getItem('cs_theme') || 'light';
+    applyTheme(savedTheme);
+  </script>
+</body>
+</html>
