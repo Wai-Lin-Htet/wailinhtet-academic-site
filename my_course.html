@@ -6,43 +6,50 @@
   <title>My Courses — Wai Lin Htet</title>
   <style>
     :root {
+      --blue-primary: #2563eb;
       --blue-text: #1e3a8a;
-      --blue-bg: #f0f4ff;
-      --border: #e5e7eb;
+      --blue-bg: #eff6ff;
+      --border: #e2e8f0;
       --muted: #64748b;
-      --text: #1e293b;
+      --text: #0f172a;
+      --card-bg: #ffffff;
     }
 
     * { box-sizing: border-box; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #f5f5f7;
+      background-color: #f8fafc;
       margin: 0;
       color: var(--text);
     }
 
-    /* ---------- Top nav (matches home page) ---------- */
+    /* ---------- Navigation ---------- */
     .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 40px;
-      background: #f5f5f7;
+      padding: 16px 40px;
+      background: #ffffff;
       border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      font-size: 0.95rem;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: none;
     }
 
     .brand .dot {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
       background: #22c55e;
       display: inline-block;
@@ -50,7 +57,7 @@
 
     .nav-links {
       display: flex;
-      gap: 32px;
+      gap: 28px;
       list-style: none;
       margin: 0;
       padding: 0;
@@ -58,42 +65,45 @@
 
     .nav-links a {
       text-decoration: none;
-      color: var(--text);
+      color: var(--muted);
       font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.15s ease;
     }
 
-    .nav-links a:hover { color: var(--blue-text); }
+    .nav-links a:hover,
+    .nav-links a.current { color: var(--blue-primary); }
 
-    /* ---------- Page layout ---------- */
+    /* ---------- Page Layout ---------- */
     .page {
       display: flex;
       align-items: flex-start;
       gap: 32px;
-      padding: 40px;
-      max-width: 1200px;
+      padding: 36px 40px 60px;
+      max-width: 1240px;
       margin: 0 auto;
     }
 
     /* Sidebar */
     .sidebar {
-      width: 280px;
+      width: 260px;
       flex-shrink: 0;
       background-color: #ffffff;
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 24px 16px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+      border-radius: 12px;
+      padding: 20px 14px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
       position: sticky;
-      top: 40px;
+      top: 85px;
     }
 
     .sidebar-title {
       font-size: 0.75rem;
       font-weight: 700;
-      color: #334155;
+      color: #94a3b8;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin: 0 0 12px 12px;
+      margin: 0 0 12px 10px;
     }
 
     .nav-list {
@@ -102,63 +112,82 @@
       margin: 0;
     }
 
-    .nav-list li { margin-bottom: 2px; }
+    .nav-list li { margin-bottom: 3px; }
 
-    .nav-list a {
+    .nav-list button {
+      width: 100%;
       display: flex;
       align-items: center;
-      text-decoration: none;
+      justify-content: space-between;
+      border: none;
+      background: transparent;
+      font-family: inherit;
       color: #475569;
-      font-size: 0.95rem;
-      padding: 10px 12px;
-      border-radius: 6px;
-      transition: background-color 0.2s ease, color 0.2s ease;
+      font-size: 0.9rem;
+      padding: 9px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
     }
 
-    .nav-list a:hover {
-      background-color: #f8fafc;
+    .nav-list button:hover {
+      background-color: #f1f5f9;
       color: var(--text);
     }
 
-    .nav-list a.active {
+    .nav-list button.active {
       background-color: var(--blue-bg);
-      color: var(--blue-text);
+      color: var(--blue-primary);
       font-weight: 600;
     }
 
-    .chevron {
-      width: 14px;
-      height: 14px;
-      margin-right: 10px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      opacity: 0.7;
+    .count-badge {
+      font-size: 0.75rem;
+      padding: 2px 7px;
+      border-radius: 10px;
+      background: #e2e8f0;
+      color: #64748b;
+      font-weight: 600;
     }
 
-    .nav-list a.active .chevron { opacity: 1; }
-
-    /* Course count badge inside sidebar */
-    .count {
-      margin-left: auto;
-      font-size: 0.8rem;
-      color: var(--muted);
+    .nav-list button.active .count-badge {
+      background: #dbeafe;
+      color: var(--blue-primary);
     }
 
-    /* ---------- Main content: course cards ---------- */
+    /* Main Content */
     .content { flex: 1; min-width: 0; }
+
+    .search-wrapper {
+      margin-bottom: 24px;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #ffffff;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .search-box:focus {
+      border-color: var(--blue-primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
 
     .group { margin-bottom: 36px; }
 
     .group-title {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 700;
-      color: #94a3b8;
+      color: #64748b;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin: 0 0 14px 2px;
+      margin: 0 0 16px 2px;
     }
 
     .card-grid {
@@ -168,43 +197,79 @@
     }
 
     .card {
-      display: block;
-      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 20px;
+      padding: 18px 20px;
       text-decoration: none;
       color: inherit;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      min-height: 110px;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
     }
 
     .card:hover {
-      border-color: #c7d2fe;
-      box-shadow: 0 2px 8px rgba(30, 58, 138, 0.08);
+      border-color: #93c5fd;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.06);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
     }
 
     .card .tag {
-      display: block;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      color: #3b82f6;
-      letter-spacing: 0.02em;
-      margin-bottom: 6px;
+      color: var(--blue-primary);
+      letter-spacing: 0.03em;
+    }
+
+    .external-icon {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: #94a3b8;
+      stroke-width: 2;
     }
 
     .card .title {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--text);
-      line-height: 1.35;
+      line-height: 1.4;
+      margin: 0;
     }
 
-    @media (max-width: 900px) {
+    .empty-message {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 960px) {
       .page { flex-direction: column; padding: 20px; }
-      .sidebar { width: 100%; position: static; }
+      .sidebar {
+        width: 100%;
+        position: static;
+        overflow-x: auto;
+      }
+      .nav-list {
+        display: flex;
+        gap: 8px;
+        white-space: nowrap;
+      }
+      .sidebar-title { display: none; }
       .card-grid { grid-template-columns: repeat(2, 1fr); }
       .navbar { padding: 16px 20px; }
-      .nav-links { gap: 18px; }
     }
 
     @media (max-width: 560px) {
@@ -215,161 +280,207 @@
 <body>
 
   <nav class="navbar">
-    <div class="brand"><span class="dot"></span> Wai Lin Htet</div>
+    <a href="index.html" class="brand"><span class="dot"></span> Wai Lin Htet</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="my_course.html">Courses</a></li>
+      <li><a href="my_course.html" class="current">Courses</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </nav>
 
   <div class="page">
 
+    <!-- Categories Sidebar -->
     <aside class="sidebar">
-      <h3 class="sidebar-title">Categories</h3>
+      <h3 class="sidebar-title">Filters</h3>
       <ul class="nav-list">
         <li>
-          <a href="#" class="active" data-filter="all">
-            <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-            All Courses
-          </a>
+          <button type="button" class="filter-btn active" data-filter="all">
+            <span>All Courses</span>
+            <span class="count-badge" id="count-all">14</span>
+          </button>
         </li>
         <li>
-          <a href="CS_0478_IGCSE_wh.html">
-            <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-            IGCSE Computer Science
-          </a>
+          <button type="button" class="filter-btn" data-filter="cambridge">
+            <span>Cambridge / Edexcel</span>
+            <span class="count-badge" id="count-cambridge">5</span>
+          </button>
         </li>
         <li>
-          <a href="ICT_0417_IGCSE_wh.html">
-            <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-            IGCSE ICT
-          </a>
+          <button type="button" class="filter-btn" data-filter="foundations">
+            <span>Foundations &amp; OSSD</span>
+            <span class="count-badge" id="count-foundations">3</span>
+          </button>
         </li>
         <li>
-          <a href="CS_9618_Alevel_wh.html">
-            <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-            A-Level (9618)
-          </a>
-        </li>
-        <li>
-          <a href="OSSD_CS_Grade12_wh.html">
-            <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-            OSSD (ICS3U / ICS4U)
-          </a>
-        </li>
-        <li>
-          <a href="PreIG_DC_ICT.html">
-            <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-            PreIGCSE ICT/Computer Science
-          </a>
-        </li>
-        <li>
-          <a href="Python.html">
-            <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-            Python Programming
-          </a>
-        </li>
-        <li>
-          <a href="web-html-css.html">
-            <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-            HTML Web Authoring
-          </a>
-        </li>
-        <li>
-          <a href="pastpaper_index.html">
-            <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-            Pastpaper
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-            Other
-          </a>
+          <button type="button" class="filter-btn" data-filter="applied">
+            <span>Skills &amp; Programming</span>
+            <span class="count-badge" id="count-applied">6</span>
+          </button>
         </li>
       </ul>
     </aside>
 
+    <!-- Main Course Contents -->
     <main class="content">
 
-      <div class="group">
+      <!-- Real-time Search Input -->
+      <div class="search-wrapper">
+        <input type="text" id="course-search" class="search-box" placeholder="Search courses by name or tag (e.g. Python, Cambridge, IGCSE)...">
+      </div>
+
+      <div class="group" data-category="cambridge">
         <h4 class="group-title">Cambridge IGCSE &amp; A-Level</h4>
         <div class="card-grid">
-          <a class="card" href="CS_0478_IGCSE_wh.html">
-            <span class="tag">CAMBRIDGE IGCSE</span>
-            <span class="title">Computer Science (0478)</span>
+          <a class="card" href="https://wai-lin-htet.github.io/CS_IGCSE/" target="_blank" rel="noopener noreferrer">
+            <div class="card-top">
+              <span class="tag">CAMBRIDGE IGCSE</span>
+              <svg class="external-icon" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </div>
+            <h5 class="title">Computer Science (0478)</h5>
           </a>
-          <a class="card" href="#">
-            <span class="tag">CAMBRIDGE IGCSE</span>
-            <span class="title">Computer Science Algorithm</span>
+
+          <a class="card" href="CS_Paper2_rev2.html">
+            <div class="card-top"><span class="tag">CAMBRIDGE IGCSE</span></div>
+            <h5 class="title">Computer Science Algorithm</h5>
           </a>
+
           <a class="card" href="ICT_0417_IGCSE_wh.html">
-            <span class="tag">CAMBRIDGE IGCSE</span>
-            <span class="title">ICT (0417)</span>
+            <div class="card-top"><span class="tag">CAMBRIDGE IGCSE</span></div>
+            <h5 class="title">ICT (0417)</h5>
           </a>
+
           <a class="card" href="CS_9618_Alevel_wh.html">
-            <span class="tag">CAMBRIDGE INTERNATIONAL</span>
-            <span class="title">A-Level CS (9618)</span>
+            <div class="card-top"><span class="tag">CAMBRIDGE INTL</span></div>
+            <h5 class="title">A-Level CS (9618)</h5>
           </a>
-          <a class="card" href="#">
-            <span class="tag">EDEXCEL</span>
-            <span class="title">IGCSE ICT (4IT0)</span>
+
+          <a class="card" href="ict_edexcel_4it_v1.html">
+            <div class="card-top"><span class="tag">EDEXCEL</span></div>
+            <h5 class="title">IGCSE ICT (4IT0)</h5>
           </a>
         </div>
       </div>
 
-      <div class="group">
+      <div class="group" data-category="foundations">
         <h4 class="group-title">Other Curricula &amp; Foundations</h4>
         <div class="card-grid">
           <a class="card" href="OSSD_CS_Grade12_wh.html">
-            <span class="tag">ONTARIO CURRICULUM</span>
-            <span class="title">OSSD (ICS3U / ICS4U)</span>
+            <div class="card-top"><span class="tag">ONTARIO</span></div>
+            <h5 class="title">OSSD (ICS3U / ICS4U)</h5>
           </a>
-          <a class="card" href="#">
-            <span class="tag">FOUNDATIONS</span>
-            <span class="title">ICT Theory Foundation Notebook</span>
+
+          <a class="card" href="ict-foundation.html">
+            <div class="card-top"><span class="tag">FOUNDATIONS</span></div>
+            <h5 class="title">ICT Theory Foundation Notebook</h5>
           </a>
+
           <a class="card" href="pastpaper_index.html">
-            <span class="tag">RESOURCES</span>
-            <span class="title">Past Papers &amp; Schemes</span>
+            <div class="card-top"><span class="tag">RESOURCES</span></div>
+            <h5 class="title">Past Papers &amp; Schemes</h5>
           </a>
         </div>
       </div>
 
-      <div class="group">
+      <div class="group" data-category="applied">
         <h4 class="group-title">Programming &amp; Applied Skills</h4>
         <div class="card-grid">
           <a class="card" href="Python.html">
-            <span class="tag">PROGRAMMING</span>
-            <span class="title">Python Practical Track</span>
+            <div class="card-top"><span class="tag">PROGRAMMING</span></div>
+            <h5 class="title">Python Practical Track</h5>
           </a>
-          <a class="card" href="#">
-            <span class="tag">PROGRAMMING</span>
-            <span class="title">OOP Programming</span>
+
+          <a class="card" href="oop_programming.html">
+            <div class="card-top"><span class="tag">PROGRAMMING</span></div>
+            <h5 class="title">OOP Programming</h5>
           </a>
+
           <a class="card" href="web-html-css.html">
-            <span class="tag">WEB DEVELOPMENT</span>
-            <span class="title">HTML Web Authoring</span>
+            <div class="card-top"><span class="tag">WEB DEV</span></div>
+            <h5 class="title">HTML Web Authoring</h5>
           </a>
-          <a class="card" href="#">
-            <span class="tag">SPREADSHEETS</span>
-            <span class="title">Spreadsheets — Excel</span>
+
+          <a class="card" href="excel_spreadsheet_guide.html">
+            <div class="card-top"><span class="tag">SPREADSHEETS</span></div>
+            <h5 class="title">Spreadsheets — Excel</h5>
           </a>
-          <a class="card" href="#">
-            <span class="tag">DATABASE</span>
-            <span class="title">Database — MS Access</span>
+
+          <a class="card" href="ms_access_database_guide.html">
+            <div class="card-top"><span class="tag">DATABASE</span></div>
+            <h5 class="title">Database — MS Access</h5>
           </a>
-          <a class="card" href="#">
-            <span class="tag">LOGIC GATE</span>
-            <span class="title">CS Logic Gate</span>
+
+          <a class="card" href="https://wai-lin-htet.github.io/CS-LogicGate/" target="_blank" rel="noopener noreferrer">
+            <div class="card-top">
+              <span class="tag">LOGIC GATE</span>
+              <svg class="external-icon" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </div>
+            <h5 class="title">CS Logic Gate Simulator</h5>
           </a>
         </div>
+      </div>
+
+      <div id="no-results" class="empty-message">
+        No courses found matching your criteria.
       </div>
 
     </main>
   </div>
 
+  <script>
+    // Search & Filter Logic
+    const searchInput = document.getElementById('course-search');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const groups = document.querySelectorAll('.group');
+    const cards = document.querySelectorAll('.card');
+    const emptyMsg = document.getElementById('no-results');
+
+    let currentCategory = 'all';
+
+    function filterCourses() {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      let totalVisible = 0;
+
+      groups.forEach(group => {
+        const groupCategory = group.getAttribute('data-category');
+        const matchesCategory = (currentCategory === 'all' || currentCategory === groupCategory);
+        let groupHasVisibleCards = false;
+
+        const groupCards = group.querySelectorAll('.card');
+        groupCards.forEach(card => {
+          const title = card.querySelector('.title').innerText.toLowerCase();
+          const tag = card.querySelector('.tag').innerText.toLowerCase();
+          const matchesSearch = title.includes(searchTerm) || tag.includes(searchTerm);
+
+          if (matchesCategory && matchesSearch) {
+            card.style.display = 'flex';
+            groupHasVisibleCards = true;
+            totalVisible++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Hide empty groups when filtering
+        group.style.display = groupHasVisibleCards ? 'block' : 'none';
+      });
+
+      emptyMsg.style.display = totalVisible === 0 ? 'block' : 'none';
+    }
+
+    // Filter Buttons Listener
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        currentCategory = button.getAttribute('data-filter');
+        filterCourses();
+      });
+    });
+
+    // Search Box Listener
+    searchInput.addEventListener('input', filterCourses);
+  </script>
 </body>
 </html>
