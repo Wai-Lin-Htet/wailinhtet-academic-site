@@ -188,6 +188,22 @@
       color: #94a3b8;
       font-size: 0.85rem;
     }
+    footer p {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.footer-link {
+  color: var(--primary, #2563eb);
+  text-decoration: none;
+  font-weight: 500;
+  transition: text-decoration 0.2s;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
   </style>
 </head>
 <body>
@@ -248,8 +264,11 @@
   </div>
 
   <footer>
-    Past Papers Portal • Created by Tr. Wai Lin Htet
-  </footer>
+  <p>
+    Past Papers Portal • Created by Tr. Wai Lin Htet • 
+    <a href="index.html#contact" class="footer-link">Contact</a>
+  </p>
+</footer>
 </div>
 
 <script>
