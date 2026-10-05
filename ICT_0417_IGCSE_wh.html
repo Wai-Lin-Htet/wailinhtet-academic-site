@@ -472,10 +472,83 @@
       .search-input { width: 100%; }
       .topic-grid { grid-template-columns: 1fr; }
     }
+
+    /* Base Style for Distinct Nav Buttons */
+.nav-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* ၁။ Paper 1 (Theory) - Modern Indigo Accent */
+.tab-primary {
+  background: #eef2ff;
+  color: #4338ca;
+  border-color: #c7d2fe;
+}
+
+.tab-primary:hover {
+  background: #4338ca;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(67, 56, 202, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ၂။ ICT Theory Notes - Warm Amber / Notebook Aesthetic Accent */
+.tab-accent {
+  background: #fffbeb;
+  color: #b45309;
+  border-color: #fde68a;
+}
+
+.tab-accent:hover {
+  background: #d97706;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ခလုတ်ဘေးက Label Badge သေးသေးလေးများ */
+.nav-tab-btn .badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: inherit;
+  border: 1px solid currentColor;
+}
+
+.nav-tab-btn:hover .badge {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: transparent;
+  color: #ffffff;
+}
   </style>
 </head>
 <body>
+<!-- Paper 1 Complete Guide (Docs Style) -->
+<a href="igcse-ict-theory-revision.html" class="nav-tab-btn tab-primary">
+  <span class="icon">📖</span> Paper 1 (Theory)
+  <span class="badge">Comprehensive</span>
+</a>
 
+<!-- ICT Notebook Study Notes -->
+<a href="ict_notes.html" class="nav-tab-btn tab-accent">
+  <span class="icon">✍️</span> ICT Theory Notes
+  <span class="badge pulse">Interactive</span>
+</a>
+  
   <header>
     <div class="header-inner">
       <div class="brand">
@@ -486,6 +559,7 @@
         <input type="text" id="searchInput" class="search-input" placeholder="Search syllabus, keywords...">
         <button class="filter-btn active" data-filter="all">All Sections</button>
         <button class="filter-btn" data-filter="p1"><a href="igcse-ict-theory-revision.html" class="course-card">Paper 1 (Theory)</a></button>
+         <button class="filter-btn" data-filter="p1"><a href="ict_notes.html" class="course-card">ICT Theory Notes</a></button>
         <button class="filter-btn" data-filter="p2">Paper 2 (Docs/DB/Pres)</button>
         <button class="filter-btn" data-filter="p3">Paper 3 (Spreadsheets/Web)</button>
       </div>
