@@ -1,0 +1,2702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT CIE 0417 — Exam Notebook by Tr.WaiLinHtet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&family=Literata:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF8F1;
+    --paper-2:#F5F0E4;
+    --line:#DCD4C0;
+    --ink:#272B33;
+    --ink-soft:#5C6070;
+    --pen:#2F4B7C;
+    --pen-light:#5C7AAE;
+    --highlight:#F4D35E;
+    --highlight-soft:#FCEFC0;
+    --margin:#C1495B;
+    --tip:#4F7A5B;
+    --tip-soft:#E4EEE2;
+    --warn:#B5442E;
+    --warn-soft:#F7E3DD;
+    --tab:#EFE7D4;
+    --code:#EFEAE0;
+    --shadow: 0 2px 10px rgba(39,43,51,0.08);
+    --radius: 3px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Literata', Georgia, serif;
+    font-size:17px;
+    line-height:1.65;
+  }
+  h1,h2,h3,h4{
+    font-family:'Zilla Slab', Georgia, serif;
+    color:var(--ink);
+    margin:0 0 .5em 0;
+    line-height:1.2;
+  }
+  p{margin:0 0 1em 0; max-width:70ch;}
+  .hand{font-family:'Caveat', cursive;}
+  a{color:var(--pen);}
+
+  /* ===== Layout shell ===== */
+  .shell{
+    display:grid;
+    grid-template-columns:230px 1fr;
+    min-height:100vh;
+  }
+  @media (max-width:900px){
+    .shell{grid-template-columns:1fr;}
+  }
+
+  /* ===== Sidebar (spiral notebook tabs) ===== */
+  .sidebar{
+    background:var(--tab);
+    border-right:2px solid var(--line);
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+    padding:22px 0 22px 18px;
+    background-image: radial-gradient(circle 4px, #fff 4px, transparent 4px);
+    background-size: 100% 34px;
+    background-position: -4px 10px;
+  }
+  @media (max-width:900px){
+    .sidebar{
+      position:relative; height:auto; padding:14px;
+      background-image:none; border-right:none; border-bottom:2px solid var(--line);
+      overflow-x:auto;
+    }
+  }
+  .side-title{
+    padding:0 14px 16px 20px;
+    font-family:'Caveat', cursive;
+    font-size:1.5rem;
+    color:var(--pen);
+    border-bottom:1px dashed var(--line);
+    margin-bottom:10px;
+  }
+  @media (max-width:900px){ .side-title{display:none;} }
+  .side-nav{list-style:none; margin:0; padding:0 10px 0 20px;}
+  @media (max-width:900px){
+    .side-nav{display:flex; gap:8px; padding:0; white-space:nowrap;}
+  }
+  .side-nav li{margin:2px 0;}
+  .side-nav a{
+    display:block;
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-family:'Zilla Slab', serif;
+    font-size:0.86rem;
+    font-weight:600;
+    padding:8px 10px;
+    border-radius: 4px 0 0 4px;
+    border-left:3px solid transparent;
+  }
+  .side-nav a:hover{color:var(--pen); border-left-color:var(--pen-light);}
+  .side-nav a.active{color:var(--pen); background:var(--paper); border-left-color:var(--pen);}
+  .side-nav .n{color:var(--margin); font-family:'Caveat',cursive; font-size:1.05rem; margin-right:4px;}
+
+  /* ===== Main column ===== */
+  main{padding:0;}
+  .page{
+    position:relative;
+    max-width:840px;
+    margin:0 auto;
+    padding:56px 48px 60px 56px;
+    border-left:2px solid var(--margin);
+    min-height:100vh;
+    background-image: repeating-linear-gradient(var(--paper) 0 33px, var(--line) 33px 34px);
+    background-position: 0 200px;
+  }
+  @media (max-width:640px){
+    .page{padding:36px 20px 44px 26px; border-left-width:1.5px;}
+  }
+
+  /* ===== Cover ===== */
+  .cover{padding-top:6vh; padding-bottom:40px;}
+  .cover .kicker{
+    font-family:'Caveat', cursive;
+    color:var(--margin);
+    font-size:1.3rem;
+    transform:rotate(-2deg);
+    display:inline-block;
+    margin-bottom:6px;
+  }
+  .cover h1{
+    font-size:3.4rem;
+    letter-spacing:-0.5px;
+    font-weight:700;
+  }
+  .cover h1 span{color:var(--pen);}
+  .cover .subtitle{
+    font-family:'Zilla Slab', serif;
+    font-size:1.15rem;
+    color:var(--ink-soft);
+    margin-top:6px;
+  }
+  .cover .byline{
+    margin-top:26px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 18px;
+    background:var(--highlight-soft);
+    border:1px solid var(--highlight);
+    border-radius:var(--radius);
+    font-family:'Zilla Slab', serif;
+    font-weight:600;
+    font-size:0.95rem;
+  }
+  .cover .byline .avatar{
+    width:34px;height:34px;border-radius:50%;
+    background:var(--pen); color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Caveat',cursive; font-size:1.2rem; font-weight:700;
+  }
+  .cover .meta-row{
+    margin-top:22px;
+    display:flex; gap:22px; flex-wrap:wrap;
+    font-size:0.85rem; color:var(--ink-soft);
+    font-family:'Zilla Slab', serif;
+  }
+  .cover .meta-row b{color:var(--ink);}
+
+  .toc{
+    margin-top:38px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+  @media (max-width:640px){ .toc{grid-template-columns:1fr;} }
+  .toc a{
+    text-decoration:none; color:var(--ink);
+    display:flex; align-items:baseline; gap:10px;
+    padding:10px 12px;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    font-family:'Zilla Slab', serif;
+    font-size:0.92rem;
+    font-weight:600;
+  }
+  .toc a:hover{border-color:var(--pen); color:var(--pen);}
+  .toc a .num{font-family:'Caveat',cursive; font-size:1.4rem; color:var(--margin);}
+
+  /* ===== Chapters ===== */
+  .chapter{padding:56px 0; border-top:1px dashed var(--line);}
+  .chapter:first-of-type{border-top:none;}
+  .chapter-head{display:flex; align-items:center; gap:16px; margin-bottom:6px;}
+  .chapter-head .badge{
+    flex:0 0 auto;
+    width:54px;height:54px;border-radius:50%;
+    background:var(--pen); color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Caveat',cursive; font-weight:700; font-size:1.7rem;
+    box-shadow:var(--shadow);
+  }
+  .chapter-head h2{font-size:1.7rem;}
+  .chapter-intro{color:var(--ink-soft); font-style:italic; margin-bottom:22px;}
+
+  figure.clipping{
+    float:right;
+    width:270px;
+    margin:0 0 14px 22px;
+    background:#fff;
+    padding:10px 10px 34px 10px;
+    box-shadow:var(--shadow);
+    transform:rotate(1.6deg);
+    position:relative;
+  }
+  figure.clipping::before{
+    content:"";
+    position:absolute; top:-10px; left:38%;
+    width:70px; height:22px;
+    background:rgba(244,211,94,0.75);
+    border:1px solid rgba(0,0,0,0.05);
+    transform:rotate(-4deg);
+  }
+  figure.clipping img{width:100%; display:block; height:170px; object-fit:cover;}
+  figure.clipping figcaption{
+    font-family:'Caveat', cursive;
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    text-align:center;
+    padding-top:8px;
+  }
+  @media (max-width:640px){
+    figure.clipping{float:none; width:100%; margin:0 0 20px 0; transform:none;}
+  }
+
+  h3{font-size:1.18rem; margin-top:1.6em; color:var(--pen);}
+  h3 .tag{
+    display:inline-block;
+    font-family:'Zilla Slab',serif;
+    font-size:0.6em; vertical-align:middle;
+    color:var(--ink-soft); font-weight:400;
+  }
+  h4{font-size:1rem; margin-top:1.2em; font-family:'Zilla Slab',serif; text-transform:none;}
+
+  ul, ol{padding-left:1.3em; max-width:70ch;}
+  li{margin-bottom:0.45em;}
+  strong{color:var(--ink); background:linear-gradient(transparent 60%, var(--highlight-soft) 60%);}
+
+  .term{
+    color:var(--pen);
+    font-weight:600;
+    border-bottom:1px dotted var(--pen-light);
+  }
+
+  /* callout boxes */
+  .box{
+    margin:1.3em 0;
+    padding:14px 18px;
+    border-radius:var(--radius);
+    border:1px solid var(--line);
+    background:var(--paper-2);
+  }
+  .box h4{margin-top:0; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.06em; font-family:'Zilla Slab',serif;}
+  .box.tip{background:var(--tip-soft); border-color:#c9dcc9;}
+  .box.tip h4{color:var(--tip);}
+  .box.warn{background:var(--warn-soft); border-color:#e6c3b6;}
+  .box.warn h4{color:var(--warn);}
+  .box.note{
+    background:var(--highlight-soft); border-color:var(--highlight);
+    transform:rotate(-0.4deg);
+  }
+  .box.note h4{color:#8a6d0c;}
+  .box p:last-child, .box ul:last-child{margin-bottom:0;}
+
+  .glossary{
+    display:grid; gap:10px;
+    grid-template-columns:1fr 1fr;
+    margin:1.2em 0;
+  }
+  @media (max-width:640px){ .glossary{grid-template-columns:1fr;} }
+  .glossary .g-item{
+    background:#fff; border:1px solid var(--line); border-left:4px solid var(--pen);
+    padding:10px 14px; border-radius:var(--radius); box-shadow:var(--shadow);
+  }
+  .glossary .g-item b{display:block; font-family:'Zilla Slab',serif; color:var(--ink); margin-bottom:2px; font-size:0.95rem;}
+  .glossary .g-item span{font-size:0.9rem; color:var(--ink-soft);}
+
+  table{
+    width:100%; border-collapse:collapse; margin:1.3em 0;
+    font-size:0.92rem; background:#fff; box-shadow:var(--shadow);
+  }
+  caption{caption-side:top; text-align:left; font-family:'Caveat',cursive; font-size:1.2rem; color:var(--margin); margin-bottom:6px;}
+  th, td{border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top;}
+  th{background:var(--pen); color:#fff; font-family:'Zilla Slab',serif; font-weight:600;}
+  tr:nth-child(even) td{background:var(--paper-2);}
+
+  .flow{
+    display:flex; align-items:center; flex-wrap:wrap; gap:8px;
+    margin:1.2em 0; font-family:'Zilla Slab',serif; font-weight:600; font-size:0.88rem;
+  }
+  .flow .step{
+    background:#fff; border:1.5px solid var(--pen); color:var(--pen);
+    padding:7px 12px; border-radius:20px;
+  }
+  .flow .arrow{color:var(--margin); font-size:1.1rem;}
+
+  .checklist{list-style:none; padding-left:0; margin:1em 0;}
+  .checklist li{
+    padding-left:30px; position:relative; margin-bottom:8px; font-size:0.96rem;
+  }
+  .checklist li::before{
+    content:"";
+    position:absolute; left:0; top:2px;
+    width:18px; height:18px;
+    border:2px solid var(--pen);
+    border-radius:3px;
+  }
+
+  .recap{
+    margin-top:26px; padding:18px 20px;
+    background:var(--tab); border:1px dashed var(--pen-light); border-radius:var(--radius);
+  }
+  .recap h4{color:var(--pen); margin-top:0; font-size:0.95rem; text-transform:uppercase; letter-spacing:0.05em;}
+
+  /* ===== Exam Practice Questions & Mark Schemes Accordion ===== */
+  .exam-questions{
+    margin-top:34px;
+    padding-top:20px;
+    border-top:2px dashed var(--line);
+  }
+  .exam-questions h3{
+    color:var(--margin);
+    font-size:1.25rem;
+    margin-bottom:14px;
+  }
+  .qa-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-left:4px solid var(--margin);
+    border-radius:var(--radius);
+    padding:14px 16px;
+    margin-bottom:14px;
+    box-shadow:var(--shadow);
+  }
+  .qa-card .q-title{
+    font-family:'Zilla Slab', serif;
+    font-weight:700;
+    color:var(--ink);
+    font-size:0.98rem;
+    margin-bottom:6px;
+  }
+  .qa-card .q-text{
+    font-size:0.93rem;
+    margin-bottom:10px;
+    color:var(--ink);
+  }
+  .qa-card details{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:8px 12px;
+    font-size:0.88rem;
+  }
+  .qa-card summary{
+    cursor:pointer;
+    font-family:'Zilla Slab', serif;
+    font-weight:700;
+    color:var(--pen);
+    user-select:none;
+    outline:none;
+  }
+  .qa-card summary:hover{
+    color:var(--margin);
+  }
+  .qa-card .ms-list{
+    margin:10px 0 4px 0;
+    padding-left:1.2em;
+    color:var(--ink-soft);
+  }
+  .qa-card .ms-list li{
+    margin-bottom:4px;
+  }
+  .qa-card .ms-list strong{
+    background:none;
+    color:var(--ink);
+  }
+
+  footer{
+    text-align:center; padding:50px 20px 70px;
+    color:var(--ink-soft); font-size:0.85rem;
+    border-top:1px dashed var(--line);
+  }
+  footer .hand{font-size:1.3rem; color:var(--pen);}
+
+  ::selection{background:var(--highlight);}
+
+  /* ===== Login / Register UI ===== */
+  .auth-widget{
+    position:fixed;
+    top:16px; right:18px;
+    z-index:60;
+    display:flex; align-items:center; gap:10px;
+  }
+  .auth-pill{
+    display:none;
+    align-items:center; gap:8px;
+    background:var(--highlight-soft);
+    border:1px solid var(--highlight);
+    box-shadow:var(--shadow);
+    padding:8px 16px;
+    border-radius:20px;
+    font-family:'Zilla Slab', serif;
+    font-weight:600;
+    font-size:0.85rem;
+    color:var(--ink);
+    cursor:pointer;
+    transform:rotate(-1deg);
+    transition:transform .15s ease;
+  }
+  .auth-pill:hover{transform:rotate(0deg);}
+  .auth-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--pen);}
+  .auth-user{
+    display:none;
+    align-items:center; gap:10px;
+    background:#fff;
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    padding:6px 8px 6px 14px;
+    border-radius:20px;
+    font-family:'Zilla Slab', serif;
+    font-size:0.85rem;
+  }
+  .auth-user .avatar-sm{
+    width:26px;height:26px;border-radius:50%;
+    background:var(--pen); color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Caveat',cursive; font-size:1.05rem; font-weight:700;
+  }
+  .auth-user button{
+    border:none; background:none; cursor:pointer;
+    color:var(--margin); font-family:'Zilla Slab',serif; font-weight:600;
+    font-size:0.78rem; text-decoration:underline;
+  }
+  @media (max-width:640px){
+    .auth-widget{top:auto; bottom:14px; right:14px;}
+  }
+
+  /* Full Screen Auth Overlay (Entrance Gate) */
+  .auth-overlay{
+    display:flex;
+    position:fixed; inset:0; z-index:999999;
+    background:rgba(20, 24, 33, 0.85);
+    backdrop-filter:blur(6px);
+    align-items:center; justify-content:center;
+    padding:20px;
+  }
+  .auth-card{
+    width:100%; max-width:400px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:6px solid var(--pen);
+    border-radius:6px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.35);
+    padding:30px 28px;
+    position:relative;
+  }
+  .auth-card h3{
+    margin-top:0; font-size:1.6rem;
+    font-family:'Caveat',cursive; color:var(--pen); font-weight:700;
+  }
+  .auth-tabs{
+    display:flex; gap:4px; margin-bottom:18px;
+    border-bottom:1px dashed var(--line);
+  }
+  .auth-tab{
+    flex:1; text-align:center; padding:8px 4px;
+    font-family:'Zilla Slab',serif; font-weight:600; font-size:0.95rem;
+    color:var(--ink-soft); cursor:pointer; border-bottom:2px solid transparent;
+    margin-bottom:-1px;
+  }
+  .auth-tab.active{color:var(--pen); border-bottom-color:var(--pen);}
+  .auth-form{display:none; flex-direction:column; gap:14px;}
+  .auth-form.active{display:flex;}
+  .auth-field label{
+    display:block; font-family:'Zilla Slab',serif; font-size:0.82rem;
+    font-weight:600; color:var(--ink-soft); margin-bottom:4px;
+    text-transform:uppercase; letter-spacing:0.04em;
+  }
+  .auth-field input{
+    width:100%; padding:10px 12px;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:4px;
+    font-family:'Literata',serif; font-size:0.98rem; color:var(--ink);
+    outline:none;
+  }
+  .auth-field input:focus{border-color:var(--pen);}
+  .auth-submit{
+    margin-top:6px;
+    background:var(--pen); color:#fff; border:none;
+    padding:12px 16px; border-radius:20px; cursor:pointer;
+    font-family:'Zilla Slab',serif; font-weight:600; font-size:0.95rem;
+    box-shadow:var(--shadow);
+  }
+  .auth-submit:hover{background:var(--pen-light);}
+  .auth-msg{
+    font-family:'Zilla Slab',serif; font-size:0.85rem;
+    padding:8px 10px; border-radius:var(--radius); display:none;
+  }
+  .auth-msg.show{display:block;}
+  .auth-msg.err{background:var(--warn-soft); color:var(--warn);}
+  .auth-msg.ok{background:var(--tip-soft); color:var(--tip);}
+  .auth-note{
+    margin-top:16px; font-size:0.8rem; color:var(--ink-soft);
+    font-family:'Zilla Slab',serif; line-height:1.5;
+  }
+</style>
+</head>
+<body>
+
+<!-- ENTRANCE GATE OVERLAY -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-card">
+    <h3>Student Entrance 📓</h3>
+    <div class="auth-tabs">
+      <div class="auth-tab active" data-tab="register">Register</div>
+      <div class="auth-tab" data-tab="login">Login </div>
+    </div>
+
+    <form class="auth-form active" id="registerForm">
+      <div class="auth-field"><label>Full Name </label><input type="text" id="regName" placeholder="e.g. Aung Aung" required></div>
+      <div class="auth-field"><label>Student ID / Username</label><input type="text" id="regUser" placeholder="e.g. ict-01" autocomplete="username" required></div>
+      <div class="auth-field"><label>Password</label><input type="password" id="regPass" autocomplete="new-password" required></div>
+      <div class="auth-msg" id="regMsg"></div>
+      <button type="submit" class="auth-submit" id="regSubmitBtn">Sign in to read</button>
+    </form>
+
+    <form class="auth-form" id="loginForm">
+      <div class="auth-field"><label>Username</label><input type="text" id="loginUser" autocomplete="username" required></div>
+      <div class="auth-field"><label>Password</label><input type="password" id="loginPass" autocomplete="current-password" required></div>
+      <div class="auth-msg" id="loginMsg"></div>
+      <button type="submit" class="auth-submit" id="loginSubmitBtn">Log in</button>
+    </form>
+
+    <p class="auth-note"> The user's name and login time are automatically logged in the attendance list.</p>
+  </div>
+</div>
+
+<!-- FLOATING PROFILE BADGE -->
+<div class="auth-widget">
+  <div class="auth-pill" id="authOpenBtn"><span class="dot"></span>Login / Register</div>
+  <div class="auth-user" id="authUserBox">
+    <div class="avatar-sm" id="authAvatar">?</div>
+    <span id="authUserName">Student</span>
+    <button id="authLogoutBtn">log out</button>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- SIDEBAR -->
+  <nav class="sidebar" aria-label="Chapter navigation">
+    <div class="side-title">ICT 0417 Notebook</div>
+    <ul class="side-nav" id="sideNav">
+      <li><a href="#cover"><span class="n"></span>Cover</a></li>
+      <li><a href="#ch1"><span class="n">1</span>Computer Systems</a></li>
+      <li><a href="#ch2"><span class="n">2</span>Input &amp; Output</a></li>
+      <li><a href="#ch3"><span class="n">3</span>Storage</a></li>
+      <li><a href="#ch4"><span class="n">4</span>Networks</a></li>
+      <li><a href="#ch5"><span class="n">5</span>Effects of IT</a></li>
+      <li><a href="#ch6"><span class="n">6</span>ICT Applications</a></li>
+      <li><a href="#ch7"><span class="n">7</span>Systems Life Cycle</a></li>
+      <li><a href="#ch8"><span class="n">8</span>Safety &amp; Security</a></li>
+      <li><a href="#ch9"><span class="n">9</span>Audiences</a></li>
+      <li><a href="#ch10"><span class="n">10</span>Communication</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <div class="page">
+
+      <!-- COVER -->
+      <section class="cover" id="cover">
+        <span class="kicker hand">Cambridge IGCSE™</span>
+        <h1>ICT <span>CIE 0417</span></h1>
+        <div class="subtitle">Exam Revision Notebook — Theory Notes, Chapters 1–10</div>
+
+        <div class="byline">
+          <div class="avatar">W</div>
+          <div>Created by <strong>Tr. Wai Lin Htet</strong></div>
+        </div>
+
+        <div class="meta-row">
+          <div><b>Syllabus:</b> Cambridge IGCSE ICT 0417</div>
+          <div><b>Format:</b> Notebook-style revision notes</div>
+          <div><b>Use:</b> Read, revise, tick off before the exam</div>
+        </div>
+
+        <div class="box tip" style="margin-top:30px; max-width:70ch;">
+          <h4>How to use this notebook</h4>
+          <p style="margin:0;">Go chapter by chapter. Yellow boxes are <strong>key terms</strong> — learn the full definition, not just the word, because CIE examiners give marks for detail, not for repeating the word back. Green boxes are exam tips. Tick the recap checklist at the end of each chapter before moving on.</p>
+        </div>
+
+        <div class="toc">
+          <a href="#ch1"><span class="num">1</span> Types &amp; Components of Computer Systems</a>
+          <a href="#ch2"><span class="num">2</span> Input &amp; Output Devices</a>
+          <a href="#ch3"><span class="num">3</span> Storage Devices &amp; Media</a>
+          <a href="#ch4"><span class="num">4</span> Networks &amp; the Effects of Using Them</a>
+          <a href="#ch5"><span class="num">5</span> The Effects of Using IT</a>
+          <a href="#ch6"><span class="num">6</span> ICT Applications</a>
+          <a href="#ch7"><span class="num">7</span> The Systems Life Cycle</a>
+          <a href="#ch8"><span class="num">8</span> Safety &amp; Security</a>
+          <a href="#ch9"><span class="num">9</span> Audiences</a>
+          <a href="#ch10"><span class="num">10</span> Communication</a>
+        </div>
+      </section>
+
+      <!-- CHAPTER 1 -->
+      <section class="chapter" id="ch1">
+        <figure class="clipping">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Computer-motherboard.jpg" alt="Computer motherboard showing internal hardware components">
+          <figcaption>the motherboard connects everything</figcaption>
+        </figure>
+        <div class="chapter-head"><div class="badge hand">1</div><h2>Types &amp; Components of Computer Systems</h2></div>
+        <p class="chapter-intro">Hardware, the CPU, signals, software types, memory, storage overview, OS interfaces, computer categories and emerging tech.</p>
+
+        <h3>1.1 Hardware</h3>
+        <p><strong>Internal hardware</strong> lives inside the system unit:</p>
+        <div class="glossary">
+          <div class="g-item"><b>CPU</b><span>Central Processing Unit — the primary processor that interprets and executes system instructions.</span></div>
+          <div class="g-item"><b>Motherboard</b><span>The main printed circuit board that connects every internal component so they can communicate.</span></div>
+          <div class="g-item"><b>RAM</b><span>Random Access Memory — volatile primary memory used for temporary data storage while processing.</span></div>
+          <div class="g-item"><b>HDD / SSD</b><span>Secondary storage devices used for persistent, non-volatile data storage.</span></div>
+          <div class="g-item"><b>NIC</b><span>Network Interface Card — wired (Ethernet) or wireless (WNIC) hardware that connects a device to a network.</span></div>
+          <div class="g-item"><b>GPU</b><span>Graphics Processing Unit — a specialised processor for rendering graphics, 3D images and video.</span></div>
+        </div>
+        <p><strong>External hardware (peripherals):</strong> Input devices (mouse, keyboard, microphone, scanner, webcam) enter data; output devices (speaker, monitor, printer, projector, actuator) present processed data to the user.</p>
+
+        <h3>1.2 CPU Components</h3>
+        <ul>
+          <li><span class="term">ALU</span> (Arithmetic Logic Unit) — performs arithmetic calculations (add, subtract) and logical decisions (AND, OR, comparisons).</li>
+          <li><span class="term">CU</span> (Control Unit) — coordinates and manages the flow of data and the execution of instructions across the processor and the system.</li>
+        </ul>
+
+        <h3>1.3 Signals &amp; Data Conversion</h3>
+        <p>Computers only understand digital data (0s and 1s). Real-world data from sensors or microphones is analogue, so it must be converted.</p>
+        <div class="flow">
+          <div class="step">Analogue input (sensor/mic)</div><div class="arrow">→</div>
+          <div class="step">ADC</div><div class="arrow">→</div>
+          <div class="step">Digital data for CPU</div>
+        </div>
+        <div class="flow">
+          <div class="step">Digital output</div><div class="arrow">→</div>
+          <div class="step">DAC</div><div class="arrow">→</div>
+          <div class="step">Analogue output (speaker/actuator/motor)</div>
+        </div>
+
+        <h3>1.4 Software Types</h3>
+        <h4>Application software</h4>
+        <p>Provides the services a user needs for a specific task: word processing, spreadsheets, database management (DBMS), control &amp; measurement software, apps/applets, video editing, graphics editing (bitmap vs vector), audio editing, and CAD (Computer-Aided Design) for precise 2D/3D models and cost estimation.</p>
+        <h4>System software</h4>
+        <p>Manages the hardware and provides the platform application software runs on:</p>
+        <div class="glossary">
+          <div class="g-item"><b>Compiler</b><span>Translates high-level code into machine code all at once, producing an independent executable file.</span></div>
+          <div class="g-item"><b>Linker</b><span>Links separate object code files and compiled libraries into one executable program.</span></div>
+          <div class="g-item"><b>Device driver</b><span>Lets the OS communicate with and control a specific hardware device, e.g. a printer or graphics card.</span></div>
+          <div class="g-item"><b>Operating System</b><span>Manages hardware resources (RAM, CPU cycles) and provides a user interface, e.g. Windows, macOS, iOS.</span></div>
+          <div class="g-item"><b>Utilities</b><span>Support software that maintains, optimises and protects the system — antivirus, disk defragmenters, backup tools.</span></div>
+        </div>
+
+        <h3>1.5 Primary Memory</h3>
+        <ul>
+          <li><span class="term">RAM</span> — temporary, volatile memory (loses data when powered off); holds the running apps, OS components and data in active use.</li>
+          <li><span class="term">ROM</span> — permanent, non-volatile memory (keeps data with no power); stores the BIOS and the bootstrap loader (start-up instructions).</li>
+        </ul>
+
+        <h3>1.6 Storage Technologies Overview</h3>
+        <ul>
+          <li><strong>Magnetic</strong> — magnetised platters or tape (HDD, magnetic tape).</li>
+          <li><strong>Solid state</strong> — flash memory chips (NAND), no moving parts (SSD, USB, SD cards).</li>
+          <li><strong>Optical</strong> — a laser reads/writes pits and lands on a reflective disc (CD, DVD, Blu-ray).</li>
+          <li><strong>Cloud</strong> — files stored on remote internet servers across public, private or hybrid environments.</li>
+        </ul>
+
+        <h3>1.7 Operating System User Interfaces <span class="tag">learn advantages AND disadvantages</span></h3>
+        <table>
+          <caption>Interface types compared</caption>
+          <tr><th>Interface</th><th>Advantages</th><th>Disadvantages</th></tr>
+          <tr><td><strong>CLI</strong> (Command Line)</td><td>Direct control; not limited to fixed options; can change low-level settings; fast, low memory use</td><td>Commands must be memorised; slow, error-prone typing; needs exact spelling/syntax</td></tr>
+          <tr><td><strong>GUI</strong> (Graphical)</td><td>No commands to remember; user-friendly WIMP (Windows, Icons, Menus, Pointer); simple mouse/touchpad control</td><td>Uses much more RAM than CLI; limited to the options shown on screen; needs a complex, slower OS</td></tr>
+          <tr><td><strong>Dialogue-based</strong> (voice)</td><td>Hands-free; very accessible for physical disabilities; can work as a biometric security feature</td><td>Unreliable with noise/accents; complex setup; user must know the exact recognised keywords</td></tr>
+          <tr><td><strong>Gesture-based</strong></td><td>No physical device needed; very natural; no training required</td><td>Accidental movements can trigger actions; short sensor range (~1.5 m); limited pre-set gestures</td></tr>
+        </table>
+
+        <h3>1.8 Computer Categories &amp; Processing</h3>
+        <p><strong>Categories:</strong> Desktop/All-in-One, Mobile computers (laptop, tablet, smartphone, smartwatch), Embedded computer (built into appliances like a washing machine), Server, Mainframe (bulk financial transactions), Supercomputer (scientific calculations), Minicomputer, Microcomputer, AI computers, and Quantum computers.</p>
+        <p><strong>Binary vs Quantum:</strong> traditional microcomputers process bits as either 0 or 1. Quantum computers use <span class="term">qubits</span>, which use superposition to exist as 0, 1, or both at once — enabling far more complex calculations.</p>
+
+        <h3>1.9 Emerging Technologies</h3>
+        <ul>
+          <li><strong>Artificial Intelligence (AI)</strong> — systems that simulate human intelligence: natural language processing (translation, voice assistants), smartphone facial recognition and predictive text, and autonomous vehicles that navigate and react in real time.</li>
+          <li><strong>Immersive tech</strong> — Augmented Reality (AR) overlays digital content on the real world (e.g. navigation heads-up display); Virtual Reality (VR) fully immerses the user in a generated 3D world using a headset; Mixed Reality (MR) blends real and virtual objects that interact in real time.</li>
+        </ul>
+
+        <div class="box tip">
+          <h4>Exam tip</h4>
+          <p>If asked to "describe" a difference (e.g. RAM vs ROM, or CLI vs GUI), always give a point for <em>each</em> side — one mark for RAM being volatile/temporary, another for ROM being non-volatile/permanent. Don't just name them.</p>
+        </div>
+
+        <div class="recap">
+          <h4>Quick recap — Chapter 1</h4>
+          <ul class="checklist">
+            <li>Name 3 internal and 3 external hardware devices</li>
+            <li>Explain the job of the ALU and the CU</li>
+            <li>Describe the ADC → CPU → DAC signal path</li>
+            <li>List 3 application software types and 3 system software types</li>
+            <li>Compare RAM and ROM</li>
+            <li>Give one advantage and one disadvantage of CLI and GUI</li>
+          </ul>
+        </div>
+
+        <!-- EXAM QUESTIONS CHAPTER 1 -->
+        <div class="exam-questions">
+          <h3>Past Paper Exam Practice — 10 Topical Questions</h3>
+          
+          <div class="qa-card">
+            <div class="q-title">Q1: Internal Components &amp; Roles</div>
+            <div class="q-text">Explain the primary functional difference between the Arithmetic Logic Unit (ALU) and the Control Unit (CU) within the central processing unit. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>ALU:</strong> Executes all mathematical calculations (addition, subtraction) and logical decisions / comparisons (AND, OR, NOT).</li>
+                <li><strong>CU:</strong> Directs and coordinates data flow and operations across the CPU; fetches, decodes, and manages the execution of instructions.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q2: Primary Storage Characteristics</div>
+            <div class="q-text">Describe two key differences between Random Access Memory (RAM) and Read Only Memory (ROM). [4]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>RAM is volatile memory / loses contents when power is turned off; ROM is non-volatile / retains contents permanently without power.</li>
+                <li>RAM is read and write memory / allows modifications; ROM is read-only memory / cannot be altered by normal user operations.</li>
+                <li>RAM holds currently executing programs, active data, and loaded OS parts; ROM stores bootstrap instructions / BIOS / start-up routines.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q3: Analogue to Digital Conversion</div>
+            <div class="q-text">State why an Analogue-to-Digital Converter (ADC) is required when sensors collect data for a microprocessor. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Sensors capture continuous, analogue physical measurements from the environment.</li>
+                <li>Microprocessors/computers only process discrete, digital electrical signals (binary 0s and 1s).</li>
+                <li>The ADC translates physical analogue data into binary values the CPU can interpret.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q4: Operating System Interfaces</div>
+            <div class="q-text">Discuss the advantages and disadvantages of using a Command Line Interface (CLI) compared to a Graphical User Interface (GUI). [4]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>CLI Advantage:</strong> Requires far less RAM and processing power; allows rapid, direct command execution by experienced users; commands can be scripted.</li>
+                <li><strong>CLI Disadvantage:</strong> Complex commands and strict syntax must be memorised; intolerant of typing errors.</li>
+                <li><strong>GUI Advantage:</strong> Intuitive and user-friendly WIMP layout; visual icons require no prior technical command memorisation.</li>
+                <li><strong>GUI Disadvantage:</strong> Uses significantly more memory and system resources; limited strictly to on-screen pre-set actions.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q5: Embedded Computers</div>
+            <div class="q-text">Identify what is meant by an embedded computer and give two everyday household appliances that contain one. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Definition:</strong> A dedicated microprocessor system built permanently into a larger mechanical/electronic device to perform a specific dedicated control task.</li>
+                <li><strong>Examples (any two):</strong> Washing machine, microwave oven, dishwasher, modern car engine management, smart thermostat.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q6: System Software Utilities</div>
+            <div class="q-text">Identify two utility programs and describe the primary function of each. [4]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Disk Defragmenter:</strong> Reorganises fragmented file clusters contiguously across magnetic storage blocks to improve read/write access speeds.</li>
+                <li><strong>Antivirus software:</strong> Scans, quarantines, and cleans/deletes malicious files using updated signature databases.</li>
+                <li><strong>Backup software:</strong> Creates duplicated archive copies of files to external or cloud drives for disaster recovery.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q7: Compilers vs Interpreters</div>
+            <div class="q-text">Describe two functional differences between a compiler and an interpreter. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>A compiler translates the entire high-level source code into a standalone machine-code executable file at once; an interpreter translates and executes source code line-by-line.</li>
+                <li>Compiled programs run faster once built and do not require original source code; interpreted programs halt immediately when an error is encountered, facilitating rapid debugging.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q8: Mainframes vs Microcomputers</div>
+            <div class="q-text">State two reasons why major financial institutions use mainframe computers instead of standard desktop microcomputers. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Mainframes can process massive volumes of concurrent input/output transactions in real time (high throughput).</li>
+                <li>Mainframes provide fault-tolerant redundant hardware ensuring zero-downtime 24/7 reliability.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q9: Virtual Reality (VR) Hardware</div>
+            <div class="q-text">Identify two specialised hardware devices used when interacting with a Virtual Reality system. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Head-Mounted Display (HMD) / VR Headset with dual micro-displays and motion tracking sensors.</li>
+                <li>Haptic feedback data gloves / sensor-equipped hand controllers.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q10: Quantum Computing Principles</div>
+            <div class="q-text">Explain how quantum computing bits (qubits) differ fundamentally from traditional binary bits. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Traditional bits can only represent one state at a time (either a 0 or a 1).</li>
+                <li>Qubits exploit the quantum phenomenon of superposition, existing as 0, 1, or both simultaneously, enabling parallel computing of massive mathematical datasets.</li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 2 -->
+      <section class="chapter" id="ch2">
+        <figure class="clipping">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Standard%20white%20computer%20keyboard.jpg" alt="A standard computer keyboard, a manual input device">
+          <figcaption>manual input devices</figcaption>
+        </figure>
+        <div class="chapter-head"><div class="badge hand">2</div><h2>Input &amp; Output Devices</h2></div>
+        <p class="chapter-intro">Manual input, sensors, direct data entry, cards, barcodes/QR codes, and every output device you need for the exam.</p>
+
+        <h3>2.1 Manual Input Devices &amp; Sensors</h3>
+        <ul>
+          <li><strong>Keyboard</strong> — fast for skilled typists but slower than direct data entry and prone to typing errors.</li>
+          <li><strong>Numeric keypad</strong> — used at ATMs and POS terminals for fast numeric/PIN entry.</li>
+          <li><strong>Pointing devices</strong> — mouse, touchpad, tracker ball, joystick, driving wheel; control the on-screen cursor.</li>
+          <li><strong>Scanner</strong> — converts paper documents into digital form, often using <span class="term">OCR</span> (Optical Character Recognition) to turn a scanned image of text into editable text.</li>
+          <li><strong>Digital camera</strong> and <strong>microphone</strong> — capture images and analogue sound respectively.</li>
+        </ul>
+        <div class="box note">
+          <h4>Key term, in full</h4>
+          <p><strong>Sensor</strong> — a device that measures a physical property (temperature, pressure, light, sound, moisture, pH) in the real world. The processing loop is: <em>Sensor (analogue) → ADC → microprocessor compares the reading with preset parameters → DAC → actuator/motor/alarm reacts.</em></p>
+        </div>
+
+        <h3>2.2 Direct Data Entry, Cards &amp; Barcodes</h3>
+        <div class="glossary">
+          <div class="g-item"><b>OMR</b><span>Optical Mark Recognition — reads pre-printed marks in fixed positions, e.g. multiple-choice exam sheets or lottery tickets.</span></div>
+          <div class="g-item"><b>OCR</b><span>Optical Character Recognition — scans printed or handwritten text and converts it into editable digital text.</span></div>
+          <div class="g-item"><b>MICR</b><span>Magnetic Ink Character Recognition — reads the special magnetic ink characters at the bottom of bank cheques for automated processing.</span></div>
+          <div class="g-item"><b>RFID / NFC</b><span>Radio Frequency Identification / Near Field Communication — contactless tracking and payment technology.</span></div>
+        </div>
+        <table>
+          <caption>Barcode (1D) vs QR Code (2D)</caption>
+          <tr><th>Feature</th><th>Barcode (1D)</th><th>QR Code (2D)</th></tr>
+          <tr><td>Data direction</td><td>Horizontal only</td><td>Horizontal and vertical matrix</td></tr>
+          <tr><td>Storage capacity</td><td>Low — numeric codes only</td><td>High — URLs, text, media, contact details</td></tr>
+          <tr><td>Scanning method</td><td>Laser scanner, needs direct alignment</td><td>Smartphone camera or scanner, any angle</td></tr>
+        </table>
+
+        <h3>2.3 Output Devices, Displays, Printers &amp; Projectors</h3>
+        <p><strong>Displays:</strong> CRT (heavy, legacy, hot); LCD (flat panel, CCFL backlight); LED (LCD backlit by LEDs — brighter, thinner, more efficient); OLED (self-emissive pixels, true blacks, flexible); IPS (wide viewing angles, accurate colour).</p>
+        <p><strong>Printers:</strong> Laser (fast, dry toner, crisp text for offices); Inkjet (liquid ink droplets, great for photos, cheaper but slower and can smudge when wet); 3D printer (builds solid objects layer-by-layer from a CAD model); Dot-matrix (impact printer, noisy, used for continuous or multi-part carbon-copy paper).</p>
+        <div class="box tip">
+          <h4>3D printing in medicine</h4>
+          <p>3D printing starts with a CAD model. Applications include custom prosthetic limbs (faster and cheaper than traditional manufacturing), bioprinted tissue to repair damaged organs and reduce transplant waiting lists, and biodegradable artificial blood vessels used in surgery.</p>
+        </div>
+        <p><strong>Projectors:</strong> DLP uses tiny micro-mirrors for high contrast and portability; LCD projectors use three glass panels (red, green, blue) for bright, colour-accurate images.</p>
+
+        <div class="recap">
+          <h4>Quick recap — Chapter 2</h4>
+          <ul class="checklist">
+            <li>Give one advantage and one disadvantage of a keyboard vs direct data entry</li>
+            <li>Explain the difference between OMR, OCR and MICR</li>
+            <li>Compare a barcode and a QR code</li>
+            <li>Compare a laser and an inkjet printer</li>
+            <li>Describe the sensor → ADC → microprocessor → DAC → actuator loop</li>
+          </ul>
+        </div>
+
+        <!-- EXAM QUESTIONS CHAPTER 2 -->
+        <div class="exam-questions">
+          <h3>Past Paper Exam Practice — 10 Topical Questions</h3>
+
+          <div class="qa-card">
+            <div class="q-title">Q1: Barcode vs QR Code Storage</div>
+            <div class="q-text">Explain two advantages of using a 2D Quick Response (QR) code compared to a traditional 1D barcode. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>QR codes hold substantially greater data capacities (including alphabetic text, URLs, binary payloads) than single-line 1D barcodes.</li>
+                <li>QR codes feature built-in Reed-Solomon error correction and can still be read even if partially stained or torn.</li>
+                <li>QR codes can be scanned omnidirectionally from any angle without precise horizontal laser alignment.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q2: Direct Data Entry in Banking</div>
+            <div class="q-text">State why Magnetic Ink Character Recognition (MICR) is used on bank cheques rather than OCR or barcodes. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Magnetic ink characters cannot be forged, altered, or duplicated with ordinary photocopiers.</li>
+                <li>Characters remain machine-readable even if overwritten with pen ink, smudged, crumpled, or folded.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q3: Microprocessor Automated Feedback Loop</div>
+            <div class="q-text">Describe the operational steps a microprocessor uses to maintain greenhouse temperature at 24°C using a temperature sensor, ADC, and heater. [4]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Temperature sensor continuously records analogue ambient readings.</li>
+                <li>Analogue signals pass through an ADC which converts them into digital numbers.</li>
+                <li>Microprocessor compares current reading against the pre-set parameter (24°C).</li>
+                <li>If temperature &lt; 24°C, microprocessor sends signal (via DAC) to activate heater actuator; if temperature &gt;= 24°C, signal shuts heater off.</li>
+                <li>Process repeats indefinitely in an automated closed control loop.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q4: Printer Comparison (Laser vs Inkjet)</div>
+            <div class="q-text">A busy corporate office prints thousands of invoices daily. Explain why a laser printer is chosen over an inkjet printer. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Laser printers produce pages per minute at significantly higher speeds.</li>
+                <li>Laser toner powder is dry and does not smudge or run when handled immediately.</li>
+                <li>Lower running cost per page for high-volume monochrome text print runs.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q5: Impact Printers &amp; Carbon Copies</div>
+            <div class="q-text">Give one scenario where a dot-matrix printer is preferred over laser or inkjet printers and explain why. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Scenario:</strong> Printing industrial duplicate receipts, delivery notes, or multi-part invoices on continuous carbonated stationery.</li>
+                <li><strong>Reason:</strong> Dot-matrix uses physical impact pins that press through carbon layers to duplicate printing onto multiple sheets simultaneously.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q6: Actuators in Computing Systems</div>
+            <div class="q-text">Define what an actuator is and name two mechanical devices controlled by actuators. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Definition:</strong> An output electromechanical transducer that converts electrical control signals from a computer into physical movement or mechanical force.</li>
+                <li><strong>Devices (any two):</strong> Electric motors, solenoids, hydraulic water valves, robotic arms, motorized door locks.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q7: RFID vs Barcode at Warehouses</div>
+            <div class="q-text">State two operational benefits of using Radio Frequency Identification (RFID) over barcodes in warehouse pallet tracking. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>RFID tags do not require direct line-of-sight and can be read through boxes and packaging.</li>
+                <li>Hundreds of RFID tags can be scanned and logged simultaneously in seconds as a forklift passes an antenna gate.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q8: Display Technologies (OLED vs LCD)</div>
+            <div class="q-text">Explain why Organic Light Emitting Diode (OLED) screens produce deeper black levels and save power compared to traditional backlit LCD screens. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>OLED pixels are individually self-emissive and do not require a global CCFL or LED backlight.</li>
+                <li>When displaying black, individual OLED pixels switch off completely, drawing 0 watts of power and emitting true zero light.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q9: Optical Mark Recognition (OMR)</div>
+            <div class="q-text">Give two reasons why examination boards use Optical Mark Recognition (OMR) to mark multiple-choice answer sheets. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Extremely fast automated data capture, processing thousands of answer sheets per hour.</li>
+                <li>Eliminates human transcription errors, guaranteeing objective marking accuracy.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q10: Medical 3D Printing</div>
+            <div class="q-text">Describe two specific benefits of using 3D printing in modern surgical medicine. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Produces patient-matched, custom-tailored prosthetics, crowns, and implants based directly on accurate CT/MRI scans.</li>
+                <li>Allows surgeons to produce exact tactile 3D anatomical models of complex patient organs for pre-operative rehearsal.</li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 3 -->
+      <section class="chapter" id="ch3">
+        <figure class="clipping">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/HDD%20and%20SSD%2020180314.jpg" alt="A hard disk drive (HDD) next to a solid state drive (SSD)">
+          <figcaption>HDD (left) vs SSD (right)</figcaption>
+        </figure>
+        <div class="chapter-head"><div class="badge hand">3</div><h2>Storage Devices &amp; Media</h2></div>
+        <p class="chapter-intro">Magnetic, solid-state and optical backing storage, plus cloud storage vs cloud computing.</p>
+
+        <h3>3.1 Magnetic Backing Storage</h3>
+        <p><span class="term">HDD</span> (Hard Disk Drive) — spinning magnetised platters, a read-write head and an actuator arm. Speed is measured in RPM; <span class="term">rotational latency</span> is the delay while the correct sector rotates under the head. <strong>Advantage:</strong> large capacity at low cost per GB. <strong>Disadvantage:</strong> moving parts are easily damaged by shocks or drops.</p>
+        <p>Other magnetic media: portable HDD (USB, for large backups), magnetic tape (low-cost, high-capacity, sequential-access — good for long-term archiving), and the legacy floppy disk.</p>
+
+        <h3>3.2 Solid-State Backing Storage</h3>
+        <p>Uses non-volatile NAND flash memory chips with zero moving parts: <strong>SSD</strong> (fast, durable), <strong>USB flash drive</strong> (portable, plug-and-play), and <strong>SD/XD/CFast memory cards</strong> used in cameras, phones and tablets.</p>
+
+        <h3>3.3 Optical Backing Storage</h3>
+        <p>A laser burns and reads microscopic pits and lands on a spiral track on a reflective disc.</p>
+        <ul>
+          <li><strong>CD</strong> — about 700 MB.</li>
+          <li><strong>DVD</strong> — about 4.7 GB, red laser; dual-layer DVDs have two reflective layers.</li>
+          <li><strong>Blu-ray</strong> — 25–50 GB, short-wavelength blue laser (405 nm) for tighter pit packing.</li>
+        </ul>
+        <p>Disc formats: <strong>-R</strong> (recordable once), <strong>-RW</strong> (rewritable), <strong>-ROM</strong> (read-only), <strong>DVD-RAM</strong> (simultaneous read/write, sector-based).</p>
+
+        <h3>3.4 Cloud Storage vs Cloud Computing</h3>
+        <div class="box note">
+          <h4>Don't mix these up</h4>
+          <p><strong>Cloud storage</strong> is like a virtual remote hard drive — a place where your files simply sit. <strong>Cloud computing</strong> is like a virtual computer (CPU + RAM + programs) that actively runs processing tasks and applications over the internet, without using your local hardware.</p>
+        </div>
+        <ul>
+          <li><strong>Public cloud</strong> — infrastructure owned by a third-party provider, open to public clients.</li>
+          <li><strong>Private cloud</strong> — dedicated infrastructure behind one company's own firewall.</li>
+          <li><strong>Hybrid cloud</strong> — combines public and private to balance security and cost.</li>
+        </ul>
+
+        <div class="recap">
+          <h4>Quick recap — Chapter 3</h4>
+          <ul class="checklist">
+            <li>State one advantage and one disadvantage of HDD storage</li>
+            <li>Explain why SSDs are more durable than HDDs</li>
+            <li>Order CD, DVD and Blu-ray by capacity and explain why Blu-ray holds more</li>
+            <li>Explain the difference between cloud storage and cloud computing in your own words</li>
+          </ul>
+        </div>
+
+        <!-- EXAM QUESTIONS CHAPTER 3 -->
+        <div class="exam-questions">
+          <h3>Past Paper Exam Practice — 10 Topical Questions</h3>
+
+          <div class="qa-card">
+            <div class="q-title">Q1: SSD vs HDD Durability</div>
+            <div class="q-text">Explain why a Solid State Drive (SSD) is more suitable than a Hard Disk Drive (HDD) for use in a laptop carried by a student. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>SSDs contain zero moving parts; HDDs have fragile spinning platters and sensitive read/write heads.</li>
+                <li>SSDs are resistant to physical drops, knocks, vibrations, and mechanical head crashes.</li>
+                <li>SSDs consume less battery power and generate negligible heat.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q2: Magnetic Tape in Archival Backup</div>
+            <div class="q-text">State two reasons why magnetic tape cartridges remain widely used for corporate data archiving instead of SSDs. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Significantly lower cost per terabyte for massive petabyte-scale storage.</li>
+                <li>Long archival shelf life (up to 30 years if stored under controlled climate conditions).</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q3: Direct Access vs Sequential Access</div>
+            <div class="q-text">Explain the operational difference between direct access and sequential access storage media, naming an example of each. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Direct Access:</strong> The read head jumps immediately to the exact address of the data without reading intermediate blocks (e.g. HDD, SSD, Optical Disc).</li>
+                <li><strong>Sequential Access:</strong> Data must be read in linear order from the beginning until the target record is reached (e.g. Magnetic Tape).</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q4: Optical Disc Capacities</div>
+            <div class="q-text">Explain why a Blu-ray disc can store 25 GB of data while a standard DVD holds only 4.7 GB. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Blu-ray uses a blue-violet laser with a shorter wavelength (405 nm) than DVD's red laser (650 nm).</li>
+                <li>Shorter wavelength creates a tighter beam focus, allowing significantly smaller pits and lands etched closer together on tracks.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q5: Cloud Storage Benefits</div>
+            <div class="q-text">Give two distinct advantages to an employee of saving work documents to cloud storage rather than a local USB thumb drive. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Files can be accessed remotely from any device anywhere with an internet connection.</li>
+                <li>Facilitates seamless real-time file sharing and simultaneous collaborative editing.</li>
+                <li>Protected from physical loss, theft, or local hardware failure.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q6: Cloud Storage Drawbacks</div>
+            <div class="q-text">Describe two drawbacks of relying entirely on cloud storage for business operations. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Requires continuous high-speed internet; files are completely inaccessible during network or ISP outages.</li>
+                <li>Ongoing recurring subscription fees for large storage tiers; risk of data privacy breaches on remote servers.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q7: DVD-RAM Distinctive Features</div>
+            <div class="q-text">State two characteristics that differentiate DVD-RAM from conventional DVD-RW discs. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Allows simultaneous read and write operations on the same disc.</li>
+                <li>Features concentric tracks divided into small sectors allowing it to behave like a removable hard drive.</li>
+                <li>Can be rewritten up to 100,000 times (compared to ~1,000 times for DVD-RW).</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q8: Solid State Flash Mechanism</div>
+            <div class="q-text">Describe how data is retained inside flash memory when power is disconnected. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Flash memory uses floating-gate transistors that trap electrical electrons.</li>
+                <li>The trapped electric charge remains held indefinitely in an insulated oxide layer representing binary 1 or 0 without electrical current.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q9: Latency in Hard Disks</div>
+            <div class="q-text">Define what is meant by rotational latency in a magnetic hard drive. [1]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>The delay time taken for the rotating magnetic platter to spin the required data sector under the read/write head.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q10: Cloud Computing vs Cloud Storage</div>
+            <div class="q-text">Explain the core distinction between cloud computing and cloud storage. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Cloud Storage:</strong> A remote repository service for saving, archiving, and retrieving digital files across servers.</li>
+                <li><strong>Cloud Computing:</strong> Accessing remote processing power, hosted applications, and virtual CPU/RAM resources to execute software over the internet.</li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 4 -->
+      <section class="chapter" id="ch4">
+        <figure class="clipping">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Dlink%20wireless%20router.jpg" alt="A wireless router used to connect a LAN to the internet">
+          <figcaption>a router connects networks</figcaption>
+        </figure>
+        <div class="chapter-head"><div class="badge hand">4</div><h2>Networks &amp; the Effects of Using Them</h2></div>
+        <p class="chapter-intro">Network hardware, addressing, network types, security &amp; access control, anti-malware, and conferencing.</p>
+
+        <h3>4.1 Core Concepts</h3>
+        <p><span class="term">Network</span> — two or more devices connected to share data, resources and communication. <span class="term">Internet</span> — a global WAN connecting millions of devices. <span class="term">World Wide Web</span> — the collection of multimedia web pages hosted on web servers, following W3C standards.</p>
+
+        <h3>4.2 Network Hardware — learn what each device does</h3>
+        <div class="glossary">
+          <div class="g-item"><b>NIC</b><span>Hardware (card or chip) that connects a device to a network; carries a unique factory-set MAC address. Wired (Ethernet) or wireless (WNIC).</span></div>
+          <div class="g-item"><b>Hub</b><span>Non-intelligent — broadcasts every packet to all connected ports, causing unnecessary traffic and weaker security.</span></div>
+          <div class="g-item"><b>Switch</b><span>Reads the destination MAC address and forwards data only to the intended port — reduces traffic and improves security vs a hub.</span></div>
+          <div class="g-item"><b>Router</b><span>Connects two or more different networks (e.g. home LAN to the internet); reads IP addresses to choose the best route, and often assigns IPs via DHCP.</span></div>
+          <div class="g-item"><b>Bridge</b><span>Connects two segments of the same LAN using the same protocol; filters traffic by MAC address to reduce congestion.</span></div>
+          <div class="g-item"><b>Gateway</b><span>Connects two networks that use different protocols, translating data so they can communicate.</span></div>
+          <div class="g-item"><b>WAP</b><span>Wireless Access Point — converts wired signals into Wi-Fi so wireless devices can join a wired network.</span></div>
+          <div class="g-item"><b>Modem</b><span>Modulates/demodulates signals between the analogue phone/cable line and digital computer data.</span></div>
+        </div>
+
+        <h3>4.3 Network Addressing</h3>
+        <p><strong>IP address</strong> — the logical location of a device on a network. <strong>IPv4</strong> uses 32 bits, written in denary (e.g. 192.168.1.1). <strong>IPv6</strong> uses 128 bits, written in hexadecimal, to solve the shortage of IPv4 addresses.</p>
+        <p><strong>MAC address</strong> — uniquely identifies hardware, set at the factory. Built from 48 bits (6 hex pairs): the first 24 bits are the manufacturer ID, the last 24 bits are the device's serial number.</p>
+
+        <h3>4.4 Types of Networks</h3>
+        <ul>
+          <li><strong>WAN</strong> — covers a large area (cities, countries); fibre-optic, leased lines, satellites.</li>
+          <li><strong>WLAN</strong> — a wireless LAN, usually Wi-Fi over 2.4 GHz / 5.0 GHz radio waves.</li>
+          <li><strong>LAN</strong> — a small area (home, school, office), using switches or hubs.</li>
+          <li><strong>PAN</strong> — a very small personal range (~10 m), commonly Bluetooth.</li>
+        </ul>
+
+        <h3>4.5 Security &amp; Access Control</h3>
+        <p><strong>Biometrics</strong> (fingerprint, face, iris), <strong>physical tokens</strong> (smart cards, security keys, USB dongles), <strong>electronic tokens / OTP</strong> (one-time passcode via SMS, email or an app), and <strong>strong passwords</strong> (mixing upper/lowercase, numbers and symbols).</p>
+
+        <h3>4.6 Anti-Malware Software</h3>
+        <p><strong>Anti-virus</strong> — scans files against malware signature databases, quarantines suspicious files, and cleans infections. <strong>Firewall</strong> — hardware or software that monitors incoming/outgoing traffic against security rules.</p>
+
+        <h3>4.7 Electronic Conferencing</h3>
+        <p>Hardware needed: microphone (audio in), webcam (video in), speakers/headphones (audio out). Common platforms: Zoom, Google Meet, Microsoft Teams.</p>
+
+        <div class="box warn">
+          <h4>Common mix-up</h4>
+          <p>A <strong>hub</strong> broadcasts to everyone (dumb device); a <strong>switch</strong> sends only to the right device (smart device). A <strong>router</strong> connects different networks together and routes by IP address; a <strong>bridge</strong> connects two parts of the <em>same</em> network and filters by MAC address.</p>
+        </div>
+
+        <div class="recap">
+          <h4>Quick recap — Chapter 4</h4>
+          <ul class="checklist">
+            <li>Explain the difference between a hub and a switch</li>
+            <li>Explain the difference between a router and a bridge</li>
+            <li>Compare IPv4 and IPv6</li>
+            <li>Explain what a MAC address is and where it comes from</li>
+            <li>List the 4 network types by geographic size, smallest to largest</li>
+          </ul>
+        </div>
+
+        <!-- EXAM QUESTIONS CHAPTER 4 -->
+        <div class="exam-questions">
+          <h3>Past Paper Exam Practice — 10 Topical Questions</h3>
+
+          <div class="qa-card">
+            <div class="q-title">Q1: Hub vs Switch Operation</div>
+            <div class="q-text">Explain why a network administrator replaces a hub with a network switch. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>A hub broadcasts incoming data packets indiscriminately to all connected ports/nodes.</li>
+                <li>A switch reads destination MAC addresses and routes data packets only to the specific intended port.</li>
+                <li>Switching drastically reduces packet collisions, cuts network congestion, and prevents data sniffing between ports.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q2: Router Functions</div>
+            <div class="q-text">Describe two main functions performed by a router in a home network connected to the internet. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Inspects incoming packet destination IP addresses to determine and forward along the optimal network path.</li>
+                <li>Connects two separate networks operating across different address spaces (home private LAN to public Internet).</li>
+                <li>Assigns dynamic private IP addresses to connecting local nodes using DHCP.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q3: MAC vs IP Address Comparison</div>
+            <div class="q-text">Describe two differences between a Media Access Control (MAC) address and an Internet Protocol (IP) address. [4]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>MAC addresses are permanent physical hardware identifiers hardcoded by the NIC manufacturer; IP addresses are logical addresses assigned dynamically or statically by the network.</li>
+                <li>MAC addresses stay identical when a device moves to another location; IP addresses change depending on network connection points.</li>
+                <li>MAC addresses use 48 bits written in hexadecimal; standard IPv4 addresses use 32 bits written in dotted denary.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q4: Bridge vs Gateway</div>
+            <div class="q-text">Explain when a network bridge is used instead of a network gateway. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>A <strong>bridge</strong> connects two segments of the same local network running identical communication protocols.</li>
+                <li>A <strong>gateway</strong> is required when joining two disparate networks using different protocols, as it translates packet protocols.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q5: Wi-Fi vs Wired Ethernet LAN</div>
+            <div class="q-text">Discuss two advantages and two disadvantages of installing a WLAN instead of a cabled Ethernet network in a school. [4]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>WLAN Advantage:</strong> Device mobility anywhere within signal range; easier to connect new student devices without drilling cables.</li>
+                <li><strong>WLAN Disadvantage:</strong> Data transfer speeds are slower than copper/fibre cables; radio signals suffer interference from walls and can be intercepted if encryption is weak.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q6: IPv4 Address Exhaustion &amp; IPv6</div>
+            <div class="q-text">Explain why the computer networking industry introduced IPv6. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>IPv4 uses 32 bits yielding approximately 4.3 billion addresses, which have become practically exhausted by mobile and IoT growth.</li>
+                <li>IPv6 uses 128 bits, providing trillions of unique hex IP addresses and removing the reliance on NAT workarounds.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q7: Video Conferencing Latency Issues</div>
+            <div class="q-text">Identify two common network problems that can disrupt an international video conference and describe their effects. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>High latency / Packet loss:</strong> Causes visual screen freezing, pixelation, or dropped calls.</li>
+                <li><strong>Jitter / Low bandwidth:</strong> Results in unsynchronized lip audio delay or robotic garbled speech.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q8: Software vs Hardware Firewall</div>
+            <div class="q-text">State the purpose of a firewall in network security. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Monitors and filters incoming and outgoing network traffic against a set of predefined security access rules.</li>
+                <li>Blocks unauthorized port access and stops malicious intrusion packets or suspicious outgoing spyware broadcasts.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q9: Personal Area Network (PAN)</div>
+            <div class="q-text">State what a Personal Area Network (PAN) is and provide one example of PAN communication. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Definition:</strong> An interconnected network organized around an individual person spanning a very small radius (typically under 10 metres).</li>
+                <li><strong>Example:</strong> Connecting a smartwatch or wireless headphones to a smartphone using Bluetooth.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q10: Two-Factor Authentication (2FA) in Networks</div>
+            <div class="q-text">Explain how Two-Factor Authentication (2FA) protects user accounts even if a hacker acquires the user's password. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>2FA requires two distinct authentication factors: something you know (password) and something you have (physical phone OTP token or biometric).</li>
+                <li>Even if the password is stolen, the unauthorized user cannot gain access without the physical second factor token.</li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 5 -->
+      <section class="chapter" id="ch5">
+        <div class="chapter-head"><div class="badge hand">5</div><h2>The Effects of Using IT</h2></div>
+        <p class="chapter-intro">Microprocessor-controlled devices, health problems and their fixes, and physical safety hazards.</p>
+
+        <h3>5.1 Microprocessor-Controlled Devices</h3>
+        <p><strong>Positive impacts:</strong> saves time through automation, increases leisure time, allows remote control via apps, high convenience. <strong>Negative impacts:</strong> encourages a sedentary lifestyle, creates dependency on technology, and can cause a loss of manual skills (deskilling).</p>
+        <p>Examples: smart fridges that track and reorder food, smart heating that learns routines to save energy, automated smart security systems, and self-driving cars/drones that use sensors and microprocessors for safety and efficiency.</p>
+
+        <h3>5.2 Health Problems &amp; How to Fix Them</h3>
+        <table>
+          <caption>Health risks of ICT use</caption>
+          <tr><th>Problem</th><th>Cause</th><th>Fix</th></tr>
+          <tr><td><strong>RSI</strong> (Repetitive Strain Injury)</td><td>Repetitive typing or clicking</td><td>Ergonomic keyboard/mouse, wrist rests, regular breaks</td></tr>
+          <tr><td>Eye strain / headaches</td><td>Screen glare, flicker, staring too long</td><td>Anti-glare screens, the 20-20-20 rule, regular eye tests, good lighting</td></tr>
+          <tr><td>Back / neck ache</td><td>Poor posture, non-adjustable chairs</td><td>Adjustable ergonomic chair with lumbar support, footrest, monitor at eye level</td></tr>
+        </table>
+        <div class="box tip">
+          <h4>Exam tip — the 20-20-20 rule</h4>
+          <p>Every 20 minutes, look at something 20 feet away for 20 seconds. It's a favourite exact-detail answer CIE examiners look for when asking how to prevent eye strain.</p>
+        </div>
+
+        <h3>5.3 Physical Safety Hazards</h3>
+        <ul>
+          <li><strong>Trailing wires</strong> (tripping hazard) — use cable ducts, route cables under desks, use wireless where possible.</li>
+          <li><strong>Overloaded sockets</strong> (fire hazard) — avoid chaining extension blocks, install more wall sockets, keep tested fire extinguishers available.</li>
+          <li><strong>Heavy equipment</strong> (fall hazard) — use strong, stable desks, and keep devices away from desk edges.</li>
+        </ul>
+
+        <div class="recap">
+          <h4>Quick recap — Chapter 5</h4>
+          <ul class="checklist">
+            <li>Give one positive and one negative effect of microprocessor-controlled devices</li>
+            <li>Name 3 ICT-related health problems and how to prevent each one</li>
+            <li>Name 3 physical safety hazards in a computer room and their prevention</li>
+          </ul>
+        </div>
+
+        <!-- EXAM QUESTIONS CHAPTER 5 -->
+        <div class="exam-questions">
+          <h3>Past Paper Exam Practice — 10 Topical Questions</h3>
+
+          <div class="qa-card">
+            <div class="q-title">Q1: Repetitive Strain Injury (RSI)</div>
+            <div class="q-text">Identify two causes of Repetitive Strain Injury (RSI) and state two specific ways an office worker can prevent it. [4]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Causes:</strong> Continuous rapid typing on standard keyboards without wrist support; prolonged repetitive mouse clicking and gripping.</li>
+                <li><strong>Preventions:</strong> Use ergonomic keyboards and contoured vertical mice; install soft gel wrist rests; take regular scheduled rest breaks.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q2: Eye Strain Prevention Strategies</div>
+            <div class="q-text">Describe two adjustments a worker can make to their workstation display to avoid eye fatigue and headaches. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Fit anti-glare screen filters or adjust room blinds to eliminate sunlight reflections.</li>
+                <li>Apply the 20-20-20 rule (every 20 minutes look at an object 20 feet away for 20 seconds).</li>
+                <li>Adjust monitor brightness, contrast, and increase font size.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q3: Electrical Fire Hazards in Computer Suites</div>
+            <div class="q-text">State two common causes of fires in computer rooms and give a prevention method for each. [4]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Cause 1:</strong> Overloaded electrical wall sockets or daisy-chaining multi-way extension blocks. <br><em>Prevention:</em> Install dedicated wall power sockets and avoid multi-plug adapters.</li>
+                <li><strong>Cause 2:</strong> Blocked computer ventilation louvres causing dust buildup and thermal overheating. <br><em>Prevention:</em> Ensure adequate air conditioning and keep hardware fans free of obstructions.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q4: Trip Hazards in Offices</div>
+            <div class="q-text">State two safety precautions that should be taken regarding network cabling in a computer lab. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Secure loose cables inside rigid plastic floor ducts / cable runners.</li>
+                <li>Route cables under raised floors, along skirting boards, or migrate to wireless connections.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q5: Societal Impact of Household Automation</div>
+            <div class="q-text">Discuss two negative social or lifestyle impacts of microprocessor-controlled smart home devices. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Can encourage a sedentary, inactive lifestyle leading to obesity as manual chores are eliminated.</li>
+                <li>Causes over-dependence on technology and loss of basic domestic cooking/cleaning skills (deskilling).</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q6: Deskilling of the Workforce</div>
+            <div class="q-text">Explain what is meant by the term deskilling in the context of computerised factory automation. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Traditional craftsmen lose their specialised manual trade skills as computerized machinery/robots take over production.</li>
+                <li>Workers are relegated to simple tasks such as pressing start buttons or monitoring conveyor belts.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q7: Postural Health Problems</div>
+            <div class="q-text">Describe two features of an ergonomic chair that help prevent chronic lower back pain during long computing sessions. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Adjustable lumbar backrest support that conforms to the natural inward curve of the spine.</li>
+                <li>Adjustable seat height and tilt allowing the user's feet to rest flat on the floor with knees bent at 90 degrees.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q8: Safety vs Health Distinctions</div>
+            <div class="q-text">Distinguish between a health hazard and a safety hazard in an ICT work environment. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Health Hazard:</strong> Issues that cause long-term, progressive physical medical conditions over extended time (e.g. RSI, eye strain, spinal issues).</li>
+                <li><strong>Safety Hazard:</strong> Dangers that can result in immediate, sudden physical injury or fatal accidents (e.g. electrocution, tripping over cables, fire).</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q9: Teleworking Lifestyle Effects</div>
+            <div class="q-text">Identify two positive impacts on an employee when working from home using ICT. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Saves daily commuting travel time and financial fuel/transit costs.</li>
+                <li>Offers flexible working hours around family commitments and child care.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q10: Ozone &amp; Particulate Emissions</div>
+            <div class="q-text">State the health risk associated with sitting next to high-volume laser printers and describe how it can be mitigated. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Risk:</strong> Inhaling volatile organic compounds, ozone gas, and fine toner particulates leading to respiratory irritation.</li>
+                <li><strong>Mitigation:</strong> Position laser printers in a well-ventilated dedicated printing room away from employees.</li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 6 -->
+      <section class="chapter" id="ch6">
+        <div class="chapter-head"><div class="badge hand">6</div><h2>ICT Applications</h2></div>
+        <p class="chapter-intro">Real-world systems: modelling, control, schools, booking, banking, medicine, expert systems, retail, recognition and satellites.</p>
+
+        <h3>6.1 Communication &amp; E-Publications</h3>
+        <p>Digital tools: email, video conferencing, VoIP, blogs, vlogs, wikis, social networks. <strong>E-publications</strong> (e-books, digital magazines, e-newsletters, PDFs) use responsive design, embedded multimedia, hyperlink navigation and screen-friendly sans-serif type. <strong>Advantages:</strong> cheap, portable, instantly updated. <strong>Disadvantages:</strong> needs a powered device, causes screen fatigue, risk of piracy, and a digital divide for those without access or skills.</p>
+
+        <h3>6.2 Modelling Applications</h3>
+        <p>Computer models simulate real systems safely and cheaply: financial forecasting, climate simulation, flight simulators (pilot training with no real risk), and weather forecasting.</p>
+
+        <h3>6.3 Computer-Controlled Systems</h3>
+        <div class="flow">
+          <div class="step">Sensor</div><div class="arrow">→</div><div class="step">ADC</div><div class="arrow">→</div>
+          <div class="step">Microprocessor compares to preset value</div><div class="arrow">→</div><div class="step">DAC</div><div class="arrow">→</div><div class="step">Actuator</div>
+        </div>
+        <p>Examples: automated greenhouses, central heating, traffic lights, chemical process plants.</p>
+
+        <h3>6.4–6.6 Schools, Booking &amp; Banking Systems</h3>
+        <ul>
+          <li><strong>School management</strong> — biometric/RFID attendance registration, performance tracking, and automated timetabling that avoids clashes.</li>
+          <li><strong>Booking systems</strong> — must process in real time to prevent double-booking: select seat → database temporarily locks it → payment confirmed → status updated to "booked".</li>
+          <li><strong>Banking</strong> — ATMs (PIN → verify → dispense cash → update balance), EFT (direct transfer between accounts), online banking (secured by encryption and TANs), and clearing (checking transactions between banks).</li>
+        </ul>
+
+        <h3>6.7–6.8 Medicine &amp; Expert Systems</h3>
+        <p><strong>Medicine:</strong> centralised patient records for instant history retrieval, sensor-based patient monitoring with automatic alarms, and high-tech imaging (MRI/CT) plus robotic surgery.</p>
+        <p><strong>Expert systems</strong> emulate a human expert's decision-making:</p>
+        <div class="glossary">
+          <div class="g-item"><b>User interface</b><span>Where the user types queries and views advice.</span></div>
+          <div class="g-item"><b>Inference engine</b><span>The "brain" that applies logical rules to inputs to reach conclusions.</span></div>
+          <div class="g-item"><b>Knowledge base</b><span>The repository of facts collected from human experts.</span></div>
+          <div class="g-item"><b>Rules base</b><span>The set of IF–THEN rules the inference engine applies.</span></div>
+        </div>
+        <p>Used for medical diagnosis, mineral prospecting, chess strategy and tax advice.</p>
+
+        <h3>6.9–6.11 Retail, Recognition &amp; Satellite Systems</h3>
+        <ul>
+          <li><strong>POS</strong> — scans barcode → looks up price → prints itemised bill → updates stock. <strong>EFTPOS</strong> links POS directly to the bank for instant card authorisation.</li>
+          <li><strong>ANPR</strong> — camera captures the plate → OCR converts the image to text → checked against a database.</li>
+          <li><strong>GPS</strong> — satellites broadcast time/location, needing signals from at least 3–4 satellites. <strong>GIS</strong> analyses layered geographic data. <strong>Remote sensing</strong> maps weather and deforestation from orbit.</li>
+        </ul>
+
+        <div class="recap">
+          <h4>Quick recap — Chapter 6</h4>
+          <ul class="checklist">
+            <li>Describe the 4 steps of a real-time booking system</li>
+            <li>Name the 4 components of an expert system</li>
+            <li>Describe what happens at a POS terminal, step by step</li>
+            <li>Explain how ANPR identifies a vehicle</li>
+          </ul>
+        </div>
+
+        <!-- EXAM QUESTIONS CHAPTER 6 -->
+        <div class="exam-questions">
+          <h3>Past Paper Exam Practice — 10 Topical Questions</h3>
+
+          <div class="qa-card">
+            <div class="q-title">Q1: Real-Time Airline Booking Double-Booking Prevention</div>
+            <div class="q-text">Explain why airline seat reservations must be processed in real-time and describe how the database handles concurrency. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Real-time processing is essential to prevent multiple customers booking the exact same seat concurrently (double-booking).</li>
+                <li>When a customer selects an available seat, the database record is temporarily locked/flagged.</li>
+                <li>If payment succeeds, the status permanently updates to "booked"; if payment fails or times out, the lock is released.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q2: Architecture of Expert Systems</div>
+            <div class="q-text">Name the four principal software components of an expert system used for medical diagnosis. [4]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>User Interface:</strong> Facilitates dialogue, allowing doctors to input patient symptoms and view diagnosis explanations.</li>
+                <li><strong>Knowledge Base:</strong> A repository containing medical facts and clinical data sourced from medical specialists.</li>
+                <li><strong>Rules Base:</strong> A set of logical IF-THEN conditional reasoning rules.</li>
+                <li><strong>Inference Engine:</strong> The problem-solving processing engine that applies the rules to the knowledge base to reach a diagnostic conclusion.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q3: Point of Sale (POS) Stock Automation</div>
+            <div class="q-text">Describe the automated inventory update cycle when a product barcode is scanned at a supermarket POS terminal. [4]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Barcode scanner reads the product code and searches the central stock database.</li>
+                <li>The system retrieves the item description and price, adding it to the customer receipt.</li>
+                <li>Stock level field for that item is decremented by 1 in the database.</li>
+                <li>The current stock quantity is compared against the pre-set reorder level.</li>
+                <li>If quantity &lt;= reorder level, the system automatically sends an electronic purchase order to the supplier.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q4: Automatic Number Plate Recognition (ANPR)</div>
+            <div class="q-text">Describe how Automatic Number Plate Recognition (ANPR) works at an automated car park barrier. [4]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Sensor detects a vehicle approach and triggers a camera to capture a digital image of the registration plate.</li>
+                <li>OCR software processes the image, locating characters and converting the graphical text into digital string data.</li>
+                <li>The string is checked against a database of authorised subscriber plates or issued entry tickets.</li>
+                <li>If a valid match is confirmed, an output signal is transmitted to an actuator to raise the barrier.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q5: Flight Simulator Modelling Benefits</div>
+            <div class="q-text">State two reasons why pilot training is carried out on computerized flight simulators instead of actual aeroplanes. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Safe simulation of extreme emergency flight scenarios (e.g. engine fire, severe storms) with zero risk to life or aircraft.</li>
+                <li>Significantly lower operational costs (saves aviation fuel, aircraft maintenance, and insurance costs).</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q6: Automated Teller Machine (ATM) Cash Withdrawal</div>
+            <div class="q-text">Describe the operational checks performed by an ATM before dispensing cash. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Customer inserts card and enters PIN, which is verified encrypted against the bank database.</li>
+                <li>Customer enters requested withdrawal amount.</li>
+                <li>System checks if account has sufficient funds and ensures amount does not exceed daily withdrawal limit.</li>
+                <li>ATM checks its internal cash cassette to ensure sufficient bank notes are available.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q7: Global Positioning System (GPS) Navigation</div>
+            <div class="q-text">State how many satellite signals a GPS receiver must detect to calculate a 3D position and explain why. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>At least four satellites are required.</li>
+                <li>Three satellites provide latitude, longitude, and altitude via trilateration of time signals; the fourth corrects clock timing discrepancies.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q8: Geographic Information Systems (GIS)</div>
+            <div class="q-text">Identify what a Geographic Information System (GIS) is and give one practical civic application. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Definition:</strong> Software designed to capture, store, manipulate, analyse, and present layered spatial and geographical data.</li>
+                <li><strong>Application:</strong> Planning urban emergency ambulance response routes, tracking disease outbreaks, or mapping flood risk zones.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q9: Intensive Care Patient Monitoring</div>
+            <div class="q-text">Explain how a computerised intensive care unit (ICU) system alerts nursing staff to a deteriorating patient. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Sensors continuously measure vital signs (heart rate, blood pressure, oxygen saturation).</li>
+                <li>Analogue signals are converted to digital and compared by a microprocessor against safe threshold boundaries.</li>
+                <li>If any vital parameter falls outside the acceptable range, an actuator sounds an audible alarm and flashes warning lights.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q10: Electronic Funds Transfer at Point of Sale (EFTPOS)</div>
+            <div class="q-text">What is the difference between EFT and EFTPOS? [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>EFT:</strong> General electronic transfer of money from one bank account to another across computer networks.</li>
+                <li><strong>EFTPOS:</strong> Specific electronic payment transaction initiated at a retail checkout counter using a payment card terminal.</li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 7 -->
+      <section class="chapter" id="ch7">
+        <div class="chapter-head"><div class="badge hand">7</div><h2>The Systems Life Cycle</h2></div>
+        <p class="chapter-intro">How a new ICT system is built: analysis, design, development &amp; testing, implementation, documentation, evaluation.</p>
+
+        <div class="flow">
+          <div class="step">1. Analysis</div><div class="arrow">→</div>
+          <div class="step">2. Design</div><div class="arrow">→</div>
+          <div class="step">3. Development &amp; Testing</div><div class="arrow">→</div>
+          <div class="step">4. Implementation</div><div class="arrow">→</div>
+          <div class="step">5. Documentation</div><div class="arrow">→</div>
+          <div class="step">6. Evaluation</div>
+        </div>
+
+        <h3>7.1 Analysis</h3>
+        <table>
+          <caption>Research methods for the current system</caption>
+          <tr><th>Method</th><th>Pros</th><th>Cons</th></tr>
+          <tr><td>Observation</td><td>Reveals actual operational reality</td><td>Workers may change behaviour when watched (Hawthorne effect)</td></tr>
+          <tr><td>Interviews</td><td>Detailed, qualitative insight</td><td>Time-consuming and costly</td></tr>
+          <tr><td>Questionnaires</td><td>Fast, cheap, reaches many users</td><td>Low response rate, no follow-up questions</td></tr>
+          <tr><td>Document examination</td><td>Shows the exact data requirements</td><td>Rigid — misses human/operational issues</td></tr>
+        </table>
+        <p>All findings feed into a <span class="term">Requirements Specification</span> — a document listing the hardware, software, user needs and constraints for the new system.</p>
+
+        <h3>7.2 Design</h3>
+        <p>Designers plan Data Flow Diagrams (DFDs), data capture forms, screen layouts, report layouts, validation/verification rules, data structures (file organisation, field names/types/lengths) and hardware/software specifications.</p>
+
+        <h3>7.3 Development &amp; Testing — the 4 data types</h3>
+        <div class="glossary">
+          <div class="g-item"><b>Normal data</b><span>Valid data inside the expected range, e.g. entering 55 for a mark out of 100.</span></div>
+          <div class="g-item"><b>Abnormal / erroneous data</b><span>Invalid data that validation should reject, e.g. "abc" or 150 for a mark.</span></div>
+          <div class="g-item"><b>Extreme data</b><span>Valid data right at the boundary, e.g. 0 or 100 for a mark.</span></div>
+          <div class="g-item"><b>Live data</b><span>Real data from the old system run through the new one to compare accuracy.</span></div>
+        </div>
+
+        <h3>7.4 Implementation — Changeover Methods</h3>
+        <table>
+          <caption>Changeover methods compared</caption>
+          <tr><th>Method</th><th>How it works</th><th>Advantage</th><th>Disadvantage</th></tr>
+          <tr><td><strong>Direct</strong></td><td>Old system stops; new one starts immediately</td><td>Immediate benefit, lowest cost</td><td>High risk — no fallback if it fails</td></tr>
+          <tr><td><strong>Parallel</strong></td><td>Old and new run side-by-side for a period</td><td>Safe — old system is a full backup</td><td>Expensive, duplicate data entry</td></tr>
+          <tr><td><strong>Pilot</strong></td><td>New system tested in one branch first</td><td>Failure only affects that branch</td><td>Delays full rollout</td></tr>
+          <tr><td><strong>Phased</strong></td><td>Introduced module by module</td><td>Errors stay isolated to one module</td><td>Very slow; integration issues between modules</td></tr>
+        </table>
+
+        <h3>7.5 Documentation</h3>
+        <p><strong>User documentation</strong> — for end-users: installation, requirements, saving/printing, error handling, FAQs. <strong>Technical documentation</strong> — for programmers/analysts: source code, algorithms, flowcharts, field definitions, validation rules.</p>
+
+        <h3>7.6 Evaluation</h3>
+        <p>Compare the finished system against the original Requirements Specification, identify limitations and future improvements, gather user feedback, and compare performance against the old system.</p>
+
+        <div class="box tip">
+          <h4>Exam tip</h4>
+          <p>If a scenario asks you to choose a changeover method, always justify with risk vs cost: parallel running is safest but most expensive; direct changeover is cheapest but riskiest.</p>
+        </div>
+
+        <div class="recap">
+          <h4>Quick recap — Chapter 7</h4>
+          <ul class="checklist">
+            <li>Recite the 6 stages of the Systems Life Cycle in order</li>
+            <li>Give one advantage and one disadvantage of interviews vs questionnaires</li>
+            <li>Define normal, abnormal, extreme and live test data with an example each</li>
+            <li>Compare direct, parallel, pilot and phased changeover</li>
+          </ul>
+        </div>
+
+        <!-- EXAM QUESTIONS CHAPTER 7 -->
+        <div class="exam-questions">
+          <h3>Past Paper Exam Practice — 10 Topical Questions</h3>
+
+          <div class="qa-card">
+            <div class="q-title">Q1: Methods of Investigating Current Systems</div>
+            <div class="q-text">Compare interviews and questionnaires as methods of fact-finding during system analysis. [4]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Interviews:</strong> Allow deep probing with flexible follow-up questions; time-consuming, expensive, and interviewer can introduce bias.</li>
+                <li><strong>Questionnaires:</strong> Distributed rapidly to hundreds of respondents at minimal cost; questions cannot be clarified, and return rates are often low.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q2: Test Data Categorisation</div>
+            <div class="q-text">A field accepts student exam marks from 0 to 100 inclusive. Provide one test value for each of the following: Normal, Extreme, Abnormal. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Normal:</strong> Any integer strictly between 1 and 99 (e.g. 45, 78).</li>
+                <li><strong>Extreme:</strong> Exactly 0 or exactly 100 (boundary values accepted).</li>
+                <li><strong>Abnormal:</strong> Negative numbers (e.g. -1), numbers > 100 (e.g. 101, 150), or textual letters (e.g. "pass", "abc").</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q3: Parallel vs Direct Changeover</div>
+            <div class="q-text">A hospital is switching to a new patient database. Discuss why the hospital opts for parallel running over direct changeover. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Direct changeover is catastrophic if the new system experiences critical bugs, as patient records would become inaccessible.</li>
+                <li>Parallel running maintains the trusted old system as an active backup until the new system is fully proven.</li>
+                <li>Hospital staff can cross-verify output accuracy across both systems.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q4: Pilot vs Phased Implementation</div>
+            <div class="q-text">Explain the operational difference between pilot implementation and phased implementation. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Pilot:</strong> The entire completed system is deployed into one branch/department of the business before rolling out to others.</li>
+                <li><strong>Phased:</strong> The system is introduced in parts / one modular subsystem at a time across the entire organisation.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q5: Verification vs Validation</div>
+            <div class="q-text">Distinguish between validation and verification, giving an example method for each. [4]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Validation:</strong> Automated software check to ensure entered data conforms to pre-set rules / is reasonable (e.g. Range check, Length check, Format check).</li>
+                <li><strong>Verification:</strong> Checking that data has been copied accurately from the original source without transcription error (e.g. Double data entry, Visual proofreading check).</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q6: User Documentation Content</div>
+            <div class="q-text">Identify three items included exclusively in user documentation rather than technical documentation. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Step-by-step software installation and loading guide.</li>
+                <li>Frequently Asked Questions (FAQs) and user troubleshooting advice.</li>
+                <li>Tutorial on formatting, saving, printing reports, and searching data.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q7: Technical Documentation Content</div>
+            <div class="q-text">State three components found within the technical documentation of a new ICT system. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Full program source code / annotated script listings.</li>
+                <li>System flowcharts / Data Flow Diagrams (DFD) and algorithms.</li>
+                <li>Database schemas, file structures, field names, data types, and validation rules.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q8: Evaluation Stage Activities</div>
+            <div class="q-text">Describe two activities carried out during the final evaluation stage of the Systems Life Cycle. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Comparing system performance directly against the original Requirements Specification criteria.</li>
+                <li>Gathering usability feedback and efficiency metrics from users to identify limitations and plan future enhancements.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q9: Validation Check Types</div>
+            <div class="q-text">Name two different validation checks and describe what each checks for. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Range check:</strong> Confirms numbers fall between a designated minimum and maximum bound.</li>
+                <li><strong>Presence check:</strong> Ensures a field is not left blank before submitting.</li>
+                <li><strong>Format/Picture check:</strong> Confirms input strictly follows a required pattern (e.g. LLNN NLL for a postcode).</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q10: Requirements Specification Purpose</div>
+            <div class="q-text">State why the analyst writes a Requirements Specification at the end of the analysis phase. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Establishes an agreed legal contract between the client and system developers outlining expected functional deliverables.</li>
+                <li>Defines necessary minimum hardware, software, user constraints, and acts as the benchmark for system evaluation.</li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 8 -->
+      <section class="chapter" id="ch8">
+        <figure class="clipping">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Internet%20Security%20Padlock%20for%20VPN%20%26%20Online%20Privacy.jpg" alt="A padlock symbolising internet and data security">
+          <figcaption>keeping data secure</figcaption>
+        </figure>
+        <div class="chapter-head"><div class="badge hand">8</div><h2>Safety &amp; Security</h2></div>
+        <p class="chapter-intro">Physical safety, the Data Protection Act, e-safety, and — in full detail — every major security threat and how systems repair and defend against them.</p>
+
+        <h3>8.1 Physical Security &amp; Safety Hazards</h3>
+        <p><strong>Physical security methods:</strong> key/electronic locks, CCTV, biometric access control, security guards, and hardware anchoring (cable locks, floor/desk mounts).</p>
+        <table>
+          <caption>Physical safety hazards and prevention</caption>
+          <tr><th>Risk</th><th>Cause</th><th>Prevention</th></tr>
+          <tr><td>Electrocution</td><td>Spilt liquids, exposed/damaged wires, unsafe sockets</td><td>Ban drinks in computer rooms; use circuit breakers (RCBs); inspect wiring and insulation</td></tr>
+          <tr><td>Fire hazard</td><td>Overloaded sockets, blocked vents/dust, short circuits</td><td>More sockets, no daisy-chained extensions; clear vents; ventilate the room; keep tested extinguishers ready</td></tr>
+          <tr><td>Tripping hazard</td><td>Trailing wires, damaged flooring</td><td>Cable ducts, route cables under desks, use wireless where possible</td></tr>
+          <tr><td>Personal injury</td><td>Heavy equipment falling from unstable desks</td><td>Strong, sturdy desks; keep equipment away from desk edges</td></tr>
+        </table>
+
+        <h3>8.2 Data Protection &amp; E-Safety</h3>
+        <p><strong>Data Protection Act — 4 key rules:</strong></p>
+        <ol>
+          <li>Data must be accurate and up to date.</li>
+          <li>Data must not be kept longer than necessary.</li>
+          <li>Data must be fairly and lawfully processed.</li>
+          <li>Data must be kept secure against unauthorised processing, loss or damage.</li>
+        </ol>
+        <p><span class="term">Personal data</span> identifies a living individual (name, address, email, date of birth). <span class="term">Sensitive personal data</span> needs extra protection (political views, religion, criminal record, biometric data).</p>
+        <p><strong>E-safety guidelines:</strong> never share personal details online; use strict privacy settings; block/report cyberbullies; only add people you actually know; check for the padlock/<code>https://</code> on websites; be wary of email attachments and phishing links.</p>
+
+        <h3>8.3 Security of Data — threats, and how each is repaired/prevented</h3>
+        <p>This is the section most exam questions expect in full detail: name the threat, explain <em>how</em> it works, and state the specific prevention or repair method.</p>
+        <div class="glossary">
+          <div class="g-item"><b>Hacking</b><span>Unauthorised access to a system. Repaired/prevented by firewalls, strong passwords and user access controls.</span></div>
+          <div class="g-item"><b>Phishing</b><span>Fake emails trick users into giving up credentials. Prevented by user training and checking the sender's email domain is genuine.</span></div>
+          <div class="g-item"><b>Pharming</b><span>Malicious code silently redirects users to a fake website. Prevented by up-to-date anti-malware and checking for HTTPS/the padlock icon.</span></div>
+          <div class="g-item"><b>Smishing / Vishing</b><span>Phishing carried out by SMS text message (smishing) or a phone call (vishing).</span></div>
+          <div class="g-item"><b>Malware</b><span>Viruses, spyware and ransomware. Prevented by anti-virus software and avoiding unknown links/downloads.</span></div>
+        </div>
+        <table>
+          <caption>Types of malware — repair and defence starts with knowing which one you have</caption>
+          <tr><th>Malware</th><th>How it behaves</th></tr>
+          <tr><td><strong>Virus</strong></td><td>Replicates itself to delete or corrupt files; needs an active host program or infected OS to run.</td></tr>
+          <tr><td><strong>Worm</strong></td><td>Stand-alone; replicates and spreads on its own across networks that have weak security.</td></tr>
+          <tr><td><strong>Trojan horse</strong></td><td>Malicious code disguised as legitimate software, which it replaces or embeds itself into.</td></tr>
+          <tr><td><strong>Spyware</strong></td><td>Secretly monitors activity and sends data to the attacker, often including keylogging.</td></tr>
+          <tr><td><strong>Adware</strong></td><td>Floods the system with unwanted pop-ups and may redirect the browser to advert sites.</td></tr>
+          <tr><td><strong>Ransomware</strong></td><td>Encrypts the victim's files and demands payment for the decryption key — usually delivered via a Trojan.</td></tr>
+        </table>
+        <div class="box warn">
+          <h4>How anti-virus software repairs an infected file</h4>
+          <p>Anti-virus software works in three stages: it <strong>scans</strong> files against a database of known malware signatures, <strong>quarantines</strong> any suspicious file so it cannot run or spread, and then either <strong>cleans/repairs</strong> the file by removing the malicious code, or deletes it if it cannot be safely repaired. Keeping the signature database updated is essential, because it can only recognise threats it already knows about.</p>
+        </div>
+
+        <h3>8.3.2 Protection &amp; Authentication Methods</h3>
+        <div class="glossary">
+          <div class="g-item"><b>Biometrics</b><span>Uses a unique physical trait — fingerprint, face or iris — to confirm identity.</span></div>
+          <div class="g-item"><b>Digital certificate</b><span>A public/private cryptographic key pair used to authenticate identity and secure communication.</span></div>
+          <div class="g-item"><b>SSL</b><span>Secure Sockets Layer — a protocol that encrypts network traffic for safe transmission over the internet.</span></div>
+          <div class="g-item"><b>Encryption</b><span>Converts readable plaintext into unreadable ciphertext using a key, to stop unauthorised access in transit or storage.</span></div>
+          <div class="g-item"><b>2FA</b><span>Two-Factor Authentication — two separate proofs of identity, e.g. a password plus a one-time passcode.</span></div>
+        </div>
+        <p><strong>Card fraud:</strong> card cloning (copying card details) and shoulder surfing (watching someone type their PIN).</p>
+
+        <div class="recap">
+          <h4>Quick recap — Chapter 8</h4>
+          <ul class="checklist">
+            <li>State the 4 rules of the Data Protection Act</li>
+            <li>Explain the difference between phishing and pharming</li>
+            <li>Describe how a virus differs from a worm and a Trojan horse</li>
+            <li>Explain the 3 stages anti-virus software uses to deal with an infected file</li>
+            <li>Explain what 2FA and SSL each protect against</li>
+          </ul>
+        </div>
+
+        <!-- EXAM QUESTIONS CHAPTER 8 -->
+        <div class="exam-questions">
+          <h3>Past Paper Exam Practice — 10 Topical Questions</h3>
+
+          <div class="qa-card">
+            <div class="q-title">Q1: Phishing vs Pharming Mechanics</div>
+            <div class="q-text">Explain the operational difference between phishing and pharming. [4]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Phishing:</strong> Relies on social engineering; fraudulent emails containing forged links deceive users into voluntarily visiting fake sites and revealing login credentials.</li>
+                <li><strong>Pharming:</strong> Malicious code installed on user's hard drive or poisoning DNS servers; silently redirects users to a spoofed website even when the user types the genuine URL.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q2: Ransomware Attack Cycle</div>
+            <div class="q-text">Describe how ransomware operates once it infiltrates a business network and state how damage can be mitigated without paying. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Ransomware quietly encrypts user files and databases using strong cryptographic algorithms, rendering them inaccessible.</li>
+                <li>Displays an extortion ransom note demanding untraceable cryptocurrency in exchange for the private decryption key.</li>
+                <li><strong>Mitigation:</strong> Regularly create isolated, air-gapped offline backups to restore files without submitting to extortion.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q3: Viruses vs Worms vs Trojan Horses</div>
+            <div class="q-text">Explain the technical difference between a computer virus and a computer worm. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>A virus requires an existing executable host file or human execution to run and replicate.</li>
+                <li>A worm is a self-contained, standalone program that replicates independently across network connections without human interaction.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q4: Role of Encryption in Data In-Transit</div>
+            <div class="q-text">Explain what encryption does and why it is used when transmitting confidential credit card data over the web. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Encryption scrambles readable plaintext into unreadable ciphertext using a mathematical key.</li>
+                <li>If intercepted by unauthorized packet sniffers, the data cannot be comprehended or exploited without the corresponding decryption key.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q5: Digital Certificates &amp; SSL</div>
+            <div class="q-text">State two items contained inside an authentic digital certificate on a secure HTTPS website. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>The website owner's authenticated public key.</li>
+                <li>Digital signature and identity of the issuing Certificate Authority (CA).</li>
+                <li>Validity date range and domain name.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q6: Biometric Security Vulnerabilities</div>
+            <div class="q-text">Give two drawbacks of using biometric authentication (e.g. fingerprint scanners) compared to alphanumeric passwords. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>If biometric data is ever compromised or stolen, it cannot be changed or reset like a password.</li>
+                <li>Scanners can reject authorized users (false negative) if fingers are dirty, sweaty, or injured.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q7: Data Protection Principles</div>
+            <div class="q-text">State two legal obligations placed upon organisations holding personal data under Data Protection legislation. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Data must be obtained fairly, lawfully, and used only for stated registered purposes.</li>
+                <li>Data must be kept accurate, up-to-date, and retained no longer than necessary.</li>
+                <li>Organisations must implement adequate security safeguards against unauthorized access or accidental loss.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q8: Shoulder Surfing Prevention</div>
+            <div class="q-text">Explain what shoulder surfing is at an ATM and give two prevention techniques. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Definition:</strong> Secretly peering over someone's shoulder or using concealed cameras to watch them enter their PIN.</li>
+                <li><strong>Preventions:</strong> Shielding keypad with hand; physical privacy mirrors/shields installed on ATM surrounds; masking PIN characters on screen as asterisks.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q9: Spyware &amp; Keyloggers</div>
+            <div class="q-text">Describe how spyware keyloggers compromise confidential passwords. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Keylogger software secretly records every physical keystroke pressed on the keyboard.</li>
+                <li>Logs are quietly uploaded over the internet to an external attacker, revealing usernames and passwords.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q10: Smishing &amp; Vishing</div>
+            <div class="q-text">Define smishing and vishing, providing the communication medium used for each. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Smishing:</strong> Phishing carried out via SMS text messages containing malicious links.</li>
+                <li><strong>Vishing:</strong> Voice phishing carried out via deceptive telephone calls impersonating bank or authority officials.</li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 9 -->
+      <section class="chapter" id="ch9">
+        <div class="chapter-head"><div class="badge hand">9</div><h2>Audiences</h2></div>
+        <p class="chapter-intro">Tailoring ICT work to who will actually read, watch or use it — plus copyright and plagiarism.</p>
+
+        <h3>9.1 Audience Appreciation</h3>
+        <ul>
+          <li><strong>Age</strong> — young children need bright colours, simple vocabulary and large text; adults/professionals need structured, data-driven layouts.</li>
+          <li><strong>Target group</strong> — specific interests, language ability and digital literacy level.</li>
+          <li><strong>Context</strong> — a formal business presentation needs a different style to a casual blog or social post.</li>
+        </ul>
+        <p><strong>When writing a presentation, consider:</strong> the language used, how much multimedia to include, the length, how much audience participation is invited, and whether practical examples are used to illustrate points.</p>
+        <p><strong>Audience characteristics to plan for:</strong> age range, income level, specific interests, disabilities (visual/auditory), and the different expectations of children, adults and older people.</p>
+
+        <h3>9.2 Copyright &amp; Plagiarism</h3>
+        <div class="glossary">
+          <div class="g-item"><b>Copyright</b><span>Protects original creative work — music, films, articles, books — from being copied without permission.</span></div>
+          <div class="g-item"><b>Licence</b><span>Legal permission to install and run a piece of software.</span></div>
+          <div class="g-item"><b>Piracy</b><span>Unauthorised copying, distribution or use of copyrighted software.</span></div>
+          <div class="g-item"><b>Plagiarism</b><span>Copying someone else's work, ideas or text and presenting it as your own without acknowledgement.</span></div>
+        </div>
+        <p>Product keys and holograms are used as security controls to verify that a software installation is genuine.</p>
+
+        <div class="recap">
+          <h4>Quick recap — Chapter 9</h4>
+          <ul class="checklist">
+            <li>List 3 factors to consider about your audience before designing a document</li>
+            <li>Explain the difference between copyright and plagiarism</li>
+            <li>Explain what a software licence gives you permission to do</li>
+          </ul>
+        </div>
+
+        <!-- EXAM QUESTIONS CHAPTER 9 -->
+        <div class="exam-questions">
+          <h3>Past Paper Exam Practice — 10 Topical Questions</h3>
+
+          <div class="qa-card">
+            <div class="q-title">Q1: Designing Interfaces for Young Children</div>
+            <div class="q-text">Describe three design features of an educational website aimed at primary school children aged 5 to 7. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Vibrant, colourful visual presentation with minimal dense blocks of text.</li>
+                <li>Large, clear fonts and audio voice prompts / spoken narration.</li>
+                <li>Prominent, graphical icon-based navigation buttons requiring minimal typing.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q2: Professional Business Presentation Formatting</div>
+            <div class="q-text">State two ways a multimedia presentation should be modified when pitched to corporate company directors. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Professional, muted colour schemes without excessive distracting animations or sound effects.</li>
+                <li>Data-focused content structured with clear charts, executive bullet summaries, and factual financial metrics.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q3: Copyright Infringement vs Plagiarism</div>
+            <div class="q-text">Explain the difference between copyright infringement and plagiarism. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Copyright Infringement:</strong> Illegally reproducing, distributing, or publishing copyrighted material without legal rights or author permission.</li>
+                <li><strong>Plagiarism:</strong> Presenting someone else's original ideas, writing, or analysis as one's own without proper academic citation or attribution.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q4: Software Piracy Prevention Mechanisms</div>
+            <div class="q-text">Describe two methods commercial software vendors use to prevent software piracy. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Requiring unique alphanumeric product activation license keys linked to online authentication servers.</li>
+                <li>Using hardware security dongles (USB tokens) or holographic security stickers on genuine retail media.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q5: Accessibility for Visually Impaired Users</div>
+            <div class="q-text">Identify two design features that should be integrated into a website to support visually impaired visitors. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Comprehensive descriptive alternative text (alt tags) on all images for screen-reading software.</li>
+                <li>Resizable high-contrast text modes (e.g. yellow on black) and scalable vector layouts.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q6: Audience Context &amp; Venue Layout</div>
+            <div class="q-text">State why the size of the room and audience must be considered when creating a slide presentation. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>In large auditoriums, text font size must be significantly larger so attendees at the back can read comfortably.</li>
+                <li>Audio projection volume and external microphone amplification must match acoustic venue size.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q7: Software Licensing Types</div>
+            <div class="q-text">Distinguish between a single-user licence and a site licence. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Single-User Licence:</strong> Authorises the installation and execution of the software on only one designated computer.</li>
+                <li><strong>Site Licence:</strong> Grants legal permission to install and run the software across all computers within a specific institution or school campus.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q8: Open Source vs Proprietary Software Licences</div>
+            <div class="q-text">Explain one difference between open-source software and proprietary commercial software. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Open-source software includes accessible source code that anyone can inspect, modify, and redistribute freely.</li>
+                <li>Proprietary software is distributed only in compiled binary format; underlying source code remains a closely guarded commercial trade secret.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q9: Font Selection for Printed Publications vs Screens</div>
+            <div class="q-text">State which font style (serif or sans-serif) is traditionally preferred for on-screen digital publications and explain why. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Preference:</strong> Sans-serif fonts (e.g. Arial, Helvetica).</li>
+                <li><strong>Reason:</strong> Clean, unembellished strokes render more legibly across lower-resolution digital screens without visual blur between characters.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q10: Digital Rights Management (DRM)</div>
+            <div class="q-text">State the purpose of Digital Rights Management (DRM) in commercial e-publications. [1]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Restricts unauthorized copying, illegal redistribution, printing, or transfer of digital media to unauthorized third-party devices.</li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 10 -->
+      <section class="chapter" id="ch10">
+        <div class="chapter-head"><div class="badge hand">10</div><h2>Communication</h2></div>
+        <p class="chapter-intro">Email, the internet vs the World Wide Web, web platforms, protocols, and staying safe online.</p>
+
+        <h3>10.1 Communicating by Email</h3>
+        <p><strong>Internet</strong> is a global public network of networks; an <strong>intranet</strong> is a private internal network for one organisation only (e.g. a school portal).</p>
+        <p><strong>Email structure:</strong> To, CC (Carbon Copy), BCC (Blind Carbon Copy — hides recipients from each other), Subject, message body, attachments.</p>
+        <p><strong>Netiquette:</strong> use appropriate language, never type in ALL CAPS (it reads as shouting), keep messages concise, and respect other people's privacy.</p>
+
+        <h3>10.2 Effective Use of the Internet</h3>
+        <table>
+          <caption>Internet vs World Wide Web</caption>
+          <tr><th>Internet</th><th>World Wide Web (WWW)</th></tr>
+          <tr><td>The global network of interconnected networks and devices</td><td>A collection of multimedia web pages hosted on websites</td></tr>
+          <tr><td>Uses TCP/IP</td><td>Uses HTTP/HTTPS to transmit HTML documents</td></tr>
+          <tr><td>Carries email, chat, FTP file transfer</td><td>Uses URLs to locate web pages</td></tr>
+          <tr><td>The underlying physical network infrastructure</td><td>Accessed through web browser software</td></tr>
+        </table>
+        <p><strong>Web platforms:</strong> Blogs (personal online journals), Wikis (collaborative, editable pages), Social networking sites (profiles and shared media), Forums (threaded discussion boards).</p>
+        <p><strong>Navigating the internet:</strong> an <span class="term">ISP</span> provides your connection; a <span class="term">web browser</span> lets you view pages; a <span class="term">search engine</span> searches an index of websites for your keywords. Use quotation marks for an exact phrase and <code>AND</code>/<code>OR</code>/<code>NOT</code> as logical search operators.</p>
+        <div class="box tip">
+          <h4>Evaluating whether a website is reliable</h4>
+          <ul style="margin-bottom:0;">
+            <li>Check the domain — <code>.gov</code> and <code>.edu</code> are generally more authoritative</li>
+            <li>Verify the author's credentials</li>
+            <li>Watch for spelling and grammar errors</li>
+            <li>Check when the page was last updated</li>
+            <li>Cross-reference the facts against other trusted sources</li>
+          </ul>
+        </div>
+        <p><strong>URL structure:</strong> <code>protocol://website address/path/filename</code></p>
+
+        <h3>Communication Protocols</h3>
+        <div class="glossary">
+          <div class="g-item"><b>IP</b><span>Internet Protocol — directs and routes data packets across networks.</span></div>
+          <div class="g-item"><b>POP</b><span>Post Office Protocol — used by email clients to retrieve email from a mail server.</span></div>
+          <div class="g-item"><b>FTP</b><span>File Transfer Protocol — transfers files between computers over a network.</span></div>
+          <div class="g-item"><b>HTTP</b><span>Hypertext Transfer Protocol — transmits web page data across the internet.</span></div>
+          <div class="g-item"><b>VOIP</b><span>Voice over Internet Protocol — carries voice/audio calls over an IP network.</span></div>
+          <div class="g-item"><b>SSL</b><span>Secure Sockets Layer — encrypts data sent over the internet.</span></div>
+        </div>
+
+        <div class="box warn">
+          <h4>Internet risks to remember</h4>
+          <p>Malware, phishing scams, unauthorised network access, pharming and cyberbullying are the risks CIE most often asks you to identify and suggest a prevention for — link each one back to the specific defence covered in Chapter 8.</p>
+        </div>
+
+        <div class="recap">
+          <h4>Quick recap — Chapter 10</h4>
+          <ul class="checklist">
+            <li>Explain the difference between the internet and the World Wide Web</li>
+            <li>List the 4 parts of an email and what each one is for</li>
+            <li>Name 3 ways to check if a website is reliable</li>
+            <li>Match each protocol (IP, POP, FTP, HTTP, VOIP, SSL) to what it is used for</li>
+          </ul>
+        </div>
+
+        <!-- EXAM QUESTIONS CHAPTER 10 -->
+        <div class="exam-questions">
+          <h3>Past Paper Exam Practice — 10 Topical Questions</h3>
+
+          <div class="qa-card">
+            <div class="q-title">Q1: Internet vs World Wide Web</div>
+            <div class="q-text">Explain the technical difference between the Internet and the World Wide Web (WWW). [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Internet:</strong> The global physical network infrastructure consisting of connected computers, servers, cables, and routers communicating via TCP/IP.</li>
+                <li><strong>World Wide Web:</strong> An information system service operating on top of the internet, comprising interlinked multimedia web pages accessed via HTTP/HTTPS.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q2: Email CC vs BCC Addressing</div>
+            <div class="q-text">Explain the operational difference between Carbon Copy (CC) and Blind Carbon Copy (BCC) in email messaging. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>All email addresses entered into the <strong>CC</strong> field are visibly revealed to every message recipient.</li>
+                <li>Addresses entered into the <strong>BCC</strong> field remain concealed from all other recipients, preserving privacy and preventing unsolicited spamming.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q3: Uniform Resource Locator (URL) Deconstruction</div>
+            <div class="q-text">Identify the three main components of the following URL: <code>https://www.cie.org.uk/igcse/ict.html</code> [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Protocol:</strong> <code>https</code></li>
+                <li><strong>Domain Name / Host:</strong> <code>www.cie.org.uk</code></li>
+                <li><strong>File Path / Resource:</strong> <code>/igcse/ict.html</code></li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q4: Evaluating Web Source Credibility</div>
+            <div class="q-text">Describe three checks a researcher should perform to determine if information on a website is reliable. [3]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Check the top-level domain type (e.g. academic <code>.edu</code> or official government <code>.gov</code> are generally more authoritative than unverified <code>.com</code> sites).</li>
+                <li>Verify author credentials, organisational affiliations, and corporate reputations.</li>
+                <li>Check the last updated date to ensure currency; cross-reference facts across independent reputable publications.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q5: Intranet vs Internet</div>
+            <div class="q-text">Give two differences between an intranet and the internet. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>The internet is globally public; an intranet is a private internal network accessible strictly to authenticated organisation personnel.</li>
+                <li>Intranets sit behind corporate firewalls hosting internal proprietary documents; internet content is hosted openly across world servers.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q6: File Transfer Protocol (FTP) Purpose</div>
+            <div class="q-text">State the purpose of File Transfer Protocol (FTP) in web development. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Used to reliably upload local website files (HTML, CSS, images) from a web developer's computer to a remote hosting web server.</li>
+                <li>Supports efficient batch downloading and directory file management between client and server.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q7: Email Protocols (POP3 vs IMAP)</div>
+            <div class="q-text">Explain one operational difference between Post Office Protocol (POP3) and Internet Message Access Protocol (IMAP). [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>POP3:</strong> Downloads emails from the mail server to the local client machine and typically deletes them from the server.</li>
+                <li><strong>IMAP:</strong> Synchronises emails directly on the remote server, keeping folder structures identical across multiple devices (phone, laptop).</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q8: Voice over Internet Protocol (VoIP)</div>
+            <div class="q-text">State two benefits of using VoIP instead of traditional landline telephone services. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li>Significantly cheaper or free call tariffs, especially for international communications.</li>
+                <li>Enables multimedia call features such as integrated screen-sharing, file sending, and video calling on the same line.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q9: Web Search Operators</div>
+            <div class="q-text">Explain how using quotation marks (e.g. <code>"computer memory"</code>) and the <code>NOT</code> boolean operator improves internet search efficiency. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Quotation marks:</strong> Forces the search engine to match the exact phrase with words in that precise sequence, cutting irrelevant pages.</li>
+                <li><strong>NOT operator:</strong> Excludes unwanted keywords from search results, filtering out unrelated topics.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="qa-card">
+            <div class="q-title">Q10: Wiki vs Blog Characteristics</div>
+            <div class="q-text">Distinguish between a blog and a wiki. [2]</div>
+            <details>
+              <summary>View Markscheme Points</summary>
+              <ul class="ms-list">
+                <li><strong>Blog:</strong> An online journal maintained typically by a single author with posts arranged in reverse chronological order; readers can only leave comments.</li>
+                <li><strong>Wiki:</strong> A collaborative website where any registered user can directly edit, add, or amend article content and structural links.</li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="hand">Good luck in your exam — you've got this! 📓</div>
+        <p style="margin-top:10px;">ICT CIE 0417 Exam Notebook · created and prepared by <strong>Tr. Wai Lin Htet</strong></p>
+      </footer>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  // Highlight the active chapter link on scroll
+  const links = document.querySelectorAll('#sideNav a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  function onScroll(){
+    let current = sections[0];
+    const y = window.scrollY + 140;
+    for(const sec of sections){
+      if(sec.offsetTop <= y) current = sec;
+    }
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+</script>
+
+<script>
+  // ===== Gated Entrance & Local Attendance Tracking =====
+  (function(){
+    const STORE_KEY = 'ict0417_users';
+    const SESSION_KEY = 'ict0417_session';
+    const MASTER_KEY = 'ict0417'; // Direct access bypass code (no registration required)
+
+    // Google Apps Script Web App URL
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweswRLHak84m6MkD8DrvxorOaH_ajSIut1uhAitFJDnF1Mrhg_m-vc7nfXaD7ibMBn/exec';
+
+    function logVisit(name, username, event){
+      if(!SCRIPT_URL) return;
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          name: name,
+          username: username,
+          timestamp: new Date().toISOString(),
+          event: event
+        })
+      }).catch(function(err){ console.warn('Attendance log failed:', err); });
+    }
+
+    const overlay = document.getElementById('authOverlay');
+    const userBox = document.getElementById('authUserBox');
+    const userNameEl = document.getElementById('authUserName');
+    const avatarEl = document.getElementById('authAvatar');
+    const logoutBtn = document.getElementById('authLogoutBtn');
+    const tabs = document.querySelectorAll('.auth-tab');
+    const forms = { register: document.getElementById('registerForm'), login: document.getElementById('loginForm') };
+    const loginMsg = document.getElementById('loginMsg');
+    const regMsg = document.getElementById('regMsg');
+
+    function getUsers(){
+      try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || []; }
+      catch(e){ return []; }
+    }
+    function saveUsers(list){ localStorage.setItem(STORE_KEY, JSON.stringify(list)); }
+    function simpleHash(str){
+      let h = 0;
+      for(let i=0;i<str.length;i++){ h = ((h<<5)-h) + str.charCodeAt(i); h |= 0; }
+      return String(h);
+    }
+    function showMsg(el, text, ok){
+      el.textContent = text;
+      el.className = 'auth-msg show ' + (ok ? 'ok' : 'err');
+    }
+
+    function unlockPage(name){
+      overlay.style.display = 'none';
+      userBox.style.display = 'flex';
+      userNameEl.textContent = name;
+      avatarEl.textContent = name.trim().charAt(0).toUpperCase() || '?';
+    }
+
+    function lockPage(){
+      overlay.style.display = 'flex';
+      userBox.style.display = 'none';
+    }
+
+    // Tab Switcher
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        Object.values(forms).forEach(f => f.classList.remove('active'));
+        forms[tab.dataset.tab].classList.add('active');
+      });
+    });
+
+    // Handle Registration
+    if(forms.register){
+      forms.register.addEventListener('submit', function(e){
+        e.preventDefault();
+        const name = document.getElementById('regName').value.trim();
+        const username = document.getElementById('regUser').value.trim().toLowerCase();
+        const pass = document.getElementById('regPass').value;
+        const btn = document.getElementById('regSubmitBtn');
+
+        if(!name || !username || !pass){
+          showMsg(regMsg, 'Please fill in all fields.', false); return;
+        }
+        const users = getUsers();
+        if(users.some(u => u.username === username)){
+          showMsg(regMsg, 'Username already exists — please log in.', false); return;
+        }
+
+        btn.innerText = 'Registering...';
+        btn.disabled = true;
+
+        users.push({ name, username, passHash: simpleHash(pass) });
+        saveUsers(users);
+        localStorage.setItem(SESSION_KEY, JSON.stringify({ name, username }));
+        logVisit(name, username, 'register');
+        showMsg(regMsg, 'Registration successful. Welcome, ' + name + '!', true);
+
+        setTimeout(() => {
+          btn.innerText = 'Proceed to Content';
+          btn.disabled = false;
+          unlockPage(name);
+        }, 600);
+      });
+    }
+
+    // Handle Login (Modified for Master Passcode "ict0417")
+    forms.login.addEventListener('submit', function(e){
+      e.preventDefault();
+      const rawUser = document.getElementById('loginUser').value.trim();
+      const username = rawUser.toLowerCase();
+      const pass = document.getElementById('loginPass').value.trim();
+      const users = getUsers();
+      const found = users.find(u => u.username === username);
+
+      // 1. Direct bypass with master key "ict0417"
+      if(pass === MASTER_KEY || username === MASTER_KEY){
+        const displayName = rawUser && username !== MASTER_KEY ? rawUser : 'Guest Student';
+        const finalUsername = username || 'guest_user';
+
+        localStorage.setItem(SESSION_KEY, JSON.stringify({ name: displayName, username: finalUsername }));
+        logVisit(displayName, finalUsername, 'quick-login');
+        showMsg(loginMsg, 'Welcome, ' + displayName + '!', true);
+
+        setTimeout(() => {
+          unlockPage(displayName);
+        }, 400);
+        return;
+      }
+
+      // 2. Standard registered user verification
+      if(found && found.passHash === simpleHash(pass)){
+        localStorage.setItem(SESSION_KEY, JSON.stringify({ name: found.name, username: found.username }));
+        logVisit(found.name, found.username, 'login');
+        showMsg(loginMsg, 'Welcome back, ' + found.name + '!', true);
+
+        setTimeout(() => {
+          unlockPage(found.name);
+        }, 400);
+        return;
+      }
+
+      showMsg(loginMsg, 'Invalid username or password. (Access Code: ict0417)', false);
+    });
+
+    // Logout Action
+    if(logoutBtn){
+      logoutBtn.addEventListener('click', function(){
+        localStorage.removeItem(SESSION_KEY);
+        lockPage();
+      });
+    }
+
+    // Page Load Authentication Check
+    let session = null;
+    try{ session = JSON.parse(localStorage.getItem(SESSION_KEY)); }catch(e){ session = null; }
+    if(session && session.name){
+      unlockPage(session.name);
+      logVisit(session.name, session.username, 'return-visit');
+    } else {
+      lockPage();
+    }
+  })();
+</script>
+</body>
+</html>
