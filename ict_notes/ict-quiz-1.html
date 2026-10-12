@@ -1,1 +1,209 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ICT 0417 Quiz – TrWaiLin</title>
+<style>
+:root{color-scheme:light;--bg:#fff;--c:#fff;--t:#1d2430;--m:#667085;--b:#d9dee7;--ok:#16794c;--no:#b42318;--ac:#2f5bd8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--t);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:8px 0 2px}.sub{color:var(--m);font-size:13px}
+.card{background:var(--c);border:1px solid var(--b);border-left-width:4px;border-radius:10px;padding:12px 14px;margin:10px 0}
+.card.ok{border-left-color:var(--ok)}.card.no{border-left-color:var(--no)}
+label.o{display:block;padding:5px 0;cursor:pointer}
+input.nm,textarea{width:100%;box-sizing:border-box;padding:10px;margin:10px 0 0;border:1px solid var(--b);border-radius:8px;background:var(--c);color:var(--t);font:inherit}
+button{background:var(--ac);color:#fff;border:0;border-radius:8px;padding:10px 18px;font:inherit;font-weight:600;cursor:pointer;margin:6px 8px 6px 0}
+button.g{background:transparent;color:var(--ac);border:1px solid var(--ac)}
+.fb{font-size:13px;margin-top:6px}.ok .fb{color:var(--ok)}.no .fb{color:var(--no)}
+#bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:2;background:var(--c);border:1px solid var(--b);border-radius:10px;padding:8px 14px;margin:10px 0;display:flex;justify-content:space-between;font-weight:600}
+#res{display:none;font-size:18px}
+</style></head><body><main>
+<h1>ICT 0417 Quiz</h1>
+<div class="sub">Teacher: Sayar WaiLinHtet · <span id="n"></span> questions · Select the best answer(s), then press Submit.</div>
+<input id="nm" class="nm" placeholder="Student name / Class" autocomplete="off">
+<div id="bar"><span id="pg">Answered 0</span><span id="tm">00:00</span></div>
+<div id="res" class="card"></div>
+<div id="qs"></div>
+<button id="go">Submit</button><button class="g" id="rs">Try again</button>
+<div id="sub" class="card" style="display:none"><b>Send your result to your teacher (Google Classroom)</b><div class="sub">Copy → paste in Classroom private comment, or Download the file and attach it, then Turn in.</div><div class="sub" style="margin-top:8px">Your result badge (long-press the image to save on phone):</div><img id="bd" alt="Result badge" style="max-width:100%;width:340px;border:1px solid var(--b);border-radius:12px;display:block;margin:8px 0"><button id="dp">Download badge (PNG)</button><textarea id="rep" readonly rows="8"></textarea><button id="cp">Copy result</button><button id="dl" class="g">Download (.txt)</button><span id="st" class="sub"></span></div>
+<script>
+const Q0=[
+[1,"Which type of memory is volatile and stores data and instructions currently being used by a computer?",["Blu-ray disc","ROM","RAM","SSD"],"c"],
+[2,"Which component is a printed circuit board containing the CPU and other computer components?",["Motherboard","Graphics card","Network interface card","Sound card"],"a"],
+[3,"What is the main purpose of a Network Interface Card (NIC)?",["Convert documents into images","Connect a computer to a network","Print documents","Store films permanently"],"b"],
+[4,"Why must analogue data usually be converted into digital data before a computer processes it?",["Computers process digital data","Analogue data is always encrypted","Digital data cannot be stored","Computers process analogue signals only"],"a"],
+[5,"Which description best distinguishes VR from AR?",["VR replaces the real environment, while AR adds digital content to it","VR adds digital content, while AR replaces the real environment","VR prints 3D objects, while AR scans paper","VR connects computer parts, while AR displays images on an LCD"],"a"],
+[6,"Which TWO are possible disadvantages of augmented reality?",["Immersive gaming can create safety risks","On-screen information can distract users","AR always works without electronic devices","AR can never display useful warnings"],"ab"],
+[7,"Which user interface is commonly described as a WIMP interface?",["Dialogue-based","Command-line","Gesture-based","Graphical user interface"],"d"],
+[9,"Which sequence best describes the CPU's processing of an instruction?",["Decode, execute, fetch","Fetch, decode, execute","Execute, decode, fetch","Store, print, scan"],"b"],
+[10,"Which output device produces solid objects using CAD software?",["LCD screen","Digital projector","Laser printer","3D printer"],"d"],
+[11,"Which technology reads marks made in specific positions on a printed form?",["OMR","QR code reader","OCR","RFID"],"a"],
+[12,"Which statement about barcode and RFID readers is correct?",["Barcode readers use radio waves to read tags","Both require a visible printed code","RFID can read multiple tags at the same time","Barcode readers always read damaged codes accurately"],"c"],
+[13,"What is the main purpose of an RFID tag attached to a warehouse product?",["Print the product label","Convert analogue sound to digital","Identify the product electronically","Display the product on a monitor"],"c"],
+[14,"Which storage medium uses laser light with a wavelength of approximately 405 nm?",["Magnetic hard disk platter","Blu-ray disc","Magnetic tape"],"b"],
+[15,"What does latency mean for a magnetic hard disk?",["Speed at which data transfers","Total storage capacity","Number of files saved","Waiting time while the platter rotates"],"d"],
+[16,"Which TWO are advantages of cloud storage for a school compared with only a fixed local SSD?",["Files can be accessed from internet-connected devices","It never requires an internet connection","Capacity can increase without another local drive","The school controls all physical servers","Files are available only from one computer"],"ac"],
+[17,"Which is a disadvantage of cloud storage rather than a local SSD?",["It always deletes backups immediately","Files can never be shared","It cannot be expanded","A reliable internet connection may be needed"],"d"],
+[18,"Which password is the strongest?",["RogerPassword","6lRg08&","R08123","Roger2008"],"b"],
+[19,"Which printer ejects tiny droplets of ink onto paper?",["Inkjet printer","Laser printer","Digital projector","3D printer"],"a"],
+[20,"Which printer uses electrically charged powdered toner fused onto paper?",["Laser printer","3D printer","Inkjet printer"],"a"],
+[21,"What does a network hub do in a LAN?",["Recognises fingerprints","Broadcasts incoming data to connected ports","Stores all files permanently","Encrypts every message with a unique key"],"b"],
+[22,"Why can losing a contactless bank card be a security risk?",["It can complete transactions without insertion","It permanently stores files","It requires a printer to process payments","It prevents all transactions after being lost"],"a"],
+[23,"Which are biometric methods?",["Fingerprint scanning","Facial recognition","A password phrase","A network hub"],"ab"],
+[29,"Which display uses the light-modulating properties of liquid crystals?",["Scanner","RFID reader","LCD screen","Laser printer"],"c"],
+[30,"Which input device converts a paper photograph into a computer-readable file?",["Scanner","Speaker","Plotter","Projector"],"a"],
+[31,"After scanning a printed page, which technology makes the words editable text?",["Optical Character Recognition","Radio-frequency identification","Liquid-crystal display","Powdered-toner printing"],"a"],
+[36,"Which device magnifies an image from a computer and displays it on a large screen?",["Scanner","Inkjet printer","LCD monitor","Digital projector"],"d"],
+[38,"What is the main function of OCR?",["Read radio-frequency tags","Detect marks in fixed positions","Identify products with radio waves","Recognise printed or handwritten characters"],"d"],
+[39,"Which TWO statements correctly describe OMR?",["Commonly used for multiple-choice answer sheets","It always recognises complete sentences","It detects marks in specified positions","It identifies products using radio waves"],"ac"],
+[40,"Which is a key advantage of OCR compared with OMR?",["Detects marks only in fixed positions","Requires an RFID tag","Reads every document without errors","Converts recognised text into editable text"],"d"],
+[41,"Which technology is a matrix of dark squares on a light background readable by a smartphone camera?",["Magnetic stripe","OMR form","RFID chip","QR code"],"d"],
+[42,"Which input device takes physical readings from the surroundings and sends data to a computer?",["Projector","Speaker","Printer","Sensor"],"d"],
+[47,"A warehouse wants to identify tagged boxes even when tags are not directly visible. Which technology?",["Optical mark recognition","Optical character recognition","Radio-frequency identification","Magnetic stripe scanning"],"c"],
+[48,"Which storage device generally uses rotating magnetic platters?",["RAM module","Blu-ray disc","Magnetic hard disk drive","Solid-state drive"],"c"],
+[49,"What is a solid-state drive (SSD)?",["An optical disc read by a laser","A storage device using solid-state flash memory","A volatile memory module","A printer using liquid or powdered ink"],"b"],
+[50,"A tape stores songs one after another; to find the fifth song, earlier songs are passed first. Which access?",["Random access","Serial access","Optical access","Wireless access"],"b"],
+[51,"Which device is fast, quiet and movement-resistant because it has no rotating parts?",["Magnetic hard disk drive","Solid-state drive","Blu-ray disc","RAM module"],"b"],
+[52,"How does a barcode reader normally work?",["Reads several barcodes at once","Identifies products through radio waves","Usually needs the barcode visible to the reader","Reads every barcode despite severe damage"],"c"],
+[55,"Which phrase describes the time taken to locate data on a storage medium?",["File size","Storage capacity","Data access time","Data transfer rate"],"c"],
+[56,"What does data transfer rate measure?",["How quickly data moves between devices or components","How long a password is stored","How many platters a disk contains","How many files are in a folder"],"a"],
+[57,"Advantage of storing movies on removable Blu-ray discs instead of only an internal hard disk?",["Always faster than every SSD","Cannot be transported","Portable and can be stored separately","Automatically increase RAM"],"c"],
+[58,"What normally happens to data on backing storage when a computer is switched off?",["It is normally retained","It is always erased","It moves into RAM","It becomes available only through RFID"],"a"],
+[59,"Which statement about cloud storage is correct?",["Files are always available without internet","Files can never be accessed from another device","Access may require an internet connection","Files are saved on Blu-ray discs"],"c"],
+[61,"Device X finds data quickly; Device Y moves large files faster. Which measures?",["X: data transfer rate; Y: file size","X: file size; Y: storage capacity","X: storage capacity; Y: data access time","X: data access time; Y: data transfer rate"],"d"],
+[62,"What is a MAC address associated with?",["A network interface","A printer cartridge","A password length","A cloud storage account"],"a"],
+[64,"Which password is the strongest?",["password","12345678","111111111","6IRrg08&"],"d"],
+[65,"Why avoid passwords based on names or birthdays?",["They are easy to guess","They cannot be typed","They use too much storage","They prevent internet access"],"a"],
+[66,"Which action helps protect a password from being intercepted?",["Email it to everyone","Use a secure, encrypted connection","Write it on a public noticeboard","Use the same password everywhere"],"b"],
+[67,"What is Bluetooth commonly used for?",["Connecting nearby devices wirelessly","Storing files permanently","Printing through a telephone line","Scanning documents into paper"],"a"],
+[72,"What should you do first to pair Bluetooth headphones with a computer?",["Delete the computer's files","Enable pairing mode on the headphones","Remove the network card","Format the hard disk"],"b"],
+[73,"After making Bluetooth headphones discoverable, what next?",["Open Bluetooth settings and search for devices","Turn off Bluetooth on the computer","Remove the battery permanently","Install a new hard disk"],"a"],
+[74,"What is electronic conferencing?",["A meeting using electronic communication","Printing several documents at once","Scanning exam answer sheets","Saving data on a Blu-ray disc"],"a"],
+[75,"Which device captures a participant's image in a video conference?",["Microphone","Webcam","Speaker","Network hub"],"b"],
+[76,"Which device captures a participant's voice?",["Monitor","Projector","Microphone","Printer"],"c"],
+[77,"Which allows a participant to hear others?",["Speakers or headphones","Document scanner","OMR reader","NIC only"],"a"],
+[78,"Which equipment can provide internet connectivity for an online meeting?",["Network router","Barcode label","Ink cartridge","Paper tray"],"a"],
+[80,"Which option contains only biometric methods?",["Fingerprint and facial recognition","Password and username","Barcode and QR code","Hub and network interface card"],"a"],
+[81,"Main purpose of biometric authentication?",["Identify or verify a person using characteristics","Increase printer speed","Sort files alphabetically","Connect a computer to a projector"],"a"],
+[82,"What does a zero-login system aim to do?",["Require a new password for every action","Pass authentication information from an initial login to a host computer","Remove all security controls","Prevent communication between computers"],"b"],
+[83,"Possible disadvantage of contactless bank cards?",["They cannot communicate wirelessly","A lost card might be misused","They require a keyboard","They cannot make payments"],"b"],
+[84,"Advantage of electronic conferencing?",["Participants must travel to one room","People in different locations can communicate","Everyone needs identical equipment","Meetings only inside one building"],"b"],
+[89,"Which storage uses flash memory and has no moving mechanical parts?",["HDD","SSD","Magnetic tape","DVD-ROM"],"b"],
+[90,"Advantage of an SSD over an HDD?",["Always costs less per gigabyte","Has rotating magnetic platters","Faster data access","More moving parts"],"c"],
+[91,"A possible disadvantage of flash memory in an SSD?",["Cannot store digital files","Limited number of write/erase cycles","Requires magnetic tape","Loses all data when power is off"],"b"],
+[92,"Which optical disc uses a blue-violet laser (~405 nm)?",["Blu-ray disc","CD-ROM","DVD","Floppy disk"],"a"],
+[93,"Why is Blu-ray suitable for high-definition video?",["Stores only plain text","Greater capacity than CDs and DVDs","Uses volatile RAM","Works without a laser"],"b"],
+[96,"Which storage usually contains moving parts and magnetic platters?",["Solid-state drive","USB flash drive","Hard disk drive","Memory card"],"c"],
+[97,"Advantage of cloud storage?",["Files can be accessed from different locations using the internet","Never accessed by unauthorised people","Never requires an internet connection","Users must carry a physical device"],"a"],
+[99,"Which is an example of backing storage?",["RAM","CPU register","Cache memory","USB flash drive"],"d"],
+[100,"Which statement about RAM is correct?",["It is normally volatile memory","It is an optical disc","It retains data when power is removed","It is used only for printing"],"a"],
+[101,"Main purpose of a graphics card?",["Connect a keyboard to Bluetooth","Process and produce graphical output","Store files without power","Provide internet access"],"b"],
+[105,"Main purpose of a motherboard?",["Connect major computer components","Print documents with coloured ink","Store files only in the cloud","Read QR codes"],"a"],
+[106,"Which device converts a digital image into a physical 3D object?",["Laser printer","OMR reader","3D printer","Digital projector"],"c"],
+[112,"Someone uses the same short password everywhere and shares it publicly. Best improvement?",["Replace it with a strong, hard-to-guess password","Replace it with their birth date","Keep it short","Share the new one with classmates"],"a"],
+[114,"Main purpose of RAM?",["Store data temporarily for active programs","Connect computers across a network","Produce objects from digital designs","Recognise printed characters"],"a"],
+[117,"Which TWO accurately describe RFID compared with barcode scanning?",["Uses radio-frequency communication to identify tags","Can read multiple tags at the same time","Normally requires the code to face the reader","Designed mainly to print scanned documents"],"ab"],
+[118,"Why can an SSD provide faster data access than an HDD?",["Uses flash memory without rotating platters","Stores files on magnetic tape","Reads files only in fixed sequence","Requires a mechanical read/write head"],"a"],
+[120,"Which TWO are for capturing or displaying information rather than long-term storage?",["A scanner captures information from a document","A digital projector displays computer-generated information","A magnetic hard disk stores files","An SSD stores data using flash memory"],"ab"],
+[125,"Storing high-definition video on an optical disc: which choice and why?",["Blu-ray, because it has high storage capacity","CD-ROM, because it uses volatile memory","DVD, because it stores less data than Blu-ray","Floppy disk, because it uses a blue-violet laser"],"a"],
+[126,"Which statements correctly describe cloud storage?",["Files can be accessed from different locations","Access depends partly on an internet connection","Files must remain on one local computer","Access is always possible without network service"],"ab"],
+[128,"Setting up wireless headphones: which procedure most likely connects them?",["Enable pairing mode and search for devices","Open a spreadsheet","Insert a disc","Connect a printer and scan"],"a"],
+[129,"Employees in different locations communicate electronically. Which technology?",["Video-conferencing system","Fingerprint-recognition system","Local document scanner","3D printer"],"a"],
+[130,"A museum overlays digital information on real exhibits. Which technology?",["Augmented reality, because it overlays digital content","Virtual reality, because it replaces the real-world view","Cloud storage, because it stores files remotely","Biometric authentication, because it verifies identity"],"a"],
+[8,"Which output device produces solid objects using computer-aided design (CAD) software?",["A three-dimensional printer","A laser printer","A computer monitor","A flatbed plotter"],"a"],
+[24,"Which are advantages of using cloud storage instead of a local drive?",["Files can be accessed from different devices with internet access","It never requires an internet connection","Storage capacity can be increased without another local drive","The school always controls the physical servers"],"ac"],
+[25,"Which is a disadvantage of using cloud storage rather than a local SSD?",["Cloud storage always deletes backups immediately","Cloud files can never be shared","Cloud storage cannot be expanded","A reliable internet connection may be needed to access files"],"d"],
+[26,"A student needs to print a high-quality document quickly using powdered toner rather than liquid ink. Which device?",["An inkjet printer","A laser printer","A digital projector","A 3D printer"],"b"],
+[27,"Which printer creates an image by ejecting tiny droplets of ink onto paper?",["Inkjet printer","Laser printer","Digital projector","3D printer"],"a"],
+[28,"Which printer uses electrically charged powdered toner that is fused onto paper?",["Laser printer","3D printer","Inkjet printer","Dot-matrix printer"],"a"],
+[32,"Which two steps are most appropriate for turning a printed document into editable digital text?",["Scan the printed document","Use Optical Character Recognition","Display it with an LCD screen","Print it with a laser printer"],"ab"],
+[33,"A contactless bank card can complete a transaction without being inserted into a card reader. What is a security risk if the card is lost?",["Another person may use the card","The card will print extra documents","The card will become a projector","The card will scan paper files"],"a"],
+[34,"Which two are examples of biometric authentication methods?",["Fingerprint scanning","Facial recognition","Laser printing","Contactless payment"],"ab"],
+[35,"Which display uses the light-modulating properties of liquid crystals?",["A scanner reads printed images","An RFID reader detects tagged objects","An LCD screen forms visible images","A laser printer produces paper copies"],"c"],
+[37,"Which input device converts a physical photograph or document into a computer-readable file?",["A scanner captures the physical document","A speaker converts data into sound","A plotter draws large technical designs","A projector enlarges images for viewing"],"a"],
+[43,"Which TWO statements correctly describe optical mark recognition (OMR)?",["It is commonly used for multiple-choice answer sheets","It always recognises complete sentences","It detects marks in specified positions","It identifies products using radio waves"],"ac"],
+[44,"Which is a key advantage of optical character recognition (OCR) compared with OMR?",["OCR detects marks in fixed positions","OCR requires an RFID tag","OCR converts recognised text into editable text","OCR reads every document without errors"],"c"],
+[45,"Which technology uses a matrix of dark squares on a light background that can be read with a smartphone camera?",["Magnetic stripe","OMR form","RFID chip","QR code"],"d"],
+[46,"Which input device takes physical readings from the surroundings and sends the data to a computer?",["A sensor","A magnetic stripe","A QR code","An optical disc"],"a"],
+[53,"Which technology uses radio-frequency communication to identify tags?",["Barcode scanning","Optical character recognition","Magnetic disk storage","Radio-frequency identification"],"d"],
+[54,"Which storage device generally uses rotating magnetic platters to store data?",["A RAM module","A Blu-ray disc","A magnetic hard disk drive","A solid-state drive"],"c"],
+[60,"A shop wants to identify a product whose printed barcode must be visible to the scanning device. Which technology best fits?",["A barcode reader","An RFID tag reader","A magnetic hard disk","A cloud storage service"],"a"],
+[63,"What does a network hub do when it receives data?",["Sends it only to the intended device","Prints the data","Broadcasts the data to connected devices","Encrypts all files"],"c"],
+[68,"A hub receives a data packet intended for one computer on a local network. What is the most likely result?",["The hub sends it to one named computer","The hub broadcasts it to connected devices","The hub converts it into a printed document","The hub stores it as an encrypted file"],"b"],
+[69,"Which password choices best combine the security principles represented by the examples?",["Use a mixture of letters, numbers, and symbols","Use a person's name as the password","Avoid information that others can easily discover","Use the same simple password for every account","Choose a password that is difficult to guess"],"ace"],
+[70,"Which is an advantage of storing movies on removable Blu-ray discs rather than only on an internal hard disk?",["Blu-ray discs provide faster access than every SSD","Blu-ray discs are portable and stored separately","Blu-ray discs cannot be transported between computers","Blu-ray discs automatically increase the computer's RAM"],"b"],
+[71,"A MAC address is most directly associated with which component or feature?",["A network interface card","A removable Blu-ray disc","A computer's random-access memory","A Bluetooth headphone battery"],"a"],
+[79,"Which of the following is a biometric authentication method?",["Fingerprint recognition","A printed barcode","A file extension","A storage platter"],"a"],
+[85,"What is Bluetooth commonly used for?",["Connecting nearby wireless devices","Printing large posters only","Storing data on magnetic platters","Converting analogue signals to digital form"],"a"],
+[86,"What should you normally do first to pair Bluetooth headphones with a computer?",["Enable pairing mode on the headphones","Delete all files from the computer","Remove the computer's network card","Format the computer's hard disk"],"a"],
+[87,"After making Bluetooth headphones discoverable, what should you generally do next?",["Open Bluetooth settings and search for devices","Turn off Bluetooth on the computer","Remove the headphones' battery permanently","Install a new hard disk in the computer"],"a"],
+[88,"What is electronic conferencing?",["A meeting using electronic communication","A process for printing several documents","A requirement to use paper letters","A system that cannot transmit sound"],"a"],
+[94,"What does data transfer rate measure?",["The physical size of a storage device","The number of users on a network","The speed at which data is transferred","The number of folders on a computer"],"c"],
+[95,"What does data access time describe?",["The time taken to locate and begin accessing required data","The total capacity available on a hard disk","The age of the computer storing the data","The number of characters in a password"],"a"],
+[98,"Which is a possible disadvantage of cloud storage?",["It cannot store any files","It cannot be used for backups","Access may be affected by internet connection problems","Files are stored only on the user's computer"],"c"],
+[102,"A student needs to open files while travelling between several locations. Which storage choice best supports this need, provided an internet connection is available?",["Cloud storage","A CPU register","Cache memory","A graphics card"],"a"],
+[103,"A computer loses all information held in a memory type when its power is switched off. Which memory type is most likely being described?",["RAM","A hard disk drive","A USB flash drive","Cloud storage"],"a"],
+[104,"A user wants to improve the computer's ability to process images and display graphical output. Which component should the user consider?",["A graphics card","A memory card","A network router","A CPU register"],"a"],
+[107,"Which output device displays images using liquid crystal display technology?",["An LCD screen","A barcode reader","A computer microphone","A document scanner"],"a"],
+[108,"A school needs to produce many clear printed worksheets quickly. Which device is most suitable?",["A laser printer","An OMR reader","A temperature sensor","A document scanner"],"a"],
+[109,"Which statement best describes the difference between virtual reality and augmented reality?",["VR replaces the real environment, while AR adds digital content to it","VR adds digital content, while AR replaces the real environment","VR prints three-dimensional objects, while AR scans paper documents","VR connects computer parts, while AR displays images on an LCD"],"a"],
+[110,"A computer must connect its processor, memory, storage, and other internal components. Which part provides the necessary platform and connections?",["The motherboard","The laser printer","The LCD screen","The document scanner"],"a"],
+[111,"A student wants to turn a paper photograph into a digital file and then view the file on a screen. Which pair of devices is needed?",["A scanner and an LCD screen","A projector and a laser printer","A 3D printer and an OMR reader","A speaker and a barcode reader"],"a"],
+[113,"Which statement correctly distinguishes virtual reality (VR) from augmented reality (AR)?",["VR replaces the real-world view; AR overlays digital content.","VR overlays digital content; AR replaces the real-world view.","VR prints physical documents; AR stores digital documents.","VR connects networks; AR identifies electronic products."],"a"],
+[115,"Which sequence describes the basic instruction cycle carried out by a processor?",["Fetch, decode, and execute","Scan, print, and project","Store, label, and transmit","Read, format, and delete"],"a"],
+[116,"A school needs to turn a paper document into an electronic file that can be edited. Which technology is most suitable?",["Optical character recognition (OCR)","Optical mark recognition (OMR)","A quick-response (QR) code","A magnetic hard disk drive"],"a"],
+[119,"A media archive must retrieve records in order, starting at the beginning and continuing until the required record is reached. Which storage method is being used?",["Sequential access","Random access","Optical recognition","Radio-frequency access"],"a"],
+[121,"What is the main purpose of a network interface?",["To connect a computer to a network","To store files on a computer","To display images on a screen","To print documents from a computer"],"a"],
+[122,"Which device broadcasts data to connected devices on a network?",["A network router","A computer monitor","A fingerprint scanner","A solid-state drive"],"a"],
+[123,"Which storage device uses flash memory and has no moving parts?",["A solid-state drive","A hard disk drive","A magnetic tape drive","An optical disc drive"],"a"],
+[124,"Why can an SSD provide faster data access than an HDD?",["An SSD has no moving mechanical parts","An SSD uses a magnetic read-write head","An SSD stores data on rotating platters","An SSD requires an optical laser"],"a"],
+[127,"A user wants to reduce the risk that someone could guess their account password. Which action is most appropriate?",["Use a strong, hard-to-guess password","Use a short password based on their name","Reuse the same password for every account","Choose a password made only of common words"],"a"]
+];
+const DROP=new Set([8,24,25,27,28,32,33,34,35,37,43,44,45,46,54,63,68,70,85,86,87,88,94,95,109,113,115,121,123,124]);
+const Q=Q0.filter(q=>!DROP.has(q[0]));
+const L='abcde',$=id=>document.getElementById(id),N=Q.length;
+$('n').textContent=N;
+const order=Q.map((_,i)=>i);for(let i=N-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}
+const P={};const shuf=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+order.forEach((k,x)=>{const q=Q[k],m=q[3].length>1,d=document.createElement('div');P[k]=shuf(q[2].map((_,i)=>i));d.className='card';d.id='c'+k;
+d.innerHTML='<div><b>'+(x+1)+'.</b> '+q[1]+(m?' <i class="sub">(select all correct answers)</i>':'')+'</div>'+P[k].map((oi,i)=>'<label class="o"><input type="'+(m?'checkbox':'radio')+'" name="q'+k+'" value="'+oi+'"> '+L[i]+') '+q[2][oi]+'</label>').join('')+'<div class="fb"></div>';$('qs').appendChild(d)});
+const sel=k=>[...document.querySelectorAll('input[name="q'+k+'"]:checked')].map(e=>L[+e.value]).join('');
+const T0=Date.now();let done=false,secs=0;
+const fmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+const tick=setInterval(()=>{secs=Math.round((Date.now()-T0)/1000);$('tm').textContent=fmt(secs)},1000);
+document.addEventListener('change',()=>{if(!done)$('pg').textContent='Answered '+order.filter(k=>sel(k)).length+' / '+N});
+let REP='',FN='result.txt';
+$('go').onclick=()=>{const nm=$('nm'),n=nm.value.trim(),R=$('res');
+if(!n){R.style.display='block';R.innerHTML='<span style="color:var(--no)">Please enter your name first.</span>';nm.focus();window.scrollTo({top:0,behavior:'smooth'});return}
+if(done)return;done=true;clearInterval(tick);secs=Math.round((Date.now()-T0)/1000);let tot=0;const rows=[];
+order.forEach(k=>{const q=Q[k],s=sel(k),ok=s===q[3],c=$('c'+k);if(ok)tot++;c.className='card '+(ok?'ok':'no');
+c.querySelector('.fb').textContent=ok?'✓ Correct':'✗ Correct answer: '+q[3].split('').map(y=>L[P[k].indexOf(L.indexOf(y))]+') '+q[2][L.indexOf(y)]).join('; ');
+c.querySelectorAll('input').forEach(e=>e.disabled=true);rows.push([q[0],s?s.split('').map(y=>q[2][L.indexOf(y)]).join(' + '):'(no answer)',q[3].split('').map(y=>q[2][L.indexOf(y)]).join(' + '),ok])});
+rows.sort((a,b)=>a[0]-b[0]);const p=Math.round(tot*100/N);
+R.style.display='block';R.innerHTML='Score: <b>'+tot+' / '+N+'</b> ('+p+'%) · Time: '+fmt(secs);
+REP='ICT 0417 Quiz – Auto-marked result\nTeacher: Sayar WaiLinHtet\nStudent Name: '+n+'\nMarks: '+tot+' / '+N+' ('+p+'%)\nSubmitted: '+new Date().toLocaleString()+'\nTime taken: '+fmt(secs)+'\n\nPaper Q#: result (wrong answers show: answered | correct)\n'+rows.map(r=>r[0]+': '+(r[3]?'✓':'✗ '+r[1]+' | '+r[2])).join('\n');
+FN='ICT-0417-'+n.replace(/[^\p{L}\p{N}]+/gu,'_')+'.txt';$('rep').value=REP;badge(n,tot,p);$('sub').style.display='block';window.scrollTo({top:0,behavior:'smooth'})};
+$('rs').onclick=()=>location.reload();
+const st=$('st');
+let BL=null;
+function badge(n,tot,p){const c=document.createElement('canvas');c.width=800;c.height=1000;const x=c.getContext('2d');
+const col=p>=90?'#16794c':p>=75?'#2f5bd8':p>=60?'#b54708':p>=40?'#7a4bd6':'#b42318';
+const lab=p>=90?'Excellent':p>=75?'Very Good':p>=60?'Good':p>=40?'Keep Practising':'Try Again';
+x.fillStyle='#fff';x.fillRect(0,0,800,1000);x.strokeStyle=col;x.lineWidth=14;x.strokeRect(20,20,760,960);
+x.fillStyle=col;x.fillRect(20,20,760,170);x.textAlign='center';x.fillStyle='#fff';
+x.font='bold 54px system-ui,sans-serif';x.fillText('ICT 0417 QUIZ',400,105);x.font='28px system-ui,sans-serif';x.fillText('Result Badge',400,155);
+x.beginPath();x.arc(400,420,170,0,Math.PI*2);x.fillStyle=col;x.fill();
+x.beginPath();x.arc(400,420,148,0,Math.PI*2);x.fillStyle='#fff';x.fill();
+x.fillStyle=col;x.font='bold 110px system-ui,sans-serif';x.fillText(p+'%',400,450);
+x.font='bold 30px system-ui,sans-serif';x.fillText(tot+' / '+N,400,500);
+x.font='bold 46px system-ui,sans-serif';x.fillText(lab,400,680);
+x.fillStyle='#1d2430';x.font='bold 44px system-ui,sans-serif';x.fillText(n,400,765,680);
+x.fillStyle='#667085';x.font='28px system-ui,sans-serif';
+x.fillText('Time taken: '+fmt(secs),400,825);x.fillText(new Date().toLocaleDateString(),400,868);x.fillText('Teacher: Sayar WaiLinHtet',400,925);
+$('bd').src=c.toDataURL('image/png');c.toBlob(b=>{BL=b},'image/png')}
+$('dp').onclick=async()=>{try{await DL.save({filename:FN.replace(/\.txt$/,'.png'),data:BL});st.textContent='Saved ✓'}catch(e){st.textContent=e&&e.code==='declined'?'':'Long-press the badge image to save it'}};
+$('cp').onclick=async()=>{try{await navigator.clipboard.writeText(REP);st.textContent='Copied ✓'}catch(e){$('rep').select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}st.textContent=ok?'Copied ✓':'Text selected – copy it manually'}};
+let DL=null;(async()=>{try{DL=window.claude?await claude.use('downloads'):null}catch(e){}if(!DL){$('dl').style.display='none';$('dp').style.display='none'}})();
+$('dl').onclick=async()=>{try{await DL.save({filename:FN,data:REP});st.textContent='Saved ✓'}catch(e){st.textContent=e&&e.code==='declined'?'':'Download unavailable – use Copy'}};
+</script></main></body></html>
 
