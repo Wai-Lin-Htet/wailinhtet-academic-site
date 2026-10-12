@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CS 0478 Quiz – TrWaiLin</title>
+<style>
+:root{color-scheme:light;--bg:#fff;--c:#fff;--t:#1d2430;--m:#667085;--b:#d9dee7;--ok:#16794c;--no:#b42318;--ac:#2f5bd8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--t);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:8px 0 2px}.sub{color:var(--m);font-size:13px}
+.card{background:var(--c);border:1px solid var(--b);border-left-width:4px;border-radius:10px;padding:12px 14px;margin:10px 0}
+.card.ok{border-left-color:var(--ok)}.card.no{border-left-color:var(--no)}
+label.o{display:block;padding:5px 0;cursor:pointer}
+input.nm,textarea{width:100%;box-sizing:border-box;padding:10px;margin:10px 0 0;border:1px solid var(--b);border-radius:8px;background:var(--c);color:var(--t);font:inherit}
+button{background:var(--ac);color:#fff;border:0;border-radius:8px;padding:10px 18px;font:inherit;font-weight:600;cursor:pointer;margin:6px 8px 6px 0}
+button.g{background:transparent;color:var(--ac);border:1px solid var(--ac)}
+.fb{font-size:13px;margin-top:6px}.ok .fb{color:var(--ok)}.no .fb{color:var(--no)}
+#bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:2;background:var(--c);border:1px solid var(--b);border-radius:10px;padding:8px 14px;margin:10px 0;display:flex;justify-content:space-between;font-weight:600}
+#res{display:none;font-size:18px}
+</style></head><body><main>
+<h1>CS 0478 Quiz</h1>
+<div class="sub">Teacher: Sayar WaiLinHtet · <span id="n"></span> questions · Select the best answer(s), then press Submit.</div>
+<input id="nm" class="nm" placeholder="Student name / Class" autocomplete="off">
+<div id="bar"><span id="pg">Answered 0</span><span id="tm">00:00</span></div>
+<div id="res" class="card"></div>
+<div id="qs"></div>
+<button id="go">Submit</button><button class="g" id="rs">Try again</button>
+<div id="sub" class="card" style="display:none"><b>Send your result to your teacher (Google Classroom)</b><div class="sub">Copy → paste in Classroom private comment, or Download the file and attach it, then Turn in.</div><div class="sub" style="margin-top:8px">Your result badge (long-press the image to save on phone):</div><img id="bd" alt="Result badge" style="max-width:100%;width:340px;border:1px solid var(--b);border-radius:12px;display:block;margin:8px 0"><button id="dp">Download badge (PNG)</button><textarea id="rep" readonly rows="8"></textarea><button id="cp">Copy result</button><button id="dl" class="g">Download (.txt)</button><span id="st" class="sub"></span></div>
+<script>
+const Q0=[
+[1,"What is the denary value of the binary number 00101101?",["37", "45", "53", "77"],"b"],
+[2,"What is the 8-bit binary representation of the denary number 65?",["01000001", "01000010", "00100001", "01100101"],"a"],
+[3,"Convert denary 109 into an 8-bit binary number:",["01101101", "01110101", "01101011", "01011101"],"a"],
+[4,"Convert the binary number 100111100000 to hexadecimal:",["9E0", "9F0", "8E1", "9D0"],"a"],
+[5,"What is the 12-bit binary representation of the hexadecimal value 404?",["0100 0000 0100", "0010 0000 0010", "0100 0000 0010", "1000 0000 1000"],"a"],
+[6,"Convert the hexadecimal error code 12B into 12-bit binary:",["0001 0010 1011", "0001 0010 1100", "0001 0011 1011", "0010 0001 1011"],"a"],
+[7,"What is the denary equivalent of the hexadecimal number 20?",["20", "32", "16", "24"],"b"],
+[8,"Convert denary 165 to hexadecimal:",["95", "A5", "B5", "A6"],"b"],
+[9,"Why is hexadecimal frequently used by programmers instead of binary?",["It takes less computer storage in RAM", "It is shorter, easier to read, and reduces transcription errors", "Computers process hexadecimal faster than binary", "It increases network transmission bandwidth"],"b"],
+[10,"Which of the following is not a valid hexadecimal number?",["1A3F", "90BC", "4G12", "FACE"],"c"],
+[11,"What is the primary purpose of two’s complement representation in computer systems?",["To represent fractional numbers", "To represent positive and negative integers in binary", "To compress text files", "To encrypt sensitive network data"],"b"],
+[12,"What is the denary value of the 8-bit two's complement integer 10100011?",["-93", "-99", "163", "-35"],"a"],
+[13,"Convert the denary value -5 to an 8-bit two’s complement binary number:",["10000101", "11111011", "11111010", "11110101"],"b"],
+[14,"Performing a logical left shift of 1 place on a binary number corresponds to:",["Multiplying by 2", "Dividing by 2", "Multiplying by 4", "Adding 2"],"a"],
+[15,"What is the effect of a logical left shift of two places on a binary integer?",["Multiplies by 2", "Multiplies by 4", "Divides by 4", "Adds 4"],"b"],
+[16,"What is the result of applying a logical right shift of 2 places to 01111001?",["00011110", "00111100", "11100100", "00111101"],"a"],
+[17,"When binary addition results in a final carry bit beyond the allocated register width, this error is called:",["Underflow error", "Overflow error", "Truncation error", "Syntax error"],"b"],
+[18,"What is the result of binary addition: 01010100 + 01110100?",["11001000", "11011000", "10101000", "11101000"],"a"],
+[19,"How many unique characters can standard 7-bit ASCII represent?",["64", "128", "256", "1024"],"b"],
+[20,"Which character encoding standard was developed to represent characters from all global languages?",["Extended ASCII", "Unicode", "BCD", "EBCDIC"],"b"],
+[21,"What is the relationship between ASCII and Unicode?",["Unicode uses fewer bits than ASCII", "ASCII only supports graphics; Unicode supports text", "The first 128 characters of Unicode are identical to ASCII", "They use completely incompatible character assignments"],"c"],
+[22,"How many bytes are in one kibibyte (KiB)?",["1000", "1024", "8", "2048"],"b"],
+[23,"Which unit represents 10^6 (1,000,000) bytes using standard decimal SI prefixes?",["Mebibyte (MiB)", "Megabyte (MB)", "Gibibyte (GiB)", "Kilobyte (kB)"],"b"],
+[24,"What does the term \"colour depth\" (or bit depth) refer to in digital bitmap images?",["The number of pixels along the width of an image", "The number of bits used to represent the colour of each pixel", "The physical height of the image on the screen", "The file size measured in mebibytes"],"b"],
+[25,"An image has dimensions 100×200 pixels and a colour depth of 8 bits. What is the uncompressed image file size in bytes?",["2,500 bytes", "20,000 bytes", "160,000 bytes", "2,000 bytes"],"b"],
+[26,"Image resolution is formally defined as:",["The total number of colors supported by the monitor", "The number of pixels per inch or total pixels (width × height)", "The compression ratio applied to a JPEG", "The speed of the graphic processing unit"],"b"],
+[27,"What is the sample rate in digital sound recording?",["The number of sound samples captured per second", "The number of bits used per sample", "The maximum volume of the recording", "The frequency difference between stereo channels"],"a"],
+[28,"What effect does increasing the sample resolution have on an audio recording?",["Decreases the file size", "Increases audio fidelity/accuracy and increases file size", "Decreases fidelity and increases playback speed", "Eliminates the need for an Analogue-to-Digital Converter"],"b"],
+[29,"What is a key characteristic of lossy compression?",["File size increases while image quality degrades", "Redundant and unnoticeable data is permanently removed", "The original file can be reconstructed with zero loss of quality", "It is suitable for compressing executable program files"],"b"],
+[30,"Which file format is an example of lossy compression?",["PNG", "MP3", "FLAC", "ZIP"],"b"],
+[31,"Why is lossless compression essential when compressing software installation files?",["Lossless compression produces smaller files than lossy compression", "Any lost data would cause the program to crash or become corrupted", "Lossless files cannot be infected by computer viruses", "Lossless algorithms run without requiring CPU cycles"],"b"],
+[32,"Run-Length Encoding (RLE) reduces file sizes by:",["Removing all high-frequency sound waves", "Replacing consecutive runs of identical values with a single value and a count", "Deleting alternate rows of image pixels", "Assigning 16-bit tags to every character"],"b"],
+[33,"How would the run AAAAABBBCCCCCC be compressed using standard Run-Length Encoding?",["5A 3B 6C", "A5 B3 CC", "ABC 536", "14ABC"],"a"],
+[34,"How many different colours can be represented using a 24-bit colour depth?",["256", "65,536", "16,777,216 (2^24)", "4,294,967,296"],"c"],
+[35,"The binary representation 1111 is equivalent to which hexadecimal character?",["E", "F", "D", "C"],"b"],
+[36,"In data transmission, serial communication means:",["Multiple bits are sent simultaneously over multiple parallel wires", "Data bits are sent sequentially, one at a time, along a single wire", "Data is transmitted wirelessly in all directions", "Data only flows in one direction at fixed intervals"],"b"],
+[37,"What is a major advantage of serial over parallel transmission across longer distances?",["Data arrives faster because multiple bits travel at once", "There is no risk of data skewing, and cables are less expensive", "It does not require any error checking methods", "Parallel cables cannot conduct electricity over 1 meter"],"b"],
+[38,"What does \"skew\" refer to in parallel data transmission?",["Overheating of transmission media", "Bits arriving out of synchronization because they travel at slightly different speeds", "Data leaking from copper wires into the surrounding air", "Electrical spikes generated by the power supply"],"b"],
+[39,"In simplex data transmission:",["Data can be transmitted in both directions simultaneously", "Data can travel in both directions, but only one direction at a time", "Data can travel in one direction only", "Data packets travel without IP addresses"],"c"],
+[40,"A walkie-talkie conversation where both users can speak, but only one at a time, illustrates:",["Simplex transmission", "Half-duplex transmission", "Full-duplex transmission", "Asynchronous transmission"],"b"],
+[41,"A modern broadband video call where both participants talk and listen simultaneously uses:",["Simplex transmission", "Half-duplex transmission", "Full-duplex transmission", "Broadcast simplex"],"c"],
+[42,"What does USB stand for?",["Universal Serial Bus", "Unified System Binary", "Universal System Bridge", "Uniform Storage Bus"],"a"],
+[43,"Which of the following is an advantage of using a USB interface?",["It requires complex driver installations for basic devices", "It automatically detects devices, supports plug-and-play, and supplies power", "It only allows simplex transmission", "It relies exclusively on parallel transmission"],"b"],
+[44,"What are the three fundamental components of a network packet?",["Input, process, output", "Packet header, payload, packet trailer", "Sender username, receiver password, file size", "Binary prefix, opcode, operand"],"b"],
+[45,"Which of the following items is stored in the packet header?",["Destination IP address and packet sequence number", "The actual image or email body", "End-of-packet markers", "Operating system product key"],"a"],
+[46,"What is the role of a router in a packet-switched network?",["Formats hard drives", "Inspects packet destination IP addresses and forwards them along the optimal path", "Converts digital signals to analogue audio", "Generates website code"],"b"],
+[47,"Why do packets sometimes arrive out of order at the receiving device?",["Routers randomly delete packets", "Different packets take different network routes with variable delays", "Packet headers do not contain recipient addresses", "Packet switching only allows one packet per hour"],"b"],
+[48,"What is the function of the packet trailer?",["Contains the destination IP address", "Identifies the end of the packet and contains error-checking data (e.g., checksum)", "Stores the operating system files", "Converts the payload from binary to text"],"b"],
+[49,"In an even parity system, what should the parity bit be for the byte _ 1 1 0 1 0 0 1?",["0", "1", "None (it is invalid)", "Both 0 and 1"],"a"],
+[50,"In an odd parity system, what should the parity bit be for the byte _ 1 1 0 0 0 0 0?",["0", "1", "X", "Cannot be determined"],"b"],
+[51,"What is a key limitation of a single parity bit check?",["It requires high amounts of CPU processing", "It cannot detect errors if an even number of bits flip during transmission", "It cannot be used with binary data", "It works only on wireless networks"],"b"],
+[52,"How does a parity block (parity byte) improve on a simple parity check?",["It encrypts the entire byte array", "It uses horizontal and vertical parity checks to identify the exact corrupted bit", "It doubles the speed of data transmission", "It removes the need for transmission cables"],"b"],
+[53,"How does a checksum verify data integrity?",["It counts only the zero bits in a file", "An algorithm calculates a numeric value from the data, which the recipient recalculates and compares", "It retransmits the entire file three times continuously", "It encrypts the communication link with a public key"],"b"],
+[54,"How does an echo check detect transmission errors?",["The recipient sends the received data back to the sender for comparison", "The sender listens for sound wave vibrations on the cable", "A checksum is added to the packet header", "Data is inverted and sent twice"],"a"],
+[55,"Why is an echo check considered inefficient for high-volume network transfers?",["It causes high battery usage", "It halves bandwidth efficiency because every dataset is transmitted twice", "It only detects errors on optical cables", "Computers cannot store echoed text"],"b"],
+[56,"In an Automatic Repeat Request (ARQ) protocol, what causes the sender to resend a packet?",["The user clicks a resend button", "Receipt of a negative acknowledgement (NAK) or expiration of a timeout window", "Completion of the checksum verification", "The receiver disconnects from the internet"],"b"],
+[57,"What is a check digit primarily used for?",["Detecting transmission errors across fiber optic cables", "Detecting human input/transcription errors (e.g., on barcodes, ISBNs)", "Encrypting passwords", "Determining the download speed of a file"],"b"],
+[58,"Plaintext refers to:",["Scrambled data that cannot be read without a key", "Original, unencrypted data that is readable", "Binary instructions executing in the CPU", "A damaged sector on a hard disk drive"],"b"],
+[59,"What is ciphertext?",["The readable source text before encryption", "Encrypted, unreadable data produced by an encryption algorithm", "The password needed to log into a network", "A method of compressing bitmap images"],"b"],
+[60,"What is the fundamental difference between symmetric and asymmetric encryption?",["Symmetric uses one shared secret key; asymmetric uses a public and private key pair", "Symmetric is public; asymmetric is completely private", "Symmetric uses 8-bit registers; asymmetric uses 64-bit registers", "Symmetric encryption is used only for hardware"],"a"],
+[61,"In asymmetric encryption, which key is made freely available to anyone wishing to send encrypted data?",["Private key", "Public key", "Parity key", "Symmetric root key"],"b"],
+[62,"If Alice wants Bob to send her an encrypted message using asymmetric encryption, Alice provides Bob with:",["Her private key", "Her public key", "Her password", "Bob's private key"],"b"],
+[63,"Which hardware component provides a computer with a dedicated physical connection to a local area network?",["Heat sink", "Network Interface Card (NIC)", "Control Unit", "BIOS chip"],"b"],
+[64,"What is a MAC (Media Access Control) address?",["A temporary IP address assigned by a network router", "A unique physical address assigned to a NIC during manufacturing", "The web address of Apple computers", "A sequence code for sorting packets"],"b"],
+[65,"How is a standard MAC address formatted?",["32 bits written as 4 dotted decimal numbers", "48 bits represented as 6 pairs of hexadecimal digits", "128 bits written as binary numbers", "8 bytes separated by forward slashes"],"b"],
+[66,"What is the primary difference between a MAC address and an IP address?",["MAC addresses change with each network; IP addresses never change", "MAC addresses identify the physical device; IP addresses indicate its logical network location", "IP addresses are hardwired at the factory; MAC addresses are assigned by DHCP", "MAC addresses are used only by optical drives"],"b"],
+[67,"Which of the following is a valid IPv4 address?",["192.168.1.256", "192.168.1.1", "2A:4B:3C:99", "10.300.0.1"],"b"],
+[68,"What is the bit-length of an IPv6 address?",["32 bits", "64 bits", "128 bits", "256 bits"],"c"],
+[69,"Why was IPv6 introduced to replace IPv4?",["IPv4 runs out of available unique addresses due to the growth of internet devices", "IPv4 is too fast for standard computer buses", "IPv4 does not support web browsers", "IPv4 is vulnerable to magnetic fields"],"a"],
+[70,"What is the main function of the Hypertext Transfer Protocol Secure (HTTPS)?",["Translating domain names into IP addresses", "Encrypting data transferred between a web browser and a web server using TLS/SSL", "Converting lossy files into lossless files", "Managing CPU registers during web browsing"],"b"],
+[71,"Which principle forms the core foundation of the Von Neumann computer architecture?",["Data and instructions are stored together in the same memory space", "Programs must run entirely inside the Arithmetic Logic Unit", "Secondary storage replaces primary storage entirely", "Parallel transmission is required between all external components"],"a"],
+[72,"What is the primary function of the Arithmetic Logic Unit (ALU)?",["Storing BIOS setup configurations", "Performing arithmetic calculations (+, -, *, /) and logical comparisons (AND, OR, NOT)", "Decoding instructions fetched from RAM", "Generating system clock pulses"],"b"],
+[73,"What is the primary function of the Control Unit (CU)?",["Displaying graphics on monitor screens", "Coordinating CPU activities and directing the flow of data and instructions", "Storing non-volatile operating system backups", "Calculating mathematical equations"],"b"],
+[74,"What is a register in the context of the CPU?",["High-speed, small temporary storage location directly inside the CPU", "The primary hard disk drive", "An external optical drive buffer", "A database of installed software programs"],"a"],
+[75,"What is the function of the Program Counter (PC)?",["Counts the total number of errors generated by software", "Holds the memory address of the next instruction to be fetched and executed", "Stores arithmetic calculations permanently", "Holds instructions currently being decoded"],"b"],
+[76,"What does the Memory Address Register (MAR) store?",["The actual program instructions currently being decoded", "The address in RAM of the data or instruction being read or written", "The network IP address of the computer", "The number of CPU clock cycles per second"],"b"],
+[77,"What does the Memory Data Register (MDR) hold?",["The next memory address to be fetched", "The data or instruction fetched from, or waiting to be written to, memory", "System time and date", "The result of logical operations from the ALU"],"b"],
+[78,"What is the role of the Current Instruction Register (CIR)?",["Holds the instruction currently being decoded and executed", "Stores data backed up to the hard disk", "Tracks mouse and keyboard events", "Holds the address of the subsequent instruction"],"a"],
+[79,"What does the Accumulator (ACC) store?",["The system bootstrap code", "The intermediate results of arithmetic and logic operations from the ALU", "Network packet sequence numbers", "The address of peripheral devices"],"b"],
+[80,"In the Fetch-Decode-Execute cycle, what happens during the Fetch stage?",["The ALU performs arithmetic operations", "The instruction is copied from primary memory into the CPU via the data bus", "The instruction is converted into control signals", "The results are written to an optical disc"],"b"],
+[81,"Which system bus transmits memory addresses from the CPU to RAM?",["Control bus", "Address bus", "Data bus", "USB cable"],"b"],
+[82,"Which of the following correctly describes the directional nature of the system buses?",["Address bus is unidirectional; Data bus is bidirectional", "Address bus is bidirectional; Data bus is unidirectional", "Both Address and Data buses are unidirectional", "Both Address and Data buses are bidirectional"],"a"],
+[83,"What is the function of the control bus?",["Transports physical data bytes between peripherals", "Carries control signals, timing pulses, and status flags across CPU components", "Holds the web addresses accessed by browsers", "Transmits electrical power to the motherboard"],"b"],
+[84,"What happens to the Program Counter (PC) during the fetch stage?",["It resets to 0", "It is incremented to point to the address of the next instruction", "It doubles its value", "It transfers its value directly to the Accumulator"],"b"],
+[85,"What does the system clock speed (measured in GHz) represent?",["The storage capacity of the solid-state drive", "The number of fetch-decode-execute cycles the CPU can execute per second", "The transmission speed of network cables", "The refresh frequency of the monitor"],"b"],
+[86,"What is the benefit of adding multiple cores to a CPU?",["Allows simultaneous parallel execution of multiple instructions", "Prevents viruses from entering primary memory", "Reduces power consumption to zero", "Eliminates the need for RAM"],"a"],
+[87,"What is cache memory?",["High-speed volatile memory located on or very near the CPU to store frequently used instructions", "Slow magnetic tape backup storage", "Non-volatile flash storage on a motherboard", "Optical storage used for gaming discs"],"a"],
+[88,"What is the main characteristic of volatile memory?",["Retains all data permanently when power is removed", "Loses its stored data immediately when power is turned off", "Cannot be read or modified by the CPU", "Resists magnetic interference"],"b"],
+[89,"Which statement accurately compares RAM and ROM?",["RAM is non-volatile; ROM is volatile", "RAM is volatile and read/write; ROM is non-volatile and read-only", "RAM contains the BIOS; ROM contains running programs", "Both RAM and ROM lose contents during a reboot"],"b"],
+[90,"What is stored in ROM on a personal computer?",["User word-processing documents", "The bootstrap loader and BIOS firmware", "Operating system updates", "Temporary graphic cache"],"b"],
+[91,"What is virtual memory?",["An area of secondary storage configured to act as an extension of RAM when physical RAM is full", "Memory simulated in online cloud services", "High-capacity ROM chips", "Memory integrated into VR headsets"],"a"],
+[92,"Which storage technology stores data by magnetizing tiny regions on spinning platters?",["Solid-State Drive (SSD)", "Hard Disk Drive (HDD)", "DVD-ROM", "USB Flash drive"],"b"],
+[93,"How do optical discs (CDs, DVDs, Blu-rays) read and store binary data?",["By charging floating-gate transistors", "Using laser beams to read pits and lands stamped onto tracks", "By aligning magnetic domains on metal discs", "By sending electrical current through copper lines"],"b"],
+[94,"Which of the following is a key advantage of Solid State Drives (SSDs) over Hard Disk Drives (HDDs)?",["SSDs have no moving parts, faster read/write speeds, and lower power consumption", "SSDs have unlimited write endurance and lower cost per gigabyte", "SSDs utilize spinning laser platters", "SSDs rely on magnetic tape mechanisms"],"a"],
+[95,"Solid-state media stores binary data using which underlying electronics?",["Electromagnets and read/write heads", "NAND/NOR flash memory cells and floating gate transistors", "Optical prisms and lasers", "Vacuum tubes"],"b"],
+[96,"What is an embedded system?",["A general-purpose desktop computer", "A dedicated computer system designed to perform a specific dedicated function within a larger machine", "An external hard disk connected via USB", "A cluster of web servers"],"b"],
+[97,"Which of the following devices is controlled by an embedded system?",["A washing machine", "A gaming PC running multi-boot OS", "A web development workstation", "A rack-mounted enterprise database server"],"a"],
+[98,"Which touchscreen technology detects touches by monitoring changes in the electrical charge caused by the conductivity of a human finger?",["Resistive touchscreen", "Capacitive touchscreen", "Infrared touchscreen", "Optical acoustic touchscreen"],"b"],
+[99,"Which of the following is a characteristic of a resistive touchscreen?",["Consists of two flexible layers that make physical contact when pressed; works with gloves or styluses", "Requires natural bare-finger skin conductance", "Provides infinite multi-touch contact points", "Emits organic light directly from each pixel"],"a"],
+[100,"How do Organic Light Emitting Diode (OLED) displays differ from standard LCD displays?",["OLED displays require powerful fluorescent backlights", "OLED displays do not require a backlight because each pixel produces its own light", "OLED displays cannot produce true dark black levels", "OLED screens consume far more power when displaying black images"],"b"]
+];
+const DROP=new Set([]);
+const Q=Q0.filter(q=>!DROP.has(q[0]));
+const L='abcde',$=id=>document.getElementById(id),N=Q.length;
+$('n').textContent=N;
+const order=Q.map((_,i)=>i);for(let i=N-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}
+const P={};const shuf=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+order.forEach((k,x)=>{const q=Q[k],m=q[3].length>1,d=document.createElement('div');P[k]=shuf(q[2].map((_,i)=>i));d.className='card';d.id='c'+k;
+d.innerHTML='<div><b>'+(x+1)+'.</b> '+q[1]+(m?' <i class="sub">(select all correct answers)</i>':'')+'</div>'+P[k].map((oi,i)=>'<label class="o"><input type="'+(m?'checkbox':'radio')+'" name="q'+k+'" value="'+oi+'"> '+L[i]+') '+q[2][oi]+'</label>').join('')+'<div class="fb"></div>';$('qs').appendChild(d)});
+const sel=k=>[...document.querySelectorAll('input[name="q'+k+'"]:checked')].map(e=>L[+e.value]).join('');
+const T0=Date.now();let done=false,secs=0;
+const fmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+const tick=setInterval(()=>{secs=Math.round((Date.now()-T0)/1000);$('tm').textContent=fmt(secs)},1000);
+document.addEventListener('change',()=>{if(!done)$('pg').textContent='Answered '+order.filter(k=>sel(k)).length+' / '+N});
+let REP='',FN='result.txt';
+$('go').onclick=()=>{const nm=$('nm'),n=nm.value.trim(),R=$('res');
+if(!n){R.style.display='block';R.innerHTML='<span style="color:var(--no)">Please enter your name first.</span>';nm.focus();window.scrollTo({top:0,behavior:'smooth'});return}
+if(done)return;done=true;clearInterval(tick);secs=Math.round((Date.now()-T0)/1000);let tot=0;const rows=[];
+order.forEach(k=>{const q=Q[k],s=sel(k),ok=s===q[3],c=$('c'+k);if(ok)tot++;c.className='card '+(ok?'ok':'no');
+c.querySelector('.fb').textContent=ok?'✓ Correct':'✗ Correct answer: '+q[3].split('').map(y=>L[P[k].indexOf(L.indexOf(y))]+') '+q[2][L.indexOf(y)]).join('; ');
+c.querySelectorAll('input').forEach(e=>e.disabled=true);rows.push([q[0],s?s.split('').map(y=>q[2][L.indexOf(y)]).join(' + '):'(no answer)',q[3].split('').map(y=>q[2][L.indexOf(y)]).join(' + '),ok])});
+rows.sort((a,b)=>a[0]-b[0]);const p=Math.round(tot*100/N);
+R.style.display='block';R.innerHTML='Score: <b>'+tot+' / '+N+'</b> ('+p+'%) · Time: '+fmt(secs);
+REP='CS 0478 Quiz – Auto-marked result\nTeacher: Sayar WaiLinHtet\nStudent Name: '+n+'\nMarks: '+tot+' / '+N+' ('+p+'%)\nSubmitted: '+new Date().toLocaleString()+'\nTime taken: '+fmt(secs)+'\n\nPaper Q#: result (wrong answers show: answered | correct)\n'+rows.map(r=>r[0]+': '+(r[3]?'✓':'✗ '+r[1]+' | '+r[2])).join('\n');
+FN='CS-0478-'+n.replace(/[^\p{L}\p{N}]+/gu,'_')+'.txt';$('rep').value=REP;badge(n,tot,p);$('sub').style.display='block';window.scrollTo({top:0,behavior:'smooth'})};
+$('rs').onclick=()=>location.reload();
+const st=$('st');
+let BL=null;
+function badge(n,tot,p){const c=document.createElement('canvas');c.width=800;c.height=1000;const x=c.getContext('2d');
+const col=p>=90?'#16794c':p>=75?'#2f5bd8':p>=60?'#b54708':p>=40?'#7a4bd6':'#b42318';
+const lab=p>=90?'Excellent':p>=75?'Very Good':p>=60?'Good':p>=40?'Keep Practising':'Try Again';
+x.fillStyle='#fff';x.fillRect(0,0,800,1000);x.strokeStyle=col;x.lineWidth=14;x.strokeRect(20,20,760,960);
+x.fillStyle=col;x.fillRect(20,20,760,170);x.textAlign='center';x.fillStyle='#fff';
+x.font='bold 54px system-ui,sans-serif';x.fillText('CS 0478 QUIZ',400,105);x.font='28px system-ui,sans-serif';x.fillText('Result Badge',400,155);
+x.beginPath();x.arc(400,420,170,0,Math.PI*2);x.fillStyle=col;x.fill();
+x.beginPath();x.arc(400,420,148,0,Math.PI*2);x.fillStyle='#fff';x.fill();
+x.fillStyle=col;x.font='bold 110px system-ui,sans-serif';x.fillText(p+'%',400,450);
+x.font='bold 30px system-ui,sans-serif';x.fillText(tot+' / '+N,400,500);
+x.font='bold 46px system-ui,sans-serif';x.fillText(lab,400,680);
+x.fillStyle='#1d2430';x.font='bold 44px system-ui,sans-serif';x.fillText(n,400,765,680);
+x.fillStyle='#667085';x.font='28px system-ui,sans-serif';
+x.fillText('Time taken: '+fmt(secs),400,825);x.fillText(new Date().toLocaleDateString(),400,868);x.fillText('Teacher: Sayar WaiLinHtet',400,925);
+$('bd').src=c.toDataURL('image/png');c.toBlob(b=>{BL=b},'image/png')}
+$('dp').onclick=async()=>{try{await DL.save({filename:FN.replace(/\.txt$/,'.png'),data:BL});st.textContent='Saved ✓'}catch(e){st.textContent=e&&e.code==='declined'?'':'Long-press the badge image to save it'}};
+$('cp').onclick=async()=>{try{await navigator.clipboard.writeText(REP);st.textContent='Copied ✓'}catch(e){$('rep').select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}st.textContent=ok?'Copied ✓':'Text selected – copy it manually'}};
+let DL=null;(async()=>{try{DL=window.claude?await claude.use('downloads'):null}catch(e){}if(!DL){$('dl').style.display='none';$('dp').style.display='none'}})();
+$('dl').onclick=async()=>{try{await DL.save({filename:FN,data:REP});st.textContent='Saved ✓'}catch(e){st.textContent=e&&e.code==='declined'?'':'Download unavailable – use Copy'}};
+</script></main></body></html>
