@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Level Computer Science Interactive Lab – tr.wailinhtet</title>
+<style>
+:root{--bg:#f6f7f2;--card:#ffffff;--ink:#14213d;--mut:#55607a;--pen:#1d4ed8;--hl:#fde68a;--ok:#15803d;--bad:#c2410c;--line:#cfd6e4;--grid:#e6eaf2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10172a;--card:#18213a;--ink:#e8ecf7;--mut:#a3adc7;--pen:#7aa2ff;--hl:#5b4b12;--ok:#4ade80;--bad:#fb923c;--line:#34415f;--grid:#222d4a}}
+:root[data-theme="dark"]{--bg:#10172a;--card:#18213a;--ink:#e8ecf7;--mut:#a3adc7;--pen:#7aa2ff;--hl:#5b4b12;--ok:#4ade80;--bad:#fb923c;--line:#34415f;--grid:#222d4a}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+header{padding:28px 20px 12px;max-width:980px;margin:auto}
+h1{font:700 clamp(26px,5vw,40px)/1.15 Georgia,"Times New Roman",serif;margin:0 0 6px}
+h2{font:700 24px/1.2 Georgia,serif;margin:0 0 6px}
+h3{font-size:17px;margin:18px 0 6px}
+.by{color:var(--mut);margin:0}
+.by b{color:var(--pen)}
+nav{max-width:980px;margin:8px auto 0;padding:0 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav button{font:inherit;font-weight:600;padding:8px 14px;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;cursor:pointer}
+nav button[aria-selected=true]{background:var(--pen);border-color:var(--pen);color:#fff}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--pen);outline-offset:2px}
+main{max-width:980px;margin:14px auto 40px;padding:0 20px}
+section{display:none;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:20px}
+section.on{display:block}
+p.lead{color:var(--mut);margin:0 0 12px;max-width:70ch}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;margin:8px 0}
+th,td{border:1px solid var(--line);padding:6px 12px;text-align:center}
+th{background:var(--grid)}
+td.l{text-align:left}
+mark{background:var(--hl);color:inherit;padding:0 3px}
+.row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.btn{font:inherit;font-weight:600;padding:7px 14px;border-radius:8px;border:2px solid var(--pen);background:var(--card);color:var(--pen);cursor:pointer}
+.btn.p{background:var(--pen);color:#fff}
+select,input[type=number]{font:inherit;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.tog{min-width:64px}
+.tog[aria-pressed=true]{background:var(--pen);color:#fff}
+.out{display:inline-block;min-width:92px;text-align:center;padding:8px 12px;border-radius:8px;border:2px solid var(--line);font-weight:700}
+.out.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.ov{text-decoration:overline}
+.note{border-left:4px solid var(--pen);padding:6px 12px;background:var(--grid);margin:10px 0;border-radius:0 8px 8px 0}
+.hi td{background:var(--hl)}
+.pc td{width:44px;height:34px;padding:0;font-weight:700;color:#14213d}
+.pc td.n{background:var(--grid);color:var(--ink)}
+.km td{width:64px;height:56px;font-weight:700;font-size:20px;cursor:pointer;padding:0}
+.chip{display:inline-block;padding:2px 10px;border-radius:99px;color:#fff;font-weight:700;margin:2px 4px 2px 0}
+svg{max-width:100%;height:auto}
+.log{max-height:150px;overflow:auto;font-size:14px}
+.cpu{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:8px 0}
+.reg{border:2px solid var(--line);border-radius:8px;padding:6px 10px;text-align:center;background:var(--card)}
+.reg b{display:block;font-size:20px;min-height:30px}
+.reg small{color:var(--mut)}
+.reg.hot{border-color:var(--pen);background:var(--hl)}
+.mem td.cur{background:var(--hl);font-weight:700}
+footer{text-align:center;color:var(--mut);padding:0 20px 30px}
+@media (prefers-reduced-motion:no-preference){.out{transition:background .2s}}
+</style>
+</head>
+<body>
+<header>
+<h1>A Level Computer Science Interactive Lab</h1>
+<p class="by">Created by <b>tr.wailinhtet</b> · Computer Science School · Chapters 15 and 18</p>
+<div class="row"><button class="btn" id="themeBtn" aria-label="Switch between light and dark mode"></button></div>
+</header>
+<nav role="tablist" id="tabs">
+<button role="tab" data-t="vn" aria-selected="true">Von Neumann</button>
+<button role="tab" data-t="cisc" aria-selected="false">CISC and RISC</button>
+<button role="tab" data-t="logic" aria-selected="false">Logic gates and adders</button>
+<button role="tab" data-t="kmap" aria-selected="false">Karnaugh maps</button>
+<button role="tab" data-t="ff" aria-selected="false">Flip-flops</button>
+<button role="tab" data-t="path" aria-selected="false">A* and Dijkstra</button>
+</nav>
+<main>
+
+<section id="vn" class="on">
+<h2>Von Neumann architecture and the fetch-decode-execute cycle</h2>
+<p class="lead">Program instructions and data share one memory. Step through a small program (LOAD, ADD, STORE) and watch the registers, the three buses and the memory change.</p>
+<div class="row"><label>Value at address 10: <input type="number" id="va" value="5" style="width:80px"></label><label>Value at address 11: <input type="number" id="vb" value="3" style="width:80px"></label></div>
+<div class="row"><button class="btn p" id="vstep">Step</button><button class="btn" id="vrun">Run program</button><button class="btn" id="vrst">Reset</button><b id="vph"></b></div>
+<div class="note" id="vmsg"></div>
+<h3>Processor (CPU)</h3>
+<div class="cpu" id="vcpu"></div>
+<h3>Buses</h3>
+<div class="cpu" id="vbus"></div>
+<h3>Main memory (RAM)</h3>
+<div class="wrap" id="vmem"></div>
+<h3>Cycle log</h3>
+<div class="wrap log" id="vlog"></div>
+<div class="note"><b>Registers:</b> PC holds the address of the next instruction; MAR holds the address being read or written; MDR holds the data just read or about to be written; CIR holds the instruction being decoded; ACC holds the result of ALU work. <b>CU</b> decodes instructions and sends control signals; <b>ALU</b> does arithmetic and logic.</div>
+</section>
+
+<section id="cisc">
+<h2>CISC and RISC processors</h2>
+<p class="lead">Compare the two designs, then watch RISC-style pipelining overlap the five stages of each instruction.</p>
+<div class="wrap"><table>
+<tr><th>CISC features</th><th>RISC features</th></tr>
+<tr><td class="l">Many instruction formats are possible</td><td class="l">Uses fewer instruction formats/sets</td></tr>
+<tr><td class="l">There are <mark>more addressing</mark> modes</td><td class="l">Uses <mark>fewer addressing</mark> modes</td></tr>
+<tr><td class="l">Makes use of <mark>multi-cycle</mark> instructions</td><td class="l">Makes use of <mark>single-cycle</mark> instructions</td></tr>
+<tr><td class="l">Instructions can be of a <mark>variable length</mark></td><td class="l"><mark>Instructions are of a fixed length</mark></td></tr>
+<tr><td class="l">Longer execution time for instructions</td><td class="l">Faster execution time for instructions</td></tr>
+<tr><td class="l">Decoding of instructions is <mark>more complex</mark></td><td class="l">Makes use of general multi-purpose registers</td></tr>
+<tr><td class="l">More difficult to make pipelining work</td><td class="l">Easier to make pipelining function correctly</td></tr>
+<tr><td class="l">Design emphasis is on the hardware</td><td class="l">Design emphasis is on the software</td></tr>
+<tr><td class="l">Uses the memory unit to allow complex instructions</td><td class="l">Processor chips require fewer transistors</td></tr>
+</table></div>
+<h3>Pipelining simulator</h3>
+<p class="lead">Stages: IF (instruction fetch), ID (decode), OF (operand fetch), IE (execute), WB (write-back). Each stage takes one clock cycle.</p>
+<div class="row"><label>Instructions: <input type="number" id="pn" min="1" max="10" value="6"></label></div>
+<div class="wrap" id="pgrid"></div>
+<div class="note" id="psum"></div>
+</section>
+
+<section id="logic">
+<h2>Logic gates, half adder and full adder</h2>
+<p class="lead">Choose a gate to see its truth table, then set the inputs of the adders.</p>
+<div class="row"><label>Gate: <select id="gsel"><option>AND</option><option>OR</option><option>NAND</option><option>NOR</option><option>XOR</option><option>XNOR</option></select></label></div>
+<div class="wrap" id="gtab"></div>
+<h3>Inputs</h3>
+<div class="row">
+<button class="btn tog" data-i="a" aria-pressed="true">A = 1</button>
+<button class="btn tog" data-i="b" aria-pressed="true">B = 1</button>
+<button class="btn tog" data-i="c" aria-pressed="false">Cin = 0</button>
+</div>
+<h3>Half adder (A and B)</h3>
+<div class="row"><span class="out" id="hs"></span><span class="out" id="hc"></span><span>Sum = A XOR B, Carry = A AND B</span></div>
+<h3>Full adder (A, B and Cin)</h3>
+<div class="note" id="fsteps"></div>
+<div class="row"><span class="out" id="fs"></span><span class="out" id="fc"></span></div>
+<div class="wrap" id="ftab"></div>
+</section>
+
+<section id="kmap">
+<h2>Karnaugh maps</h2>
+<p class="lead">Click an output (X) in the truth table or a cell in the K-map to flip it. The simplest sum-of-products expression is found for you. The K-map columns use Gray code (00, 01, 11, 10) so neighbours differ by one bit.</p>
+<div class="row"><button class="btn" id="kex">Load textbook example</button><button class="btn" id="kclr">Clear all</button></div>
+<div class="row" style="align-items:flex-start;gap:30px">
+<div class="wrap" id="ktt"></div>
+<div class="wrap" id="kgrid"></div>
+</div>
+<div id="kres" class="note"></div>
+</section>
+
+<section id="ff">
+<h2>SR flip-flop (NOR gates)</h2>
+<p class="lead">Two cross-coupled NOR gates store one bit. Toggle S (set) and R (reset) and watch Q and its inverse change. Try S = 1, then S = 0 to see the memory.</p>
+<div class="row">
+<button class="btn tog" id="fS" aria-pressed="false">S = 0</button>
+<button class="btn tog" id="fR" aria-pressed="false">R = 0</button>
+<span class="out" id="fQ"></span><span class="out" id="fQb"></span>
+</div>
+<svg id="fsvg" viewBox="0 0 420 190" width="420" role="img" aria-label="SR flip-flop circuit"></svg>
+<div class="note" id="fnote"></div>
+<div class="wrap log"><table id="flog"><tr><th>S</th><th>R</th><th>Q</th><th>Q̅</th><th>Comment</th></tr></table></div>
+</section>
+
+<section id="path">
+<h2>Shortest path: A* and Dijkstra</h2>
+<p class="lead">Step through each algorithm on the textbook graph. Dijkstra expands the node with the smallest g (cost so far). A* expands the smallest f = g + h, where h is the heuristic estimate to the goal.</p>
+<div class="row">
+<label>Algorithm: <select id="alg"><option value="astar">A*</option><option value="dij">Dijkstra</option></select></label>
+<label>Start: <select id="st"></select></label>
+<label>Goal: <select id="gl"></select></label>
+</div>
+<div class="row"><button class="btn p" id="pstep">Step</button><button class="btn" id="prun">Run to end</button><button class="btn" id="prst">Reset</button></div>
+<svg id="gsvg" viewBox="0 0 620 340" width="620" role="img" aria-label="Graph for pathfinding"></svg>
+<div class="note" id="plog"></div>
+<div class="wrap"><table id="ptab"></table></div>
+</section>
+</main>
+<footer>© tr.wailinhtet · Computer Science School</footer>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const bar=l=>'<span class="ov">'+l+'</span>';
+$$('#tabs button').forEach(b=>b.onclick=()=>{
+  $$('#tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  $$('section').forEach(s=>s.classList.toggle('on',s.id===b.dataset.t));
+});
+
+/* ---------- Pipelining ---------- */
+function pipe(){
+  let n=Math.max(1,Math.min(10,+$('#pn').value||6)),st=['IF','ID','OF','IE','WB'],cyc=n+4;
+  let h='<table class="pc"><tr><th>Stage</th>'+Array.from({length:cyc},(_,i)=>'<th>'+(i+1)+'</th>').join('')+'</tr>';
+  st.forEach((s,k)=>{
+    h+='<tr><th>'+s+'</th>';
+    for(let c=0;c<cyc;c++){const i=c-k;
+      h+=i>=0&&i<n?'<td style="background:hsl('+(i*47)+',70%,78%)">'+String.fromCharCode(65+i)+'</td>':'<td class="n"></td>';}
+    h+='</tr>';});
+  $('#pgrid').innerHTML='<div class="wrap">'+h+'</table></div>';
+  $('#psum').innerHTML='With pipelining: <b>'+cyc+'</b> clock cycles (n + 4). Sequential processing: <b>'+5*n+'</b> clock cycles (5 × n). Saving: <b>'+(5*n-cyc)+'</b> cycles.';
+}
+$('#pn').oninput=pipe;pipe();
+
+/* ---------- Logic ---------- */
+const G={AND:(a,b)=>a&b,OR:(a,b)=>a|b,NAND:(a,b)=>+!(a&b),NOR:(a,b)=>+!(a|b),XOR:(a,b)=>a^b,XNOR:(a,b)=>+!(a^b)};
+function gate(){
+  const g=$('#gsel').value;let h='<table><tr><th>A</th><th>B</th><th>'+g+'</th></tr>';
+  for(let a=0;a<2;a++)for(let b=0;b<2;b++)h+='<tr><td>'+a+'</td><td>'+b+'</td><td>'+G[g](a,b)+'</td></tr>';
+  $('#gtab').innerHTML=h+'</table>';
+}
+$('#gsel').onchange=gate;gate();
+const I={a:1,b:1,c:0};
+function adder(){
+  const {a,b,c}=I,x1=a^b,a1=a&b,s=x1^c,a2=x1&c,co=a1|a2;
+  $$('.tog[data-i]').forEach(t=>{const k=t.dataset.i;t.textContent=(k=='c'?'Cin':k.toUpperCase())+' = '+I[k];t.setAttribute('aria-pressed',!!I[k]);});
+  const o=(id,l,v)=>{const e=$(id);e.textContent=l+' = '+v;e.classList.toggle('on',!!v);};
+  o('#hs','Sum',a^b);o('#hc','Carry',a&b);o('#fs','Sum',s);o('#fc','Cout',co);
+  $('#fsteps').innerHTML='1st XOR: '+a+' ⊕ '+b+' = '+x1+'<br>2nd XOR: '+x1+' ⊕ '+c+' = '+s+' (Sum)<br>1st AND: '+a+' · '+b+' = '+a1+'<br>2nd AND: '+x1+' · '+c+' = '+a2+'<br>OR gate: '+a1+' + '+a2+' = '+co+' (Cout)<br><b>'+a+' + '+b+' + '+c+' = '+co+s+' (binary)</b>';
+  let h='<table><tr><th>A</th><th>B</th><th>Cin</th><th>Sum</th><th>Cout</th></tr>';
+  for(let i=0;i<8;i++){const A=i>>2,B=i>>1&1,C=i&1,t=A+B+C;
+    h+='<tr'+(A==a&&B==b&&C==c?' class="hi"':'')+'><td>'+A+'</td><td>'+B+'</td><td>'+C+'</td><td>'+(t&1)+'</td><td>'+(t>>1)+'</td></tr>';}
+  $('#ftab').innerHTML=h+'</table>';
+}
+$$('.tog[data-i]').forEach(t=>t.onclick=()=>{I[t.dataset.i]^=1;adder();});adder();
+
+/* ---------- K-map ---------- */
+let tt=[0,0,0,1,0,1,1,1];const COL=['#1d4ed8','#15803d','#c2410c','#7e22ce','#0e7490','#a16207'];
+const pop=n=>n.toString(2).replace(/0/g,'').length;
+function term(m,v){if(!m)return'1';return[[4,'A'],[2,'B'],[1,'C']].map(([b,l])=>m&b?(v&b?l:bar(l)):'').join('');}
+function simplify(){
+  const ones=tt.map((v,i)=>v?i:-1).filter(i=>i>=0);
+  if(!ones.length)return{ex:'0',gs:[]};
+  if(ones.length==8)return{ex:'1',gs:[]};
+  let imp=[];
+  for(let m=0;m<8;m++)for(let v=0;v<8;v++){if(v&~m)continue;
+    const cv=[0,1,2,3,4,5,6,7].filter(x=>(x&m)==v);
+    if(cv.every(x=>tt[x]))imp.push({m,v,cv,cb:cv.reduce((s,x)=>s|1<<x,0)});}
+  const prime=imp.filter(p=>!imp.some(q=>q!==p&&q.cb!==p.cb&&(q.cb&p.cb)===p.cb));
+  const need=ones.reduce((s,x)=>s|1<<x,0);let best=null;
+  for(let s=1;s<1<<prime.length;s++){
+    let cb=0,cnt=0,lit=0;prime.forEach((p,i)=>{if(s>>i&1){cb|=p.cb;cnt++;lit+=pop(p.m);}});
+    if((cb&need)!==need)continue;
+    if(!best||cnt<best.cnt||(cnt==best.cnt&&lit<best.lit))best={s,cnt,lit};}
+  const gs=prime.filter((p,i)=>best.s>>i&1);
+  return{ex:gs.map(g=>term(g.m,g.v)).join(' + '),gs};
+}
+function kmap(){
+  const {ex,gs}=simplify();
+  let h='<table><tr><th>A</th><th>B</th><th>C</th><th>X</th></tr>';
+  tt.forEach((v,i)=>h+='<tr><td>'+(i>>2)+'</td><td>'+(i>>1&1)+'</td><td>'+(i&1)+'</td><td><button class="btn tog" data-m="'+i+'" aria-pressed="'+!!v+'" aria-label="Output for row '+i+'">'+v+'</button></td></tr>');
+  $('#ktt').innerHTML=h+'</table>';
+  const order=[0,1,3,2];
+  let k='<table class="km"><tr><th>A \\ BC</th>'+order.map(o=>'<th>'+(o>>1)+(o&1)+'</th>').join('')+'</tr>';
+  for(let a=0;a<2;a++){k+='<tr><th>'+a+'</th>';
+    order.forEach(o=>{const m=a*4+o,sh=gs.map((g,i)=>g.cv.includes(m)?'inset 0 0 0 '+(3*(i+1))+'px '+COL[i%6]:'').filter(Boolean).join(',');
+      k+='<td data-m="'+m+'" style="box-shadow:'+(sh||'none')+';background:'+(tt[m]?'var(--hl)':'transparent')+'">'+tt[m]+'</td>';});
+    k+='</tr>';}
+  $('#kgrid').innerHTML=k+'</table>';
+  $$('#ktt [data-m],#kgrid td').forEach(e=>e.onclick=()=>{tt[+e.dataset.m]^=1;kmap();});
+  $('#kres').innerHTML='<b>Simplified expression:</b> X = '+ex+'<br>'+(gs.length?gs.map((g,i)=>'<span class="chip" style="background:'+COL[i%6]+'">'+term(g.m,g.v)+' ('+g.cv.length+' cells)</span>').join(''):'')+'<br><small>Each group is a rectangle of 1, 2, 4 or 8 cells. Variables that change inside a group are dropped.</small>';
+}
+$('#kex').onclick=()=>{tt=[0,0,0,1,0,1,1,1];kmap();};
+$('#kclr').onclick=()=>{tt=Array(8).fill(0);kmap();};kmap();
+
+/* ---------- SR flip-flop ---------- */
+let S=0,R=0,Q=0,Qb=1;const flog=[];
+function settle(){for(let i=0;i<8;i++){const q=+!(R|Qb),qb=+!(S|q);if(q==Q&&qb==Qb)break;Q=q;Qb=qb;}}
+function ffDraw(){
+  const w=v=>v?'#15803d':'#94a3b8';
+  $('#fS').textContent='S = '+S;$('#fS').setAttribute('aria-pressed',!!S);
+  $('#fR').textContent='R = '+R;$('#fR').setAttribute('aria-pressed',!!R);
+  $('#fQ').textContent='Q = '+Q;$('#fQ').classList.toggle('on',!!Q);
+  $('#fQb').textContent='Q̅ = '+Qb;$('#fQb').classList.toggle('on',!!Qb);
+  $('#fsvg').innerHTML='<g fill="none" stroke-width="3" font-family="sans-serif" font-size="14">'+
+  '<path d="M20 40H110" stroke="'+w(R)+'"/><path d="M20 150H110" stroke="'+w(S)+'"/>'+
+  '<path d="M230 55H380" stroke="'+w(Q)+'"/><path d="M230 145H380" stroke="'+w(Qb)+'"/>'+
+  '<path d="M300 55V100L90 100V68H110" stroke="'+w(Q)+'" /><path d="M300 145V110L90 110V122H110" stroke="'+w(Qb)+'"/></g>'+
+  '<g fill="var(--card)" stroke="var(--ink)" stroke-width="2"><rect x="110" y="25" width="120" height="45" rx="10"/><rect x="110" y="125" width="120" height="45" rx="10"/></g>'+
+  '<g fill="var(--ink)" font-family="sans-serif" font-size="14"><text x="145" y="53">NOR X</text><text x="145" y="153">NOR Y</text>'+
+  '<text x="20" y="32">R='+R+'</text><text x="20" y="142">S='+S+'</text><text x="385" y="60">Q='+Q+'</text><text x="385" y="150">Q̅='+Qb+'</text></g>';
+  $('#fnote').textContent=S&&R?'S = R = 1 is an invalid input: both outputs become 0, and releasing both together gives an unpredictable result.':S?'S = 1 sets the flip-flop: Q = 1.':R?'R = 1 resets the flip-flop: Q = 0.':'S = R = 0: the flip-flop holds (remembers) its previous value.';
+}
+function ffStep(){settle();const c=S&&R?'invalid':S?'set':R?'reset':'hold, memory';
+  flog.push('<tr><td>'+S+'</td><td>'+R+'</td><td>'+Q+'</td><td>'+Qb+'</td><td>'+c+'</td></tr>');
+  $('#flog').innerHTML='<tr><th>S</th><th>R</th><th>Q</th><th>Q̅</th><th>Comment</th></tr>'+flog.slice(-12).join('');ffDraw();}
+$('#fS').onclick=()=>{S^=1;ffStep();};$('#fR').onclick=()=>{R^=1;ffStep();};ffDraw();
+
+/* ---------- Pathfinding ---------- */
+const N={A:[150,50,10],B:[50,150,8],C:[100,235,5],D:[180,150,6],E:[230,300,3],F:[360,60,6],G:[310,150,5],H:[560,120,3],I:[450,195,1],J:[400,300,0]};
+const E=[['A','B',6],['A','F',3],['B','D',2],['B','C',3],['C','D',1],['C','E',5],['E','I',5],['E','J',5],['F','G',1],['F','H',7],['G','I',3],['H','I',2],['I','J',3]];
+const nb=n=>E.filter(e=>e[0]==n||e[1]==n).map(e=>[e[0]==n?e[1]:e[0],e[2]]);
+let P;
+const hv=n=>$('#alg').value=='astar'?N[n][2]:0;
+function reset(){const s=$('#st').value;P={g:{[s]:0},par:{},open:[s],closed:[],cur:null,done:false,path:[],msg:'Press Step to begin. Start node '+s+' is in the open list with g = 0.'};draw();}
+function pstep(){
+  if(P.done)return;const goal=$('#gl').value;
+  if(!P.open.length){P.done=true;P.msg='No path exists.';return draw();}
+  P.open.sort((a,b)=>P.g[a]+hv(a)-(P.g[b]+hv(b))||a.localeCompare(b));
+  const c=P.open.shift();P.cur=c;
+  if(c==goal){P.done=true;let n=c;P.path=[n];while(P.par[n]){n=P.par[n];P.path.unshift(n);}
+    P.msg='Goal reached. Shortest path: '+P.path.join(' → ')+' with total cost '+P.g[c]+'. Nodes expanded: '+(P.closed.length+1)+'.';return draw();}
+  P.closed.push(c);const upd=[];
+  nb(c).forEach(([m,w])=>{if(P.closed.includes(m))return;const ng=P.g[c]+w;
+    if(P.g[m]===undefined||ng<P.g[m]){P.g[m]=ng;P.par[m]=c;if(!P.open.includes(m))P.open.push(m);upd.push(m+' (g='+ng+')');}});
+  P.msg='Expanded '+c+' (f = '+P.g[c]+(hv(c)?' + '+hv(c)+' = '+(P.g[c]+hv(c)):'')+'). Updated: '+(upd.join(', ')||'none')+'.';draw();
+}
+function draw(){
+  const onP=(a,b)=>P.path.some((n,i)=>i&&((P.path[i-1]==a&&n==b)||(P.path[i-1]==b&&n==a)));
+  let s='<g font-family="sans-serif" font-size="14" text-anchor="middle">';
+  E.forEach(([a,b,w])=>{const [x1,y1]=N[a],[x2,y2]=N[b],p=onP(a,b);
+    s+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+(p?'#15803d':'var(--line)')+'" stroke-width="'+(p?6:3)+'"/><text x="'+(x1+x2)/2+'" y="'+((y1+y2)/2-5)+'" fill="var(--bad)" font-weight="700">'+w+'</text>';});
+  Object.keys(N).forEach(n=>{const [x,y,h]=N[n],inP=P.path.includes(n);
+    const f=inP?'#86efac':n==P.cur&&!P.done?'#fdba74':P.open.includes(n)?'#fde68a':P.closed.includes(n)?'#bfdbfe':'#e2e8f0';
+    s+='<circle cx="'+x+'" cy="'+y+'" r="19" fill="'+f+'" stroke="#14213d" stroke-width="2"/><text x="'+x+'" y="'+(y+5)+'" font-weight="700" fill="#14213d">'+n+'</text>';
+    if($('#alg').value=='astar')s+='<text x="'+(x+25)+'" y="'+(y-14)+'" fill="var(--ok)" font-weight="700">h'+h+'</text>';
+    if(P.g[n]!==undefined)s+='<text x="'+x+'" y="'+(y+36)+'" fill="var(--ink)" font-size="12">g='+P.g[n]+'</text>';});
+  $('#gsvg').innerHTML=s+'</g>';$('#plog').textContent=P.msg;
+  const A=$('#alg').value=='astar';
+  let t='<tr><th>Node</th><th>g</th>'+(A?'<th>h</th><th>f</th>':'')+'<th>Status</th></tr>';
+  Object.keys(N).forEach(n=>{const g=P.g[n];if(g===undefined)return;
+    t+='<tr><td>'+n+'</td><td>'+g+'</td>'+(A?'<td>'+N[n][2]+'</td><td>'+(g+N[n][2])+'</td>':'')+'<td>'+(P.path.includes(n)?'on path':P.closed.includes(n)?'closed':'open')+'</td></tr>';});
+  $('#ptab').innerHTML=t;
+}
+Object.keys(N).forEach(n=>{['#st','#gl'].forEach(id=>$(id).add(new Option(n,n)));});
+$('#st').value='A';$('#gl').value='J';
+['#alg','#st','#gl'].forEach(i=>$(i).onchange=reset);
+$('#pstep').onclick=pstep;$('#prst').onclick=reset;
+$('#prun').onclick=()=>{let k=60;while(!P.done&&k--)pstep();};
+
+/* ---------- Von Neumann ---------- */
+let V,vt=null;
+function vInit(){
+  clearInterval(vt);vt=null;
+  V={mem:{0:'LOAD 10',1:'ADD 11',2:'STORE 12',3:'HALT',10:+$('#va').value||0,11:+$('#vb').value||0,12:0},
+  r:{PC:0,MAR:'-',MDR:'-',CIR:'-',ACC:0},q:[],hot:[],bus:{a:'-',d:'-',c:'idle'},ph:'Ready',msg:'Press Step to begin the first fetch.',halt:false,log:[],n:0,ins:0};
+  vDraw();
+}
+const vFetch=()=>[
+ {ph:'Fetch',hot:['PC','MAR'],t:'PC → MAR: the address of the next instruction is copied into MAR.',fn(){V.r.MAR=V.r.PC;}},
+ {ph:'Fetch',hot:['MAR','PC','CU','MEM'],t:'MAR → address bus. CU sends READ on the control bus. PC is incremented to point at the next instruction.',b:()=>({a:V.r.MAR,c:'READ'}),fn(){V.r.PC++;}},
+ {ph:'Fetch',hot:['MEM','MDR'],t:()=>'Memory sends the contents of address '+V.r.MAR+' along the data bus into MDR.',b:()=>({a:V.r.MAR,d:V.mem[V.r.MAR],c:'READ'}),fn(){V.r.MDR=V.mem[V.r.MAR];}},
+ {ph:'Fetch',hot:['MDR','CIR'],t:'MDR → CIR: the instruction is held in the current instruction register.',fn(){V.r.CIR=V.r.MDR;}},
+ {ph:'Decode',hot:['CIR','CU'],t:()=>{const [o,x]=String(V.r.CIR).split(' ');return 'CU decodes CIR: opcode = '+o+(x?', operand (address) = '+x:' (no operand)')+'.';},fn(){const [o,x]=String(V.r.CIR).split(' ');V.q.push(...vExec(o,+x));}}
+];
+function vExec(o,x){
+ const E='Execute',m1={ph:E,hot:['CIR','MAR'],t:'Operand '+x+' → MAR.',fn(){V.r.MAR=x;}};
+ if(o=='LOAD')return[m1,
+  {ph:E,hot:['MAR','MEM','MDR','CU'],t:()=>'READ: address '+x+' on the address bus, data '+V.mem[x]+' returns on the data bus into MDR.',b:()=>({a:x,d:V.mem[x],c:'READ'}),fn(){V.r.MDR=V.mem[x];}},
+  {ph:E,hot:['MDR','ACC'],t:'MDR → ACC. LOAD is complete.',fn(){V.r.ACC=V.r.MDR;}}];
+ if(o=='ADD')return[m1,
+  {ph:E,hot:['MAR','MEM','MDR','CU'],t:()=>'READ: data '+V.mem[x]+' from address '+x+' travels on the data bus into MDR.',b:()=>({a:x,d:V.mem[x],c:'READ'}),fn(){V.r.MDR=V.mem[x];}},
+  {ph:E,hot:['ALU','ACC','MDR'],t:()=>'ALU adds ACC + MDR and the result '+V.r.ACC+' goes back into ACC.',fn(){V.r.ACC=V.r.ACC+V.r.MDR;}}];
+ if(o=='STORE')return[m1,
+  {ph:E,hot:['ACC','MDR'],t:'ACC → MDR: the value to be stored is placed in MDR.',fn(){V.r.MDR=V.r.ACC;}},
+  {ph:E,hot:['MDR','MEM','CU'],t:()=>'WRITE: address '+x+' on the address bus, data '+V.r.MDR+' on the data bus is written into memory.',b:()=>({a:x,d:V.r.MDR,c:'WRITE'}),fn(){V.mem[x]=V.r.MDR;}}];
+ return[{ph:E,hot:['CU'],t:'HALT: the CU stops the program.',fn(){V.halt=true;}}];
+}
+function vStep(){
+ if(V.halt)return;
+ if(!V.q.length){V.q.push(...vFetch());V.ins++;}
+ const s=V.q.shift();s.fn();V.n++;
+ V.ph=s.ph;V.hot=s.hot;V.bus=Object.assign({a:'-',d:'-',c:'idle'},s.b?s.b():{});
+ V.msg=typeof s.t=='function'?s.t():s.t;
+ V.log.push('<tr><td>'+V.n+'</td><td>'+V.ins+'</td><td>'+s.ph+'</td><td class="l" style="text-align:left">'+V.msg+'</td></tr>');
+ if(V.halt){clearInterval(vt);vt=null;V.msg+=' Program finished: memory[12] = '+V.mem[12]+'.';}
+ vDraw();
+}
+function vDraw(){
+ const h=k=>V.hot.includes(k)?' hot':'',r=V.r;
+ $('#vph').textContent=V.ph==='Ready'?'':'Phase: '+V.ph+' · instruction '+V.ins;
+ $('#vmsg').textContent=V.msg;
+ $('#vcpu').innerHTML=['PC','MAR','MDR','CIR','ACC'].map(k=>'<div class="reg'+h(k)+'"><small>'+k+'</small><b>'+r[k]+'</b></div>').join('')+
+  '<div class="reg'+h('CU')+'"><small>Control Unit</small><b>CU</b></div><div class="reg'+h('ALU')+'"><small>Arithmetic Logic Unit</small><b>ALU</b></div>';
+ const b=V.bus,on=b.c!='idle';
+ $('#vbus').innerHTML='<div class="reg'+(on?' hot':'')+'"><small>Address bus</small><b>'+b.a+'</b></div><div class="reg'+(b.d!='-'?' hot':'')+'"><small>Data bus</small><b>'+b.d+'</b></div><div class="reg'+(on?' hot':'')+'"><small>Control bus</small><b>'+b.c+'</b></div>';
+ let t='<table class="mem"><tr><th>Address</th><th>Contents</th><th>Type</th></tr>';
+ Object.keys(V.mem).forEach(a=>{t+='<tr><td'+(+a==r.MAR&&V.hot.includes('MEM')?' class="cur"':'')+'>'+a+'</td><td'+(+a==r.MAR&&V.hot.includes('MEM')?' class="cur"':'')+'>'+V.mem[a]+'</td><td>'+(a<10?'instruction':'data')+'</td></tr>';});
+ $('#vmem').innerHTML=t+'</table>';
+ $('#vlog').innerHTML=V.log.length?'<table><tr><th>Step</th><th>Instr.</th><th>Phase</th><th>What happens</th></tr>'+V.log.slice(-8).join('')+'</table>':'';
+ $('#vstep').disabled=V.halt;
+}
+$('#vstep').onclick=vStep;$('#vrst').onclick=vInit;$('#va').oninput=$('#vb').oninput=vInit;
+$('#vrun').onclick=()=>{if(vt||V.halt)return;vt=setInterval(vStep,900);};
+
+/* ---------- Light / dark switch ---------- */
+const root=document.documentElement;
+function curTheme(){return root.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}
+function setTheme(t){root.dataset.theme=t;$('#themeBtn').textContent=t=='dark'?'☀ Switch to light mode':'☾ Switch to dark mode';try{localStorage.setItem('theme',t);}catch(e){}}
+try{const s=localStorage.getItem('theme');if(s)root.dataset.theme=s;}catch(e){}
+setTheme(curTheme());
+$('#themeBtn').onclick=()=>setTheme(curTheme()=='dark'?'light':'dark');
+vInit();
+reset();
+</script>
+</body>
+</html>
