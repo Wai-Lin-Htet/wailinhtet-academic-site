@@ -1,7 +1,7 @@
 // SrWL Learning Firebase Web App configuration (public client identifiers).
 // Firebase security is enforced by Authentication and Firestore Rules.
 export const firebaseConfig = {
-  apiKey: "AIzaSyCI2Ke9YTP0clGUV3t9880e50IfGnk_IgQ",
+  apiKey: "AIzaSyCI2Ke9YTPOclGUV3t9880e50IfGnk_IgQ",
   authDomain: "srwl-learning.firebaseapp.com",
   projectId: "srwl-learning",
   storageBucket: "srwl-learning.firebasestorage.app",
