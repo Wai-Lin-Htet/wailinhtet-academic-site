@@ -1,0 +1,10 @@
+
+/* Phase 2: shared accessible mobile navigation */
+.wlh-mobile-toggle{display:none;align-items:center;justify-content:center;min-width:44px;min-height:44px;border:1px solid #d1d5db;border-radius:10px;background:#fff;color:#1d1d1f;cursor:pointer;font-size:1.25rem}
+.wlh-mobile-links{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;color:#1d1d1f;border:1px solid #e5e7eb;padding:1rem 1.5rem;box-shadow:0 12px 25px rgba(0,0,0,.12);z-index:1100}
+.wlh-mobile-links[hidden]{display:none!important}
+.wlh-mobile-links a{display:block;padding:.7rem .25rem;color:#1d1d1f;text-decoration:none;font-size:1rem}
+.wlh-mobile-links a:focus-visible,.wlh-mobile-toggle:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+@media(max-width:760px){.wlh-mobile-toggle{display:inline-flex}.wlh-mobile-links:not([hidden]){display:block}nav,.navbar{position:relative}}
+@media(min-width:761px){.wlh-mobile-links{display:none!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
