@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources | SrWL Learning — Sayar Wai Lin Htet</title>
+<meta name="description" content="Notes, PDFs, past papers and videos for every SrWL Learning course. Free resources open to everyone; course notes open after student sign-in and teacher approval.">
+<style>
+  :root{
+    --navy:#0d2a5c;
+    --navy-dark:#081f45;
+    --yellow:#ffc900;
+    --ink:#1e293b;
+    --muted:#64748b;
+    --line:#e2e8f0;
+    --bg:#f1f5f9;
+    --card:#ffffff;
+    --green:#059669;
+    --green-bg:#ecfdf5;
+    --lock-bg:#fef3c7;
+    --lock-ink:#92400e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  a{color:var(--navy);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* Header */
+  .site-header{background:var(--navy);color:#fff}
+  .site-header-inner{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px}
+  .brand{font-weight:800;font-size:20px;letter-spacing:.2px;color:#fff}
+  .brand span{color:var(--yellow)}
+  .site-nav{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap}
+  .site-nav a{color:#dbeafe;font-size:15px}
+  .site-nav a:hover{color:#fff}
+  .signin-btn{background:var(--yellow);color:var(--navy);font-weight:700;padding:6px 14px;border-radius:999px}
+  .signin-btn:hover{text-decoration:none;background:#ffd83d}
+
+  /* Hero */
+  .hero{background:var(--navy);color:#fff;padding:34px 20px 40px}
+  .hero-inner{max-width:1100px;margin:0 auto}
+  .hero h1{font-size:34px;line-height:1.2}
+  .hero p{margin-top:10px;font-size:17px;color:#dbeafe;max-width:760px}
+  .search-wrap{max-width:1100px;margin:-22px auto 0;padding:0 20px}
+  .search-box{width:100%;padding:14px 18px;font-size:16px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 4px 14px rgba(13,42,92,.12);outline:none}
+  .search-box:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(13,42,92,.15)}
+
+  main{max-width:1100px;margin:0 auto;padding:18px 20px 40px}
+
+  /* Access note */
+  .access-note{background:#fffbeb;border:1px solid #fde68a;border-left:5px solid var(--yellow);border-radius:10px;padding:14px 16px;margin:6px 0 26px;font-size:15px}
+  .access-note strong{color:var(--navy)}
+
+  /* Sections */
+  .subject{margin-bottom:38px}
+  .subject > h2{font-size:24px;color:var(--navy);margin-bottom:4px}
+  .subject > .subject-sub{color:var(--muted);margin-bottom:16px;font-size:15px}
+  .subject-link{display:inline-block;background:var(--navy);color:#fff;font-weight:700;font-size:15px;padding:11px 18px;border-radius:10px;margin-bottom:18px}
+  .subject-link:hover{background:var(--navy-dark);text-decoration:none;color:#fff}
+  .res-group{margin-bottom:20px}
+  .res-group > h3{font-size:17px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .group-tag{font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px;letter-spacing:.3px}
+  .tag-free{background:var(--green-bg);color:var(--green)}
+  .tag-lock{background:var(--lock-bg);color:var(--lock-ink)}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .res-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:6px}
+  .res-card h4{font-size:16px;line-height:1.35;color:var(--navy)}
+  .res-card p{font-size:14px;color:var(--muted);flex:1}
+  .meta{font-size:13px;color:var(--muted)}
+  .meta b{color:var(--ink)}
+  .card-link{font-weight:700;font-size:14px;margin-top:4px}
+  .badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;margin-top:4px}
+  .badge-free{background:var(--green-bg);color:var(--green)}
+  .badge-lock{background:var(--lock-bg);color:var(--lock-ink)}
+  .badge-soon{background:#f1f5f9;color:var(--muted);border:1px solid var(--line)}
+  .pdf-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .pdf-chips a{font-size:13px;font-weight:600;background:#eff6ff;border:1px solid #bfdbfe;color:var(--navy);padding:4px 9px;border-radius:999px}
+  .pdf-chips a:hover{background:#dbeafe;text-decoration:none}
+
+  .no-results{display:none;background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px;text-align:center;color:var(--muted);font-size:16px;margin-top:10px}
+
+  /* How access works */
+  .howto{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:38px}
+  .howto h2{font-size:19px;color:var(--navy);margin-bottom:8px}
+  .howto ol{margin-left:20px;font-size:15px}
+  .howto li{margin-bottom:4px}
+
+  footer{background:var(--navy-dark);color:#cbd5e1;padding:26px 20px;text-align:center;font-size:14px}
+  footer a{color:#fff}
+  footer p{margin-bottom:6px}
+  @media (max-width:600px){
+    .hero h1{font-size:27px}
+    .site-nav{margin-left:0}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="index.html">SrWL <span>Learning</span></a>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="my_course.html">Courses</a>
+      <a href="pastpaper_index.html">Past Papers</a>
+      <a class="signin-btn" href="login.html">Student sign in</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <h1>Resources</h1>
+    <p>Notes, PDFs, past papers and videos for every SrWL Learning course. Free resources are open to everyone. Course notes and practical pages open after a free student sign-in and teacher approval.</p>
+  </div>
+</div>
+
+<div class="search-wrap">
+  <input type="search" id="searchInput" class="search-box" placeholder="Search resources..." aria-label="Search resources">
+</div>
+
+<main>
+  <div class="access-note">
+    <strong>No paid tier.</strong> Everything here is free. Some resources are open to everyone, and course notes and practical pages need a free student sign-in — your teacher approves your account, then you open the course from your student dashboard.
+  </div>
+
+  <!-- ============ IGCSE ICT (0417) ============ -->
+  <section class="subject" data-section>
+    <h2>IGCSE ICT (0417)</h2>
+    <p class="subject-sub">Cambridge IGCSE Information and Communication Technology — Theory (Paper 1) and Practical (Papers 2 &amp; 3). Exam target: May/June 2027.</p>
+    <a class="subject-link" href="ict-0417.html">Open the IGCSE ICT (0417) subject page &rarr;</a>
+
+    <div class="res-group" data-group>
+      <h3>Free resources <span class="group-tag tag-free">OPEN TO EVERYONE</span></h3>
+      <div class="cards">
+        <article class="res-card" data-title="Chapter 1 Types and Components of Computer Systems Theory Notes" data-desc="Chapter 1 of the Theory Notes, notes and exam questions, no sign-in needed">
+          <h4>Chapter 1 — Types &amp; Components of Computer Systems</h4>
+          <p>Chapter 1 of the Theory Notes — full notes and exam questions, free with no sign-in.</p>
+          <div class="meta"><b>Free</b> · Theory Notes · Chapter 1 of 10</div>
+          <a class="card-link" href="ict_notes.html#ch1">Open Chapter 1 notes &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="Chapter 1 PDF Types and Components of Computer Systems slides mind maps exam answers" data-desc="Chapter 1 slide deck with mind maps and exam answers">
+          <h4>Chapter 1 PDF — Types &amp; Components of Computer Systems</h4>
+          <p>Chapter 1 teaching slides with mind maps and exam answers.</p>
+          <div class="meta"><b>PDF</b> · 37 pages</div>
+          <a class="card-link" href="/pdfs/ict-0417-chapter-01.pdf">Download PDF &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="Syllabus 2026 2027 2028 Cambridge IGCSE ICT 0417 specification" data-desc="Official Cambridge IGCSE ICT syllabus for 2026, 2027 and 2028">
+          <h4>Syllabus 2026–2028 — Cambridge IGCSE ICT (0417)</h4>
+          <p>Official syllabus: subject content Sections 1–21 and the Paper 1, 2 and 3 assessment.</p>
+          <div class="meta"><b>PDF</b> · 45 pages · 2026–2028</div>
+          <a class="card-link" href="/pdfs/ict-0417-syllabus-2026-2028.pdf">Download syllabus PDF &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="Theory Revision Chapters 1 to 10 IGCSE ICT complete revision chapter 1" data-desc="Complete theory revision notes for all 10 chapters">
+          <h4>Theory Revision — Chapters 1–10</h4>
+          <p>Complete theory revision notes covering all 10 theory chapters.</p>
+          <div class="meta"><b>10 chapters</b> · Revision notes</div>
+          <a class="card-link" href="igcse-ict-theory-revision.html">Open revision notes &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="Past Papers mark schemes resource library" data-desc="Past papers and mark schemes from the resource library">
+          <h4>Past Papers</h4>
+          <p>Past papers and mark schemes from the SrWL resource library.</p>
+          <div class="meta">Past papers &amp; mark schemes</div>
+          <a class="card-link" href="pastpaper_index.html">Browse past papers &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="Spreadsheets Guide Microsoft Excel step by step" data-desc="Excel spreadsheets guide for Section 20">
+          <h4>Spreadsheets Guide — Microsoft Excel</h4>
+          <p>Step-by-step Excel guide: formulas, functions, lookups and charts (Section 20).</p>
+          <div class="meta">Practical guide · Section 20</div>
+          <a class="card-link" href="excel_spreadsheet_guide.html">Open Excel guide &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="Database Guide Microsoft Access" data-desc="Access database guide for Section 18">
+          <h4>Database Guide — Microsoft Access</h4>
+          <p>Step-by-step Access guide: tables, data types, keys, queries and reports (Section 18).</p>
+          <div class="meta">Practical guide · Section 18</div>
+          <a class="card-link" href="ms_access_database_guide.html">Open Access guide &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="HTML CSS Guide web authoring cheat sheet" data-desc="HTML and CSS guide for Section 21 website authoring">
+          <h4>HTML &amp; CSS Guide — Website Authoring</h4>
+          <p>HTML and CSS guide: page structure, styles, tables and hyperlinks (Section 21).</p>
+          <div class="meta">Practical guide · Section 21</div>
+          <a class="card-link" href="web-html-css.html">Open HTML &amp; CSS guide &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="YouTube channel SrWL Learning lessons revision Shorts" data-desc="SrWL Learning Channel on YouTube">
+          <h4>YouTube Channel — SrWL Learning</h4>
+          <p>Lessons and revision Shorts on the SrWL Learning Channel.</p>
+          <div class="meta">Video lessons · YouTube</div>
+          <a class="card-link" href="https://www.youtube.com/@SayarWaiLin">Watch on YouTube &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+      </div>
+    </div>
+
+    <div class="res-group" data-group>
+      <h3>Sign in to access <span class="group-tag tag-lock">&#128274; STUDENT SIGN-IN REQUIRED</span></h3>
+      <div class="cards">
+        <article class="res-card" data-title="Theory Notes Chapters 2 to 10 IGCSE ICT exam notebook" data-desc="Full Theory Notes Chapters 2 to 10 with exam questions">
+          <h4>Theory Notes — Chapters 2–10</h4>
+          <p>Full Theory Notes: Chapters 2–10 with extended notes, recaps and exam questions.</p>
+          <div class="meta"><b>Chapters 2–10</b> · Paper 1 theory</div>
+          <a class="card-link" href="ict_notes.html">Open Theory Notes &rarr;</a>
+          <span class="badge badge-lock">&#128274; Sign in required</span>
+        </article>
+
+        <article class="res-card" data-title="Chapter PDFs 2 to 10 slides mind maps exam answers" data-desc="Chapter slide decks with mind maps and exam answers, Chapters 2 to 10">
+          <h4>Chapter PDFs — Chapters 2–10</h4>
+          <p>Teaching slide decks with mind maps and exam answers, one PDF per chapter.</p>
+          <div class="meta"><b>9 PDFs</b> · Chapters 2–10</div>
+          <div class="pdf-chips">
+            <a href="/pdfs/ict-0417-chapter-02.pdf">Ch 2 · Input &amp; Output</a>
+            <a href="/pdfs/ict-0417-chapter-03.pdf">Ch 3 · Storage</a>
+            <a href="/pdfs/ict-0417-chapter-04.pdf">Ch 4 · Networks</a>
+            <a href="/pdfs/ict-0417-chapter-05.pdf">Ch 5 · Effects of IT</a>
+            <a href="/pdfs/ict-0417-chapter-06.pdf">Ch 6 · ICT Applications</a>
+            <a href="/pdfs/ict-0417-chapter-07.pdf">Ch 7 · Systems Life Cycle</a>
+            <a href="/pdfs/ict-0417-chapter-08.pdf">Ch 8 · Safety &amp; Security</a>
+            <a href="/pdfs/ict-0417-chapter-09.pdf">Ch 9 · Audiences</a>
+            <a href="/pdfs/ict-0417-chapter-10.pdf">Ch 10 · Communication</a>
+          </div>
+          <span class="badge badge-lock">&#128274; Sign in required</span>
+        </article>
+
+        <article class="res-card" data-title="Practical Skills Papers 2 and 3 document production databases presentations spreadsheets website authoring" data-desc="Practical Skills Sections 11 to 21 for Papers 2 and 3">
+          <h4>Practical Skills — Papers 2 &amp; 3</h4>
+          <p>Sections 11–21: file management, images, layout, styles, proofing, charts, document production, databases, presentations, spreadsheets and website authoring.</p>
+          <div class="meta"><b>11 sections</b> · Papers 2 &amp; 3</div>
+          <a class="card-link" href="ict_practical.html">Open Practical Skills &rarr;</a>
+          <span class="badge badge-lock">&#128274; Sign in required</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ IGCSE Computer Science (0478) ============ -->
+  <section class="subject" data-section>
+    <h2>IGCSE Computer Science (0478)</h2>
+    <p class="subject-sub">Cambridge IGCSE Computer Science.</p>
+    <div class="res-group" data-group>
+      <h3>Resources</h3>
+      <div class="cards">
+        <article class="res-card" data-title="IGCSE Computer Science 0478 course pages" data-desc="IGCSE Computer Science course pages">
+          <h4>IGCSE Computer Science — Course Pages</h4>
+          <p>Course pages for Cambridge IGCSE Computer Science (0478).</p>
+          <div class="meta">Course pages</div>
+          <a class="card-link" href="https://wai-lin-htet.github.io/CS_IGCSE/">Open course pages &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="Paper 2 Revision algorithms" data-desc="CS Paper 2 revision on algorithms">
+          <h4>Paper 2 Revision — Algorithms</h4>
+          <p>Revision for Computer Science Paper 2: algorithms and programming concepts.</p>
+          <div class="meta">Paper 2 revision</div>
+          <a class="card-link" href="CS_Paper2_rev2.html">Open Paper 2 revision &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="CS 0478 Quiz 1" data-desc="Computer Science 0478 quiz">
+          <h4>CS 0478 — Quiz 1</h4>
+          <p>Practice quiz for IGCSE Computer Science (0478).</p>
+          <div class="meta">Practice quiz</div>
+          <a class="card-link" href="cs_notes/cs_quiz_1.html">Take Quiz 1 &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="Full revision notes IGCSE Computer Science 0478 coming soon" data-desc="Full revision notes coming soon">
+          <h4>Full Revision Notes — 0478</h4>
+          <p>Full revision notes for IGCSE Computer Science are coming soon.</p>
+          <div class="meta">Notes</div>
+          <span class="badge badge-soon">Coming soon</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Edexcel IGCSE ICT (4IT1) ============ -->
+  <section class="subject" data-section>
+    <h2>Edexcel IGCSE ICT (4IT1)</h2>
+    <p class="subject-sub">Pearson Edexcel International GCSE in ICT (4IT1).</p>
+    <div class="res-group" data-group>
+      <h3>Resources</h3>
+      <div class="cards">
+        <article class="res-card" data-title="Edexcel ICT 4IT1 notebook" data-desc="Edexcel IGCSE ICT notebook">
+          <h4>Edexcel ICT Notebook — 4IT1</h4>
+          <p>Notebook for Edexcel IGCSE ICT (4IT1): written paper and practical topics.</p>
+          <div class="meta">Course notebook</div>
+          <a class="card-link" href="ict_edexcel_4it_v1.html">Open Edexcel notebook &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="Past Papers Edexcel ICT 4IT1 coming soon" data-desc="Past papers for Edexcel ICT coming soon">
+          <h4>Past Papers — Edexcel ICT</h4>
+          <p>Past papers for Edexcel IGCSE ICT (4IT1) are coming soon.</p>
+          <div class="meta">Past papers</div>
+          <span class="badge badge-soon">Coming soon</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Edexcel IGCSE Computer Science (4CP0) ============ -->
+  <section class="subject" data-section>
+    <h2>Edexcel IGCSE Computer Science (4CP0)</h2>
+    <p class="subject-sub">Pearson Edexcel International GCSE in Computer Science (4CP0).</p>
+    <div class="res-group" data-group>
+      <h3>Resources</h3>
+      <div class="cards">
+        <article class="res-card" data-title="Edexcel Computer Science 4CP0 notes coming soon" data-desc="Notes for Edexcel Computer Science coming soon">
+          <h4>Course Notes — 4CP0</h4>
+          <p>Notes for Edexcel IGCSE Computer Science (4CP0) are coming soon.</p>
+          <div class="meta">Course notes</div>
+          <span class="badge badge-soon">Coming soon</span>
+        </article>
+
+        <article class="res-card" data-title="Past Papers Edexcel Computer Science 4CP0 coming soon" data-desc="Past papers for Edexcel Computer Science coming soon">
+          <h4>Past Papers — Edexcel CS</h4>
+          <p>Past papers for Edexcel IGCSE Computer Science (4CP0) are coming soon.</p>
+          <div class="meta">Past papers</div>
+          <span class="badge badge-soon">Coming soon</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ A-Level Computer Science (9618) ============ -->
+  <section class="subject" data-section>
+    <h2>A-Level Computer Science (9618)</h2>
+    <p class="subject-sub">Cambridge International AS &amp; A Level Computer Science (9618).</p>
+    <div class="res-group" data-group>
+      <h3>Resources</h3>
+      <div class="cards">
+        <article class="res-card" data-title="A Level Computer Science 9618 syllabus explorer" data-desc="Syllabus explorer for AS and A Level Computer Science">
+          <h4>Syllabus Explorer — 9618</h4>
+          <p>Syllabus explorer for Cambridge International AS &amp; A Level Computer Science (9618).</p>
+          <div class="meta">Syllabus explorer</div>
+          <a class="card-link" href="CS_9618_Alevel_wh.html">Open syllabus explorer &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="A Level Computer Science interactive lab" data-desc="Interactive lab for A Level Computer Science">
+          <h4>Interactive Lab — A Level CS</h4>
+          <p>Interactive lab for A Level Computer Science.</p>
+          <div class="meta">Interactive lab</div>
+          <a class="card-link" href="alevel_notes/alevel_cs_lab.html">Open the lab &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="Full revision notes A Level Computer Science 9618 coming soon" data-desc="Full revision notes for A Level coming soon">
+          <h4>Full Revision Notes — 9618</h4>
+          <p>Full revision notes for A Level Computer Science are coming soon.</p>
+          <div class="meta">Notes</div>
+          <span class="badge badge-soon">Coming soon</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Python Foundation ============ -->
+  <section class="subject" data-section>
+    <h2>Python Foundation</h2>
+    <p class="subject-sub">Beginner Python — basics, variables, data types, operations, conditions, loops, functions, lists and dictionaries.</p>
+    <div class="res-group" data-group>
+      <h3>Resources</h3>
+      <div class="cards">
+        <article class="res-card" data-title="Python Basics cheat sheet" data-desc="Python Basics cheat sheet">
+          <h4>Python Basics — Cheat Sheet</h4>
+          <p>Python basics cheat sheet: variables, data types, operations, conditions, loops, functions, lists and dictionaries.</p>
+          <div class="meta">Cheat sheet</div>
+          <a class="card-link" href="Python.html">Open cheat sheet &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+
+        <article class="res-card" data-title="Python Basics video lessons YouTube playlist" data-desc="Python Basics video lessons playlist on YouTube">
+          <h4>Python Basics — Video Lessons</h4>
+          <p>Python Basics video lessons on the SrWL Learning Channel.</p>
+          <div class="meta">Video lessons · YouTube</div>
+          <a class="card-link" href="https://www.youtube.com/playlist?list=PLftf_oM79wYM">Watch the playlist &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ICT / CS Foundation ============ -->
+  <section class="subject" data-section>
+    <h2>ICT / CS Foundation</h2>
+    <p class="subject-sub">Foundation notebook for ICT and Computer Science beginners.</p>
+    <div class="res-group" data-group>
+      <h3>Resources</h3>
+      <div class="cards">
+        <article class="res-card" data-title="ICT CS Foundation notebook" data-desc="Foundation notebook for ICT and Computer Science">
+          <h4>Foundation Notebook — ICT / CS</h4>
+          <p>Foundation notebook for ICT and Computer Science beginners.</p>
+          <div class="meta">Foundation notebook</div>
+          <a class="card-link" href="ict-foundation.html">Open foundation notebook &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OSSD Computer Science ============ -->
+  <section class="subject" data-section>
+    <h2>OSSD Computer Science (ICS3U / ICS4U)</h2>
+    <p class="subject-sub">Ontario Secondary School Diploma — Computer Science, Grades 11 and 12.</p>
+    <div class="res-group" data-group>
+      <h3>Resources</h3>
+      <div class="cards">
+        <article class="res-card" data-title="OSSD Computer Science curriculum hub ICS3U ICS4U" data-desc="OSSD Computer Science curriculum hub">
+          <h4>Curriculum Hub — OSSD CS</h4>
+          <p>Curriculum hub for OSSD Computer Science (ICS3U &amp; ICS4U).</p>
+          <div class="meta">Curriculum hub</div>
+          <a class="card-link" href="OSSD_CS_Grade12_wh.html">Open curriculum hub &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ How access works ============ -->
+  <div class="howto">
+    <h2>How access works</h2>
+    <ol>
+      <li><strong>Free resources</strong> open to everyone — no account needed.</li>
+      <li><strong>Sign-in resources</strong> (marked &#128274;) need a free student account: sign in with Google on the <a href="login.html">Student sign-in</a> page.</li>
+      <li>Your teacher approves your account. Then open your course from the <a href="student-dashboard.html">student dashboard</a>.</li>
+      <li>Questions? Contact your teacher on Telegram: <a href="https://t.me/SayarWaiLin">@SayarWaiLin</a>.</li>
+    </ol>
+  </div>
+
+  <div class="no-results" id="noResults">No resources match your search. Try a different word — for example "Python", "database" or "past papers".</div>
+</main>
+
+<footer>
+  <p><strong>SrWL Learning</strong> — Sayar Wai Lin Htet</p>
+  <p><a href="index.html">Home</a> · <a href="my_course.html">Courses</a> · <a href="login.html">Student sign in</a> · <a href="https://t.me/SayarWaiLin">Telegram @SayarWaiLin</a></p>
+  <p>www.wailinhtet.com</p>
+</footer>
+
+<script>
+(function () {
+  var input = document.getElementById('searchInput');
+  var noResults = document.getElementById('noResults');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.res-card'));
+
+  function filterCards() {
+    var q = input.value.trim().toLowerCase();
+    var visibleCount = 0;
+    cards.forEach(function (card) {
+      var hay = ((card.getAttribute('data-title') || '') + ' ' + (card.getAttribute('data-desc') || '') + ' ' + card.textContent).toLowerCase();
+      var show = q === '' || hay.indexOf(q) !== -1;
+      card.style.display = show ? '' : 'none';
+      if (show) visibleCount++;
+    });
+    Array.prototype.slice.call(document.querySelectorAll('[data-group]')).forEach(function (group) {
+      var anyVisible = Array.prototype.slice.call(group.querySelectorAll('.res-card')).some(function (c) {
+        return c.style.display !== 'none';
+      });
+      group.style.display = anyVisible ? '' : 'none';
+    });
+    Array.prototype.slice.call(document.querySelectorAll('[data-section]')).forEach(function (section) {
+      var anyVisible = Array.prototype.slice.call(section.querySelectorAll('.res-card')).some(function (c) {
+        return c.style.display !== 'none';
+      });
+      section.style.display = anyVisible ? '' : 'none';
+    });
+    noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+  }
+
+  input.addEventListener('input', filterCards);
+})();
+</script>
+</body>
+</html>
