@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cambridge AS &amp; A Level Computer Science 9618 &middot; Theory &amp; Practical Notes</title>
+<meta name="description" content="Cambridge International AS &amp; A Level Computer Science (9618) revision notes for SrWL Learning students: all 20 sections, exam maps for Papers 1-4, worked examples and exam tips. Section 1 is free.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfbfd; --surface:#ffffff; --surface-2:#f5f5f7; --ink:#1d1d1f; --muted:#6e6e73; --line:rgba(0,0,0,.08);
+  --p1:#0071e3; --p1-soft:rgba(0,113,227,.08); --p2:#ff9500; --p2-soft:rgba(255,149,0,.1); --mm:#34c759; --mm-soft:rgba(52,199,89,.1);
+  --code-bg:#1d1d1f; --code-ink:#f5f5f7; --code-line:#3a3a3c; --code-tag:#98989d;
+  --ok:#34c759; --bad:#d70015;
+  --f-display:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --f-body:'Inter','Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  --f-serif:'Newsreader',serif;
+  --f-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 2px 10px rgba(0,0,0,.03),0 12px 30px rgba(0,0,0,.06);
+  --radius-pill:980px;
+  color-scheme:light;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px);-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.12;margin:0;letter-spacing:-.03em}
+p{margin:0 0 1em}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--p1);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(251,251,253,.8);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;padding-top:10px;padding-bottom:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:600;font-size:.95rem;letter-spacing:-.02em;margin-right:auto;color:var(--ink)}
+.brand .dot{width:7px;height:7px;border-radius:50%;background:#34c759;display:inline-block}
+.brand .chip{font-family:var(--f-mono);font-weight:500;font-size:.72rem;background:var(--ink);color:var(--bg);padding:3px 8px;border-radius:6px;letter-spacing:0}
+.tabs{display:flex;gap:4px;overflow-x:auto;order:3;width:100%;scrollbar-width:none;padding-bottom:2px}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap;padding:7px 14px;border-radius:var(--radius-pill);font-weight:500;font-size:.85rem;color:var(--muted);border:1px solid transparent}
+.tabs a:hover{color:var(--ink);background:var(--surface-2)}
+.tabs a[aria-current="page"]{color:#fff;background:var(--ink)}
+.tabs svg{width:13px;height:13px;flex:none}
+.tools{display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-pill);padding:8px 16px;font-weight:500;font-size:.85rem;text-decoration:none;transition:all .2s cubic-bezier(.16,1,.3,1)}
+.btn:hover{border-color:#a1a1a6}
+.btn.solid{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.solid:hover{background:#000;transform:scale(1.02)}
+.btn.big{padding:12px 22px;font-size:.9rem}
+.btn svg{width:16px;height:16px}
+@media(max-width:520px){.brand .bt{display:none}.btn{padding:7px 13px}}
+@media(min-width:900px){.tabs{order:0;width:auto}.brand{margin-right:0}.tools{margin-left:auto}}
+
+/* ---------- home ---------- */
+.hero{padding:44px 0 40px}
+.hero .wrap{display:grid;gap:36px;align-items:center}
+@media(min-width:900px){.hero .wrap{grid-template-columns:1.15fr .85fr;gap:56px}}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:600;letter-spacing:.03em;padding:.35rem .85rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-pill);color:var(--muted);margin-bottom:1.25rem;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing:-.04em;line-height:1.05;background:linear-gradient(180deg,#1d1d1f 0%,#434344 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1 span{display:block;-webkit-text-fill-color:var(--p1);color:var(--p1);background:none}
+.hero .sub{font-family:var(--f-serif);font-style:italic;font-size:1.2rem;max-width:34em;color:var(--muted);margin:18px 0 26px;font-weight:400;line-height:1.4}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero .by{margin-top:22px;font-size:.85rem;color:var(--muted)}
+.byte{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
+.byte h2{font-size:1.05rem;font-weight:600;margin-bottom:4px}
+.byte .hint{color:var(--muted);font-size:.85rem;margin-bottom:18px}
+.bits{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
+.bit{border:1.5px solid var(--line);background:var(--surface-2);border-radius:10px;padding:10px 0 6px;text-align:center;font-family:var(--f-mono);font-size:1.5rem;font-weight:500;line-height:1}
+.bit small{display:block;margin-top:8px;font-size:.66rem;color:var(--muted);font-weight:400}
+.bit[aria-checked="true"]{background:var(--p1);border-color:var(--p1);color:#fff}
+.bit[aria-checked="true"] small{color:rgba(255,255,255,.8)}
+.readout{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.readout div{background:var(--surface-2);border-radius:12px;padding:10px 12px}
+.readout dt{font-size:.74rem;color:var(--muted)}
+.readout dd{margin:2px 0 0;font-family:var(--f-mono);font-size:1.35rem;font-weight:500;word-break:break-all}
+
+.sec{padding:36px 0}
+.sec .section-eyebrow{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--p1);margin-bottom:.4rem}
+.sec h2{font-size:clamp(1.6rem,3.2vw,2.1rem);font-weight:700;letter-spacing:-.03em}
+.sec .lede{color:var(--muted);max-width:44em;margin:10px 0 26px}
+.papers{display:grid;gap:20px}
+@media(min-width:900px){.papers{grid-template-columns:1.1fr 1fr}}
+.paper{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:all .25s cubic-bezier(.16,1,.3,1)}
+.paper:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.paper header{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:6px}
+.paper h3{font-size:1.35rem;font-weight:700}
+.paper.p1 h3{color:var(--p1)}.paper.p2 h3{color:var(--p2)}
+.paper .meta{color:var(--muted);font-size:.88rem;margin-top:6px}
+.chlist{list-style:none;margin:0;padding:0;flex:1}
+.chlist li{border-bottom:1px solid var(--line)}
+.chlist li:last-child{border-bottom:0}
+.chrow{display:grid;grid-template-columns:44px 1fr;gap:4px 12px;width:100%;text-align:left;background:none;border:0;padding:14px 4px;border-radius:10px;align-items:baseline}
+.chrow:hover{background:var(--surface-2)}
+.chrow .n{font-family:var(--f-display);font-weight:700;font-size:1.6rem;line-height:1;color:var(--p1)}
+.p2 .chrow .n{color:var(--p2)}
+.chrow .t{font-weight:600;font-size:1rem}
+.chrow .d{grid-column:2;color:var(--muted);font-size:.88rem;line-height:1.45}
+.paper .btn{margin-top:14px;align-self:flex-start}
+.mmband{margin-top:20px;background:var(--mm-soft);border:1px solid rgba(52,199,89,.3);border-radius:20px;padding:22px 24px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.mmband h3{font-size:1.25rem;font-weight:700;color:var(--mm)}
+.mmband p{margin:4px 0 0;color:var(--ink);max-width:38em}
+footer.foot{padding:32px 0 60px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);margin-top:24px;text-align:center}
+
+/* ---------- Firebase login gate + free Topic 1 preview (v2 pattern) ---------- */
+/* Signed-out / pending visitors read Topic 1 free. Topics 2-6 and the
+   Practical sections stay locked until Google sign-in + teacher approval. */
+.free-banner{display:none;align-items:center;justify-content:center;gap:14px;position:sticky;top:0;z-index:60;background:#e8f1fd;color:var(--ink);border-bottom:1px solid rgba(0,113,227,.35);padding:10px 16px;text-align:center;font-weight:600;font-size:.92rem}
+.free-banner .free-banner-btn{flex:0 0 auto;background:var(--p1);color:#fff;border:none;padding:8px 16px;border-radius:980px;cursor:pointer;font-weight:600;font-size:.88rem;white-space:nowrap}
+@media (max-width:640px){.free-banner{flex-wrap:wrap;gap:8px}}
+.auth-name{font-weight:600;font-size:.85rem;color:var(--ink);white-space:nowrap}
+/* Locked topics: hide everything inside except the lock panel. */
+body.chapters-locked .chapter[data-ch]:not([data-ch="1"]) > :not(.chapter-lock){display:none}
+.chapter-lock{display:none}
+body.chapters-locked .chapter-lock{display:block;text-align:center;background:var(--surface);border:2px dashed var(--line);border-radius:16px;padding:44px 24px;margin:24px 0}
+.chapter-lock .lock-icon{font-size:2.4rem;line-height:1}
+.chapter-lock h2{margin:10px 0 6px;font-size:1.4rem;color:var(--p1)}
+.chapter-lock p{color:var(--muted);max-width:56ch;margin:0 auto 18px}
+.chapter-lock .lock-btn{background:var(--p1);color:#fff;border:none;padding:12px 22px;border-radius:980px;cursor:pointer;font-weight:600;font-size:1rem}
+.chapter-lock .lock-btn:hover{background:#0062c4}
+/* Lock marks on chapter links while chapters are locked. */
+body.chapters-locked .locked-link::after{content:" \1F512"}
+/* Free preview section (public — visible in every auth state, never locked). */
+.vid{position:relative;aspect-ratio:16/9;margin:16px 0 4px;border-radius:14px;overflow:hidden;background:#000}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.preview-samples{margin-top:20px}
+/* Hard-error overlay (shown only if Firebase fails or the account check fails). */
+.auth-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(29,29,31,.55);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px}
+.auth-card{width:100%;max-width:400px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--p1);border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.25);padding:28px}
+.auth-card h3{font-size:1.4rem;font-weight:700}
+.auth-msg{font-size:.92rem;padding:10px 12px;border-radius:10px;display:none;background:rgba(215,0,21,.08);color:var(--bad);margin-top:12px}
+.auth-msg.show{display:block}
+.auth-submit{margin-top:16px;background:var(--p1);color:#fff;border:none;padding:12px 20px;border-radius:980px;cursor:pointer;font-weight:600;font-size:.95rem}
+.auth-note{margin-top:16px;font-size:.86rem;color:var(--muted);line-height:1.5}
+@media print{.free-banner,.chapter-lock{display:none!important}}
+
+/* ---------- reader (Paper 1 / Paper 2) ---------- */
+.viewhead{padding:34px 0 8px}
+.viewhead h1{font-size:clamp(1.9rem,4.6vw,2.8rem);font-weight:700;letter-spacing:-.035em}
+.viewhead p{color:var(--muted);max-width:42em;margin:8px 0 0}
+.reader{display:grid;gap:20px;padding:20px 0 60px}
+@media(min-width:960px){.reader{grid-template-columns:250px minmax(0,1fr);gap:40px}}
+.chapnav{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+@media(min-width:960px){.chapnav{flex-direction:column;position:sticky;top:calc(env(safe-area-inset-top,0px) + 74px);align-self:start;overflow:visible}}
+.chapnav a{display:flex;gap:10px;align-items:baseline;text-decoration:none;white-space:nowrap;padding:9px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);font-weight:500;font-size:.92rem}
+@media(min-width:960px){.chapnav a{white-space:normal}}
+.chapnav a b{font-family:var(--f-display);font-weight:700;font-size:1.02rem;color:var(--accent)}
+.chapnav a:hover{border-color:var(--accent)}
+.chapnav a[aria-current="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.chapnav a[aria-current="true"] b{color:inherit}
+#view-p1{--accent:var(--p1);--accent-soft:var(--p1-soft)}
+#view-p2{--accent:var(--p2);--accent-soft:var(--p2-soft)}
+.chapter{min-width:0}
+.chead{display:flex;gap:18px;align-items:flex-start;padding:8px 0 22px;border-bottom:2px solid var(--ink);margin-bottom:8px}
+.chead .num{font-family:var(--f-display);font-weight:800;font-size:clamp(3.2rem,8vw,5.4rem);line-height:.8;color:var(--accent);letter-spacing:-.06em}
+.chead h2{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:700;letter-spacing:-.035em}
+.chead p{color:var(--muted);margin:8px 0 0;max-width:40em}
+.chapter h3{font-size:1.35rem;font-weight:700;margin:48px 0 12px;letter-spacing:-.025em}
+.chapter h3 small{font-family:var(--f-mono);font-size:.76rem;font-weight:500;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:6px;margin-right:10px;letter-spacing:0;vertical-align:.18em}
+.chapter h4{font-size:1.05rem;font-weight:600;margin:26px 0 6px;letter-spacing:-.01em}
+.chapter p,.chapter li{max-width:70ch}
+.chapter ul,.chapter ol{padding-left:1.25em;margin:0 0 1em}
+.chapter li{margin:.3em 0}
+.chapter li::marker{color:var(--accent)}
+.chapter code{font-family:var(--f-mono);font-size:.88em;background:var(--surface-2);border:1px solid var(--line);padding:1px 6px;border-radius:5px}
+.chapter pre code{background:none;border:0;padding:0;font-size:inherit}
+.chapter strong{font-weight:600}
+.scroll{overflow-x:auto;margin:14px 0 22px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface-2);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.mono,th.mono{font-family:var(--f-mono);font-size:.88rem}
+table.tt td,table.tt th{text-align:center;font-family:var(--f-mono)}
+table.tt .out{font-weight:700;color:var(--accent)}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 14px 14px 0;padding:14px 18px;margin:20px 0;max-width:74ch}
+.callout p:last-child,.callout ul:last-child{margin-bottom:0}
+.callout .lab{display:block;font-weight:700;font-size:.9rem;margin-bottom:4px}
+.callout.warn{border-color:var(--bad);background:rgba(215,0,21,.06)}
+.terms{display:grid;gap:10px;margin:16px 0 22px}
+@media(min-width:720px){.terms{grid-template-columns:1fr 1fr}}
+.terms div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px}
+.terms dt{font-weight:700;color:var(--accent)}
+.terms dd{margin:2px 0 0;font-size:.94rem}
+pre.code{position:relative;background:var(--code-bg);color:var(--code-ink);border:1px solid var(--code-line);border-radius:14px;padding:34px 18px 16px;margin:14px 0 22px;overflow-x:auto;font-family:var(--f-mono);font-size:.86rem;line-height:1.7;tab-size:4}
+pre.code::before{content:attr(data-lang);position:absolute;top:9px;left:18px;font-size:.72rem;color:var(--code-tag);letter-spacing:.02em}
+.pair{display:grid;gap:0 16px}
+@media(min-width:900px){.pair{grid-template-columns:1fr 1fr}}
+.pair pre.code{margin-top:14px}
+.tree{list-style:none;padding:0!important;margin:14px 0 22px}
+.tree ul{list-style:none;padding-left:22px!important;margin:0;border-left:2px solid var(--line)}
+.tree li{position:relative;margin:6px 0!important;max-width:none!important}
+.tree .node{display:inline-block;background:var(--surface);border:1.5px solid var(--accent);border-radius:8px;padding:4px 12px;font-size:.92rem;font-weight:500}
+.tree > li > .node{background:var(--accent);color:#fff;font-weight:600}
+figure.diagram{margin:16px 0 24px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;overflow-x:auto}
+figure.diagram svg{display:block;margin:0 auto;max-width:100%;height:auto}
+figure.diagram figcaption{color:var(--muted);font-size:.86rem;margin-top:8px;text-align:center}
+.svgt{fill:var(--ink);font-family:var(--f-body);font-size:13px}
+.svgs{fill:var(--surface);stroke:var(--accent);stroke-width:2}
+.svgl{stroke:var(--ink);stroke-width:1.6;fill:none}
+.svgf{fill:var(--ink)}
+.lab-box{background:var(--surface);border:1.5px solid var(--accent);border-radius:18px;padding:18px 20px;margin:22px 0}
+.lab-box h4{margin:0 0 4px!important}
+.lab-box .hint{color:var(--muted);font-size:.9rem;margin-bottom:12px}
+.conv{display:grid;gap:12px}
+@media(min-width:720px){.conv{grid-template-columns:repeat(3,1fr)}}
+.conv label{font-size:.82rem;font-weight:600;display:block;margin-bottom:4px}
+.conv input{font-family:var(--f-mono)}
+.note{color:var(--muted);font-size:.9rem;margin:10px 0 0}
+.sortbox{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.cell{min-width:52px;padding:12px 8px;text-align:center;font-family:var(--f-mono);font-size:1.1rem;font-weight:500;border:2px solid var(--line);border-radius:12px;background:var(--surface-2)}
+.cell.cmp{border-color:var(--accent);background:var(--accent-soft)}
+.cell.swp{border-color:var(--bad);background:rgba(215,0,21,.08)}
+.cell.done{border-color:var(--ok);background:rgba(52,199,89,.1)}
+.rowbtns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.rowbtns input{max-width:280px}
+.gates{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));margin-top:14px}
+.gate{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.gate svg{width:100%;max-width:130px;height:auto;color:var(--ink)}
+.gate b{display:block;font-family:var(--f-display);font-size:1rem}
+.gate .q{display:inline-block;margin-top:6px;font-family:var(--f-mono);font-weight:500;min-width:36px;padding:3px 10px;border-radius:8px;background:var(--line);color:var(--ink)}
+.gate .q.on{background:var(--accent);color:#fff}
+.toggles{display:flex;gap:10px;flex-wrap:wrap}
+.tg{display:inline-flex;align-items:center;gap:10px;border:1.5px solid var(--line);background:var(--surface-2);border-radius:12px;padding:8px 16px;font-family:var(--f-mono);font-weight:500}
+.tg[aria-checked="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:56px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap}
+.pager a{text-decoration:none}
+.pager .sp{flex:1}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body class="chapters-locked">
+
+<!-- FREE PREVIEW BANNER — shown while Sections 2-20 are locked. -->
+<div class="free-banner" id="freeBanner">
+  <span id="freeBannerMsg">&#128214; Section 1 is free &mdash; sign in with Google to unlock Sections 2&ndash;20.</span>
+  <button type="button" class="free-banner-btn" id="freeBannerBtn">Sign in with Google</button>
+</div>
+
+<!-- FIREBASE LOGIN GATE — the overlay below is shown only for hard errors
+     (Firebase not configured / account check failed). Section 1 is free to
+     read; Sections 2-20 are locked per-section until Google sign-in +
+     teacher approval. No passwords are stored on this page. -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-card">
+    <h3>Student Login &#128211;</h3>
+    <div class="auth-msg show" id="authStatusMsg">Checking your Google sign-in&hellip;</div>
+    <button type="button" class="auth-submit" id="authGoLoginBtn" style="display:none;">Go to Login</button>
+    <p class="auth-note">These notes are for approved SrWL Learning students. Sign in with Google on the login page &mdash; your teacher approves your account, then your courses appear on your dashboard. Your name and login time are automatically logged in the attendance list.</p>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="https://wailinhtet.com/"><span class="dot"></span> <span class="bt">Wai Lin Htet</span> <span class="chip">9618</span></a>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#home" data-tab="home">Section list</a>
+      <a href="#p1" data-tab="p1">AS notes</a>
+      <a href="#p2" data-tab="p2">A Level notes</a>
+    </nav>
+    <div class="tools">
+      <a class="btn" href="https://wailinhtet.com/my_course.html">All courses</a>
+      <span id="authUserName" class="auth-name" hidden></span><button class="btn solid" id="authBtn" type="button">Sign in with Google</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- =============== HOME =============== -->
+<section id="view-home">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <div class="hero-badge"><span>Cambridge International AS &amp; A Level &bull; 9618 &bull; AS + A Level &bull;</span></div>
+        <h1>Cambridge AS &amp; A Level Computer Science <span>Theory &amp; Practical</span></h1>
+        <p class="sub">Revision notes for all twenty sections of the 9618 syllabus, with worked examples and exam tips for every paper. Section 1 is free &mdash; sign in with Google to unlock Sections 2&ndash;20.</p>
+        <p class="note" style="margin-top:-12px"><strong>Exam map:</strong> AS = Papers 1&ndash;2 &middot; A Level = all four papers &middot; 75 marks each &middot; No calculators in any paper &middot; June and November series &middot; Exam target: May/June 2027</p>
+        <div class="cta">
+          <button class="btn solid big" type="button" data-go="p1"><span>Start with Section 1 &mdash; it&rsquo;s free</span> <span>&rarr;</span></button>
+          <button class="btn big" type="button" id="seeList">See the section list</button>
+        </div>
+        <p class="by">Cambridge 9618 &middot; Notes by Tr. Wai Lin Htet</p>
+      </div>
+      <div class="byte">
+        <h2>How a computer sees a number</h2>
+        <p class="hint">Tap the bits. Turn them on and off and watch the value change.</p>
+        <div class="bits" id="bits" role="group" aria-label="Eight bits"></div>
+        <dl class="readout">
+          <div><dt>Denary</dt><dd id="rDen">65</dd></div>
+          <div><dt>Hex</dt><dd id="rHex">41</dd></div>
+          <div><dt>ASCII character</dt><dd id="rChr">A</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <section class="sec" id="exam-map">
+    <div class="wrap">
+      <div class="section-eyebrow">Exam map &mdash; 2026 syllabus</div>
+      <h2>Four papers, 75 marks each</h2>
+      <p class="lede">At AS Level you take Papers 1 and 2. At A Level you take all four papers. No calculators may be used in any paper. Exams are available in the June and November series.</p>
+      <div class="papers">
+        <article class="paper p1">
+          <header>
+            <h3>Paper 1 &middot; Theory Fundamentals</h3>
+            <p class="meta">1 h 30 m &middot; 75 marks &middot; 50% of AS / 25% of A Level &middot; written paper &middot; Sections 1&ndash;8</p>
+          </header>
+          <p>Written paper assessing the theory of Sections 1 to 8: information representation, communication, hardware, processor fundamentals, system software, security, ethics and databases. Answer all questions.</p>
+        </article>
+        <article class="paper p1">
+          <header>
+            <h3>Paper 2 &middot; Fundamental Problem-solving and Programming Skills</h3>
+            <p class="meta">2 h &middot; 75 marks &middot; 50% of AS / 25% of A Level &middot; written paper &middot; Sections 9&ndash;12</p>
+          </header>
+          <p>Written paper assessing Sections 9 to 12: algorithm design, data types and structures, programming and software development. Answers are written in pseudocode.</p>
+        </article>
+        <article class="paper p2">
+          <header>
+            <h3>Paper 3 &middot; Advanced Theory</h3>
+            <p class="meta">1 h 30 m &middot; 75 marks &middot; 25% of A Level &middot; written paper &middot; Sections 13&ndash;20</p>
+          </header>
+          <p>Written paper assessing Sections 13 to 20: advanced data representation, internet technologies, hardware and virtual machines, system software, security, artificial intelligence, computational thinking and further programming. Answer all questions.</p>
+        </article>
+        <article class="paper p2">
+          <header>
+            <h3>Paper 4 &middot; Practical</h3>
+            <p class="meta">2 h 30 m &middot; 75 marks &middot; 25% of A Level &middot; on a computer &middot; Sections 19&ndash;20</p>
+          </header>
+          <p>Practical examination on a computer, without internet or email. Assesses Sections 19 to 20 (except low-level and declarative programming). Use Java, Visual Basic (.NET) or Python in console mode, and submit complete program code with evidence of testing.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="resources">
+    <div class="wrap">
+      <div class="section-eyebrow">Resources</div>
+      <h2>Downloads and recommended reading</h2>
+      <p class="lede">The syllabus and revision notes for this course are free &mdash; ask your teacher for a copy, or get them from Cambridge International and zNotes.</p>
+      <div class="papers">
+        <article class="paper p1">
+          <header>
+            <h3>Official syllabus &mdash; 9618 for 2026</h3>
+            <p class="meta">Cambridge International AS &amp; A Level Computer Science 9618 syllabus for examination in 2026 (49 pages).</p>
+          </header>
+          <p>The official syllabus: the paper structure, the content of all twenty sections, and the assessment objectives. This is the document the notes on this page follow. Available free from Cambridge International &mdash; ask your teacher for a copy.</p>
+        </article>
+        <article class="paper p2">
+          <header>
+            <h3>Revision notes &mdash; AS Theory and Practical</h3>
+            <p class="meta">Concise revision notes for the AS topics.</p>
+          </header>
+          <p>Two short revision-note booklets covering the AS topics. Please note they were written for the previous syllabus, so their section numbers differ from 9618. Free from zNotes &mdash; ask your teacher for a copy.</p>
+        </article>
+      </div>
+      <div class="mmband">
+        <div>
+          <h3>Recommended coursebook</h3>
+          <p>Cambridge International AS &amp; A Level Computer Science Coursebook &mdash; David Watson &amp; Helen Williams, Hodder Education, 2019. ISBN 9781510457591. Endorsed by Cambridge Assessment International Education; the chapters follow the 9618 syllabus in order. Ask your teacher where to buy a copy.</p>
+        </div>
+        <a class="btn solid" href="alevel_notes/alevel_cs_lab.html">Open the CS Lab</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="free-preview">
+    <div class="wrap">
+      <div class="section-eyebrow">Free preview</div>
+      <h2>Try Section 1 before you sign in</h2>
+      <p class="lede">No sign-in needed for Section 1 &mdash; here is a sample of how the notes teach, so you can see the style before you join.</p>
+      <div class="papers preview-samples">
+        <article class="paper">
+          <header>
+            <h3>Two&rsquo;s complement sample</h3>
+            <p class="meta">Free sample from Section 1 &mdash; Information representation and multimedia.</p>
+          </header>
+<pre class="code" data-lang="Binary">+23 in 8 bits:  00010111
+Invert the bits: 11101000
+Add 1:           11101001
+So -23 = 11101001</pre>
+        </article>
+        <article class="paper">
+          <header>
+            <h3>Pseudocode sample</h3>
+            <p class="meta">Free sample from Section 9 &mdash; Algorithm design and problem solving. A linear search, in Cambridge pseudocode.</p>
+          </header>
+<pre class="code" data-lang="Pseudocode">Found &larr; FALSE
+Index &larr; 1
+WHILE Index &lt;= 8 AND Found = FALSE
+  IF Numbers[Index] = Target THEN
+    Found &larr; TRUE
+  ELSE
+    Index &larr; Index + 1
+  ENDIF
+ENDWHILE</pre>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="chapter-list">
+    <div class="wrap">
+      <div class="section-eyebrow">Curriculum</div>
+      <h2>Section list</h2>
+      <p class="lede">Twenty sections in syllabus order. Section 1 is free to read &mdash; sign in with Google to unlock Sections 2&ndash;20.</p>
+      <div class="papers">
+        <article class="paper p1">
+          <header>
+            <h3>AS Level &middot; Sections 1&ndash;12</h3>
+            <p class="meta">Papers 1 and 2 &middot; theory fundamentals and problem-solving</p>
+          </header>
+          <ul class="chlist" id="listP1"></ul>
+          <button class="btn solid" type="button" data-go="p1">Open AS notes</button>
+        </article>
+        <article class="paper p2">
+          <header>
+            <h3>A Level &middot; Sections 13&ndash;20</h3>
+            <p class="meta">Papers 3 and 4 &middot; advanced theory and practical programming</p>
+          </header>
+          <ul class="chlist" id="listP2"></ul>
+          <button class="btn solid" type="button" data-go="p2">Open A Level notes</button>
+        </article>
+      </div>
+      <div class="mmband">
+        <div>
+          <h3>How to get access</h3>
+          <p>1) Sign in with Google on the login page. 2) Your teacher approves your account. 3) Your courses appear on your dashboard &mdash; open this page from there.</p>
+        </div>
+        <button class="btn solid" type="button" data-signin>Sign in with Google</button>
+      </div>
+    </div>
+  </section>
+</section>
+<!-- =============== AS =============== -->
+<section id="view-p1" hidden>
+  <div class="wrap">
+    <div class="viewhead">
+      <h1>AS Level &middot; Sections 1&ndash;12</h1>
+      <p>Theory notes for Sections 1 to 12, in syllabus order. Each section states what you must be able to do, explains the ideas, and ends with a worked example and exam tips.</p>
+    </div>
+    <div class="reader" data-reader="p1">
+      <nav class="chapnav" aria-label="AS sections"></nav>
+      <div class="chapters">
+<article class="chapter" data-ch="1" data-title="Information representation and multimedia" hidden>
+
+  <div class="chead"><div class="num">1</div><div><h2>Information representation and multimedia</h2><p>Binary, denary, hexadecimal and BCD; two&#x27;s complement; bitmaps, vectors and sound; compression.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>1.1 Data representation</strong> — use binary, denary and hexadecimal bases and Binary Coded Decimal (BCD); represent positive and negative integers with one's and two's complement; convert between bases; add and subtract binary numbers and explain overflow; describe where BCD and hexadecimal are used in practice; represent character data with ASCII, extended ASCII and Unicode.</li>
+<li><strong>1.2 Multimedia</strong> — explain how bitmap images are encoded (pixel, file header, image resolution, screen resolution, colour depth / bit depth) and estimate bitmap file sizes; explain how changing resolution or colour depth changes quality and file size; explain how vector graphics are encoded (drawing object, property, drawing list) and justify bitmap vs vector for a task; explain how sound is sampled and encoded and how sampling rate and resolution affect quality and file size.</li>
+<li><strong>1.3 Compression</strong> — explain why compression is needed; compare lossy and lossless compression and justify a choice; explain how text, bitmap, vector and sound files are compressed, including run-length encoding (RLE).</li>
+</ul>
+<h3><small>1.1</small>Number systems and negative numbers</h3>
+<p>Computers store everything as patterns of 0s and 1s. Denary is base 10, binary is base 2 and hexadecimal is base 16. Hexadecimal is a shorthand for binary: each hex digit stands for exactly four bits, which is why memory addresses and colour codes are usually written in hex. BCD is different again — each denary digit is stored as its own four-bit group, which is why BCD is used in displays and financial systems where exact decimal digits matter.</p>
+<p>Negative integers are normally stored in <strong>two's complement</strong>: to find the two's complement of a positive number, invert every bit and add 1. In 8 bits, +5 is <code>00000101</code>, so &minus;5 is <code>11111011</code>. The big advantage is that the same addition circuit works for positive and negative numbers. <strong>Overflow</strong> happens when a result needs more bits than are available — for example, adding two large positive 8-bit numbers and getting a result that looks negative.</p>
+<p>Characters are stored as numbers too. ASCII uses 7 bits (128 characters: letters, digits, punctuation and control codes), extended ASCII uses 8 bits (256 characters), and Unicode uses 16 or more bits so it can represent almost every writing system in the world. You are not expected to memorise any particular character codes — but you must know which set to use and why.</p>
+<h3><small>1.2</small>Bitmaps, vectors and sound</h3>
+<p>A <strong>bitmap</strong> image is a grid of pixels. Its file size depends on three things: the number of pixels (image resolution) and the number of bits used for each pixel (colour depth). A useful formula to learn is:</p>
+<div class="callout"><span class="lab">File size</span><p>Bitmap file size (bits) = image width in pixels &times; image height in pixels &times; colour depth in bits. Divide by 8 for bytes. Raising the resolution or the colour depth makes the picture sharper but the file bigger.</p></div>
+<p>A <strong>vector</strong> graphic is not a grid at all — it is a list of drawing objects (lines, curves, shapes) with properties such as position, size, fill colour and line thickness. Vectors can be scaled to any size without losing quality, so they suit logos and diagrams; bitmaps suit photographs, where every pixel can be a different colour.</p>
+<p><strong>Sound</strong> is analogue, so it must be sampled: the sound wave is measured at regular intervals (the sampling rate, in samples per second) and each measurement is stored to a fixed precision (the sampling resolution, in bits). A higher sampling rate captures higher frequencies and a higher resolution captures quieter and louder detail — both make the file bigger. CD-quality sound is sampled 44,100 times per second at 16 bits.</p>
+<h3><small>1.3</small>Compression</h3>
+<p><strong>Lossless</strong> compression throws away nothing: the original file can be rebuilt exactly. <strong>Lossy</strong> compression throws away detail the eye or ear is unlikely to notice, so the file is much smaller but the original can never be recovered. Use lossless for text and data, and lossy for photographs, music and video where a little lost detail does not matter.</p>
+<p><strong>Run-length encoding (RLE)</strong> is the simplest lossless method: a run of identical values is stored as one value plus a count. The string <code>AAAAABBBCC</code> becomes <code>5A 3B 2C</code>. RLE works well on images with large flat areas of one colour and badly on photographs, where neighbouring pixels are almost never identical.</p>
+<h3>Worked example — two's complement and a bitmap file size</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>(a)</strong> Write &minus;23 as an 8-bit two's complement number. 23 in binary is <code>00010111</code>. Invert the bits: <code>11101000</code>. Add 1: <code>11101001</code>. So &minus;23 = <code>11101001</code>. Check: the leftmost bit is 1, which marks a negative number.</p>
+<p><strong>(b)</strong> A bitmap is 800 &times; 600 pixels with a colour depth of 24 bits. File size = 800 &times; 600 &times; 24 = 11,520,000 bits = 1,440,000 bytes (&divide; 8), about 1.4 MB before any compression or file header.</p></div>
+<div class="lab-box"><h4>Try it — denary, binary and hex converter</h4><p class="hint">Type in any box and the other two follow. This is the same conversion the exam asks for, up to 8 bits.</p>
+<div class="conv">
+<div><label for="cv-d">Denary</label><input id="cv-d" type="text" inputmode="numeric" value="156" autocomplete="off"></div>
+<div><label for="cv-b">Binary (8-bit)</label><input id="cv-b" type="text" inputmode="numeric" value="10011100" autocomplete="off"></div>
+<div><label for="cv-h">Hexadecimal</label><input id="cv-h" type="text" value="9C" autocomplete="off"></div>
+</div>
+<p class="note" id="cv-note"></p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Always show your working for conversions and binary arithmetic — method marks are available even if the final answer is wrong.</li>
+<li>For overflow, state the range first: an 8-bit two's complement number can hold &minus;128 to +127. A result outside that range overflows.</li>
+<li>When a question asks you to justify bitmap vs vector, give the reason (scaling, photographic detail, editing) — not just the name.</li>
+<li>Do not memorise character codes; know what ASCII, extended ASCII and Unicode are for and how many bits each uses.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="2" data-title="Communication" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 2 — Communication</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">2</div><div><h2>Communication</h2><p>LANs and WANs, client-server and peer-to-peer, topologies, cloud computing, media and hardware, IP addressing.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>2.1 Networks including the internet</strong> — explain the purpose and benefits of networking devices; describe LANs and WANs; compare the client-server and peer-to-peer models and justify a choice; explain thin-client and thick-client; describe bus, star, mesh and hybrid topologies and how packets travel in each; explain cloud computing (public and private clouds) and its benefits and drawbacks; compare wired and wireless networks and describe copper, fibre-optic, radio waves, microwaves and satellites; describe LAN hardware (switch, server, NIC, WNIC, WAP, cables, bridge, repeater); explain the role of a router; explain Ethernet and CSMA/CD; explain bit streaming (real-time and on-demand) and the effect of bit rate; distinguish the World Wide Web from the internet and describe the hardware that supports it; explain IP addressing (IPv4 and IPv6), DNS and MAC addresses.</li>
+</ul>
+<h3><small>2.1</small>Networks and models</h3>
+<p>A <strong>LAN</strong> (local area network) covers a small area such as a school or office, is fast, and is usually owned by one organisation. A <strong>WAN</strong> (wide area network) covers a large area — the internet is the largest WAN — and is slower and owned by many organisations. In a <strong>client-server</strong> network, a central server provides services and controls security; in a <strong>peer-to-peer</strong> network, every computer is equal and shares files directly with the others. Client-server suits a school (central backups, one login, controlled access); peer-to-peer suits a small home network (cheap, no server to maintain).</p>
+<p>A <strong>thin client</strong> does almost no processing itself — it relies on the server for programs and storage. A <strong>thick client</strong> has its own processor, memory and storage and can work on its own. Thin clients are cheap and easy to manage centrally; thick clients keep working if the network fails.</p>
+<h3><small>2.1</small>Topologies and media</h3>
+<table>
+<tr><th>Topology</th><th>How it works</th><th>Strength</th><th>Weakness</th></tr>
+<tr><td><strong>Bus</strong></td><td>All computers share one cable; data travels along the bus to its destination.</td><td>Cheap and simple to set up.</td><td>If the main cable fails, the whole network fails; collisions slow it down.</td></tr>
+<tr><td><strong>Star</strong></td><td>Every computer connects to a central switch or hub.</td><td>One cable failing affects only one computer; easy to add computers.</td><td>If the central switch fails, the whole network fails.</td></tr>
+<tr><td><strong>Mesh</strong></td><td>Computers connect to several others, so there are many routes.</td><td>Very reliable — data can take another route if one link fails.</td><td>Expensive: lots of cables and connections.</td></tr>
+<tr><td><strong>Hybrid</strong></td><td>A mix of two or more topologies, e.g. star networks joined by a bus backbone.</td><td>Combines the strengths of each part.</td><td>Complex and expensive to design and manage.</td></tr>
+</table>
+<p>Data travels as <strong>packets</strong>. Wired media include copper cable (cheap, but signals weaken over distance and suffer interference) and fibre-optic cable (light pulses, very fast, immune to interference, but expensive to install). Wireless media include radio waves (WiFi), microwaves and satellites (good for remote areas, but slower and affected by weather and interference).</p>
+<h3><small>2.1</small>Hardware, addressing and the internet</h3>
+<p>Key LAN hardware: a <strong>switch</strong> connects computers in a LAN and sends each packet only to its destination; a <strong>NIC</strong> (network interface card) connects a computer to the network and holds its MAC address; a <strong>WAP</strong> (wireless access point) lets wireless devices join a wired network; a <strong>bridge</strong> joins two similar networks; a <strong>repeater</strong> boosts a weakening signal. A <strong>router</strong> connects different networks together — it reads the destination IP address of each packet and forwards it towards the next network on its journey.</p>
+<p>Every device on a network has a <strong>MAC address</strong> (a permanent hardware address built into the NIC) and an <strong>IP address</strong> (a logical address that can change). IPv4 addresses are 32 bits written as four denary numbers (for example 192.168.1.10); IPv6 addresses are 128 bits written in hexadecimal, introduced because IPv4 addresses are running out. <strong>DNS</strong> (Domain Name System) translates human-readable names such as wailinhtet.com into IP addresses.</p>
+<p><strong>Ethernet</strong> is the standard way computers share a cable. To avoid collisions, it uses <strong>CSMA/CD</strong>: a computer listens to check the cable is free, sends its data, and if two computers send at the same time (a collision) both stop, wait a random time and try again. <strong>Bit streaming</strong> sends audio or video as a continuous stream — real-time (live, cannot be paused) or on-demand (stored, can be paused). A higher bit rate means better quality but needs a faster connection.</p>
+<p>Finally, the <strong>internet</strong> is the network of networks; the <strong>World Wide Web</strong> is a service that runs on it (web pages linked by hyperlinks). <strong>Cloud computing</strong> means using storage and software on remote servers over the internet: a <strong>public cloud</strong> is shared by many customers, a <strong>private cloud</strong> is used by one organisation only. Cloud computing cuts the cost of buying and maintaining hardware, but it needs a reliable internet connection and raises questions about who controls your data.</p>
+<h3>Worked example — choosing a topology and a model</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> A school has 200 computers in 8 classrooms and wants central control of logins, files and printing. Recommend a topology and a network model, giving reasons.</p>
+<p><strong>Answer:</strong> Use a <strong>star topology</strong> in each classroom, with the classroom switches joined into a hybrid network, and a <strong>client-server model</strong>. Reasons: in a star, one faulty cable affects only one computer, so a fault does not stop a whole class; the server gives one login per student, central backups and controlled printing; and new computers are easy to add to a star. A bus would be a poor choice because one cable fault would stop a whole classroom, and peer-to-peer would give no central control over 200 users.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Questions that ask you to "justify" a choice always want the reason, not just the name — link the feature of the topology or model to the situation in the question.</li>
+<li>Do not confuse MAC and IP addresses: MAC is fixed hardware, IP is logical and can change; DNS links a name to an IP address.</li>
+<li>For CSMA/CD, remember the order: listen, send, detect a collision, stop, wait a random time, resend.</li>
+<li>Cloud computing questions often ask for a benefit <em>and</em> a drawback — give one of each.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="3" data-title="Hardware" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 3 — Hardware</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">3</div><div><h2>Hardware</h2><p>Input, output and storage devices; RAM and ROM; logic gates, truth tables and circuits.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>3.1 Computers and their components</strong> — describe input and output devices and sensors; explain RAM (SRAM vs DRAM) and ROM (PROM, EPROM, EEPROM); describe secondary storage (magnetic, optical, solid state) and compare them.</li>
+<li><strong>3.2 Logic gates and logic circuits</strong> — describe the six standard gates (NOT, AND, OR, NAND, NOR, XOR); construct truth tables and Boolean expressions from a problem; draw and interpret logic circuits (examination circuits use at most three inputs and one output).</li>
+</ul>
+<h3><small>3.1</small>Memory and storage</h3>
+<p><strong>RAM</strong> is volatile working memory: its contents are lost when the power is off. <strong>SRAM</strong> (static RAM) uses flip-flops, is fast and expensive, and is used for cache memory. <strong>DRAM</strong> (dynamic RAM) stores each bit as a charge in a capacitor, is slower and cheaper, and must be refreshed regularly — it is the main memory of a computer. <strong>ROM</strong> is non-volatile and holds the start-up instructions: PROM can be written once, EPROM can be erased with ultraviolet light and rewritten, and EEPROM can be erased electrically.</p>
+<p><strong>Secondary storage</strong> keeps data when the power is off. Magnetic storage (hard disk drives) is cheap with a large capacity but has moving parts and is relatively slow. Optical storage (CD, DVD, Blu-ray) is cheap and portable but holds less and is slower to write. Solid-state storage (SSD, USB flash, NAND flash) has no moving parts, is fast and silent, but costs more per gigabyte and wears out after many write cycles.</p>
+<h3><small>3.2</small>Logic gates</h3>
+<p>Each gate takes binary inputs and produces one binary output. The six gates you must know are:</p>
+<table class="tt">
+<tr><th>A</th><th>B</th><th>NOT A</th><th>A AND B</th><th>A OR B</th><th>A NAND B</th><th>A NOR B</th><th>A XOR B</th></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+</table>
+<p>In words: AND is 1 only when both inputs are 1; OR is 1 when at least one input is 1; XOR is 1 when the inputs are <em>different</em>; NAND and NOR are AND and OR followed by NOT. A <strong>Boolean expression</strong> describes a circuit in symbols, for example X = (A AND B) OR C. To build a truth table, work out the intermediate columns first (for example A AND B), then combine them for X — never try to jump straight to the final column.</p>
+<div class="lab-box"><h4>Try it — logic gates</h4><p class="hint">Tap A and B and watch every gate output change.</p>
+<div class="toggles"><button type="button" class="tg" id="tgA" aria-checked="false">A = <span>0</span></button><button type="button" class="tg" id="tgB" aria-checked="false">B = <span>0</span></button></div>
+<div class="gates" id="gateGrid"></div></div>
+<h3>Worked example — truth table from a circuit</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> A circuit has X = (A AND B) OR NOT C. Complete the truth table row where A = 1, B = 0, C = 1.</p>
+<p><strong>Answer:</strong> Work column by column. A AND B = 1 AND 0 = 0. NOT C = NOT 1 = 0. Then X = 0 OR 0 = 0. So for A = 1, B = 0, C = 1, X = 0. Building the full table the same way (8 rows for three inputs) gives X = 1 only when A AND B is 1, or C is 0.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Write out intermediate columns in truth tables — they earn method marks and stop careless errors.</li>
+<li>Read the question's gate count: examination circuits have at most three inputs and one output, so a truth table has at most eight rows.</li>
+<li>XOR is the gate students mix up most: it is 1 when the inputs are different, 0 when they are the same.</li>
+<li>When asked to draw a circuit, label every input and the output, and keep the gates in the same order as the expression.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="4" data-title="Processor fundamentals" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 4 — Processor fundamentals</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">4</div><div><h2>Processor fundamentals</h2><p>Von Neumann architecture, the fetch-decode-execute cycle, registers, assembly language and bit manipulation.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>4.1 Central Processing Unit (CPU) architecture</strong> — describe the Von Neumann architecture (ALU, control unit, clock, address/data/control buses); explain the role of the registers PC, MAR, MDR, CIR, ACC and the status register; describe the fetch-decode-execute cycle and the role of interrupts and interrupt service routines.</li>
+<li><strong>4.2 Assembly language</strong> — compare machine code and assembly language; explain mnemonics, op-code and operand; explain immediate, direct, indirect, indexed and relative addressing; trace and write assembly routines for the Cambridge instruction set.</li>
+<li><strong>4.3 Bit manipulation</strong> — use AND, OR and XOR with masks to test, set, clear and invert individual bits.</li>
+</ul>
+<h3><small>4.1</small>The Von Neumann architecture and the FDE cycle</h3>
+<p>Almost every computer follows the <strong>Von Neumann architecture</strong>: one memory holds both program instructions and data, and a central processor fetches instructions from memory one at a time and executes them. The processor has an <strong>ALU</strong> (arithmetic logic unit, which does calculations and comparisons), a <strong>control unit</strong> (which directs the whole process), a <strong>clock</strong> (which sends regular pulses to time every step) and three buses: the <strong>address bus</strong> (one-way: processor to memory, carrying the address wanted), the <strong>data bus</strong> (two-way: carrying the data or instruction itself) and the <strong>control bus</strong> (carrying timing and control signals).</p>
+<table>
+<tr><th>Register</th><th>Role</th></tr>
+<tr><td><strong>PC</strong> (program counter)</td><td>Holds the address of the next instruction to be fetched.</td></tr>
+<tr><td><strong>MAR</strong> (memory address register)</td><td>Holds the address of the memory location being read from or written to.</td></tr>
+<tr><td><strong>MDR</strong> (memory data register)</td><td>Holds the data or instruction that has just been read from, or is about to be written to, memory.</td></tr>
+<tr><td><strong>CIR</strong> (current instruction register)</td><td>Holds the instruction currently being decoded and executed.</td></tr>
+<tr><td><strong>ACC</strong> (accumulator)</td><td>Holds the result of a calculation while it is being worked on.</td></tr>
+<tr><td><strong>Status register</strong></td><td>Holds flags, for example whether the last result was zero or negative.</td></tr>
+</table>
+<p>The <strong>fetch-decode-execute cycle</strong> repeats for every instruction: <strong>fetch</strong> — copy the instruction at the address in the PC into the CIR (and increase the PC); <strong>decode</strong> — the control unit works out what the instruction means; <strong>execute</strong> — carry it out, which may move data or change the PC. An <strong>interrupt</strong> is a signal that makes the processor stop what it is doing, save its place, run an <strong>interrupt service routine</strong> (for example to handle a key press or a printer finishing), and then return to the saved place.</p>
+<h3><small>4.2</small>Assembly language and addressing modes</h3>
+<p><strong>Machine code</strong> is binary — the only language the processor understands directly. <strong>Assembly language</strong> is the same thing written with readable <strong>mnemonics</strong>: each instruction has an <strong>op-code</strong> (what to do, such as ADD or LDM) and an <strong>operand</strong> (the data or address to work on). An assembler translates assembly language into machine code.</p>
+<table>
+<tr><th>Addressing mode</th><th>What the operand means</th><th>Example</th></tr>
+<tr><td><strong>Immediate</strong></td><td>The operand is the value itself.</td><td><code>LDM #25</code> loads the value 25.</td></tr>
+<tr><td><strong>Direct</strong></td><td>The operand is the address of the value.</td><td><code>LDM 25</code> loads the value stored at address 25.</td></tr>
+<tr><td><strong>Indirect</strong></td><td>The operand is the address of an address: the value at that address is itself an address.</td><td><code>LDM (25)</code> loads the value at the address stored at address 25.</td></tr>
+<tr><td><strong>Indexed</strong></td><td>The operand address is added to the index register (IX).</td><td><code>LDM 25, IX</code> loads the value at address 25 + IX.</td></tr>
+<tr><td><strong>Relative</strong></td><td>The operand is added to the PC — used for jumps.</td><td><code>JMP +4</code> jumps four instructions ahead.</td></tr>
+</table>
+<h3><small>4.3</small>Bit manipulation with masks</h3>
+<p>A <strong>mask</strong> is a pattern of bits used with AND, OR or XOR to change selected bits and leave the rest alone: <strong>AND</strong> with 0 clears a bit (and with 1 leaves it unchanged), so AND tests or clears bits; <strong>OR</strong> with 1 sets a bit; <strong>XOR</strong> with 1 inverts (toggles) a bit. For example, to set bit 2 of the register value <code>00001000</code>, OR it with the mask <code>00000100</code> to get <code>00001100</code>. To test whether bit 3 is set, AND the value with <code>00001000</code> and check whether the result is zero.</p>
+<h3>Worked example — trace an assembly routine</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<pre class="code" data-lang="Assembly">LDM #0      ; load 0 into the accumulator
+STO 50      ; store the accumulator at address 50
+LDM 51      ; load the value at address 51
+ADD #5      ; add 5
+STO 52      ; store the result at address 52
+END</pre>
+<p>If memory location 51 holds 20, the trace is: ACC = 0, then address 50 holds 0; ACC = 20, then 20 + 5 = 25; address 52 holds 25. The routine copies 0 to address 50 and stores 25 (the value at 51, plus 5) at address 52. When tracing, write one row per instruction showing the ACC and any memory locations that change.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Trace tables are the safest way to answer FDE and assembly questions — one row per step, one column per register.</li>
+<li>Learn the register names and their jobs exactly: examiners ask "what is the role of the MAR?" as a one- or two-mark question.</li>
+<li>Do not confuse addressing modes: immediate means the value is in the instruction; direct means the address is in the instruction.</li>
+<li>For masks, remember: AND clears, OR sets, XOR flips — and always show the mask you used.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="5" data-title="System software" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 5 — System software</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">5</div><div><h2>System software</h2><p>Operating systems, utility software, assemblers, compilers and interpreters.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>5.1 Operating systems</strong> — explain the functions of an operating system (process, memory, file, device management and user security); describe utility software (disk defragmenter, backup utility, compression tools, file manager).</li>
+<li><strong>5.2 Language translators</strong> — explain how a two-pass assembler works; compare compilers and interpreters, including their advantages, execution overhead, the debugging cycle and intermediate bytecodes.</li>
+</ul>
+<h3><small>5.1</small>What an operating system does</h3>
+<p>The <strong>operating system</strong> is the software that manages the computer so that programs can run. Its main jobs are: <strong>process management</strong> (deciding which program gets the processor and for how long), <strong>memory management</strong> (giving each program the memory it needs and protecting programs from each other), <strong>file management</strong> (organising files and folders), <strong>device management</strong> (talking to printers, disks and other hardware through drivers) and <strong>user security</strong> (logins, passwords and access rights). <strong>Utility software</strong> helps maintain the system: a disk defragmenter gathers the scattered pieces of files back together so the disk reads faster, a backup utility copies files so they can be restored, and a compression tool shrinks files for storage or sending.</p>
+<h3><small>5.2</small>Translators: assemblers, compilers, interpreters</h3>
+<table>
+<tr><th></th><th>What it does</th><th>Strength</th><th>Weakness</th></tr>
+<tr><td><strong>Assembler</strong></td><td>Translates assembly language into machine code. A two-pass assembler reads the program twice: the first pass records the addresses of labels, the second pass produces the machine code — this is how it resolves forward references to labels that appear later in the program.</td><td>Produces fast, small machine code.</td><td>Assembly language is slow to write and hard to read.</td></tr>
+<tr><td><strong>Compiler</strong></td><td>Translates the whole high-level program into machine code (or bytecode) in one go, before it runs.</td><td>The finished program runs fast; errors are reported together so they can be fixed before running.</td><td>Must recompile the whole program after any change; the compiled code only runs on one type of processor.</td></tr>
+<tr><td><strong>Interpreter</strong></td><td>Translates and runs the program one line at a time, while it runs.</td><td>Easy to test and debug — you can stop, fix and continue; the same program runs on any computer with an interpreter.</td><td>Runs more slowly, because translation happens every time; an error stops the program part-way through.</td></tr>
+</table>
+<p>Some languages compile to <strong>bytecode</strong> — an intermediate code that runs on a virtual machine (for example Java bytecode on the JVM). This gives a middle ground: the program is compiled once, but the bytecode runs on any computer that has the virtual machine.</p>
+<h3>Worked example — compiler or interpreter?</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> A student is writing a program to control a robot and needs to test small parts of the code again and again while the robot is running. Should the program be compiled or interpreted? Give two reasons.</p>
+<p><strong>Answer:</strong> Interpreted. First, an interpreter translates and runs one line at a time, so the student can test a small change immediately without recompiling the whole program. Second, when an error occurs the interpreter stops at that line, which makes it easier to find and fix the fault during development.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Compiler vs interpreter questions almost always ask for a comparison — give one advantage of each, or two of the one you recommend, tied to the situation.</li>
+<li>Remember the two-pass assembler: pass 1 records label addresses, pass 2 generates the code — that is why forward references work.</li>
+<li>Do not say a compiler "runs the program" — it translates it; the program runs afterwards.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="6" data-title="Security, privacy and data integrity" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 6 — Security, privacy and data integrity</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">6</div><div><h2>Security, privacy and data integrity</h2><p>Threats and defences, encryption, validation and verification.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>6.1 Data security</strong> — describe threats (malware including viruses, worms and trojans; phishing; pharming; spyware; ransomware) and defensive measures (firewalls, anti-virus software, authentication, biometric controls, access rights, symmetric encryption); distinguish data privacy from data security.</li>
+<li><strong>6.2 Data integrity</strong> — describe validation methods (range check, format check, length check, presence check, check digit) and verification methods (double data entry, visual checks, parity bits, checksums).</li>
+</ul>
+<h3><small>6.1</small>Threats and defences</h3>
+<p><strong>Malware</strong> is software written to harm: a <strong>virus</strong> attaches to files and spreads when they are shared, a <strong>worm</strong> spreads by itself across a network, and a <strong>trojan</strong> pretends to be useful software while secretly doing harm. <strong>Phishing</strong> is a fake email or message that tricks you into giving away passwords or bank details; <strong>pharming</strong> redirects you to a fake copy of a real website without you clicking anything; <strong>spyware</strong> secretly records what you type or where you browse; <strong>ransomware</strong> encrypts your files and demands payment to unlock them.</p>
+<p>Defences work in layers. A <strong>firewall</strong> blocks unwanted network traffic; <strong>anti-virus software</strong> scans for and removes known malware; <strong>authentication</strong> (passwords, two-factor authentication, biometrics such as fingerprints) checks that a user is who they claim to be; <strong>access rights</strong> limit what each user can see or change; and <strong>encryption</strong> scrambles data so it cannot be read without the key. In <strong>symmetric encryption</strong> the same key encrypts and decrypts the data, so the key itself must be shared safely.</p>
+<p><strong>Data privacy</strong> and <strong>data security</strong> are different: privacy is about people's rights — who is allowed to collect and use personal data; security is about the safeguards that protect data from unauthorised access. A system can be secure (well protected) yet still breach privacy (collecting data it has no right to hold).</p>
+<h3><small>6.2</small>Validation and verification</h3>
+<p><strong>Validation</strong> checks whether data is sensible and acceptable when it is entered; <strong>verification</strong> checks whether data matches its original source. They are not the same thing, and the exam tests the difference.</p>
+<table>
+<tr><th>Validation method</th><th>What it checks</th><th>Example</th></tr>
+<tr><td>Range check</td><td>The value is between sensible limits.</td><td>An exam mark must be 0–100.</td></tr>
+<tr><td>Format check</td><td>The value matches a pattern.</td><td>A date must be DD/MM/YYYY.</td></tr>
+<tr><td>Length check</td><td>The value has the right number of characters.</td><td>A password must be at least 8 characters.</td></tr>
+<tr><td>Presence check</td><td>A value has been entered at all.</td><td>A name field must not be blank.</td></tr>
+<tr><td>Check digit</td><td>The last digit matches a calculation on the others.</td><td>A barcode or ISBN number.</td></tr>
+</table>
+<p>Verification methods: <strong>double data entry</strong> (type the data twice and compare), <strong>visual checks</strong> (a person reads the entered data against the original), <strong>parity bits</strong> (an extra bit makes the number of 1s even or odd, catching single-bit errors in transmission) and <strong>checksums</strong> (a value calculated from the data, sent with it, and recalculated at the other end — if the two values differ, the data changed).</p>
+<h3>Worked example — validation or verification?</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> A school enters students' exam marks into a system. (a) A mark of 105 is rejected. Which validation method is this, and why? (b) A teacher types each mark twice and the system compares the two entries. What is this called?</p>
+<p><strong>Answer:</strong> (a) A <strong>range check</strong>: marks must be between 0 and 100, and 105 is outside that range, so the value is not sensible. (b) <strong>Double data entry</strong> — a verification method: it checks that the entered data matches what was typed the first time, not whether the mark itself is sensible.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>The most common error in this section is swapping validation and verification: validation = sensible?, verification = same as the original?</li>
+<li>When a question asks for a defence against a named threat, match the defence to the threat — a firewall does not stop phishing, and anti-virus software does not stop someone guessing a password.</li>
+<li>For encryption, state whether the key is the same for both sides (symmetric) — and remember the key must be shared safely.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="7" data-title="Ethics and ownership" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 7 — Ethics and ownership</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">7</div><div><h2>Ethics and ownership</h2><p>Ethical issues, codes of conduct, intellectual property, copyright and open-source licensing.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>7.1 Ethics and ownership</strong> — discuss ethical concerns in computing and software engineering; explain professional codes of conduct (ACM, BCS); explain intellectual property rights, software piracy and copyright law; compare open-source (FOSS) and proprietary licensing; discuss the ethical issues of artificial intelligence, including automated decision making and data profiling.</li>
+</ul>
+<h3><small>7.1</small>Ethics, codes of conduct and ownership</h3>
+<p>Computers create ethical questions that did not exist before: who owns data about you, who is responsible when an automated system makes a wrong decision, and how much should a program be allowed to watch its users? <strong>Professional codes of conduct</strong> — such as those of the ACM and the BCS — set out how computing professionals should behave: act honestly, protect users' privacy, do not harm others, and take responsibility for the systems you build. A code of conduct does not have the force of law, but breaking it can cost a professional their membership and reputation.</p>
+<p><strong>Intellectual property</strong> is the legal idea that creative work belongs to its creator. <strong>Copyright</strong> gives the creator the right to control copying; <strong>software piracy</strong> — copying or using software without a licence — is a breach of copyright and is illegal. A <strong>proprietary licence</strong> keeps the source code closed and charges for use; an <strong>open-source (FOSS)</strong> licence lets anyone see, change and share the code, usually for free. Open-source software is often developed by a community and can be inspected for security problems, but there may be no company to provide support or accept responsibility when it fails.</p>
+<p>Artificial intelligence raises its own ethical issues: an AI system that decides who gets a loan or a job can inherit the biases in its training data; <strong>data profiling</strong> builds detailed pictures of people from their behaviour, often without their full understanding; and automated decisions can be hard to explain or appeal against. When you evaluate an ethical question in the exam, name the people affected, state what is gained and what is lost, and reach a reasoned conclusion — a one-sided answer scores less than a balanced one.</p>
+<h3>Worked example — evaluating an ethical dilemma</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> A company uses AI to shortlist job applicants from their CVs. Discuss two ethical issues this raises.</p>
+<p><strong>Answer:</strong> First, <strong>bias</strong>: if the AI was trained on past hiring data that favoured one group of applicants, it will repeat that bias and reject qualified people unfairly — and the company may not even notice. Second, <strong>lack of transparency</strong>: applicants are not told how the decision was made and have no clear way to challenge it, so an unfair rejection cannot be corrected. A responsible company would audit the system for bias and keep a human in the final decision.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Ethics questions want discussion, not just a list: give the issue, explain who is affected and how, and finish with a balanced judgement.</li>
+<li>Do not confuse copyright with patents: copyright protects the expression of an idea (code, text, music); it does not protect the idea itself.</li>
+<li>For open-source vs proprietary, compare the same points on both sides: cost, access to source code, support, and who is responsible when things go wrong.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="8" data-title="Databases" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 8 — Databases</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">8</div><div><h2>Databases</h2><p>Flat files and relational databases, keys and E-R diagrams, DBMS features, SQL (DDL and DML).</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>8.1 Database concepts</strong> — explain the limitations of flat-file systems (data redundancy, inconsistency, data-program dependency); describe relational databases (entities, attributes, primary keys, foreign keys, compound keys, referential integrity); draw and interpret entity-relationship (E-R) diagrams (1:1, 1:M, M:N relationships).</li>
+<li><strong>8.2 Database Management Systems (DBMS)</strong> — describe DBMS features: data dictionary, data security, access permissions, backup and recovery.</li>
+<li><strong>8.3 DDL and DML (SQL)</strong> — write SQL using DDL (CREATE TABLE, ALTER TABLE, PRIMARY KEY, FOREIGN KEY) and DML (SELECT, FROM, WHERE, ORDER BY, GROUP BY, INNER JOIN, INSERT INTO, UPDATE, DELETE).</li>
+</ul>
+<h3><small>8.1</small>From flat files to relational databases</h3>
+<p>A <strong>flat file</strong> stores all its data in one table. That causes three problems: <strong>data redundancy</strong> (the same fact is stored many times), <strong>inconsistency</strong> (updating one copy but not another leaves the data disagreeing with itself) and <strong>data-program dependency</strong> (changing the file's structure means changing every program that uses it). A <strong>relational database</strong> splits the data into linked tables, so each fact is stored once.</p>
+<p>Each table has a <strong>primary key</strong> — a field (or combination of fields, called a <strong>compound key</strong>) that uniquely identifies each row. A <strong>foreign key</strong> is a primary key from another table, stored in this table to create the link. <strong>Referential integrity</strong> is the rule that a foreign key must match a real primary key in the other table — you cannot record an order for a customer who does not exist.</p>
+<p>An <strong>E-R diagram</strong> shows the tables (entities) and how they relate: <strong>1:1</strong> (one row links to exactly one row, such as a person and their passport), <strong>1:M</strong> (one row links to many, such as one customer and many orders) and <strong>M:N</strong> (many to many, such as students and courses). An M:N relationship cannot be built directly — it must be split into two 1:M relationships using a <strong>junction table</strong> in the middle.</p>
+<h3><small>8.2</small>What a DBMS provides</h3>
+<p>A <strong>DBMS</strong> is the software that manages the database. It keeps a <strong>data dictionary</strong> (the definitions of every table, field and data type), enforces <strong>data security</strong> and <strong>access permissions</strong> (who can read or change what), and provides <strong>backup and recovery</strong> (so the database can be restored after a failure). Because programs use the DBMS instead of reading files directly, the data is independent of the programs — this is called logical data independence.</p>
+<h3><small>8.3</small>SQL: DDL and DML</h3>
+<p><strong>DDL</strong> (Data Definition Language) builds the structure; <strong>DML</strong> (Data Manipulation Language) works with the data inside it.</p>
+<pre class="code" data-lang="SQL">-- DDL: create a table with a primary key and a foreign key
+CREATE TABLE Orders (
+  OrderID INTEGER PRIMARY KEY,
+  CustomerID INTEGER,
+  OrderDate DATE,
+  FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID)
+);
+
+-- DML: list the names of customers who ordered after 1 June 2026
+SELECT Customers.Name, Orders.OrderDate
+FROM Customers
+INNER JOIN Orders ON Customers.CustomerID = Orders.CustomerID
+WHERE Orders.OrderDate &gt; '2026-06-01'
+ORDER BY Orders.OrderDate;</pre>
+<p>The <strong>INNER JOIN</strong> connects the two tables on the matching key, so each order appears next to the name of the customer who placed it. Other DML you must know: <code>INSERT INTO</code> (add a row), <code>UPDATE</code> (change a row), <code>DELETE</code> (remove a row), <code>GROUP BY</code> (group rows, for example to count orders per customer) and <code>ORDER BY</code> (sort the results).</p>
+<h3>Worked example — designing the tables</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> A library lends books to members. A member can borrow many books, and a book can be borrowed by many members over time. Draw the E-R design and name the keys.</p>
+<p><strong>Answer:</strong> This is an M:N relationship between Member and Book, so it needs a junction table — call it Loan. Member has primary key MemberID; Book has primary key BookID; Loan has a compound primary key (MemberID, BookID) — both fields are also foreign keys, one to Member and one to Book — plus fields such as DateBorrowed and DateReturned. The junction table turns one M:N relationship into two 1:M relationships, and referential integrity stops a loan being recorded for a member or book that does not exist.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Learn the SQL keywords exactly, including commas and the semicolon at the end — the exam gives marks for correct syntax.</li>
+<li>When a question asks for a JOIN, always state which fields link the tables (primary key to foreign key).</li>
+<li>For E-R questions, first decide the relationship type (1:1, 1:M or M:N) — everything else follows from it.</li>
+<li>Do not use a flat file where a relational database is asked for: name the redundancy and inconsistency problems the flat file would cause.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="9" data-title="Algorithm design and problem solving" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 9 — Algorithm design and problem solving</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">9</div><div><h2>Algorithm design and problem solving</h2><p>Computational thinking, flowcharts and pseudocode, linear and binary search, bubble sort, trace tables.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>9.1 Computational thinking skills</strong> — use abstraction, decomposition, pattern recognition and algorithm design to break a problem down.</li>
+<li><strong>9.2 Algorithms</strong> — express algorithms with structured flowcharts and standard Cambridge pseudocode; explain and use linear search, binary search and bubble sort; build dry-run trace tables to check logic and find errors.</li>
+</ul>
+<h3><small>9.1</small>Computational thinking</h3>
+<dl class="terms">
+<div><dt>Decomposition</dt><dd>Splitting a big problem into smaller sub-problems. "Run a school library" splits into: add a book, lend a book, return a book, list overdue books.</dd></div>
+<div><dt>Abstraction</dt><dd>Keeping only the details that matter and ignoring the rest. For lending a book, you need the book ID, the member ID and the date — not the colour of the book's cover.</dd></div>
+<div><dt>Pattern recognition</dt><dd>Spotting that a new problem is like one you have solved before, so you can reuse the solution — for example, searching a list of students is the same problem as searching a list of books.</dd></div>
+<div><dt>Algorithm design</dt><dd>Writing the steps in a clear order, with decisions and repeats where needed, so that anyone (or any computer) can follow them exactly.</dd></div>
+</dl>
+<h3><small>9.2</small>Searching and sorting</h3>
+<table>
+<tr><th>Algorithm</th><th>How it works</th><th>When to use it</th></tr>
+<tr><td><strong>Linear search</strong></td><td>Check each item in turn, from the first to the last, until you find the one you want.</td><td>Any list, in any order. Simple, but slow for long lists.</td></tr>
+<tr><td><strong>Binary search</strong></td><td>Look at the middle item of a sorted list: if it is too big, search the left half; if too small, search the right half; repeat.</td><td>Only on a sorted list. Very fast — it halves the search space at every step.</td></tr>
+<tr><td><strong>Bubble sort</strong></td><td>Compare neighbouring pairs and swap them if they are in the wrong order; repeat passes until a whole pass makes no swaps.</td><td>Small lists, or teaching the idea of sorting. Slow for long lists.</td></tr>
+</table>
+<p>A <strong>trace table</strong> is how you prove an algorithm works — and how you find its bugs. Write one column for each variable, one row for each step, and update the values exactly as the algorithm would. If the trace table disagrees with what you expected, the algorithm (or your understanding of it) is wrong.</p>
+<h3>Worked example — binary search trace</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> Use binary search to find 42 in the sorted list [5, 12, 23, 31, 42, 57, 68, 79]. Show the low, high and mid positions at each step.</p>
+<p><strong>Answer:</strong> Low = 1, High = 8. Mid = (1 + 8) div 2 = 4, value 31. 31 &lt; 42, so search the right half: Low = 5. Mid = (5 + 8) div 2 = 6, value 57. 57 &gt; 42, so search the left half: High = 5. Mid = (5 + 5) div 2 = 5, value 42. Found at position 5, after three comparisons. A linear search would have needed five.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Binary search only works on a sorted list — if the question does not say the list is sorted, use linear search.</li>
+<li>Trace tables earn marks even when the final answer is wrong, so write them out fully, one row per step.</li>
+<li>Use Cambridge pseudocode in Paper 2 answers (FOR...NEXT, WHILE...ENDWHILE, IF...THEN...ELSE...ENDIF) — Python syntax is not accepted there.</li>
+<li>When comparing algorithms, count comparisons: binary search roughly halves the list each time, linear search checks each item in turn.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="10" data-title="Data types and structures" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 10 — Data types and structures</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">10</div><div><h2>Data types and structures</h2><p>Primitive types, records and arrays, text files, abstract data types: stacks, queues and linked lists.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>10.1 Data types and records</strong> — use the primitive types INTEGER, REAL, CHAR, STRING, BOOLEAN and DATE; define and use user-defined record structures (TYPE ... ENDTYPE).</li>
+<li><strong>10.2 Arrays</strong> — declare, index, traverse and manipulate one-dimensional and two-dimensional arrays.</li>
+<li><strong>10.3 Files</strong> — read from and write to sequential and random text files (OPENFILE, READFILE, WRITEFILE, CLOSEFILE).</li>
+<li><strong>10.4 Abstract data types (ADTs)</strong> — explain and implement stacks, queues and linked lists using one-dimensional arrays.</li>
+</ul>
+<h3><small>10.1–10.2</small>Types, records and arrays</h3>
+<p>Choosing the right data type matters: an age is an INTEGER, a price is a REAL, a single letter is a CHAR, a name is a STRING, a yes/no answer is a BOOLEAN, and a date of birth is a DATE. A <strong>record</strong> groups different types of data about one thing under one name — for example a student record with a name (STRING), an age (INTEGER) and a grade (CHAR). In pseudocode:</p>
+<pre class="code" data-lang="Pseudocode">TYPE Student
+  DECLARE Name : STRING
+  DECLARE Age : INTEGER
+  DECLARE Grade : CHAR
+ENDTYPE
+DECLARE ClassList : ARRAY[1:30] OF Student</pre>
+<p>An <strong>array</strong> stores many values of the same type under one name, reached by an index. A one-dimensional array is a list (for example <code>Scores[1:10]</code>); a two-dimensional array is a table (for example <code>Grid[1:5, 1:5]</code> for a board game). Arrays are fixed in size and indexed from a known starting point — know whether your array starts at 0 or 1, because the exam tests this.</p>
+<h3><small>10.3</small>Files</h3>
+<p>A <strong>sequential</strong> file is read from the start to the end, one record at a time; a <strong>random</strong> file lets you jump straight to any record. Text files are usually sequential. The pseudocode you must know is:</p>
+<pre class="code" data-lang="Pseudocode">OPENFILE "results.txt" FOR READ
+READFILE "results.txt", Line
+WHILE NOT EOF("results.txt")
+  OUTPUT Line
+  READFILE "results.txt", Line
+ENDWHILE
+CLOSEFILE "results.txt"</pre>
+<p>Always close a file after using it, and always check for the end of file (EOF) when reading — reading past the end of a file is a common error.</p>
+<h3><small>10.4</small>Stacks, queues and linked lists</h3>
+<p>A <strong>stack</strong> is last-in, first-out (LIFO): you push items on the top and pop them off the top, like a pile of plates. A <strong>queue</strong> is first-in, first-out (FIFO): items join at the back and leave from the front, like a queue of people. A <strong>linked list</strong> is a chain of nodes, where each node holds data and a pointer to the next node — items can be inserted or removed anywhere in the chain without moving the others. All three can be built from a one-dimensional array: a stack needs a top pointer, a queue needs front and rear pointers, and a linked list needs a head pointer plus a free-list pointer for empty spaces.</p>
+<h3>Worked example — stack trace</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> A stack is empty. Push 5, push 8, pop, push 3, pop, pop. What is popped each time, and what is left on the stack?</p>
+<p><strong>Answer:</strong> Push 5 → [5]. Push 8 → [5, 8]. Pop → 8 is removed, leaving [5]. Push 3 → [5, 3]. Pop → 3 is removed, leaving [5]. Pop → 5 is removed, leaving the stack empty. The values come out in reverse order of how they went in: 8, then 3, then 5. That is LIFO.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>State LIFO for a stack and FIFO for a queue — and use them: a question that asks for the order items come out is testing exactly this.</li>
+<li>When implementing an ADT in an array, name the pointers you need (top for a stack, front and rear for a queue, head and free-list for a linked list).</li>
+<li>For file questions, write the OPENFILE, the loop with the EOF test, and the CLOSEFILE — missing the close is a lost mark.</li>
+<li>Check array bounds in your answers: reading <code>Scores[11]</code> in an array declared <code>[1:10]</code> is an error.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="11" data-title="Programming" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 11 — Programming</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">11</div><div><h2>Programming</h2><p>Variables and constants, sequence, selection and iteration, procedures and functions, parameter passing and scope.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>11.1 Programming basics</strong> — declare variables and constants, assign values, and use arithmetic and relational operators.</li>
+<li><strong>11.2 Constructs</strong> — write sequence, selection (IF-THEN-ELSE, CASE OF) and iteration (FOR, WHILE, REPEAT-UNTIL) in pseudocode.</li>
+<li><strong>11.3 Structured programming</strong> — write procedures and functions; explain parameter passing by value and by reference; explain local and global scope.</li>
+</ul>
+<h3><small>11.1–11.2</small>Building blocks</h3>
+<p>Every program is built from three constructs. <strong>Sequence</strong> is one step after another. <strong>Selection</strong> chooses a path: <code>IF...THEN...ELSE...ENDIF</code> for two paths, and <code>CASE OF...ENDCASE</code> when one value can take several different paths (such as a menu choice). <strong>Iteration</strong> repeats steps: a <code>FOR</code> loop repeats a known number of times, a <code>WHILE</code> loop repeats while a condition is true (and may run zero times), and a <code>REPEAT...UNTIL</code> loop always runs at least once and stops when its condition becomes true.</p>
+<pre class="code" data-lang="Pseudocode">// Count how many marks are passes (50 or more) in an array of 20 marks
+Passes ← 0
+FOR Index ← 1 TO 20
+  IF Marks[Index] &gt;= 50 THEN
+    Passes ← Passes + 1
+  ENDIF
+NEXT Index
+OUTPUT "Passes: ", Passes</pre>
+<h3><small>11.3</small>Procedures, functions and parameters</h3>
+<p>A <strong>procedure</strong> carries out a task and returns nothing; a <strong>function</strong> returns a value. Both take <strong>parameters</strong> — values passed in when they are called. Parameters can be passed <strong>by value</strong> (a copy is passed, so changes inside the subprogram do not affect the caller's variable) or <strong>by reference</strong> (the address is passed, so changes inside the subprogram do change the caller's variable). Use by value when you only need to read the data, and by reference when the subprogram must change it — for example when a sort routine must reorder the caller's array.</p>
+<p><strong>Scope</strong> is where a variable can be used. A <strong>local</strong> variable exists only inside the subprogram that declares it; a <strong>global</strong> variable can be used anywhere in the program. Good programs use local variables wherever possible, because a global variable can be changed by any part of the program, which makes errors hard to find.</p>
+<pre class="code" data-lang="Python"># Python: a function that returns a value, and a procedure-like function
+def average(marks):
+    total = 0
+    for mark in marks:
+        total = total + mark
+    return total / len(marks)
+
+scores = [62, 71, 55, 80]
+print("Average:", average(scores))</pre>
+<h3>Worked example — by value or by reference?</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> A procedure <code>Double(Number)</code> doubles the value passed to it. If Number is passed by value and the caller passes 7, what is the caller's variable afterwards? What if it is passed by reference?</p>
+<p><strong>Answer:</strong> By value: the procedure works on a copy, so the caller's variable is still 7 — the doubled value is lost unless the procedure returns it. By reference: the procedure works on the caller's variable itself, so afterwards it holds 14.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Paper 2 answers must be in pseudocode, not Python — write <code>←</code> for assignment and use the Cambridge keywords.</li>
+<li>Know the difference between WHILE and REPEAT-UNTIL: WHILE tests first and may run zero times; REPEAT-UNTIL always runs at least once.</li>
+<li>When a question asks why to use a procedure, give a reason: the code is reused, the program is easier to read, or a fault is easier to find.</li>
+<li>For by value vs by reference, always say what happens to the caller's variable — that is what the question is testing.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="12" data-title="Software development" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 12 — Software development</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">12</div><div><h2>Software development</h2><p>The software development life cycle, program design, testing and maintenance.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>12.1 Program development life cycle</strong> — describe the stages of the software development life cycle and compare the Waterfall, Iterative and Agile methodologies.</li>
+<li><strong>12.2 Program design</strong> — use structure charts, state-transition diagrams and pseudocode to design a program.</li>
+<li><strong>12.3 Program testing and maintenance</strong> — describe stub testing, black-box and white-box testing, and normal, boundary and erroneous test data; describe maintenance types (corrective, adaptive, perfective).</li>
+</ul>
+<h3><small>12.1</small>Life cycles</h3>
+<p>Building software follows stages: analysis (what is needed), design (how it will work), implementation (writing the code), testing (finding the faults) and maintenance (keeping it working after delivery). The <strong>Waterfall</strong> model does each stage once, in order — it is simple and easy to manage, but a mistake found late is expensive to fix. The <strong>Iterative</strong> model builds the system in small versions, improving it each time — feedback comes earlier, but the project can grow without a clear end. <strong>Agile</strong> works in short cycles with the customer involved throughout — it adapts well to changing requirements, but it needs an experienced team and constant communication.</p>
+<h3><small>12.2</small>Design tools</h3>
+<p>Before writing code, design it. A <strong>structure chart</strong> shows the program broken into modules in a tree, with the main module at the top. A <strong>state-transition diagram</strong> shows the states a system can be in (for example a traffic light: red, red-amber, green, amber) and the events that move it between states. Pseudocode describes the logic of each module in words. Design first, code second — it is far cheaper to fix a design than to rewrite a program.</p>
+<h3><small>12.3</small>Testing and maintenance</h3>
+<p><strong>Stub testing</strong> replaces a module that is not written yet with a simple stand-in, so the rest of the program can be tested early. <strong>Black-box testing</strong> tests what the program does (inputs and outputs) without looking at the code; <strong>white-box testing</strong> tests the code itself, checking that every path through it runs correctly. Good test data covers three kinds: <strong>normal</strong> data (ordinary values that should be accepted), <strong>boundary</strong> data (values at the very edge of what is allowed, such as 0 and 100 for a mark) and <strong>erroneous</strong> data (values that should be rejected, such as &minus;5 or "abc" for a mark).</p>
+<p>After delivery, a program still needs <strong>maintenance</strong>: <strong>corrective</strong> (fixing faults found by users), <strong>adaptive</strong> (changing the program because the world changed — a new law, a new operating system) and <strong>perfective</strong> (improving it, for example making it faster or adding a feature users asked for).</p>
+<h3>Worked example — choosing test data</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> A program accepts an age from 0 to 120. Give one normal, one boundary and one erroneous test value, and say what should happen for each.</p>
+<p><strong>Answer:</strong> Normal: 25 — accepted, the program continues. Boundary: 0 and 120 — both accepted, because they are the exact limits; 121 would be rejected. Erroneous: &minus;3 (or "twenty") — rejected with an error message. Boundary values are the ones programmers forget to test, and they are where most errors hide.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Test-data questions want three kinds — normal, boundary, erroneous — with a value and the expected result for each.</li>
+<li>Black-box vs white-box is a favourite comparison: black-box tests the outside (inputs/outputs), white-box tests the inside (code paths).</li>
+<li>For life-cycle questions, match the methodology to the situation: a fixed, well-understood project suits Waterfall; a project whose requirements keep changing suits Agile.</li>
+</ul></div>
+
+</article>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- =============== A LEVEL =============== -->
+<section id="view-p2" hidden>
+  <div class="wrap">
+    <div class="viewhead">
+      <h1>A Level &middot; Sections 13&ndash;20</h1>
+      <p>Advanced theory and practical programming for Sections 13 to 20, in syllabus order. Each section states what you must be able to do, explains the ideas, and ends with a worked example and exam tips.</p>
+    </div>
+    <div class="reader" data-reader="p2">
+      <nav class="chapnav" aria-label="A Level sections"></nav>
+      <div class="chapters">
+<article class="chapter" data-ch="13" data-title="Data representation" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 13 — Data representation</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">13</div><div><h2>Data representation</h2><p>User-defined data types, file organisation and access, floating-point numbers.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>13.1 User-defined data types</strong> — explain composite types (records, sets, classes) and non-composite types (enumerated types, pointer types).</li>
+<li><strong>13.2 File organisation and access</strong> — compare serial, sequential and random file organisation; explain sequential and direct (random) access; explain hashing and how collisions are resolved (open addressing, chaining).</li>
+<li><strong>13.3 Floating-point numbers, representation and manipulation</strong> — explain two's complement floating-point representation (mantissa and exponent); normalise floating-point numbers; explain the trade-off between precision and range, and underflow, overflow and rounding/truncation errors.</li>
+</ul>
+<h3><small>13.1</small>User-defined data types</h3>
+<p>Built-in types (INTEGER, REAL, CHAR, STRING, BOOLEAN) are not always enough, so programmers define their own. <strong>Composite</strong> types combine other types: a <strong>record</strong> groups different types under one name, a <strong>set</strong> is a collection of values of the same type with no duplicates, and a <strong>class</strong> groups data with the methods that work on it. <strong>Non-composite</strong> types are single values with a restricted set of possibilities: an <strong>enumerated type</strong> lists every allowed value (for example <code>TYPE Day = (Mon, Tue, Wed, Thu, Fri)</code>), and a <strong>pointer type</strong> holds the address of another value — pointers are what make dynamic data structures such as linked lists possible.</p>
+<h3><small>13.2</small>File organisation, access and hashing</h3>
+<p>Files can be organised in three ways. In a <strong>serial</strong> file, records are stored in the order they arrive, with no sorting. In a <strong>sequential</strong> file, records are stored in key order, so they must be read from the start to find one. In a <strong>random</strong> file, each record sits at a position calculated from its key, so any record can be reached directly. <strong>Sequential access</strong> reads records one after another; <strong>direct (random) access</strong> jumps straight to the record wanted.</p>
+<p><strong>Hashing</strong> turns a key into a record address with a hash function — for example, take the key modulo the number of records. A <strong>collision</strong> happens when two different keys hash to the same address. It is resolved by <strong>open addressing</strong> (look for the next free space) or <strong>chaining</strong> (keep a list of all records that share that address).</p>
+<h3><small>13.3</small>Floating-point numbers</h3>
+<p>Very large and very small numbers are stored in <strong>floating-point</strong> form: a <strong>mantissa</strong> (the significant digits) and an <strong>exponent</strong> (how far to move the point). In two's complement floating-point, the mantissa is a two's complement fraction and the exponent is a two's complement integer. A number is <strong>normalised</strong> when its mantissa starts with 01 (positive) or 10 (negative) — normalisation uses the available bits as well as possible, giving maximum precision.</p>
+<p>There is always a trade-off: more bits for the mantissa gives more <strong>precision</strong> (more significant digits), more bits for the exponent gives more <strong>range</strong> (bigger and smaller numbers) — you cannot have both with a fixed number of bits. <strong>Overflow</strong> is when a result is too large to store; <strong>underflow</strong> is when a result is too small (too close to zero) to store. <strong>Rounding</strong> error comes from keeping only some digits; <strong>truncation</strong> error comes from simply cutting off the rest.</p>
+<h3>Worked example — normalising a floating-point number</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> A floating-point number uses an 8-bit mantissa and a 4-bit exponent. The value 0.001011 &times; 2<sup>3</sup> is not normalised. Normalise it and explain why.</p>
+<p><strong>Answer:</strong> The mantissa 0.001011 starts with 00, so it is not normalised. Shift the mantissa left until it starts with 01, adjusting the exponent each time: 0.001011 &times; 2<sup>3</sup> = 0.01011 &times; 2<sup>2</sup> = 0.1011 &times; 2<sup>1</sup>. The normalised form is mantissa 0.1011 with exponent 1. It uses the same value, but the leading zeros are gone, so the mantissa holds more significant digits — that is the extra precision normalisation gives.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Normalisation: positive mantissa must start with 01, negative with 10 — check the first two bits before you do anything else.</li>
+<li>For hashing questions, always name the collision and the resolution method (open addressing or chaining).</li>
+<li>When asked about precision vs range, say which one improves when bits move from the exponent to the mantissa — and that the total stays the same.</li>
+<li>Enumerated types are a favourite one-mark question: they are an ordered, finite list of allowed values.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="14" data-title="Communication and internet technologies" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 14 — Communication and internet technologies</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">14</div><div><h2>Communication and internet technologies</h2><p>Protocols and the OSI/TCP-IP models, circuit vs packet switching, peer-to-peer file sharing.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>14.1 Protocols</strong> — explain the OSI 7-layer model and the TCP/IP 4-layer model; explain the function of IP, TCP, UDP, HTTP, HTTPS, FTP, POP3, IMAP and SMTP.</li>
+<li><strong>14.2 BitTorrent protocol</strong> — explain how BitTorrent provides peer-to-peer file sharing; compare circuit switching and packet switching.</li>
+</ul>
+<h3><small>14.1</small>Layered models and protocols</h3>
+<p>Networks are described in <strong>layers</strong>, so that each layer only has to talk to the layers next to it. The <strong>OSI model</strong> has seven layers (physical, data link, network, transport, session, presentation, application); the <strong>TCP/IP model</strong> has four (network access, internet, transport, application). The exam expects you to know what each layer does in general terms, not to memorise every detail.</p>
+<table>
+<tr><th>Protocol</th><th>What it does</th></tr>
+<tr><td><strong>IP</strong></td><td>Addresses packets and routes them between networks.</td></tr>
+<tr><td><strong>TCP</strong></td><td>Reliable delivery: splits data into packets, numbers them, checks they arrive and resends any that are lost, and puts them back in order.</td></tr>
+<tr><td><strong>UDP</strong></td><td>Fast, connectionless delivery with no checking: packets may arrive out of order or not at all. Used where speed matters more than perfection, such as live video and online games.</td></tr>
+<tr><td><strong>HTTP / HTTPS</strong></td><td>Transfer web pages; HTTPS adds encryption (TLS) so the data cannot be read in transit.</td></tr>
+<tr><td><strong>FTP</strong></td><td>Transfer files between computers.</td></tr>
+<tr><td><strong>SMTP</strong></td><td>Send email from a client to a mail server, and between mail servers.</td></tr>
+<tr><td><strong>POP3 / IMAP</strong></td><td>Receive email: POP3 downloads mail and usually deletes it from the server; IMAP keeps mail on the server so it can be read from many devices.</td></tr>
+</table>
+<p><strong>TCP is connection-oriented and reliable; UDP is connectionless, fast and unacknowledged.</strong> That one sentence answers many comparison questions: choose TCP when every byte must arrive correctly (a file download, a web page), and UDP when a small loss does not matter but delay does (a phone call, a live stream).</p>
+<h3><small>14.2</small>Switching and BitTorrent</h3>
+<p><strong>Circuit switching</strong> reserves a dedicated path for the whole conversation before any data is sent — like an old telephone call. It gives a guaranteed quality but wastes the path when nobody is speaking. <strong>Packet switching</strong> splits data into packets that travel independently and share the network with other traffic — it uses bandwidth efficiently, but packets can be delayed or arrive out of order.</p>
+<p><strong>BitTorrent</strong> is peer-to-peer file sharing: a file is split into small pieces, and each computer (peer) downloads pieces from many other peers and uploads the pieces it already has to others. There is no central server holding the file, so the more people downloading, the faster it goes — the opposite of a normal download, where more users slow the server down. A tracker keeps a list of which peers have which pieces.</p>
+<h3>Worked example — TCP or UDP?</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> A student is watching a live football match online. The picture occasionally freezes for a second but then continues. Which protocol is being used, and why is it the right choice?</p>
+<p><strong>Answer:</strong> UDP. A live stream cannot wait for lost packets to be resent — by the time a retransmission arrived, the moment would have passed. UDP sends the packets as fast as possible and accepts that a few may be lost, which is exactly the brief freeze the student sees. TCP would be wrong here: resending lost packets would delay the stream and make it fall behind the live match.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Learn the protocol table as pairs: TCP/UDP (reliable vs fast), POP3/IMAP (download-and-delete vs keep-on-server), HTTP/HTTPS (plain vs encrypted).</li>
+<li>For switching questions, the key contrast is dedicated path vs shared bandwidth — and which one wastes capacity when idle.</li>
+<li>BitTorrent questions usually ask why it gets faster with more users: every new peer is also a new source of pieces.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="15" data-title="Hardware" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 15 — Hardware</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">15</div><div><h2>Hardware</h2><p>RISC and CISC, pipelining, parallel processing, virtual machines, Boolean algebra and logic circuits.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>15.1 Processors, parallel processing and virtual machines</strong> — compare RISC and CISC architectures; explain pipelining and pipeline hazards; describe parallel computing architectures (SISD, SIMD, MISD, MIMD and massively parallel computers); explain virtual machines (host and guest operating systems, hypervisors), their benefits and limitations.</li>
+<li><strong>15.2 Boolean algebra and logic circuits</strong> — produce truth tables for logic circuits including half adders and full adders; explain flip-flops (SR, JK) as data storage; use Boolean algebra and De Morgan's laws to simplify expressions and circuits; explain and use Karnaugh maps (K-maps).</li>
+</ul>
+<h3><small>15.1</small>Processors, parallelism and virtual machines</h3>
+<p><strong>RISC</strong> (reduced instruction set) processors have a small set of simple instructions, each taking about one clock cycle, with many registers — they are fast and energy-efficient. <strong>CISC</strong> (complex instruction set) processors have a large set of instructions, including complex ones that do several things at once, with fewer registers — each instruction is more powerful but takes more cycles. Modern processors often mix both ideas.</p>
+<p><strong>Pipelining</strong> overlaps the stages of the fetch-decode-execute cycle: while one instruction is being executed, the next is being decoded and the one after that is being fetched — like an assembly line. A <strong>pipeline hazard</strong> happens when this overlap breaks down, for example when an instruction needs a result that has not been calculated yet, or when a jump changes the flow of instructions; the pipeline must stall (a "bubble") until the problem clears.</p>
+<p><strong>Parallel processing</strong> uses several processors at once. Flynn's taxonomy describes the four combinations of instruction streams and data streams: <strong>SISD</strong> (one instruction, one set of data — an ordinary single processor), <strong>SIMD</strong> (one instruction applied to many sets of data at once — graphics processing), <strong>MISD</strong> (many instructions on one set of data — rare, used in fault-tolerant systems) and <strong>MIMD</strong> (many instructions on many sets of data — a cluster of computers, or a multi-core processor). A <strong>massively parallel computer</strong> links thousands of processors together for very large problems such as weather forecasting.</p>
+<p>A <strong>virtual machine</strong> is a computer simulated in software: a <strong>hypervisor</strong> runs on the host hardware and lets several <strong>guest</strong> operating systems run on one physical machine, each believing it has its own computer. Benefits: better use of hardware, easy backup (copy the whole virtual machine), and safe testing. Limitations: each virtual machine shares the physical hardware, so performance is lower than running directly on the machine, and the hypervisor itself needs managing.</p>
+<h3><small>15.2</small>Boolean algebra, adders, flip-flops and K-maps</h3>
+<p><strong>De Morgan's laws</strong> let you swap between AND and OR with NOT: NOT (A AND B) = (NOT A) OR (NOT B), and NOT (A OR B) = (NOT A) AND (NOT B). They are the main tool for simplifying expressions — and for turning a circuit that needs one kind of gate into a circuit that uses only NAND or only NOR gates.</p>
+<p>A <strong>half adder</strong> adds two single bits: the sum is A XOR B and the carry is A AND B. A <strong>full adder</strong> adds two bits plus a carry-in, so it can be chained to add whole numbers. A <strong>flip-flop</strong> is a circuit that remembers one bit: an <strong>SR flip-flop</strong> sets (S = 1) or resets (R = 1) its output, and a <strong>JK flip-flop</strong> adds a toggle mode (J = K = 1 flips the output). Flip-flops are the building blocks of registers and memory.</p>
+<p>A <strong>Karnaugh map (K-map)</strong> is a grid for simplifying Boolean expressions visually: the cells are arranged so that neighbouring cells differ in only one variable (Gray code order), and you group adjacent 1s in blocks of 1, 2, 4 or 8. Each group removes one variable from the expression. A 2-variable K-map has 4 cells, a 3-variable map has 8, and a 4-variable map has 16.</p>
+<h3>Worked example — De Morgan's laws in action</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> Simplify X = NOT (A AND B) and write the result using only OR and NOT.</p>
+<p><strong>Answer:</strong> By De Morgan's first law, NOT (A AND B) = (NOT A) OR (NOT B). So the circuit needs two NOT gates and one OR gate, and no AND gate at all. Check with a truth table: when A = 1 and B = 1, A AND B = 1 so X = 0; (NOT A) OR (NOT B) = 0 OR 0 = 0. When A = 0 and B = 1, A AND B = 0 so X = 1; (NOT A) OR (NOT B) = 1 OR 0 = 1. The two expressions agree on every row.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Learn De Morgan's laws by heart — they appear in almost every Paper 3.</li>
+<li>For K-maps, group the largest possible blocks of 1s (1, 2, 4 or 8 cells) and remember that the edges of the map wrap around.</li>
+<li>Half adder: sum = XOR, carry = AND. Full adder: add the carry-in as well — draw it as two half adders plus an OR gate.</li>
+<li>Pipeline hazard questions want the cause (a result not ready yet, or a jump) and the effect (the pipeline stalls).</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="16" data-title="System software and virtual machines" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 16 — System software and virtual machines</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">16</div><div><h2>System software and virtual machines</h2><p>Process scheduling, memory management, the phases of compilation, BNF and syntax diagrams, linkers and loaders.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>16.1 Purposes of an operating system</strong> — explain process scheduling algorithms (Round Robin, First Come First Served, Shortest Job First, Shortest Remaining Time, multi-level feedback queues); explain memory management (paging, segmentation, virtual memory and page faults, thrashing).</li>
+<li><strong>16.2 Translation software</strong> — describe the phases of compilation (lexical analysis, syntax analysis, semantic analysis, code generation and optimisation); explain grammars using Backus-Naur Form (BNF) and syntax diagrams; explain linkers and loaders and static vs dynamic linked libraries.</li>
+</ul>
+<h3><small>16.1</small>Scheduling and memory management</h3>
+<p>When several programs want the processor, the operating system's <strong>scheduler</strong> decides the order. <strong>First Come First Served (FCFS)</strong> runs jobs in arrival order — simple, but a long job can block everything behind it. <strong>Shortest Job First (SJF)</strong> runs the quickest job first, which keeps waiting times low, but a long job can be starved. <strong>Shortest Remaining Time (SRT)</strong> is the preemptive version of SJF: if a shorter job arrives, the current job is paused. <strong>Round Robin</strong> gives each job a fixed time slice in turn — fair, and good for interactive systems, but switching jobs costs time. <strong>Multi-level feedback queues</strong> move jobs between queues based on how they behave, giving interactive jobs priority over long background jobs.</p>
+<p><strong>Paging</strong> divides memory into fixed-size blocks (pages) so a program's pages can be scattered through physical memory; <strong>segmentation</strong> divides it into variable-size logical units (such as code and data). <strong>Virtual memory</strong> lets a program use more memory than the computer physically has, by keeping some pages on disk and loading them when needed — a <strong>page fault</strong> happens when a program needs a page that is on disk, so the operating system must fetch it. <strong>Thrashing</strong> is when the system spends most of its time swapping pages in and out of disk and almost no time doing useful work — the computer appears to freeze.</p>
+<h3><small>16.2</small>How a compiler works</h3>
+<p>Compilation happens in phases. <strong>Lexical analysis</strong> breaks the source code into tokens (keywords, identifiers, numbers, symbols), throws away comments and whitespace, and builds the symbol table. <strong>Syntax analysis</strong> (parsing) checks the tokens against the grammar of the language and builds a parse tree — a syntax error is found here. <strong>Semantic analysis</strong> checks that the program makes sense (for example that a variable has been declared and has the right type). <strong>Code generation</strong> produces machine code, and <strong>optimisation</strong> makes it faster or smaller.</p>
+<p>A grammar can be written in <strong>Backus-Naur Form (BNF)</strong>, using rules such as <code>&lt;number&gt; ::= &lt;digit&gt; | &lt;digit&gt;&lt;number&gt;</code>, or drawn as a <strong>syntax diagram</strong> with the same information as a picture. A <strong>linker</strong> joins the compiled code with the libraries it needs; a <strong>loader</strong> places the finished program into memory so it can run. Libraries can be <strong>statically linked</strong> (copied into the program when it is built — bigger program, but it runs on its own) or <strong>dynamically linked</strong> (loaded from a shared file such as a DLL when the program runs — smaller program, but it needs the library file to be present).</p>
+<h3>Worked example — Round Robin schedule</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> Three jobs arrive together. Job A needs 6 ms, Job B needs 3 ms, Job C needs 4 ms. Round Robin uses a time slice of 2 ms. In what order do the jobs finish?</p>
+<p><strong>Answer:</strong> Slice 1: A runs 2 ms (4 left), B runs 2 ms (1 left), C runs 2 ms (2 left). Slice 2: A runs 2 ms (2 left), B runs 1 ms and finishes (3 ms of work done). C runs 2 ms and finishes. Slice 3: A runs its last 2 ms and finishes. Finish order: B, then C, then A. Round Robin is fair, but B — the shortest job — still had to wait for two slices before it could finish.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Scheduling questions usually ask you to draw the timeline — label each block with the job and the time, and show the finish order.</li>
+<li>Thrashing: name the cause (too many page faults, too little free memory) and the cure (add RAM, or reduce the number of programs running).</li>
+<li>For compilation phases, learn the order and one thing each phase does: lexical = tokens, syntax = grammar and parse tree, semantic = meaning and types, code generation = machine code.</li>
+<li>BNF: <code>::=</code> means "is defined as", <code>|</code> means "or", and angle brackets mark a non-terminal such as <code>&lt;digit&gt;</code>.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="17" data-title="Security" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 17 — Security</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">17</div><div><h2>Security</h2><p>Asymmetric encryption, digital signatures, digital certificates and certificate authorities, SSL and TLS.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>17.1 Encryption, encryption protocols and digital certificates</strong> — explain asymmetric encryption (public and private keys, the basics of RSA); explain digital signatures for authenticity, non-repudiation and message integrity; explain digital certificates and certificate authorities (CAs); describe the SSL/TLS handshake.</li>
+</ul>
+<h3><small>17.1</small>Public and private keys</h3>
+<p>In <strong>symmetric encryption</strong> (Section 6) the same key encrypts and decrypts, so the key must be shared safely — and that is the hard part. <strong>Asymmetric encryption</strong> solves it with a key pair: a <strong>public key</strong> that anyone may know, and a <strong>private key</strong> that only its owner knows. Data encrypted with the public key can only be decrypted with the matching private key, so anyone can send you a secret message — but only you can read it. In <strong>RSA</strong>, the public key is built from the product of two large prime numbers, and the security comes from how hard it is to factor that product back into the two primes.</p>
+<p>A <strong>digital signature</strong> proves who sent a message and that it was not changed. The sender first makes a <strong>message digest</strong> (a short fingerprint of the message, made with a hash function), then encrypts the digest with their <strong>private</strong> key — that is the signature. Anyone can decrypt it with the sender's <strong>public</strong> key and compare it with a fresh digest of the message: if they match, the message is genuine and unchanged. Because only the sender holds the private key, they cannot later deny sending it — this is called <strong>non-repudiation</strong>.</p>
+<h3><small>17.1</small>Certificates and the TLS handshake</h3>
+<p>But how do you know a public key really belongs to the person it claims to? A <strong>digital certificate</strong> answers that: it is a document containing a person's public key and identity, signed by a trusted <strong>certificate authority (CA)</strong>. Your browser trusts the CA, so it trusts the certificate, so it trusts the public key. If a certificate is stolen or misused, the CA puts it on a revocation list.</p>
+<p>When you open a secure website, your browser and the server perform the <strong>TLS handshake</strong>: the server sends its certificate, the browser checks it, they agree on a session key (using asymmetric encryption to share it safely), and from then on they use fast symmetric encryption for the rest of the session. That is why HTTPS is secure: the handshake uses asymmetric encryption to exchange the key, and symmetric encryption to protect the data.</p>
+<h3>Worked example — signing and checking a message</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> A teacher sends a signed exam paper to a school. Explain how the school checks the paper is genuine and unchanged, naming the keys used.</p>
+<p><strong>Answer:</strong> The teacher hashes the paper to make a message digest and encrypts the digest with the teacher's <strong>private key</strong> — this is the digital signature, sent with the paper. The school decrypts the signature with the teacher's <strong>public key</strong> (from the teacher's certificate) to recover the original digest, then hashes the paper it received. If the two digests match, the paper came from the teacher and was not altered on the way. If they differ, the paper was changed — or the signature is fake.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>The most common mistake in this section is swapping the keys: encrypting with the public key keeps a message secret; signing with the private key proves who sent it.</li>
+<li>For the TLS handshake, list the steps in order: certificate, check, agree a session key, switch to symmetric encryption.</li>
+<li>Non-repudiation means the sender cannot deny sending the message — link it to the private key only the sender holds.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="18" data-title="Artificial intelligence (AI)" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 18 — Artificial intelligence (AI)</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">18</div><div><h2>Artificial intelligence (AI)</h2><p>Graphs and trees, A* and Dijkstra search, machine learning, artificial neural networks.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>18.1 Artificial intelligence</strong> — use graphs and trees with search algorithms (A* search, Dijkstra's algorithm); compare supervised, unsupervised and reinforcement learning; explain artificial neural networks (inputs, weights, biases, activation functions, backpropagation).</li>
+</ul>
+<h3><small>18.1</small>Search: A* and Dijkstra</h3>
+<p>Many AI problems are searches through a graph of possible states — a map of roads, a maze, or the moves in a game. <strong>Dijkstra's algorithm</strong> finds the shortest path from a start node to every other node by always expanding the node with the smallest known distance so far; it is guaranteed to find the shortest path, but it explores in all directions. <strong>A* search</strong> is faster because it uses a heuristic — an estimate of the distance still to go. At each step it chooses the node with the smallest <strong>f(n) = g(n) + h(n)</strong>, where g(n) is the cost so far and h(n) is the estimated cost to the goal. A* is still guaranteed to find the shortest path, provided the heuristic never overestimates the true distance.</p>
+<h3><small>18.1</small>Machine learning</h3>
+<table>
+<tr><th>Type</th><th>What the data looks like</th><th>Example</th></tr>
+<tr><td><strong>Supervised learning</strong></td><td>Labelled examples: each input comes with the right answer.</td><td>Photos labelled "cat" or "dog" teach a model to recognise cats and dogs.</td></tr>
+<tr><td><strong>Unsupervised learning</strong></td><td>No labels: the system finds patterns and groups by itself.</td><td>Grouping customers by what they buy, without being told the groups in advance.</td></tr>
+<tr><td><strong>Reinforcement learning</strong></td><td>No right answers at all: the system tries actions and gets rewards or penalties.</td><td>A program learning to play a game by winning and losing many times.</td></tr>
+</table>
+<h3><small>18.1</small>Artificial neural networks</h3>
+<p>An <strong>artificial neural network (ANN)</strong> is layers of simple units, loosely modelled on the brain. Each unit takes several <strong>inputs</strong>, multiplies each by a <strong>weight</strong>, adds them together with a <strong>bias</strong>, and passes the result through an <strong>activation function</strong> that decides whether the unit "fires". The network learns by <strong>backpropagation</strong>: it compares its output with the right answer, works out how much each weight contributed to the error, and adjusts the weights a little — then repeats this thousands of times over many examples. Training needs a lot of labelled data and a lot of computing power, and the trained network can be hard to explain: it works, but nobody can easily say why it gave a particular answer.</p>
+<h3>Worked example — A* on a small graph</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> From node S, two neighbours are available: node A with g = 4 and h = 6, and node B with g = 7 and h = 2. Which node does A* expand next, and why?</p>
+<p><strong>Answer:</strong> Work out f(n) = g(n) + h(n) for each: A has f = 4 + 6 = 10, B has f = 7 + 2 = 9. A* always expands the node with the smallest f, so it expands B next — even though B cost more to reach, its estimated total cost to the goal is lower. That is the point of the heuristic: it guides the search towards the goal instead of wandering in every direction like Dijkstra's algorithm.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>Learn f(n) = g(n) + h(n) and what each letter means — g is the cost so far, h is the estimated cost remaining.</li>
+<li>For machine learning, the question is usually "which type, and why?" — match the data (labelled, unlabelled, or rewards) to the type.</li>
+<li>For neural networks, know the order: weighted sum plus bias, then the activation function; and that backpropagation adjusts the weights to reduce the error.</li>
+<li>A* is only guaranteed optimal if the heuristic never overestimates — state that condition if the question asks about guarantees.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="19" data-title="Computational thinking and problem solving" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 19 — Computational thinking and problem solving</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">19</div><div><h2>Computational thinking and problem solving</h2><p>Dynamic abstract data types, tree traversals, insertion sort, recursion.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>19.1 Algorithms and abstract data types</strong> — implement dynamic abstract data types (stacks, queues, linked lists, binary trees, hash tables, dictionaries); perform tree traversals (in-order, pre-order, post-order); use insertion sort and binary tree search and insert.</li>
+<li><strong>19.2 Recursion</strong> — explain recursive routines (base case, recursive step, call stack); trace recursive subroutines and convert between iterative and recursive solutions.</li>
+</ul>
+<h3><small>19.1</small>Dynamic data structures and trees</h3>
+<p>In Section 10 the ADTs were built from fixed arrays. At A Level they are <strong>dynamic</strong>: memory is allocated as it is needed, using pointers. A <strong>linked list</strong> is a chain of nodes, each holding data and a pointer to the next node; a <strong>binary tree</strong> is a node with at most two children (left and right); a <strong>hash table</strong> stores values at addresses computed from their keys; a <strong>dictionary</strong> stores key-value pairs so a value can be found quickly by its key. Pointers manage the links in heap memory, so the structure can grow and shrink — unlike a fixed array, which wastes space when half empty and overflows when full.</p>
+<p><strong>Tree traversals</strong> visit every node of a binary tree in a fixed order. In-order traversal visits left subtree, then the node, then the right subtree — for a binary search tree this gives the values in sorted order. Pre-order visits the node first, then left, then right (useful for copying a tree). Post-order visits left, then right, then the node (useful for deleting a tree, since children are removed before their parent).</p>
+<p><strong>Insertion sort</strong> builds the sorted list one item at a time: take the next unsorted item and insert it into its correct place in the sorted part. It is simple and fast on small or nearly-sorted lists, but slow on long random lists. A <strong>binary tree search</strong> starts at the root and goes left if the value is smaller, right if it is larger, until it finds the value or reaches an empty branch; inserting a value follows the same path and adds a new leaf where the empty branch was.</p>
+<h3><small>19.2</small>Recursion</h3>
+<p>A <strong>recursive</strong> routine calls itself to solve a smaller version of the same problem. Every recursive routine needs two parts: a <strong>base case</strong> that stops the recursion (the simplest version of the problem, with a direct answer) and a <strong>recursive step</strong> that calls the routine again on a smaller problem. Each call is stored on the <strong>call stack</strong> until the base case is reached, then the calls return one by one. If the base case is missing or never reached, the calls pile up until the stack overflows and the program crashes.</p>
+<pre class="code" data-lang="Python"># Recursive factorial: base case n == 0, recursive step n * factorial(n - 1)
+def factorial(n):
+    if n == 0:          # base case
+        return 1
+    return n * factorial(n - 1)   # recursive step
+
+print(factorial(4))   # 4 * 3 * 2 * 1 * 1 = 24</pre>
+<h3>Worked example — tracing recursion</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> Trace <code>factorial(3)</code> and show the call stack.</p>
+<p><strong>Answer:</strong> factorial(3) calls factorial(2), which calls factorial(1), which calls factorial(0). The stack now holds four calls. factorial(0) hits the base case and returns 1. factorial(1) returns 1 &times; 1 = 1. factorial(2) returns 2 &times; 1 = 2. factorial(3) returns 3 &times; 2 = 6. The stack unwinds in reverse order — the last call made is the first to return.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>For traversal questions, write the order out in full: in-order = left, node, right; pre-order = node, left, right; post-order = left, right, node.</li>
+<li>When tracing recursion, draw the call stack — one box per call, with its parameter — and unwind it from the base case upwards.</li>
+<li>Every recursive answer needs the base case stated: without it, the routine never stops.</li>
+<li>Insertion sort questions usually ask you to show the list after each pass — write one line per pass.</li>
+</ul></div>
+
+</article>
+<article class="chapter" data-ch="20" data-title="Further programming" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Section 20 — Further programming</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Section 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">20</div><div><h2>Further programming</h2><p>Programming paradigms, object-oriented programming, low-level programming and declarative programming.</p></div></div>
+
+<h3>What you must be able to do</h3>
+<ul>
+<li><strong>20.1 Programming paradigms</strong> — explain object-oriented programming (objects, properties/attributes, methods, classes, inheritance, polymorphism, containment/aggregation, encapsulation, getters, setters, instances) and how to solve a problem by designing appropriate classes; write code that demonstrates OOP.</li>
+<li><strong>20.2 Low-level programming</strong> — write low-level code using immediate, direct, indirect, indexed and relative addressing; write imperative (procedural) code with variables, constructs, procedures and functions; solve a problem by writing facts and rules (declarative programming).</li>
+</ul>
+<h3><small>20.1</small>Object-oriented programming</h3>
+<p>In <strong>object-oriented programming (OOP)</strong>, a <strong>class</strong> is a blueprint and an <strong>object</strong> is one instance built from it — a class <code>Student</code> describes what every student has, and each actual student is an object of that class. The data an object holds are its <strong>attributes</strong> (or properties); the things it can do are its <strong>methods</strong>. <strong>Encapsulation</strong> means keeping an object's data hidden inside it and only allowing access through its methods — <strong>getters</strong> read an attribute and <strong>setters</strong> change it, so the object can check the new value first.</p>
+<p><strong>Inheritance</strong> lets a new class take the attributes and methods of an existing class and add its own: a class <code>Teacher</code> can inherit from <code>Person</code> and add a staff number. <strong>Polymorphism</strong> means the same method name can behave differently in different classes — <code>describe()</code> might print a student's grade for a Student and a teacher's subject for a Teacher — and a program can call it without knowing which kind of object it has. <strong>Containment (aggregation)</strong> is when one object holds another as part of itself, such as a School holding a list of Students. A <strong>constructor</strong> runs when an object is created, setting up its starting values.</p>
+<pre class="code" data-lang="Python"># A class with a constructor, a method, inheritance and overriding
+class Person:
+    def __init__(self, name):
+        self.name = name          # attribute
+    def describe(self):
+        return "Person: " + self.name
+
+class Student(Person):            # Student inherits from Person
+    def __init__(self, name, grade):
+        super().__init__(name)
+        self.grade = grade
+    def describe(self):           # overriding: same name, new behaviour
+        return "Student: " + self.name + ", grade " + self.grade
+
+a = Student("Aung", "A")
+print(a.describe())   # Student: Aung, grade A</pre>
+<h3><small>20.2</small>Low-level and declarative programming</h3>
+<p><strong>Low-level programming</strong> is assembly language: the same five addressing modes from Section 4 (immediate, direct, indirect, indexed, relative) and the same idea that every instruction is an op-code plus an operand. <strong>Imperative (procedural) programming</strong> is the style of Sections 11 and 19: the programmer writes the steps, in order, using variables, constructs, procedures and functions.</p>
+<p><strong>Declarative programming</strong> is different: instead of writing steps, you write <strong>facts</strong> and <strong>rules</strong>, and the system works out how to answer a question from them. For example, facts: <code>parent(thiri, aung)</code> and <code>parent(aung, may)</code>; rule: <code>grandparent(X, Z) IF parent(X, Y) AND parent(Y, Z)</code>. Ask "who is May's grandparent?" and the system uses the rule to answer "Thiri" — you never wrote the steps to search. Note that Paper 4 does not assess low-level or declarative programming; they are examined in Paper 3.</p>
+<h3>Worked example — designing classes</h3>
+<div class="callout"><span class="lab">Worked example</span>
+<p><strong>Question:</strong> A school system needs to store students and teachers. Both have a name and an email; students have a grade, teachers have a subject. Design the classes and explain how inheritance helps.</p>
+<p><strong>Answer:</strong> Create a base class <code>Person</code> with attributes name and email and a method <code>describe()</code>. Create <code>Student</code> inheriting from <code>Person</code>, adding grade; and <code>Teacher</code> inheriting from <code>Person</code>, adding subject. Inheritance helps because name, email and the basic <code>describe()</code> are written once in <code>Person</code> instead of twice — if the school later adds a phone number, it is added in one place only. Each subclass can override <code>describe()</code> to include its own extra information.</p></div>
+<div class="callout warn"><span class="lab">Exam tips</span><ul>
+<li>OOP questions often ask you to design classes: name the classes, list their attributes and methods, and say which class inherits from which — and why.</li>
+<li>Encapsulation is not the same as inheritance: encapsulation hides data inside an object; inheritance shares behaviour between classes.</li>
+<li>For declarative programming, write facts and rules in the form given — do not write a procedure that searches for the answer.</li>
+<li>Paper 4 (practical) covers Sections 19–20 except low-level and declarative programming — those two are Paper 3 only.</li>
+</ul></div>
+
+</article>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot"><div class="wrap">Cambridge International AS &amp; A Level Computer Science 9618 revision portal &middot; Notes by Tr. Wai Lin Htet</div></footer>
+
+
+
+<script>
+(function(){
+'use strict';
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+/* ---------- data ---------- */
+const CH={
+1:["Information representation and multimedia","Binary, denary, hex and BCD; two's complement; bitmaps, vectors, sound; compression.","p1"],
+  2:["Communication","LANs and WANs, client-server and peer-to-peer, topologies, cloud, media, IP addressing.","p1"],
+  3:["Hardware","RAM and ROM, secondary storage, logic gates, truth tables and circuits.","p1"],
+  4:["Processor fundamentals","Von Neumann architecture, the fetch-decode-execute cycle, registers, assembly, bit masks.","p1"],
+  5:["System software","Operating systems, utility software, assemblers, compilers and interpreters.","p1"],
+  6:["Security, privacy and data integrity","Threats and defences, encryption, validation and verification.","p1"],
+  7:["Ethics and ownership","Ethical issues, codes of conduct, copyright, open-source licensing, AI ethics.","p1"],
+  8:["Databases","Flat files and relational databases, keys, E-R diagrams, DBMS, SQL.","p1"],
+  9:["Algorithm design and problem solving","Computational thinking, flowcharts, pseudocode, searching, sorting, trace tables.","p1"],
+  10:["Data types and structures","Primitive types, records, arrays, text files, stacks, queues, linked lists.","p1"],
+  11:["Programming","Variables and constants, sequence, selection, iteration, procedures, functions, scope.","p1"],
+  12:["Software development","Life cycles, design tools, testing, maintenance.","p1"],
+  13:["Data representation","User-defined types, file organisation and hashing, floating-point numbers.","p2"],
+  14:["Communication and internet technologies","OSI and TCP/IP, protocols, circuit vs packet switching, BitTorrent.","p2"],
+  15:["Hardware","RISC and CISC, pipelining, parallel processing, virtual machines, Boolean algebra.","p2"],
+  16:["System software and virtual machines","Scheduling, memory management, compilation phases, BNF, linkers and loaders.","p2"],
+  17:["Security","Asymmetric encryption, digital signatures, certificates, SSL and TLS.","p2"],
+  18:["Artificial intelligence (AI)","A* and Dijkstra search, machine learning, artificial neural networks.","p2"],
+  19:["Computational thinking and problem solving","Dynamic ADTs, tree traversals, insertion sort, recursion.","p2"],
+  20:["Further programming","Object-oriented programming, low-level programming, declarative programming.","p2"]
+};
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- access state (Firebase gate lives in the module script below) ---------- */
+// The page starts locked (body.chapters-locked): Section 1 is free and
+// Sections 2-20 show lock panels until the Firebase module unlocks them.
+// Sign-in buttons carry [data-signin]; this handler works even if the module
+// fails to load (offline), so the call to action never dies.
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-signin]');
+  if(b) location.assign('login.html');
+});
+
+/* ---------- home lists ---------- */
+function disp(paper,k){return k}
+function rows(paper){
+  return Object.keys(CH).filter(k=>CH[k][2]===paper).map(k=>
+    `<li><button type="button" class="chrow${k==='1'?'':' locked-link'}" data-go="${paper}/${k}"><span class="n">${disp(paper,k)}</span><span class="t">${esc(CH[k][0])}</span><span class="d">${esc(CH[k][1])}</span></button></li>`).join('');
+}
+$('#listP1').innerHTML=rows('p1');
+$('#listP2').innerHTML=rows('p2');
+$('#seeList').addEventListener('click',()=>$('#chapter-list').scrollIntoView({behavior:'smooth',block:'start'}));
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-go]');
+  if(!b) return;
+  const t=b.dataset.go;
+  if(location.hash.replace(/^#/,'')===t) route(); else location.hash=t;
+});
+
+/* ---------- hero byte ---------- */
+(function(){
+  const bits=[0,1,0,0,0,0,0,1], W=[128,64,32,16,8,4,2,1], box=$('#bits');
+  function paint(){
+    box.innerHTML=bits.map((b,i)=>`<button type="button" class="bit" role="switch" aria-checked="${b?'true':'false'}" data-i="${i}" aria-label="Bit worth ${W[i]}">${b}<small>${W[i]}</small></button>`).join('');
+    const v=bits.reduce((s,b,i)=>s+b*W[i],0);
+    $('#rDen').textContent=v;
+    $('#rHex').textContent=v.toString(16).toUpperCase().padStart(2,'0');
+    $('#rChr').textContent=v===32?'space':(v>32&&v<127)?String.fromCharCode(v):'none';
+  }
+  box.addEventListener('click',e=>{const b=e.target.closest('.bit');if(!b)return;const i=+b.dataset.i;bits[i]=bits[i]?0:1;paint();$(`.bit[data-i="${i}"]`,box).focus()});
+  paint();
+})();
+
+/* ---------- readers ---------- */
+const views={};
+['p1','p2'].forEach(paper=>{
+  const r=$(`[data-reader="${paper}"]`), nav=$('.chapnav',r), arts=$$('.chapter',r);
+  const keys=arts.map(a=>a.dataset.ch);
+  const kind='Section';
+  nav.innerHTML=arts.map(a=>`<a href="#${paper}/${a.dataset.ch}" data-ch="${a.dataset.ch}"${a.dataset.ch==='1'?'':' class="locked-link"'}><b>${disp(paper,a.dataset.ch)}</b><span>${esc(a.dataset.title)}</span></a>`).join('');
+  arts.forEach((a,i)=>{
+    const prev=arts[i-1], next=arts[i+1];
+    const p=document.createElement('div');p.className='pager';
+    p.innerHTML=(prev?`<a class="btn${prev.dataset.ch==='1'?'':' locked-link'}" href="#${paper}/${prev.dataset.ch}">Previous: ${kind} ${disp(paper,prev.dataset.ch)}, ${esc(prev.dataset.title)}</a>`:'<span class="sp"></span>')+
+                (next?`<a class="btn solid${next.dataset.ch==='1'?'':' locked-link'}" href="#${paper}/${next.dataset.ch}">Next: ${kind} ${disp(paper,next.dataset.ch)}, ${esc(next.dataset.title)}</a>`:'');
+    a.appendChild(p);
+  });
+  views[paper]={r,nav,arts,keys};
+});
+function showChapter(paper,ch){
+  const v=views[paper];
+  if(!ch||!v.keys.includes(ch)) ch=v.keys[0];
+  v.arts.forEach(a=>a.hidden=a.dataset.ch!==ch);
+  $$('a',v.nav).forEach(a=>a.setAttribute('aria-current',a.dataset.ch===ch?'true':'false'));
+  return ch;
+}
+
+/* ---------- router ---------- */
+let lastView=null, lastCh=null;
+function route(){
+  const raw=location.hash.replace(/^#/,'');
+  const [v,sub]=raw.split('/');
+  let view=['p1','p2'].includes(v)?v:'home';
+  // No redirect: locked sections show their lock panel; Section 1 is free.
+  ['home','p1','p2'].forEach(n=>{$('#view-'+n).hidden=n!==view});
+  $$('.tabs a').forEach(a=>{if(a.dataset.tab===view)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  let ch=null;
+  if(view==='p1'||view==='p2') ch=showChapter(view,sub);
+  if(view!==lastView){window.scrollTo(0,0)}
+  else if(ch&&ch!==lastCh){views[view].r.scrollIntoView({block:'start'})}
+  lastView=view;lastCh=ch;
+  const t={home:'Cambridge AS & A Level Computer Science 9618 · Theory & Practical Notes',p1:'AS notes · Cambridge AS & A Level Computer Science 9618',p2:'A Level notes · Cambridge AS & A Level Computer Science 9618'};
+  document.title=t[view];
+}
+window.addEventListener('hashchange',route);
+window.__csRoute=route;
+
+/* ---------- section 1 converter ---------- */
+(function(){
+  const d=$('#cv-d'),b=$('#cv-b'),h=$('#cv-h'),note=$('#cv-note');
+  function set(v,src){
+    if(src!=='d')d.value=v;
+    const bin=v.toString(2).padStart(8,'0'), hex=v.toString(16).toUpperCase().padStart(2,'0');
+    if(src!=='b')b.value=bin;
+    if(src!=='h')h.value=hex;
+    note.textContent=`${bin.slice(0,4)} ${bin.slice(4)} → ${hex[0]} ${hex[1]} → denary ${v}`;
+  }
+  const bad=()=>{note.textContent='Enter a whole number from 0 to 255, a binary number of up to 8 bits, or a hex value from 00 to FF.'};
+  d.addEventListener('input',()=>{const v=parseInt(d.value,10);/^\d{1,3}$/.test(d.value.trim())&&v<=255?set(v,'d'):bad()});
+  b.addEventListener('input',()=>{/^[01]{1,8}$/.test(b.value.trim())?set(parseInt(b.value.trim(),2),'b'):bad()});
+  h.addEventListener('input',()=>{/^[0-9a-fA-F]{1,2}$/.test(h.value.trim())?set(parseInt(h.value.trim(),16),'h'):bad()});
+  set(156);
+})();
+
+/* ---------- section 3 logic gates ---------- */
+(function(){
+  const FN={NOT:a=>+!a,AND:(a,b)=>a&b,OR:(a,b)=>a|b,NAND:(a,b)=>+!(a&b),NOR:(a,b)=>+!(a|b),XOR:(a,b)=>a^b};
+  const grid=$('#gateGrid'),A=$('#tgA'),B=$('#tgB');let a=0,b=0;
+  grid.innerHTML=Object.keys(FN).map(n=>`<div class="gate" data-g="${n}"><b>${n}</b><span class="q">0</span></div>`).join('');
+  function paint(){
+    A.setAttribute('aria-checked',a?'true':'false');B.setAttribute('aria-checked',b?'true':'false');
+    $('span',A).textContent=a;$('span',B).textContent=b;
+    $$('.gate',grid).forEach(g=>{const n=g.dataset.g,v=n==='NOT'?FN.NOT(a):FN[n](a,b);const q=$('.q',g);q.textContent=v;q.classList.toggle('on',!!v);});
+  }
+  A.addEventListener('click',()=>{a=a?0:1;paint()});B.addEventListener('click',()=>{b=b?0:1;paint()});paint();
+})();
+
+/* ---------- start ---------- */
+if(!location.hash) { try{history.replaceState(null,'','#home')}catch(e){} }
+route();
+})();
+</script>
+
+
+<script type="module">
+  // ===== Firebase Login Gate + Free Section 1 Preview (v2 pattern, Nov 2026) =====
+  // Access rule: Section 1 (Information representation and multimedia) is free for everyone. Sections 2–20
+  // unlock after Google sign-in via the SrWL portal
+  // + teacher approval. No passwords are stored on this page.
+  // The dashboard enrollment + approval remain the real access control; this
+  // check keeps the notes page itself behind the same Google login.
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+  import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+  import { firebaseConfig, firebaseReady } from './assets/portal/firebase-config.js';
+
+  // Tells the offline fallback below that this module loaded.
+  window.__srwlGateRan = true;
+
+  // Google Apps Script Web App URL (attendance logging, same as the ICT notes).
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweswRLHak84m6MkD8DrvxorOaH_ajSIut1uhAitFJDnF1Mrhg_m-vc7nfXaD7ibMBn/exec';
+
+  function logVisit(name, username, event) {
+    if (!SCRIPT_URL) return;
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ name: name, username: username, timestamp: new Date().toISOString(), event: event })
+    }).catch(function (err) { console.warn('Attendance log failed:', err); });
+  }
+
+  const overlay = document.getElementById('authOverlay');
+  const statusMsg = document.getElementById('authStatusMsg');
+  const goLoginBtn = document.getElementById('authGoLoginBtn');
+  const authBtn = document.getElementById('authBtn');
+  const userNameEl = document.getElementById('authUserName');
+  const freeBanner = document.getElementById('freeBanner');
+  const freeBannerMsg = document.getElementById('freeBannerMsg');
+  const freeBannerBtn = document.getElementById('freeBannerBtn');
+  let auth = null;
+
+  function setBanner(text, showButton) {
+    if (freeBannerMsg) freeBannerMsg.textContent = text;
+    if (freeBanner) freeBanner.style.display = 'flex';
+    if (freeBannerBtn) freeBannerBtn.style.display = showButton ? '' : 'none';
+  }
+
+  function hideBanner() {
+    if (freeBanner) freeBanner.style.display = 'none';
+  }
+
+  function showSignedOut() {
+    document.body.classList.add('chapters-locked');
+    if (authBtn) { authBtn.textContent = 'Sign in with Google'; authBtn.classList.add('solid'); }
+    if (userNameEl) userNameEl.hidden = true;
+  }
+
+  function showSignedIn(name) {
+    if (authBtn) { authBtn.textContent = 'Log out'; authBtn.classList.remove('solid'); }
+    if (userNameEl) { userNameEl.textContent = name; userNameEl.hidden = false; }
+  }
+
+  // Free-preview state: Section 1 readable, Sections 2–20 locked.
+  function lockChapters() {
+    document.body.classList.add('chapters-locked');
+    if (window.__csRoute) window.__csRoute();
+  }
+
+  // Full access: everything unlocked, banner hidden.
+  function unlockChapters(name) {
+    document.body.classList.remove('chapters-locked');
+    hideBanner();
+    if (overlay) overlay.style.display = 'none';
+    showSignedIn(name);
+    if (window.__csRoute) window.__csRoute();
+  }
+
+  // Hard error only: show the full-page overlay (Firebase not configured,
+  // or the account check itself failed).
+  function lockPage(message, showLoginButton) {
+    if (overlay) overlay.style.display = 'flex';
+    if (statusMsg) { statusMsg.textContent = message; statusMsg.className = 'auth-msg show'; }
+    if (goLoginBtn) goLoginBtn.style.display = showLoginButton ? '' : 'none';
+  }
+
+  if (goLoginBtn) goLoginBtn.addEventListener('click', function () { location.assign('login.html'); });
+  if (freeBannerBtn) freeBannerBtn.addEventListener('click', function () { location.assign('login.html'); });
+
+  if (authBtn) {
+    authBtn.addEventListener('click', async function () {
+      if (!auth || !auth.currentUser) { location.assign('login.html'); return; }
+      try { await signOut(auth); } catch (e) { console.warn('Sign-out failed:', e); }
+      location.assign('login.html');
+    });
+  }
+
+  if (!firebaseReady) {
+    lockPage('Firebase is not configured. Please contact your teacher.', false);
+  } else {
+    const app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Same admin check as assets/portal/portal.js: a denied read is not admin.
+    const isAdmin = async (uid) => {
+      try {
+        const snapshot = await getDoc(doc(db, 'admins', uid));
+        return snapshot.exists();
+      } catch (error) {
+        if (error.code === 'permission-denied') return false;
+        throw error;
+      }
+    };
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        // Signed out: no redirect — Section 1 is free, the rest is locked.
+        showSignedOut();
+        lockChapters();
+        setBanner('📖 Section 1 is free — sign in with Google to unlock Sections 2–20.', true);
+        return;
+      }
+      const displayName = user.displayName || (user.email ? user.email.split('@')[0] : 'Student');
+      try {
+        const admin = await isAdmin(user.uid);
+        let approved = null; // null = could not verify (read denied); dashboard already enforces approval
+        try {
+          const snapshot = await getDoc(doc(db, 'users', user.uid));
+          if (snapshot.exists()) approved = snapshot.data().approved === true;
+        } catch (error) {
+          if (error.code !== 'permission-denied') throw error;
+          console.warn('Could not verify approval - allowing signed-in user. Check Firestore Rules for /users/{uid}.', error);
+        }
+        if (admin || approved === true || approved === null) {
+          unlockChapters(displayName);
+          logVisit(displayName, user.email || user.uid, 'firebase-login');
+        } else {
+          // Signed in, waiting for teacher approval: Section 1 is free meanwhile.
+          showSignedIn(displayName);
+          lockChapters();
+          setBanner('⏳ Your registration is waiting for teacher approval — you can read Section 1 meanwhile.', true);
+        }
+      } catch (error) {
+        console.error('Account check failed:', error);
+        lockPage('Unable to verify your account. Please try again or contact your teacher.', true);
+      }
+    });
+  }
+</script>
+<script>
+  // Fallback if the Firebase module above failed to load (e.g. offline).
+  // Topics stay locked (fail closed) but Section 1 below is still free to read.
+  setTimeout(function () {
+    if (window.__srwlGateRan) return; // module loaded - auth state already handled
+    var banner = document.getElementById('freeBanner');
+    var msg = document.getElementById('freeBannerMsg');
+    if (banner && msg) {
+      banner.style.display = 'flex';
+      msg.textContent = 'Could not reach the sign-in service. Check your connection, then refresh this page. Section 1 below is still free to read.';
+    }
+  }, 8000);
+</script>
+</body>
+</html>
