@@ -154,7 +154,8 @@ if (!firebaseReady) {
     { courseId: 'ict-4it1', courseTitle: 'IGCSE ICT (4IT1) — Edexcel', resourceUrl: 'ict_edexcel_4it_v1.html' },
     { courseId: 'cs-4cp0', courseTitle: 'Computer Science (4CP0) — Edexcel IGCSE', resourceUrl: 'resources.html' },
     { courseId: 'cs-9618', courseTitle: 'A-Level Computer Science (9618)', resourceUrl: 'CS_9618_Alevel_wh.html' },
-    { courseId: 'ict-cs-foundation', courseTitle: 'ICT / Computer Science Foundation', resourceUrl: 'ict-foundation.html' }
+    { courseId: 'ict-cs-foundation', courseTitle: 'ICT / Computer Science Foundation', resourceUrl: 'ict-foundation.html' },
+    { courseId: 'python-basics', courseTitle: 'Python Programming Basics', resourceUrl: 'python-basics.html' }
   ];
 
   // Admin enrollment panel: enroll a student, or update their entry point
