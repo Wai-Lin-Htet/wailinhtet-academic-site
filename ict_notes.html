@@ -452,9 +452,11 @@
     .auth-widget{top:auto; bottom:14px; right:14px;}
   }
 
-  /* Full Screen Auth Overlay (Entrance Gate) */
+  /* Full Screen Auth Overlay — v2: hidden by default, shown only for hard errors
+     (Firebase not configured / account check failed). Signed-out visitors no
+     longer hit a full-page block: Chapter 1 is free, Chapters 2-10 use lock panels. */
   .auth-overlay{
-    display:flex;
+    display:none;
     position:fixed; inset:0; z-index:999999;
     background:rgba(20, 24, 33, 0.85);
     backdrop-filter:blur(6px);
@@ -521,6 +523,54 @@
     margin-top:16px; font-size:0.8rem; color:var(--ink-soft);
     font-family:'Zilla Slab',serif; line-height:1.5;
   }
+
+  /* ===== Free Chapter 1 preview (v2, Nov 2026) ===== */
+  /* Signed-out / pending visitors read Chapter 1 free. Chapters 2-10 and the
+     practice sets stay locked until Google sign-in + teacher approval. */
+  .free-banner{
+    display:none; align-items:center; justify-content:center; gap:14px;
+    position:sticky; top:0; z-index:80;
+    background:var(--highlight-soft); color:var(--ink);
+    border-bottom:2px solid var(--highlight);
+    padding:10px 16px; text-align:center;
+    font-family:'Zilla Slab',serif; font-weight:600; font-size:0.95rem;
+  }
+  .free-banner .free-banner-btn{
+    flex:0 0 auto;
+    background:var(--pen); color:var(--on-pen); border:none;
+    padding:8px 16px; border-radius:20px; cursor:pointer;
+    font-family:'Zilla Slab',serif; font-weight:600; font-size:0.9rem;
+    box-shadow:var(--shadow); white-space:nowrap;
+  }
+  .free-banner .free-banner-btn:hover{background:var(--pen-light);}
+  @media (max-width:640px){ .free-banner{flex-wrap:wrap; gap:8px;} }
+  /* Locked chapters: hide everything inside except the lock panel. */
+  body.chapters-locked section.locked-chapter > :not(.chapter-lock){display:none;}
+  .chapter-lock{display:none;}
+  body.chapters-locked .chapter-lock{
+    display:block; text-align:center;
+    background:var(--card); border:2px dashed var(--line); border-radius:12px;
+    padding:44px 24px; margin:24px 0;
+    font-family:'Zilla Slab',serif;
+  }
+  .chapter-lock .lock-icon{font-size:2.4rem; line-height:1;}
+  .chapter-lock h2{margin:10px 0 6px; font-size:1.4rem; color:var(--pen);}
+  .chapter-lock p{color:var(--ink-soft); max-width:56ch; margin:0 auto 18px;}
+  .chapter-lock .lock-btn{
+    background:var(--pen); color:var(--on-pen); border:none;
+    padding:12px 22px; border-radius:20px; cursor:pointer;
+    font-family:'Zilla Slab',serif; font-weight:600; font-size:1rem;
+    box-shadow:var(--shadow);
+  }
+  .chapter-lock .lock-btn:hover{background:var(--pen-light);}
+  /* Lock marks on contents links while chapters are locked. */
+  body.chapters-locked a.locked-link::after{content:" 🔒";}
+  /* Keep the fixed controls clear of the banner while it is shown. */
+  @media (min-width:901px){
+    body.chapters-locked .ctrl-bar{top:60px;}
+    body.chapters-locked .auth-widget{top:60px;}
+  }
+  @media print{ .free-banner,.chapter-lock{display:none!important;} }
 
   /* ===== Extended notes (merged from detailed summary) ===== */
   details.extended{margin:2.2em 0 1.6em; background:var(--card); border:1px solid var(--line); border-left:4px solid var(--margin); border-radius:var(--radius); box-shadow:var(--shadow);}
@@ -608,33 +658,24 @@
   })();
 </script>
 </head>
-<body>
+<body class="chapters-locked">
 
-<!-- ENTRANCE GATE OVERLAY -->
+<!-- FREE PREVIEW BANNER (v2) — shown while Chapters 2-10 are locked. -->
+<div class="free-banner" id="freeBanner">
+  <span id="freeBannerMsg">📖 Chapter 1 is free — sign in with Google to unlock Chapters 2–10.</span>
+  <button type="button" class="free-banner-btn" id="freeBannerBtn">Sign in with Google</button>
+</div>
+
+<!-- FIREBASE LOGIN GATE (v2) — the full-page overlay below is now shown only for
+     hard errors. Chapter 1 is free to read; Chapters 2-10 and the practice sets
+     are locked per-section until Google sign-in + teacher approval.
+     No passwords are stored on this page. -->
 <div class="auth-overlay" id="authOverlay">
   <div class="auth-card">
-    <h3>Student Entrance 📓</h3>
-    <div class="auth-tabs">
-      <div class="auth-tab active" data-tab="register">Register</div>
-      <div class="auth-tab" data-tab="login">Login </div>
-    </div>
-
-    <form class="auth-form active" id="registerForm">
-      <div class="auth-field"><label>Full Name </label><input type="text" id="regName" placeholder="e.g. John Htet" required></div>
-      <div class="auth-field"><label>Student ID / Username</label><input type="text" id="regUser" placeholder="e.g. ict-01" autocomplete="username" required></div>
-      <div class="auth-field"><label>Password</label><input type="password" id="regPass" autocomplete="new-password" required></div>
-      <div class="auth-msg" id="regMsg"></div>
-      <button type="submit" class="auth-submit" id="regSubmitBtn">Sign in to read</button>
-    </form>
-
-    <form class="auth-form" id="loginForm">
-      <div class="auth-field"><label>Username</label><input type="text" id="loginUser" autocomplete="username" required></div>
-      <div class="auth-field"><label>Password</label><input type="password" id="loginPass" autocomplete="current-password" required></div>
-      <div class="auth-msg" id="loginMsg"></div>
-      <button type="submit" class="auth-submit" id="loginSubmitBtn">Log in</button>
-    </form>
-
-    <p class="auth-note"> The user's name and login time are automatically logged in the attendance list.</p>
+    <h3>Student Login 📓</h3>
+    <div class="auth-msg show" id="authStatusMsg">Checking your Google sign-in…</div>
+    <button type="button" class="auth-submit" id="authGoLoginBtn" style="display:none;">Go to Login</button>
+    <p class="auth-note">These notes are for approved SrWL Learning students. Sign in with Google on the login page — your teacher approves your account, then your courses appear on your dashboard. Your name and login time are automatically logged in the attendance list.</p>
   </div>
 </div>
 
@@ -646,7 +687,7 @@
 </div>
 
 <div class="auth-widget">
-  <div class="auth-pill" id="authOpenBtn"><span class="dot"></span>Login / Register</div>
+  <div class="auth-pill" id="authOpenBtn"><span class="dot"></span>Sign in with Google</div>
   <div class="auth-user" id="authUserBox">
     <div class="avatar-sm" id="authAvatar">?</div>
     <span id="authUserName">Student</span>
@@ -661,42 +702,42 @@
     <ul class="side-nav" id="sideNav">
       <li><a href="#cover"><span class="n"></span>Cover</a></li>
       <li><a href="#ch1"><span class="n">1</span>Computer Systems</a></li>
-      <li><a href="#ch2"><span class="n">2</span>Input &amp; Output</a></li>
-      <li><a href="#ch3"><span class="n">3</span>Storage</a></li>
-      <li><a href="#ch4"><span class="n">4</span>Networks</a></li>
-      <li><a href="#ch5"><span class="n">5</span>Effects of IT</a></li>
-      <li><a href="#ch6"><span class="n">6</span>ICT Applications</a></li>
-      <li><a href="#ch7"><span class="n">7</span>Systems Life Cycle</a></li>
-      <li><a href="#ch8"><span class="n">8</span>Safety &amp; Security</a></li>
-      <li><a href="#ch9"><span class="n">9</span>Audiences</a></li>
-      <li><a href="#ch10"><span class="n">10</span>Communication</a></li>
+      <li><a class="locked-link" href="#ch2"><span class="n">2</span>Input &amp; Output</a></li>
+      <li><a class="locked-link" href="#ch3"><span class="n">3</span>Storage</a></li>
+      <li><a class="locked-link" href="#ch4"><span class="n">4</span>Networks</a></li>
+      <li><a class="locked-link" href="#ch5"><span class="n">5</span>Effects of IT</a></li>
+      <li><a class="locked-link" href="#ch6"><span class="n">6</span>ICT Applications</a></li>
+      <li><a class="locked-link" href="#ch7"><span class="n">7</span>Systems Life Cycle</a></li>
+      <li><a class="locked-link" href="#ch8"><span class="n">8</span>Safety &amp; Security</a></li>
+      <li><a class="locked-link" href="#ch9"><span class="n">9</span>Audiences</a></li>
+      <li><a class="locked-link" href="#ch10"><span class="n">10</span>Communication</a></li>
       <li style="margin-top: 10px;">
-  <a href="#practice-questions" style="font-weight: 700; color: #ea580c; text-decoration: none;">
+  <a class="locked-link" href="#practice-questions" style="font-weight: 700; color: #ea580c; text-decoration: none;">
     ★ Practice Questions 1
   </a>
 </li>
 <li style="margin-top: 10px;">
-  <a href="#assignment-answers" style="font-weight: 700; color: #059669; text-decoration: none;">
+  <a class="locked-link" href="#assignment-answers" style="font-weight: 700; color: #059669; text-decoration: none;">
     ★ Practice Question 2
   </a>
 </li>
 <li style="margin-top: 10px;">
-  <a href="#assignment-set-3" style="font-weight: 700; color: #7c3aed; text-decoration: none;">
+  <a class="locked-link" href="#assignment-set-3" style="font-weight: 700; color: #7c3aed; text-decoration: none;">
     ★ Practice Question 3
   </a>
 </li>
 <li style="margin-top: 10px;">
-  <a href="#practice-questions-set4" style="font-weight: 700; color: #7c3aed; text-decoration: none;">
+  <a class="locked-link" href="#practice-questions-set4" style="font-weight: 700; color: #7c3aed; text-decoration: none;">
     ★ Practice Question 4
   </a>
 </li>
 <li style="margin-top: 10px;">
-  <a href="#practice-questions-set5" style="font-weight: 700; color: #0284c7; text-decoration: none;">
+  <a class="locked-link" href="#practice-questions-set5" style="font-weight: 700; color: #0284c7; text-decoration: none;">
     ★ Practice Question 5
   </a>
 </li>
 <li style="margin-top: 10px;">
-  <a href="ict_notes/ict-quiz-1.html" style="font-weight: 700; color: #0284c7; text-decoration: none;">
+  <a class="locked-link" href="ict_notes/ict-quiz-1.html" style="font-weight: 700; color: #0284c7; text-decoration: none;">
     ⭐ Comprehensive Quiz
   </a>
 </li>
@@ -733,15 +774,15 @@
 
         <div class="toc" id="table-of-contents">
           <a href="#ch1"><span class="num">1</span> Types &amp; Components of Computer Systems</a>
-          <a href="#ch2"><span class="num">2</span> Input &amp; Output Devices</a>
-          <a href="#ch3"><span class="num">3</span> Storage Devices &amp; Media</a>
-          <a href="#ch4"><span class="num">4</span> Networks &amp; the Effects of Using Them</a>
-          <a href="#ch5"><span class="num">5</span> The Effects of Using IT</a>
-          <a href="#ch6"><span class="num">6</span> ICT Applications</a>
-          <a href="#ch7"><span class="num">7</span> The Systems Life Cycle</a>
-          <a href="#ch8"><span class="num">8</span> Safety &amp; Security</a>
-          <a href="#ch9"><span class="num">9</span> Audiences</a>
-          <a href="#ch10"><span class="num">10</span> Communication</a>
+          <a class="locked-link" href="#ch2"><span class="num">2</span> Input &amp; Output Devices</a>
+          <a class="locked-link" href="#ch3"><span class="num">3</span> Storage Devices &amp; Media</a>
+          <a class="locked-link" href="#ch4"><span class="num">4</span> Networks &amp; the Effects of Using Them</a>
+          <a class="locked-link" href="#ch5"><span class="num">5</span> The Effects of Using IT</a>
+          <a class="locked-link" href="#ch6"><span class="num">6</span> ICT Applications</a>
+          <a class="locked-link" href="#ch7"><span class="num">7</span> The Systems Life Cycle</a>
+          <a class="locked-link" href="#ch8"><span class="num">8</span> Safety &amp; Security</a>
+          <a class="locked-link" href="#ch9"><span class="num">9</span> Audiences</a>
+          <a class="locked-link" href="#ch10"><span class="num">10</span> Communication</a>
         </div>
       </section>
 
@@ -1306,7 +1347,13 @@
       </section>
 
       <!-- CHAPTER 2 -->
-      <section class="chapter" id="ch2">
+      <section class="chapter locked-chapter" id="ch2">
+        <div class="chapter-lock">
+          <div class="lock-icon">🔒</div>
+          <h2>Chapter 2 — Input &amp; Output Devices</h2>
+          <p>This is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+          <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+        </div>
         <figure class="clipping">
           <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Standard%20white%20computer%20keyboard.jpg" alt="A standard computer keyboard, a manual input device">
           <figcaption>manual input devices</figcaption>
@@ -1768,7 +1815,13 @@
       </section>
 
       <!-- CHAPTER 3 -->
-      <section class="chapter" id="ch3">
+      <section class="chapter locked-chapter" id="ch3">
+        <div class="chapter-lock">
+          <div class="lock-icon">🔒</div>
+          <h2>Chapter 3 — Storage Devices &amp; Media</h2>
+          <p>This is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+          <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+        </div>
         <figure class="clipping">
           <img src="https://commons.wikimedia.org/wiki/Special:FilePath/HDD%20and%20SSD%2020180314.jpg" alt="A hard disk drive (HDD) next to a solid state drive (SSD)">
           <figcaption>HDD (left) vs SSD (right)</figcaption>
@@ -2054,7 +2107,13 @@
       </section>
 
       <!-- CHAPTER 4 -->
-      <section class="chapter" id="ch4">
+      <section class="chapter locked-chapter" id="ch4">
+        <div class="chapter-lock">
+          <div class="lock-icon">🔒</div>
+          <h2>Chapter 4 — Networks &amp; the Effects of Using Them</h2>
+          <p>This is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+          <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+        </div>
         <figure class="clipping">
           <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Dlink%20wireless%20router.jpg" alt="A wireless router used to connect a LAN to the internet">
           <figcaption>a router connects networks</figcaption>
@@ -2418,7 +2477,13 @@
       </section>
 
       <!-- CHAPTER 5 -->
-      <section class="chapter" id="ch5">
+      <section class="chapter locked-chapter" id="ch5">
+        <div class="chapter-lock">
+          <div class="lock-icon">🔒</div>
+          <h2>Chapter 5 — The Effects of Using IT</h2>
+          <p>This is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+          <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+        </div>
         <div class="chapter-head"><div class="badge hand">5</div><h2>The Effects of Using IT</h2></div>
         <p class="chapter-intro">Microprocessor-controlled devices, health problems and their fixes, and physical safety hazards.</p>
 
@@ -2692,7 +2757,13 @@
       </section>
 
       <!-- CHAPTER 6 -->
-      <section class="chapter" id="ch6">
+      <section class="chapter locked-chapter" id="ch6">
+        <div class="chapter-lock">
+          <div class="lock-icon">🔒</div>
+          <h2>Chapter 6 — ICT Applications</h2>
+          <p>This is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+          <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+        </div>
         <div class="chapter-head"><div class="badge hand">6</div><h2>ICT Applications</h2></div>
         <p class="chapter-intro">Real-world systems: modelling, control, schools, booking, banking, medicine, expert systems, retail, recognition and satellites.</p>
 
@@ -3010,7 +3081,13 @@
       </section>
 
       <!-- CHAPTER 7 -->
-      <section class="chapter" id="ch7">
+      <section class="chapter locked-chapter" id="ch7">
+        <div class="chapter-lock">
+          <div class="lock-icon">🔒</div>
+          <h2>Chapter 7 — The Systems Life Cycle</h2>
+          <p>This is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+          <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+        </div>
         <div class="chapter-head"><div class="badge hand">7</div><h2>The Systems Life Cycle</h2></div>
         <p class="chapter-intro">How a new ICT system is built: analysis, design, development &amp; testing, implementation, documentation, evaluation.</p>
 
@@ -3379,7 +3456,13 @@
       </section>
 
       <!-- CHAPTER 8 -->
-      <section class="chapter" id="ch8">
+      <section class="chapter locked-chapter" id="ch8">
+        <div class="chapter-lock">
+          <div class="lock-icon">🔒</div>
+          <h2>Chapter 8 — Safety &amp; Security</h2>
+          <p>This is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+          <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+        </div>
         <figure class="clipping">
           <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Internet%20Security%20Padlock%20for%20VPN%20%26%20Online%20Privacy.jpg" alt="A padlock symbolising internet and data security">
           <figcaption>keeping data secure</figcaption>
@@ -3743,7 +3826,13 @@
       </section>
 
       <!-- CHAPTER 9 -->
-      <section class="chapter" id="ch9">
+      <section class="chapter locked-chapter" id="ch9">
+        <div class="chapter-lock">
+          <div class="lock-icon">🔒</div>
+          <h2>Chapter 9 — Audiences</h2>
+          <p>This is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+          <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+        </div>
         <div class="chapter-head"><div class="badge hand">9</div><h2>Audiences</h2></div>
         <p class="chapter-intro">Tailoring ICT work to who will actually read, watch or use it — plus copyright and plagiarism.</p>
 
@@ -3934,7 +4023,13 @@
       </section>
 
       <!-- CHAPTER 10 -->
-      <section class="chapter" id="ch10">
+      <section class="chapter locked-chapter" id="ch10">
+        <div class="chapter-lock">
+          <div class="lock-icon">🔒</div>
+          <h2>Chapter 10 — Communication</h2>
+          <p>This is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+          <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+        </div>
         <div class="chapter-head"><div class="badge hand">10</div><h2>Communication</h2></div>
         <p class="chapter-intro">Email, the internet vs the World Wide Web, web platforms, protocols, and staying safe online.</p>
 
@@ -4225,7 +4320,13 @@
       </section>
 
       <!-- PRACTICE QUESTIONS &amp; MARK SCHEME SECTION (CHAPTERS 1-5) -->
-<section id="practice-questions" class="chapter-section" style="background: #fafafa; border: 2px solid #cbd5e1; border-radius: 12px; padding: 25px; margin-top: 40px;">
+<section id="practice-questions" class="chapter-section locked-chapter" style="background: #fafafa; border: 2px solid #cbd5e1; border-radius: 12px; padding: 25px; margin-top: 40px;">
+  <div class="chapter-lock">
+    <div class="lock-icon">🔒</div>
+    <h2>Practice Questions 1 (Chapters 1–5)</h2>
+    <p>This is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+    <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+  </div>
   <div style="border-bottom: 2px solid #3b82f6; padding-bottom: 10px; margin-bottom: 20px;">
     <h2 style="color: #1e3a8a; margin: 0;">Practice Questions &amp; Mark Scheme Answers</h2>
     <p style="color: #2563eb; font-weight: 600; margin: 4px 0 0 0;">Cambridge IGCSE ICT 0417 (Chapters 1–5) – 100 Marks</p>
@@ -4433,7 +4534,13 @@
 </section>
 
 <!-- PRACTICE QUESTION 2 / ASSIGNMENT MODEL ANSWERS SECTION -->
-<section id="assignment-answers" class="chapter-section" style="background: #fafafa; border: 2px solid #cbd5e1; border-radius: 12px; padding: 25px; margin-top: 40px;">
+<section id="assignment-answers" class="chapter-section locked-chapter" style="background: #fafafa; border: 2px solid #cbd5e1; border-radius: 12px; padding: 25px; margin-top: 40px;">
+  <div class="chapter-lock">
+    <div class="lock-icon">🔒</div>
+    <h2>Practice Question 2 — ICT Theory Assignment</h2>
+    <p>This is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+    <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+  </div>
   <div style="border-bottom: 2px solid #10b981; padding-bottom: 10px; margin-bottom: 20px;">
     <h2 style="color: #065f46; margin: 0;">Practice Question 2: ICT Theory Assignment – Model Answers</h2>
     <p style="color: #059669; font-weight: 600; margin: 4px 0 0 0;">23 Comprehensive Assignment Questions &amp; Marking Points</p>
@@ -4695,7 +4802,13 @@
 </section>
 
 <!-- PRACTICE QUESTION 3 / ASSIGNMENTS 1 &amp; b MODEL ANSWERS SECTION -->
-<section id="assignment-set-3" class="chapter-section" style="background: #fafafa; border: 2px solid #cbd5e1; border-radius: 12px; padding: 25px; margin-top: 40px;">
+<section id="assignment-set-3" class="chapter-section locked-chapter" style="background: #fafafa; border: 2px solid #cbd5e1; border-radius: 12px; padding: 25px; margin-top: 40px;">
+  <div class="chapter-lock">
+    <div class="lock-icon">🔒</div>
+    <h2>Practice Question 3 — ICT Theory Assignments</h2>
+    <p>This is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+    <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+  </div>
   <div style="border-bottom: 2px solid #8b5cf6; padding-bottom: 10px; margin-bottom: 20px;">
     <h2 style="color: #5b21b6; margin: 0;">Practice Question 3: ICT Theory Assignments (1 &amp; 2) – Model Answers</h2>
     <p style="color: #7c3aed; font-weight: 600; margin: 4px 0 0 0;">IGCSE ICT – Comprehensive Exam Practice Papers</p>
@@ -4884,7 +4997,13 @@
 </section>
 
 <!-- PRACTICE QUESTION 4 / CHAPTERS 6-10 ADVANCED MODEL ANSWERS SECTION -->
-<section id="practice-questions-set4" class="chapter-section" style="background: #fafafa; border: 2px solid #cbd5e1; border-radius: 12px; padding: 25px; margin-top: 40px;">
+<section id="practice-questions-set4" class="chapter-section locked-chapter" style="background: #fafafa; border: 2px solid #cbd5e1; border-radius: 12px; padding: 25px; margin-top: 40px;">
+  <div class="chapter-lock">
+    <div class="lock-icon">🔒</div>
+    <h2>Practice Question 4 — Advanced Theory Revision (Chapters 6–10)</h2>
+    <p>This is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+    <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+  </div>
   <div style="border-bottom: 2px solid #8b5cf6; padding-bottom: 10px; margin-bottom: 20px;">
     <h2 style="color: #5b21b6; margin: 0;">Practice Question 4: Advanced Theory Revision – Model Answers</h2>
     <p style="color: #7c3aed; font-weight: 600; margin: 4px 0 0 0;">Cambridge IGCSE ICT 0417 (Chapters 6–10 Focus) – Comprehensive Mark Scheme</p>
@@ -5104,7 +5223,13 @@
 </section>
 
 <!-- PRACTICE QUESTION 5 / CHAPTERS 6-10 MARK SCHEME SECTION -->
-<section id="practice-questions-set5" class="chapter-section" style="background: #fafafa; border: 2px solid #cbd5e1; border-radius: 12px; padding: 25px; margin-top: 40px;">
+<section id="practice-questions-set5" class="chapter-section locked-chapter" style="background: #fafafa; border: 2px solid #cbd5e1; border-radius: 12px; padding: 25px; margin-top: 40px;">
+  <div class="chapter-lock">
+    <div class="lock-icon">🔒</div>
+    <h2>Practice Question 5 — Exam-Style Answers (Chapters 6–10)</h2>
+    <p>This is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+    <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+  </div>
   <div style="border-bottom: 2px solid #0284c7; padding-bottom: 10px; margin-bottom: 20px;">
     <h2 style="color: #0369a1; margin: 0;">Practice Question 5: Exam-Style Mark Scheme Answers (Chapters 6–10)</h2>
     <p style="color: #0284c7; font-weight: 600; margin: 4px 0 0 0;">Cambridge IGCSE ICT 0417 – Model Answers &amp; Marking Criteria</p>
@@ -5414,169 +5539,169 @@
   onScroll();
 </script>
 
+<script type="module">
+  // ===== Firebase Login Gate + Free Chapter 1 Preview (v2, Nov 2026) =====
+  // Access rule: Chapter 1 is free for everyone. Chapters 2-10 and the practice
+  // sets unlock after Google sign-in via the SrWL portal + teacher approval.
+  // No passwords are stored on this page. The dashboard enrollment + approval
+  // remain the real access control; this check keeps the notes page itself
+  // behind the same Google login.
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+  import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+  import { firebaseConfig, firebaseReady } from './assets/portal/firebase-config.js';
+
+  // Tells the offline fallback below that this module loaded.
+  window.__srwlGateRan = true;
+
+  // Remove any credentials left behind by the old local password system.
+  try {
+    localStorage.removeItem('ict0417_users');
+    localStorage.removeItem('ict0417_session');
+  } catch (e) { /* storage unavailable - nothing to clean */ }
+
+  // Google Apps Script Web App URL (attendance logging, unchanged)
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweswRLHak84m6MkD8DrvxorOaH_ajSIut1uhAitFJDnF1Mrhg_m-vc7nfXaD7ibMBn/exec';
+
+  function logVisit(name, username, event) {
+    if (!SCRIPT_URL) return;
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ name: name, username: username, timestamp: new Date().toISOString(), event: event })
+    }).catch(function (err) { console.warn('Attendance log failed:', err); });
+  }
+
+  const overlay = document.getElementById('authOverlay');
+  const statusMsg = document.getElementById('authStatusMsg');
+  const goLoginBtn = document.getElementById('authGoLoginBtn');
+  const userBox = document.getElementById('authUserBox');
+  const userNameEl = document.getElementById('authUserName');
+  const avatarEl = document.getElementById('authAvatar');
+  const logoutBtn = document.getElementById('authLogoutBtn');
+  const openBtn = document.getElementById('authOpenBtn');
+  const freeBanner = document.getElementById('freeBanner');
+  const freeBannerMsg = document.getElementById('freeBannerMsg');
+  const freeBannerBtn = document.getElementById('freeBannerBtn');
+
+  function showStatus(text, isError) {
+    if (!statusMsg) return;
+    statusMsg.textContent = text;
+    statusMsg.className = 'auth-msg show ' + (isError ? 'err' : 'ok');
+  }
+
+  function setBanner(text, showButton) {
+    if (freeBannerMsg) freeBannerMsg.textContent = text;
+    if (freeBanner) freeBanner.style.display = 'flex';
+    if (freeBannerBtn) freeBannerBtn.style.display = showButton ? '' : 'none';
+  }
+
+  function hideBanner() {
+    if (freeBanner) freeBanner.style.display = 'none';
+  }
+
+  // Free-preview state: Chapter 1 readable, Chapters 2-10 + practice sets locked.
+  function lockChapters() {
+    document.body.classList.add('chapters-locked');
+    if (userBox) userBox.style.display = 'none';
+    if (openBtn) openBtn.style.display = 'flex';
+  }
+
+  // Full access: everything unlocked, banner + sign-in pill hidden.
+  function unlockChapters(name) {
+    document.body.classList.remove('chapters-locked');
+    hideBanner();
+    if (overlay) overlay.style.display = 'none';
+    if (openBtn) openBtn.style.display = 'none';
+    if (userBox) userBox.style.display = 'flex';
+    if (userNameEl) userNameEl.textContent = name;
+    if (avatarEl) avatarEl.textContent = (name || '?').trim().charAt(0).toUpperCase() || '?';
+  }
+
+  // Hard error only: show the full-page overlay (Firebase not configured,
+  // or the account check itself failed).
+  function lockPage(message, showLoginButton) {
+    if (overlay) overlay.style.display = 'flex';
+    if (userBox) userBox.style.display = 'none';
+    if (message) showStatus(message, true);
+    if (goLoginBtn) goLoginBtn.style.display = showLoginButton ? '' : 'none';
+  }
+
+  if (goLoginBtn) goLoginBtn.addEventListener('click', function () { location.assign('login.html'); });
+  if (openBtn) openBtn.addEventListener('click', function () { location.assign('login.html'); });
+  if (freeBannerBtn) freeBannerBtn.addEventListener('click', function () { location.assign('login.html'); });
+
+  if (!firebaseReady) {
+    lockPage('Firebase is not configured. Please contact your teacher.', false);
+  } else {
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Same admin check as assets/portal/portal.js: a denied read is not admin.
+    const isAdmin = async (uid) => {
+      try {
+        const snapshot = await getDoc(doc(db, 'admins', uid));
+        return snapshot.exists();
+      } catch (error) {
+        if (error.code === 'permission-denied') return false;
+        throw error;
+      }
+    };
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', async function () {
+        try { await signOut(auth); } catch (e) { console.warn('Sign-out failed:', e); }
+        location.assign('login.html');
+      });
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        // Signed out: no redirect — Chapter 1 is free, the rest is locked.
+        lockChapters();
+        setBanner('📖 Chapter 1 is free — sign in with Google to unlock Chapters 2–10.', true);
+        return;
+      }
+      const displayName = user.displayName || (user.email ? user.email.split('@')[0] : 'Student');
+      try {
+        const admin = await isAdmin(user.uid);
+        let approved = null; // null = could not verify (read denied); dashboard already enforces approval
+        try {
+          const snapshot = await getDoc(doc(db, 'users', user.uid));
+          if (snapshot.exists()) approved = snapshot.data().approved === true;
+        } catch (error) {
+          if (error.code !== 'permission-denied') throw error;
+          console.warn('Could not verify approval - allowing signed-in user. Check Firestore Rules for /users/{uid}.', error);
+        }
+        if (admin || approved === true || approved === null) {
+          unlockChapters(displayName);
+          logVisit(displayName, user.email || user.uid, 'firebase-login');
+        } else {
+          // Signed in, waiting for teacher approval: Chapter 1 is free meanwhile.
+          lockChapters();
+          setBanner('⏳ Your registration is waiting for teacher approval — you can read Chapter 1 meanwhile.', true);
+        }
+      } catch (error) {
+        console.error('Account check failed:', error);
+        lockPage('Unable to verify your account. Please try again or contact your teacher.', true);
+      }
+    });
+  }
+</script>
 <script>
-  // ===== Gated Entrance & Local Attendance Tracking =====
-  (function(){
-    const STORE_KEY = 'ict0417_users';
-    const SESSION_KEY = 'ict0417_session';
-    const MASTER_KEY = 'ict0417'; // Direct access bypass code (no registration required)
-
-    // Google Apps Script Web App URL
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweswRLHak84m6MkD8DrvxorOaH_ajSIut1uhAitFJDnF1Mrhg_m-vc7nfXaD7ibMBn/exec';
-
-    function logVisit(name, username, event){
-      if(!SCRIPT_URL) return;
-      fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
-          name: name,
-          username: username,
-          timestamp: new Date().toISOString(),
-          event: event
-        })
-      }).catch(function(err){ console.warn('Attendance log failed:', err); });
+  // Fallback if the Firebase module above failed to load (e.g. offline).
+  // Chapters stay locked (fail closed) but Chapter 1 below is still free to read.
+  setTimeout(function () {
+    if (window.__srwlGateRan) return; // module loaded - auth state already handled
+    var banner = document.getElementById('freeBanner');
+    var msg = document.getElementById('freeBannerMsg');
+    if (banner && msg) {
+      banner.style.display = 'flex';
+      msg.textContent = 'Could not reach the sign-in service. Check your connection, then refresh this page. Chapter 1 below is still free to read.';
     }
-
-    const overlay = document.getElementById('authOverlay');
-    const userBox = document.getElementById('authUserBox');
-    const userNameEl = document.getElementById('authUserName');
-    const avatarEl = document.getElementById('authAvatar');
-    const logoutBtn = document.getElementById('authLogoutBtn');
-    const tabs = document.querySelectorAll('.auth-tab');
-    const forms = { register: document.getElementById('registerForm'), login: document.getElementById('loginForm') };
-    const loginMsg = document.getElementById('loginMsg');
-    const regMsg = document.getElementById('regMsg');
-
-    function getUsers(){
-      try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || []; }
-      catch(e){ return []; }
-    }
-    function saveUsers(list){ localStorage.setItem(STORE_KEY, JSON.stringify(list)); }
-    function simpleHash(str){
-      let h = 0;
-      for(let i=0;i<str.length;i++){ h = ((h<<5)-h) + str.charCodeAt(i); h |= 0; }
-      return String(h);
-    }
-    function showMsg(el, text, ok){
-      el.textContent = text;
-      el.className = 'auth-msg show ' + (ok ? 'ok' : 'err');
-    }
-
-    function unlockPage(name){
-      overlay.style.display = 'none';
-      userBox.style.display = 'flex';
-      userNameEl.textContent = name;
-      avatarEl.textContent = name.trim().charAt(0).toUpperCase() || '?';
-    }
-
-    function lockPage(){
-      overlay.style.display = 'flex';
-      userBox.style.display = 'none';
-    }
-
-    // Tab Switcher
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        Object.values(forms).forEach(f => f.classList.remove('active'));
-        forms[tab.dataset.tab].classList.add('active');
-      });
-    });
-
-    // Handle Registration
-    if(forms.register){
-      forms.register.addEventListener('submit', function(e){
-        e.preventDefault();
-        const name = document.getElementById('regName').value.trim();
-        const username = document.getElementById('regUser').value.trim().toLowerCase();
-        const pass = document.getElementById('regPass').value;
-        const btn = document.getElementById('regSubmitBtn');
-
-        if(!name || !username || !pass){
-          showMsg(regMsg, 'Please fill in all fields.', false); return;
-        }
-        const users = getUsers();
-        if(users.some(u => u.username === username)){
-          showMsg(regMsg, 'Username already exists — please log in.', false); return;
-        }
-
-        btn.innerText = 'Registering...';
-        btn.disabled = true;
-
-        users.push({ name, username, passHash: simpleHash(pass) });
-        saveUsers(users);
-        localStorage.setItem(SESSION_KEY, JSON.stringify({ name, username }));
-        logVisit(name, username, 'register');
-        showMsg(regMsg, 'Registration successful. Welcome, ' + name + '!', true);
-
-        setTimeout(() => {
-          btn.innerText = 'Proceed to Content';
-          btn.disabled = false;
-          unlockPage(name);
-        }, 600);
-      });
-    }
-
-    // Handle Login (Modified for Master Passcode "ict0417")
-    forms.login.addEventListener('submit', function(e){
-      e.preventDefault();
-      const rawUser = document.getElementById('loginUser').value.trim();
-      const username = rawUser.toLowerCase();
-      const pass = document.getElementById('loginPass').value.trim();
-      const users = getUsers();
-      const found = users.find(u => u.username === username);
-
-      // 1. Direct bypass with master key "ict0417"
-      if(pass === MASTER_KEY || username === MASTER_KEY){
-        const displayName = rawUser && username !== MASTER_KEY ? rawUser : 'Guest Student';
-        const finalUsername = username || 'guest_user';
-
-        localStorage.setItem(SESSION_KEY, JSON.stringify({ name: displayName, username: finalUsername }));
-        logVisit(displayName, finalUsername, 'quick-login');
-        showMsg(loginMsg, 'Welcome, ' + displayName + '!', true);
-
-        setTimeout(() => {
-          unlockPage(displayName);
-        }, 400);
-        return;
-      }
-
-      // 2. Standard registered user verification
-      if(found && found.passHash === simpleHash(pass)){
-        localStorage.setItem(SESSION_KEY, JSON.stringify({ name: found.name, username: found.username }));
-        logVisit(found.name, found.username, 'login');
-        showMsg(loginMsg, 'Welcome back, ' + found.name + '!', true);
-
-        setTimeout(() => {
-          unlockPage(found.name);
-        }, 400);
-        return;
-      }
-
-      showMsg(loginMsg, 'Invalid username or password. (Access Code: ict0417)', false);
-    });
-
-    // Logout Action
-    if(logoutBtn){
-      logoutBtn.addEventListener('click', function(){
-        localStorage.removeItem(SESSION_KEY);
-        lockPage();
-      });
-    }
-
-    // Page Load Authentication Check
-    let session = null;
-    try{ session = JSON.parse(localStorage.getItem(SESSION_KEY)); }catch(e){ session = null; }
-    if(session && session.name){
-      unlockPage(session.name);
-      logVisit(session.name, session.username, 'return-visit');
-    } else {
-      lockPage();
-    }
-  })();
+  }, 8000);
 </script>
 <script>
   // ===== Theme + hide/show contents =====
