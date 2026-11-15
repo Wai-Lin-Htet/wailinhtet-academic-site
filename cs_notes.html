@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IGCSE Computer Science 0478 · Notes, Code & Mind Maps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfbfd; --surface:#ffffff; --surface-2:#f5f5f7; --ink:#1d1d1f; --muted:#6e6e73; --line:rgba(0,0,0,.08);
+  --p1:#0071e3; --p1-soft:rgba(0,113,227,.08); --p2:#ff9500; --p2-soft:rgba(255,149,0,.1); --mm:#34c759; --mm-soft:rgba(52,199,89,.1);
+  --code-bg:#1d1d1f; --code-ink:#f5f5f7; --code-line:#3a3a3c; --code-tag:#98989d;
+  --ok:#34c759; --bad:#d70015;
+  --f-display:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --f-body:'Inter','Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  --f-serif:'Newsreader',serif;
+  --f-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 2px 10px rgba(0,0,0,.03),0 12px 30px rgba(0,0,0,.06);
+  --radius-pill:980px;
+  color-scheme:light;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px);-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.12;margin:0;letter-spacing:-.03em}
+p{margin:0 0 1em}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--p1);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(251,251,253,.8);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;padding-top:10px;padding-bottom:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:600;font-size:.95rem;letter-spacing:-.02em;margin-right:auto;color:var(--ink)}
+.brand .dot{width:7px;height:7px;border-radius:50%;background:#34c759;display:inline-block}
+.brand .chip{font-family:var(--f-mono);font-weight:500;font-size:.72rem;background:var(--ink);color:var(--bg);padding:3px 8px;border-radius:6px;letter-spacing:0}
+.tabs{display:flex;gap:4px;overflow-x:auto;order:3;width:100%;scrollbar-width:none;padding-bottom:2px}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap;padding:7px 14px;border-radius:var(--radius-pill);font-weight:500;font-size:.85rem;color:var(--muted);border:1px solid transparent}
+.tabs a:hover{color:var(--ink);background:var(--surface-2)}
+.tabs a[aria-current="page"]{color:#fff;background:var(--ink)}
+.tabs svg{width:13px;height:13px;flex:none}
+.tools{display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-pill);padding:8px 16px;font-weight:500;font-size:.85rem;text-decoration:none;transition:all .2s cubic-bezier(.16,1,.3,1)}
+.btn:hover{border-color:#a1a1a6}
+.btn.solid{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.solid:hover{background:#000;transform:scale(1.02)}
+.btn.big{padding:12px 22px;font-size:.9rem}
+.btn svg{width:16px;height:16px}
+@media(max-width:520px){.brand .bt{display:none}.btn{padding:7px 13px}}
+@media(min-width:900px){.tabs{order:0;width:auto}.brand{margin-right:0}.tools{margin-left:auto}}
+
+/* ---------- home ---------- */
+.hero{padding:44px 0 40px}
+.hero .wrap{display:grid;gap:36px;align-items:center}
+@media(min-width:900px){.hero .wrap{grid-template-columns:1.15fr .85fr;gap:56px}}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:600;letter-spacing:.03em;padding:.35rem .85rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-pill);color:var(--muted);margin-bottom:1.25rem;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing:-.04em;line-height:1.05;background:linear-gradient(180deg,#1d1d1f 0%,#434344 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1 span{display:block;-webkit-text-fill-color:var(--p1);color:var(--p1);background:none}
+.hero .sub{font-family:var(--f-serif);font-style:italic;font-size:1.2rem;max-width:34em;color:var(--muted);margin:18px 0 26px;font-weight:400;line-height:1.4}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero .by{margin-top:22px;font-size:.85rem;color:var(--muted)}
+.byte{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
+.byte h2{font-size:1.05rem;font-weight:600;margin-bottom:4px}
+.byte .hint{color:var(--muted);font-size:.85rem;margin-bottom:18px}
+.bits{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
+.bit{border:1.5px solid var(--line);background:var(--surface-2);border-radius:10px;padding:10px 0 6px;text-align:center;font-family:var(--f-mono);font-size:1.5rem;font-weight:500;line-height:1}
+.bit small{display:block;margin-top:8px;font-size:.66rem;color:var(--muted);font-weight:400}
+.bit[aria-checked="true"]{background:var(--p1);border-color:var(--p1);color:#fff}
+.bit[aria-checked="true"] small{color:rgba(255,255,255,.8)}
+.readout{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.readout div{background:var(--surface-2);border-radius:12px;padding:10px 12px}
+.readout dt{font-size:.74rem;color:var(--muted)}
+.readout dd{margin:2px 0 0;font-family:var(--f-mono);font-size:1.35rem;font-weight:500;word-break:break-all}
+
+.sec{padding:36px 0}
+.sec .section-eyebrow{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--p1);margin-bottom:.4rem}
+.sec h2{font-size:clamp(1.6rem,3.2vw,2.1rem);font-weight:700;letter-spacing:-.03em}
+.sec .lede{color:var(--muted);max-width:44em;margin:10px 0 26px}
+.papers{display:grid;gap:20px}
+@media(min-width:900px){.papers{grid-template-columns:1.1fr 1fr}}
+.paper{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:all .25s cubic-bezier(.16,1,.3,1)}
+.paper:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.paper header{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:6px}
+.paper h3{font-size:1.35rem;font-weight:700}
+.paper.p1 h3{color:var(--p1)}.paper.p2 h3{color:var(--p2)}
+.paper .meta{color:var(--muted);font-size:.88rem;margin-top:6px}
+.chlist{list-style:none;margin:0;padding:0;flex:1}
+.chlist li{border-bottom:1px solid var(--line)}
+.chlist li:last-child{border-bottom:0}
+.chrow{display:grid;grid-template-columns:44px 1fr;gap:4px 12px;width:100%;text-align:left;background:none;border:0;padding:14px 4px;border-radius:10px;align-items:baseline}
+.chrow:hover{background:var(--surface-2)}
+.chrow .n{font-family:var(--f-display);font-weight:700;font-size:1.6rem;line-height:1;color:var(--p1)}
+.p2 .chrow .n{color:var(--p2)}
+.chrow .t{font-weight:600;font-size:1rem}
+.chrow .d{grid-column:2;color:var(--muted);font-size:.88rem;line-height:1.45}
+.paper .btn{margin-top:14px;align-self:flex-start}
+.mmband{margin-top:20px;background:var(--mm-soft);border:1px solid rgba(52,199,89,.3);border-radius:20px;padding:22px 24px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.mmband h3{font-size:1.25rem;font-weight:700;color:var(--mm)}
+.mmband p{margin:4px 0 0;color:var(--ink);max-width:38em}
+footer.foot{padding:32px 0 60px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);margin-top:24px;text-align:center}
+
+/* ---------- Firebase login gate + free Chapter 1 preview (v2 pattern) ---------- */
+/* Signed-out / pending visitors read Chapter 1 free. Chapters 2-10 and mind
+   maps 2-10 stay locked until Google sign-in + teacher approval. */
+.free-banner{display:none;align-items:center;justify-content:center;gap:14px;position:sticky;top:0;z-index:60;background:#e8f1fd;color:var(--ink);border-bottom:1px solid rgba(0,113,227,.35);padding:10px 16px;text-align:center;font-weight:600;font-size:.92rem}
+.free-banner .free-banner-btn{flex:0 0 auto;background:var(--p1);color:#fff;border:none;padding:8px 16px;border-radius:980px;cursor:pointer;font-weight:600;font-size:.88rem;white-space:nowrap}
+@media (max-width:640px){.free-banner{flex-wrap:wrap;gap:8px}}
+.auth-name{font-weight:600;font-size:.85rem;color:var(--ink);white-space:nowrap}
+/* Locked chapters: hide everything inside except the lock panel. */
+body.chapters-locked .chapter[data-ch]:not([data-ch="1"]) > :not(.chapter-lock){display:none}
+.chapter-lock{display:none}
+body.chapters-locked .chapter-lock{display:block;text-align:center;background:var(--surface);border:2px dashed var(--line);border-radius:16px;padding:44px 24px;margin:24px 0}
+.chapter-lock .lock-icon{font-size:2.4rem;line-height:1}
+.chapter-lock h2{margin:10px 0 6px;font-size:1.4rem;color:var(--p1)}
+.chapter-lock p{color:var(--muted);max-width:56ch;margin:0 auto 18px}
+.chapter-lock .lock-btn{background:var(--p1);color:#fff;border:none;padding:12px 22px;border-radius:980px;cursor:pointer;font-weight:600;font-size:1rem}
+.chapter-lock .lock-btn:hover{background:#0062c4}
+/* Lock marks on chapter links while chapters are locked. */
+body.chapters-locked .locked-link::after{content:" \1F512"}
+/* Locked mind-map cards: title + description stay visible, Drive links withheld. */
+.mmcard.locked-mm{opacity:.75}
+.mm-lock-btn{display:flex;justify-content:center;align-items:center;gap:8px;width:100%;font-weight:600;font-size:.9rem;padding:9px 12px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);cursor:pointer}
+/* Chapter PDF download link (one per chapter, after the chapter header). */
+.pdf-link{margin:18px 0 4px}
+.pdf-link .btn{font-size:.88rem}
+/* Free preview section (public — visible in every auth state, never locked). */
+.vid{position:relative;aspect-ratio:16/9;margin:16px 0 4px;border-radius:14px;overflow:hidden;background:#000}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.preview-samples{margin-top:20px}
+/* Hard-error overlay (shown only if Firebase fails or the account check fails). */
+.auth-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(29,29,31,.55);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px}
+.auth-card{width:100%;max-width:400px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--p1);border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.25);padding:28px}
+.auth-card h3{font-size:1.4rem;font-weight:700}
+.auth-msg{font-size:.92rem;padding:10px 12px;border-radius:10px;display:none;background:rgba(215,0,21,.08);color:var(--bad);margin-top:12px}
+.auth-msg.show{display:block}
+.auth-submit{margin-top:16px;background:var(--p1);color:#fff;border:none;padding:12px 20px;border-radius:980px;cursor:pointer;font-weight:600;font-size:.95rem}
+.auth-note{margin-top:16px;font-size:.86rem;color:var(--muted);line-height:1.5}
+@media print{.free-banner,.chapter-lock{display:none!important}}
+
+/* ---------- reader (Paper 1 / Paper 2) ---------- */
+.viewhead{padding:34px 0 8px}
+.viewhead h1{font-size:clamp(1.9rem,4.6vw,2.8rem);font-weight:700;letter-spacing:-.035em}
+.viewhead p{color:var(--muted);max-width:42em;margin:8px 0 0}
+.reader{display:grid;gap:20px;padding:20px 0 60px}
+@media(min-width:960px){.reader{grid-template-columns:250px minmax(0,1fr);gap:40px}}
+.chapnav{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+@media(min-width:960px){.chapnav{flex-direction:column;position:sticky;top:calc(env(safe-area-inset-top,0px) + 74px);align-self:start;overflow:visible}}
+.chapnav a{display:flex;gap:10px;align-items:baseline;text-decoration:none;white-space:nowrap;padding:9px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);font-weight:500;font-size:.92rem}
+@media(min-width:960px){.chapnav a{white-space:normal}}
+.chapnav a b{font-family:var(--f-display);font-weight:700;font-size:1.02rem;color:var(--accent)}
+.chapnav a:hover{border-color:var(--accent)}
+.chapnav a[aria-current="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.chapnav a[aria-current="true"] b{color:inherit}
+#view-p1{--accent:var(--p1);--accent-soft:var(--p1-soft)}
+#view-p2{--accent:var(--p2);--accent-soft:var(--p2-soft)}
+#view-mm{--accent:var(--mm);--accent-soft:var(--mm-soft)}
+.chapter{min-width:0}
+.chead{display:flex;gap:18px;align-items:flex-start;padding:8px 0 22px;border-bottom:2px solid var(--ink);margin-bottom:8px}
+.chead .num{font-family:var(--f-display);font-weight:800;font-size:clamp(3.2rem,8vw,5.4rem);line-height:.8;color:var(--accent);letter-spacing:-.06em}
+.chead h2{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:700;letter-spacing:-.035em}
+.chead p{color:var(--muted);margin:8px 0 0;max-width:40em}
+.chapter h3{font-size:1.35rem;font-weight:700;margin:48px 0 12px;letter-spacing:-.025em}
+.chapter h3 small{font-family:var(--f-mono);font-size:.76rem;font-weight:500;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:6px;margin-right:10px;letter-spacing:0;vertical-align:.18em}
+.chapter h4{font-size:1.05rem;font-weight:600;margin:26px 0 6px;letter-spacing:-.01em}
+.chapter p,.chapter li{max-width:70ch}
+.chapter ul,.chapter ol{padding-left:1.25em;margin:0 0 1em}
+.chapter li{margin:.3em 0}
+.chapter li::marker{color:var(--accent)}
+.chapter code{font-family:var(--f-mono);font-size:.88em;background:var(--surface-2);border:1px solid var(--line);padding:1px 6px;border-radius:5px}
+.chapter pre code{background:none;border:0;padding:0;font-size:inherit}
+.chapter strong{font-weight:600}
+.scroll{overflow-x:auto;margin:14px 0 22px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface-2);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.mono,th.mono{font-family:var(--f-mono);font-size:.88rem}
+table.tt td,table.tt th{text-align:center;font-family:var(--f-mono)}
+table.tt .out{font-weight:700;color:var(--accent)}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 14px 14px 0;padding:14px 18px;margin:20px 0;max-width:74ch}
+.callout p:last-child,.callout ul:last-child{margin-bottom:0}
+.callout .lab{display:block;font-weight:700;font-size:.9rem;margin-bottom:4px}
+.callout.warn{border-color:var(--bad);background:rgba(215,0,21,.06)}
+.terms{display:grid;gap:10px;margin:16px 0 22px}
+@media(min-width:720px){.terms{grid-template-columns:1fr 1fr}}
+.terms div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px}
+.terms dt{font-weight:700;color:var(--accent)}
+.terms dd{margin:2px 0 0;font-size:.94rem}
+pre.code{position:relative;background:var(--code-bg);color:var(--code-ink);border:1px solid var(--code-line);border-radius:14px;padding:34px 18px 16px;margin:14px 0 22px;overflow-x:auto;font-family:var(--f-mono);font-size:.86rem;line-height:1.7;tab-size:4}
+pre.code::before{content:attr(data-lang);position:absolute;top:9px;left:18px;font-size:.72rem;color:var(--code-tag);letter-spacing:.02em}
+.pair{display:grid;gap:0 16px}
+@media(min-width:900px){.pair{grid-template-columns:1fr 1fr}}
+.pair pre.code{margin-top:14px}
+.tree{list-style:none;padding:0!important;margin:14px 0 22px}
+.tree ul{list-style:none;padding-left:22px!important;margin:0;border-left:2px solid var(--line)}
+.tree li{position:relative;margin:6px 0!important;max-width:none!important}
+.tree .node{display:inline-block;background:var(--surface);border:1.5px solid var(--accent);border-radius:8px;padding:4px 12px;font-size:.92rem;font-weight:500}
+.tree > li > .node{background:var(--accent);color:#fff;font-weight:600}
+figure.diagram{margin:16px 0 24px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;overflow-x:auto}
+figure.diagram svg{display:block;margin:0 auto;max-width:100%;height:auto}
+figure.diagram figcaption{color:var(--muted);font-size:.86rem;margin-top:8px;text-align:center}
+.svgt{fill:var(--ink);font-family:var(--f-body);font-size:13px}
+.svgs{fill:var(--surface);stroke:var(--accent);stroke-width:2}
+.svgl{stroke:var(--ink);stroke-width:1.6;fill:none}
+.svgf{fill:var(--ink)}
+.lab-box{background:var(--surface);border:1.5px solid var(--accent);border-radius:18px;padding:18px 20px;margin:22px 0}
+.lab-box h4{margin:0 0 4px!important}
+.lab-box .hint{color:var(--muted);font-size:.9rem;margin-bottom:12px}
+.conv{display:grid;gap:12px}
+@media(min-width:720px){.conv{grid-template-columns:repeat(3,1fr)}}
+.conv label{font-size:.82rem;font-weight:600;display:block;margin-bottom:4px}
+.conv input{font-family:var(--f-mono)}
+.note{color:var(--muted);font-size:.9rem;margin:10px 0 0}
+.sortbox{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.cell{min-width:52px;padding:12px 8px;text-align:center;font-family:var(--f-mono);font-size:1.1rem;font-weight:500;border:2px solid var(--line);border-radius:12px;background:var(--surface-2)}
+.cell.cmp{border-color:var(--accent);background:var(--accent-soft)}
+.cell.swp{border-color:var(--bad);background:rgba(215,0,21,.08)}
+.cell.done{border-color:var(--ok);background:rgba(52,199,89,.1)}
+.rowbtns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.rowbtns input{max-width:280px}
+.gates{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));margin-top:14px}
+.gate{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.gate svg{width:100%;max-width:130px;height:auto;color:var(--ink)}
+.gate b{display:block;font-family:var(--f-display);font-size:1rem}
+.gate .q{display:inline-block;margin-top:6px;font-family:var(--f-mono);font-weight:500;min-width:36px;padding:3px 10px;border-radius:8px;background:var(--line);color:var(--ink)}
+.gate .q.on{background:var(--accent);color:#fff}
+.toggles{display:flex;gap:10px;flex-wrap:wrap}
+.tg{display:inline-flex;align-items:center;gap:10px;border:1.5px solid var(--line);background:var(--surface-2);border-radius:12px;padding:8px 16px;font-family:var(--f-mono);font-weight:500}
+.tg[aria-checked="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:56px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap}
+.pager a{text-decoration:none}
+.pager .sp{flex:1}
+
+/* ---------- mind maps ---------- */
+.mmtools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0}
+.mmtools input{max-width:360px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip-b{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-weight:500;font-size:.9rem}
+.chip-b[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.mmgrid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));padding-bottom:60px}
+.mmcard{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:10px;border-top:5px solid var(--p1);transition:all .25s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow)}
+.mmcard:hover{transform:translateY(-3px)}
+.mmcard.p2{border-top-color:var(--p2)}
+.mmcard .n{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:.9;color:var(--p1);letter-spacing:-.05em}
+.mmcard.p2 .n{color:var(--p2)}
+.mmcard h3{font-size:1.1rem;font-weight:700}
+.mmcard p{color:var(--muted);font-size:.9rem;margin:0;flex:1}
+.mmcard .links{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.mmcard .links a{display:flex;justify-content:space-between;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:.9rem;padding:9px 12px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line)}
+.mmcard .links a:hover{border-color:var(--mm);color:var(--mm)}
+.mmcard .links svg{width:13px;height:13px;flex:none}
+.empty{grid-column:1/-1;padding:40px 0;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body class="chapters-locked">
+
+<!-- FREE PREVIEW BANNER — shown while Chapters 2-10 are locked. -->
+<div class="free-banner" id="freeBanner">
+  <span id="freeBannerMsg">📖 Chapter 1 is free — sign in with Google to unlock Chapters 2–10 and their mind maps.</span>
+  <button type="button" class="free-banner-btn" id="freeBannerBtn">Sign in with Google</button>
+</div>
+
+<!-- FIREBASE LOGIN GATE — the overlay below is shown only for hard errors
+     (Firebase not configured / account check failed). Chapter 1 is free to
+     read; Chapters 2-10 and mind maps 2-10 are locked per-chapter until
+     Google sign-in + teacher approval. No passwords are stored on this page. -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-card">
+    <h3>Student Login 📓</h3>
+    <div class="auth-msg show" id="authStatusMsg">Checking your Google sign-in…</div>
+    <button type="button" class="auth-submit" id="authGoLoginBtn" style="display:none;">Go to Login</button>
+    <p class="auth-note">These notes are for approved SrWL Learning students. Sign in with Google on the login page — your teacher approves your account, then your courses appear on your dashboard. Your name and login time are automatically logged in the attendance list.</p>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="https://wai-lin-htet.github.io/wailinhtet-academic-site/"><span class="dot"></span> <span class="bt">Wai Lin Htet</span> <span class="chip">0478</span></a>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#home" data-tab="home">Chapter list</a>
+      <a href="#p1" data-tab="p1">Paper 1 notes</a>
+      <a href="#p2" data-tab="p2">Paper 2 notes</a>
+      <a href="#mm" data-tab="mm">Mind maps</a>
+    </nav>
+    <div class="tools">
+      <a class="btn" href="https://wai-lin-htet.github.io/wailinhtet-academic-site/my_course.html">All courses</a>
+      <span id="authUserName" class="auth-name" hidden></span><button class="btn solid" id="authBtn" type="button">Sign in with Google</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- =============== HOME =============== -->
+<section id="view-home">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <div class="hero-badge"><span>Cambridge IGCSE &bull; 0478 &bull; Notes &amp; Mind Maps &bull;</span></div>
+        <h1>IGCSE Computer Science <span>Paper 1 &amp; Paper 2</span></h1>
+        <p class="sub">Detailed theory notes, Python and pseudocode, and a mind map for every one of the ten chapters. Chapter 1 is free — sign in with Google to unlock Chapters 2–10.</p>
+        <div class="cta">
+          <button class="btn solid big" type="button" data-go="p1"><span>Start with Chapter 1 — it&rsquo;s free</span> <span>&rarr;</span></button>
+          <button class="btn big" type="button" id="seeList">See the chapter list</button>
+        </div>
+        <p class="by">Cambridge 0478 · Notes by Tr. Wai Lin Htet</p>
+      </div>
+      <div class="byte">
+        <h2>How a computer sees a number</h2>
+        <p class="hint">Tap the bits. Turn them on and off and watch the value change.</p>
+        <div class="bits" id="bits" role="group" aria-label="Eight bits"></div>
+        <dl class="readout">
+          <div><dt>Denary</dt><dd id="rDen">65</dd></div>
+          <div><dt>Hex</dt><dd id="rHex">41</dd></div>
+          <div><dt>ASCII character</dt><dd id="rChr">A</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <section class="sec" id="free-preview">
+    <div class="wrap">
+      <div class="section-eyebrow">Free preview</div>
+      <h2>Try it before you sign in</h2>
+      <p class="lede">No sign-in needed for these — two video lessons and a sample from two chapters, so you can see how the notes teach before you join.</p>
+      <div class="papers">
+        <article class="paper">
+          <header>
+            <h3>Pseudocode Revision Part 2</h3>
+            <p class="meta">Questions 4, 5 and 6 from the SrWL 100-mark Pseudocode Practice Paper, IGCSE Computer Science (0478), with English voice-over and subtitles.</p>
+          </header>
+          <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/DgaPfTkrEi0" title="Pseudocode Revision Part 2" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe></div>
+          <a class="btn" href="https://www.youtube.com/watch?v=DgaPfTkrEi0" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+        </article>
+        <article class="paper">
+          <header>
+            <h3>Python Basics – Day 2</h3>
+            <p class="meta">Basic Operations, Conditionals and Loops.</p>
+          </header>
+          <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/eM9oH1uDIGE" title="Python Basics – Day 2" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe></div>
+          <a class="btn" href="https://www.youtube.com/watch?v=eM9oH1uDIGE" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+        </article>
+      </div>
+      <div class="papers preview-samples">
+        <article class="paper">
+          <header>
+            <h3>Pseudocode sample</h3>
+            <p class="meta">Free sample from Chapter 7 — Algorithm Design &amp; Problem-solving. Variables and constants, in Cambridge pseudocode.</p>
+          </header>
+<pre class="code" data-lang="Pseudocode">DECLARE Score : INTEGER
+CONSTANT VATRate ← 0.2
+Score ← 0
+Score ← Score + 10</pre>
+        </article>
+        <article class="paper">
+          <header>
+            <h3>Python Basics sample</h3>
+            <p class="meta">Free sample from Chapter 8 — Programming. Input, output and casting: input() always returns a string, so cast it before doing arithmetic.</p>
+          </header>
+<pre class="code" data-lang="Python">name = input("Name: ")
+age = int(input("Age: "))    # int() casts text
+print("Hello", name)
+print("Next year you will be", age + 1)</pre>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="chapter-list">
+    <div class="wrap">
+      <div class="section-eyebrow">Curriculum</div>
+      <h2>Chapter list</h2>
+      <p class="lede">Ten chapters across two exam papers. Chapter 1 is free to read — sign in with Google to unlock Chapters 2–10 and their mind maps.</p>
+      <div class="papers">
+        <article class="paper p1">
+          <header>
+            <h3>Paper 1 · Computer Systems</h3>
+            <p class="meta">1 h 45 min · 75 marks · 50% of the grade · theory, no calculator</p>
+          </header>
+          <ul class="chlist" id="listP1"></ul>
+          <button class="btn solid" type="button" data-go="p1">Open Paper 1 notes</button>
+        </article>
+        <article class="paper p2">
+          <header>
+            <h3>Paper 2 · Algorithms, Programming &amp; Logic</h3>
+            <p class="meta">1 h 45 min · 75 marks · 50% of the grade · problem solving and code</p>
+          </header>
+          <ul class="chlist" id="listP2"></ul>
+          <button class="btn solid" type="button" data-go="p2">Open Paper 2 notes</button>
+        </article>
+      </div>
+      <div class="mmband">
+        <div>
+          <h3>Mind maps for chapters 1 to 10</h3>
+          <p>One-page visual summaries for last-minute revision. Chapters 2, 7, 8, 9 and 10 have two maps each.</p>
+        </div>
+        <button class="btn solid" type="button" data-go="mm">Open mind maps</button>
+      </div>
+    </div>
+  </section>
+</section>
+<!-- =============== PAPER 1 =============== -->
+<section id="view-p1" hidden>
+  <div class="wrap">
+    <div class="viewhead">
+      <h1>Paper 1 · Computer Systems</h1>
+      <p>Theory notes for chapters 1 to 6. Each chapter follows the syllabus order and ends with the mistakes examiners see most often.</p>
+    </div>
+    <div class="reader" data-reader="p1">
+      <nav class="chapnav" aria-label="Paper 1 chapters"></nav>
+      <div class="chapters">
+
+<!-- ======== CHAPTER 1 ======== -->
+<article class="chapter" data-ch="1" data-title="Data Representation" hidden>
+  <div class="chead"><div class="num">1</div><div><h2>Data Representation</h2><p>How computers store numbers, text, sound and images as binary, and how files are made smaller.</p></div></div>
+<div class="pdf-link"><a class="btn" href="pdfs/cs-0478-chapter-01.pdf" target="_blank" rel="noopener noreferrer">⬇ Download PDF</a></div>
+
+  <h3><small>1.1</small>Number systems</h3>
+  <p>A computer is built from billions of tiny switches called transistors. Each switch is either off or on, so the natural way to store anything is as a pattern of two states: <strong>0</strong> and <strong>1</strong>. That is why every kind of data (numbers, letters, pictures, music, program instructions) is stored as binary.</p>
+  <div class="scroll"><table>
+    <tr><th>System</th><th>Base</th><th>Digits used</th><th>Where you meet it</th></tr>
+    <tr><td>Denary (decimal)</td><td>10</td><td class="mono">0–9</td><td>Everyday counting and maths</td></tr>
+    <tr><td>Binary</td><td>2</td><td class="mono">0, 1</td><td>Inside every processor and memory chip</td></tr>
+    <tr><td>Hexadecimal</td><td>16</td><td class="mono">0–9, A–F</td><td>Colour codes, MAC addresses, memory addresses, error codes</td></tr>
+  </table></div>
+
+  <h4>Binary to denary</h4>
+  <p>Each bit has a place value that doubles as you move left. Add up the place values where the bit is 1.</p>
+  <div class="scroll"><table class="tt">
+    <tr><th>128</th><th>64</th><th>32</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+    <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+  </table></div>
+  <p>128 + 16 + 8 + 4 = <strong>156</strong>. To go the other way, subtract place values from the largest downwards: 156 − 128 = 28, then 28 − 16 = 12, 12 − 8 = 4, 4 − 4 = 0, which gives <code>10011100</code>.</p>
+
+  <h4>Binary and hexadecimal</h4>
+  <p>One hex digit represents exactly four bits (a nibble), so conversion is a matter of splitting into groups of four. Hex letters: A = 10, B = 11, C = 12, D = 13, E = 14, F = 15.</p>
+  <p><code>1001 1100</code> → 9 and C → <code>9C</code>. In the other direction, <code>2B</code> → 0010 and 1011 → <code>00101011</code> = 43.</p>
+  <div class="lab-box">
+    <h4>Try it: converter</h4>
+    <p class="hint">Type in any box (0 to 255). The other two update.</p>
+    <div class="conv">
+      <div><label for="cv-d">Denary</label><input id="cv-d" type="text" inputmode="numeric" value="156" autocomplete="off"></div>
+      <div><label for="cv-b">Binary (8-bit)</label><input id="cv-b" type="text" inputmode="numeric" value="10011100" autocomplete="off"></div>
+      <div><label for="cv-h">Hexadecimal</label><input id="cv-h" type="text" value="9C" autocomplete="off"></div>
+    </div>
+    <p class="note" id="cv-note"></p>
+  </div>
+  <div class="callout"><span class="lab">Why programmers use hexadecimal</span>
+    <ul><li>It is much shorter than binary (8 bits become 2 characters).</li><li>It is easier for people to read, remember and copy without mistakes.</li><li>It converts to and from binary quickly, so it is a convenient shorthand, not a different way for the computer to store data.</li></ul>
+  </div>
+
+  <h4>Binary addition and overflow</h4>
+  <p>Rules for each column, working right to left: 0 + 0 = 0; 0 + 1 = 1; 1 + 1 = 0 carry 1; 1 + 1 + 1 = 1 carry 1.</p>
+<pre class="code" data-lang="Worked example (8-bit)">  10110110   (182)
++ 01101011   (107)
+----------
+ 100100001   (289)  ← 9 bits
+
+Register holds 8 bits, so the left-hand 1 is lost:  00100001 (33)  → OVERFLOW ERROR</pre>
+  <p><strong>Overflow</strong> happens when the result is too big for the number of bits available. In 8 bits the largest value is 255, so anything above 255 overflows and the answer stored is wrong.</p>
+
+  <h4>Logical shifts</h4>
+  <p>A logical shift moves every bit left or right by a number of places. Bits that fall off the end are lost, and the gaps are filled with 0.</p>
+  <ul>
+    <li><strong>Left shift by 1</strong> multiplies by 2. <code>00001101</code> (13) shifted left 2 places gives <code>00110100</code> (52).</li>
+    <li><strong>Right shift by 1</strong> divides by 2 (whole number). <code>10110100</code> (180) shifted right 3 places gives <code>00010110</code> (22). The three bits <code>100</code> that fell off were lost, which is why 180 ÷ 8 = 22.5 became 22.</li>
+    <li>Shifting can cause loss of precision or overflow if a 1 falls off the left end.</li>
+  </ul>
+
+  <h4>Two's complement (negative numbers)</h4>
+  <p>The left-most bit has the value −128 instead of +128. Numbers with a leading 1 are negative. The range of 8-bit two's complement is <strong>−128 to +127</strong>.</p>
+  <ol>
+    <li>Write the positive number in binary: 45 = <code>00101101</code>.</li>
+    <li>Invert every bit: <code>11010010</code>.</li>
+    <li>Add 1: <code>11010011</code>.</li>
+  </ol>
+  <p>Check: −128 + 64 + 16 + 2 + 1 = −45.</p>
+  <div class="callout warn"><span class="lab">Common mistakes</span>
+    <ul><li>Forgetting to write all 8 bits (leading zeros matter in a register).</li><li>Saying hexadecimal is "used by computers". Computers use binary; hex is for humans.</li><li>Forgetting to add 1 in two's complement.</li></ul>
+  </div>
+
+  <h3><small>1.2</small>Text, sound and images</h3>
+  <h4>Text</h4>
+  <p>Every character is given a number in a <strong>character set</strong>, and that number is stored in binary. Letters follow in order, so once you know 'A' = 65 you know 'B' = 66; lower-case 'a' = 97; the digit character '0' = 48.</p>
+  <div class="scroll"><table>
+    <tr><th></th><th>ASCII</th><th>Unicode</th></tr>
+    <tr><td>Bits per character</td><td>7 bits (128 characters); extended ASCII uses 8 bits (256)</td><td>Up to 32 bits (UTF-8, UTF-16, UTF-32)</td></tr>
+    <tr><td>Characters covered</td><td>English letters, digits, punctuation, control codes</td><td>Almost every language, symbols and emoji, including Myanmar script</td></tr>
+    <tr><td>File size</td><td>Smaller</td><td>Larger for the same number of characters</td></tr>
+  </table></div>
+  <h4>Sound</h4>
+  <p>Real sound is analogue (a continuous wave). To store it, the wave is measured at regular intervals; this is called <strong>sampling</strong>. Each measurement is stored as a binary number.</p>
+  <dl class="terms">
+    <div><dt>Sample rate</dt><dd>Number of samples taken each second, in hertz (Hz). CD audio uses 44,100 Hz.</dd></div>
+    <div><dt>Sample resolution</dt><dd>Number of bits used for each sample (bit depth). CD audio uses 16 bits.</dd></div>
+  </dl>
+  <p>Raising either value makes the stored sound a closer match to the original wave, but the file becomes larger.</p>
+  <h4>Images</h4>
+  <p>An image is a grid of tiny squares called <strong>pixels</strong>. Each pixel stores a binary number that represents its colour.</p>
+  <dl class="terms">
+    <div><dt>Resolution</dt><dd>Width × height in pixels. More pixels means more detail and a larger file.</dd></div>
+    <div><dt>Colour depth</dt><dd>Bits per pixel. 1 bit = 2 colours, 8 bits = 256 colours, 24 bits = about 16.7 million colours.</dd></div>
+  </dl>
+  <p><strong>Metadata</strong> is data about the file, such as the image width, height and colour depth, or the sound file's sample rate and length. The computer needs it to rebuild the file correctly.</p>
+
+  <h3><small>1.3</small>Data storage and compression</h3>
+  <div class="scroll"><table>
+    <tr><th>Unit</th><th>Size</th></tr>
+    <tr><td>Bit</td><td>A single 0 or 1</td></tr>
+    <tr><td>Nibble</td><td>4 bits</td></tr>
+    <tr><td>Byte</td><td>8 bits</td></tr>
+    <tr><td>Kibibyte (KiB)</td><td>1024 bytes</td></tr>
+    <tr><td>Mebibyte (MiB)</td><td>1024 KiB</td></tr>
+    <tr><td>Gibibyte (GiB)</td><td>1024 MiB</td></tr>
+    <tr><td>Tebibyte (TiB)</td><td>1024 GiB</td></tr>
+    <tr><td>Pebibyte (PiB)</td><td>1024 TiB</td></tr>
+  </table></div>
+  <h4>File size formulas</h4>
+<pre class="code" data-lang="Formulas">Image size (bits) = width × height × colour depth
+Sound size (bits) = sample rate × sample resolution × length in seconds
+Bytes = bits ÷ 8       KiB = bytes ÷ 1024       MiB = KiB ÷ 1024</pre>
+  <div class="callout"><span class="lab">Worked example: image</span>
+    800 × 600 pixels at 24 bits: 800 × 600 = 480,000 pixels × 24 = 11,520,000 bits ÷ 8 = 1,440,000 bytes ÷ 1024 = 1406 KiB, about 1.37 MiB.
+  </div>
+  <div class="callout"><span class="lab">Worked example: sound</span>
+    60 seconds at 44,100 Hz and 16 bits: 44,100 × 16 × 60 = 42,336,000 bits ÷ 8 = 5,292,000 bytes, about 5.05 MiB.
+  </div>
+  <h4>Compression</h4>
+  <p>Compression reduces file size, so files use less storage, take less bandwidth and transfer faster.</p>
+  <div class="scroll"><table>
+    <tr><th></th><th>Lossless</th><th>Lossy</th></tr>
+    <tr><td>Original data</td><td>Can be rebuilt exactly</td><td>Some data permanently removed</td></tr>
+    <tr><td>File size reduction</td><td>Smaller</td><td>Much smaller</td></tr>
+    <tr><td>Examples</td><td>PNG, FLAC, ZIP, run-length encoding (RLE)</td><td>JPEG, MP3, MP4</td></tr>
+    <tr><td>Methods</td><td>Replace repeated data with a short code</td><td>Reduce resolution, colour depth or sample rate; drop detail people barely notice</td></tr>
+    <tr><td>Best for</td><td>Text, program files, medical images</td><td>Photos, music and video on the web</td></tr>
+  </table></div>
+  <p><strong>Run-length encoding:</strong> store each value once with a count of how many times it repeats. <code>AAAABBBCC</code> becomes <code>4A3B2C</code> (9 characters shrink to 6). It works best on data with long runs, such as simple graphics.</p>
+</article>
+
+<!-- ======== CHAPTER 2 ======== -->
+<article class="chapter" data-ch="2" data-title="Data Transmission" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Chapter 2 — Data Transmission</h2>
+  <p>This chapter is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">2</div><div><h2>Data Transmission</h2><p>How data travels between devices, how errors are caught, and how encryption keeps it private.</p></div></div>
+<div class="pdf-link"><a class="btn" href="pdfs/cs-0478-chapter-02.pdf" target="_blank" rel="noopener noreferrer">⬇ Download PDF</a></div>
+
+  <h3><small>2.1</small>Types and methods of transmission</h3>
+  <h4>Packets</h4>
+  <p>Data sent over a network is split into small units called <strong>packets</strong>. Each packet has three parts:</p>
+  <dl class="terms">
+    <div><dt>Header</dt><dd>Destination IP address, sender's IP address, packet number (so they can be put back in order), and the number of packets.</dd></div>
+    <div><dt>Payload</dt><dd>The actual piece of data being carried.</dd></div>
+    <div><dt>Trailer</dt><dd>Marks the end of the packet and usually holds an error-checking value.</dd></div>
+  </dl>
+  <h4>Packet switching</h4>
+  <ol>
+    <li>The message is broken into packets, each numbered.</li>
+    <li>Each packet is sent separately. Routers read the header and choose the best route at that moment, so packets may take different routes.</li>
+    <li>Packets can arrive out of order. The receiving device uses the packet numbers to reassemble them.</li>
+    <li>If a packet is missing or damaged, the receiver asks for it to be sent again.</li>
+  </ol>
+  <p>Advantages: no single route is tied up, so the network is used efficiently; if one route fails, packets take another; it is harder to intercept a whole message. Disadvantages: packets may arrive late or out of order, and reassembly takes time (which can hurt live audio or video).</p>
+
+  <h4>Serial and parallel</h4>
+  <div class="scroll"><table>
+    <tr><th></th><th>Serial</th><th>Parallel</th></tr>
+    <tr><td>How</td><td>One bit at a time along one wire</td><td>Several bits at once along several wires</td></tr>
+    <tr><td>Good for</td><td>Long distances; reliable; cheaper cabling</td><td>Short distances, such as inside a computer</td></tr>
+    <tr><td>Weakness</td><td>Slower for the same clock speed</td><td>Bits can arrive at slightly different times (skew) and wires interfere with each other, worse over long cables</td></tr>
+  </table></div>
+
+  <h4>Direction of transmission</h4>
+  <div class="scroll"><table>
+    <tr><th>Type</th><th>Direction</th><th>Example</th></tr>
+    <tr><td>Simplex</td><td>One direction only</td><td>Keyboard to computer, TV broadcast</td></tr>
+    <tr><td>Half-duplex</td><td>Both directions, but only one at a time</td><td>Walkie-talkie</td></tr>
+    <tr><td>Full-duplex</td><td>Both directions at the same time</td><td>Phone call, broadband connection</td></tr>
+  </table></div>
+
+  <h4>Universal Serial Bus (USB)</h4>
+  <p>USB sends data serially. Advantages: one standard connector on most devices; plug-and-play (the computer detects the device); can supply power; backwards compatible with older versions; USB-C plugs in either way round. Drawbacks: limited cable length; a lower maximum speed than some specialised connections; older versions are slower.</p>
+
+  <h3><small>2.2</small>Methods of error detection</h3>
+  <p>Errors happen during transmission because of interference, electrical noise or a weak signal. Data can be <strong>lost</strong>, <strong>gained</strong> (extra bits) or <strong>changed</strong> (a 0 becomes a 1). Detection methods find out that something has gone wrong; they do not fix it.</p>
+  <h4>Parity check</h4>
+  <p>The sender and receiver agree on <strong>even</strong> or <strong>odd</strong> parity. One extra bit (the parity bit) is added so the total number of 1s is even (or odd). The receiver counts the 1s; if the count is wrong, an error occurred.</p>
+  <p>Example (even parity): <code>1011001</code> has four 1s, which is already even, so the parity bit is 0. <code>1011011</code> has five 1s, so the parity bit is 1.</p>
+  <p><strong>Parity block (parity byte) check:</strong> the data is arranged in rows and columns and a parity bit is added for every row and every column. A single wrong bit is located where the failing row and column meet.</p>
+  <div class="callout warn"><span class="lab">Limitation</span> If two bits change at once, the number of 1s may stay the same and the error goes undetected.</div>
+  <h4>Checksum</h4>
+  <p>A value is calculated from the data using an agreed algorithm and sent with the data. The receiver repeats the calculation. If the results differ, the data is corrupt and is sent again.</p>
+  <h4>Echo check</h4>
+  <p>The receiver sends a copy of the data it received back to the sender, who compares it with the original. If they differ, the data is sent again. It is not efficient because it doubles the traffic, and an error could have happened on the return trip instead.</p>
+  <h4>Check digit</h4>
+  <p>An extra digit at the end of a number (such as an ISBN or barcode) is calculated from the other digits. When the number is typed or scanned, the digit is recalculated. It catches data-entry mistakes such as a wrong digit or two digits swapped.</p>
+  <h4>Automatic repeat query (ARQ)</h4>
+  <ol>
+    <li>The receiver checks each packet for errors.</li>
+    <li>If it is correct, a <strong>positive acknowledgement</strong> is sent. If not, a <strong>negative acknowledgement</strong> asks for it again.</li>
+    <li>The sender starts a <strong>timeout</strong>. If no acknowledgement arrives in time, it resends the packet.</li>
+    <li>This repeats until the packet is acknowledged, or a set number of attempts is reached.</li>
+  </ol>
+
+  <h3><small>2.3</small>Encryption</h3>
+  <p><strong>Encryption</strong> scrambles data (<em>plaintext</em>) into unreadable <em>ciphertext</em> using an algorithm and a key. It does not stop data being intercepted; it makes intercepted data useless without the key.</p>
+  <div class="scroll"><table>
+    <tr><th></th><th>Symmetric</th><th>Asymmetric</th></tr>
+    <tr><td>Keys</td><td>One secret key used to encrypt and decrypt</td><td>A key pair: public key encrypts, private key decrypts</td></tr>
+    <tr><td>Main problem</td><td>The key has to be shared, and could be stolen on the way</td><td>Slower, but the private key is never sent to anyone</td></tr>
+    <tr><td>Used for</td><td>Encrypting large amounts of data</td><td>Exchanging keys safely, for example in HTTPS (SSL/TLS)</td></tr>
+  </table></div>
+  <p>To send a secret message to someone with asymmetric encryption, you encrypt with <em>their public key</em>. Only their private key can decrypt it.</p>
+</article>
+
+<!-- ======== CHAPTER 3 ======== -->
+<article class="chapter" data-ch="3" data-title="Hardware" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Chapter 3 — Hardware</h2>
+  <p>This chapter is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">3</div><div><h2>Hardware</h2><p>What is inside the CPU, how instructions are run, and the devices that go in and out of a computer.</p></div></div>
+<div class="pdf-link"><a class="btn" href="pdfs/cs-0478-chapter-03.pdf" target="_blank" rel="noopener noreferrer">⬇ Download PDF</a></div>
+
+  <h3><small>3.1</small>Computer architecture</h3>
+  <p>The <strong>central processing unit (CPU)</strong> processes data and instructions. The <strong>Von Neumann architecture</strong> stores both program instructions and data in the same main memory (RAM) and fetches them one after another.</p>
+  <dl class="terms">
+    <div><dt>Arithmetic logic unit (ALU)</dt><dd>Carries out calculations and logical comparisons.</dd></div>
+    <div><dt>Control unit (CU)</dt><dd>Fetches and decodes instructions and sends control signals to coordinate the rest of the computer.</dd></div>
+    <div><dt>Program counter (PC)</dt><dd>Holds the address of the next instruction.</dd></div>
+    <div><dt>Memory address register (MAR)</dt><dd>Holds the address of the memory location to be read from or written to.</dd></div>
+    <div><dt>Memory data register (MDR)</dt><dd>Holds data or the instruction just fetched from memory, or about to be written to it.</dd></div>
+    <div><dt>Current instruction register (CIR)</dt><dd>Holds the instruction being decoded and executed.</dd></div>
+    <div><dt>Accumulator (ACC)</dt><dd>Holds the results of ALU calculations.</dd></div>
+  </dl>
+  <h4>Buses</h4>
+  <div class="scroll"><table>
+    <tr><th>Bus</th><th>Carries</th><th>Direction</th></tr>
+    <tr><td>Address bus</td><td>Memory addresses</td><td>One way, from the CPU to memory</td></tr>
+    <tr><td>Data bus</td><td>Data and instructions</td><td>Both ways</td></tr>
+    <tr><td>Control bus</td><td>Control signals such as read, write and clock</td><td>Both ways</td></tr>
+  </table></div>
+  <h4>The fetch–decode–execute cycle</h4>
+  <ol>
+    <li>The address in the <strong>PC</strong> is copied to the <strong>MAR</strong>.</li>
+    <li>The PC is increased by 1, ready for the next instruction.</li>
+    <li>The instruction at that address is fetched from RAM along the data bus into the <strong>MDR</strong>.</li>
+    <li>The instruction is copied from the MDR to the <strong>CIR</strong>.</li>
+    <li>The <strong>CU decodes</strong> the instruction.</li>
+    <li>The instruction is <strong>executed</strong> (the ALU does any calculation, with results held in the ACC). The cycle then starts again.</li>
+  </ol>
+  <h4>What affects CPU performance</h4>
+  <div class="scroll"><table>
+    <tr><th>Factor</th><th>Effect</th></tr>
+    <tr><td>Clock speed</td><td>Cycles per second (GHz). A higher speed means more instructions per second, but also more heat.</td></tr>
+    <tr><td>Number of cores</td><td>Each core runs its own instructions, so more cores can share the work. Gains are smaller if software cannot split tasks up.</td></tr>
+    <tr><td>Cache size</td><td>Cache is very fast memory close to the CPU. More cache means fewer slow trips to RAM.</td></tr>
+  </table></div>
+  <p>The <strong>instruction set</strong> is the list of machine-code commands a given CPU can carry out. An <strong>embedded system</strong> is a computer built into a device to do one dedicated job, such as a washing machine controller, a microwave, traffic lights or a car engine unit. A general-purpose computer, by contrast, can run many different programs.</p>
+
+  <h3><small>3.2</small>Input and output devices</h3>
+  <p>An <strong>input device</strong> sends data into the computer; an <strong>output device</strong> sends data or results out.</p>
+  <div class="scroll"><table>
+    <tr><th>Device</th><th>How it works / key point</th></tr>
+    <tr><td>Resistive touchscreen</td><td>Two flexible layers pressed together at the touch point. Cheap; works with a gloved finger or stylus; not multi-touch friendly.</td></tr>
+    <tr><td>Capacitive touchscreen</td><td>Detects the electrical charge of a finger. Supports multi-touch; does not respond to plain gloves.</td></tr>
+    <tr><td>Infra-red touchscreen</td><td>A grid of infra-red beams; a touch breaks the beams.</td></tr>
+    <tr><td>Barcode / QR reader</td><td>Shines light at the code and reads the pattern of dark and light stripes or squares.</td></tr>
+    <tr><td>Scanner (2D and 3D)</td><td>2D copies a flat document into an image; 3D captures the shape of an object.</td></tr>
+    <tr><td>Digital camera, microphone</td><td>Convert light or sound into digital data.</td></tr>
+    <tr><td>LCD / LED screen</td><td>Liquid crystals let light from a backlight (LED) through each pixel to make colour.</td></tr>
+    <tr><td>Inkjet printer</td><td>Sprays tiny droplets of ink from nozzles. Good photo quality, lower cost to buy.</td></tr>
+    <tr><td>Laser printer</td><td>A laser draws the page on a charged drum, which picks up toner and transfers it to paper, then heat fuses it. Fast and cheap per page.</td></tr>
+    <tr><td>3D printer</td><td>Builds an object layer by layer from plastic, resin or powder.</td></tr>
+    <tr><td>Actuators</td><td>Output devices that cause movement or action, for example motors, pumps, heaters and buzzers.</td></tr>
+  </table></div>
+  <h4>Sensors</h4>
+  <p>A sensor measures a physical quantity and turns it into a signal the computer can use. Know the common types and one use for each:</p>
+  <div class="scroll"><table>
+    <tr><th>Sensor</th><th>Example use</th></tr>
+    <tr><td>Temperature</td><td>Greenhouse, oven, central heating</td></tr>
+    <tr><td>Light</td><td>Automatic street lights, camera exposure</td></tr>
+    <tr><td>Moisture / humidity</td><td>Watering crops, weather stations</td></tr>
+    <tr><td>Pressure</td><td>Burglar alarm mat, tyre monitoring</td></tr>
+    <tr><td>Infra-red / motion</td><td>Security lights, automatic doors</td></tr>
+    <tr><td>Acoustic (sound)</td><td>Glass-break alarm</td></tr>
+    <tr><td>Gas, pH, level, flow, magnetic field, proximity, accelerometer</td><td>Factories, water treatment, phones and cars</td></tr>
+  </table></div>
+
+  <h3><small>3.3</small>Data storage</h3>
+  <div class="scroll"><table>
+    <tr><th></th><th>RAM</th><th>ROM</th></tr>
+    <tr><td>Full name</td><td>Random access memory</td><td>Read-only memory</td></tr>
+    <tr><td>Volatile?</td><td>Yes: contents lost when power is off</td><td>No: contents kept</td></tr>
+    <tr><td>Read/write</td><td>Read and write</td><td>Read only</td></tr>
+    <tr><td>Holds</td><td>Programs, data and parts of the OS in use</td><td>Start-up instructions (bootloader / BIOS)</td></tr>
+  </table></div>
+  <p><strong>Primary storage</strong> is directly accessed by the CPU (RAM, ROM). <strong>Secondary storage</strong> is non-volatile and keeps files long-term; the CPU cannot access it directly.</p>
+  <div class="scroll"><table>
+    <tr><th>Type</th><th>How it works</th><th>Strengths</th><th>Weaknesses</th></tr>
+    <tr><td>Magnetic (hard disk drive)</td><td>Spinning platters divided into magnetised areas, read and written by a moving head</td><td>Large capacity, low cost per GB</td><td>Moving parts: slower, noisy, can break if dropped, uses more power</td></tr>
+    <tr><td>Optical (CD, DVD, Blu-ray)</td><td>A laser reads pits and lands on a spinning disc. Blu-ray's blue laser has a shorter wavelength so it fits more data.</td><td>Cheap, light, easy to post</td><td>Low capacity, slower, scratches easily</td></tr>
+    <tr><td>Solid state (SSD, USB flash, SD card)</td><td>Flash memory: transistors trap electric charge to represent 0 and 1; no moving parts</td><td>Very fast, silent, low power, durable</td><td>More expensive per GB; a limited number of write cycles</td></tr>
+  </table></div>
+  <h4>Virtual memory</h4>
+  <p>If RAM fills up, the operating system moves sections of data that are not currently needed (<em>pages</em>) out to a reserved area of secondary storage, and brings them back when needed. This lets the computer run more programs than RAM alone can hold, but secondary storage is much slower than RAM, so too much paging makes the computer sluggish.</p>
+  <h4>Cloud storage</h4>
+  <p>Data is stored on remote servers and accessed over the internet. Benefits: reachable from any device, automatic backup, easy to add space. Drawbacks: needs an internet connection, ongoing subscription cost, you rely on the provider's security and reliability.</p>
+
+  <h3><small>3.4</small>Network hardware</h3>
+  <dl class="terms">
+    <div><dt>Network interface card (NIC)</dt><dd>Allows a device to connect to a network, wired or wireless. It stores the device's MAC address.</dd></div>
+    <div><dt>Router</dt><dd>Connects networks together (for example your home LAN to the internet). It reads each packet's destination IP address and forwards it, and it gives IP addresses to devices on the local network.</dd></div>
+  </dl>
+  <div class="scroll"><table>
+    <tr><th></th><th>MAC address</th><th>IP address</th></tr>
+    <tr><td>Assigned by</td><td>Manufacturer, when the NIC is made</td><td>The network (router or ISP)</td></tr>
+    <tr><td>Changes?</td><td>Fixed to the hardware</td><td>Can change depending on the network</td></tr>
+    <tr><td>Format</td><td>48 bits, written as six hex pairs, e.g. <code>00:1A:2B:3C:4D:5E</code>. First half identifies the manufacturer.</td><td>IPv4: four numbers 0–255, e.g. <code>192.168.0.1</code> (32 bits). IPv6: eight groups of hex (128 bits).</td></tr>
+    <tr><td>Purpose</td><td>Identifies the physical device on a local network</td><td>Identifies where a device is on a network, so packets can be routed</td></tr>
+  </table></div>
+  <p>IPv6 exists because the world is running out of IPv4 addresses. An IP address can be <strong>static</strong> (never changes, used for servers) or <strong>dynamic</strong> (a new one is given each time a device connects, which is the norm at home).</p>
+</article>
+<!-- ======== CHAPTER 4 ======== -->
+<article class="chapter" data-ch="4" data-title="Software" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Chapter 4 — Software</h2>
+  <p>This chapter is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">4</div><div><h2>Software</h2><p>System and application software, what an operating system does, interrupts, and how code is translated.</p></div></div>
+<div class="pdf-link"><a class="btn" href="pdfs/cs-0478-chapter-04.pdf" target="_blank" rel="noopener noreferrer">⬇ Download PDF</a></div>
+
+  <h3><small>4.1</small>Types of software and interrupts</h3>
+  <div class="scroll"><table>
+    <tr><th></th><th>System software</th><th>Application software</th></tr>
+    <tr><td>Purpose</td><td>Runs and maintains the computer itself</td><td>Lets the user do a task</td></tr>
+    <tr><td>Examples</td><td>Operating system, utility programs, device drivers</td><td>Word processor, web browser, spreadsheet, game</td></tr>
+  </table></div>
+  <h4>What an operating system does</h4>
+  <ul>
+    <li><strong>User interface:</strong> a GUI (icons, windows) or a command-line interface.</li>
+    <li><strong>Memory management:</strong> decides which programs use which part of RAM and controls virtual memory.</li>
+    <li><strong>Process management and multitasking:</strong> shares CPU time so several programs appear to run at once.</li>
+    <li><strong>File management:</strong> creates, names, moves, copies and deletes files and folders.</li>
+    <li><strong>Peripheral management:</strong> controls input and output devices, using device drivers.</li>
+    <li><strong>Security:</strong> user accounts, passwords and access rights.</li>
+    <li><strong>Providing a platform</strong> on which application software can run.</li>
+  </ul>
+  <h4>Utility software and drivers</h4>
+  <p>Utilities are small programs that maintain the computer: antivirus, backup, disk formatting, defragmentation (only useful on hard disks, not SSDs), file compression and disk clean-up. A <strong>device driver</strong> tells the OS how to communicate with one particular piece of hardware such as a printer.</p>
+  <h4>Interrupts</h4>
+  <p>An <strong>interrupt</strong> is a signal sent to the processor asking it to stop what it is doing because something needs attention.</p>
+  <div class="scroll"><table>
+    <tr><th>Type</th><th>Source</th><th>Examples</th></tr>
+    <tr><td>Hardware</td><td>A device</td><td>Key pressed, mouse clicked, printer out of paper, disk transfer finished</td></tr>
+    <tr><td>Software</td><td>A running program</td><td>Division by zero, invalid instruction, two programs trying to use the same memory</td></tr>
+  </table></div>
+  <ol>
+    <li>An interrupt signal is generated.</li>
+    <li>At the end of each fetch–decode–execute cycle the CPU checks for interrupts.</li>
+    <li>If the interrupt has a higher <strong>priority</strong> than the current task, the CPU saves the current state (register contents).</li>
+    <li>The <strong>interrupt service routine (ISR)</strong> for that interrupt is run.</li>
+    <li>The saved state is restored and the interrupted task carries on.</li>
+  </ol>
+
+  <h3><small>4.2</small>Languages, translators and IDEs</h3>
+  <div class="scroll"><table>
+    <tr><th></th><th>High-level language</th><th>Low-level language</th></tr>
+    <tr><td>Examples</td><td>Python, Java, C#, Visual Basic</td><td>Machine code (binary), assembly language</td></tr>
+    <tr><td>Readability</td><td>English-like, easier to read, write and debug</td><td>Hard to read; assembly uses short <strong>mnemonics</strong> such as ADD, LDA</td></tr>
+    <tr><td>Portability</td><td>Runs on many machines after translation</td><td>Tied to one type of processor</td></tr>
+    <tr><td>Hardware control</td><td>Less direct</td><td>Direct control, memory and speed efficient</td></tr>
+    <tr><td>Translation needed</td><td>Compiler or interpreter</td><td>Assembly needs an assembler; machine code runs as it is</td></tr>
+  </table></div>
+  <div class="scroll"><table>
+    <tr><th></th><th>Compiler</th><th>Interpreter</th></tr>
+    <tr><td>How it translates</td><td>Whole program at once into an executable file</td><td>One line at a time, and runs it straight away</td></tr>
+    <tr><td>Errors</td><td>Listed after the whole program is checked</td><td>Stops at the first error</td></tr>
+    <tr><td>Speed of running</td><td>Fast, because translation is already done</td><td>Slower; translation happens every run</td></tr>
+    <tr><td>Source code needed?</td><td>Not once compiled, so it can be sold without the code</td><td>Yes, every time it runs</td></tr>
+    <tr><td>Best for</td><td>Finished programs</td><td>Development and testing</td></tr>
+  </table></div>
+  <p>An <strong>assembler</strong> translates assembly language into machine code.</p>
+  <h4>Integrated development environment (IDE)</h4>
+  <p>An IDE bundles the tools a programmer needs into one program:</p>
+  <ul>
+    <li>Code editor with <strong>syntax highlighting</strong>, auto-completion, auto-indentation and pretty-printing.</li>
+    <li><strong>Error diagnostics</strong> to point out mistakes and a <strong>debugger</strong> with breakpoints, single-stepping and variable watches.</li>
+    <li>A built-in translator (compiler or interpreter) and a <strong>run-time environment</strong> to test the program.</li>
+  </ul>
+</article>
+
+<!-- ======== CHAPTER 5 ======== -->
+<article class="chapter" data-ch="5" data-title="The Internet and its Uses" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Chapter 5 — The Internet and its Uses</h2>
+  <p>This chapter is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">5</div><div><h2>The Internet and its Uses</h2><p>The web, how a page reaches you, digital money, and the threats that put users at risk.</p></div></div>
+<div class="pdf-link"><a class="btn" href="pdfs/cs-0478-chapter-05.pdf" target="_blank" rel="noopener noreferrer">⬇ Download PDF</a></div>
+
+  <h3><small>5.1</small>The internet and the World Wide Web</h3>
+  <div class="scroll"><table>
+    <tr><th>The internet</th><th>The World Wide Web (WWW)</th></tr>
+    <tr><td>The worldwide network of connected networks: the infrastructure of cables, routers and servers.</td><td>A collection of web pages and websites written in HTML and accessed with a browser over the internet. It is one service that runs on the internet (email is another).</td></tr>
+  </table></div>
+  <h4>URL structure</h4>
+<pre class="code" data-lang="Example">https://www.example.com/school/index.html
+└─┬─┘   └──────┬──────┘└────┬────┘└───┬────┘
+protocol   domain name       path    file name</pre>
+  <p>The <strong>web browser</strong> reads the HTML and displays the page. The <strong>web server</strong> stores the pages and sends them when requested.</p>
+  <h4>What happens when you type a URL</h4>
+  <ol>
+    <li>The browser asks a <strong>DNS server</strong> for the IP address of the domain name.</li>
+    <li>If that server does not know it, it asks other DNS servers until the IP address is found and returned.</li>
+    <li>The browser sends a request to the web server at that IP address.</li>
+    <li>The web server sends back the page (as HTML), and the browser renders it.</li>
+  </ol>
+  <h4>HTTP and HTTPS</h4>
+  <p><strong>HTTP</strong> is the protocol for sending web pages, but the data is not encrypted. <strong>HTTPS</strong> adds <strong>SSL/TLS</strong>: the browser checks the server's digital certificate, they agree a session key using asymmetric encryption, and all data after that is encrypted. A padlock icon shows HTTPS is in use.</p>
+  <h4>Cookies</h4>
+  <p>A cookie is a small text file stored by the browser when you visit a site.</p>
+  <ul>
+    <li><strong>Session cookies</strong> are held in memory and deleted when the browser closes (for example a shopping basket or keeping you logged in during a visit).</li>
+    <li><strong>Persistent cookies</strong> stay on the device until they expire or are deleted (remembering login details, language and preferences, or tracking browsing to target adverts).</li>
+  </ul>
+
+  <h3><small>5.2</small>Digital currency</h3>
+  <p><strong>Digital currency</strong> exists only in electronic form. <strong>Cryptocurrencies</strong> are decentralised: there is no bank in control.</p>
+  <p>A <strong>blockchain</strong> is the digital ledger that records every transaction:</p>
+  <ul>
+    <li>Transactions are grouped into <strong>blocks</strong>. Each block stores its data, a timestamp, its own <strong>hash</strong> and the hash of the <strong>previous block</strong>, so the blocks form a chain.</li>
+    <li>If someone changes a block, its hash changes and no longer matches the next block. The chain is broken and the tampering is obvious.</li>
+    <li>Many computers hold a copy of the ledger and agree on new blocks together, so there is no single point to attack.</li>
+  </ul>
+  <p>Benefits include fast transfers and no bank fees. Drawbacks include price swings, high energy use for some systems, no way to recover lost keys, and use in scams.</p>
+
+  <h3><small>5.3</small>Cyber security</h3>
+  <div class="scroll"><table>
+    <tr><th>Threat</th><th>What it is</th><th>How to reduce it</th></tr>
+    <tr><td>Brute-force attack</td><td>Software tries every possible password until one works</td><td>Long, complex passwords; limit login attempts; two-factor authentication</td></tr>
+    <tr><td>Data interception</td><td>Data is captured in transit (for example with a packet sniffer)</td><td>Encryption, HTTPS</td></tr>
+    <tr><td>Distributed denial of service (DDoS)</td><td>Many computers (a botnet) flood a server with requests so real users cannot get through</td><td>Firewall, proxy server, traffic monitoring</td></tr>
+    <tr><td>Hacking</td><td>Gaining unauthorised access to a system or data</td><td>Firewall, strong passwords, biometrics, software updates</td></tr>
+    <tr><td>Phishing</td><td>Fake emails or messages that lead you to a fake site to steal details</td><td>Check the sender and links; spam filters; never enter details from links in messages</td></tr>
+    <tr><td>Pharming</td><td>Malicious code redirects you to a fake site even when you type the right address</td><td>Anti-malware; check the URL and padlock</td></tr>
+    <tr><td>Social engineering</td><td>Tricking people into giving up information or access</td><td>Staff training and verification procedures</td></tr>
+  </table></div>
+  <h4>Malware</h4>
+  <div class="scroll"><table>
+    <tr><th>Type</th><th>Behaviour</th></tr>
+    <tr><td>Virus</td><td>Attaches itself to a file and spreads when that file is opened; can delete or corrupt data</td></tr>
+    <tr><td>Worm</td><td>Copies itself across networks without needing a user to open anything</td></tr>
+    <tr><td>Trojan horse</td><td>Looks like useful software but carries harmful code; needs the user to install it</td></tr>
+    <tr><td>Spyware</td><td>Secretly records what you do (such as key presses) and sends it away</td></tr>
+    <tr><td>Adware</td><td>Floods you with unwanted adverts and may track browsing</td></tr>
+    <tr><td>Ransomware</td><td>Encrypts your files and demands payment for the key</td></tr>
+  </table></div>
+  <h4>Protection methods</h4>
+  <dl class="terms">
+    <div><dt>Firewall</dt><dd>Checks incoming and outgoing traffic against a set of rules and blocks anything unauthorised.</dd></div>
+    <div><dt>Anti-malware</dt><dd>Scans for, quarantines and removes malicious software; keep it updated.</dd></div>
+    <div><dt>Authentication</dt><dd>Passwords, biometrics (fingerprint, face, iris, voice) and two-factor authentication (two different proofs, such as a password plus a code sent to a phone).</dd></div>
+    <div><dt>Proxy server</dt><dd>Sits between users and the internet. It can filter websites, cache pages and hide users' IP addresses.</dd></div>
+    <div><dt>Access levels</dt><dd>Users only see the data they need for their role.</dd></div>
+    <div><dt>Software updates</dt><dd>Fix known security holes; turn on automatic updates.</dd></div>
+  </dl>
+</article>
+
+<!-- ======== CHAPTER 6 ======== -->
+<article class="chapter" data-ch="6" data-title="Automated and Emerging Technologies" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Chapter 6 — Automated and Emerging Technologies</h2>
+  <p>This chapter is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">6</div><div><h2>Automated &amp; Emerging Technologies</h2><p>Systems that sense and act on their own, robots, and artificial intelligence.</p></div></div>
+<div class="pdf-link"><a class="btn" href="pdfs/cs-0478-chapter-06.pdf" target="_blank" rel="noopener noreferrer">⬇ Download PDF</a></div>
+
+  <h3><small>6.1</small>Automated systems</h3>
+  <p>An automated system uses sensors, a microprocessor and actuators to run a process with little or no human help. It works as a <strong>feedback loop</strong>:</p>
+  <ol>
+    <li><strong>Sensors</strong> measure a physical value (for example temperature).</li>
+    <li>If the signal is analogue, an <strong>analogue-to-digital converter (ADC)</strong> turns it into digital data.</li>
+    <li>The <strong>microprocessor</strong> compares the reading with a stored target value.</li>
+    <li>If action is needed, it sends a signal (through a <strong>digital-to-analogue converter, DAC</strong>, if required) to an <strong>actuator</strong> such as a heater or motor.</li>
+    <li>The sensor keeps measuring, so the result of the action feeds back in. The loop repeats.</li>
+  </ol>
+  <div class="callout"><span class="lab">Example: greenhouse</span>
+    Temperature, moisture and light sensors feed a microprocessor. If the temperature rises above the set value it starts a motor to open the windows; if soil moisture is low it turns on the sprinkler pump; if it is dark it turns on lamps. Readings are taken continuously.
+  </div>
+  <p>Other examples: automatic street lighting, central heating, automatic doors, air-conditioning, self-driving vehicles, farm drones and factory production lines.</p>
+  <div class="scroll"><table>
+    <tr><th>Advantages</th><th>Disadvantages</th></tr>
+    <tr><td>Works 24 hours a day without tiring; no human error; consistent results; can work in dangerous places; cheaper to run in the long term</td><td>High cost to set up and maintain; jobs may be lost; skills are lost; if it fails, the whole process may stop; can be hacked</td></tr>
+  </table></div>
+
+  <h3><small>6.2</small>Robotics and artificial intelligence</h3>
+  <h4>Robotics</h4>
+  <p>A <strong>robot</strong> is a machine with a mechanical structure, electrical parts (sensors, motors and a controller) and a program that lets it carry out tasks. Uses: welding and painting in factories, exploring places people cannot go, surgery, vacuum cleaning, warehouse picking and farming.</p>
+  <p>Benefits: precise, tireless, safe in hazardous places. Drawbacks: expensive, can replace workers, cannot adapt to situations they were not programmed for.</p>
+  <h4>Artificial intelligence (AI)</h4>
+  <p><strong>AI</strong> is a computer system that carries out tasks normally needing human intelligence, such as learning, reasoning, problem solving and recognising speech or images.</p>
+  <p><strong>Machine learning</strong> is a part of AI in which a system improves at a task by learning from data instead of being told every rule. It is used in recommendations, spam filters and voice assistants.</p>
+  <h4>Expert systems</h4>
+  <p>An expert system imitates a human specialist to give advice or a diagnosis. It has four main parts:</p>
+  <dl class="terms">
+    <div><dt>Knowledge base</dt><dd>A large database of facts about the subject.</dd></div>
+    <div><dt>Rule base</dt><dd>IF…THEN rules that link facts to conclusions.</dd></div>
+    <div><dt>Inference engine</dt><dd>The reasoning part. It applies the rules to the knowledge base and the user's answers to reach a conclusion.</dd></div>
+    <div><dt>User interface</dt><dd>Lets the user answer questions and read the results, often with an explanation of how the conclusion was reached.</dd></div>
+  </dl>
+  <p>Uses: medical diagnosis, finding faults in car engines, mineral prospecting, financial advice, chess.</p>
+  <div class="callout"><span class="lab">Exam tip</span> For "describe how an automated system works" questions, name the sensor, say what it measures, say what the microprocessor compares it with, and name the actuator and what it does. Generic answers such as "the computer controls it" earn no marks.</div>
+</article>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- =============== PAPER 2 =============== -->
+<section id="view-p2" hidden>
+  <div class="wrap">
+    <div class="viewhead">
+      <h1>Paper 2 · Algorithms, Programming &amp; Logic</h1>
+      <p>Chapters 7 to 10: the twelve essentials of algorithm design, Python and pseudocode side by side, databases with SQL, and logic gates.</p>
+    </div>
+    <div class="reader" data-reader="p2">
+      <nav class="chapnav" aria-label="Paper 2 chapters"></nav>
+      <div class="chapters">
+
+<!-- ======== CHAPTER 7 ======== -->
+<article class="chapter" data-ch="7" data-title="Algorithm Design and Problem-solving" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Chapter 7 — Algorithm Design and Problem-solving</h2>
+  <p>This chapter is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">7</div><div><h2>Algorithm Design &amp; Problem-solving</h2><p>The twelve essentials, in the order they usually appear in the exam. Pseudocode is shown with Cambridge conventions; Python is shown where you will be asked to code.</p></div></div>
+<div class="pdf-link"><a class="btn" href="pdfs/cs-0478-chapter-07.pdf" target="_blank" rel="noopener noreferrer">⬇ Download PDF</a></div>
+
+  <h3><small>1</small>Program development life cycle (SDLC)</h3>
+  <p>Programs are built in stages, so that mistakes are found early when they are cheap to fix.</p>
+  <div class="scroll"><table>
+    <tr><th>Stage</th><th>What happens</th></tr>
+    <tr><td>Analysis</td><td>Find out exactly what the program must do. <strong>Abstraction</strong> (keep only the important details) and <strong>decomposition</strong> (break the problem into smaller parts). List the inputs, processes, outputs and any data to store, using interviews, questionnaires and observation.</td></tr>
+    <tr><td>Design</td><td>Plan the solution before coding: structure diagrams, flowcharts and pseudocode. Decide the data structures and validation, and how the screens will look.</td></tr>
+    <tr><td>Coding</td><td>Write the program in a programming language, following the design. Test each part as it is written.</td></tr>
+    <tr><td>Testing</td><td>Run the program with test data to find and fix errors, and check it does everything the requirements ask for.</td></tr>
+  </table></div>
+
+  <h3><small>2</small>A program: input, process, output</h3>
+  <p>Every program takes <strong>input</strong>, applies a <strong>process</strong> and produces <strong>output</strong>. Storage (files and databases) keeps data between runs. Designs are drawn as flowcharts or structure diagrams.</p>
+  <h4>Flowchart symbols</h4>
+  <div class="scroll"><table>
+    <tr><th>Symbol</th><th>Meaning</th></tr>
+    <tr><td>Rounded box (terminator)</td><td>START or STOP</td></tr>
+    <tr><td>Parallelogram</td><td>Input or output</td></tr>
+    <tr><td>Rectangle</td><td>Process, such as a calculation or assignment</td></tr>
+    <tr><td>Diamond</td><td>Decision, with two exits labelled Yes and No</td></tr>
+    <tr><td>Rectangle with double side lines</td><td>Predefined process (a procedure or function defined elsewhere)</td></tr>
+    <tr><td>Arrows</td><td>Direction of flow</td></tr>
+  </table></div>
+  <figure class="diagram">
+    <svg viewBox="0 0 520 405" role="img" aria-label="Flowchart: input a number, decide if it is even, output Even or Odd">
+      <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="svgf"/></marker></defs>
+      <ellipse class="svgs" cx="260" cy="28" rx="62" ry="20"/><text class="svgt" x="260" y="33" text-anchor="middle">START</text>
+      <path class="svgl" d="M260 48V70" marker-end="url(#arr)"/>
+      <polygon class="svgs" points="205,70 335,70 315,106 185,106"/><text class="svgt" x="260" y="93" text-anchor="middle">INPUT Num</text>
+      <path class="svgl" d="M260 106V138" marker-end="url(#arr)"/>
+      <polygon class="svgs" points="260,138 370,180 260,222 150,180"/><text class="svgt" x="260" y="184" text-anchor="middle">Num MOD 2 = 0 ?</text>
+      <path class="svgl" d="M150 180H105V258" marker-end="url(#arr)"/><text class="svgt" x="122" y="172" text-anchor="middle">Yes</text>
+      <path class="svgl" d="M370 180H415V258" marker-end="url(#arr)"/><text class="svgt" x="398" y="172" text-anchor="middle">No</text>
+      <polygon class="svgs" points="42,258 168,258 158,294 32,294"/><text class="svgt" x="105" y="281" text-anchor="middle">OUTPUT "Even"</text>
+      <polygon class="svgs" points="352,258 478,258 468,294 342,294"/><text class="svgt" x="415" y="281" text-anchor="middle">OUTPUT "Odd"</text>
+      <path class="svgl" d="M105 294V330H260"/><path class="svgl" d="M415 294V330H260"/><path class="svgl" d="M260 330V352" marker-end="url(#arr)"/>
+      <ellipse class="svgs" cx="260" cy="372" rx="62" ry="20"/><text class="svgt" x="260" y="377" text-anchor="middle">STOP</text>
+    </svg>
+    <figcaption>Flowchart for "is the number even or odd?"</figcaption>
+  </figure>
+  <h4>Structure diagram</h4>
+  <p>A structure diagram breaks a system into sub-systems, from the overall task at the top down to small jobs at the bottom (top-down design). It shows <em>what</em> the parts are, not the order they run in.</p>
+  <ul class="tree">
+    <li><span class="node">Library system</span>
+      <ul>
+        <li><span class="node">Members</span><ul><li><span class="node">Register member</span></li><li><span class="node">Update details</span></li></ul></li>
+        <li><span class="node">Books</span><ul><li><span class="node">Add book</span></li><li><span class="node">Search for book</span></li></ul></li>
+        <li><span class="node">Loans</span><ul><li><span class="node">Issue book</span></li><li><span class="node">Return book</span></li><li><span class="node">Calculate fine</span></li></ul></li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3><small>3</small>Data types</h3>
+  <div class="scroll"><table>
+    <tr><th>Cambridge pseudocode</th><th>Python</th><th>Stores</th><th>Example</th></tr>
+    <tr><td class="mono">INTEGER</td><td class="mono">int</td><td>Whole numbers</td><td class="mono">42, −7</td></tr>
+    <tr><td class="mono">REAL</td><td class="mono">float</td><td>Numbers with a decimal part</td><td class="mono">3.14, −0.5</td></tr>
+    <tr><td class="mono">CHAR</td><td class="mono">str (length 1)</td><td>A single character</td><td class="mono">'A'</td></tr>
+    <tr><td class="mono">STRING</td><td class="mono">str</td><td>Text of any length</td><td class="mono">"Hello"</td></tr>
+    <tr><td class="mono">BOOLEAN</td><td class="mono">bool</td><td>True or False only</td><td class="mono">TRUE</td></tr>
+  </table></div>
+  <div class="callout warn"><span class="lab">Watch out</span> A phone number or student ID should be a <strong>string</strong>, not an integer. You never do arithmetic on it, and an integer would drop a leading 0.</div>
+
+  <h3><small>4</small>Operators</h3>
+  <div class="scroll"><table>
+    <tr><th>Type</th><th>Pseudocode</th><th>Python</th><th>Meaning</th></tr>
+    <tr><td rowspan="4">Arithmetic</td><td class="mono">+  −  *  /</td><td class="mono">+  −  *  /</td><td>Add, subtract, multiply, divide (result can be a decimal)</td></tr>
+    <tr><td class="mono">^</td><td class="mono">**</td><td>Power: 2 ^ 3 = 8</td></tr>
+    <tr><td class="mono">DIV</td><td class="mono">//</td><td>Whole-number division: 17 DIV 5 = 3</td></tr>
+    <tr><td class="mono">MOD</td><td class="mono">%</td><td>Remainder: 17 MOD 5 = 2. <code>MOD 2 = 0</code> tests for even.</td></tr>
+    <tr><td>Comparison</td><td class="mono">=  &lt;&gt;  &lt;  &gt;  &lt;=  &gt;=</td><td class="mono">==  !=  &lt;  &gt;  &lt;=  &gt;=</td><td>Equal, not equal, less than, greater than, and so on. Result is TRUE or FALSE.</td></tr>
+    <tr><td>Logical</td><td class="mono">AND  OR  NOT</td><td class="mono">and  or  not</td><td>Combine conditions. AND needs both true; OR needs at least one; NOT reverses.</td></tr>
+  </table></div>
+  <div class="callout warn"><span class="lab">Common mistake</span> In Python, <code>=</code> assigns a value and <code>==</code> compares. In Cambridge pseudocode, assignment is <code>←</code> and comparison is <code>=</code>.</div>
+
+  <h3><small>5</small>Variables and constants</h3>
+  <p>A <strong>variable</strong> is a named memory location whose value <em>can change</em> while the program runs (a score, a counter, a total). A <strong>constant</strong> is a named value that <em>does not change</em> (VAT rate, pi, maximum class size). Use meaningful names, and use constants so a value only needs changing in one place.</p>
+  <div class="pair">
+<pre class="code" data-lang="Pseudocode">DECLARE Score : INTEGER
+CONSTANT VATRate ← 0.2
+Score ← 0
+Score ← Score + 10</pre>
+<pre class="code" data-lang="Python">VAT_RATE = 0.2        # constant by convention (capitals)
+score = 0
+score = score + 10</pre>
+  </div>
+
+  <h3><small>6</small>Selection</h3>
+  <p>Selection lets the program choose which statements to run, depending on a condition.</p>
+  <div class="pair">
+<pre class="code" data-lang="Pseudocode">INPUT Mark
+IF Mark >= 70 THEN
+   OUTPUT "Distinction"
+ELSE
+   IF Mark >= 40 THEN
+      OUTPUT "Pass"
+   ELSE
+      OUTPUT "Fail"
+   ENDIF
+ENDIF</pre>
+<pre class="code" data-lang="Python">mark = int(input("Mark: "))
+if mark >= 70:
+    print("Distinction")
+elif mark >= 40:
+    print("Pass")
+else:
+    print("Fail")</pre>
+  </div>
+  <p>When one variable is compared with many fixed values, use <code>CASE OF</code> (Python 3.10+: <code>match</code>):</p>
+<pre class="code" data-lang="Pseudocode">CASE OF Choice
+   1 : OUTPUT "Start game"
+   2 : OUTPUT "Options"
+   OTHERWISE : OUTPUT "Invalid choice"
+ENDCASE</pre>
+
+  <h3><small>7</small>Iteration (loops)</h3>
+  <div class="scroll"><table>
+    <tr><th>Loop</th><th>Use when</th><th>Condition tested</th><th>Runs at least once?</th></tr>
+    <tr><td class="mono">FOR … TO … NEXT</td><td>The number of repeats is known</td><td>Counter reaches its end value</td><td>Yes (if start ≤ end)</td></tr>
+    <tr><td class="mono">REPEAT … UNTIL</td><td>Repeat until something becomes true</td><td>At the <strong>end</strong>; stops when TRUE</td><td>Always</td></tr>
+    <tr><td class="mono">WHILE … DO … ENDWHILE</td><td>Repeat while something is true</td><td>At the <strong>start</strong>; continues while TRUE</td><td>Not necessarily: may run zero times</td></tr>
+  </table></div>
+  <div class="pair">
+<pre class="code" data-lang="Pseudocode">FOR Count ← 1 TO 5
+   OUTPUT Count
+NEXT Count
+
+REPEAT
+   INPUT Password
+UNTIL Password = "cs0478"
+
+WHILE Lives > 0 DO
+   PlayRound
+ENDWHILE</pre>
+<pre class="code" data-lang="Python">for count in range(1, 6):    # 1 to 5
+    print(count)
+
+while True:                  # REPEAT-UNTIL pattern
+    password = input("Password: ")
+    if password == "cs0478":
+        break
+
+while lives > 0:
+    play_round()</pre>
+  </div>
+  <div class="callout"><span class="lab">Remember</span> Python's <code>range(1, 6)</code> stops <em>before</em> 6. Python has no <code>REPEAT…UNTIL</code>; the <code>while True … break</code> pattern above does the same job.</div>
+
+  <h3><small>8</small>Maximum, minimum, counting and totalling</h3>
+  <p>These four standard algorithms appear in almost every Paper 2 question. Start the total and count at <strong>0</strong>, and start the max and min at the <strong>first value</strong>, not at 0.</p>
+  <div class="pair">
+<pre class="code" data-lang="Pseudocode">Total ← 0
+Count ← 0
+Highest ← Marks[1]
+Lowest ← Marks[1]
+FOR Index ← 1 TO 5
+   Total ← Total + Marks[Index]
+   Count ← Count + 1
+   IF Marks[Index] > Highest THEN
+      Highest ← Marks[Index]
+   ENDIF
+   IF Marks[Index] < Lowest THEN
+      Lowest ← Marks[Index]
+   ENDIF
+NEXT Index
+Average ← Total / Count</pre>
+<pre class="code" data-lang="Python">marks = [72, 85, 60, 91, 55]
+total = 0
+count = 0
+highest = marks[0]
+lowest = marks[0]
+for m in marks:
+    total = total + m
+    count = count + 1
+    if m > highest:
+        highest = m
+    if m < lowest:
+        lowest = m
+average = total / count</pre>
+  </div>
+  <p>Result for this data: total 363, count 5, highest 91, lowest 55, average 72.6.</p>
+
+  <h3><small>9</small>Lists and one-dimensional arrays</h3>
+  <p>An <strong>array</strong> stores several items of the <em>same data type</em> under one name. Each item is reached by its <strong>index</strong>. A Python <strong>list</strong> written <code>[item1, item2, …]</code> is used for arrays. Two-dimensional arrays (rows and columns) are covered in Chapter 8.</p>
+  <div class="pair">
+<pre class="code" data-lang="Pseudocode">DECLARE Names : ARRAY[1:3] OF STRING
+Names[1] ← "Aung"
+Names[2] ← "Su"
+Names[3] ← "Zin"
+FOR Index ← 1 TO 3
+   OUTPUT Names[Index]
+NEXT Index</pre>
+<pre class="code" data-lang="Python">names = ["Aung", "Su", "Zin"]
+print(names[0])          # Aung
+names[1] = "Mya"         # change an item
+names.append("Kyaw")     # add to the end
+for i in range(len(names)):
+    print(names[i])</pre>
+  </div>
+  <div class="callout warn"><span class="lab">Index starts at different numbers</span> Cambridge pseudocode arrays usually start at index 1 (you choose it in <code>ARRAY[1:3]</code>). Python lists always start at index <strong>0</strong>, so the last item of a 5-item list is <code>list[4]</code>.</div>
+
+  <h3><small>10</small>Linear search and bubble sort</h3>
+  <h4>Linear search</h4>
+  <p>Check each item in turn from the start until the target is found or the end is reached. It works on unsorted data, but is slow on long lists because in the worst case every item is checked.</p>
+  <div class="pair">
+<pre class="code" data-lang="Pseudocode">Found ← FALSE
+Index ← 1
+WHILE Index <= 5 AND Found = FALSE
+   IF Data[Index] = Target THEN
+      Found ← TRUE
+   ELSE
+      Index ← Index + 1
+   ENDIF
+ENDWHILE
+IF Found THEN
+   OUTPUT "Found at ", Index
+ELSE
+   OUTPUT "Not found"
+ENDIF</pre>
+<pre class="code" data-lang="Python">found = False
+index = 0
+while index < len(data) and not found:
+    if data[index] == target:
+        found = True
+    else:
+        index = index + 1
+if found:
+    print("Found at", index)
+else:
+    print("Not found")</pre>
+  </div>
+  <h4>Bubble sort</h4>
+  <p>Compare each pair of neighbouring items and swap them if they are in the wrong order. After each pass the largest unsorted value has "bubbled" to the end. Keep going until a full pass makes no swaps.</p>
+<pre class="code" data-lang="Python">n = len(data)
+for i in range(n - 1):
+    swapped = False
+    for j in range(n - 1 - i):
+        if data[j] > data[j + 1]:
+            temp = data[j]
+            data[j] = data[j + 1]
+            data[j + 1] = temp
+            swapped = True
+    if not swapped:
+        break</pre>
+  <div class="lab-box" id="bubble">
+    <h4>Try it: bubble sort, one step at a time</h4>
+    <p class="hint">Enter numbers separated by commas (up to 10). The highlighted pair is being compared, red cells were just swapped, green cells are in their final place.</p>
+    <div class="rowbtns">
+      <input type="text" id="bs-in" value="5, 1, 4, 2, 8" aria-label="Numbers to sort" autocomplete="off">
+      <button class="btn" type="button" id="bs-load">Load</button>
+      <button class="btn solid" type="button" id="bs-step">Step</button>
+      <button class="btn" type="button" id="bs-all">Finish</button>
+    </div>
+    <div class="sortbox" id="bs-cells" aria-live="polite"></div>
+    <p class="note" id="bs-msg"></p>
+  </div>
+
+  <h3><small>11</small>Validation and verification</h3>
+  <p><strong>Validation</strong> is an automatic check that data is <em>reasonable</em> (sensible and in the right form). It cannot prove the data is correct: a date of birth of 01/01/2000 passes even if the real date is 05/03/2000. <strong>Verification</strong> checks that the data entered is <em>the same as the source data</em> or was not changed in transfer.</p>
+  <div class="scroll"><table>
+    <tr><th>Validation check</th><th>What it does</th><th>Example</th></tr>
+    <tr><td>Range check</td><td>Value is between a minimum and maximum</td><td>Mark between 0 and 100</td></tr>
+    <tr><td>Length check</td><td>Correct number of characters</td><td>Password at least 8 characters</td></tr>
+    <tr><td>Type check</td><td>Correct data type</td><td>Age must be a whole number</td></tr>
+    <tr><td>Presence check</td><td>Field is not left empty</td><td>Surname required</td></tr>
+    <tr><td>Format check</td><td>Follows a set pattern</td><td>Date as DD/MM/YYYY</td></tr>
+    <tr><td>Check digit</td><td>Last digit calculated from others</td><td>ISBN, barcode</td></tr>
+    <tr><td>Uniqueness check</td><td>Value has not been used already</td><td>Username or primary key</td></tr>
+  </table></div>
+  <p><strong>Verification methods:</strong> <em>double entry</em> (type it twice and the computer compares, as with a new password) and a <em>visual check</em> (a person compares the screen with the original document).</p>
+<pre class="code" data-lang="Python — range check with a loop">mark = int(input("Mark (0-100): "))
+while mark < 0 or mark > 100:
+    print("Invalid: enter a number from 0 to 100")
+    mark = int(input("Mark (0-100): "))</pre>
+  <h4>Test data</h4>
+  <p>Test data is chosen to show the program works for every kind of input. Example: a program that accepts a whole-number mark from 0 to 100.</p>
+  <div class="scroll"><table>
+    <tr><th>Type</th><th>Meaning</th><th>Examples</th></tr>
+    <tr><td>Normal</td><td>Sensible data that should be accepted</td><td class="mono">56</td></tr>
+    <tr><td>Abnormal</td><td>Data that should be rejected</td><td class="mono">−5, 101, "abc", 45.5</td></tr>
+    <tr><td>Extreme</td><td>The largest and smallest values that are accepted</td><td class="mono">0 and 100</td></tr>
+    <tr><td>Boundary</td><td>An extreme value together with the nearest value just outside it, which is rejected</td><td class="mono">0 (accepted) and −1 (rejected); 100 (accepted) and 101 (rejected)</td></tr>
+  </table></div>
+
+  <h3><small>12</small>Trace tables</h3>
+  <p>A <strong>trace table</strong> is a "dry run" on paper: one column for each variable (and output), one row for each change, so you can follow the algorithm step by step. It is used to find logic errors and to work out what an algorithm does. Fill in a value only in the row where it <em>changes</em>, unless the question says otherwise.</p>
+<pre class="code" data-lang="Pseudocode">Total ← 0
+Count ← 0
+FOR i ← 1 TO 4
+   INPUT Num
+   IF Num MOD 2 = 0 THEN
+      Total ← Total + Num
+      Count ← Count + 1
+   ENDIF
+NEXT i
+OUTPUT Total, Count</pre>
+  <p>Inputs in order: 5, 8, 3, 6. The algorithm totals and counts the even numbers.</p>
+  <div class="scroll"><table class="tt">
+    <tr><th>i</th><th>Num</th><th>Num MOD 2 = 0</th><th>Total</th><th>Count</th><th>OUTPUT</th></tr>
+    <tr><td></td><td></td><td></td><td>0</td><td>0</td><td></td></tr>
+    <tr><td>1</td><td>5</td><td>FALSE</td><td></td><td></td><td></td></tr>
+    <tr><td>2</td><td>8</td><td>TRUE</td><td>8</td><td>1</td><td></td></tr>
+    <tr><td>3</td><td>3</td><td>FALSE</td><td></td><td></td><td></td></tr>
+    <tr><td>4</td><td>6</td><td>TRUE</td><td>14</td><td>2</td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td class="out">14, 2</td></tr>
+  </table></div>
+  <div class="callout"><span class="lab">Exam tip</span> Write the column headings exactly as the variable names in the algorithm, and include a column for each condition that is tested and for the output. Never skip an iteration, even when nothing changes.</div>
+</article>
+<!-- ======== CHAPTER 8 ======== -->
+<article class="chapter" data-ch="8" data-title="Programming" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Chapter 8 — Programming</h2>
+  <p>This chapter is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">8</div><div><h2>Programming</h2><p>Python for the Paper 2 coding questions, with the matching Cambridge pseudocode: strings, arrays, files, subprograms, searching and sorting.</p></div></div>
+<div class="pdf-link"><a class="btn" href="pdfs/cs-0478-chapter-08.pdf" target="_blank" rel="noopener noreferrer">⬇ Download PDF</a></div>
+
+  <h3><small>8.1</small>Input, output and casting</h3>
+  <p><code>input()</code> always returns a <strong>string</strong>. Convert it (cast it) before doing arithmetic.</p>
+  <div class="pair">
+<pre class="code" data-lang="Pseudocode">INPUT Name
+INPUT Age
+OUTPUT "Hello ", Name
+OUTPUT "Next year you will be ", Age + 1</pre>
+<pre class="code" data-lang="Python">name = input("Name: ")
+age = int(input("Age: "))    # int() casts text
+print("Hello", name)
+print("Next year you will be", age + 1)</pre>
+  </div>
+  <div class="scroll"><table>
+    <tr><th>Cast</th><th>Result</th></tr>
+    <tr><td class="mono">int("42")</td><td>42 (whole number)</td></tr>
+    <tr><td class="mono">float("3.5")</td><td>3.5 (decimal)</td></tr>
+    <tr><td class="mono">str(42)</td><td>"42" (text)</td></tr>
+  </table></div>
+  <p>Whole-number division and remainder: <code>17 // 5</code> is 3 and <code>17 % 5</code> is 2 (pseudocode <code>DIV</code> and <code>MOD</code>). Use <code>round(x, 2)</code> to round to 2 decimal places.</p>
+
+  <h3><small>8.2</small>Strings and upper / lower case</h3>
+  <div class="scroll"><table>
+    <tr><th>Task</th><th>Pseudocode</th><th>Python</th></tr>
+    <tr><td>Length of text</td><td class="mono">LENGTH(Word)</td><td class="mono">len(word)</td></tr>
+    <tr><td>Convert to upper case</td><td class="mono">UCASE(Word)</td><td class="mono">word.upper()</td></tr>
+    <tr><td>Convert to lower case</td><td class="mono">LCASE(Word)</td><td class="mono">word.lower()</td></tr>
+    <tr><td>Part of a string</td><td class="mono">SUBSTRING(Word, 1, 3)</td><td class="mono">word[0:3]  (position 0, 1, 2)</td></tr>
+    <tr><td>One character</td><td class="mono">Word[1]</td><td class="mono">word[0]</td></tr>
+    <tr><td>Character code</td><td class="mono">ASC("A") = 65</td><td class="mono">ord("A")</td></tr>
+    <tr><td>Code to character</td><td class="mono">CHR(65) = "A"</td><td class="mono">chr(65)</td></tr>
+    <tr><td>Join strings</td><td class="mono">"Hi " &amp; Name</td><td class="mono">"Hi " + name</td></tr>
+  </table></div>
+  <p>Strings cannot be changed in place; the methods above return a new string. Some versions of the pseudocode guide write <code>TO_UPPER</code> and <code>TO_LOWER</code> instead of <code>UCASE</code> and <code>LCASE</code>.</p>
+  <p><strong>Why change case?</strong> To compare fairly. A user might type "YES", "yes" or "Yes"; converting the input first means one test covers them all.</p>
+<pre class="code" data-lang="Python — case-insensitive answer and vowel count">answer = input("Play again? (yes/no): ").lower()
+if answer == "yes":
+    print("Restarting")
+
+word = input("Word: ").lower()
+vowels = 0
+for ch in word:
+    if ch == "a" or ch == "e" or ch == "i" or ch == "o" or ch == "u":
+        vowels = vowels + 1
+print("Vowels:", vowels)</pre>
+
+  <h3><small>8.3</small>One-dimensional arrays</h3>
+  <p>Use a loop to fill and process an array. A loop with an index is the standard way to read, total or search every item.</p>
+  <div class="pair">
+<pre class="code" data-lang="Pseudocode">DECLARE Marks : ARRAY[1:5] OF INTEGER
+FOR Index ← 1 TO 5
+   OUTPUT "Enter mark ", Index
+   INPUT Marks[Index]
+NEXT Index</pre>
+<pre class="code" data-lang="Python">marks = [0, 0, 0, 0, 0]          # 5 items, indexes 0 to 4
+for i in range(5):
+    marks[i] = int(input("Enter mark " + str(i + 1) + ": "))</pre>
+  </div>
+  <p>Useful list tools: <code>len(marks)</code> (number of items), <code>marks.append(x)</code> (add to the end), <code>marks[-1]</code> (last item).</p>
+  <div class="callout"><span class="lab">Parallel arrays</span> Two arrays with matching positions store related data: <code>names[2]</code> and <code>scores[2]</code> both belong to the same person. Swap both arrays together when sorting.</div>
+
+  <h3><small>8.4</small>Two-dimensional arrays</h3>
+  <p>A 2D array is a table with <strong>rows and columns</strong>, and needs two indexes: <code>Grid[row][column]</code> in Python and <code>Grid[row, column]</code> in pseudocode. Use a <strong>nested loop</strong>: the outer loop moves down the rows and the inner loop moves across the columns.</p>
+  <div class="pair">
+<pre class="code" data-lang="Pseudocode">DECLARE Grid : ARRAY[1:3, 1:3] OF INTEGER
+FOR Row ← 1 TO 3
+   FOR Col ← 1 TO 3
+      Grid[Row, Col] ← 0
+   NEXT Col
+NEXT Row
+Grid[2, 3] ← 7</pre>
+<pre class="code" data-lang="Python">grid = [[0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]]
+grid[1][2] = 7          # row 2, column 3 (counting from 0)
+
+total = 0
+for r in range(3):
+    for c in range(3):
+        total = total + grid[r][c]
+print("Total:", total)   # 7</pre>
+  </div>
+
+  <h3><small>8.5</small>File handling</h3>
+  <p>Variables lose their values when a program ends. A <strong>text file</strong> keeps data between runs. The three modes are <strong>read</strong>, <strong>write</strong> (creates the file, or overwrites the old contents) and <strong>append</strong> (adds to the end). Always <strong>close</strong> the file when finished.</p>
+  <div class="pair">
+<pre class="code" data-lang="Pseudocode — write">OPENFILE "scores.txt" FOR WRITE
+WRITEFILE "scores.txt", "Aung,85"
+WRITEFILE "scores.txt", "Su,91"
+CLOSEFILE "scores.txt"</pre>
+<pre class="code" data-lang="Python — write">file = open("scores.txt", "w")
+file.write("Aung,85\n")
+file.write("Su,91\n")
+file.close()</pre>
+<pre class="code" data-lang="Pseudocode — read until end of file">DECLARE Line : STRING
+OPENFILE "scores.txt" FOR READ
+WHILE NOT EOF("scores.txt") DO
+   READFILE "scores.txt", Line
+   OUTPUT Line
+ENDWHILE
+CLOSEFILE "scores.txt"</pre>
+<pre class="code" data-lang="Python — read">file = open("scores.txt", "r")
+for line in file:            # loops until the end
+    print(line.strip())      # strip() removes \n
+file.close()</pre>
+  </div>
+<pre class="code" data-lang="Python — append, then load a file into an array">file = open("scores.txt", "a")
+file.write("Zin,67\n")
+file.close()
+
+names = []
+scores = []
+file = open("scores.txt", "r")
+for line in file:
+    parts = line.strip().split(",")     # "Aung,85" → ["Aung", "85"]
+    names.append(parts[0])
+    scores.append(int(parts[1]))
+file.close()</pre>
+  <div class="callout warn"><span class="lab">Common mistakes</span> Opening with "w" when you meant "a" (which wipes existing data); forgetting <code>\n</code> so records run together; forgetting to close the file.</div>
+
+  <h3><small>8.6</small>Procedures and functions</h3>
+  <p>A <strong>procedure</strong> carries out a task. A <strong>function</strong> carries out a task and <strong>returns</strong> a value. Both can take <strong>parameters</strong>. Variables created inside are <strong>local</strong> (exist only in that subprogram); a <strong>global</strong> variable is available everywhere. Subprograms make code shorter, easier to test and reusable.</p>
+  <div class="pair">
+<pre class="code" data-lang="Pseudocode">PROCEDURE Greet(Name : STRING)
+   OUTPUT "Hello ", Name
+ENDPROCEDURE
+
+FUNCTION Area(L : REAL, W : REAL) RETURNS REAL
+   RETURN L * W
+ENDFUNCTION
+
+CALL Greet("Aung")
+Size ← Area(4, 2.5)</pre>
+<pre class="code" data-lang="Python">def greet(name):
+    print("Hello", name)
+
+def area(l, w):
+    return l * w
+
+greet("Aung")
+size = area(4, 2.5)</pre>
+  </div>
+
+  <h3><small>8.7</small>Linear search and bubble sort: complete programs</h3>
+  <p>Chapter 7 explained the ideas. These are full versions with input, so you can run them.</p>
+<pre class="code" data-lang="Python — linear search of a list of names">names = ["Aung", "Su", "Zin", "Kyaw", "Mya"]
+target = input("Name to find: ")
+found = False
+for i in range(len(names)):
+    if names[i].lower() == target.lower():
+        print("Found at position", i + 1)
+        found = True
+if not found:
+    print("Not found")</pre>
+<pre class="code" data-lang="Python — bubble sort into ascending order">marks = [72, 85, 60, 91, 55]
+n = len(marks)
+for i in range(n - 1):
+    swapped = False
+    for j in range(n - 1 - i):
+        if marks[j] > marks[j + 1]:
+            temp = marks[j]
+            marks[j] = marks[j + 1]
+            marks[j + 1] = temp
+            swapped = True
+    if not swapped:
+        break
+print(marks)       # [55, 60, 72, 85, 91]</pre>
+  <p>To sort into <strong>descending</strong> order, change <code>&gt;</code> to <code>&lt;</code> in the comparison.</p>
+  <div class="callout"><span class="lab">Exam tip</span> In the 15-mark scenario question, write the code in clear steps: declare variables, take input with validation, use a loop to process, then output. Use meaningful variable names and add short comments; marks are given for structure as well as for working code.</div>
+</article>
+
+<!-- ======== CHAPTER 9 ======== -->
+<article class="chapter" data-ch="9" data-title="Databases" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Chapter 9 — Databases</h2>
+  <p>This chapter is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">9</div><div><h2>Databases</h2><p>Storing data in a table, choosing a primary key, and writing SQL to find what you need.</p></div></div>
+<div class="pdf-link"><a class="btn" href="pdfs/cs-0478-chapter-09.pdf" target="_blank" rel="noopener noreferrer">⬇ Download PDF</a></div>
+
+  <h3><small>9.1</small>Database concepts</h3>
+  <p>A <strong>database</strong> is an organised collection of data. In a table, each <strong>field</strong> is a column (one piece of data about every item), each <strong>record</strong> is a row (everything about one item), and the table holds many records. The syllabus uses <strong>single-table</strong> databases only.</p>
+  <dl class="terms">
+    <div><dt>Primary key</dt><dd>A field whose value is <em>unique</em> for every record, so it identifies exactly one record. It cannot be empty or duplicated. Examples: StudentID, ISBN.</dd></div>
+    <div><dt>Data types</dt><dd>Text (alphanumeric), Character, Integer, Real, Boolean (Yes/No) and Date/Time. Choose the one that matches the data; a phone number is text.</dd></div>
+    <div><dt>Validation</dt><dd>Range, length, type, presence and format checks stop bad data entering a field.</dd></div>
+  </dl>
+  <p>The sample table used below is called <code>Students</code>. <code>StudentID</code> is the primary key.</p>
+  <div class="scroll"><table>
+    <tr><th>StudentID</th><th>FirstName</th><th>LastName</th><th>Class</th><th>Grade</th></tr>
+    <tr><td>S001</td><td>Aung</td><td>Kyaw</td><td>10A</td><td>82</td></tr>
+    <tr><td>S002</td><td>Su</td><td>Mon</td><td>10A</td><td>91</td></tr>
+    <tr><td>S003</td><td>Zin</td><td>Htet</td><td>10B</td><td>67</td></tr>
+    <tr><td>S004</td><td>Kaung</td><td>Min</td><td>10B</td><td>78</td></tr>
+    <tr><td>S005</td><td>Hla</td><td>Hla</td><td>10A</td><td>55</td></tr>
+    <tr><td>S006</td><td>Thura</td><td>Oo</td><td>10B</td><td>88</td></tr>
+  </table></div>
+
+  <h3><small>9.2</small>Structured Query Language (SQL)</h3>
+<pre class="code" data-lang="SQL — structure">SELECT   field1, field2       -- which columns to show (* means all fields)
+FROM     table                -- which table
+WHERE    condition            -- which records (optional)
+ORDER BY field ASC|DESC;      -- sort order (optional; ASC is the default)</pre>
+  <div class="scroll"><table>
+    <tr><th>Item</th><th>Notes</th></tr>
+    <tr><td class="mono">=  &lt;&gt;  &lt;  &lt;=  &gt;  &gt;=</td><td>Comparison operators. Text values go in quotes: <code>Class = "10A"</code>.</td></tr>
+    <tr><td class="mono">AND  OR</td><td>Combine conditions.</td></tr>
+    <tr><td class="mono">LIKE</td><td>Pattern match with a wildcard: <code>FirstName LIKE "S%"</code> finds names starting with S.</td></tr>
+    <tr><td class="mono">SUM(field)</td><td>Adds up the values in a numeric field.</td></tr>
+    <tr><td class="mono">COUNT(field)</td><td>Counts the records.</td></tr>
+  </table></div>
+
+  <h4>Worked queries on the Students table</h4>
+<pre class="code" data-lang="SQL">SELECT FirstName, LastName
+FROM Students
+WHERE Grade >= 80
+ORDER BY LastName ASC;</pre>
+  <div class="scroll"><table><tr><th>FirstName</th><th>LastName</th></tr><tr><td>Aung</td><td>Kyaw</td></tr><tr><td>Su</td><td>Mon</td></tr><tr><td>Thura</td><td>Oo</td></tr></table></div>
+<pre class="code" data-lang="SQL">SELECT StudentID, FirstName, Grade
+FROM Students
+WHERE Class = "10A" AND Grade > 60;</pre>
+  <div class="scroll"><table><tr><th>StudentID</th><th>FirstName</th><th>Grade</th></tr><tr><td>S001</td><td>Aung</td><td>82</td></tr><tr><td>S002</td><td>Su</td><td>91</td></tr></table></div>
+<pre class="code" data-lang="SQL">SELECT *
+FROM Students
+ORDER BY Grade DESC;</pre>
+  <p>Shows all fields, with the highest grade first: S002 (91), S006 (88), S001 (82), S004 (78), S003 (67), S005 (55).</p>
+<pre class="code" data-lang="SQL">SELECT COUNT(StudentID)
+FROM Students
+WHERE Class = "10A";           -- result: 3
+
+SELECT SUM(Grade)
+FROM Students
+WHERE Class = "10B";           -- result: 233 (67 + 78 + 88)</pre>
+  <div class="callout warn"><span class="lab">Common mistakes</span>
+    <ul><li>Forgetting the semicolon at the end or the quotes around text.</li><li>Writing fields in <code>SELECT</code> that the question did not ask for.</li><li>Using <code>=</code> when the question needs <code>&gt;=</code> ("at least" means greater than <em>or equal to</em>).</li></ul>
+  </div>
+</article>
+
+<!-- ======== CHAPTER 10 ======== -->
+<article class="chapter" data-ch="10" data-title="Boolean Logic" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Chapter 10 — Boolean Logic</h2>
+  <p>This chapter is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">10</div><div><h2>Boolean Logic</h2><p>Logic gates, truth tables, and turning a written condition into a circuit.</p></div></div>
+<div class="pdf-link"><a class="btn" href="pdfs/cs-0478-chapter-10.pdf" target="_blank" rel="noopener noreferrer">⬇ Download PDF</a></div>
+
+  <h3><small>10.1</small>Logic gates</h3>
+  <p>A logic gate takes one or more binary inputs (1 = true / on, 0 = false / off) and gives one output. <strong>NOT</strong> has one input; every other gate you need has two. Try each one:</p>
+  <div class="lab-box">
+    <h4>Try it: gate playground</h4>
+    <p class="hint">Switch A and B on and off. Each gate shows its output. NOT uses only A.</p>
+    <div class="toggles">
+      <button type="button" class="tg" id="tgA" role="switch" aria-checked="false">A = <span>0</span></button>
+      <button type="button" class="tg" id="tgB" role="switch" aria-checked="false">B = <span>0</span></button>
+    </div>
+    <div class="gates" id="gateGrid"></div>
+  </div>
+  <div class="scroll"><table>
+    <tr><th>Gate</th><th>Rule</th><th>Boolean form</th></tr>
+    <tr><td>NOT</td><td>Output is the opposite of the input</td><td class="mono">X = NOT A</td></tr>
+    <tr><td>AND</td><td>Output 1 only when <em>both</em> inputs are 1</td><td class="mono">X = A AND B</td></tr>
+    <tr><td>OR</td><td>Output 1 when <em>at least one</em> input is 1</td><td class="mono">X = A OR B</td></tr>
+    <tr><td>NAND</td><td>NOT AND: the opposite of AND</td><td class="mono">X = NOT (A AND B)</td></tr>
+    <tr><td>NOR</td><td>NOT OR: the opposite of OR</td><td class="mono">X = NOT (A OR B)</td></tr>
+    <tr><td>XOR</td><td>Output 1 when the inputs are <em>different</em></td><td class="mono">X = A XOR B</td></tr>
+  </table></div>
+  <h4>Truth tables</h4>
+  <div class="scroll"><table class="tt">
+    <tr><th>A</th><th>B</th><th>AND</th><th>OR</th><th>NAND</th><th>NOR</th><th>XOR</th></tr>
+    <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+    <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+    <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+  </table></div>
+  <div class="scroll" style="max-width:220px"><table class="tt"><tr><th>A</th><th>NOT A</th></tr><tr><td>0</td><td>1</td></tr><tr><td>1</td><td>0</td></tr></table></div>
+
+  <h3><small>10.2</small>Logic circuits and truth tables</h3>
+  <p>Circuits join gates so that the output of one is the input of another. Work from the inputs towards the output, and add one column for every gate. With <em>n</em> inputs a truth table has 2<sup>n</sup> rows (two inputs: 4 rows; three inputs: 8 rows). List the input rows in binary counting order.</p>
+  <h4>From a statement to an expression</h4>
+  <p>"An alarm (X) sounds if the door is open (A) <strong>and</strong> the system is armed (B), <strong>or</strong> the panic button (C) is pressed." Becomes <code>X = (A AND B) OR C</code>. Words map straight to gates: <em>and</em> → AND, <em>or</em> → OR, <em>not</em> → NOT.</p>
+  <div class="lab-box">
+    <h4>Try it: truth table builder</h4>
+    <p class="hint">Choose an expression. The table shows the working column for each gate.</p>
+    <div class="rowbtns"><select id="ttSel" aria-label="Expression" style="background:var(--surface-2);color:var(--ink);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit"></select></div>
+    <div class="scroll"><table class="tt" id="ttOut"></table></div>
+  </div>
+  <div class="callout"><span class="lab">Exam tip</span> Fill the truth table one gate at a time and write the working column, even if the question does not ask for it. A wrong final answer can still earn marks for correct working columns. Check that the number of rows is 2<sup>n</sup>.</div>
+</article>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- =============== MIND MAPS =============== -->
+<section id="view-mm" hidden>
+  <div class="wrap">
+    <div class="viewhead">
+      <h1>Mind maps · Chapters 1 to 10</h1>
+      <p>One-page visual summaries for quick revision. Each map opens in a new tab on Google Drive.</p>
+    </div>
+    <div class="mmtools">
+      <input type="search" id="mmSearch" placeholder="Search, e.g. binary or SQL" aria-label="Search mind maps" autocomplete="off">
+      <div class="chips" role="group" aria-label="Filter by paper">
+        <button type="button" class="chip-b" data-f="all" aria-pressed="true">All chapters</button>
+        <button type="button" class="chip-b" data-f="p1" aria-pressed="false">Paper 1</button>
+        <button type="button" class="chip-b" data-f="p2" aria-pressed="false">Paper 2</button>
+      </div>
+    </div>
+    <div class="mmgrid" id="mmGrid"></div>
+  </div>
+</section>
+</main>
+
+<footer class="foot"><div class="wrap">Cambridge IGCSE Computer Science 0478 revision portal · Notes and mind maps by Tr. Wai Lin Htet</div></footer>
+
+<script>
+(function(){
+'use strict';
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+/* ---------- data ---------- */
+const CH={
+  1:['Data Representation','Binary, hexadecimal and two’s complement; how text, sound and images are stored; lossy and lossless compression.','p1'],
+  2:['Data Transmission','Packets, serial and parallel, USB, error detection (parity, checksum, ARQ) and encryption.','p1'],
+  3:['Hardware','Von Neumann architecture, CPU registers and the fetch–decode–execute cycle, I/O devices, storage, network hardware.','p1'],
+  4:['Software','Operating systems, utilities, interrupts, compilers and interpreters, IDEs.','p1'],
+  5:['The Internet and its Uses','The web, DNS, HTTPS, cookies, blockchain, and cyber security threats and defences.','p1'],
+  6:['Automated and Emerging Technologies','Sensors, actuators and feedback loops; robotics; artificial intelligence and expert systems.','p1'],
+  7:['Algorithm Design and Problem-solving','The twelve essentials: SDLC, flowcharts, data types, loops, searching, sorting, validation and trace tables.','p2'],
+  8:['Programming','Python and pseudocode: strings and case, 1D and 2D arrays, file handling, subprograms, search and sort.','p2'],
+  9:['Databases','Tables, records, fields and primary keys; SQL with SELECT, FROM, WHERE, ORDER BY, SUM and COUNT.','p2'],
+  10:['Boolean Logic','AND, OR, NOT, NAND, NOR and XOR gates; truth tables; logic circuits.','p2']
+};
+const D='https://drive.google.com/file/d/';
+const MM={
+  1:[D+'1lSMngSurpT9z3dgO9nLDlTY_hjhruSdy/view?usp=sharing'],
+  2:[D+'1O-gG44Q0UP3EHAgIsLojvzAernMFv7NB/view?usp=sharing',D+'1MMJVoKreIzWmhnmiTp2fpJq7uquH2Dub/view?usp=sharing'],
+  3:[D+'1bdm4Wety-jzHcHNoikC99qT6Uhmh77eq/view?usp=sharing'],
+  4:[D+'13EHaS03r7PIs4vlPu0wBfX5RUmPcN2Uy/view?usp=sharing'],
+  5:[D+'1BfWuw03tltkI5mT98GhKjX5__ToyYtWN/view?usp=sharing'],
+  6:[D+'1R9K97ZARugL9hvKkW7ON923kQOu_zDEh/view?usp=sharing'],
+  7:[D+'1i3YrKOUXmz3bXcWtPrmasCoUtFH1Td8v/view?usp=sharing',D+'1Jm_IkGKNCmiksLEpsogunWwq-F8_wkDO/view?usp=sharing'],
+  8:[D+'1A6qoKOFkjWcDSNtfYzCZW-UGc6I8w8Jf/view?usp=sharing',D+'1Hwdx0A04QviDG2KrCpYY4PXge5b120G3/view?usp=sharing'],
+  9:[D+'1_73m_ZvSMaP57RV47U9FtXIFNhozzdnF/view?usp=sharing',D+'1GkeJU2xT2lmTd-M-0TcUB1d8SbzUyK11/view?usp=sharing'],
+  10:[D+'1S9tQFerZ6k_DrCsaCD9g4earT-z4IQ1n/view?usp=sharing',D+'1iImge8dDAjcRwr03zH0qnktsm9PfYu8D/view?usp=sharing']
+};
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- access state (Firebase gate lives in the module script below) ---------- */
+// The page starts locked (body.chapters-locked): Chapter 1 is free and
+// Chapters 2-10 + mind maps 2-10 show lock panels until the Firebase module
+// unlocks them. Sign-in buttons carry [data-signin]; this handler works even
+// if the module fails to load (offline), so the call to action never dies.
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-signin]');
+  if(b) location.assign('login.html');
+});
+
+/* ---------- home lists ---------- */
+function rows(paper){
+  return Object.keys(CH).filter(k=>CH[k][2]===paper).map(k=>
+    `<li><button type="button" class="chrow${k==='1'?'':' locked-link'}" data-go="${paper}/${k}"><span class="n">${k}</span><span class="t">${esc(CH[k][0])}</span><span class="d">${esc(CH[k][1])}</span></button></li>`).join('');
+}
+$('#listP1').innerHTML=rows('p1');
+$('#listP2').innerHTML=rows('p2');
+$('#seeList').addEventListener('click',()=>$('#chapter-list').scrollIntoView({behavior:'smooth',block:'start'}));
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-go]');
+  if(!b) return;
+  const t=b.dataset.go;
+  if(location.hash.replace(/^#/,'')===t) route(); else location.hash=t;
+});
+
+/* ---------- hero byte ---------- */
+(function(){
+  const bits=[0,1,0,0,0,0,0,1], W=[128,64,32,16,8,4,2,1], box=$('#bits');
+  function paint(){
+    box.innerHTML=bits.map((b,i)=>`<button type="button" class="bit" role="switch" aria-checked="${b?'true':'false'}" data-i="${i}" aria-label="Bit worth ${W[i]}">${b}<small>${W[i]}</small></button>`).join('');
+    const v=bits.reduce((s,b,i)=>s+b*W[i],0);
+    $('#rDen').textContent=v;
+    $('#rHex').textContent=v.toString(16).toUpperCase().padStart(2,'0');
+    $('#rChr').textContent=v===32?'space':(v>32&&v<127)?String.fromCharCode(v):'none';
+  }
+  box.addEventListener('click',e=>{const b=e.target.closest('.bit');if(!b)return;const i=+b.dataset.i;bits[i]=bits[i]?0:1;paint();$(`.bit[data-i="${i}"]`,box).focus()});
+  paint();
+})();
+
+/* ---------- readers ---------- */
+const views={};
+['p1','p2'].forEach(paper=>{
+  const r=$(`[data-reader="${paper}"]`), nav=$('.chapnav',r), arts=$$('.chapter',r);
+  const keys=arts.map(a=>a.dataset.ch);
+  nav.innerHTML=arts.map(a=>`<a href="#${paper}/${a.dataset.ch}" data-ch="${a.dataset.ch}"${a.dataset.ch==='1'?'':' class="locked-link"'}><b>${a.dataset.ch}</b><span>${esc(a.dataset.title)}</span></a>`).join('');
+  arts.forEach((a,i)=>{
+    const prev=arts[i-1], next=arts[i+1];
+    const p=document.createElement('div');p.className='pager';
+    p.innerHTML=(prev?`<a class="btn${prev.dataset.ch==='1'?'':' locked-link'}" href="#${paper}/${prev.dataset.ch}">Previous: chapter ${prev.dataset.ch}, ${esc(prev.dataset.title)}</a>`:'<span class="sp"></span>')+
+                (next?`<a class="btn solid${next.dataset.ch==='1'?'':' locked-link'}" href="#${paper}/${next.dataset.ch}">Next: chapter ${next.dataset.ch}, ${esc(next.dataset.title)}</a>`:'');
+    a.appendChild(p);
+  });
+  views[paper]={r,nav,arts,keys};
+});
+function showChapter(paper,ch){
+  const v=views[paper];
+  if(!ch||!v.keys.includes(ch)) ch=v.keys[0];
+  v.arts.forEach(a=>a.hidden=a.dataset.ch!==ch);
+  $$('a',v.nav).forEach(a=>a.setAttribute('aria-current',a.dataset.ch===ch?'true':'false'));
+  return ch;
+}
+
+/* ---------- mind maps ---------- */
+const mmState={q:'',f:'all'};
+function paintMM(){
+  const q=mmState.q.trim().toLowerCase();
+  const locked=document.body.classList.contains('chapters-locked');
+  const list=Object.keys(CH).filter(k=>{
+    const [t,d,p]=CH[k];
+    return (mmState.f==='all'||p===mmState.f)&&(!q||(('chapter '+k+' '+t+' '+d).toLowerCase().includes(q)));
+  });
+  $('#mmGrid').innerHTML=list.length?list.map(k=>{
+    const [t,d,p]=CH[k], links=MM[k];
+    if(locked&&k!=='1'){
+      return `<article class="mmcard ${p} locked-mm"><div class="n">${k}</div><h3>${esc(t)}</h3><p>${esc(d)}</p><div class="links"><button type="button" class="mm-lock-btn" data-signin>\u{1F512} Sign in to unlock this mind map</button></div></article>`;
+    }
+    return `<article class="mmcard ${p}"><div class="n">${k}</div><h3>${esc(t)}</h3><p>${esc(d)}</p><div class="links">`+
+      links.map((u,i)=>`<a href="${u}" target="_blank" rel="noopener noreferrer">${links.length>1?'Open mind map '+(i+1):'Open mind map'}<svg aria-hidden="true"><use href="#i-ext"/></svg></a>`).join('')+`</div></article>`;
+  }).join(''):'<p class="empty">No chapter matches that search. Try a shorter word, such as “binary” or “SQL”.</p>';
+}
+$('#mmSearch').addEventListener('input',e=>{mmState.q=e.target.value;paintMM()});
+$$('.chip-b').forEach(b=>b.addEventListener('click',()=>{
+  mmState.f=b.dataset.f;$$('.chip-b').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));paintMM();
+}));
+paintMM();
+window.__csPaintMM=paintMM;
+
+/* ---------- router ---------- */
+let lastView=null, lastCh=null;
+function route(){
+  const raw=location.hash.replace(/^#/,'');
+  const [v,sub]=raw.split('/');
+  let view=['p1','p2','mm'].includes(v)?v:'home';
+  // No redirect: locked chapters show their lock panel; Chapter 1 is free.
+  ['home','p1','p2','mm'].forEach(n=>{$('#view-'+n).hidden=n!==view});
+  $$('.tabs a').forEach(a=>{if(a.dataset.tab===view)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  let ch=null;
+  if(view==='p1'||view==='p2') ch=showChapter(view,sub);
+  if(view!==lastView){window.scrollTo(0,0)}
+  else if(ch&&ch!==lastCh){views[view].r.scrollIntoView({block:'start'})}
+  lastView=view;lastCh=ch;
+  const t={home:'IGCSE Computer Science 0478 · Notes, Code & Mind Maps',p1:'Paper 1 notes · IGCSE Computer Science',p2:'Paper 2 notes · IGCSE Computer Science',mm:'Mind maps · IGCSE Computer Science'};
+  document.title=t[view];
+}
+window.addEventListener('hashchange',route);
+window.__csRoute=route;
+
+/* ---------- ch1 converter ---------- */
+(function(){
+  const d=$('#cv-d'),b=$('#cv-b'),h=$('#cv-h'),note=$('#cv-note');
+  function set(v,src){
+    if(src!=='d')d.value=v;
+    const bin=v.toString(2).padStart(8,'0'), hex=v.toString(16).toUpperCase().padStart(2,'0');
+    if(src!=='b')b.value=bin;
+    if(src!=='h')h.value=hex;
+    note.textContent=`${bin.slice(0,4)} ${bin.slice(4)} → ${hex[0]} ${hex[1]} → denary ${v}`;
+  }
+  const bad=()=>{note.textContent='Enter a whole number from 0 to 255, a binary number of up to 8 bits, or a hex value from 00 to FF.'};
+  d.addEventListener('input',()=>{const v=parseInt(d.value,10);/^\d{1,3}$/.test(d.value.trim())&&v<=255?set(v,'d'):bad()});
+  b.addEventListener('input',()=>{/^[01]{1,8}$/.test(b.value.trim())?set(parseInt(b.value.trim(),2),'b'):bad()});
+  h.addEventListener('input',()=>{/^[0-9a-fA-F]{1,2}$/.test(h.value.trim())?set(parseInt(h.value.trim(),16),'h'):bad()});
+  set(156);
+})();
+
+/* ---------- ch7 bubble sort stepper ---------- */
+(function(){
+  const inp=$('#bs-in'),cells=$('#bs-cells'),msg=$('#bs-msg'),stepB=$('#bs-step'),allB=$('#bs-all');
+  let steps=[],pos=0;
+  function build(a){
+    const n=a.length,arr=a.slice(),done=[];
+    steps=[{arr:arr.slice(),cmp:null,swp:false,done:[],msg:'Start. The list is '+arr.join(', ')+'. Press Step to compare the first pair.'}];
+    for(let i=0;i<n-1;i++){
+      let swapped=false;
+      for(let j=0;j<n-1-i;j++){
+        const x=arr[j],y=arr[j+1];let sw=false;
+        if(x>y){arr[j]=y;arr[j+1]=x;sw=true;swapped=true}
+        steps.push({arr:arr.slice(),cmp:[j,j+1],swp:sw,done:done.slice(),msg:`Pass ${i+1}: is ${x} > ${y}? ${sw?'Yes, so swap them.':'No, so leave them.'}`});
+      }
+      done.push(n-1-i);
+      if(!swapped){
+        for(let k=0;k<n-1-i;k++)done.push(k);
+        steps.push({arr:arr.slice(),cmp:null,swp:false,done:done.slice(),msg:`Pass ${i+1} made no swaps, so the list is sorted: ${arr.join(', ')}.`});
+        return;
+      }
+      steps.push({arr:arr.slice(),cmp:null,swp:false,done:done.slice(),msg:`End of pass ${i+1}: ${arr[n-1-i]} is now in its final place.`});
+    }
+    const all=[...Array(n).keys()];
+    steps.push({arr:arr.slice(),cmp:null,swp:false,done:all,msg:`All passes complete. Sorted: ${arr.join(', ')}.`});
+  }
+  function paint(){
+    const s=steps[pos];
+    cells.innerHTML=s.arr.map((v,i)=>{
+      let c='cell';
+      if(s.cmp&&s.cmp.includes(i))c+=s.swp?' swp':' cmp';
+      else if(s.done.includes(i))c+=' done';
+      return `<div class="${c}">${v}</div>`;
+    }).join('');
+    msg.textContent=s.msg;
+    const end=pos>=steps.length-1;
+    stepB.disabled=end;allB.disabled=end;
+    stepB.style.opacity=allB.style.opacity=end?.5:1;
+  }
+  function load(){
+    const a=inp.value.split(',').map(x=>parseFloat(x.trim())).filter(x=>Number.isFinite(x)).slice(0,10);
+    if(a.length<2){msg.textContent='Enter at least two numbers separated by commas.';return}
+    build(a);pos=0;paint();
+  }
+  $('#bs-load').addEventListener('click',load);
+  stepB.addEventListener('click',()=>{if(pos<steps.length-1){pos++;paint()}});
+  allB.addEventListener('click',()=>{pos=steps.length-1;paint()});
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')load()});
+  load();
+})();
+
+/* ---------- ch10 gates ---------- */
+(function(){
+  const FN={NOT:a=>+!a,AND:(a,b)=>a&b,OR:(a,b)=>a|b,NAND:(a,b)=>+!(a&b),NOR:(a,b)=>+!(a|b),XOR:(a,b)=>a^b};
+  const AND='M30 8H58A22 22 0 0 1 58 52H30Z', OR='M26 8Q62 8 84 30Q62 52 26 52Q40 30 26 8Z';
+  function svg(n){
+    const o={
+      NOT:`<path d="M10 30H30M30 10L74 30L30 50Z M82 30H110" /><circle cx="78" cy="30" r="4"/>`,
+      AND:`<path d="M10 20H30M10 40H30M80 30H110"/><path d="${AND}"/>`,
+      OR:`<path d="M10 20H35M10 40H35M84 30H110"/><path d="${OR}"/>`,
+      NAND:`<path d="M10 20H30M10 40H30M88 30H110"/><path d="${AND}"/><circle cx="84" cy="30" r="4"/>`,
+      NOR:`<path d="M10 20H35M10 40H35M92 30H110"/><path d="${OR}"/><circle cx="88" cy="30" r="4"/>`,
+      XOR:`<path d="M10 20H33M10 40H33M84 30H110"/><path d="${OR}"/><path d="M17 8Q31 30 17 52"/>`
+    }[n];
+    return `<svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${o}</svg>`;
+  }
+  const grid=$('#gateGrid'),A=$('#tgA'),B=$('#tgB');let a=0,b=0;
+  grid.innerHTML=Object.keys(FN).map(n=>`<div class="gate" data-g="${n}">${svg(n)}<b>${n}</b><span class="q">0</span></div>`).join('');
+  function paint(){
+    A.setAttribute('aria-checked',a?'true':'false');B.setAttribute('aria-checked',b?'true':'false');
+    $('span',A).textContent=a;$('span',B).textContent=b;
+    $$('.gate',grid).forEach(g=>{const n=g.dataset.g,v=n==='NOT'?FN.NOT(a):FN[n](a,b);const q=$('.q',g);q.textContent=v;q.classList.toggle('on',!!v);
+      });
+  }
+  A.addEventListener('click',()=>{a=a?0:1;paint()});B.addEventListener('click',()=>{b=b?0:1;paint()});paint();
+
+  const EX=[
+    {t:'X = (A AND B) OR C',v:['A','B','C'],c:[['A AND B',(a,b)=>a&b]],x:(a,b,c)=>(a&b)|c},
+    {t:'X = (A AND B) OR NOT C',v:['A','B','C'],c:[['A AND B',(a,b)=>a&b],['NOT C',(a,b,c)=>+!c]],x:(a,b,c)=>(a&b)|+!c},
+    {t:'X = NOT (A OR B)',v:['A','B'],c:[['A OR B',(a,b)=>a|b]],x:(a,b)=>+!(a|b)},
+    {t:'X = (A XOR B) AND C',v:['A','B','C'],c:[['A XOR B',(a,b)=>a^b]],x:(a,b,c)=>(a^b)&c},
+    {t:'X = NOT (A AND B) AND (B OR C)',v:['A','B','C'],c:[['A AND B',(a,b)=>a&b],['NOT (A AND B)',(a,b)=>+!(a&b)],['B OR C',(a,b,c)=>b|c]],x:(a,b,c)=>(+!(a&b))&(b|c)}
+  ];
+  const sel=$('#ttSel'),out=$('#ttOut');
+  sel.innerHTML=EX.map((e,i)=>`<option value="${i}">${esc(e.t)}</option>`).join('');
+  function tt(){
+    const e=EX[+sel.value],n=e.v.length;
+    let h='<tr>'+e.v.map(v=>`<th>${v}</th>`).join('')+e.c.map(c=>`<th>${esc(c[0])}</th>`).join('')+'<th>X</th></tr>';
+    for(let r=0;r<(1<<n);r++){
+      const bits=e.v.map((_,i)=>(r>>(n-1-i))&1);
+      h+='<tr>'+bits.map(x=>`<td>${x}</td>`).join('')+e.c.map(c=>`<td>${c[1](...bits)}</td>`).join('')+`<td class="out">${e.x(...bits)}</td></tr>`;
+    }
+    out.innerHTML=h;
+  }
+  sel.addEventListener('change',tt);tt();
+})();
+
+/* ---------- start ---------- */
+if(!location.hash) { try{history.replaceState(null,'','#home')}catch(e){} }
+route();
+})();
+</script>
+
+<script type="module">
+  // ===== Firebase Login Gate + Free Chapter 1 Preview (v2 pattern, Nov 2026) =====
+  // Access rule: Chapter 1 (Data Representation) is free for everyone, including
+  // its mind map. Chapters 2-10 and mind maps 2-10 unlock after Google sign-in
+  // via the SrWL portal + teacher approval. No passwords are stored on this page.
+  // The dashboard enrollment + approval remain the real access control; this
+  // check keeps the notes page itself behind the same Google login.
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+  import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+  import { firebaseConfig, firebaseReady } from './assets/portal/firebase-config.js';
+
+  // Tells the offline fallback below that this module loaded.
+  window.__srwlGateRan = true;
+
+  // Remove the credential left behind by the old class-password system.
+  try { localStorage.removeItem('cs_auth'); } catch (e) { /* storage unavailable - nothing to clean */ }
+
+  // Google Apps Script Web App URL (attendance logging, same as the ICT notes).
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweswRLHak84m6MkD8DrvxorOaH_ajSIut1uhAitFJDnF1Mrhg_m-vc7nfXaD7ibMBn/exec';
+
+  function logVisit(name, username, event) {
+    if (!SCRIPT_URL) return;
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ name: name, username: username, timestamp: new Date().toISOString(), event: event })
+    }).catch(function (err) { console.warn('Attendance log failed:', err); });
+  }
+
+  const overlay = document.getElementById('authOverlay');
+  const statusMsg = document.getElementById('authStatusMsg');
+  const goLoginBtn = document.getElementById('authGoLoginBtn');
+  const authBtn = document.getElementById('authBtn');
+  const userNameEl = document.getElementById('authUserName');
+  const freeBanner = document.getElementById('freeBanner');
+  const freeBannerMsg = document.getElementById('freeBannerMsg');
+  const freeBannerBtn = document.getElementById('freeBannerBtn');
+  let auth = null;
+
+  function setBanner(text, showButton) {
+    if (freeBannerMsg) freeBannerMsg.textContent = text;
+    if (freeBanner) freeBanner.style.display = 'flex';
+    if (freeBannerBtn) freeBannerBtn.style.display = showButton ? '' : 'none';
+  }
+
+  function hideBanner() {
+    if (freeBanner) freeBanner.style.display = 'none';
+  }
+
+  function showSignedOut() {
+    document.body.classList.add('chapters-locked');
+    if (authBtn) { authBtn.textContent = 'Sign in with Google'; authBtn.classList.add('solid'); }
+    if (userNameEl) userNameEl.hidden = true;
+    if (window.__csPaintMM) window.__csPaintMM();
+  }
+
+  function showSignedIn(name) {
+    if (authBtn) { authBtn.textContent = 'Log out'; authBtn.classList.remove('solid'); }
+    if (userNameEl) { userNameEl.textContent = name; userNameEl.hidden = false; }
+  }
+
+  // Free-preview state: Chapter 1 readable, Chapters 2-10 + mind maps 2-10 locked.
+  function lockChapters() {
+    document.body.classList.add('chapters-locked');
+    if (window.__csPaintMM) window.__csPaintMM();
+    if (window.__csRoute) window.__csRoute();
+  }
+
+  // Full access: everything unlocked, banner hidden.
+  function unlockChapters(name) {
+    document.body.classList.remove('chapters-locked');
+    hideBanner();
+    if (overlay) overlay.style.display = 'none';
+    showSignedIn(name);
+    if (window.__csPaintMM) window.__csPaintMM();
+    if (window.__csRoute) window.__csRoute();
+  }
+
+  // Hard error only: show the full-page overlay (Firebase not configured,
+  // or the account check itself failed).
+  function lockPage(message, showLoginButton) {
+    if (overlay) overlay.style.display = 'flex';
+    if (statusMsg) { statusMsg.textContent = message; statusMsg.className = 'auth-msg show'; }
+    if (goLoginBtn) goLoginBtn.style.display = showLoginButton ? '' : 'none';
+  }
+
+  if (goLoginBtn) goLoginBtn.addEventListener('click', function () { location.assign('login.html'); });
+  if (freeBannerBtn) freeBannerBtn.addEventListener('click', function () { location.assign('login.html'); });
+
+  if (authBtn) {
+    authBtn.addEventListener('click', async function () {
+      if (!auth || !auth.currentUser) { location.assign('login.html'); return; }
+      try { await signOut(auth); } catch (e) { console.warn('Sign-out failed:', e); }
+      location.assign('login.html');
+    });
+  }
+
+  if (!firebaseReady) {
+    lockPage('Firebase is not configured. Please contact your teacher.', false);
+  } else {
+    const app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Same admin check as assets/portal/portal.js: a denied read is not admin.
+    const isAdmin = async (uid) => {
+      try {
+        const snapshot = await getDoc(doc(db, 'admins', uid));
+        return snapshot.exists();
+      } catch (error) {
+        if (error.code === 'permission-denied') return false;
+        throw error;
+      }
+    };
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        // Signed out: no redirect — Chapter 1 is free, the rest is locked.
+        showSignedOut();
+        lockChapters();
+        setBanner('📖 Chapter 1 is free — sign in with Google to unlock Chapters 2–10 and their mind maps.', true);
+        return;
+      }
+      const displayName = user.displayName || (user.email ? user.email.split('@')[0] : 'Student');
+      try {
+        const admin = await isAdmin(user.uid);
+        let approved = null; // null = could not verify (read denied); dashboard already enforces approval
+        try {
+          const snapshot = await getDoc(doc(db, 'users', user.uid));
+          if (snapshot.exists()) approved = snapshot.data().approved === true;
+        } catch (error) {
+          if (error.code !== 'permission-denied') throw error;
+          console.warn('Could not verify approval - allowing signed-in user. Check Firestore Rules for /users/{uid}.', error);
+        }
+        if (admin || approved === true || approved === null) {
+          unlockChapters(displayName);
+          logVisit(displayName, user.email || user.uid, 'firebase-login');
+        } else {
+          // Signed in, waiting for teacher approval: Chapter 1 is free meanwhile.
+          showSignedIn(displayName);
+          lockChapters();
+          setBanner('⏳ Your registration is waiting for teacher approval — you can read Chapter 1 meanwhile.', true);
+        }
+      } catch (error) {
+        console.error('Account check failed:', error);
+        lockPage('Unable to verify your account. Please try again or contact your teacher.', true);
+      }
+    });
+  }
+</script>
+<script>
+  // Fallback if the Firebase module above failed to load (e.g. offline).
+  // Chapters stay locked (fail closed) but Chapter 1 below is still free to read.
+  setTimeout(function () {
+    if (window.__srwlGateRan) return; // module loaded - auth state already handled
+    var banner = document.getElementById('freeBanner');
+    var msg = document.getElementById('freeBannerMsg');
+    if (banner && msg) {
+      banner.style.display = 'flex';
+      msg.textContent = 'Could not reach the sign-in service. Check your connection, then refresh this page. Chapter 1 below is still free to read.';
+    }
+  }, 8000);
+</script>
+</body>
+</html>

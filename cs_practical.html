@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS Paper 2 Revision | Tr.WaiLinHtet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #F3F5F9;
+      --card-bg: #FFFFFF;
+      --text: #131C2E;
+      --text-muted: #556175;
+      --border: #DCE2EC;
+      --accent: #5E43D2;
+      --accent-light: #ECE8FB;
+      --code-bg: #F0F3F8;
+      --code-border: #DCE2EC;
+      --code-text: #1B2740;
+      --table-header-bg: #F7F9FC;
+      --diagram-stroke: #131C2E;
+      --diagram-fill: #FFFFFF;
+      --nav-active-bg: #131C2E;
+      --nav-active-text: #F3F5F9;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0C111B;
+      --card-bg: #141B29;
+      --text: #E8EDF5;
+      --text-muted: #9AA7BB;
+      --border: #26314A;
+      --accent: #A797FF;
+      --accent-light: rgba(167, 151, 255, 0.15);
+      --code-bg: #0B1120;
+      --code-border: #26314A;
+      --code-text: #CBD5E6;
+      --table-header-bg: #101623;
+      --diagram-stroke: #E8EDF5;
+      --diagram-fill: #141B29;
+      --nav-active-bg: #6AAAFF;
+      --nav-active-text: #0C111B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0 1rem;
+    }
+
+    header {
+      max-width: 1000px;
+      margin: 2.5rem auto 2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .header-content {
+      flex: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.65rem;
+      background-color: var(--accent-light);
+      color: var(--accent);
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+    }
+
+    header h1 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.9rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      min-width: 132px;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .home-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.9rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      min-width: 132px;
+    }
+
+    .home-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    nav {
+      max-width: 1000px;
+      margin: 0 auto 2.5rem;
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .nav-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 0.55rem 1.15rem;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover {
+      color: var(--text);
+      border-color: var(--text-muted);
+    }
+
+    .nav-btn.active {
+      background: var(--nav-active-bg);
+      color: var(--nav-active-text);
+      border-color: var(--nav-active-bg);
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto 4rem;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card p, .card li {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .card ul {
+      padding-left: 1.25rem;
+      margin: 0.5rem 0;
+    }
+
+    pre, code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.84rem;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: 10px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+      color: var(--code-text);
+      line-height: 1.5;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      background: var(--card-bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-weight: 600;
+      background: var(--table-header-bg);
+      color: var(--text);
+    }
+
+    .symbol-shape {
+      display: inline-block;
+      width: 70px;
+      text-align: center;
+      font-size: 0.75rem;
+      padding: 4px;
+      border: 1.5px solid var(--text);
+      font-weight: 500;
+    }
+
+    .terminator { border-radius: 12px; }
+    .process { border-radius: 0; }
+    .io { transform: skew(-15deg); }
+    .decision { transform: rotate(45deg); width: 24px; height: 24px; margin: 8px auto; }
+
+    /* Logic Gates Grid */
+    .gate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gate-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gate-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .gate-header h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .gate-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      min-height: 2.2rem;
+    }
+
+    .gate-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+    }
+
+    .gate-svg-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gate-svg-container svg {
+      width: 120px;
+      height: 60px;
+      stroke: var(--diagram-stroke);
+      fill: var(--diagram-fill);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .truth-table-mini {
+      width: auto;
+      margin-top: 0;
+      border: 1px solid var(--border);
+      font-size: 0.75rem;
+    }
+
+    .truth-table-mini th, .truth-table-mini td {
+      padding: 0.25rem 0.5rem;
+      text-align: center;
+    }
+
+    /* ===== Interactive Pseudocode Visualizer ===== */
+    .viz-card { grid-column: 1 / -1; }
+    .viz-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+    .viz-select {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      flex: 1;
+      min-width: 220px;
+    }
+    .viz-btn {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.95rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .viz-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .viz-btn.viz-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .viz-speed {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.45rem 0.6rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.8rem;
+    }
+    .viz-desc { font-size: 0.85rem; color: var(--text-muted); margin: -0.4rem 0 1rem; }
+    .viz-stage {
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      border-radius: 10px;
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      padding: 1rem;
+      margin-bottom: 0.85rem;
+    }
+    .viz-narration {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      padding: 0.7rem 1rem;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .viz-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; }
+    @media (max-width: 720px) { .viz-grid { grid-template-columns: 1fr; } }
+    .viz-panel { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; }
+    .viz-panel-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 700; margin-bottom: 0.6rem; }
+    .viz-code-line { padding: 3px 8px; border-radius: 4px; line-height: 1.65; font-size: 0.83rem; white-space: pre-wrap; font-family: 'Fira Code', monospace; color: var(--code-text); }
+    .viz-code-line.active { background: var(--accent-light); color: var(--accent); font-weight: 700; border-left: 3px solid var(--accent); }
+    .viz-trace-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .viz-trace-table th { text-align: left; padding: 6px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.68rem; text-transform: uppercase; }
+    .viz-trace-table td { padding: 6px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--accent); }
+    .viz-mem-card { display: flex; flex-direction: column; background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; min-width: 130px; margin: 4px; }
+    .viz-mem-tag { background: var(--code-bg); padding: 4px 8px; font-size: 0.68rem; color: var(--text-muted); border-bottom: 1px solid var(--border); font-weight: 700; }
+    .viz-mem-val { padding: 10px; font-size: 1.1rem; font-weight: 800; color: var(--text); text-align: center; }
+    .viz-arr-slot { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 4px; }
+    .viz-arr-box { width: 44px; height: 44px; background: var(--card-bg); border: 2px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .viz-arr-box.active { border-color: var(--accent); background: var(--accent-light); }
+    .viz-arr-idx { font-size: 0.68rem; color: var(--text-muted); }
+    .viz-progress { font-size: 0.75rem; color: var(--text-muted); margin-left: auto; }
+
+    /* ===== Firebase Login Gate (SrWL portal: Google sign-in + teacher approval) ===== */
+    .auth-widget{
+      position:fixed;
+      bottom:16px; right:16px;
+      z-index:60;
+      display:flex; align-items:center; gap:10px;
+    }
+    .auth-pill{
+      display:none;
+      align-items:center; gap:8px;
+      background:var(--accent-light);
+      border:1px solid var(--accent);
+      box-shadow:0 4px 16px rgba(0,0,0,.12);
+      padding:8px 16px;
+      border-radius:20px;
+      font-weight:600;
+      font-size:0.85rem;
+      color:var(--text);
+      cursor:pointer;
+    }
+    .auth-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+    .auth-user{
+      display:none;
+      align-items:center; gap:10px;
+      background:var(--card-bg);
+      border:1px solid var(--border);
+      box-shadow:0 4px 16px rgba(0,0,0,.12);
+      padding:6px 8px 6px 14px;
+      border-radius:20px;
+      font-size:0.85rem;
+    }
+    .auth-user .avatar-sm{
+      width:26px;height:26px;border-radius:50%;
+      background:var(--accent); color:#fff;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1rem; font-weight:700;
+    }
+    .auth-user button{
+      border:none; background:none; cursor:pointer;
+      color:var(--text-muted); font-weight:600;
+      font-size:0.78rem; text-decoration:underline;
+    }
+
+    /* Full Screen Auth Overlay (Entrance Gate) */
+    .auth-overlay{
+      display:flex;
+      position:fixed; inset:0; z-index:999999;
+      background:rgba(12, 17, 27, 0.85);
+      backdrop-filter:blur(6px);
+      align-items:center; justify-content:center;
+      padding:20px;
+    }
+    .auth-card{
+      width:100%; max-width:400px;
+      background:var(--card-bg);
+      border:1px solid var(--border);
+      border-left:6px solid var(--accent);
+      border-radius:6px;
+      box-shadow:0 15px 40px rgba(0,0,0,0.35);
+      padding:30px 28px;
+      position:relative;
+    }
+    .auth-card h3{
+      margin-top:0; font-size:1.5rem;
+      font-weight:700; color:var(--accent);
+    }
+    .auth-submit{
+      margin-top:6px;
+      background:var(--accent); color:#fff; border:none;
+      padding:12px 16px; border-radius:20px; cursor:pointer;
+      font-weight:600; font-size:0.95rem;
+      box-shadow:0 4px 16px rgba(0,0,0,.12);
+    }
+    .auth-submit:hover{opacity:0.9;}
+    .auth-msg{
+      font-size:0.85rem;
+      padding:8px 10px; border-radius:8px; display:none;
+    }
+    .auth-msg.show{display:block;}
+    .auth-msg.err{background:#fdecea; color:#b3261e;}
+    .auth-msg.ok{background:#e6f4ea; color:#137333;}
+    .auth-note{
+      margin-top:16px; font-size:0.8rem; color:var(--text-muted);
+      line-height:1.5;
+    }
+
+    footer {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 0 3.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 600px) {
+      header { flex-direction: column; }
+      .header-actions { align-self: flex-start; }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- FIREBASE LOGIN GATE — replaces the old local class-password gate (Nov 2026).
+     Access is controlled by the SrWL Learning portal: Google sign-in + teacher approval.
+     No passwords are stored on this page. -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-card">
+    <h3>Student Login &#128274;</h3>
+    <div class="auth-msg show" id="authStatusMsg">Checking your Google sign-in&hellip;</div>
+    <button type="button" class="auth-submit" id="authGoLoginBtn" style="display:none;">Go to Login</button>
+    <p class="auth-note">This Paper 2 revision page is for approved SrWL Learning students. Sign in with Google on the login page &mdash; your teacher approves your account, then your courses appear on your dashboard. Your name and login time are automatically logged in the attendance list.</p>
+  </div>
+</div>
+
+<!-- FLOATING PROFILE BADGE -->
+
+<div class="auth-widget">
+  <div class="auth-pill" id="authOpenBtn"><span class="dot"></span>Sign in with Google</div>
+  <div class="auth-user" id="authUserBox">
+    <div class="avatar-sm" id="authAvatar">?</div>
+    <span id="authUserName">Student</span>
+    <button id="authLogoutBtn">log out</button>
+  </div>
+</div>
+
+  <header>
+    <div class="header-content">
+      <div class="badge">Paper 2 &bull; Computer Science</div>
+      <h1>Algorithms, Pseudocode & Data Structures</h1>
+      <p>CS revision created by Tr.WaiLinHtet</p>
+    </div>
+    
+    <div class="header-actions">
+      <a class="home-btn" href="index.html" title="Back to Home">
+        <span>&#8962;</span>
+        <span>Home</span>
+      </a>
+      <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()" title="Switch Light/Dark Mode">
+        <span id="themeIcon">&#9790;</span>
+        <span id="themeLabel">Dark Mode</span>
+      </button>
+    </div>
+  </header>
+
+  <nav>
+    <button class="nav-btn active" onclick="switchTab(event, 'sdlc-datatype')">1. SDLC &amp; Data Type</button>
+    <button class="nav-btn" onclick="switchTab(event, 'pseudocode')">2. Pseudocode</button>
+    <button class="nav-btn" onclick="switchTab(event, 'search-sort')">3. Search &amp; Sort</button>
+    <button class="nav-btn" onclick="switchTab(event, 'validation-testdata')">4. Validation &amp; Test Data</button>
+    <button class="nav-btn" onclick="switchTab(event, 'array-string-file')">5. Array, String &amp; File Handling</button>
+    <button class="nav-btn" onclick="switchTab(event, 'flowcharts')">6. Flowchart</button>
+    <button class="nav-btn" onclick="switchTab(event, 'trace-table')">7. Trace Table</button>
+    <button class="nav-btn" onclick="switchTab(event, 'programming')">8. Programming</button>
+    <button class="nav-btn" onclick="switchTab(event, 'databases')">9. Database</button>
+    <button class="nav-btn" onclick="switchTab(event, 'logic-gates')">10. Logic Gate</button>
+  </nav>
+
+  <main>
+    <!-- TAB 1: SDLC & DATA TYPE -->
+    <section id="sdlc-datatype" class="tab-content active">
+      <div class="grid">
+        <!-- SDLC -->
+        <div class="card">
+          <h3>Program Development Life Cycle (SDLC)</h3>
+          <p>The standard stages followed when developing a program:</p>
+          <ul>
+            <li><strong>Analysis:</strong> Understand the problem and define requirements.</li>
+            <li><strong>Design:</strong> Plan the solution using pseudocode, flowcharts or structure diagrams.</li>
+            <li><strong>Coding:</strong> Write the program in a programming language.</li>
+            <li><strong>Testing:</strong> Check the program works correctly using test data.</li>
+            <li><strong>Maintenance:</strong> Fix errors and improve the program after release.</li>
+          </ul>
+        </div>
+
+        <!-- IPO -->
+        <div class="card">
+          <h3>Program Structure: IPO</h3>
+          <p>Every program can be broken down into three stages:</p>
+          <ul>
+            <li><strong>Input:</strong> Data entered into the program (e.g. keyboard, sensor, file).</li>
+            <li><strong>Process:</strong> Calculations and decisions performed on the data.</li>
+            <li><strong>Output:</strong> Results displayed or stored (e.g. screen, file, printer).</li>
+          </ul>
+          <p>Design tools used to plan a solution before coding include <strong>flowcharts</strong> (symbols and flowlines showing the logic) and <strong>structure diagrams</strong> (hierarchical diagrams that break a problem down into smaller sub-tasks / modules).</p>
+        </div>
+
+        <!-- DATA TYPES -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Data Types</h3>
+          <table>
+            <thead>
+              <tr><th>Data Type</th><th>Keyword</th><th>Example</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Integer</td><td><code>INTEGER</code></td><td>5, -12, 100</td></tr>
+              <tr><td>Real / Float</td><td><code>REAL</code></td><td>3.14, -0.5, 99.9</td></tr>
+              <tr><td>Character</td><td><code>CHAR</code></td><td>'A', 'x', '7'</td></tr>
+              <tr><td>String</td><td><code>STRING</code></td><td>"Hello", "S1045"</td></tr>
+              <tr><td>Boolean</td><td><code>BOOLEAN</code></td><td>TRUE, FALSE</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- VARIABLES & CONSTANTS -->
+        <div class="card">
+          <h3>Variables &amp; Constants</h3>
+          <p><strong>Variable:</strong> A named storage location whose value <em>can change</em> while the program runs.</p>
+          <p><strong>Constant:</strong> A named storage location whose value <em>stays the same</em> throughout the program.</p>
+          <pre>DECLARE Score : INTEGER      // variable
+CONSTANT VAT = 0.20          // constant</pre>
+        </div>
+
+        <!-- OPERATORS -->
+        <div class="card">
+          <h3>Operators</h3>
+          <p><strong>Arithmetic:</strong> <code>+</code> add, <code>-</code> subtract, <code>*</code> multiply, <code>/</code> divide, <code>DIV</code> integer division, <code>MOD</code> remainder</p>
+          <p><strong>Comparison:</strong> <code>&gt;</code> <code>&lt;</code> <code>=</code> <code>&gt;=</code> <code>&lt;=</code> <code>&lt;&gt;</code></p>
+          <p><strong>Logical:</strong> <code>AND</code> (both true), <code>OR</code> (either true), <code>NOT</code> (opposite)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: PSEUDOCODE -->
+    <section id="pseudocode" class="tab-content">
+      <div class="grid">
+
+        <!-- INTERACTIVE VISUALIZER -->
+        <div class="card viz-card">
+          <h3>▶ Interactive Step-by-Step Visualizer</h3>
+          <div class="viz-toolbar">
+            <select class="viz-select" id="vizModuleSelect" onchange="vizLoadModule(this.value)">
+              <option value="selection_if">Selection: IF...THEN...ELSE</option>
+              <option value="selection_case">Selection: CASE OF</option>
+              <option value="loop_for">Iteration: FOR...TO...NEXT</option>
+              <option value="loop_while">Iteration: WHILE...DO</option>
+              <option value="loop_repeat">Iteration: REPEAT...UNTIL</option>
+              <option value="algo_totalling">Algorithm: Totalling &amp; Average</option>
+              <option value="algo_minmax">Algorithm: Maximum &amp; Minimum Finder</option>
+            </select>
+          </div>
+          <p class="viz-desc" id="vizDesc"></p>
+          <div class="viz-stage" id="vizStage"></div>
+          <div class="viz-narration" id="vizNarration">Ready — click "Next Step" or "Play".</div>
+          <div class="viz-toolbar">
+            <button class="viz-btn viz-primary" id="vizPlayBtn" onclick="vizTogglePlay()">▶ Play</button>
+            <button class="viz-btn" onclick="vizStepForward()">Next Step ❯</button>
+            <button class="viz-btn" onclick="vizReset()">↺ Reset</button>
+            <select class="viz-speed" id="vizSpeed">
+              <option value="1300">0.75x</option>
+              <option value="800" selected>1.0x</option>
+              <option value="400">1.5x</option>
+            </select>
+            <span class="viz-progress" id="vizProgress"></span>
+          </div>
+          <div class="viz-grid">
+            <div class="viz-panel">
+              <div class="viz-panel-label">Pseudocode</div>
+              <div id="vizCodeContainer"></div>
+            </div>
+            <div class="viz-panel">
+              <div class="viz-panel-label">Variable Trace Table</div>
+              <table class="viz-trace-table">
+                <thead><tr id="vizTraceHeaders"></tr></thead>
+                <tbody id="vizTraceRows"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SELECTION -->
+        <div class="card">
+          <h3>Selection: IF...THEN...ELSE...ENDIF</h3>
+          <pre>IF Age &lt; 18 THEN
+  OUTPUT "Child"
+ELSE
+  OUTPUT "Adult"
+ENDIF
+
+CASE OF Move
+  'W' : Position &larr; Position - 10
+  'S' : Position &larr; Position + 10
+  OTHERWISE : CALL Beep
+ENDCASE</pre>
+        </div>
+
+        <!-- ITERATION -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Iteration / Looping</h3>
+          <div class="grid" style="margin-bottom: 0;">
+            <div>
+              <p><strong>FOR...TO...NEXT</strong></p>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Used when the number of iterations is fixed / known in advance.</p>
+              <pre>FOR Counter &larr; 1 TO 10
+  OUTPUT Counter
+NEXT Counter</pre>
+            </div>
+            <div>
+              <p><strong>WHILE...DO...ENDWHILE</strong></p>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Condition checked <em>before</em> the loop runs - body may execute zero times.</p>
+              <pre>Total &larr; 0
+INPUT Mark
+WHILE Mark &lt;&gt; -1 DO
+  Total &larr; Total + Mark
+  INPUT Mark
+ENDWHILE</pre>
+            </div>
+            <div>
+              <p><strong>REPEAT...UNTIL</strong></p>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Condition checked <em>after</em> the loop runs - body always executes at least once.</p>
+              <pre>REPEAT
+  OUTPUT "Enter -1 to stop"
+  INPUT Option
+UNTIL Option = -1</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAXIMUM & MINIMUM -->
+        <div class="card">
+          <h3>Maximum &amp; Minimum Finder</h3>
+          <p>Initializes both values to the first element and updates them sequentially.</p>
+          <pre>MaximumValue &larr; Array[1]
+MinimumValue &larr; Array[1]
+
+FOR Counter &larr; 2 TO LoopLimit
+  IF Array[Counter] > MaximumValue THEN
+    MaximumValue &larr; Array[Counter]
+  ENDIF
+  IF Array[Counter] &lt; MinimumValue THEN
+    MinimumValue &larr; Array[Counter]
+  ENDIF
+NEXT Counter</pre>
+        </div>
+
+        <!-- TOTALING & COUNTING -->
+        <div class="card">
+          <h3>Totalling, Counting &amp; Average</h3>
+          <p>Standard loop patterns for accumulation and filtering conditions.</p>
+          <pre>Total &larr; 0
+PassCount &larr; 0
+
+FOR Counter &larr; 1 TO NumberOfValues
+  Total &larr; Total + StudentMark[Counter]
+  IF StudentMark[Counter] >= 50 THEN
+    PassCount &larr; PassCount + 1
+  ENDIF
+NEXT Counter
+
+Average &larr; Total / NumberOfValues
+OUTPUT "Total: ", Total
+OUTPUT "Average: ", Average
+OUTPUT "Passed: ", PassCount</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: SEARCH & SORT -->
+    <section id="search-sort" class="tab-content">
+      <div class="grid">
+        <!-- BUBBLE SORT -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Bubble Sort Algorithm</h3>
+          <p>Sorts an array into ascending order by iteratively comparing adjacent elements and swapping them until fully ordered.</p>
+          <pre>First &larr; 1
+Last &larr; 10
+REPEAT
+  Swap &larr; FALSE
+  FOR Index &larr; First TO Last - 1
+    IF Array[Index] > Array[Index + 1] THEN
+      Temp &larr; Array[Index]
+      Array[Index] &larr; Array[Index + 1]
+      Array[Index + 1] &larr; Temp
+      Swap &larr; TRUE
+    ENDIF
+  NEXT Index
+  Last &larr; Last - 1
+UNTIL (NOT Swap) OR Last = 1</pre>
+        </div>
+
+        <!-- BUBBLE SORT: INTERACTIVE VISUALIZER -->
+        <div class="card" style="grid-column: 1 / -1; padding: 0.75rem;">
+          <h3 style="padding: 0.5rem 0.5rem 0;">Bubble Sort — Interactive Visualizer</h3>
+          <p style="padding: 0 0.5rem 0.75rem;">Step through or play the trace to watch each comparison, swap, and the pseudocode line update live.</p>
+          <iframe src="data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CiAgPG1ldGEgY2hhcnNldD0iVVRGLTgiPgogIDxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MS4wIj4KICA8dGl0bGU+QnViYmxlIFNvcnQgQWxnb3JpdGhtIEludGVyYWN0aXZlIEV4cGxhaW5lcjwvdGl0bGU+CiAgPHN0eWxlPgogICAgOnJvb3QgewogICAgICAtLXByaW1hcnk6ICMyNTYzZWI7CiAgICAgIC0tYmc6ICMwZjE3MmE7CiAgICAgIC0tcGFuZWw6ICMxZTI5M2I7CiAgICAgIC0tdGV4dDogI2Y4ZmFmYzsKICAgICAgLS10ZXh0LW11dGVkOiAjOTRhM2I4OwogICAgICAtLWFjY2VudC1jb21wYXJlOiAjZjU5ZTBiOwogICAgICAtLWFjY2VudC1zd2FwOiAjZWY0NDQ0OwogICAgICAtLWFjY2VudC1zb3J0ZWQ6ICMxMGI5ODE7CiAgICAgIC0tY29kZS1obDogcmdiYSgzNywgOTksIDIzNSwgMC40NSk7CiAgICB9CgogICAgKiB7IGJveC1zaXppbmc6IGJvcmRlci1ib3g7IG1hcmdpbjogMDsgcGFkZGluZzogMDsgZm9udC1mYW1pbHk6IHVpLW1vbm9zcGFjZSwgU0ZNb25vLVJlZ3VsYXIsIE1lbmxvLCBNb25hY28sIENvbnNvbGFzLCBtb25vc3BhY2U7IH0KICAgIGJvZHkgeyBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1iZyk7IGNvbG9yOiB2YXIoLS10ZXh0KTsgcGFkZGluZzogMjRweCAxNnB4OyBkaXNwbGF5OiBmbGV4OyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsgfQogICAgLmNvbnRhaW5lciB7IHdpZHRoOiAxMDAlOyBtYXgtd2lkdGg6IDEwODBweDsgZGlzcGxheTogZmxleDsgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsgZ2FwOiAyMHB4OyB9CgogICAgaGVhZGVyIHsgZGlzcGxheTogZmxleDsganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuOyBhbGlnbi1pdGVtczogY2VudGVyOyBib3JkZXItYm90dG9tOiAxcHggc29saWQgIzMzNDE1NTsgcGFkZGluZy1ib3R0b206IDEycHg7IH0KICAgIGgxIHsgZm9udC1zaXplOiAxLjI1cmVtOyBmb250LXdlaWdodDogNzAwOyBjb2xvcjogIzYwYTVmYTsgfQoKICAgIC8qIFZpZGVvIFBsYXllciBDYW52YXMgU2NyZWVuICovCiAgICAucGxheWVyLXNjcmVlbiB7CiAgICAgIGJhY2tncm91bmQ6ICMwMjA2MTc7CiAgICAgIGJvcmRlcjogMXB4IHNvbGlkICMzMzQxNTU7CiAgICAgIGJvcmRlci1yYWRpdXM6IDEycHg7CiAgICAgIHBhZGRpbmc6IDMycHggMjRweCAyMHB4OwogICAgICBkaXNwbGF5OiBmbGV4OwogICAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uOwogICAgICBhbGlnbi1pdGVtczogY2VudGVyOwogICAgICBnYXA6IDI0cHg7CiAgICAgIGJveC1zaGFkb3c6IDAgMTBweCAyNXB4IHJnYmEoMCwwLDAsMC41KTsKICAgIH0KCiAgICAvKiBCYXIgQXJyYXkgVmlzdWFsaXphdGlvbiAqLwogICAgLmFycmF5LWJhcnMgewogICAgICBkaXNwbGF5OiBmbGV4OwogICAgICBhbGlnbi1pdGVtczogZmxleC1lbmQ7CiAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyOwogICAgICBnYXA6IDEycHg7CiAgICAgIGhlaWdodDogMTkwcHg7CiAgICAgIHdpZHRoOiAxMDAlOwogICAgICBwYWRkaW5nLWJvdHRvbTogMTJweDsKICAgICAgYm9yZGVyLWJvdHRvbTogMnB4IHNvbGlkICMzMzQxNTU7CiAgICB9CiAgICAuYmFyLXdyYXBwZXIgewogICAgICBkaXNwbGF5OiBmbGV4OwogICAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uOwogICAgICBhbGlnbi1pdGVtczogY2VudGVyOwogICAgICBnYXA6IDZweDsKICAgIH0KICAgIC5iYXIgewogICAgICB3aWR0aDogNDRweDsKICAgICAgYmFja2dyb3VuZDogIzNiODJmNjsKICAgICAgYm9yZGVyLXJhZGl1czogNnB4IDZweCAwIDA7CiAgICAgIGRpc3BsYXk6IGZsZXg7CiAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyOwogICAgICBhbGlnbi1pdGVtczogZmxleC1zdGFydDsKICAgICAgcGFkZGluZy10b3A6IDZweDsKICAgICAgZm9udC1zaXplOiAwLjg1cmVtOwogICAgICBmb250LXdlaWdodDogNzAwOwogICAgICBjb2xvcjogI2ZmZjsKICAgICAgdHJhbnNpdGlvbjogaGVpZ2h0IDAuMnMsIGJhY2tncm91bmQtY29sb3IgMC4yczsKICAgIH0KICAgIC5iYXItaWR4IHsgZm9udC1zaXplOiAwLjc1cmVtOyBjb2xvcjogdmFyKC0tdGV4dC1tdXRlZCk7IH0KCiAgICAvKiBCYXIgU3RhdGUgSGlnaGxpZ2h0cyAqLwogICAgLmJhci5jb21wYXJpbmcgeyBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1hY2NlbnQtY29tcGFyZSkgIWltcG9ydGFudDsgYm94LXNoYWRvdzogMCAwIDEycHggdmFyKC0tYWNjZW50LWNvbXBhcmUpOyB9CiAgICAuYmFyLnN3YXBwaW5nIHsgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tYWNjZW50LXN3YXApICFpbXBvcnRhbnQ7IGJveC1zaGFkb3c6IDAgMCAxNHB4IHZhcigtLWFjY2VudC1zd2FwKTsgfQogICAgLmJhci5zb3J0ZWQgeyBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1hY2NlbnQtc29ydGVkKSAhaW1wb3J0YW50OyB9CgogICAgLyogVmlkZW8gU3VidGl0bGUgJiBFeHBsYW5hdGlvbiBCb3ggKi8KICAgIC5uYXJyYXRpb24tYm94IHsKICAgICAgd2lkdGg6IDEwMCU7CiAgICAgIGJhY2tncm91bmQ6IHJnYmEoMzAsIDQxLCA1OSwgMC43KTsKICAgICAgYm9yZGVyOiAxcHggc29saWQgIzMzNDE1NTsKICAgICAgYm9yZGVyLWxlZnQ6IDRweCBzb2xpZCAjM2I4MmY2OwogICAgICBwYWRkaW5nOiAxMnB4IDE4cHg7CiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDsKICAgICAgZm9udC1zaXplOiAwLjk1cmVtOwogICAgICBtaW4taGVpZ2h0OiA1MnB4OwogICAgICBkaXNwbGF5OiBmbGV4OwogICAgICBhbGlnbi1pdGVtczogY2VudGVyOwogICAgICBjb2xvcjogI2UyZThmMDsKICAgICAgZm9udC1mYW1pbHk6IHN5c3RlbS11aSwgc2Fucy1zZXJpZjsKICAgIH0KCiAgICAvKiBDb250cm9scyBCYXIgKi8KICAgIC5jb250cm9scyB7CiAgICAgIGRpc3BsYXk6IGZsZXg7CiAgICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjsKICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjsKICAgICAgYmFja2dyb3VuZDogdmFyKC0tcGFuZWwpOwogICAgICBwYWRkaW5nOiAxMnB4IDIwcHg7CiAgICAgIGJvcmRlci1yYWRpdXM6IDhweDsKICAgICAgYm9yZGVyOiAxcHggc29saWQgIzMzNDE1NTsKICAgICAgZmxleC13cmFwOiB3cmFwOwogICAgICBnYXA6IDEycHg7CiAgICB9CiAgICAuYnRuLWdyb3VwIHsgZGlzcGxheTogZmxleDsgZ2FwOiA4cHg7IH0KICAgIGJ1dHRvbiB7CiAgICAgIGJhY2tncm91bmQ6ICMzMzQxNTU7CiAgICAgIGNvbG9yOiAjZmZmOwogICAgICBib3JkZXI6IG5vbmU7CiAgICAgIHBhZGRpbmc6IDhweCAxNnB4OwogICAgICBib3JkZXItcmFkaXVzOiA2cHg7CiAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7CiAgICAgIGN1cnNvcjogcG9pbnRlcjsKICAgICAgZm9udC1zaXplOiAwLjg1cmVtOwogICAgfQogICAgYnV0dG9uOmhvdmVyIHsgYmFja2dyb3VuZDogIzQ3NTU2OTsgfQogICAgYnV0dG9uLnByaW1hcnktYnRuIHsgYmFja2dyb3VuZDogdmFyKC0tcHJpbWFyeSk7IH0KICAgIGJ1dHRvbi5wcmltYXJ5LWJ0bjpob3ZlciB7IGJhY2tncm91bmQ6ICMxZDRlZDg7IH0KCiAgICAvKiBDb2RlIGFuZCBTdGF0ZSBEdWFsIEdyaWQgKi8KICAgIC5kZWJ1Zy1ncmlkIHsgZGlzcGxheTogZ3JpZDsgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiAxLjI1ZnIgMWZyOyBnYXA6IDE2cHg7IH0KCiAgICAuY29kZS1wYW5lbCwgLnN0YXRlLXBhbmVsIHsKICAgICAgYmFja2dyb3VuZDogdmFyKC0tcGFuZWwpOwogICAgICBib3JkZXI6IDFweCBzb2xpZCAjMzM0MTU1OwogICAgICBib3JkZXItcmFkaXVzOiA4cHg7CiAgICAgIHBhZGRpbmc6IDE4cHg7CiAgICAgIGZvbnQtc2l6ZTogMC44MnJlbTsKICAgIH0KICAgIC5wYW5lbC10aXRsZSB7IGZvbnQtc2l6ZTogMC43NXJlbTsgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTsgY29sb3I6IHZhcigtLXRleHQtbXV0ZWQpOyBtYXJnaW4tYm90dG9tOiAxMnB4OyBmb250LXdlaWdodDogNzAwOyBsZXR0ZXItc3BhY2luZzogMC4wNWVtOyB9CgogICAgLmNvZGUtbGluZSB7IHBhZGRpbmc6IDNweCA4cHg7IGJvcmRlci1yYWRpdXM6IDRweDsgbGluZS1oZWlnaHQ6IDEuNjsgY29sb3I6ICNjYmQ1ZTE7IHdoaXRlLXNwYWNlOiBwcmU7IH0KICAgIC5jb2RlLWxpbmUuYWN0aXZlIHsgYmFja2dyb3VuZDogdmFyKC0tY29kZS1obCk7IGNvbG9yOiAjZmZmZmZmOyBmb250LXdlaWdodDogNzAwOyBib3JkZXItbGVmdDogM3B4IHNvbGlkICM2MGE1ZmE7IH0KCiAgICAuc3RhdGUtdmFyaWFibGVzIHsgZGlzcGxheTogZ3JpZDsgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiAxZnIgMWZyOyBnYXA6IDEycHg7IH0KICAgIC5zdGF0ZS1jYXJkIHsgYmFja2dyb3VuZDogIzBmMTcyYTsgcGFkZGluZzogMTJweDsgYm9yZGVyLXJhZGl1czogNnB4OyBib3JkZXI6IDFweCBzb2xpZCAjMzM0MTU1OyB9CiAgICAuc3RhdGUtbGFiZWwgeyBmb250LXNpemU6IDAuNzJyZW07IGNvbG9yOiB2YXIoLS10ZXh0LW11dGVkKTsgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTsgfQogICAgLnN0YXRlLXZhbHVlIHsgZm9udC1zaXplOiAxLjE1cmVtOyBmb250LXdlaWdodDogNzAwOyBjb2xvcjogIzM4YmRmODsgbWFyZ2luLXRvcDogNHB4OyB9CgogICAgQG1lZGlhIChtYXgtd2lkdGg6IDgwMHB4KSB7CiAgICAgIC5kZWJ1Zy1ncmlkIHsgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiAxZnI7IH0KICAgICAgLmJhciB7IHdpZHRoOiAyOHB4OyB9CiAgICB9CiAgPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4KCjxkaXYgY2xhc3M9ImNvbnRhaW5lciI+CiAgPGhlYWRlcj4KICAgIDxoMT5CdWJibGUgU29ydCBBbGdvcml0aG0gSW50ZXJhY3RpdmUgVmlzdWFsaXplcjwvaDE+CiAgICA8c3BhbiBzdHlsZT0iZm9udC1zaXplOiAwLjgycmVtOyBjb2xvcjogdmFyKC0tdGV4dC1tdXRlZCk7Ij5TdGFuZGFyZCBQc2V1ZG9jb2RlIEV4ZWN1dGlvbiBFbmdpbmU8L3NwYW4+CiAgPC9oZWFkZXI+CgogIDwhLS0gVmlkZW8gVmlzdWFsaXphdGlvbiBCb2FyZCAtLT4KICA8ZGl2IGNsYXNzPSJwbGF5ZXItc2NyZWVuIj4KICAgIDxkaXYgY2xhc3M9ImFycmF5LWJhcnMiIGlkPSJiYXJzQ29udGFpbmVyIj48L2Rpdj4KICAgIDxkaXYgY2xhc3M9Im5hcnJhdGlvbi1ib3giIGlkPSJuYXJyYXRpb25UZXh0Ij4KICAgICAgQ2xpY2sgIlBsYXkgVmlkZW8iIG9yICJOZXh0IFN0ZXAiIHRvIHN0YXJ0IHRyYWNpbmcgdGhlIHNvcnRpbmcgYWxnb3JpdGhtLgogICAgPC9kaXY+CiAgPC9kaXY+CgogIDwhLS0gUGxheWVyIENvbnRyb2xzIC0tPgogIDxkaXYgY2xhc3M9ImNvbnRyb2xzIj4KICAgIDxkaXYgY2xhc3M9ImJ0bi1ncm91cCI+CiAgICAgIDxidXR0b24gY2xhc3M9InByaW1hcnktYnRuIiBpZD0icGxheUJ0biIgb25jbGljaz0idG9nZ2xlUGxheSgpIj5QbGF5IFZpZGVvIOKWtjwvYnV0dG9uPgogICAgICA8YnV0dG9uIG9uY2xpY2s9InN0ZXBGb3J3YXJkKCkiPk5leHQgU3RlcCDina88L2J1dHRvbj4KICAgICAgPGJ1dHRvbiBvbmNsaWNrPSJyZXNldEFsbCgpIj5SZXNldCBBcnJheTwvYnV0dG9uPgogICAgPC9kaXY+CiAgICA8ZGl2IHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogY2VudGVyOyBnYXA6IDEwcHg7IGZvbnQtc2l6ZTogMC44NXJlbTsiPgogICAgICA8bGFiZWw+U3BlZWQ6PC9sYWJlbD4KICAgICAgPHNlbGVjdCBpZD0ic3BlZWRTZWxlY3QiIHN0eWxlPSJiYWNrZ3JvdW5kOiAjMGYxNzJhOyBjb2xvcjogd2hpdGU7IGJvcmRlcjogMXB4IHNvbGlkICMzMzQxNTU7IHBhZGRpbmc6IDVweCAxMHB4OyBib3JkZXItcmFkaXVzOiA0cHg7Ij4KICAgICAgICA8b3B0aW9uIHZhbHVlPSIxMjAwIj4wLjc1eDwvb3B0aW9uPgogICAgICAgIDxvcHRpb24gdmFsdWU9Ijc1MCIgc2VsZWN0ZWQ+MS4weDwvb3B0aW9uPgogICAgICAgIDxvcHRpb24gdmFsdWU9IjM1MCI+MS41eDwvb3B0aW9uPgogICAgICA8L3NlbGVjdD4KICAgIDwvZGl2PgogIDwvZGl2PgoKICA8IS0tIENvZGUgTGluZSBTeW5jICYgRXhlY3V0aW9uIFRyYWNlIFZhcmlhYmxlcyAtLT4KICA8ZGl2IGNsYXNzPSJkZWJ1Zy1ncmlkIj4KICAgIDwhLS0gUHNldWRvY29kZSBWaWV3IC0tPgogICAgPGRpdiBjbGFzcz0iY29kZS1wYW5lbCI+CiAgICAgIDxkaXYgY2xhc3M9InBhbmVsLXRpdGxlIj5BbGdvcml0aG0gUHNldWRvY29kZTwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJjb2RlLWxpbmUiIGlkPSJsaW5lLTEiPkZpcnN0ICZsYXJyOyAxPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImNvZGUtbGluZSIgaWQ9ImxpbmUtMiI+TGFzdCAmbGFycjsgMTA8L2Rpdj4KICAgICAgPGRpdiBjbGFzcz0iY29kZS1saW5lIiBpZD0ibGluZS0zIj5SRVBFQVQ8L2Rpdj4KICAgICAgPGRpdiBjbGFzcz0iY29kZS1saW5lIiBpZD0ibGluZS00Ij4gIFN3YXAgJmxhcnI7IEZBTFNFPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImNvZGUtbGluZSIgaWQ9ImxpbmUtNSI+ICBGT1IgSW5kZXggJmxhcnI7IEZpcnN0IFRPIExhc3QgLSAxPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImNvZGUtbGluZSIgaWQ9ImxpbmUtNiI+ICAgIElGIEFycmF5W0luZGV4XSAmZ3Q7IEFycmF5W0luZGV4ICsgMV0gVEhFTjwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJjb2RlLWxpbmUiIGlkPSJsaW5lLTciPiAgICAgIFRlbXAgJmxhcnI7IEFycmF5W0luZGV4XTwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJjb2RlLWxpbmUiIGlkPSJsaW5lLTgiPiAgICAgIEFycmF5W0luZGV4XSAmbGFycjsgQXJyYXlbSW5kZXggKyAxXTwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJjb2RlLWxpbmUiIGlkPSJsaW5lLTkiPiAgICAgIEFycmF5W0luZGV4ICsgMV0gJmxhcnI7IFRlbXA8L2Rpdj4KICAgICAgPGRpdiBjbGFzcz0iY29kZS1saW5lIiBpZD0ibGluZS0xMCI+ICAgICAgU3dhcCAmbGFycjsgVFJVRTwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJjb2RlLWxpbmUiIGlkPSJsaW5lLTExIj4gICAgRU5ESUY8L2Rpdj4KICAgICAgPGRpdiBjbGFzcz0iY29kZS1saW5lIiBpZD0ibGluZS0xMiI+ICBORVhUIEluZGV4PC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImNvZGUtbGluZSIgaWQ9ImxpbmUtMTMiPiAgTGFzdCAmbGFycjsgTGFzdCAtIDE8L2Rpdj4KICAgICAgPGRpdiBjbGFzcz0iY29kZS1saW5lIiBpZD0ibGluZS0xNCI+VU5USUwgKE5PVCBTd2FwKSBPUiBMYXN0ID0gMTwvZGl2PgogICAgPC9kaXY+CgogICAgPCEtLSBUcmFjZSBWYXJpYWJsZXMgUGFuZWwgLS0+CiAgICA8ZGl2IGNsYXNzPSJzdGF0ZS1wYW5lbCI+CiAgICAgIDxkaXYgY2xhc3M9InBhbmVsLXRpdGxlIj5UcmFjZSBTdGF0ZSBWYXJpYWJsZXM8L2Rpdj4KICAgICAgPGRpdiBjbGFzcz0ic3RhdGUtdmFyaWFibGVzIj4KICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0ZS1jYXJkIj4KICAgICAgICAgIDxkaXYgY2xhc3M9InN0YXRlLWxhYmVsIj5JbmRleCAoUG9pbnRlcik8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InN0YXRlLXZhbHVlIiBpZD0idmFsSW5kZXgiPi08L2Rpdj4KICAgICAgICA8L2Rpdj4KICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0ZS1jYXJkIj4KICAgICAgICAgIDxkaXYgY2xhc3M9InN0YXRlLWxhYmVsIj5MYXN0IChVcHBlciBCb3VuZGFyeSk8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InN0YXRlLXZhbHVlIiBpZD0idmFsTGFzdCI+MTA8L2Rpdj4KICAgICAgICA8L2Rpdj4KICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0ZS1jYXJkIj4KICAgICAgICAgIDxkaXYgY2xhc3M9InN0YXRlLWxhYmVsIj5Td2FwIChCb29sZWFuIEZsYWcpPC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0ZS12YWx1ZSIgaWQ9InZhbFN3YXAiPkZBTFNFPC9kaXY+CiAgICAgICAgPC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0ic3RhdGUtY2FyZCI+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0ZS1sYWJlbCI+Q29tcGFyaXNvbiBSZXN1bHQ8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InN0YXRlLXZhbHVlIiBpZD0idmFsQ29tcCI+LTwvZGl2PgogICAgICAgIDwvZGl2PgogICAgICA8L2Rpdj4KICAgICAgPGRpdiBzdHlsZT0ibWFyZ2luLXRvcDogMThweDsgZm9udC1zaXplOiAwLjhyZW07IGNvbG9yOiB2YXIoLS10ZXh0LW11dGVkKTsgbGluZS1oZWlnaHQ6IDEuNjsiPgogICAgICAgIOKAoiA8c3BhbiBzdHlsZT0iY29sb3I6IHZhcigtLWFjY2VudC1jb21wYXJlKTsgZm9udC13ZWlnaHQ6IDcwMDsiPk9yYW5nZTwvc3Bhbj46IEFkamFjZW50IHZhbHVlcyBjdXJyZW50bHkgdW5kZXJnb2luZyBjb21wYXJpc29uLjxicj4KICAgICAgICDigKIgPHNwYW4gc3R5bGU9ImNvbG9yOiB2YXIoLS1hY2NlbnQtc3dhcCk7IGZvbnQtd2VpZ2h0OiA3MDA7Ij5SZWQ8L3NwYW4+OiBDb25kaXRpb24gbWV0ICg8c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IG1vbm9zcGFjZTsiPkFycmF5W0luZGV4XSAmZ3Q7IEFycmF5W0luZGV4KzFdPC9zcGFuPik7IHZhbHVlcyBzd2FwcGluZy48YnI+CiAgICAgICAg4oCiIDxzcGFuIHN0eWxlPSJjb2xvcjogdmFyKC0tYWNjZW50LXNvcnRlZCk7IGZvbnQtd2VpZ2h0OiA3MDA7Ij5HcmVlbjwvc3Bhbj46IEVsZW1lbnRzIGNvbmZpcm1lZCBpbiBzb3J0ZWQgYXNjZW5kaW5nIHBvc2l0aW9uLgogICAgICA8L2Rpdj4KICAgIDwvZGl2PgogIDwvZGl2Pgo8L2Rpdj4KCjxzY3JpcHQ+CiAgLy8gSW5pdGlhbCAxLWluZGV4ZWQgZGF0YXNldCBtYXRjaGluZyBhcnJheSBzaXplIG9mIDEwCiAgY29uc3QgaW5pdGlhbERhdGEgPSBbNDUsIDEyLCA4OSwgMzQsIDI1LCA3LCA2OCwgNTMsIDkwLCAxOV07CiAgbGV0IHN0ZXBzID0gW107CiAgbGV0IGN1cnJlbnRTdGVwSWR4ID0gMDsKICBsZXQgaXNQbGF5aW5nID0gZmFsc2U7CiAgbGV0IHRpbWVyID0gbnVsbDsKCiAgLy8gUHJlLWdlbmVyYXRlIGRldGVybWluaXN0aWMgc3RlcHMgbWF0Y2hpbmcgdGhlIHBzZXVkb2NvZGUKICBmdW5jdGlvbiBnZW5lcmF0ZVN0ZXBzKCkgewogICAgc3RlcHMgPSBbXTsKICAgIGxldCBhcnIgPSBbLi4uaW5pdGlhbERhdGFdOwogICAgbGV0IGZpcnN0ID0gMTsKICAgIGxldCBsYXN0ID0gMTA7CiAgICBsZXQgc3dhcCA9IGZhbHNlOwoKICAgIHN0ZXBzLnB1c2goewogICAgICBsaW5lOiAxLAogICAgICBhcnI6IFsuLi5hcnJdLAogICAgICBpbmRleDogJy0nLAogICAgICBsYXN0OiAxMCwKICAgICAgc3dhcDogJ0ZBTFNFJywKICAgICAgY29tcDogJy0nLAogICAgICBhY3RpdmVJZHg6IFtdLAogICAgICBzdGF0ZTogJ25vcm1hbCcsCiAgICAgIG1zZzogJ0luaXRpYWxpemUgRmlyc3QgcG9pbnRlciB0byAxIGFuZCBMYXN0IHBvaW50ZXIgdG8gMTAgKHNpemUgb2YgYXJyYXkpLicKICAgIH0pOwoKICAgIGRvIHsKICAgICAgc3dhcCA9IGZhbHNlOwogICAgICBzdGVwcy5wdXNoKHsKICAgICAgICBsaW5lOiA0LAogICAgICAgIGFycjogWy4uLmFycl0sCiAgICAgICAgaW5kZXg6ICctJywKICAgICAgICBsYXN0OiBsYXN0LAogICAgICAgIHN3YXA6ICdGQUxTRScsCiAgICAgICAgY29tcDogJy0nLAogICAgICAgIGFjdGl2ZUlkeDogW10sCiAgICAgICAgc3RhdGU6ICdub3JtYWwnLAogICAgICAgIG1zZzogYFN0YXJ0aW5nIG5ldyBwYXNzLiBSZXNldHRpbmcgU3dhcCBmbGFnIHRvIEZBTFNFLiBBY3RpdmUgc2NhbiByYW5nZTogMSB0byAke2xhc3QgLSAxfS5gCiAgICAgIH0pOwoKICAgICAgZm9yIChsZXQgaW5kZXggPSBmaXJzdDsgaW5kZXggPD0gbGFzdCAtIDE7IGluZGV4KyspIHsKICAgICAgICBsZXQgaWR4MCA9IGluZGV4IC0gMTsKICAgICAgICBsZXQgaWR4MSA9IGluZGV4OwoKICAgICAgICBsZXQgbmVlZFN3YXAgPSBhcnJbaWR4MF0gPiBhcnJbaWR4MV07CiAgICAgICAgc3RlcHMucHVzaCh7CiAgICAgICAgICBsaW5lOiA2LAogICAgICAgICAgYXJyOiBbLi4uYXJyXSwKICAgICAgICAgIGluZGV4OiBpbmRleCwKICAgICAgICAgIGxhc3Q6IGxhc3QsCiAgICAgICAgICBzd2FwOiBzd2FwID8gJ1RSVUUnIDogJ0ZBTFNFJywKICAgICAgICAgIGNvbXA6IGAke2FycltpZHgwXX0gPiAke2FycltpZHgxXX0gKCR7bmVlZFN3YXB9KWAsCiAgICAgICAgICBhY3RpdmVJZHg6IFtpZHgwLCBpZHgxXSwKICAgICAgICAgIHN0YXRlOiAnY29tcGFyaW5nJywKICAgICAgICAgIG1zZzogYENvbXBhcmluZyBBcnJheVske2luZGV4fV0gKCR7YXJyW2lkeDBdfSkgd2l0aCBBcnJheVske2luZGV4ICsgMX1dICgke2FycltpZHgxXX0pLmAKICAgICAgICB9KTsKCiAgICAgICAgaWYgKG5lZWRTd2FwKSB7CiAgICAgICAgICBsZXQgdGVtcCA9IGFycltpZHgwXTsKICAgICAgICAgIGFycltpZHgwXSA9IGFycltpZHgxXTsKICAgICAgICAgIGFycltpZHgxXSA9IHRlbXA7CiAgICAgICAgICBzd2FwID0gdHJ1ZTsKCiAgICAgICAgICBzdGVwcy5wdXNoKHsKICAgICAgICAgICAgbGluZTogNywKICAgICAgICAgICAgYXJyOiBbLi4uYXJyXSwKICAgICAgICAgICAgaW5kZXg6IGluZGV4LAogICAgICAgICAgICBsYXN0OiBsYXN0LAogICAgICAgICAgICBzd2FwOiAnVFJVRScsCiAgICAgICAgICAgIGNvbXA6ICdTV0FQUElORycsCiAgICAgICAgICAgIGFjdGl2ZUlkeDogW2lkeDAsIGlkeDFdLAogICAgICAgICAgICBzdGF0ZTogJ3N3YXBwaW5nJywKICAgICAgICAgICAgbXNnOiBgQ29uZGl0aW9uIHRydWUgKCR7dGVtcH0gPiAke2FycltpZHgwXX0pLiBTd2FwcGluZyB2YWx1ZXMgYW5kIHNldHRpbmcgU3dhcCBmbGFnIHRvIFRSVUUuYAogICAgICAgICAgfSk7CiAgICAgICAgfQogICAgICB9CgogICAgICBsYXN0ID0gbGFzdCAtIDE7CiAgICAgIHN0ZXBzLnB1c2goewogICAgICAgIGxpbmU6IDEzLAogICAgICAgIGFycjogWy4uLmFycl0sCiAgICAgICAgaW5kZXg6ICctJywKICAgICAgICBsYXN0OiBsYXN0LAogICAgICAgIHN3YXA6IHN3YXAgPyAnVFJVRScgOiAnRkFMU0UnLAogICAgICAgIGNvbXA6ICctJywKICAgICAgICBhY3RpdmVJZHg6IFtdLAogICAgICAgIHN0YXRlOiAnbm9ybWFsJywKICAgICAgICBzb3J0ZWRGcm9tOiBsYXN0LAogICAgICAgIG1zZzogYFBhc3MgY29tcGxldGUuIExhcmdlc3QgdW5zb3J0ZWQgdmFsdWUgbW92ZWQgdG8gcG9zaXRpb24gJHtsYXN0ICsgMX0uIERlY3JlbWVudGluZyBMYXN0IHRvICR7bGFzdH0uYAogICAgICB9KTsKCiAgICB9IHdoaWxlIChzd2FwICYmIGxhc3QgPiAxKTsKCiAgICBzdGVwcy5wdXNoKHsKICAgICAgbGluZTogMTQsCiAgICAgIGFycjogWy4uLmFycl0sCiAgICAgIGluZGV4OiAnLScsCiAgICAgIGxhc3Q6IGxhc3QsCiAgICAgIHN3YXA6IHN3YXAgPyAnVFJVRScgOiAnRkFMU0UnLAogICAgICBjb21wOiAnU09SVEVEJywKICAgICAgYWN0aXZlSWR4OiBbXSwKICAgICAgc3RhdGU6ICdhbGwtc29ydGVkJywKICAgICAgbXNnOiAnU29ydGluZyBjb21wbGV0ZS4gRWl0aGVyIG5vIHN3YXBzIG9jY3VycmVkIGR1cmluZyB0aGUgcGFzcyBvciBMYXN0IGJvdW5kYXJ5IHJlYWNoZWQgMS4nCiAgICB9KTsKICB9CgogIGZ1bmN0aW9uIHJlbmRlclN0ZXAoaWR4KSB7CiAgICBpZiAoaWR4IDwgMCB8fCBpZHggPj0gc3RlcHMubGVuZ3RoKSByZXR1cm47CiAgICBjb25zdCBzID0gc3RlcHNbaWR4XTsKCiAgICAvLyBUcmFjZSBQYW5lbCBVcGRhdGVzCiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndmFsSW5kZXgnKS50ZXh0Q29udGVudCA9IHMuaW5kZXg7CiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndmFsTGFzdCcpLnRleHRDb250ZW50ID0gcy5sYXN0OwogICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3ZhbFN3YXAnKS50ZXh0Q29udGVudCA9IHMuc3dhcDsKICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd2YWxDb21wJykudGV4dENvbnRlbnQgPSBzLmNvbXA7CiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbmFycmF0aW9uVGV4dCcpLnRleHRDb250ZW50ID0gcy5tc2c7CgogICAgLy8gUHNldWRvY29kZSBMaW5lIFN5bmMKICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJy5jb2RlLWxpbmUnKS5mb3JFYWNoKGVsID0+IGVsLmNsYXNzTGlzdC5yZW1vdmUoJ2FjdGl2ZScpKTsKICAgIGNvbnN0IGxpbmVFbCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGBsaW5lLSR7cy5saW5lfWApOwogICAgaWYgKGxpbmVFbCkgbGluZUVsLmNsYXNzTGlzdC5hZGQoJ2FjdGl2ZScpOwoKICAgIC8vIEJhciBDaGFydCBVcGRhdGVzCiAgICBjb25zdCBjb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnYmFyc0NvbnRhaW5lcicpOwogICAgY29udGFpbmVyLmlubmVySFRNTCA9ICcnOwogICAgcy5hcnIuZm9yRWFjaCgodmFsLCBpKSA9PiB7CiAgICAgIGNvbnN0IHdyYXAgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTsKICAgICAgd3JhcC5jbGFzc05hbWUgPSAnYmFyLXdyYXBwZXInOwoKICAgICAgY29uc3QgYmFyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7CiAgICAgIGJhci5jbGFzc05hbWUgPSAnYmFyJzsKICAgICAgYmFyLnN0eWxlLmhlaWdodCA9IGAke3ZhbCAqIDEuNzV9cHhgOwogICAgICBiYXIudGV4dENvbnRlbnQgPSB2YWw7CgogICAgICBpZiAocy5zdGF0ZSA9PT0gJ2FsbC1zb3J0ZWQnIHx8IChzLnNvcnRlZEZyb20gIT09IHVuZGVmaW5lZCAmJiBpID49IHMuc29ydGVkRnJvbSkpIHsKICAgICAgICBiYXIuY2xhc3NMaXN0LmFkZCgnc29ydGVkJyk7CiAgICAgIH0gZWxzZSBpZiAocy5hY3RpdmVJZHguaW5jbHVkZXMoaSkpIHsKICAgICAgICBpZiAocy5zdGF0ZSA9PT0gJ2NvbXBhcmluZycpIGJhci5jbGFzc0xpc3QuYWRkKCdjb21wYXJpbmcnKTsKICAgICAgICBpZiAocy5zdGF0ZSA9PT0gJ3N3YXBwaW5nJykgYmFyLmNsYXNzTGlzdC5hZGQoJ3N3YXBwaW5nJyk7CiAgICAgIH0KCiAgICAgIGNvbnN0IGlkeExhYmVsID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7CiAgICAgIGlkeExhYmVsLmNsYXNzTmFtZSA9ICdiYXItaWR4JzsKICAgICAgaWR4TGFiZWwudGV4dENvbnRlbnQgPSBgWyR7aSArIDF9XWA7CgogICAgICB3cmFwLmFwcGVuZENoaWxkKGJhcik7CiAgICAgIHdyYXAuYXBwZW5kQ2hpbGQoaWR4TGFiZWwpOwogICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQod3JhcCk7CiAgICB9KTsKICB9CgogIGZ1bmN0aW9uIHRvZ2dsZVBsYXkoKSB7CiAgICBpc1BsYXlpbmcgPSAhaXNQbGF5aW5nOwogICAgY29uc3QgYnRuID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3BsYXlCdG4nKTsKICAgIGlmIChpc1BsYXlpbmcpIHsKICAgICAgYnRuLnRleHRDb250ZW50ID0gJ1BhdXNlIOKdmuKdmic7CiAgICAgIGJ0bi5zdHlsZS5iYWNrZ3JvdW5kID0gJyNlMTFkNDgnOwogICAgICBydW5Mb29wKCk7CiAgICB9IGVsc2UgewogICAgICBidG4udGV4dENvbnRlbnQgPSAnUGxheSBWaWRlbyDilrYnOwogICAgICBidG4uc3R5bGUuYmFja2dyb3VuZCA9ICd2YXIoLS1wcmltYXJ5KSc7CiAgICAgIGNsZWFyVGltZW91dCh0aW1lcik7CiAgICB9CiAgfQoKICBmdW5jdGlvbiBydW5Mb29wKCkgewogICAgaWYgKCFpc1BsYXlpbmcpIHJldHVybjsKICAgIGlmIChjdXJyZW50U3RlcElkeCA8IHN0ZXBzLmxlbmd0aCAtIDEpIHsKICAgICAgY3VycmVudFN0ZXBJZHgrKzsKICAgICAgcmVuZGVyU3RlcChjdXJyZW50U3RlcElkeCk7CiAgICAgIGNvbnN0IHNwZWVkID0gcGFyc2VJbnQoZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3NwZWVkU2VsZWN0JykudmFsdWUpOwogICAgICB0aW1lciA9IHNldFRpbWVvdXQocnVuTG9vcCwgc3BlZWQpOwogICAgfSBlbHNlIHsKICAgICAgdG9nZ2xlUGxheSgpOwogICAgfQogIH0KCiAgZnVuY3Rpb24gc3RlcEZvcndhcmQoKSB7CiAgICBpZiAoaXNQbGF5aW5nKSB0b2dnbGVQbGF5KCk7CiAgICBpZiAoY3VycmVudFN0ZXBJZHggPCBzdGVwcy5sZW5ndGggLSAxKSB7CiAgICAgIGN1cnJlbnRTdGVwSWR4Kys7CiAgICAgIHJlbmRlclN0ZXAoY3VycmVudFN0ZXBJZHgpOwogICAgfQogIH0KCiAgZnVuY3Rpb24gcmVzZXRBbGwoKSB7CiAgICBpZiAoaXNQbGF5aW5nKSB0b2dnbGVQbGF5KCk7CiAgICBjdXJyZW50U3RlcElkeCA9IDA7CiAgICBnZW5lcmF0ZVN0ZXBzKCk7CiAgICByZW5kZXJTdGVwKDApOwogIH0KCiAgLy8gSW5pdGlhbCBnZW5lcmF0aW9uCiAgZ2VuZXJhdGVTdGVwcygpOwogIHJlbmRlclN0ZXAoMCk7Cjwvc2NyaXB0PgoKPC9ib2R5Pgo8L2h0bWw+" title="Bubble Sort Interactive Visualizer" style="width: 100%; height: 900px; border: none; border-radius: 10px; display: block;" loading="lazy"></iframe>
+        </div>
+
+        <!-- LINEAR SEARCH -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Linear Search</h3>
+          <p>Searches through the array until the target value is found or the end is reached.</p>
+          <pre>INPUT TargetValue
+Found &larr; FALSE
+Counter &larr; 1
+
+REPEAT
+  IF TargetValue = Array[Counter] THEN
+    Found &larr; TRUE
+  ELSE
+    Counter &larr; Counter + 1
+  ENDIF
+UNTIL Found OR Counter > NumberOfValues
+
+IF Found THEN
+  OUTPUT "Found at position: ", Counter
+ELSE
+  OUTPUT "Not found."
+ENDIF</pre>
+        </div>
+
+        <!-- LINEAR SEARCH: INTERACTIVE VISUALIZER -->
+        <div class="card" style="grid-column: 1 / -1; padding: 0.75rem;">
+          <h3 style="padding: 0.5rem 0.5rem 0;">Linear Search — Interactive Visualizer</h3>
+          <p style="padding: 0 0.5rem 0.75rem;">Set a target value, then step through or play the trace to watch the pointer scan the array and the pseudocode line update live.</p>
+          <iframe src="data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CiAgPG1ldGEgY2hhcnNldD0iVVRGLTgiPgogIDxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MS4wIj4KICA8dGl0bGU+TGluZWFyIFNlYXJjaCBBbGdvcml0aG0gSW50ZXJhY3RpdmUgVmlzdWFsaXplcjwvdGl0bGU+CiAgPHN0eWxlPgogICAgOnJvb3QgewogICAgICAtLXByaW1hcnk6ICMyNTYzZWI7CiAgICAgIC0tYmc6ICMwZjE3MmE7CiAgICAgIC0tcGFuZWw6ICMxZTI5M2I7CiAgICAgIC0tdGV4dDogI2Y4ZmFmYzsKICAgICAgLS10ZXh0LW11dGVkOiAjOTRhM2I4OwogICAgICAtLWFjY2VudC1jaGVjazogI2Y1OWUwYjsKICAgICAgLS1hY2NlbnQtZm91bmQ6ICMxMGI5ODE7CiAgICAgIC0tYWNjZW50LW1pc3M6ICNlZjQ0NDQ7CiAgICAgIC0tY29kZS1obDogcmdiYSgzNywgOTksIDIzNSwgMC40NSk7CiAgICB9CgogICAgKiB7IGJveC1zaXppbmc6IGJvcmRlci1ib3g7IG1hcmdpbjogMDsgcGFkZGluZzogMDsgZm9udC1mYW1pbHk6IHVpLW1vbm9zcGFjZSwgU0ZNb25vLVJlZ3VsYXIsIE1lbmxvLCBNb25hY28sIENvbnNvbGFzLCBtb25vc3BhY2U7IH0KICAgIGJvZHkgeyBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1iZyk7IGNvbG9yOiB2YXIoLS10ZXh0KTsgcGFkZGluZzogMjRweCAxNnB4OyBkaXNwbGF5OiBmbGV4OyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsgfQogICAgLmNvbnRhaW5lciB7IHdpZHRoOiAxMDAlOyBtYXgtd2lkdGg6IDEwODBweDsgZGlzcGxheTogZmxleDsgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsgZ2FwOiAyMHB4OyB9CgogICAgaGVhZGVyIHsgZGlzcGxheTogZmxleDsganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuOyBhbGlnbi1pdGVtczogY2VudGVyOyBib3JkZXItYm90dG9tOiAxcHggc29saWQgIzMzNDE1NTsgcGFkZGluZy1ib3R0b206IDEycHg7IH0KICAgIGgxIHsgZm9udC1zaXplOiAxLjI1cmVtOyBmb250LXdlaWdodDogNzAwOyBjb2xvcjogIzYwYTVmYTsgfQoKICAgIC8qIFZpZGVvIFBsYXllciBDYW52YXMgU2NyZWVuICovCiAgICAucGxheWVyLXNjcmVlbiB7CiAgICAgIGJhY2tncm91bmQ6ICMwMjA2MTc7CiAgICAgIGJvcmRlcjogMXB4IHNvbGlkICMzMzQxNTU7CiAgICAgIGJvcmRlci1yYWRpdXM6IDEycHg7CiAgICAgIHBhZGRpbmc6IDMycHggMjRweCAyMHB4OwogICAgICBkaXNwbGF5OiBmbGV4OwogICAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uOwogICAgICBhbGlnbi1pdGVtczogY2VudGVyOwogICAgICBnYXA6IDI0cHg7CiAgICAgIGJveC1zaGFkb3c6IDAgMTBweCAyNXB4IHJnYmEoMCwwLDAsMC41KTsKICAgIH0KCiAgICAvKiBBcnJheSBFbGVtZW50cyBHcmlkICovCiAgICAuYXJyYXktY29udGFpbmVyIHsKICAgICAgZGlzcGxheTogZmxleDsKICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjsKICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7CiAgICAgIGdhcDogMTBweDsKICAgICAgd2lkdGg6IDEwMCU7CiAgICAgIHBhZGRpbmc6IDIwcHggMDsKICAgICAgZmxleC13cmFwOiB3cmFwOwogICAgfQogICAgLmVsZW1lbnQtY2FyZCB7CiAgICAgIGRpc3BsYXk6IGZsZXg7CiAgICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47CiAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7CiAgICAgIGdhcDogOHB4OwogICAgfQogICAgLmJveCB7CiAgICAgIHdpZHRoOiA1OHB4OwogICAgICBoZWlnaHQ6IDU4cHg7CiAgICAgIGJhY2tncm91bmQ6ICMxZTI5M2I7CiAgICAgIGJvcmRlcjogMnB4IHNvbGlkICMzMzQxNTU7CiAgICAgIGJvcmRlci1yYWRpdXM6IDhweDsKICAgICAgZGlzcGxheTogZmxleDsKICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7CiAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7CiAgICAgIGZvbnQtc2l6ZTogMS4xNXJlbTsKICAgICAgZm9udC13ZWlnaHQ6IDcwMDsKICAgICAgY29sb3I6ICNmZmY7CiAgICAgIHRyYW5zaXRpb246IGFsbCAwLjJzIGVhc2U7CiAgICB9CiAgICAuZWxlbWVudC1pZHggeyBmb250LXNpemU6IDAuNzVyZW07IGNvbG9yOiB2YXIoLS10ZXh0LW11dGVkKTsgfQoKICAgIC8qIEhpZ2hsaWdodHMgKi8KICAgIC5ib3guY2hlY2tpbmcgeyBib3JkZXItY29sb3I6IHZhcigtLWFjY2VudC1jaGVjayk7IGJhY2tncm91bmQ6IHJnYmEoMjQ1LCAxNTgsIDExLCAwLjE1KTsgYm94LXNoYWRvdzogMCAwIDEycHggdmFyKC0tYWNjZW50LWNoZWNrKTsgfQogICAgLmJveC5mb3VuZCB7IGJvcmRlci1jb2xvcjogdmFyKC0tYWNjZW50LWZvdW5kKTsgYmFja2dyb3VuZDogdmFyKC0tYWNjZW50LWZvdW5kKTsgY29sb3I6ICMwMjJjMjI7IGJveC1zaGFkb3c6IDAgMCAxNnB4IHZhcigtLWFjY2VudC1mb3VuZCk7IH0KICAgIC5ib3gucmVqZWN0ZWQgeyBib3JkZXItY29sb3I6ICM0NzU1Njk7IGJhY2tncm91bmQ6ICMwYjExMjA7IG9wYWNpdHk6IDAuNDU7IH0KCiAgICAvKiBFeHBsYW5hdG9yeSBTdWJ0aXRsZXMgKi8KICAgIC5uYXJyYXRpb24tYm94IHsKICAgICAgd2lkdGg6IDEwMCU7CiAgICAgIGJhY2tncm91bmQ6IHJnYmEoMzAsIDQxLCA1OSwgMC43KTsKICAgICAgYm9yZGVyOiAxcHggc29saWQgIzMzNDE1NTsKICAgICAgYm9yZGVyLWxlZnQ6IDRweCBzb2xpZCAjM2I4MmY2OwogICAgICBwYWRkaW5nOiAxMnB4IDE4cHg7CiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDsKICAgICAgZm9udC1zaXplOiAwLjk1cmVtOwogICAgICBtaW4taGVpZ2h0OiA1MnB4OwogICAgICBkaXNwbGF5OiBmbGV4OwogICAgICBhbGlnbi1pdGVtczogY2VudGVyOwogICAgICBjb2xvcjogI2UyZThmMDsKICAgICAgZm9udC1mYW1pbHk6IHN5c3RlbS11aSwgc2Fucy1zZXJpZjsKICAgIH0KCiAgICAvKiBDb250cm9scyBCYXIgKi8KICAgIC5jb250cm9scyB7CiAgICAgIGRpc3BsYXk6IGZsZXg7CiAgICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjsKICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjsKICAgICAgYmFja2dyb3VuZDogdmFyKC0tcGFuZWwpOwogICAgICBwYWRkaW5nOiAxMnB4IDIwcHg7CiAgICAgIGJvcmRlci1yYWRpdXM6IDhweDsKICAgICAgYm9yZGVyOiAxcHggc29saWQgIzMzNDE1NTsKICAgICAgZmxleC13cmFwOiB3cmFwOwogICAgICBnYXA6IDEycHg7CiAgICB9CiAgICAuYnRuLWdyb3VwIHsgZGlzcGxheTogZmxleDsgZ2FwOiA4cHg7IH0KICAgIGJ1dHRvbiB7CiAgICAgIGJhY2tncm91bmQ6ICMzMzQxNTU7CiAgICAgIGNvbG9yOiAjZmZmOwogICAgICBib3JkZXI6IG5vbmU7CiAgICAgIHBhZGRpbmc6IDhweCAxNnB4OwogICAgICBib3JkZXItcmFkaXVzOiA2cHg7CiAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7CiAgICAgIGN1cnNvcjogcG9pbnRlcjsKICAgICAgZm9udC1zaXplOiAwLjg1cmVtOwogICAgfQogICAgYnV0dG9uOmhvdmVyIHsgYmFja2dyb3VuZDogIzQ3NTU2OTsgfQogICAgYnV0dG9uLnByaW1hcnktYnRuIHsgYmFja2dyb3VuZDogdmFyKC0tcHJpbWFyeSk7IH0KICAgIGJ1dHRvbi5wcmltYXJ5LWJ0bjpob3ZlciB7IGJhY2tncm91bmQ6ICMxZDRlZDg7IH0KCiAgICAuaW5wdXQtZ3JvdXAgewogICAgICBkaXNwbGF5OiBmbGV4OwogICAgICBhbGlnbi1pdGVtczogY2VudGVyOwogICAgICBnYXA6IDhweDsKICAgICAgZm9udC1zaXplOiAwLjg1cmVtOwogICAgfQogICAgaW5wdXRbdHlwZT0ibnVtYmVyIl0sIHNlbGVjdCB7CiAgICAgIGJhY2tncm91bmQ6ICMwZjE3MmE7CiAgICAgIGNvbG9yOiB3aGl0ZTsKICAgICAgYm9yZGVyOiAxcHggc29saWQgIzMzNDE1NTsKICAgICAgcGFkZGluZzogNnB4IDEwcHg7CiAgICAgIGJvcmRlci1yYWRpdXM6IDRweDsKICAgICAgb3V0bGluZTogbm9uZTsKICAgIH0KCiAgICAvKiBEdWFsIEdyaWQ6IENvZGUgYW5kIFRyYWNlIFZhcmlhYmxlcyAqLwogICAgLmRlYnVnLWdyaWQgeyBkaXNwbGF5OiBncmlkOyBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDEuMjVmciAxZnI7IGdhcDogMTZweDsgfQoKICAgIC5jb2RlLXBhbmVsLCAuc3RhdGUtcGFuZWwgewogICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1wYW5lbCk7CiAgICAgIGJvcmRlcjogMXB4IHNvbGlkICMzMzQxNTU7CiAgICAgIGJvcmRlci1yYWRpdXM6IDhweDsKICAgICAgcGFkZGluZzogMThweDsKICAgICAgZm9udC1zaXplOiAwLjgycmVtOwogICAgfQogICAgLnBhbmVsLXRpdGxlIHsgZm9udC1zaXplOiAwLjc1cmVtOyB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlOyBjb2xvcjogdmFyKC0tdGV4dC1tdXRlZCk7IG1hcmdpbi1ib3R0b206IDEycHg7IGZvbnQtd2VpZ2h0OiA3MDA7IGxldHRlci1zcGFjaW5nOiAwLjA1ZW07IH0KCiAgICAuY29kZS1saW5lIHsgcGFkZGluZzogM3B4IDhweDsgYm9yZGVyLXJhZGl1czogNHB4OyBsaW5lLWhlaWdodDogMS42OyBjb2xvcjogI2NiZDVlMTsgd2hpdGUtc3BhY2U6IHByZTsgfQogICAgLmNvZGUtbGluZS5hY3RpdmUgeyBiYWNrZ3JvdW5kOiB2YXIoLS1jb2RlLWhsKTsgY29sb3I6ICNmZmZmZmY7IGZvbnQtd2VpZ2h0OiA3MDA7IGJvcmRlci1sZWZ0OiAzcHggc29saWQgIzYwYTVmYTsgfQoKICAgIC5zdGF0ZS12YXJpYWJsZXMgeyBkaXNwbGF5OiBncmlkOyBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDFmciAxZnI7IGdhcDogMTJweDsgfQogICAgLnN0YXRlLWNhcmQgeyBiYWNrZ3JvdW5kOiAjMGYxNzJhOyBwYWRkaW5nOiAxMnB4OyBib3JkZXItcmFkaXVzOiA2cHg7IGJvcmRlcjogMXB4IHNvbGlkICMzMzQxNTU7IH0KICAgIC5zdGF0ZS1sYWJlbCB7IGZvbnQtc2l6ZTogMC43MnJlbTsgY29sb3I6IHZhcigtLXRleHQtbXV0ZWQpOyB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlOyB9CiAgICAuc3RhdGUtdmFsdWUgeyBmb250LXNpemU6IDEuMTVyZW07IGZvbnQtd2VpZ2h0OiA3MDA7IGNvbG9yOiAjMzhiZGY4OyBtYXJnaW4tdG9wOiA0cHg7IH0KCiAgICBAbWVkaWEgKG1heC13aWR0aDogODAwcHgpIHsKICAgICAgLmRlYnVnLWdyaWQgeyBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDFmcjsgfQogICAgfQogIDwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+Cgo8ZGl2IGNsYXNzPSJjb250YWluZXIiPgogIDxoZWFkZXI+CiAgICA8aDE+TGluZWFyIFNlYXJjaCBBbGdvcml0aG0gSW50ZXJhY3RpdmUgVmlzdWFsaXplcjwvaDE+CiAgICA8c3BhbiBzdHlsZT0iZm9udC1zaXplOiAwLjgycmVtOyBjb2xvcjogdmFyKC0tdGV4dC1tdXRlZCk7Ij5TdGFuZGFyZCBQc2V1ZG9jb2RlIEV4ZWN1dGlvbiBFbmdpbmU8L3NwYW4+CiAgPC9oZWFkZXI+CgogIDwhLS0gVmlkZW8gVmlzdWFsaXphdGlvbiBCb2FyZCAtLT4KICA8ZGl2IGNsYXNzPSJwbGF5ZXItc2NyZWVuIj4KICAgIDxkaXYgY2xhc3M9ImFycmF5LWNvbnRhaW5lciIgaWQ9ImFycmF5Q29udGFpbmVyIj48L2Rpdj4KICAgIDxkaXYgY2xhc3M9Im5hcnJhdGlvbi1ib3giIGlkPSJuYXJyYXRpb25UZXh0Ij4KICAgICAgU2VsZWN0IGEgdGFyZ2V0IHZhbHVlIGFuZCBjbGljayAiUGxheSBWaWRlbyIgb3IgIk5leHQgU3RlcCIgdG8gc3RhcnQgdHJhY2luZy4KICAgIDwvZGl2PgogIDwvZGl2PgoKICA8IS0tIFBsYXllciBDb250cm9scyAtLT4KICA8ZGl2IGNsYXNzPSJjb250cm9scyI+CiAgICA8ZGl2IGNsYXNzPSJidG4tZ3JvdXAiPgogICAgICA8YnV0dG9uIGNsYXNzPSJwcmltYXJ5LWJ0biIgaWQ9InBsYXlCdG4iIG9uY2xpY2s9InRvZ2dsZVBsYXkoKSI+UGxheSBWaWRlbyDilrY8L2J1dHRvbj4KICAgICAgPGJ1dHRvbiBvbmNsaWNrPSJzdGVwRm9yd2FyZCgpIj5OZXh0IFN0ZXAg4p2vPC9idXR0b24+CiAgICAgIDxidXR0b24gb25jbGljaz0icmVzdGFydFNlYXJjaCgpIj5SZXNldDwvYnV0dG9uPgogICAgPC9kaXY+CgogICAgPGRpdiBjbGFzcz0iaW5wdXQtZ3JvdXAiPgogICAgICA8bGFiZWw+VGFyZ2V0IFZhbHVlOjwvbGFiZWw+CiAgICAgIDxpbnB1dCB0eXBlPSJudW1iZXIiIGlkPSJ0YXJnZXRJbnB1dCIgdmFsdWU9IjY4IiBzdHlsZT0id2lkdGg6IDcwcHg7Ij4KICAgICAgPGJ1dHRvbiBvbmNsaWNrPSJyZXN0YXJ0U2VhcmNoKCkiPlNldCBUYXJnZXQ8L2J1dHRvbj4KICAgIDwvZGl2PgoKICAgIDxkaXYgY2xhc3M9ImlucHV0LWdyb3VwIj4KICAgICAgPGxhYmVsPlNwZWVkOjwvbGFiZWw+CiAgICAgIDxzZWxlY3QgaWQ9InNwZWVkU2VsZWN0Ij4KICAgICAgICA8b3B0aW9uIHZhbHVlPSIxMjAwIj4wLjc1eDwvb3B0aW9uPgogICAgICAgIDxvcHRpb24gdmFsdWU9Ijc1MCIgc2VsZWN0ZWQ+MS4weDwvb3B0aW9uPgogICAgICAgIDxvcHRpb24gdmFsdWU9IjM1MCI+MS41eDwvb3B0aW9uPgogICAgICA8L3NlbGVjdD4KICAgIDwvZGl2PgogIDwvZGl2PgoKICA8IS0tIENvZGUgTGluZSBTeW5jICYgRXhlY3V0aW9uIFRyYWNlIFZhcmlhYmxlcyAtLT4KICA8ZGl2IGNsYXNzPSJkZWJ1Zy1ncmlkIj4KICAgIDwhLS0gUHNldWRvY29kZSBWaWV3IC0tPgogICAgPGRpdiBjbGFzcz0iY29kZS1wYW5lbCI+CiAgICAgIDxkaXYgY2xhc3M9InBhbmVsLXRpdGxlIj5BbGdvcml0aG0gUHNldWRvY29kZTwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJjb2RlLWxpbmUiIGlkPSJsaW5lLTEiPkluZGV4ICZsYXJyOyAxPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImNvZGUtbGluZSIgaWQ9ImxpbmUtMiI+Rm91bmQgJmxhcnI7IEZBTFNFPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImNvZGUtbGluZSIgaWQ9ImxpbmUtMyI+UkVQRUFUPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImNvZGUtbGluZSIgaWQ9ImxpbmUtNCI+ICBJRiBBcnJheVtJbmRleF0gPSBTZWFyY2hWYWx1ZSBUSEVOPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImNvZGUtbGluZSIgaWQ9ImxpbmUtNSI+ICAgIEZvdW5kICZsYXJyOyBUUlVFPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImNvZGUtbGluZSIgaWQ9ImxpbmUtNiI+ICBFTFNFPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImNvZGUtbGluZSIgaWQ9ImxpbmUtNyI+ICAgIEluZGV4ICZsYXJyOyBJbmRleCArIDE8L2Rpdj4KICAgICAgPGRpdiBjbGFzcz0iY29kZS1saW5lIiBpZD0ibGluZS04Ij4gIEVORElGPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImNvZGUtbGluZSIgaWQ9ImxpbmUtOSI+VU5USUwgRm91bmQgT1IgSW5kZXggJmd0OyAxMDwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJjb2RlLWxpbmUiIGlkPSJsaW5lLTEwIj5JRiBGb3VuZCA9IFRSVUUgVEhFTiBPdXRwdXQgSW5kZXggRUxTRSBPdXRwdXQgIk5vdCBGb3VuZCI8L2Rpdj4KICAgIDwvZGl2PgoKICAgIDwhLS0gVHJhY2UgVmFyaWFibGVzIFBhbmVsIC0tPgogICAgPGRpdiBjbGFzcz0ic3RhdGUtcGFuZWwiPgogICAgICA8ZGl2IGNsYXNzPSJwYW5lbC10aXRsZSI+VHJhY2UgU3RhdGUgVmFyaWFibGVzPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9InN0YXRlLXZhcmlhYmxlcyI+CiAgICAgICAgPGRpdiBjbGFzcz0ic3RhdGUtY2FyZCI+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0ZS1sYWJlbCI+SW5kZXggKFBvaW50ZXIpPC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0ZS12YWx1ZSIgaWQ9InZhbEluZGV4Ij4tPC9kaXY+CiAgICAgICAgPC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0ic3RhdGUtY2FyZCI+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0ZS1sYWJlbCI+U2VhcmNoVmFsdWU8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InN0YXRlLXZhbHVlIiBpZD0idmFsVGFyZ2V0Ij4tPC9kaXY+CiAgICAgICAgPC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0ic3RhdGUtY2FyZCI+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0ZS1sYWJlbCI+Rm91bmQgKEZsYWcpPC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0ZS12YWx1ZSIgaWQ9InZhbEZvdW5kIj5GQUxTRTwvZGl2PgogICAgICAgIDwvZGl2PgogICAgICAgIDxkaXYgY2xhc3M9InN0YXRlLWNhcmQiPgogICAgICAgICAgPGRpdiBjbGFzcz0ic3RhdGUtbGFiZWwiPkNvbmRpdGlvbiBFdmFsdWF0aW9uPC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0ZS12YWx1ZSIgaWQ9InZhbENvbmQiPi08L2Rpdj4KICAgICAgICA8L2Rpdj4KICAgICAgPC9kaXY+CiAgICAgIDxkaXYgc3R5bGU9Im1hcmdpbi10b3A6IDE4cHg7IGZvbnQtc2l6ZTogMC44cmVtOyBjb2xvcjogdmFyKC0tdGV4dC1tdXRlZCk7IGxpbmUtaGVpZ2h0OiAxLjY7Ij4KICAgICAgICDigKIgPHNwYW4gc3R5bGU9ImNvbG9yOiB2YXIoLS1hY2NlbnQtY2hlY2spOyBmb250LXdlaWdodDogNzAwOyI+T3JhbmdlPC9zcGFuPjogRWxlbWVudCBjdXJyZW50bHkgY29tcGFyZWQgYWdhaW5zdCBTZWFyY2hWYWx1ZS48YnI+CiAgICAgICAg4oCiIDxzcGFuIHN0eWxlPSJjb2xvcjogdmFyKC0tYWNjZW50LWZvdW5kKTsgZm9udC13ZWlnaHQ6IDcwMDsiPkdyZWVuPC9zcGFuPjogTWF0Y2ggY29uZmlybWVkICg8c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IG1vbm9zcGFjZTsiPkFycmF5W0luZGV4XSA9IFNlYXJjaFZhbHVlPC9zcGFuPikuPGJyPgogICAgICAgIOKAoiA8c3BhbiBzdHlsZT0iY29sb3I6IHZhcigtLXRleHQtbXV0ZWQpOyBmb250LXdlaWdodDogNzAwOyI+RGltbWVkPC9zcGFuPjogRWxlbWVudCB2ZXJpZmllZCBhcyBub3QgbWF0Y2hpbmcuCiAgICAgIDwvZGl2PgogICAgPC9kaXY+CiAgPC9kaXY+CjwvZGl2PgoKPHNjcmlwdD4KICAvLyAxLWluZGV4ZWQgZml4ZWQgYXJyYXkgb2Ygc2l6ZSAxMAogIGNvbnN0IGFycmF5RGF0YSA9IFs0NSwgMTIsIDg5LCAzNCwgMjUsIDcsIDY4LCA1MywgOTAsIDE5XTsKICBsZXQgc3RlcHMgPSBbXTsKICBsZXQgY3VycmVudFN0ZXBJZHggPSAwOwogIGxldCBpc1BsYXlpbmcgPSBmYWxzZTsKICBsZXQgdGltZXIgPSBudWxsOwoKICBmdW5jdGlvbiBnZW5lcmF0ZVN0ZXBzKHNlYXJjaFZhbHVlKSB7CiAgICBzdGVwcyA9IFtdOwogICAgbGV0IGluZGV4ID0gMTsKICAgIGxldCBmb3VuZCA9IGZhbHNlOwoKICAgIHN0ZXBzLnB1c2goewogICAgICBsaW5lOiAxLAogICAgICBjdXJySWR4OiBudWxsLAogICAgICBmb3VuZDogJ0ZBTFNFJywKICAgICAgY29uZDogJy0nLAogICAgICBzdGF0dXM6ICdpbml0JywKICAgICAgcmVqZWN0ZWQ6IFtdLAogICAgICBmb3VuZElkeDogbnVsbCwKICAgICAgbXNnOiBgSW5pdGlhbGl6ZSBJbmRleCDihpAgMSBhbmQgRm91bmQg4oaQIEZBTFNFLiBTZWFyY2ggdGFyZ2V0IGlzICR7c2VhcmNoVmFsdWV9LmAKICAgIH0pOwoKICAgIGxldCByZWplY3RlZExpc3QgPSBbXTsKCiAgICBkbyB7CiAgICAgIGxldCBhcnJheVZhbHVlID0gYXJyYXlEYXRhW2luZGV4IC0gMV07CiAgICAgIGxldCBpc01hdGNoID0gKGFycmF5VmFsdWUgPT09IHNlYXJjaFZhbHVlKTsKCiAgICAgIHN0ZXBzLnB1c2goewogICAgICAgIGxpbmU6IDQsCiAgICAgICAgY3VycklkeDogaW5kZXgsCiAgICAgICAgZm91bmQ6IGZvdW5kID8gJ1RSVUUnIDogJ0ZBTFNFJywKICAgICAgICBjb25kOiBgQXJyYXlbJHtpbmRleH1dICgke2FycmF5VmFsdWV9KSA9ICR7c2VhcmNoVmFsdWV9ICgke2lzTWF0Y2h9KWAsCiAgICAgICAgc3RhdHVzOiAnY2hlY2tpbmcnLAogICAgICAgIHJlamVjdGVkOiBbLi4ucmVqZWN0ZWRMaXN0XSwKICAgICAgICBmb3VuZElkeDogbnVsbCwKICAgICAgICBtc2c6IGBDb21wYXJpbmcgZWxlbWVudCBhdCBJbmRleCBbJHtpbmRleH1dICgke2FycmF5VmFsdWV9KSB3aXRoIFNlYXJjaFZhbHVlICgke3NlYXJjaFZhbHVlfSkuYAogICAgICB9KTsKCiAgICAgIGlmIChpc01hdGNoKSB7CiAgICAgICAgZm91bmQgPSB0cnVlOwogICAgICAgIHN0ZXBzLnB1c2goewogICAgICAgICAgbGluZTogNSwKICAgICAgICAgIGN1cnJJZHg6IGluZGV4LAogICAgICAgICAgZm91bmQ6ICdUUlVFJywKICAgICAgICAgIGNvbmQ6ICdNQVRDSCBGT1VORCcsCiAgICAgICAgICBzdGF0dXM6ICdmb3VuZCcsCiAgICAgICAgICByZWplY3RlZDogWy4uLnJlamVjdGVkTGlzdF0sCiAgICAgICAgICBmb3VuZElkeDogaW5kZXgsCiAgICAgICAgICBtc2c6IGBNYXRjaCBmb3VuZCBhdCBJbmRleCBbJHtpbmRleH1dLiBTZXQgRm91bmQg4oaQIFRSVUUuYAogICAgICAgIH0pOwogICAgICB9IGVsc2UgewogICAgICAgIHJlamVjdGVkTGlzdC5wdXNoKGluZGV4KTsKICAgICAgICBzdGVwcy5wdXNoKHsKICAgICAgICAgIGxpbmU6IDcsCiAgICAgICAgICBjdXJySWR4OiBpbmRleCwKICAgICAgICAgIGZvdW5kOiAnRkFMU0UnLAogICAgICAgICAgY29uZDogJ05PIE1BVENIJywKICAgICAgICAgIHN0YXR1czogJ21pc21hdGNoJywKICAgICAgICAgIHJlamVjdGVkOiBbLi4ucmVqZWN0ZWRMaXN0XSwKICAgICAgICAgIGZvdW5kSWR4OiBudWxsLAogICAgICAgICAgbXNnOiBgTm8gbWF0Y2guIEFkdmFuY2UgcG9pbnRlciB0byB0aGUgbmV4dCBwb3NpdGlvbjogSW5kZXgg4oaQICR7aW5kZXggKyAxfS5gCiAgICAgICAgfSk7CiAgICAgICAgaW5kZXgrKzsKICAgICAgfQoKICAgICAgc3RlcHMucHVzaCh7CiAgICAgICAgbGluZTogOSwKICAgICAgICBjdXJySWR4OiBpbmRleCA8PSAxMCA/IGluZGV4IDogMTAsCiAgICAgICAgZm91bmQ6IGZvdW5kID8gJ1RSVUUnIDogJ0ZBTFNFJywKICAgICAgICBjb25kOiBgRm91bmQgKCR7Zm91bmR9KSBPUiBJbmRleCA+IDEwICgke2luZGV4ID4gMTB9KWAsCiAgICAgICAgc3RhdHVzOiBmb3VuZCA/ICdmb3VuZCcgOiAnbG9vcC1jaGVjaycsCiAgICAgICAgcmVqZWN0ZWQ6IFsuLi5yZWplY3RlZExpc3RdLAogICAgICAgIGZvdW5kSWR4OiBmb3VuZCA/IChpbmRleCA8PSAxMCA/IGluZGV4IDogaW5kZXggLSAxKSA6IG51bGwsCiAgICAgICAgbXNnOiBgRXZhbHVhdGluZyBsb29wIHRlcm1pbmF0aW9uOiBGb3VuZCA9ICR7Zm91bmQgPyAnVFJVRScgOiAnRkFMU0UnfSwgSW5kZXggPSAke2luZGV4fS5gCiAgICAgIH0pOwoKICAgIH0gd2hpbGUgKCFmb3VuZCAmJiBpbmRleCA8PSAxMCk7CgogICAgc3RlcHMucHVzaCh7CiAgICAgIGxpbmU6IDEwLAogICAgICBjdXJySWR4OiBudWxsLAogICAgICBmb3VuZDogZm91bmQgPyAnVFJVRScgOiAnRkFMU0UnLAogICAgICBjb25kOiBmb3VuZCA/ICdURVJNSU5BVEVEOiBTVUNDRVNTJyA6ICdURVJNSU5BVEVEOiBOT1QgRk9VTkQnLAogICAgICBzdGF0dXM6IGZvdW5kID8gJ2ZvdW5kJyA6ICdjb21wbGV0ZWQtbWlzcycsCiAgICAgIHJlamVjdGVkOiBbLi4ucmVqZWN0ZWRMaXN0XSwKICAgICAgZm91bmRJZHg6IGZvdW5kID8gaW5kZXggOiBudWxsLAogICAgICBtc2c6IGZvdW5kIAogICAgICAgID8gYFNlYXJjaCBjb21wbGV0ZTogVGFyZ2V0IHZhbHVlICR7c2VhcmNoVmFsdWV9IGZvdW5kIGF0IGluZGV4IGxvY2F0aW9uICR7aW5kZXh9LmAgCiAgICAgICAgOiBgU2VhcmNoIGNvbXBsZXRlOiBUYXJnZXQgdmFsdWUgJHtzZWFyY2hWYWx1ZX0gZG9lcyBub3QgZXhpc3QgaW4gdGhlIGFycmF5LmAKICAgIH0pOwogIH0KCiAgZnVuY3Rpb24gcmVuZGVyU3RlcChpZHgpIHsKICAgIGlmIChpZHggPCAwIHx8IGlkeCA+PSBzdGVwcy5sZW5ndGgpIHJldHVybjsKICAgIGNvbnN0IHMgPSBzdGVwc1tpZHhdOwogICAgY29uc3QgdGFyZ2V0ID0gcGFyc2VJbnQoZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3RhcmdldElucHV0JykudmFsdWUpOwoKICAgIC8vIFN0YXRlIFZhcmlhYmxlcwogICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3ZhbEluZGV4JykudGV4dENvbnRlbnQgPSBzLmN1cnJJZHggIT09IG51bGwgPyBzLmN1cnJJZHggOiAnLSc7CiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndmFsVGFyZ2V0JykudGV4dENvbnRlbnQgPSB0YXJnZXQ7CiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndmFsRm91bmQnKS50ZXh0Q29udGVudCA9IHMuZm91bmQ7CiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndmFsQ29uZCcpLnRleHRDb250ZW50ID0gcy5jb25kOwogICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ25hcnJhdGlvblRleHQnKS50ZXh0Q29udGVudCA9IHMubXNnOwoKICAgIC8vIFBzZXVkb2NvZGUgU3luYwogICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLmNvZGUtbGluZScpLmZvckVhY2goZWwgPT4gZWwuY2xhc3NMaXN0LnJlbW92ZSgnYWN0aXZlJykpOwogICAgY29uc3QgbGluZUVsID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoYGxpbmUtJHtzLmxpbmV9YCk7CiAgICBpZiAobGluZUVsKSBsaW5lRWwuY2xhc3NMaXN0LmFkZCgnYWN0aXZlJyk7CgogICAgLy8gQXJyYXkgVmlzdWFsaXphdGlvbgogICAgY29uc3QgY29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2FycmF5Q29udGFpbmVyJyk7CiAgICBjb250YWluZXIuaW5uZXJIVE1MID0gJyc7CgogICAgYXJyYXlEYXRhLmZvckVhY2goKHZhbCwgaSkgPT4gewogICAgICBjb25zdCBvbmVJZHggPSBpICsgMTsKICAgICAgY29uc3Qgd3JhcCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpOwogICAgICB3cmFwLmNsYXNzTmFtZSA9ICdlbGVtZW50LWNhcmQnOwoKICAgICAgY29uc3QgYm94ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7CiAgICAgIGJveC5jbGFzc05hbWUgPSAnYm94JzsKICAgICAgYm94LnRleHRDb250ZW50ID0gdmFsOwoKICAgICAgaWYgKHMuZm91bmRJZHggPT09IG9uZUlkeCkgewogICAgICAgIGJveC5jbGFzc0xpc3QuYWRkKCdmb3VuZCcpOwogICAgICB9IGVsc2UgaWYgKHMuY3VycklkeCA9PT0gb25lSWR4ICYmIHMuc3RhdHVzID09PSAnY2hlY2tpbmcnKSB7CiAgICAgICAgYm94LmNsYXNzTGlzdC5hZGQoJ2NoZWNraW5nJyk7CiAgICAgIH0gZWxzZSBpZiAocy5yZWplY3RlZC5pbmNsdWRlcyhvbmVJZHgpKSB7CiAgICAgICAgYm94LmNsYXNzTGlzdC5hZGQoJ3JlamVjdGVkJyk7CiAgICAgIH0KCiAgICAgIGNvbnN0IGxhYmVsID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7CiAgICAgIGxhYmVsLmNsYXNzTmFtZSA9ICdlbGVtZW50LWlkeCc7CiAgICAgIGxhYmVsLnRleHRDb250ZW50ID0gYFske29uZUlkeH1dYDsKCiAgICAgIHdyYXAuYXBwZW5kQ2hpbGQoYm94KTsKICAgICAgd3JhcC5hcHBlbmRDaGlsZChsYWJlbCk7CiAgICAgIGNvbnRhaW5lci5hcHBlbmRDaGlsZCh3cmFwKTsKICAgIH0pOwogIH0KCiAgZnVuY3Rpb24gdG9nZ2xlUGxheSgpIHsKICAgIGlzUGxheWluZyA9ICFpc1BsYXlpbmc7CiAgICBjb25zdCBidG4gPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncGxheUJ0bicpOwogICAgaWYgKGlzUGxheWluZykgewogICAgICBidG4udGV4dENvbnRlbnQgPSAnUGF1c2Ug4p2a4p2aJzsKICAgICAgYnRuLnN0eWxlLmJhY2tncm91bmQgPSAnI2UxMWQ0OCc7CiAgICAgIHJ1bkxvb3AoKTsKICAgIH0gZWxzZSB7CiAgICAgIGJ0bi50ZXh0Q29udGVudCA9ICdQbGF5IFZpZGVvIOKWtic7CiAgICAgIGJ0bi5zdHlsZS5iYWNrZ3JvdW5kID0gJ3ZhcigtLXByaW1hcnkpJzsKICAgICAgY2xlYXJUaW1lb3V0KHRpbWVyKTsKICAgIH0KICB9CgogIGZ1bmN0aW9uIHJ1bkxvb3AoKSB7CiAgICBpZiAoIWlzUGxheWluZykgcmV0dXJuOwogICAgaWYgKGN1cnJlbnRTdGVwSWR4IDwgc3RlcHMubGVuZ3RoIC0gMSkgewogICAgICBjdXJyZW50U3RlcElkeCsrOwogICAgICByZW5kZXJTdGVwKGN1cnJlbnRTdGVwSWR4KTsKICAgICAgY29uc3Qgc3BlZWQgPSBwYXJzZUludChkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnc3BlZWRTZWxlY3QnKS52YWx1ZSk7CiAgICAgIHRpbWVyID0gc2V0VGltZW91dChydW5Mb29wLCBzcGVlZCk7CiAgICB9IGVsc2UgewogICAgICB0b2dnbGVQbGF5KCk7CiAgICB9CiAgfQoKICBmdW5jdGlvbiBzdGVwRm9yd2FyZCgpIHsKICAgIGlmIChpc1BsYXlpbmcpIHRvZ2dsZVBsYXkoKTsKICAgIGlmIChjdXJyZW50U3RlcElkeCA8IHN0ZXBzLmxlbmd0aCAtIDEpIHsKICAgICAgY3VycmVudFN0ZXBJZHgrKzsKICAgICAgcmVuZGVyU3RlcChjdXJyZW50U3RlcElkeCk7CiAgICB9CiAgfQoKICBmdW5jdGlvbiByZXN0YXJ0U2VhcmNoKCkgewogICAgaWYgKGlzUGxheWluZykgdG9nZ2xlUGxheSgpOwogICAgY3VycmVudFN0ZXBJZHggPSAwOwogICAgY29uc3QgdGFyZ2V0ID0gcGFyc2VJbnQoZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3RhcmdldElucHV0JykudmFsdWUpIHx8IDA7CiAgICBnZW5lcmF0ZVN0ZXBzKHRhcmdldCk7CiAgICByZW5kZXJTdGVwKDApOwogIH0KCiAgLy8gSW5pdGlhbCBsb2FkCiAgcmVzdGFydFNlYXJjaCgpOwo8L3NjcmlwdD4KCjwvYm9keT4KPC9odG1sPg==" title="Linear Search Interactive Visualizer" style="width: 100%; height: 900px; border: none; border-radius: 10px; display: block;" loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: VALIDATION & TEST DATA -->
+    <section id="validation-testdata" class="tab-content">
+      <div class="grid">
+        <!-- BASIC CHECKS -->
+        <div class="card">
+          <h3>Range &amp; Length Check</h3>
+          <p><strong>Range Check:</strong></p>
+          <pre>REPEAT
+  INPUT Mark
+  IF Mark &lt; 0 OR Mark > 100 THEN
+    OUTPUT "Mark must be between 0 and 100"
+  ENDIF
+UNTIL Mark >= 0 AND Mark &lt;= 100</pre>
+          <p><strong>Length Check:</strong></p>
+          <pre>REPEAT
+  INPUT Password
+UNTIL LENGTH(Password) >= 8</pre>
+        </div>
+
+        <!-- MORE VALIDATION CHECKS -->
+        <div class="card">
+          <h3>Presence, Type, Format &amp; Check Digit</h3>
+          <p><strong>Presence Check</strong> &ndash; a required field is not left blank:</p>
+          <pre>REPEAT
+  INPUT Name
+  IF Name = "" THEN
+    OUTPUT "This field is required"
+  ENDIF
+UNTIL Name &lt;&gt; ""</pre>
+          <p><strong>Type Check</strong> &ndash; data is of the correct data type:</p>
+          <pre>REPEAT
+  INPUT Age
+  IF Age &lt;&gt; DIV(Age, 1) THEN
+    OUTPUT "Please enter a whole number"
+  ENDIF
+UNTIL Age = DIV(Age, 1)</pre>
+          <p><strong>Format Check</strong> &ndash; data follows a pre-defined pattern (e.g. DD/MM/YYYY dates, Student ID "S####").</p>
+          <p><strong>Check Digit</strong> &ndash; an extra digit calculated from the other digits to detect data entry errors (used in barcodes, ISBNs, VINs):</p>
+          <pre>IF CalculatedCheckDigit &lt;&gt; EnteredCheckDigit THEN
+  OUTPUT "Invalid code"
+ENDIF</pre>
+        </div>
+
+        <!-- VERIFICATION -->
+        <div class="card">
+          <h3>Verification</h3>
+          <p>Verification checks that data has been copied or entered <strong>accurately</strong>, usually by comparing it with the original source.</p>
+          <p><strong>Double Entry:</strong> The same data is entered twice (often by different operators) and compared.</p>
+          <pre>INPUT Password
+INPUT ConfirmPassword
+IF Password &lt;&gt; ConfirmPassword THEN
+  OUTPUT "Entries do not match"
+ENDIF</pre>
+          <p><strong>Visual Check:</strong> A person compares the data entered on screen with the original source document.</p>
+        </div>
+
+        <!-- TEST DATA -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Types of Test Data</h3>
+          <p>Suppose a program accepts marks from 0 to 100:</p>
+          <table>
+            <thead>
+              <tr><th>Type</th><th>Meaning</th><th>Example</th><th>Expected Result</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Normal</strong></td><td>Valid, typical data</td><td>65</td><td>Accepted</td></tr>
+              <tr><td><strong>Abnormal</strong></td><td>Invalid data</td><td>-10, 120</td><td>Rejected</td></tr>
+              <tr><td><strong>Extreme</strong></td><td>Valid data close to the limits</td><td>1, 99</td><td>Accepted</td></tr>
+              <tr><td><strong>Boundary</strong></td><td>Data exactly at (or just outside) the limits</td><td>0, 100 (accepted) &bull; -1, 101 (rejected)</td><td>See example</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- VALIDATION VS VERIFICATION -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Validation vs Verification</h3>
+          <table>
+            <thead>
+              <tr><th>Aspect</th><th>Validation</th><th>Verification</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Purpose</td><td>Checks whether data is reasonable / acceptable</td><td>Checks whether data was entered / copied accurately</td></tr>
+              <tr><td>Who performs it</td><td>Usually performed by the computer</td><td>Can involve a person, or repeated data entry</td></tr>
+              <tr><td>Methods</td><td>Range, length, presence, type, format, check digit</td><td>Double entry, visual check</td></tr>
+              <tr><td>Example</td><td>Mark must be 0&ndash;100</td><td>Checking an entered mark against the original paper</td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top: 0.75rem;"><strong>Easy way to remember:</strong> Validation = "Is this data acceptable?" &nbsp;|&nbsp; Verification = "Did I enter/copy the data correctly?"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: ARRAY, STRING & FILE HANDLING -->
+    <section id="array-string-file" class="tab-content">
+      <div class="grid">
+        <!-- 1D ARRAYS -->
+        <div class="card">
+          <h3>1D Arrays (Declaration &amp; Iteration)</h3>
+          <pre>// Declaration: 1D Array of size 10
+DECLARE StudentNames : ARRAY[1:10] OF STRING
+DECLARE Scores : ARRAY[1:10] OF INTEGER
+
+// Populating array
+FOR Index &larr; 1 TO 10
+  INPUT StudentNames[Index]
+  INPUT Scores[Index]
+NEXT Index
+
+// Accessing Nth element
+OUTPUT "First student is: ", StudentNames[1]</pre>
+        </div>
+
+        <!-- 2D ARRAYS -->
+        <div class="card">
+          <h3>2D Arrays (Nested Loops)</h3>
+          <pre>// Declaration: 2D Array (e.g. 5 rows, 10 columns)
+DECLARE Amount : ARRAY[1:5, 1:10] OF INTEGER
+DECLARE GrandTotal : INTEGER
+GrandTotal &larr; 0
+
+FOR Row &larr; 1 TO 5
+  RowTotal &larr; 0
+  FOR Column &larr; 1 TO 10
+    RowTotal &larr; RowTotal + Amount[Row, Column]
+  NEXT Column
+  OUTPUT "Total for Row ", Row, " is ", RowTotal
+  GrandTotal &larr; GrandTotal + RowTotal
+NEXT Row
+
+OUTPUT "Grand Total: ", GrandTotal</pre>
+        </div>
+
+        <!-- STRING HANDLING -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>String Handling Functions</h3>
+          <div class="grid" style="margin-bottom: 0;">
+            <div>
+              <p><strong>LENGTH(string)</strong></p>
+              <pre>DECLARE Name : STRING
+Name &larr; "Computer Science"
+OUTPUT LENGTH(Name) // Outputs 16</pre>
+            </div>
+            <div>
+              <p><strong>SUBSTRING(string, start, length)</strong></p>
+              <pre>// SUBSTRING(str, pos, count)
+OUTPUT SUBSTRING("Computer Science", 10, 7)
+// Outputs "Science"</pre>
+            </div>
+            <div>
+              <p><strong>UCASE(string) &amp; LCASE(string)</strong></p>
+              <pre>OUTPUT UCASE("hello") // Outputs "HELLO"
+OUTPUT LCASE("WORLD") // Outputs "world"</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- FILE HANDLING MODES -->
+        <div class="card">
+          <h3>File Handling Modes</h3>
+          <ul>
+            <li><code>READ</code>: Opens file for data retrieval from the beginning.</li>
+            <li><code>WRITE</code>: Creates a new file or overwrites an existing file.</li>
+            <li><code>APPEND</code>: Adds new data to the end of an existing file.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Writing to a Text File</h3>
+          <pre>OPENFILE "StudentData.txt" FOR WRITE
+WRITEFILE "StudentData.txt", "Bob, Smith, 90"
+WRITEFILE "StudentData.txt", "Ada, Lovelace, 100"
+CLOSEFILE "StudentData.txt"</pre>
+        </div>
+
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Reading Lines from File until EOF</h3>
+          <p>Reads every line of a text file sequentially until EOF (End Of File) is reached.</p>
+          <pre>DECLARE LineOfText : STRING
+
+OPENFILE "StudentData.txt" FOR READ
+
+WHILE NOT EOF("StudentData.txt") DO
+  READFILE "StudentData.txt", LineOfText
+  OUTPUT LineOfText
+ENDWHILE
+
+CLOSEFILE "StudentData.txt"</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: FLOWCHART -->
+    <section id="flowcharts" class="tab-content">
+      <div class="grid">
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Standard Flowchart Symbols</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Function</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="symbol-shape terminator">START</div></td>
+                <td><strong>Terminator</strong></td>
+                <td>Shows the start and end termination points of an algorithm.</td>
+              </tr>
+              <tr>
+                <td><div class="symbol-shape process">Process</div></td>
+                <td><strong>Process</strong></td>
+                <td>Calculations, data assignments, and internal tasks.</td>
+              </tr>
+              <tr>
+                <td><div class="symbol-shape io">Input/Output</div></td>
+                <td><strong>Input / Output</strong></td>
+                <td>Prompts input from keyboard or prints output to monitor.</td>
+              </tr>
+              <tr>
+                <td><div class="symbol-shape decision"></div></td>
+                <td><strong>Decision</strong></td>
+                <td>Conditional branching check with Yes/No exit paths.</td>
+              </tr>
+              <tr>
+                <td><div class="symbol-shape">&rarr;</div></td>
+                <td><strong>Flowline</strong></td>
+                <td>Defines directional sequence of execution.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- WORKED FLOWCHART EXAMPLE -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Worked Example: Odd or Even Number</h3>
+          <p>Flowchart equivalent of: <code>IF Num MOD 2 = 0 THEN OUTPUT "Even" ELSE OUTPUT "Odd" ENDIF</code></p>
+          <div style="display:flex; justify-content:center; padding: 1rem 0;">
+            <svg viewBox="0 0 320 560" style="width:260px; height:auto; stroke:var(--diagram-stroke); fill:var(--diagram-fill); stroke-width:2; stroke-linecap:round; stroke-linejoin:round;">
+              <!-- START -->
+              <rect x="90" y="10" width="140" height="45" rx="22" />
+              <text x="160" y="38" text-anchor="middle" font-size="15" stroke="none" fill="var(--diagram-stroke)">START</text>
+              <line x1="160" y1="55" x2="160" y2="85" marker-end="url(#arrow)" />
+
+              <!-- INPUT (parallelogram) -->
+              <polygon points="80,85 240,85 220,135 60,135" />
+              <text x="150" y="116" text-anchor="middle" font-size="14" stroke="none" fill="var(--diagram-stroke)">INPUT Num</text>
+              <line x1="150" y1="135" x2="150" y2="165" marker-end="url(#arrow)" />
+
+              <!-- DECISION (diamond) -->
+              <polygon points="150,165 260,235 150,305 40,235" />
+              <text x="150" y="230" text-anchor="middle" font-size="12.5" stroke="none" fill="var(--diagram-stroke)">Num MOD 2</text>
+              <text x="150" y="246" text-anchor="middle" font-size="12.5" stroke="none" fill="var(--diagram-stroke)">= 0 ?</text>
+
+              <!-- YES branch (right) -->
+              <line x1="260" y1="235" x2="300" y2="235" />
+              <line x1="300" y1="235" x2="300" y2="270" marker-end="url(#arrow)" />
+              <text x="272" y="228" font-size="12" stroke="none" fill="var(--diagram-stroke)">YES</text>
+              <polygon points="230,270 320,270 300,320 250,320" />
+              <text x="275" y="301" text-anchor="middle" font-size="13" stroke="none" fill="var(--diagram-stroke)">OUTPUT</text>
+              <text x="275" y="316" text-anchor="middle" font-size="13" stroke="none" fill="var(--diagram-stroke)">"Even"</text>
+
+              <!-- NO branch (down) -->
+              <line x1="150" y1="305" x2="150" y2="335" marker-end="url(#arrow)" />
+              <text x="160" y="325" font-size="12" stroke="none" fill="var(--diagram-stroke)">NO</text>
+              <polygon points="90,335 210,335 190,385 70,385" />
+              <text x="130" y="366" text-anchor="middle" font-size="13" stroke="none" fill="var(--diagram-stroke)">OUTPUT</text>
+              <text x="130" y="381" text-anchor="middle" font-size="13" stroke="none" fill="var(--diagram-stroke)">"Odd"</text>
+
+              <!-- Merge lines down to END -->
+              <line x1="275" y1="320" x2="275" y2="440" />
+              <line x1="130" y1="385" x2="130" y2="440" />
+              <line x1="130" y1="440" x2="275" y2="440" />
+              <line x1="200" y1="440" x2="200" y2="470" marker-end="url(#arrow)" />
+
+              <!-- END -->
+              <rect x="130" y="470" width="140" height="45" rx="22" />
+              <text x="200" y="498" text-anchor="middle" font-size="15" stroke="none" fill="var(--diagram-stroke)">END</text>
+
+              <defs>
+                <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 Z" fill="var(--diagram-stroke)" stroke="none" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 7: TRACE TABLE -->
+    <section id="trace-table" class="tab-content">
+      <div class="grid">
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Trace Tables</h3>
+          <p>A trace table follows the values of variables through a program, one instruction at a time, to check whether an algorithm produces the correct result.</p>
+          <pre>Total &larr; 0
+FOR Count &larr; 1 TO 3
+  INPUT Number
+  Total &larr; Total + Number
+NEXT Count
+OUTPUT Total</pre>
+          <p>Input values: 5, 7, 3</p>
+          <table>
+            <thead>
+              <tr><th>Step</th><th>Count</th><th>Number</th><th>Total</th><th>Action</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>-</td><td>-</td><td>0</td><td>Initial values</td></tr>
+              <tr><td>2</td><td>1</td><td>5</td><td>5</td><td>Total &larr; Total + Number</td></tr>
+              <tr><td>3</td><td>2</td><td>7</td><td>12</td><td>Total &larr; Total + Number</td></tr>
+              <tr><td>4</td><td>3</td><td>3</td><td>15</td><td>Total &larr; Total + Number</td></tr>
+              <tr><td>-</td><td>-</td><td>-</td><td>15</td><td>Output Total (final output: 15)</td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top:0.75rem;"><strong>How to trace:</strong> (1) Start with initial values &bull; (2) Execute each instruction in order &bull; (3) Record changes to variables &bull; (4) Continue until the algorithm finishes &bull; (5) Check the final output against the expected result.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 8: PROGRAMMING -->
+    <section id="programming" class="tab-content">
+      <div class="grid">
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3>Chapter 8 - Programming</h3>
+          <p>This section (translating pseudocode into an actual programming language, e.g. Python) hasn't been added yet. Let me know the topics or examples you'd like here and I'll fill this tab in.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 9: DATABASE -->
+    <section id="databases" class="tab-content">
+      <div class="grid">
+        <div class="card">
+          <h3>Relational Concepts</h3>
+          <ul>
+            <li><strong>Flat File:</strong> Single table containing all data.</li>
+            <li><strong>Relational Database:</strong> Multiple linked tables reducing redundancy.</li>
+            <li><strong>Primary Key:</strong> Unique identifier field for a record.</li>
+            <li><strong>Foreign Key:</strong> Links to another table's primary key.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Standard Query (SELECT)</h3>
+          <pre>SELECT Forename, Lastname
+FROM Students
+WHERE StudentID &lt; 10
+ORDER BY Lastname ASC;</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Modifying Tables (SQL)</h3>
+        <div class="grid" style="margin-bottom: 0;">
+          <div>
+            <p><strong>INSERT</strong></p>
+            <pre>INSERT INTO Students (ID, Name)
+VALUES (1, 'Adam');</pre>
+          </div>
+          <div>
+            <p><strong>UPDATE</strong></p>
+            <pre>UPDATE Students
+SET Class = '11A'
+WHERE StudentID = 1;</pre>
+          </div>
+          <div>
+            <p><strong>DELETE</strong></p>
+            <pre>DELETE FROM Students
+WHERE StudentID = 1;</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 10: LOGIC GATE -->
+    <section id="logic-gates" class="tab-content">
+      <div class="gate-grid">
+        
+        <!-- AND -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>AND Gate</h4>
+            <code>OUT = A AND B</code>
+          </div>
+          <p>Output 1 only when <strong>all</strong> inputs are 1.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="45" y2="22" />
+                <line x1="10" y1="48" x2="45" y2="48" />
+                <path d="M 45,10 L 80,10 A 25,25 0 0,1 80,60 L 45,60 Z" />
+                <line x1="105" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td></tr>
+              <tr><td>1</td><td>1</td><td>1</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- NAND -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>NAND Gate</h4>
+            <code>OUT = NOT (A AND B)</code>
+          </div>
+          <p>Opposite of AND. Output is 0 only when both inputs are 1.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="45" y2="22" />
+                <line x1="10" y1="48" x2="45" y2="48" />
+                <path d="M 45,10 L 78,10 A 25,25 0 0,1 78,60 L 45,60 Z" />
+                <circle cx="107" cy="35" r="4" />
+                <line x1="111" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- OR -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>OR Gate</h4>
+            <code>OUT = A OR B</code>
+          </div>
+          <p>Output is 1 if <strong>at least one</strong> input is 1.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="52" y2="22" />
+                <line x1="10" y1="48" x2="52" y2="48" />
+                <path d="M 40,10 Q 60,35 40,60 Q 80,60 105,35 Q 80,10 40,10 Z" />
+                <line x1="105" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>1</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- NOR -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>NOR Gate</h4>
+            <code>OUT = NOT (A OR B)</code>
+          </div>
+          <p>Opposite of OR. Output is 1 only when both inputs are 0.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="50" y2="22" />
+                <line x1="10" y1="48" x2="50" y2="48" />
+                <path d="M 38,10 Q 58,35 38,60 Q 75,60 98,35 Q 75,10 38,10 Z" />
+                <circle cx="102" cy="35" r="4" />
+                <line x1="106" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- XOR -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>XOR Gate</h4>
+            <code>OUT = A XOR B</code>
+          </div>
+          <p>Output 1 only when inputs are <strong>different</strong>.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="48" y2="22" />
+                <line x1="10" y1="48" x2="48" y2="48" />
+                <path d="M 33,10 Q 53,35 33,60" fill="none" />
+                <path d="M 43,10 Q 63,35 43,60 Q 80,60 105,35 Q 80,10 43,10 Z" />
+                <line x1="105" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- XNOR -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>XNOR Gate</h4>
+            <code>OUT = NOT (A XOR B)</code>
+          </div>
+          <p>Output 1 when both inputs are <strong>identical</strong>.</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="10" y1="22" x2="44" y2="22" />
+                <line x1="10" y1="48" x2="44" y2="48" />
+                <path d="M 30,10 Q 50,35 30,60" fill="none" />
+                <path d="M 39,10 Q 59,35 39,60 Q 75,60 98,35 Q 75,10 39,10 Z" />
+                <circle cx="102" cy="35" r="4" />
+                <line x1="106" y1="35" x2="135" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>Y</th><th>OUT</th></tr>
+              <tr><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td></tr>
+              <tr><td>1</td><td>1</td><td>1</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- NOT -->
+        <div class="gate-card">
+          <div class="gate-header">
+            <h4>NOT Gate</h4>
+            <code>OUT = NOT A</code>
+          </div>
+          <p>Inverts input (1 becomes 0, 0 becomes 1).</p>
+          <div class="gate-body">
+            <div class="gate-svg-container">
+              <svg viewBox="0 0 140 70">
+                <line x1="15" y1="35" x2="45" y2="35" />
+                <polygon points="45,15 45,55 85,35" />
+                <circle cx="89" cy="35" r="4" />
+                <line x1="93" y1="35" x2="130" y2="35" />
+              </svg>
+            </div>
+            <table class="truth-table-mini">
+              <tr><th>X</th><th>OUT</th></tr>
+              <tr><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td></tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>Computer Science Paper 2 Revision</div>
+    <div>CS revision created by <strong>Tr.WaiLinHtet</strong></div>
+  </footer>
+
+  <script>
+    function switchTab(event, tabId) {
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    const htmlEl = document.documentElement;
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+
+    function applyTheme(theme) {
+      htmlEl.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        themeIcon.innerHTML = '&#9788;';
+        themeLabel.textContent = 'Light Mode';
+      } else {
+        themeIcon.innerHTML = '&#9790;';
+        themeLabel.textContent = 'Dark Mode';
+      }
+      localStorage.setItem('cs_theme', theme);
+    }
+
+    function toggleTheme() {
+      const currentTheme = htmlEl.getAttribute('data-theme') || 'light';
+      applyTheme(currentTheme === 'light' ? 'dark' : 'light');
+    }
+
+    const savedTheme = localStorage.getItem('cs_theme') || 'light';
+    applyTheme(savedTheme);
+
+    /* ===================================================================
+       INTERACTIVE PSEUDOCODE VISUALIZER (Tab 2)
+    =================================================================== */
+    const vizModules = {
+      selection_if: {
+        title: "Selection: IF...THEN...ELSE...ENDIF",
+        desc: "Evaluates a boolean condition. Routes execution to the THEN branch if TRUE, otherwise the ELSE branch.",
+        code: [
+          "Age ← 15",
+          "IF Age < 18 THEN",
+          "  OUTPUT \"Child\"",
+          "ELSE",
+          "  OUTPUT \"Adult\"",
+          "ENDIF"
+        ],
+        headers: ["Age", "Condition: Age < 18", "Output Console"],
+        steps: [
+          { line: 0, vars: ["15", "-", "-"], stage: { branch: "Waiting..." }, msg: "Assign integer 15 into variable 'Age'." },
+          { line: 1, vars: ["15", "TRUE (15 < 18)", "-"], stage: { branch: "THEN Branch Taken" }, msg: "Condition 15 < 18 evaluates to TRUE. Program enters THEN branch." },
+          { line: 2, vars: ["15", "TRUE", "\"Child\""], stage: { branch: "Output: Child" }, msg: "Execute THEN branch: Output \"Child\"." },
+          { line: 5, vars: ["15", "TRUE", "\"Child\""], stage: { branch: "ENDIF Completed" }, msg: "Skip ELSE branch directly to ENDIF." }
+        ],
+        renderStage: (s) => `<div style="font-size:1.15rem; font-weight:700; color:var(--accent);">${s.branch}</div>`
+      },
+
+      selection_case: {
+        title: "Selection: CASE OF Move",
+        desc: "Multi-way conditional selection statement testing the exact state of variable 'Move'.",
+        code: [
+          "Move ← 'S'",
+          "Position ← 50",
+          "CASE OF Move",
+          "  'W' : Position ← Position - 10",
+          "  'S' : Position ← Position + 10",
+          "  OTHERWISE : CALL Beep",
+          "ENDCASE"
+        ],
+        headers: ["Move", "Position", "Matched Branch"],
+        steps: [
+          { line: 0, vars: ["'S'", "-", "-"], stage: { pos: "-" }, msg: "User enters Move = 'S'." },
+          { line: 1, vars: ["'S'", "50", "-"], stage: { pos: "50" }, msg: "Initial position set to 50." },
+          { line: 2, vars: ["'S'", "50", "Evaluating..."], stage: { pos: "50" }, msg: "Evaluate CASE expression for value 'S'." },
+          { line: 4, vars: ["'S'", "60", "Matched 'S'"], stage: { pos: "60 (+10 applied)" }, msg: "Matched selector 'S': execute Position ← Position + 10." },
+          { line: 6, vars: ["'S'", "60", "Terminated"], stage: { pos: "60" }, msg: "Exit CASE construct." }
+        ],
+        renderStage: (s) => `<div class="viz-mem-card"><span class="viz-mem-tag">Updated Position</span><span class="viz-mem-val">${s.pos}</span></div>`
+      },
+
+      loop_for: {
+        title: "Iteration: FOR...TO...NEXT (Definite Iteration)",
+        desc: "Fixed iteration loop executed a predetermined count known in advance.",
+        code: [
+          "Total ← 0",
+          "FOR Counter ← 1 TO 4",
+          "  Total ← Total + Counter",
+          "NEXT Counter",
+          "OUTPUT Total"
+        ],
+        headers: ["Counter", "Total", "Loop Condition (Counter <= 4)"],
+        steps: [
+          { line: 0, vars: ["-", "0", "-"], stage: { c: "-", t: "0" }, msg: "Initialize Total to 0." },
+          { line: 1, vars: ["1", "0", "TRUE"], stage: { c: "1", t: "0" }, msg: "Iteration 1: Counter starts at 1." },
+          { line: 2, vars: ["1", "1", "TRUE"], stage: { c: "1", t: "1" }, msg: "Add Counter (1) to Total: Total becomes 1." },
+          { line: 3, vars: ["2", "1", "TRUE"], stage: { c: "2", t: "1" }, msg: "NEXT Counter: Increment Counter to 2." },
+          { line: 2, vars: ["2", "3", "TRUE"], stage: { c: "2", t: "3" }, msg: "Add Counter (2) to Total: Total becomes 3." },
+          { line: 3, vars: ["3", "3", "TRUE"], stage: { c: "3", t: "3" }, msg: "NEXT Counter: Increment Counter to 3." },
+          { line: 2, vars: ["3", "6", "TRUE"], stage: { c: "3", t: "6" }, msg: "Add Counter (3) to Total: Total becomes 6." },
+          { line: 3, vars: ["4", "6", "TRUE"], stage: { c: "4", t: "6" }, msg: "NEXT Counter: Final iteration boundary Counter = 4." },
+          { line: 2, vars: ["4", "10", "TRUE"], stage: { c: "4", t: "10" }, msg: "Add Counter (4) to Total: Total becomes 10." },
+          { line: 4, vars: ["5", "10", "TERMINATED"], stage: { c: "5 (Exited)", t: "10" }, msg: "Counter exceeds upper limit (4). Loop terminates; Output 10." }
+        ],
+        renderStage: (s) => `
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <div class="viz-mem-card"><span class="viz-mem-tag">Counter</span><span class="viz-mem-val">${s.c}</span></div>
+            <div class="viz-mem-card"><span class="viz-mem-tag">Total</span><span class="viz-mem-val">${s.t}</span></div>
+          </div>
+        `
+      },
+
+      loop_while: {
+        title: "Iteration: WHILE...DO...ENDWHILE (Pre-Condition)",
+        desc: "Condition checked before entering the loop body. If the initial condition is FALSE, the loop runs zero times.",
+        code: [
+          "Total ← 0",
+          "INPUT Mark (Simulated: 40, -1)",
+          "WHILE Mark <> -1 DO",
+          "  Total ← Total + Mark",
+          "  INPUT Mark",
+          "ENDWHILE"
+        ],
+        headers: ["Mark", "Total", "Condition: Mark <> -1"],
+        steps: [
+          { line: 0, vars: ["-", "0", "-"], stage: { m: "-", t: "0" }, msg: "Initialize Total to 0." },
+          { line: 1, vars: ["40", "0", "-"], stage: { m: "40", t: "0" }, msg: "Initial user input: Mark = 40." },
+          { line: 2, vars: ["40", "0", "TRUE (40 <> -1)"], stage: { m: "40", t: "0" }, msg: "Check condition: 40 <> -1 is TRUE. Enter loop." },
+          { line: 3, vars: ["40", "40", "TRUE"], stage: { m: "40", t: "40" }, msg: "Accumulate Total: Total ← 0 + 40." },
+          { line: 4, vars: ["-1", "40", "TRUE"], stage: { m: "-1 (Rogue Value)", t: "40" }, msg: "Next user input: Sentinel/Rogue value -1." },
+          { line: 2, vars: ["-1", "40", "FALSE (-1 <> -1)"], stage: { m: "-1", t: "40" }, msg: "Check condition: -1 <> -1 is FALSE. Loop ends." },
+          { line: 5, vars: ["-1", "40", "EXITED"], stage: { m: "-1", t: "40" }, msg: "Loop terminates safely without adding the rogue value." }
+        ],
+        renderStage: (s) => `
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <div class="viz-mem-card"><span class="viz-mem-tag">Input Mark</span><span class="viz-mem-val">${s.m}</span></div>
+            <div class="viz-mem-card"><span class="viz-mem-tag">Total</span><span class="viz-mem-val">${s.t}</span></div>
+          </div>
+        `
+      },
+
+      loop_repeat: {
+        title: "Iteration: REPEAT...UNTIL (Post-Condition)",
+        desc: "Condition checked after the loop runs, so the body always executes at least once.",
+        code: [
+          "REPEAT",
+          "  INPUT Option",
+          "  OUTPUT \"Processing Choice\"",
+          "UNTIL Option = -1"
+        ],
+        headers: ["Option", "Loop Condition (Option = -1)", "Execution State"],
+        steps: [
+          { line: 0, vars: ["-", "-", "Entering Loop"], stage: { opt: "Waiting..." }, msg: "Body enters unconditionally at least once." },
+          { line: 1, vars: ["2", "FALSE (2 = -1)", "Running Iteration 1"], stage: { opt: "2" }, msg: "User inputs Option = 2." },
+          { line: 3, vars: ["2", "FALSE", "Repeating"], stage: { opt: "2" }, msg: "Check UNTIL: 2 = -1 evaluates to FALSE. Loop repeats." },
+          { line: 1, vars: ["-1", "TRUE (-1 = -1)", "Running Iteration 2"], stage: { opt: "-1" }, msg: "User inputs Option = -1." },
+          { line: 3, vars: ["-1", "TRUE", "TERMINATED"], stage: { opt: "-1 (Exit Signal)" }, msg: "Condition Option = -1 is TRUE. Loop terminates." }
+        ],
+        renderStage: (s) => `<div class="viz-mem-card"><span class="viz-mem-tag">Option</span><span class="viz-mem-val">${s.opt}</span></div>`
+      },
+
+      algo_totalling: {
+        title: "Algorithm: Totalling, Counting & Average",
+        desc: "Computes a cumulative sum, a conditional pass count, and the final average.",
+        code: [
+          "Total ← 0, PassCount ← 0",
+          "FOR Counter ← 1 TO 3",
+          "  Total ← Total + StudentMark[Counter]",
+          "  IF StudentMark[Counter] >= 50 THEN PassCount ← PassCount + 1",
+          "NEXT Counter",
+          "Average ← Total / 3"
+        ],
+        headers: ["Counter", "Mark", "Total", "PassCount"],
+        steps: [
+          { line: 0, vars: ["-", "-", "0", "0"], stage: { t: 0, p: 0 }, msg: "Initialize Total to 0 and PassCount to 0." },
+          { line: 2, vars: ["1", "60", "60", "1"], stage: { t: 60, p: 1 }, msg: "Mark[1] = 60: Total = 60, Mark >= 50 (PassCount = 1)." },
+          { line: 2, vars: ["2", "40", "100", "1"], stage: { t: 100, p: 1 }, msg: "Mark[2] = 40: Total = 100, Mark < 50 (PassCount remains 1)." },
+          { line: 2, vars: ["3", "80", "180", "2"], stage: { t: 180, p: 2 }, msg: "Mark[3] = 80: Total = 180, Mark >= 50 (PassCount = 2)." },
+          { line: 5, vars: ["Exited", "-", "180", "2"], stage: { t: 180, p: 2, avg: "60.0" }, msg: "Calculate Average = 180 / 3 = 60.0." }
+        ],
+        renderStage: (s) => `
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <div class="viz-mem-card"><span class="viz-mem-tag">Total</span><span class="viz-mem-val">${s.t}</span></div>
+            <div class="viz-mem-card"><span class="viz-mem-tag">PassCount</span><span class="viz-mem-val">${s.p}</span></div>
+            ${s.avg ? `<div class="viz-mem-card" style="border-color:var(--accent);"><span class="viz-mem-tag">Average</span><span class="viz-mem-val">${s.avg}</span></div>` : ''}
+          </div>
+        `
+      },
+
+      algo_minmax: {
+        title: "Algorithm: Maximum & Minimum Finder",
+        desc: "Initializes both trackers to the first element, then updates them while scanning the rest of the array.",
+        code: [
+          "MaximumValue ← Array[1] (45)",
+          "MinimumValue ← Array[1] (45)",
+          "FOR Counter ← 2 TO 4",
+          "  IF Array[Counter] > MaximumValue THEN MaximumValue ← Array[Counter]",
+          "  IF Array[Counter] < MinimumValue THEN MinimumValue ← Array[Counter]",
+          "NEXT Counter"
+        ],
+        headers: ["Counter", "Array[Counter]", "MaximumValue", "MinimumValue"],
+        steps: [
+          { line: 0, vars: ["1", "45", "45", "45"], stage: { max: 45, min: 45 }, msg: "Initialize MaximumValue and MinimumValue to Array[1] = 45." },
+          { line: 3, vars: ["2", "12", "45", "12"], stage: { max: 45, min: 12 }, msg: "Array[2] = 12: 12 < MinimumValue (45). Update MinimumValue ← 12." },
+          { line: 3, vars: ["3", "89", "89", "12"], stage: { max: 89, min: 12 }, msg: "Array[3] = 89: 89 > MaximumValue (45). Update MaximumValue ← 89." },
+          { line: 3, vars: ["4", "34", "89", "12"], stage: { max: 89, min: 12 }, msg: "Array[4] = 34: No updates required. Scan complete." }
+        ],
+        renderStage: (s) => `
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <div class="viz-mem-card" style="border-color:var(--accent);"><span class="viz-mem-tag">MaximumValue</span><span class="viz-mem-val">${s.max}</span></div>
+            <div class="viz-mem-card"><span class="viz-mem-tag">MinimumValue</span><span class="viz-mem-val">${s.min}</span></div>
+          </div>
+        `
+      }
+    };
+
+    let vizActiveKey = 'selection_if';
+    let vizStepIdx = 0;
+    let vizPlaying = false;
+    let vizTimer = null;
+
+    function vizLoadModule(key) {
+      if (vizPlaying) vizTogglePlay();
+      vizActiveKey = key;
+      vizStepIdx = 0;
+
+      const mod = vizModules[key];
+      document.getElementById('vizDesc').textContent = mod.desc;
+
+      const codeContainer = document.getElementById('vizCodeContainer');
+      codeContainer.innerHTML = mod.code.map((line, i) => `<div class="viz-code-line" id="viz-code-${i}">${line}</div>`).join('');
+
+      document.getElementById('vizTraceHeaders').innerHTML = mod.headers.map(h => `<th>${h}</th>`).join('');
+
+      vizRenderStep();
+    }
+
+    function vizRenderStep() {
+      const mod = vizModules[vizActiveKey];
+      const s = mod.steps[vizStepIdx];
+
+      document.getElementById('vizNarration').textContent = s.msg;
+      document.querySelectorAll('.viz-code-line').forEach(el => el.classList.remove('active'));
+      const activeLine = document.getElementById(`viz-code-${s.line}`);
+      if (activeLine) activeLine.classList.add('active');
+
+      document.getElementById('vizStage').innerHTML = mod.renderStage(s.stage);
+
+      document.getElementById('vizTraceRows').innerHTML = `<tr>${s.vars.map(v => `<td>${v}</td>`).join('')}</tr>`;
+      document.getElementById('vizProgress').textContent = `Step ${vizStepIdx + 1} / ${mod.steps.length}`;
+    }
+
+    function vizTogglePlay() {
+      vizPlaying = !vizPlaying;
+      const btn = document.getElementById('vizPlayBtn');
+      if (vizPlaying) {
+        btn.textContent = '❚❚ Pause';
+        vizRunLoop();
+      } else {
+        btn.textContent = '▶ Play';
+        clearTimeout(vizTimer);
+      }
+    }
+
+    function vizRunLoop() {
+      if (!vizPlaying) return;
+      const mod = vizModules[vizActiveKey];
+      if (vizStepIdx < mod.steps.length - 1) {
+        vizStepIdx++;
+        vizRenderStep();
+        const speed = parseInt(document.getElementById('vizSpeed').value);
+        vizTimer = setTimeout(vizRunLoop, speed);
+      } else {
+        vizTogglePlay();
+      }
+    }
+
+    function vizStepForward() {
+      if (vizPlaying) vizTogglePlay();
+      const mod = vizModules[vizActiveKey];
+      if (vizStepIdx < mod.steps.length - 1) {
+        vizStepIdx++;
+        vizRenderStep();
+      }
+    }
+
+    function vizReset() {
+      if (vizPlaying) vizTogglePlay();
+      vizStepIdx = 0;
+      vizRenderStep();
+    }
+
+    vizLoadModule('selection_if');
+  </script>
+<script type="module">
+  // ===== Firebase Login Gate (replaces the old local class-password gate, Nov 2026) =====
+  // Access rule: Google sign-in via the SrWL portal + teacher approval.
+  // No passwords are stored on this page. The dashboard enrollment + approval
+  // remain the real access control; this check keeps the revision page itself
+  // behind the same Google login.
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+  import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+  import { firebaseConfig, firebaseReady } from './assets/portal/firebase-config.js';
+
+  // Remove any credentials left behind by the old local class-password gate.
+  try {
+    localStorage.removeItem('cs_gate_ok');
+    localStorage.removeItem('cs_gate_user');
+  } catch (e) { /* storage unavailable - nothing to clean */ }
+
+  // Google Apps Script Web App URL (attendance logging, unchanged)
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweswRLHak84m6MkD8DrvxorOaH_ajSIut1uhAitFJDnF1Mrhg_m-vc7nfXaD7ibMBn/exec';
+
+  function logVisit(name, username, event) {
+    if (!SCRIPT_URL) return;
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ name: name, username: username, timestamp: new Date().toISOString(), event: event })
+    }).catch(function (err) { console.warn('Attendance log failed:', err); });
+  }
+
+  const overlay = document.getElementById('authOverlay');
+  const statusMsg = document.getElementById('authStatusMsg');
+  const goLoginBtn = document.getElementById('authGoLoginBtn');
+  const userBox = document.getElementById('authUserBox');
+  const userNameEl = document.getElementById('authUserName');
+  const avatarEl = document.getElementById('authAvatar');
+  const logoutBtn = document.getElementById('authLogoutBtn');
+  const openBtn = document.getElementById('authOpenBtn');
+
+  function showStatus(text, isError) {
+    if (!statusMsg) return;
+    statusMsg.textContent = text;
+    statusMsg.className = 'auth-msg show ' + (isError ? 'err' : 'ok');
+  }
+
+  function unlockPage(name) {
+    overlay.style.display = 'none';
+    userBox.style.display = 'flex';
+    userNameEl.textContent = name;
+    avatarEl.textContent = (name || '?').trim().charAt(0).toUpperCase() || '?';
+  }
+
+  function lockPage(message, showLoginButton) {
+    overlay.style.display = 'flex';
+    userBox.style.display = 'none';
+    if (message) showStatus(message, true);
+    if (goLoginBtn) goLoginBtn.style.display = showLoginButton ? '' : 'none';
+  }
+
+  if (goLoginBtn) goLoginBtn.addEventListener('click', function () { location.assign('login.html'); });
+  if (openBtn) openBtn.addEventListener('click', function () { location.assign('login.html'); });
+
+  if (!firebaseReady) {
+    lockPage('Firebase is not configured. Please contact your teacher.', false);
+  } else {
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Same admin check as assets/portal/portal.js: a denied read is not admin.
+    const isAdmin = async (uid) => {
+      try {
+        const snapshot = await getDoc(doc(db, 'admins', uid));
+        return snapshot.exists();
+      } catch (error) {
+        if (error.code === 'permission-denied') return false;
+        throw error;
+      }
+    };
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', async function () {
+        try { await signOut(auth); } catch (e) { console.warn('Sign-out failed:', e); }
+        location.assign('login.html');
+      });
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        lockPage('Please sign in with Google to open this revision page. Redirecting to the login page\u2026', true);
+        setTimeout(function () { location.assign('login.html'); }, 2500);
+        return;
+      }
+      const displayName = user.displayName || (user.email ? user.email.split('@')[0] : 'Student');
+      try {
+        const admin = await isAdmin(user.uid);
+        let approved = null; // null = could not verify (read denied); dashboard already enforces approval
+        try {
+          const snapshot = await getDoc(doc(db, 'users', user.uid));
+          if (snapshot.exists()) approved = snapshot.data().approved === true;
+        } catch (error) {
+          if (error.code !== 'permission-denied') throw error;
+          console.warn('Could not verify approval - allowing signed-in user. Check Firestore Rules for /users/{uid}.', error);
+        }
+        if (admin || approved === true || approved === null) {
+          unlockPage(displayName);
+          logVisit(displayName, user.email || user.uid, 'firebase-login');
+        } else {
+          lockPage('Registration received. Your teacher must approve your account before course access is enabled.', false);
+        }
+      } catch (error) {
+        console.error('Account check failed:', error);
+        lockPage('Unable to verify your account. Please try again or contact your teacher.', true);
+      }
+    });
+  }
+</script>
+<script>
+  // Fallback if the Firebase module above failed to load (e.g. offline)
+  setTimeout(function () {
+    var msg = document.getElementById('authStatusMsg');
+    var overlay = document.getElementById('authOverlay');
+    if (msg && overlay && overlay.style.display !== 'none' && msg.textContent.indexOf('Checking your Google sign-in') === 0) {
+      msg.textContent = 'Could not reach the sign-in service. Check your connection, then refresh this page.';
+      msg.className = 'auth-msg show err';
+      var btn = document.getElementById('authGoLoginBtn');
+      if (btn) btn.style.display = '';
+    }
+  }, 8000);
+</script>
+</body>
+</html>
