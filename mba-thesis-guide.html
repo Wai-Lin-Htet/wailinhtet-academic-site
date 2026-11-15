@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business IT &amp; MBA Thesis Guide | SrWL Learning</title>
+<meta name="description" content="A step-by-step MBA thesis guide — from choosing a topic to the defense — plus a Business IT study hub: IT management, digital transformation, AI in business, e-commerce, data analytics, information systems, project management and cybersecurity.">
+<style>
+  :root{
+    --navy:#0d2a5c;
+    --navy-dark:#081f45;
+    --yellow:#ffc900;
+    --ink:#1e293b;
+    --muted:#64748b;
+    --line:#e2e8f0;
+    --bg:#f1f5f9;
+    --card:#ffffff;
+    --green:#059669;
+    --green-bg:#ecfdf5;
+    --blue-bg:#eff6ff;
+    --red:#dc2626;
+    --red-bg:#fef2f2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  a{color:var(--navy);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* Header */
+  .site-header{background:var(--navy);color:#fff}
+  .site-header-inner{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px}
+  .brand{font-weight:800;font-size:20px;letter-spacing:.2px;color:#fff}
+  .brand span{color:var(--yellow)}
+  .site-nav{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap}
+  .site-nav a{color:#dbeafe;font-size:15px}
+  .site-nav a:hover{color:#fff}
+  .signin-btn{background:var(--yellow);color:var(--navy);font-weight:700;padding:6px 14px;border-radius:999px}
+  .signin-btn:hover{text-decoration:none;background:#ffd83d}
+
+  /* Hero */
+  .hero{background:var(--navy);color:#fff;padding:34px 20px 40px}
+  .hero-inner{max-width:1100px;margin:0 auto}
+  .crumb{font-size:14px;color:#93c5fd;margin-bottom:8px}
+  .crumb a{color:#93c5fd}
+  .hero h1{font-size:34px;line-height:1.2}
+  .hero p{margin-top:10px;font-size:17px;color:#dbeafe;max-width:760px}
+  .hero p.instructor{color:#fff;font-weight:600}
+  .hero p.instructor span{color:var(--yellow)}
+
+  main{max-width:1100px;margin:0 auto;padding:18px 20px 40px}
+
+  /* Start here card */
+  .start-card{background:#fffbeb;border:1px solid #fde68a;border-left:5px solid var(--yellow);border-radius:12px;padding:22px;margin:22px 0 6px}
+  .start-card h2{font-size:22px;color:var(--navy);margin-bottom:6px}
+  .start-card p{font-size:16px;margin-bottom:14px}
+  .start-actions{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;font-weight:800;font-size:16px;padding:13px 22px;border-radius:12px}
+  .btn:hover{text-decoration:none}
+  .btn-primary{background:var(--navy);color:#fff}
+  .btn-primary:hover{background:var(--navy-dark)}
+  .btn-secondary{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+
+  /* Tabs */
+  .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 0}
+  .tab-btn{flex:1 1 160px;min-height:58px;font-size:17px;font-weight:800;font-family:inherit;border:2px solid var(--navy);background:#fff;color:var(--navy);border-radius:12px;cursor:pointer;padding:12px 10px}
+  .tab-btn:hover{background:#eff6ff}
+  .tab-btn[aria-selected="true"]{background:var(--navy);color:#fff;box-shadow:0 4px 0 var(--yellow)}
+  .tab-btn small{display:block;font-size:13px;font-weight:600;opacity:.8}
+
+  .tab-panel{margin-top:20px}
+  body.tabs-on .tab-panel{display:none}
+  body.tabs-on .tab-panel.active{display:block}
+
+  .do-first{background:var(--blue-bg);border-left:5px solid var(--navy);border-radius:10px;padding:14px 16px;font-size:16px;margin-bottom:18px}
+  .do-first strong{color:var(--navy)}
+
+  /* Step list */
+  .chapter-list{display:flex;flex-direction:column;gap:10px}
+  .chapter-row{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px 16px}
+  .chapter-num{width:38px;height:38px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .chapter-body{flex:1;min-width:0}
+  .chapter-body h4{font-size:17px;line-height:1.35;color:var(--navy)}
+  .chapter-body p{font-size:14px;color:var(--muted);margin-top:2px}
+  .step-do{margin:10px 0 0 18px;font-size:15px}
+  .step-do li{margin-bottom:4px}
+  .step-do strong{color:var(--navy)}
+  .step-tip{background:var(--green-bg);border-left:4px solid var(--green);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:10px}
+  .step-tip strong{color:var(--green)}
+  .step-mistake{background:var(--red-bg);border-left:4px solid var(--red);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+  .step-mistake strong{color:var(--red)}
+  .order-note{margin-top:16px;font-size:15px;color:var(--muted)}
+
+  /* Cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .res-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:6px}
+  .res-card h4{font-size:16px;line-height:1.35;color:var(--navy)}
+  .res-card p{font-size:14px;color:var(--muted);flex:1}
+  .concept-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .concept-chips span{font-size:13px;font-weight:600;background:#eff6ff;border:1px solid #bfdbfe;color:var(--navy);padding:4px 9px;border-radius:999px}
+
+  .tip-card{background:#fff;border:1px solid var(--line);border-left:5px solid var(--yellow);border-radius:12px;padding:16px 18px;margin-top:18px;font-size:15px}
+  .tip-card strong{color:var(--navy)}
+
+  .howto{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:28px}
+  .howto h2{font-size:19px;color:var(--navy);margin-bottom:8px}
+  .howto ol{margin-left:20px;font-size:15px}
+  .howto li{margin-bottom:4px}
+
+  footer{background:var(--navy-dark);color:#cbd5e1;padding:26px 20px;text-align:center;font-size:14px}
+  footer a{color:#fff}
+  footer p{margin-bottom:6px}
+  @media (max-width:600px){
+    .hero h1{font-size:27px}
+    .site-nav{margin-left:0}
+    .tab-btn{flex:1 1 45%}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="index.html">Wai Lin <span>Htet</span></a>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="my_course.html">Courses</a>
+      <a href="resources.html">Resources</a>
+      <a class="signin-btn" href="login.html">Sign in</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="crumb"><a href="index.html">Home</a> &rsaquo; Business IT &amp; MBA Thesis Guide</p>
+    <h1>Business IT &amp; MBA Thesis Guide</h1>
+    <p>This page is for MBA students writing a thesis, especially in Business IT. Work through the 7-step thesis guide — from choosing a topic to the defense — then use the Study Hub to build the knowledge behind each chapter.</p>
+    <p class="instructor">Your teacher: <span>Sayar Wai Lin Htet</span> — PhD (Thesis) Applied AI, MBA IT Management, BSCS (Computer Science).</p>
+  </div>
+</div>
+
+<main>
+  <div class="start-card">
+    <h2>Start here — pick your step</h2>
+    <p>Starting a thesis? Begin with Step 1 and work through the steps in order. Already have a topic? Jump to the step you are on. Need background knowledge first? Open the Study Hub tab.</p>
+    <div class="start-actions">
+      <a class="btn btn-primary" href="#panel-thesis-guide">Start Step 1 — Choose your topic &rarr;</a>
+      <a class="btn btn-secondary" href="#panel-study-hub">Open the Study Hub</a>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="MBA Thesis Guide sections">
+    <button type="button" class="tab-btn" role="tab" id="tab-thesis-guide" aria-controls="panel-thesis-guide" aria-selected="true" data-tab="thesis-guide">MBA Thesis Guide<small>7 steps · Topic to defense</small></button>
+    <button type="button" class="tab-btn" role="tab" id="tab-study-hub" aria-controls="panel-study-hub" aria-selected="false" data-tab="study-hub">Business IT Study Hub<small>8 topics · Key concepts</small></button>
+  </div>
+
+  <!-- ============ THESIS GUIDE ============ -->
+  <section class="tab-panel active" id="panel-thesis-guide" role="tabpanel" aria-labelledby="tab-thesis-guide">
+    <div class="do-first"><strong>Do this first:</strong> choose a small, clear topic and check that you can get the data before you write anything else. A good topic saves you months later.</div>
+    <div class="chapter-list">
+
+      <article class="chapter-row">
+        <span class="chapter-num">1</span>
+        <div class="chapter-body">
+          <h4>Choose your topic</h4>
+          <p>Pick a Business IT problem you care about — and one you can actually study.</p>
+          <ul class="step-do">
+            <li><strong>Pick an area:</strong> AI in business, digital transformation, IT management, e-commerce, data analytics, or cybersecurity for business.</li>
+            <li><strong>Make it narrow:</strong> one organisation, one process, one clear question — not a whole industry.</li>
+            <li><strong>Check the data:</strong> can you get the numbers or the people you need? Check before you commit.</li>
+            <li><strong>Talk to your supervisor:</strong> discuss the idea early and get feedback before you start writing.</li>
+          </ul>
+          <p class="step-tip"><strong>Tip:</strong> A good topic is small, clear and measurable — &ldquo;How AI chatbots change customer service in one bank&rdquo; beats &ldquo;AI in business&rdquo;.</p>
+          <p class="step-mistake"><strong>Common mistake:</strong> Choosing a topic that is too broad, or one with no data available.</p>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">2</span>
+        <div class="chapter-body">
+          <h4>Write the research proposal</h4>
+          <p>The proposal is your plan — it tells the reader what you will study and how.</p>
+          <ul class="step-do">
+            <li><strong>Problem statement:</strong> what is wrong, who it affects, and why it matters.</li>
+            <li><strong>Objectives:</strong> set 3–5 clear objectives for what your study will achieve.</li>
+            <li><strong>Research questions:</strong> write one question for each objective.</li>
+            <li><strong>Scope and limitations:</strong> say honestly what your study covers — and what it does not.</li>
+          </ul>
+          <p class="step-tip"><strong>Tip:</strong> Every research question should lead to one objective, and every objective to one part of your findings.</p>
+          <p class="step-mistake"><strong>Common mistake:</strong> Writing objectives and questions that do not match each other.</p>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">3</span>
+        <div class="chapter-body">
+          <h4>Literature review</h4>
+          <p>Show what others already know — and where your study adds something new.</p>
+          <ul class="step-do">
+            <li><strong>Search academic sources:</strong> journal articles, books and trusted reports — not random web pages.</li>
+            <li><strong>Read with a question in mind:</strong> what does this source say, and how does it connect to my topic?</li>
+            <li><strong>Organise by theme:</strong> group similar ideas together, not one author after another.</li>
+            <li><strong>Cite everything:</strong> give every source a correct citation and keep a full reference list.</li>
+          </ul>
+          <p class="step-tip"><strong>Tip:</strong> A good review compares and criticises sources — it does not just list them one by one.</p>
+          <p class="step-mistake"><strong>Common mistake:</strong> Copying long summaries of each paper instead of synthesising what they mean together.</p>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">4</span>
+        <div class="chapter-body">
+          <h4>Research methodology</h4>
+          <p>Choose how you will answer your research questions — and explain why.</p>
+          <ul class="step-do">
+            <li><strong>Choose the approach:</strong> quantitative (numbers, surveys), qualitative (interviews, case study) or mixed methods.</li>
+            <li><strong>Explain your choice:</strong> why this approach fits your question — and what its limits are.</li>
+            <li><strong>Design your instrument:</strong> survey questions or an interview guide.</li>
+            <li><strong>Describe your sample:</strong> who you study, how many, and how you choose them.</li>
+          </ul>
+          <p class="step-tip"><strong>Tip:</strong> The method follows the question — a &ldquo;how many&rdquo; question needs numbers; a &ldquo;why&rdquo; question needs interviews.</p>
+          <p class="step-mistake"><strong>Common mistake:</strong> Choosing a method because it looks easy, not because it answers the question.</p>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">5</span>
+        <div class="chapter-body">
+          <h4>Data collection &amp; analysis</h4>
+          <p>Collect clean data, analyse it honestly, and present what it actually shows.</p>
+          <ul class="step-do">
+            <li><strong>Collect carefully:</strong> keep your data clean — check for missing or wrong entries.</li>
+            <li><strong>Analyse simply first:</strong> counts, averages and percentages for surveys; themes for interviews.</li>
+            <li><strong>Present with tables and charts:</strong> each one needs a title and a short explanation.</li>
+            <li><strong>Report honestly:</strong> include results that surprise you — do not hide them.</li>
+          </ul>
+          <p class="step-tip"><strong>Tip:</strong> Label every table and chart, and explain in words what the reader should see in it.</p>
+          <p class="step-mistake"><strong>Common mistake:</strong> Hiding or ignoring data that does not support your expectation.</p>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">6</span>
+        <div class="chapter-body">
+          <h4>Write the thesis</h4>
+          <p>Put it together in the standard chapter structure — and keep the chapters connected.</p>
+          <ul class="step-do">
+            <li><strong>Follow the standard structure:</strong> Ch 1 Introduction, Ch 2 Literature Review, Ch 3 Methodology, Ch 4 Findings &amp; Analysis, Ch 5 Conclusion &amp; Recommendations.</li>
+            <li><strong>Write clearly:</strong> formal academic English — short sentences, one idea per paragraph.</li>
+            <li><strong>Connect every chapter:</strong> the findings must answer the questions from Chapter 1.</li>
+            <li><strong>Proofread:</strong> check grammar, spelling and consistent citations.</li>
+          </ul>
+          <p class="step-tip"><strong>Tip:</strong> Write a little every day — a finished draft you can improve beats a perfect first page.</p>
+          <p class="step-mistake"><strong>Common mistake:</strong> Writing chapters that do not connect — findings that answer a different question from the one you asked.</p>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">7</span>
+        <div class="chapter-body">
+          <h4>Defense / viva preparation</h4>
+          <p>Show the examiners that the work is yours — and that you understand it.</p>
+          <ul class="step-do">
+            <li><strong>Prepare a short presentation:</strong> 10–15 minutes telling the story — problem, method, findings, conclusion.</li>
+            <li><strong>Practise likely questions:</strong> why this topic, why this method, what your findings mean, what you would do differently.</li>
+            <li><strong>Know your own thesis:</strong> examiners will ask about your tables, your sample and your conclusions.</li>
+            <li><strong>Bring your notes:</strong> a copy of the thesis and your key points for the day.</li>
+          </ul>
+          <p class="step-tip"><strong>Tip:</strong> If you do not know an answer, say so honestly and explain how you would find out.</p>
+          <p class="step-mistake"><strong>Common mistake:</strong> Reading slides word for word instead of speaking to the examiners.</p>
+        </div>
+      </article>
+
+    </div>
+    <p class="order-note">Work through the steps in order — each step builds on the one before it. If you are stuck on a step, ask your teacher before moving on.</p>
+  </section>
+
+  <!-- ============ STUDY HUB ============ -->
+  <section class="tab-panel" id="panel-study-hub" role="tabpanel" aria-labelledby="tab-study-hub">
+    <div class="do-first"><strong>Do this first:</strong> start with the topic that matches your thesis — the key concepts under each card are the ideas your thesis chapters will use.</div>
+    <div class="cards">
+
+      <article class="res-card">
+        <h4>IT Management</h4>
+        <p>How organisations plan, run and control their technology.</p>
+        <div class="concept-chips">
+          <span>IT strategy</span>
+          <span>IT governance</span>
+          <span>IT service management</span>
+          <span>Technology budgeting</span>
+        </div>
+      </article>
+
+      <article class="res-card">
+        <h4>Digital Transformation</h4>
+        <p>How businesses change the way they work with digital technology.</p>
+        <div class="concept-chips">
+          <span>Process redesign</span>
+          <span>Cloud adoption</span>
+          <span>Change management</span>
+          <span>Digital culture</span>
+        </div>
+      </article>
+
+      <article class="res-card">
+        <h4>AI in Business</h4>
+        <p>Using artificial intelligence to improve decisions and service.</p>
+        <div class="concept-chips">
+          <span>Machine learning basics</span>
+          <span>Chatbots</span>
+          <span>Predictive analytics</span>
+          <span>AI ethics</span>
+        </div>
+      </article>
+
+      <article class="res-card">
+        <h4>E-Commerce &amp; Digital Business</h4>
+        <p>Buying, selling and serving customers online.</p>
+        <div class="concept-chips">
+          <span>Online business models</span>
+          <span>Digital payments</span>
+          <span>Customer experience</span>
+          <span>Digital marketing</span>
+        </div>
+      </article>
+
+      <article class="res-card">
+        <h4>Data Analytics &amp; Business Intelligence</h4>
+        <p>Turning data into decisions.</p>
+        <div class="concept-chips">
+          <span>Dashboards</span>
+          <span>Data visualisation</span>
+          <span>Key performance indicators</span>
+          <span>Data-driven decisions</span>
+        </div>
+      </article>
+
+      <article class="res-card">
+        <h4>Information Systems</h4>
+        <p>The systems that carry a business: people, processes and technology.</p>
+        <div class="concept-chips">
+          <span>Enterprise systems</span>
+          <span>Databases</span>
+          <span>Business processes</span>
+          <span>Systems analysis</span>
+        </div>
+      </article>
+
+      <article class="res-card">
+        <h4>Project Management</h4>
+        <p>Delivering IT projects on time and on budget.</p>
+        <div class="concept-chips">
+          <span>Project planning</span>
+          <span>Agile methods</span>
+          <span>Risk management</span>
+          <span>Stakeholder management</span>
+        </div>
+      </article>
+
+      <article class="res-card">
+        <h4>Cybersecurity for Business</h4>
+        <p>Protecting business data and systems.</p>
+        <div class="concept-chips">
+          <span>Threats and attacks</span>
+          <span>Access control</span>
+          <span>Data protection</span>
+          <span>Business continuity</span>
+        </div>
+      </article>
+
+    </div>
+    <div class="tip-card">
+      <strong>Tip for your thesis:</strong> pick one hub topic and go deep — your literature review and methodology should come from that topic, not from all eight at once.
+    </div>
+  </section>
+
+  <div class="howto">
+    <h2>How to get help</h2>
+    <ol>
+      <li><strong>Telegram:</strong> message your teacher on <a href="https://t.me/SayarWaiLin">Telegram @SayarWaiLin</a>.</li>
+      <li><strong>Viber:</strong> ask on Viber — see the contact details on the home page.</li>
+      <li><strong>Website:</strong> www.wailinhtet.com — more courses and resources on the home page.</li>
+    </ol>
+  </div>
+</main>
+
+<footer>
+  <p><strong>SrWL Learning</strong> — Sayar Wai Lin Htet</p>
+  <p><a href="index.html">Home</a> · <a href="my_course.html">Courses</a> · <a href="resources.html">Resources</a> · <a href="https://www.youtube.com/@SayarWaiLin">YouTube</a> · <a href="https://t.me/SayarWaiLin">Telegram @SayarWaiLin</a></p>
+  <p>www.wailinhtet.com</p>
+</footer>
+
+<script>
+(function () {
+  var tabs = ['thesis-guide', 'study-hub'];
+  var buttons = {};
+  var panels = {};
+  tabs.forEach(function (id) {
+    buttons[id] = document.getElementById('tab-' + id);
+    panels[id] = document.getElementById('panel-' + id);
+  });
+
+  function activate(id, updateHash) {
+    if (tabs.indexOf(id) === -1) id = 'thesis-guide';
+    tabs.forEach(function (t) {
+      var selected = (t === id);
+      buttons[t].setAttribute('aria-selected', selected ? 'true' : 'false');
+      panels[t].classList.toggle('active', selected);
+    });
+    if (updateHash) {
+      try {
+        history.replaceState(null, '', '#' + id);
+      } catch (e) {
+        location.hash = id;
+      }
+    }
+  }
+
+  tabs.forEach(function (id) {
+    buttons[id].addEventListener('click', function () { activate(id, true); });
+  });
+
+  function fromHash() {
+    var h = (location.hash || '').replace('#', '');
+    if (h.indexOf('panel-') === 0) h = h.slice(6);
+    activate(tabs.indexOf(h) === -1 ? 'thesis-guide' : h, false);
+  }
+
+  window.addEventListener('hashchange', fromHash);
+  document.body.classList.add('tabs-on');
+  fromHash();
+})();
+</script>
+</body>
+</html>
