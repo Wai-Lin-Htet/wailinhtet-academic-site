@@ -109,6 +109,15 @@ details[open] .chev{transform:rotate(180deg)}
 .research-box h3{font-weight:600;font-size:1.3rem;line-height:1.35;letter-spacing:-.02em;margin-bottom:1rem}
 .research-box p{font-size:1rem;line-height:1.7;color:#292929;margin-bottom:1rem;max-width:68ch}
 .research-status{display:inline-block;font-size:.78rem;font-weight:600;border:1px solid var(--text-main);border-radius:var(--radius-pill);padding:.2rem .7rem;margin-bottom:1rem}
+/* youtube preview */
+.yt-intro{color:var(--text-muted);font-size:.95rem;margin-bottom:1.5rem;max-width:68ch}
+.yt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-bottom:1.25rem}
+.yt-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem;box-shadow:var(--shadow-sm)}
+.yt-embed{position:relative;width:100%;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000;margin-bottom:.75rem}
+.yt-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-card h3{font-size:1.05rem;font-weight:600;letter-spacing:-.01em;margin-bottom:.35rem}
+.yt-card p{font-size:.88rem;color:var(--text-muted);line-height:1.55;margin-bottom:.6rem}
+.yt-link{font-size:.88rem;font-weight:600}
 .stats{display:flex;flex-wrap:wrap;gap:2.5rem;margin-bottom:2rem}
 .stat strong{display:block;font-size:2rem;font-weight:700;letter-spacing:-.03em;line-height:1.1}
 .stat span{font-size:.82rem;color:var(--text-muted)}
@@ -143,6 +152,7 @@ footer{border-top:1px solid var(--border);padding:3rem 1.5rem;text-align:center;
         <li><a href="#school" data-my="အွန်လိုင်းသင်တန်း">IT School</a></li>
         <li><a href="#courses" data-my="သင်ရိုးများ">Courses</a></li>
         <li><a href="#contact" data-my="ဆက်သွယ်ရန်">Contact</a></li>
+        <li><a href="login.html" data-my="ဝင်ရန်">Sign in</a></li>
       </ul>
       <div class="lang-toggle" role="group" aria-label="Language">
         <button type="button" data-lang="en" aria-pressed="true">EN</button>
@@ -201,12 +211,30 @@ footer{border-top:1px solid var(--border);padding:3rem 1.5rem;text-align:center;
     <div class="research-box">
       <span class="research-status" data-my="ဆက်လက်လုပ်ဆောင်နေဆဲ">In progress</span>
       <h3 data-my="မြန်မာနိုင်ငံ အလယ်တန်းပညာရေးတွင် ကျောင်းသားများ၏ ဉာဏ်ရည်တု (AI) လက်ခံအသုံးပြုမှု — မျှတသော သင်ယူမှုရလဒ်များအတွက် စီမံခန့်ခွဲမှုမူဘောင်">Students' Adoption of Artificial Intelligence in Secondary Education in Myanmar: A Management Framework for Equitable Learning Outcomes</h3>
-      <p data-my="ဤသုတေသနသည် AI ကို သီးခြားမူဝါဒပြဿနာတစ်ခုအဖြစ် မကြည့်ဘဲ၊ ရှိပြီးသား ICT စီမံအုပ်ချုပ်မှုဖွဲ့စည်းပုံကို တိုးချဲ့ပေးသည့် မူဘောင်တစ်ခုကို တည်ဆောက်ပြီး အတည်ပြုရန် ရည်ရွယ်သည်။ ကျောင်းသားများနှင့် ဆရာများအပေါ် AI ၏သက်ရောက်မှုကို လေ့လာပြီး မြန်မာ့ပညာရေးတွင် အသုံးပြုနေသော ICT၊ အွန်လိုင်းသင်ကြားမှုနှင့် LMS များကို အခြေခံသည်။">This study aims to develop and validate a localized management framework for the equitable integration of AI in Myanmar's secondary education sector. Rather than treating AI as an isolated policy challenge, the framework extends existing ICT governance structures. The research looks at how students and teachers are affected by AI, building on the ICT, online teaching, and LMS practices already used in Myanmar education.</p>
-      <p data-my="သီအိုရီအခြေခံအနေဖြင့် Technology Acceptance Model (TAM) — အသုံးဝင်မှုသိမြင်ခြင်း၊ အသုံးပြုရလွယ်ကူမှုသိမြင်ခြင်းနှင့် အပြုအမူရည်ရွယ်ချက် — ကို Self-Regulated Learning (SRL) သီအိုရီနှင့် ပေါင်းစပ်ပြီး Input-Process-Output (IPO) အယူအဆမူဘောင်အတွင်း အသုံးပြုသည်။">It combines the Technology Acceptance Model (TAM), specifically Perceived Usefulness, Perceived Ease of Use, and Behavioral Intention, with Self-Regulated Learning (SRL) theory inside an Input-Process-Output (IPO) conceptual framework.</p>
-      <div class="chips-container">
-        <span class="chip">AI in Education</span><span class="chip">TAM</span><span class="chip">Self-Regulated Learning</span><span class="chip">IPO Framework</span><span class="chip">ICT Governance</span><span class="chip">LMS &amp; Online Teaching</span>
+      <p data-my="ဤသုတေသနသည် မြန်မာနိုင်ငံ အလယ်တန်းပညာရေးတွင် AI ကို မျှတစွာ ထည့်သွင်းအသုံးပြုရန် စီမံခန့်ခွဲမှုမူဘောင်တစ်ခု တည်ဆောက်ပြီး အတည်ပြုရန် ရည်ရွယ်သည်။">This study aims to develop and validate a localized management framework for the equitable integration of AI in Myanmar's secondary education sector.</p>
+    </div>
+  </section>
+
+  <!-- YOUTUBE -->
+  <section id="youtube">
+    <div class="section-eyebrow" data-my="ကြည့်ရှုလေ့လာပါ">Watch &amp; Learn</div>
+    <h2 data-my="YouTube မှာ လေ့လာပါ">Learn on YouTube</h2>
+    <p class="yt-intro" data-my="SrWL Learning Channel မှာ IGCSE Computer Science, ICT နှင့် Python သင်ခန်းစာတွေ အခမဲ့ ကြည့်လို့ရတယ်။">Watch free lessons from the SrWL Learning channel — IGCSE Computer Science, ICT and Python, taught by Sayar Wai Lin Htet.</p>
+    <div class="yt-grid">
+      <div class="yt-card">
+        <div class="yt-embed"><iframe src="https://www.youtube-nocookie.com/embed/DgaPfTkrEi0" title="Pseudocode Revision Part 2" loading="lazy" allowfullscreen></iframe></div>
+        <h3>Pseudocode Revision Part 2</h3>
+        <p>Questions 4, 5 and 6 from the SrWL 100-mark Pseudocode Practice Paper — IGCSE Computer Science (0478), with English voice-over and subtitles.</p>
+        <a class="yt-link" href="https://www.youtube.com/watch?v=DgaPfTkrEi0">Watch on YouTube &rarr;</a>
+      </div>
+      <div class="yt-card">
+        <div class="yt-embed"><iframe src="https://www.youtube-nocookie.com/embed/eM9oH1uDIGE" title="Python Basics – Day 2" loading="lazy" allowfullscreen></iframe></div>
+        <h3>Python Basics – Day 2</h3>
+        <p>Basic Operations, Conditionals and Loops — the Python Basics series from SrWL Learning.</p>
+        <a class="yt-link" href="https://www.youtube.com/watch?v=eM9oH1uDIGE">Watch on YouTube &rarr;</a>
       </div>
     </div>
+    <a href="https://www.youtube.com/@SayarWaiLin" class="apple-btn ghost"><span data-my="SrWL Learning Channel ကို ကြည့်ပါ">Visit the SrWL Learning Channel</span><span>&rarr;</span></a>
   </section>
 
   <!-- IT SCHOOL -->
@@ -248,7 +276,7 @@ footer{border-top:1px solid var(--border);padding:3rem 1.5rem;text-align:center;
         <a href="CS_Paper2_rev2.html" class="course-tile"><span class="course-code">Cambridge IGCSE</span><div class="course-title">Computer Science Paper 2 — Algorithms</div><div class="course-desc">Pseudocode, algorithms and problem-solving practice.</div></a>
         <a href="ICT_0417_IGCSE_wh.html" class="course-tile"><span class="course-code">Cambridge IGCSE</span><div class="course-title">ICT (0417)</div><div class="course-desc">Course outline and practical skills for the ICT syllabus.</div></a>
         <a href="CS_9618_Alevel_wh.html" class="course-tile"><span class="course-code">Cambridge International A-Level</span><div class="course-title">Computer Science (9618)</div><div class="course-desc">AS and A-Level topics with revision support.</div></a>
-        <a href="ict_edexcel_4it_v1.html" class="course-tile"><span class="course-code">Edexcel IGCSE</span><div class="course-title">ICT (4IT0)</div><div class="course-desc">Edexcel syllabus coverage and exam guidance.</div></a>
+        <a href="ict_edexcel_4it_v1.html" class="course-tile"><span class="course-code">Edexcel IGCSE</span><div class="course-title">ICT (4IT1)</div><div class="course-desc">Edexcel syllabus coverage and exam guidance.</div></a>
       </div>
     </details>
 
