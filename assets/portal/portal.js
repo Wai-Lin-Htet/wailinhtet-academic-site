@@ -5,7 +5,7 @@ import {
 } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
 import {
   getFirestore, doc, getDoc, setDoc, updateDoc, collection,
-  addDoc, getDocs, query, where, serverTimestamp, orderBy, limit
+  addDoc, deleteDoc, getDocs, query, where, serverTimestamp, orderBy, limit
 } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 import { firebaseConfig, firebaseReady } from './firebase-config.js';
 
@@ -145,6 +145,151 @@ if (!firebaseReady) {
     return /^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))[a-zA-Z0-9_./-]+\.html(?:#[a-zA-Z0-9_-]+)?$/.test(value);
   };
 
+  // Course catalogue for the admin Enroll panel — the 6 main courses.
+  // resourceUrl is the page a student lands on from their dashboard.
+  // 4CP0 has no course page yet, so it opens the Resources catalogue.
+  const COURSES = [
+    { courseId: 'ict-0417', courseTitle: 'ICT CIE 0417 — Exam Notebook', resourceUrl: 'ict-0417-course.html' },
+    { courseId: 'cs-0478', courseTitle: 'Computer Science (0478) — IGCSE', resourceUrl: 'https://wai-lin-htet.github.io/CS_IGCSE/' },
+    { courseId: 'ict-4it1', courseTitle: 'IGCSE ICT (4IT1) — Edexcel', resourceUrl: 'ict_edexcel_4it_v1.html' },
+    { courseId: 'cs-4cp0', courseTitle: 'Computer Science (4CP0) — Edexcel IGCSE', resourceUrl: 'resources.html' },
+    { courseId: 'cs-9618', courseTitle: 'A-Level Computer Science (9618)', resourceUrl: 'CS_9618_Alevel_wh.html' },
+    { courseId: 'ict-cs-foundation', courseTitle: 'ICT / Computer Science Foundation', resourceUrl: 'ict-foundation.html' }
+  ];
+
+  // Admin enrollment panel: enroll a student, or update their entry point
+  // if they already have the course. Rebuilt on every showAdmin() call.
+  const renderEnroll = (users, enrollments) => {
+    const studentSelect = $('enroll-student');
+    const courseSelect = $('enroll-course');
+    const enrollBtn = $('enroll-btn');
+    const listBody = $('enrollment-rows');
+    if (!studentSelect || !courseSelect || !enrollBtn || !listBody) return;
+
+    const userById = {};
+    users.forEach((item) => { userById[item.id] = item.data(); });
+
+    // Student dropdown: approved students only (pending students cannot open courses yet).
+    studentSelect.replaceChildren();
+    const approved = users.docs.filter((item) => item.data().approved === true);
+    if (approved.length === 0) {
+      const opt = document.createElement('option');
+      opt.value = '';
+      opt.textContent = 'No approved students yet';
+      studentSelect.append(opt);
+      studentSelect.disabled = true;
+    } else {
+      studentSelect.disabled = false;
+      for (const item of approved) {
+        const opt = document.createElement('option');
+        opt.value = item.id;
+        opt.textContent = (item.data().displayName || '—') + ' (' + (item.data().email || '—') + ')';
+        studentSelect.append(opt);
+      }
+    }
+
+    // Course dropdown: the 6 main courses.
+    courseSelect.replaceChildren();
+    for (const course of COURSES) {
+      const opt = document.createElement('option');
+      opt.value = course.courseId;
+      opt.textContent = course.courseTitle;
+      courseSelect.append(opt);
+    }
+
+    // Current enrollments list (with Unenroll buttons).
+    listBody.replaceChildren();
+    const enrollmentDocs = enrollments ? enrollments.docs : [];
+    if (!enrollments) {
+      const row = document.createElement('tr');
+      const cell = document.createElement('td');
+      cell.colSpan = 4;
+      cell.textContent = 'Could not load enrollments. Check the published Firestore Rules for the enrollments collection, then refresh.';
+      row.append(cell);
+      listBody.append(row);
+    } else if (enrollmentDocs.length === 0) {
+      const row = document.createElement('tr');
+      const cell = document.createElement('td');
+      cell.colSpan = 4;
+      cell.textContent = 'No enrollments yet.';
+      row.append(cell);
+      listBody.append(row);
+    }
+    for (const record of enrollmentDocs) {
+      const data = record.data();
+      const row = document.createElement('tr');
+      for (const value of [
+        (userById[data.uid] && userById[data.uid].displayName) || data.uid || '—',
+        data.courseTitle || data.courseId || '—',
+        data.resourceUrl || '—'
+      ]) {
+        const cell = document.createElement('td');
+        safeText(cell, value);
+        row.append(cell);
+      }
+      const actionCell = document.createElement('td');
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'portal-btn';
+      removeBtn.textContent = 'Unenroll';
+      removeBtn.addEventListener('click', async () => {
+        removeBtn.disabled = true;
+        try {
+          await deleteDoc(doc(db, 'enrollments', record.id));
+          await showAdmin();
+          status('Enrollment removed.');
+        } catch (error) {
+          status('Unenroll failed: ' + errorMessage(error), true);
+          removeBtn.disabled = false;
+        }
+      });
+      actionCell.append(removeBtn);
+      row.append(actionCell);
+      listBody.append(row);
+    }
+
+    // Enroll button: create the enrollment, or update the entry point if one exists.
+    enrollBtn.onclick = async () => {
+      const uid = studentSelect.value;
+      const course = COURSES.find((item) => item.courseId === courseSelect.value);
+      if (!uid || !course) {
+        status('Choose a student and a course first.', true);
+        return;
+      }
+      enrollBtn.disabled = true;
+      try {
+        // 0417 has a legacy courseId ('ict-0417-notes') from the pilot enrollment.
+        const existing = enrollmentDocs.find((record) => {
+          const data = record.data();
+          return data.uid === uid && (data.courseId === course.courseId
+            || (course.courseId === 'ict-0417' && data.courseId === 'ict-0417-notes'));
+        });
+        if (existing) {
+          await updateDoc(doc(db, 'enrollments', existing.id), {
+            courseId: course.courseId,
+            courseTitle: course.courseTitle,
+            resourceUrl: course.resourceUrl
+          });
+          await showAdmin();
+          status('Already enrolled — entry point updated to ' + course.resourceUrl + '.');
+        } else {
+          await addDoc(collection(db, 'enrollments'), {
+            uid: uid,
+            courseId: course.courseId,
+            courseTitle: course.courseTitle,
+            resourceUrl: course.resourceUrl,
+            createdAt: serverTimestamp()
+          });
+          await showAdmin();
+          status('Enrolled ' + ((userById[uid] && userById[uid].displayName) || uid) + ' in ' + course.courseTitle + '.');
+        }
+      } catch (error) {
+        status('Enroll failed: ' + errorMessage(error), true);
+      } finally {
+        enrollBtn.disabled = false;
+      }
+    };
+  };
+
   const showCourses = async (user) => {
     const list = $('courses-list');
     if (!list) return;
@@ -190,6 +335,14 @@ if (!firebaseReady) {
       getDocs(query(collection(db, 'loginEvents'), orderBy('at', 'desc'), limit(500))),
       getDocs(query(collection(db, 'lessonViews'), orderBy('at', 'desc'), limit(500)))
     ]);
+    // Enrollments load separately: if the Rules do not allow the admin to
+    // list them yet, the rest of the dashboard must still work.
+    let enrollments = null;
+    try {
+      enrollments = await getDocs(collection(db, 'enrollments'));
+    } catch (error) {
+      console.warn('Could not load enrollments. Check the published Firestore Rules for /enrollments.', error);
+    }
     safeText($('student-count'), users.size);
     safeText($('login-count'), String(logins.size) + ' (latest 500 max)');
     safeText($('view-count'), String(views.size) + ' (latest 500 max)');
@@ -232,6 +385,7 @@ if (!firebaseReady) {
       row.append(actionCell);
       tbody.append(row);
     }
+    renderEnroll(users, enrollments);
   };
 
   onAuthStateChanged(auth, async (user) => {
