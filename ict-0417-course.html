@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT CIE 0417 — Course Home | SrWL Learning</title>
+<meta name="description" content="ICT CIE 0417 course home for SrWL Learning students: progress, all 21 sections, exam countdown, calendar and work to do. Sign in with Google, approved by your teacher.">
+<style>
+  :root{
+    --navy:#0d2a5c; --navy-dark:#081f45; --yellow:#ffc900;
+    --ink:#1e293b; --muted:#64748b; --line:#e2e8f0; --bg:#f1f5f9; --card:#ffffff;
+    --green:#059669; --green-bg:#ecfdf5; --lock-bg:#fef3c7; --lock-ink:#92400e;
+    /* v1 gate palette, mapped onto the SrWL palette */
+    --pen:#0d2a5c; --pen-light:#1e40af; --highlight:#ffc900; --highlight-soft:#fff8db;
+    --ink-soft:#64748b; --paper:#f1f5f9; --paper-2:#e8eef5; --tip:#059669; --tip-soft:#ecfdf5;
+    --warn:#b91c1c; --warn-soft:#fef2f2; --margin:#b91c1c; --on-pen:#ffffff;
+    --shadow:0 2px 10px rgba(13,42,92,.10); --radius:12px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  a{color:var(--navy);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* ===== Header ===== */
+  .site-header{background:var(--navy);color:#fff}
+  .site-header-inner{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px}
+  .brand{font-weight:800;font-size:20px;color:#fff}
+  .brand span{color:var(--yellow)}
+  .site-nav{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .site-nav a{color:#dbeafe;font-size:15px}
+  .site-nav a:hover{color:#fff}
+  .header-user{display:none;align-items:center;gap:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:5px 8px 5px 12px;font-size:14px;color:#fff}
+  .header-user .avatar-sm{width:26px;height:26px;border-radius:50%;background:var(--yellow);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+  .header-user button{border:none;background:none;cursor:pointer;color:#fde68a;font-weight:700;font-size:13px;text-decoration:underline}
+  .header-signin{display:none;background:var(--yellow);color:var(--navy);font-weight:700;padding:6px 14px;border-radius:999px;font-size:14px}
+  .header-signin:hover{text-decoration:none;background:#ffd83d}
+
+  /* ===== Hero ===== */
+  .hero{background:var(--navy);color:#fff;padding:30px 20px 36px}
+  .hero-inner{max-width:1100px;margin:0 auto}
+  .hero h1{font-size:32px;line-height:1.2}
+  .hero h1 span{color:var(--yellow)}
+  .hero p{margin-top:10px;font-size:17px;color:#dbeafe;max-width:760px}
+  .hero .welcome{margin-top:12px;font-size:16px;color:#fff;font-weight:700}
+
+  main{max-width:1100px;margin:0 auto;padding:22px 20px 40px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+  @media (max-width:760px){.grid{grid-template-columns:1fr}.hero h1{font-size:26px}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+  .card h2{font-size:19px;color:var(--navy);margin-bottom:10px}
+  .card h3{font-size:16px;color:var(--navy);margin:14px 0 6px}
+  .card p{font-size:15px}
+  .muted{color:var(--muted);font-size:14px}
+
+  /* ===== Progress ===== */
+  .progress-wrap{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+  .ring{position:relative;width:140px;height:140px;flex:0 0 auto}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .ring-bg{fill:none;stroke:#e2e8f0;stroke-width:12}
+  .ring .ring-fg{fill:none;stroke:var(--yellow);stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset .4s ease}
+  .ring .ring-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .ring .ring-pct{font-size:28px;font-weight:800;color:var(--navy)}
+  .ring .ring-label{font-size:12px;color:var(--muted)}
+  .progress-side{flex:1;min-width:200px}
+  .progress-count{font-size:17px;font-weight:700;color:var(--navy)}
+  .progress-bar{height:10px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin:10px 0}
+  .progress-bar > div{height:100%;background:var(--yellow);width:0%;transition:width .4s ease}
+  .btn{display:inline-block;background:var(--navy);color:#fff;font-weight:700;font-size:15px;padding:11px 18px;border-radius:10px;border:none;cursor:pointer}
+  .btn:hover{background:var(--navy-dark);text-decoration:none;color:#fff}
+  .btn:disabled{opacity:.55;cursor:default}
+  .save-msg{font-size:13px;margin-top:10px;min-height:18px}
+  .save-msg.err{color:var(--warn)}
+  .save-msg.ok{color:var(--green)}
+
+  /* ===== Countdown ===== */
+  .countdown-big{font-size:44px;font-weight:800;color:var(--navy);line-height:1.1}
+  .countdown-big small{font-size:16px;color:var(--muted);font-weight:600}
+  .paper-split{margin-top:12px;font-size:15px}
+  .paper-split li{margin-bottom:4px}
+
+  /* ===== Announcements / To do ===== */
+  .announce{background:#fffbeb;border:1px solid #fde68a;border-left:5px solid var(--yellow);border-radius:10px;padding:14px 16px;font-size:15px}
+  .todo{list-style:none}
+  .todo li{padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+  .todo li:last-child{border-bottom:none}
+  .todo input{margin-right:8px}
+
+  /* ===== Calendar ===== */
+  .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .cal-head h3{margin:0}
+  .cal-nav{background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 12px;cursor:pointer;font-weight:700;color:var(--navy)}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  .cal-dow{font-size:12px;font-weight:700;color:var(--muted);text-align:center;padding:4px 0}
+  .cal-day{min-height:58px;border:1px solid var(--line);border-radius:8px;padding:4px 5px;font-size:12px;background:#fff}
+  .cal-day.empty{background:transparent;border-color:transparent}
+  .cal-day .dnum{font-weight:700;color:var(--navy)}
+  .cal-day .evt{display:block;margin-top:3px;background:#fffbeb;border:1px solid #fde68a;border-radius:5px;padding:1px 4px;font-size:11px;line-height:1.3;color:#78350f}
+  .cal-day.exam .dnum{color:var(--warn)}
+  .cal-day.exam{background:#fef2f2;border-color:#fecaca}
+  .cal-note{margin-top:10px;font-size:13px;color:var(--muted)}
+
+  /* ===== Video ===== */
+  .video-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:10px;overflow:hidden;background:#000}
+  .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  /* ===== Modules ===== */
+  .modules{margin-bottom:16px}
+  .modules > h2{font-size:22px;color:var(--navy);margin-bottom:4px}
+  .modules > .mod-sub{color:var(--muted);margin-bottom:16px;font-size:15px}
+  .mod-group{margin-bottom:20px}
+  .mod-group > h3{font-size:17px;color:var(--navy);margin-bottom:10px}
+  ul.module-list{list-style:none}
+  li.module{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
+  li.module.done{background:var(--green-bg);border-color:#a7f3d0}
+  li.module .mnum{width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex:0 0 auto}
+  li.module.done .mnum{background:var(--green)}
+  li.module .mtitle{font-weight:700;font-size:15px;flex:1;min-width:180px}
+  li.module .mtitle .check{color:var(--green);margin-left:6px}
+  .tag{font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px}
+  .tag-p1{background:#eff6ff;color:var(--navy);border:1px solid #bfdbfe}
+  .tag-p2{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+  .tag-p3{background:#ede9fe;color:#5b21b6;border:1px solid #ddd6fe}
+  .tag-foundation{background:#f1f5f9;color:var(--muted);border:1px solid var(--line)}
+  .mod-links{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .mod-links a{font-size:14px;font-weight:700}
+  .mark-btn{background:#fff;border:1.5px solid var(--navy);color:var(--navy);font-weight:700;font-size:13px;padding:6px 12px;border-radius:999px;cursor:pointer}
+  .mark-btn:hover{background:#eff6ff}
+  .mark-btn.done{background:var(--green);border-color:var(--green);color:#fff}
+  .mark-btn:disabled{opacity:.55;cursor:default}
+
+  /* ===== Links row ===== */
+  .links-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+  .links-row a{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 16px;font-weight:700;font-size:15px}
+  .links-row a:hover{border-color:var(--navy);text-decoration:none}
+
+  footer{background:var(--navy-dark);color:#cbd5e1;padding:26px 20px;text-align:center;font-size:14px}
+  footer a{color:#fff}
+  footer p{margin-bottom:6px}
+
+  /* ===== Login gate (from v1 notes page) ===== */
+  .auth-widget{position:fixed;top:16px;right:18px;z-index:60;display:flex;align-items:center;gap:10px}
+  .auth-pill{display:none;align-items:center;gap:8px;background:var(--highlight-soft);border:1px solid var(--highlight);box-shadow:var(--shadow);padding:8px 16px;border-radius:20px;font-weight:600;font-size:0.85rem;color:var(--ink);cursor:pointer}
+  .auth-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--pen)}
+  .auth-user{display:none;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);padding:6px 8px 6px 14px;border-radius:20px;font-size:0.85rem}
+  .auth-user .avatar-sm{width:26px;height:26px;border-radius:50%;background:var(--pen);color:var(--on-pen);display:flex;align-items:center;justify-content:center;font-size:1.05rem;font-weight:700}
+  .auth-user button{border:none;background:none;cursor:pointer;color:var(--margin);font-weight:600;font-size:0.78rem;text-decoration:underline}
+  @media (max-width:640px){.auth-widget{top:auto;bottom:14px;right:14px}}
+  .auth-overlay{display:flex;position:fixed;inset:0;z-index:999999;background:rgba(20,24,33,.85);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px}
+  .auth-card{width:100%;max-width:400px;background:#f1f5f9;border:1px solid var(--line);border-left:6px solid var(--pen);border-radius:6px;box-shadow:0 15px 40px rgba(0,0,0,.35);padding:30px 28px}
+  .auth-card h3{margin-top:0;font-size:1.6rem;color:var(--pen);font-weight:700}
+  .auth-submit{margin-top:6px;background:var(--pen);color:var(--on-pen);border:none;padding:12px 16px;border-radius:20px;cursor:pointer;font-weight:600;font-size:0.95rem;box-shadow:var(--shadow)}
+  .auth-submit:hover{background:var(--pen-light)}
+  .auth-msg{font-size:0.85rem;padding:8px 10px;border-radius:6px;display:none}
+  .auth-msg.show{display:block}
+  .auth-msg.err{background:var(--warn-soft);color:var(--warn)}
+  .auth-msg.ok{background:var(--tip-soft);color:var(--tip)}
+  .auth-note{margin-top:16px;font-size:0.8rem;color:var(--ink-soft);line-height:1.5}
+</style>
+</head>
+<body>
+
+<!-- FIREBASE LOGIN GATE — same access control as the notes page (Nov 2026).
+     Google sign-in via the SrWL portal + teacher approval. No passwords stored here. -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-card">
+    <h3>ICT 0417 Course Home</h3>
+    <div class="auth-msg show" id="authStatusMsg">Checking your Google sign-in…</div>
+    <button type="button" class="auth-submit" id="authGoLoginBtn" style="display:none;">Go to Login</button>
+    <p class="auth-note">This course home is for approved SrWL Learning students. Sign in with Google on the login page — your teacher approves your account, then your courses appear on your dashboard. Your name and login time are automatically logged in the attendance list.</p>
+  </div>
+</div>
+
+<div class="auth-widget">
+  <div class="auth-pill" id="authOpenBtn"><span class="dot"></span>Sign in with Google</div>
+  <div class="auth-user" id="authUserBox">
+    <div class="avatar-sm" id="authAvatar">?</div>
+    <span id="authUserName">Student</span>
+    <button id="authLogoutBtn">log out</button>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="index.html">SrWL <span>Learning</span></a>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="ict-0417.html">Subject Hub</a>
+      <a href="resources.html">Resources</a>
+      <a href="pastpaper_index.html">Past Papers</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <h1>ICT CIE 0417 — <span>Exam Notebook</span></h1>
+    <p>Your course home: all 21 syllabus sections, your progress, the exam countdown and what to do next. Work through the sections in order — Theory first, then Practical.</p>
+    <p class="welcome" id="welcomeLine">Welcome, Student</p>
+  </div>
+</div>
+
+<main>
+  <div class="grid">
+    <!-- Progress -->
+    <section class="card" aria-label="Your progress">
+      <h2>Your progress</h2>
+      <div class="progress-wrap">
+        <div class="ring" role="img" aria-label="Course progress">
+          <svg width="140" height="140" viewBox="0 0 140 140">
+            <circle class="ring-bg" cx="70" cy="70" r="54"></circle>
+            <circle class="ring-fg" id="ringFg" cx="70" cy="70" r="54" stroke-dasharray="339.292" stroke-dashoffset="339.292"></circle>
+          </svg>
+          <div class="ring-text"><span class="ring-pct" id="ringPct">0%</span><span class="ring-label">complete</span></div>
+        </div>
+        <div class="progress-side">
+          <p class="progress-count" id="progressCount">0 of 21 sections complete</p>
+          <div class="progress-bar"><div id="progressBarFill"></div></div>
+          <p class="muted">Mark each section complete as you finish it. Your progress is saved to your account.</p>
+          <p style="margin-top:12px;"><a class="btn" id="continueBtn" href="ict_notes.html#ch1">Continue: Chapter 1 — Types &amp; Components of Computer Systems &rarr;</a></p>
+          <p class="save-msg" id="saveMsg" role="status"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Exam target -->
+    <section class="card" aria-label="Exam target">
+      <h2>Exam target</h2>
+      <p class="countdown-big"><span id="countdownDays">—</span> <small>days to go</small></p>
+      <p class="muted">May/June 2027 exams · target date <strong>1 May 2027</strong></p>
+      <ul class="paper-split">
+        <li><strong>Paper 1 — Theory:</strong> 40% · 1h 30m · 80 marks</li>
+        <li><strong>Paper 2 — Document Production, Databases &amp; Presentations:</strong> 30% · 2h 15m · 70 marks</li>
+        <li><strong>Paper 3 — Spreadsheets &amp; Website Authoring:</strong> 30% · 2h 15m · 70 marks</li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="grid">
+    <!-- Announcements -->
+    <section class="card" aria-label="Announcements">
+      <h2>Announcements</h2>
+      <div class="announce">Welcome to ICT 0417. Chapter 1 is free for everyone — sign in to unlock Chapters 2–10 and the Practical sections.</div>
+      <h3>How to get access</h3>
+      <p class="muted">1. Sign in with Google. &nbsp;2. Your teacher approves your account. &nbsp;3. Open your courses from your student dashboard. Questions? Contact your teacher on Telegram: <a href="https://t.me/SayarWaiLin">@SayarWaiLin</a>.</p>
+    </section>
+
+    <!-- Work to do -->
+    <section class="card" aria-label="Work to do">
+      <h2>Work To Do</h2>
+      <ul class="todo">
+        <li><a href="ict_notes.html#ch1">Read Chapter 1 (free)</a></li>
+        <li><a href="ict_notes.html#practice-questions">Try Practice Questions 1</a></li>
+        <li><a href="pastpaper_index.html">Past Paper: 2024 Paper 1 (see Past Papers)</a></li>
+        <li><a href="ict_practical.html#sec-17">Complete Section 17 — Document Production</a></li>
+      </ul>
+    </section>
+
+    <!-- Study on your own -->
+    <section class="card" aria-label="Study on your own">
+      <h2>Study on your own</h2>
+      <p class="muted">No class needed — every section is written so you can learn it by yourself. Follow these 5 steps for every section:</p>
+      <ol>
+        <li><strong>Read</strong> the chapter notes.</li>
+        <li><strong>Try</strong> the exam questions without looking at the answers.</li>
+        <li><strong>Check</strong> the model answers and fix your mistakes.</li>
+        <li><strong>Mark complete</strong> on this page — your progress is saved.</li>
+        <li><strong>Test yourself</strong> with a past paper.</li>
+      </ol>
+      <p><strong>Suggested pace:</strong> 1 section a week — 21 sections in about 21 weeks, finishing around 11 April 2027, with about 3 weeks left for past papers and revision before the May/June 2027 exams. Live online classes run Mon–Fri 6:00–7:30 PM &amp; 7:30–9:00 PM, Sat–Sun 10:00–11:30 AM, 12:00–1:30 PM &amp; 2:00–3:30 PM (Myanmar Time) — see the calendar below.</p>
+    </section>
+  </div>
+
+  <div class="grid">
+    <!-- Calendar -->
+    <section class="card" aria-label="Calendar">
+      <h2>Calendar</h2>
+      <div class="cal-head">
+        <button class="cal-nav" id="calPrev" type="button" aria-label="Previous month">&larr; Prev</button>
+        <h3 id="calTitle">November 2026</h3>
+        <button class="cal-nav" id="calNext" type="button" aria-label="Next month">Next &rarr;</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <p class="cal-note">Online classes (Myanmar Time) — Mon–Fri 6:00–7:30 PM &amp; 7:30–9:00 PM; Sat–Sun 10:00–11:30 AM, 12:00–1:30 PM &amp; 2:00–3:30 PM. These slots are shared across the main courses: IGCSE ICT (0417), IGCSE Computer Science (0478), Edexcel ICT (4IT1), Edexcel CS (4CP0), A-Level CS (9618) and ICT/CS Foundation.</p>
+    </section>
+
+    <!-- Video preview -->
+    <section class="card" aria-label="Video preview">
+      <h2>Video preview</h2>
+      <div class="video-wrap">
+        <iframe src="https://www.youtube-nocookie.com/embed/eM9oH1uDIGE?list=PLftf_oM79wYM" title="Python Basics – Day 2" loading="lazy" allowfullscreen></iframe>
+      </div>
+      <p style="margin-top:10px;"><strong>Python Basics – Day 2</strong> — Basic Operations, Conditionals &amp; Loops.</p>
+      <p class="muted">This is a Python video, not ICT 0417 content. It is shown here as a course video preview. <a href="https://www.youtube.com/@SayarWaiLin">Watch on YouTube &rarr;</a></p>
+    </section>
+  </div>
+
+  <!-- Course modules -->
+  <section class="modules" aria-label="Course modules">
+    <h2>Course modules — all 21 sections</h2>
+    <p class="mod-sub">Work through the sections in order. Open a section to study it, then mark it complete. Your progress is saved to your account.</p>
+
+    <div class="mod-group">
+      <h3>Theory — Paper 1 (Chapters 1–10)</h3>
+      <ul class="module-list">
+        <li class="module" id="mod-ch1"><span class="mnum">1</span><span class="mtitle">Types &amp; Components of Computer Systems</span><span class="tag tag-p1">Paper 1</span><span class="mod-links"><a href="ict_notes.html#ch1">Open notes &rarr;</a><a href="/pdfs/ict-0417-chapter-01.pdf">PDF</a><button class="mark-btn" type="button" data-section="ch1">Mark complete</button></span></li>
+        <li class="module" id="mod-ch2"><span class="mnum">2</span><span class="mtitle">Input &amp; Output Devices</span><span class="tag tag-p1">Paper 1</span><span class="mod-links"><a href="ict_notes.html#ch2">Open notes &rarr;</a><a href="/pdfs/ict-0417-chapter-02.pdf">PDF</a><button class="mark-btn" type="button" data-section="ch2">Mark complete</button></span></li>
+        <li class="module" id="mod-ch3"><span class="mnum">3</span><span class="mtitle">Storage Devices &amp; Media</span><span class="tag tag-p1">Paper 1</span><span class="mod-links"><a href="ict_notes.html#ch3">Open notes &rarr;</a><a href="/pdfs/ict-0417-chapter-03.pdf">PDF</a><button class="mark-btn" type="button" data-section="ch3">Mark complete</button></span></li>
+        <li class="module" id="mod-ch4"><span class="mnum">4</span><span class="mtitle">Networks &amp; the Effects of Using Them</span><span class="tag tag-p1">Paper 1</span><span class="mod-links"><a href="ict_notes.html#ch4">Open notes &rarr;</a><a href="/pdfs/ict-0417-chapter-04.pdf">PDF</a><button class="mark-btn" type="button" data-section="ch4">Mark complete</button></span></li>
+        <li class="module" id="mod-ch5"><span class="mnum">5</span><span class="mtitle">The Effects of Using IT</span><span class="tag tag-p1">Paper 1</span><span class="mod-links"><a href="ict_notes.html#ch5">Open notes &rarr;</a><a href="/pdfs/ict-0417-chapter-05.pdf">PDF</a><button class="mark-btn" type="button" data-section="ch5">Mark complete</button></span></li>
+        <li class="module" id="mod-ch6"><span class="mnum">6</span><span class="mtitle">ICT Applications</span><span class="tag tag-p1">Paper 1</span><span class="mod-links"><a href="ict_notes.html#ch6">Open notes &rarr;</a><a href="/pdfs/ict-0417-chapter-06.pdf">PDF</a><button class="mark-btn" type="button" data-section="ch6">Mark complete</button></span></li>
+        <li class="module" id="mod-ch7"><span class="mnum">7</span><span class="mtitle">The Systems Life Cycle</span><span class="tag tag-p1">Paper 1</span><span class="mod-links"><a href="ict_notes.html#ch7">Open notes &rarr;</a><a href="/pdfs/ict-0417-chapter-07.pdf">PDF</a><button class="mark-btn" type="button" data-section="ch7">Mark complete</button></span></li>
+        <li class="module" id="mod-ch8"><span class="mnum">8</span><span class="mtitle">Safety &amp; Security</span><span class="tag tag-p1">Paper 1</span><span class="mod-links"><a href="ict_notes.html#ch8">Open notes &rarr;</a><a href="/pdfs/ict-0417-chapter-08.pdf">PDF</a><button class="mark-btn" type="button" data-section="ch8">Mark complete</button></span></li>
+        <li class="module" id="mod-ch9"><span class="mnum">9</span><span class="mtitle">Audiences</span><span class="tag tag-p1">Paper 1</span><span class="mod-links"><a href="ict_notes.html#ch9">Open notes &rarr;</a><a href="/pdfs/ict-0417-chapter-09.pdf">PDF</a><button class="mark-btn" type="button" data-section="ch9">Mark complete</button></span></li>
+        <li class="module" id="mod-ch10"><span class="mnum">10</span><span class="mtitle">Communication</span><span class="tag tag-p1">Paper 1</span><span class="mod-links"><a href="ict_notes.html#ch10">Open notes &rarr;</a><a href="/pdfs/ict-0417-chapter-10.pdf">PDF</a><button class="mark-btn" type="button" data-section="ch10">Mark complete</button></span></li>
+      </ul>
+    </div>
+
+    <div class="mod-group">
+      <h3>Practical — Papers 2 &amp; 3 (Sections 11–21)</h3>
+      <ul class="module-list">
+        <li class="module" id="mod-sec-11"><span class="mnum">11</span><span class="mtitle">File management</span><span class="tag tag-foundation">Foundation</span><span class="mod-links"><a href="ict_practical.html#sec-11">Open &rarr;</a><button class="mark-btn" type="button" data-section="sec-11">Mark complete</button></span></li>
+        <li class="module" id="mod-sec-12"><span class="mnum">12</span><span class="mtitle">Images</span><span class="tag tag-foundation">Foundation</span><span class="mod-links"><a href="ict_practical.html#sec-12">Open &rarr;</a><button class="mark-btn" type="button" data-section="sec-12">Mark complete</button></span></li>
+        <li class="module" id="mod-sec-13"><span class="mnum">13</span><span class="mtitle">Layout</span><span class="tag tag-foundation">Foundation</span><span class="mod-links"><a href="ict_practical.html#sec-13">Open &rarr;</a><button class="mark-btn" type="button" data-section="sec-13">Mark complete</button></span></li>
+        <li class="module" id="mod-sec-14"><span class="mnum">14</span><span class="mtitle">Styles</span><span class="tag tag-foundation">Foundation</span><span class="mod-links"><a href="ict_practical.html#sec-14">Open &rarr;</a><button class="mark-btn" type="button" data-section="sec-14">Mark complete</button></span></li>
+        <li class="module" id="mod-sec-15"><span class="mnum">15</span><span class="mtitle">Proofing</span><span class="tag tag-foundation">Foundation</span><span class="mod-links"><a href="ict_practical.html#sec-15">Open &rarr;</a><button class="mark-btn" type="button" data-section="sec-15">Mark complete</button></span></li>
+        <li class="module" id="mod-sec-16"><span class="mnum">16</span><span class="mtitle">Graphs and charts</span><span class="tag tag-foundation">Foundation</span><span class="mod-links"><a href="ict_practical.html#sec-16">Open &rarr;</a><button class="mark-btn" type="button" data-section="sec-16">Mark complete</button></span></li>
+        <li class="module" id="mod-sec-17"><span class="mnum">17</span><span class="mtitle">Document production</span><span class="tag tag-p2">Paper 2</span><span class="mod-links"><a href="ict_practical.html#sec-17">Open &rarr;</a><button class="mark-btn" type="button" data-section="sec-17">Mark complete</button></span></li>
+        <li class="module" id="mod-sec-18"><span class="mnum">18</span><span class="mtitle">Databases</span><span class="tag tag-p2">Paper 2</span><span class="mod-links"><a href="ict_practical.html#sec-18">Open &rarr;</a><button class="mark-btn" type="button" data-section="sec-18">Mark complete</button></span></li>
+        <li class="module" id="mod-sec-19"><span class="mnum">19</span><span class="mtitle">Presentations</span><span class="tag tag-p2">Paper 2</span><span class="mod-links"><a href="ict_practical.html#sec-19">Open &rarr;</a><button class="mark-btn" type="button" data-section="sec-19">Mark complete</button></span></li>
+        <li class="module" id="mod-sec-20"><span class="mnum">20</span><span class="mtitle">Spreadsheets</span><span class="tag tag-p3">Paper 3</span><span class="mod-links"><a href="ict_practical.html#sec-20">Open &rarr;</a><button class="mark-btn" type="button" data-section="sec-20">Mark complete</button></span></li>
+        <li class="module" id="mod-sec-21"><span class="mnum">21</span><span class="mtitle">Website authoring</span><span class="tag tag-p3">Paper 3</span><span class="mod-links"><a href="ict_practical.html#sec-21">Open &rarr;</a><button class="mark-btn" type="button" data-section="sec-21">Mark complete</button></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Links -->
+  <nav class="links-row" aria-label="Course links">
+    <a href="ict_notes.html">Theory Notes</a>
+    <a href="ict_practical.html">Practical Skills</a>
+    <a href="resources.html">Resources</a>
+    <a href="ict-0417.html">Subject Hub</a>
+    <a href="pastpaper_index.html">Past Papers</a>
+    <a href="https://www.youtube.com/@SayarWaiLin">YouTube Channel</a>
+  </nav>
+</main>
+
+<footer>
+  <p><strong>SrWL Learning</strong> — Sayar Wai Lin Htet · <a href="https://www.wailinhtet.com">www.wailinhtet.com</a></p>
+  <p><a href="index.html">Home</a> · <a href="my_course.html">Courses</a> · <a href="login.html">Student sign in</a> · <a href="https://t.me/SayarWaiLin">Telegram @SayarWaiLin</a></p>
+  <p>ICT CIE 0417 — Exam target May/June 2027.</p>
+</footer>
+
+<script>
+  // ===== Exam countdown (live, from the real date) =====
+  (function () {
+    var target = new Date(2027, 4, 1); // 1 May 2027
+    var now = new Date();
+    var days = Math.ceil((target.getTime() - now.getTime()) / 86400000);
+    var el = document.getElementById('countdownDays');
+    if (el) el.textContent = days > 0 ? days : 0;
+  })();
+
+  // ===== Calendar (starts November 2026; real class times, Myanmar Time) =====
+  (function () {
+    var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var view = { y: 2026, m: 10 }; // November 2026 (month index 10)
+    var grid = document.getElementById('calGrid');
+    var title = document.getElementById('calTitle');
+
+    // Dave's real online class times (Myanmar Time).
+    // Mon-Fri: 6:00-7:30 PM & 7:30-9:00 PM. Sat-Sun: 10:00-11:30 AM, 12:00-1:30 PM & 2:00-3:30 PM.
+    function classesFor(date) {
+      var dow = date.getDay(); // 0 Sun … 6 Sat
+      if (dow >= 1 && dow <= 5) return ['Online class 6:00–7:30 PM', 'Online class 7:30–9:00 PM'];
+      return ['Online class 10:00–11:30 AM', 'Online class 12:00–1:30 PM', 'Online class 2:00–3:30 PM'];
+    }
+
+    function render() {
+      title.textContent = MONTHS[view.m] + ' ' + view.y;
+      var html = '';
+      ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(function (d) { html += '<div class="cal-dow">' + d + '</div>'; });
+      var first = new Date(view.y, view.m, 1);
+      var daysInMonth = new Date(view.y, view.m + 1, 0).getDate();
+      for (var i = 0; i < first.getDay(); i++) html += '<div class="cal-day empty"></div>';
+      for (var d = 1; d <= daysInMonth; d++) {
+        var date = new Date(view.y, view.m, d);
+        var evts = classesFor(date);
+        var isExam = (view.y === 2027 && view.m === 4 && d === 1);
+        var cls = 'cal-day' + (isExam ? ' exam' : '');
+        html += '<div class="' + cls + '"><span class="dnum">' + d + '</span>';
+        if (isExam) html += '<span class="evt">Exam target &#127919; 1 May 2027</span>';
+        evts.forEach(function (e) { html += '<span class="evt">' + e + '</span>'; });
+        html += '</div>';
+      }
+      grid.innerHTML = html;
+    }
+
+    document.getElementById('calPrev').addEventListener('click', function () {
+      view.m--; if (view.m < 0) { view.m = 11; view.y--; } render();
+    });
+    document.getElementById('calNext').addEventListener('click', function () {
+      view.m++; if (view.m > 11) { view.m = 0; view.y++; } render();
+    });
+    render();
+  })();
+</script>
+
+<script type="module">
+  // ===== Firebase Login Gate + Live Progress (same access control as the notes page) =====
+  // Access rule: Google sign-in via the SrWL portal + teacher approval.
+  // No passwords are stored on this page.
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+  import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+  import { firebaseConfig, firebaseReady } from './assets/portal/firebase-config.js';
+
+  // Remove any credentials left behind by the old local password system.
+  try {
+    localStorage.removeItem('ict0417_users');
+    localStorage.removeItem('ict0417_session');
+  } catch (e) { /* storage unavailable - nothing to clean */ }
+
+  // Google Apps Script Web App URL (attendance logging, unchanged)
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweswRLHak84m6MkD8DrvxorOaH_ajSIut1uhAitFJDnF1Mrhg_m-vc7nfXaD7ibMBn/exec';
+
+  function logVisit(name, username, event) {
+    if (!SCRIPT_URL) return;
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ name: name, username: username, timestamp: new Date().toISOString(), event: event })
+    }).catch(function (err) { console.warn('Attendance log failed:', err); });
+  }
+
+  const overlay = document.getElementById('authOverlay');
+  const statusMsg = document.getElementById('authStatusMsg');
+  const goLoginBtn = document.getElementById('authGoLoginBtn');
+  const userBox = document.getElementById('authUserBox');
+  const userNameEl = document.getElementById('authUserName');
+  const avatarEl = document.getElementById('authAvatar');
+  const logoutBtn = document.getElementById('authLogoutBtn');
+  const openBtn = document.getElementById('authOpenBtn');
+  const welcomeLine = document.getElementById('welcomeLine');
+
+  function showStatus(text, isError) {
+    if (!statusMsg) return;
+    statusMsg.textContent = text;
+    statusMsg.className = 'auth-msg show ' + (isError ? 'err' : 'ok');
+  }
+
+  function unlockPage(name) {
+    overlay.style.display = 'none';
+    userBox.style.display = 'flex';
+    userNameEl.textContent = name;
+    avatarEl.textContent = (name || '?').trim().charAt(0).toUpperCase() || '?';
+    if (welcomeLine) welcomeLine.textContent = 'Welcome, ' + name;
+  }
+
+  function lockPage(message, showLoginButton) {
+    overlay.style.display = 'flex';
+    userBox.style.display = 'none';
+    if (message) showStatus(message, true);
+    if (goLoginBtn) goLoginBtn.style.display = showLoginButton ? '' : 'none';
+  }
+
+  // ===== Live progress (Firestore collection "progress") =====
+  // One document per student per course. Doc ID: "<uid>_ict-0417".
+  // Fields: uid, courseId "ict-0417", completedSections (array of section IDs),
+  // updatedAt (server timestamp). The document is NOT created until the student
+  // marks something complete for the first time.
+  const SECTIONS = [
+    { id: 'ch1', title: 'Chapter 1 — Types & Components of Computer Systems', href: 'ict_notes.html#ch1' },
+    { id: 'ch2', title: 'Chapter 2 — Input & Output Devices', href: 'ict_notes.html#ch2' },
+    { id: 'ch3', title: 'Chapter 3 — Storage Devices & Media', href: 'ict_notes.html#ch3' },
+    { id: 'ch4', title: 'Chapter 4 — Networks & the Effects of Using Them', href: 'ict_notes.html#ch4' },
+    { id: 'ch5', title: 'Chapter 5 — The Effects of Using IT', href: 'ict_notes.html#ch5' },
+    { id: 'ch6', title: 'Chapter 6 — ICT Applications', href: 'ict_notes.html#ch6' },
+    { id: 'ch7', title: 'Chapter 7 — The Systems Life Cycle', href: 'ict_notes.html#ch7' },
+    { id: 'ch8', title: 'Chapter 8 — Safety & Security', href: 'ict_notes.html#ch8' },
+    { id: 'ch9', title: 'Chapter 9 — Audiences', href: 'ict_notes.html#ch9' },
+    { id: 'ch10', title: 'Chapter 10 — Communication', href: 'ict_notes.html#ch10' },
+    { id: 'sec-11', title: 'Section 11 — File management', href: 'ict_practical.html#sec-11' },
+    { id: 'sec-12', title: 'Section 12 — Images', href: 'ict_practical.html#sec-12' },
+    { id: 'sec-13', title: 'Section 13 — Layout', href: 'ict_practical.html#sec-13' },
+    { id: 'sec-14', title: 'Section 14 — Styles', href: 'ict_practical.html#sec-14' },
+    { id: 'sec-15', title: 'Section 15 — Proofing', href: 'ict_practical.html#sec-15' },
+    { id: 'sec-16', title: 'Section 16 — Graphs and charts', href: 'ict_practical.html#sec-16' },
+    { id: 'sec-17', title: 'Section 17 — Document production', href: 'ict_practical.html#sec-17' },
+    { id: 'sec-18', title: 'Section 18 — Databases', href: 'ict_practical.html#sec-18' },
+    { id: 'sec-19', title: 'Section 19 — Presentations', href: 'ict_practical.html#sec-19' },
+    { id: 'sec-20', title: 'Section 20 — Spreadsheets', href: 'ict_practical.html#sec-20' },
+    { id: 'sec-21', title: 'Section 21 — Website authoring', href: 'ict_practical.html#sec-21' }
+  ];
+  const RING_CIRC = 339.292;
+  const ringFg = document.getElementById('ringFg');
+  const ringPct = document.getElementById('ringPct');
+  const progressCount = document.getElementById('progressCount');
+  const progressBarFill = document.getElementById('progressBarFill');
+  const continueBtn = document.getElementById('continueBtn');
+  const saveMsg = document.getElementById('saveMsg');
+  let completedSet = new Set();
+  let progressDocRef = null;
+
+  function setSaveMsg(text, isError) {
+    if (!saveMsg) return;
+    saveMsg.textContent = text;
+    saveMsg.className = 'save-msg ' + (isError ? 'err' : 'ok');
+  }
+
+  function renderProgress() {
+    const done = SECTIONS.filter(function (s) { return completedSet.has(s.id); }).length;
+    const pct = Math.round((done / SECTIONS.length) * 100);
+    if (ringPct) ringPct.textContent = pct + '%';
+    if (ringFg) ringFg.style.strokeDashoffset = String(RING_CIRC * (1 - pct / 100));
+    if (progressBarFill) progressBarFill.style.width = pct + '%';
+    if (progressCount) progressCount.textContent = done + ' of ' + SECTIONS.length + ' sections complete';
+    SECTIONS.forEach(function (s) {
+      const li = document.getElementById('mod-' + s.id);
+      const btn = document.querySelector('.mark-btn[data-section="' + s.id + '"]');
+      const isDone = completedSet.has(s.id);
+      if (li) li.classList.toggle('done', isDone);
+      if (btn) {
+        btn.classList.toggle('done', isDone);
+        btn.textContent = isDone ? '✓ Completed' : 'Mark complete';
+        const titleEl = li ? li.querySelector('.mtitle') : null;
+        if (titleEl) {
+          let check = titleEl.querySelector('.check');
+          if (isDone && !check) {
+            check = document.createElement('span');
+            check.className = 'check';
+            check.textContent = '✓';
+            titleEl.appendChild(check);
+          } else if (!isDone && check) {
+            check.remove();
+          }
+        }
+      }
+    });
+    if (continueBtn) {
+      const next = SECTIONS.find(function (s) { return !completedSet.has(s.id); });
+      if (next) {
+        continueBtn.href = next.href;
+        continueBtn.textContent = 'Continue: ' + next.title + ' →';
+      } else {
+        continueBtn.href = 'pastpaper_index.html';
+        continueBtn.textContent = 'All 21 sections complete — well done! Try a past paper →';
+      }
+    }
+  }
+
+  async function loadProgress(uid) {
+    progressDocRef = doc(window.__courseDb, 'progress', uid + '_ict-0417');
+    try {
+      const snap = await getDoc(progressDocRef);
+      if (snap.exists()) {
+        const data = snap.data() || {};
+        const arr = Array.isArray(data.completedSections) ? data.completedSections : [];
+        completedSet = new Set(arr.filter(function (id) { return SECTIONS.some(function (s) { return s.id === id; }); }));
+      }
+    } catch (error) {
+      console.warn('Could not load progress:', error);
+      setSaveMsg('Progress could not be loaded — ask your teacher to publish the Firestore Rules for the progress collection. Your marks will still be tried when you click.', true);
+    }
+    renderProgress();
+  }
+
+  async function toggleSection(sectionId, btn) {
+    if (!progressDocRef) return;
+    btn.disabled = true;
+    const next = new Set(completedSet);
+    if (next.has(sectionId)) next.delete(sectionId); else next.add(sectionId);
+    const arr = SECTIONS.map(function (s) { return s.id; }).filter(function (id) { return next.has(id); });
+    try {
+      await setDoc(progressDocRef, {
+        uid: window.__courseUid,
+        courseId: 'ict-0417',
+        completedSections: arr,
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+      completedSet = next;
+      renderProgress();
+      setSaveMsg('Progress saved ✓', false);
+    } catch (error) {
+      console.error('Could not save progress:', error);
+      setSaveMsg('Could not save progress — ask your teacher to publish the Firestore Rules for the progress collection, then try again.', true);
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  document.querySelectorAll('.mark-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () { toggleSection(btn.getAttribute('data-section'), btn); });
+  });
+  renderProgress(); // initial 0 of 21, updated once Firestore answers
+
+  if (goLoginBtn) goLoginBtn.addEventListener('click', function () { location.assign('login.html'); });
+  if (openBtn) openBtn.addEventListener('click', function () { location.assign('login.html'); });
+
+  if (!firebaseReady) {
+    lockPage('Firebase is not configured. Please contact your teacher.', false);
+  } else {
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    window.__courseDb = db;
+
+    // Same admin check as assets/portal/portal.js: a denied read is not admin.
+    const isAdmin = async (uid) => {
+      try {
+        const snapshot = await getDoc(doc(db, 'admins', uid));
+        return snapshot.exists();
+      } catch (error) {
+        if (error.code === 'permission-denied') return false;
+        throw error;
+      }
+    };
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', async function () {
+        try { await signOut(auth); } catch (e) { console.warn('Sign-out failed:', e); }
+        location.assign('login.html');
+      });
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        lockPage('Please sign in with Google to open your course home. Redirecting to the login page…', true);
+        setTimeout(function () { location.assign('login.html'); }, 2500);
+        return;
+      }
+      window.__courseUid = user.uid;
+      const displayName = user.displayName || (user.email ? user.email.split('@')[0] : 'Student');
+      try {
+        const admin = await isAdmin(user.uid);
+        let approved = null; // null = could not verify (read denied); dashboard already enforces approval
+        try {
+          const snapshot = await getDoc(doc(db, 'users', user.uid));
+          if (snapshot.exists()) approved = snapshot.data().approved === true;
+        } catch (error) {
+          if (error.code !== 'permission-denied') throw error;
+          console.warn('Could not verify approval - allowing signed-in user. Check Firestore Rules for /users/{uid}.', error);
+        }
+        if (admin || approved === true || approved === null) {
+          unlockPage(displayName);
+          logVisit(displayName, user.email || user.uid, 'firebase-login');
+          loadProgress(user.uid);
+        } else {
+          lockPage('Registration received. Your teacher must approve your account before course access is enabled.', false);
+        }
+      } catch (error) {
+        console.error('Account check failed:', error);
+        lockPage('Unable to verify your account. Please try again or contact your teacher.', true);
+      }
+    });
+  }
+</script>
+<script>
+  // Fallback if the Firebase module above failed to load (e.g. offline)
+  setTimeout(function () {
+    var msg = document.getElementById('authStatusMsg');
+    var overlay = document.getElementById('authOverlay');
+    if (msg && overlay && overlay.style.display !== 'none' && msg.textContent.indexOf('Checking your Google sign-in') === 0) {
+      msg.textContent = 'Could not reach the sign-in service. Check your connection, then refresh this page.';
+      msg.className = 'auth-msg show err';
+      var btn = document.getElementById('authGoLoginBtn');
+      if (btn) btn.style.display = '';
+    }
+  }, 8000);
+</script>
+</body>
+</html>

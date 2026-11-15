@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGCSE ICT (0417) — Theory, Practical, Past Papers &amp; Resources | SrWL Learning</title>
+<meta name="description" content="Everything for Cambridge IGCSE ICT (0417) in one place: Theory notes Chapters 1-10, Practical skills Sections 11-21, past papers and resources. Chapter 1 is free — no sign-in needed.">
+<style>
+  :root{
+    --navy:#0d2a5c;
+    --navy-dark:#081f45;
+    --yellow:#ffc900;
+    --ink:#1e293b;
+    --muted:#64748b;
+    --line:#e2e8f0;
+    --bg:#f1f5f9;
+    --card:#ffffff;
+    --green:#059669;
+    --green-bg:#ecfdf5;
+    --lock-bg:#fef3c7;
+    --lock-ink:#92400e;
+    --blue-bg:#eff6ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  a{color:var(--navy);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* Header */
+  .site-header{background:var(--navy);color:#fff}
+  .site-header-inner{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px}
+  .brand{font-weight:800;font-size:20px;letter-spacing:.2px;color:#fff}
+  .brand span{color:var(--yellow)}
+  .site-nav{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap}
+  .site-nav a{color:#dbeafe;font-size:15px}
+  .site-nav a:hover{color:#fff}
+  .signin-btn{background:var(--yellow);color:var(--navy);font-weight:700;padding:6px 14px;border-radius:999px}
+  .signin-btn:hover{text-decoration:none;background:#ffd83d}
+
+  /* Hero */
+  .hero{background:var(--navy);color:#fff;padding:34px 20px 40px}
+  .hero-inner{max-width:1100px;margin:0 auto}
+  .crumb{font-size:14px;color:#93c5fd;margin-bottom:8px}
+  .crumb a{color:#93c5fd}
+  .hero h1{font-size:34px;line-height:1.2}
+  .hero p{margin-top:10px;font-size:17px;color:#dbeafe;max-width:760px}
+  .exam-map{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .exam-chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:999px;padding:7px 14px;font-size:14px;font-weight:600}
+  .exam-chip b{color:var(--yellow)}
+
+  main{max-width:1100px;margin:0 auto;padding:18px 20px 40px}
+
+  /* Start here card */
+  .start-card{background:#fffbeb;border:1px solid #fde68a;border-left:5px solid var(--yellow);border-radius:12px;padding:22px;margin:22px 0 6px}
+  .start-card h2{font-size:22px;color:var(--navy);margin-bottom:6px}
+  .start-card p{font-size:16px;margin-bottom:14px}
+  .start-actions{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;font-weight:800;font-size:16px;padding:13px 22px;border-radius:12px}
+  .btn:hover{text-decoration:none}
+  .btn-primary{background:var(--navy);color:#fff}
+  .btn-primary:hover{background:var(--navy-dark)}
+  .btn-secondary{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+
+  /* Tabs */
+  .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 0}
+  .tab-btn{flex:1 1 160px;min-height:58px;font-size:17px;font-weight:800;font-family:inherit;border:2px solid var(--navy);background:#fff;color:var(--navy);border-radius:12px;cursor:pointer;padding:12px 10px}
+  .tab-btn:hover{background:#eff6ff}
+  .tab-btn[aria-selected="true"]{background:var(--navy);color:#fff;box-shadow:0 4px 0 var(--yellow)}
+  .tab-btn small{display:block;font-size:13px;font-weight:600;opacity:.8}
+
+  .tab-panel{margin-top:20px}
+  body.tabs-on .tab-panel{display:none}
+  body.tabs-on .tab-panel.active{display:block}
+
+  .do-first{background:var(--blue-bg);border-left:5px solid var(--navy);border-radius:10px;padding:14px 16px;font-size:16px;margin-bottom:18px}
+  .do-first strong{color:var(--navy)}
+
+  /* Chapter list */
+  .chapter-list{display:flex;flex-direction:column;gap:10px}
+  .chapter-row{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px 16px}
+  .chapter-num{width:38px;height:38px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .chapter-num.free{background:var(--green)}
+  .chapter-body{flex:1;min-width:0}
+  .chapter-body h4{font-size:17px;line-height:1.35;color:var(--navy)}
+  .chapter-body p{font-size:14px;color:var(--muted);margin-top:2px}
+  .chapter-links{display:flex;gap:16px;flex-wrap:wrap;margin-top:7px;align-items:center}
+  .chapter-links a{font-weight:700;font-size:14px}
+  .order-note{margin-top:16px;font-size:15px;color:var(--muted)}
+
+  /* Cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .res-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:6px}
+  .res-card h4{font-size:16px;line-height:1.35;color:var(--navy)}
+  .res-card p{font-size:14px;color:var(--muted);flex:1}
+  .meta{font-size:13px;color:var(--muted)}
+  .meta b{color:var(--ink)}
+  .card-link{font-weight:700;font-size:14px;margin-top:4px}
+  .badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;margin-top:4px}
+  .badge-free{background:var(--green-bg);color:var(--green)}
+  .badge-lock{background:var(--lock-bg);color:var(--lock-ink)}
+  .pdf-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .pdf-chips a{font-size:13px;font-weight:600;background:#eff6ff;border:1px solid #bfdbfe;color:var(--navy);padding:4px 9px;border-radius:999px}
+  .pdf-chips a:hover{background:#dbeafe;text-decoration:none}
+
+  .paper-group{margin-bottom:24px}
+  .paper-group > h3{font-size:18px;color:var(--navy);margin-bottom:4px}
+  .paper-group > p{font-size:15px;color:var(--muted);margin-bottom:12px}
+
+  .tip-card{background:#fff;border:1px solid var(--line);border-left:5px solid var(--yellow);border-radius:12px;padding:16px 18px;margin-top:18px;font-size:15px}
+  .tip-card strong{color:var(--navy)}
+
+  .access-note{background:#fffbeb;border:1px solid #fde68a;border-left:5px solid var(--yellow);border-radius:10px;padding:14px 16px;margin:28px 0 26px;font-size:15px}
+  .access-note strong{color:var(--navy)}
+  .howto{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:28px}
+  .howto h2{font-size:19px;color:var(--navy);margin-bottom:8px}
+  .howto ol{margin-left:20px;font-size:15px}
+  .howto li{margin-bottom:4px}
+
+  footer{background:var(--navy-dark);color:#cbd5e1;padding:26px 20px;text-align:center;font-size:14px}
+  footer a{color:#fff}
+  footer p{margin-bottom:6px}
+  @media (max-width:600px){
+    .hero h1{font-size:27px}
+    .site-nav{margin-left:0}
+    .tab-btn{flex:1 1 45%}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="index.html">SrWL <span>Learning</span></a>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="my_course.html">Courses</a>
+      <a href="resources.html">Resources</a>
+      <a href="pastpaper_index.html">Past Papers</a>
+      <a class="signin-btn" href="login.html">Student sign in</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="crumb"><a href="resources.html">Resources</a> &rsaquo; IGCSE ICT (0417)</p>
+    <h1>IGCSE ICT (0417)</h1>
+    <p>Cambridge IGCSE Information and Communication Technology. Everything for this subject in one place — Theory, Practical, Past Papers and Resources. Exam target: May/June 2027.</p>
+    <div class="exam-map">
+      <span class="exam-chip"><b>Paper 1</b> Theory · 40% · 1h 30m · 80 marks</span>
+      <span class="exam-chip"><b>Paper 2</b> Practical · 30% · 2h 15m · 70 marks</span>
+      <span class="exam-chip"><b>Paper 3</b> Practical · 30% · 2h 15m · 70 marks</span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="start-card">
+    <h2>Start here — Chapter 1 is free</h2>
+    <p>Chapter 1 is free — no sign-in needed. Start with Chapter 1, then sign in to unlock the rest.</p>
+    <div class="start-actions">
+      <a class="btn btn-primary" href="ict_notes.html#ch1">Start Chapter 1 — it&rsquo;s free &rarr;</a>
+      <a class="btn btn-secondary" href="login.html">Sign in with Google</a>
+    </div>
+  </div>
+
+  <div class="start-card">
+    <h2>Study on your own — no class needed</h2>
+    <p>You can learn this course by yourself, at your own pace. Live online classes run Mon–Fri evenings and Sat–Sun (see the calendar on the course home page), but every section is written so you can study it alone. Follow these 5 steps for every section:</p>
+    <ol>
+      <li><strong>Read</strong> the chapter notes.</li>
+      <li><strong>Try</strong> the exam questions without looking at the answers.</li>
+      <li><strong>Check</strong> the model answers and fix your mistakes.</li>
+      <li><strong>Mark complete</strong> on the course home page (sign in first) — your progress is saved.</li>
+      <li><strong>Test yourself</strong> with a past paper from the Past Papers tab.</li>
+    </ol>
+    <p><strong>Suggested pace:</strong> 1 section a week — 21 sections in about 21 weeks, finishing around 11 April 2027, with about 3 weeks left for past papers and revision before the May/June 2027 exams.</p>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="IGCSE ICT (0417) sections">
+    <button type="button" class="tab-btn" role="tab" id="tab-theory" aria-controls="panel-theory" aria-selected="true" data-tab="theory">Theory<small>Paper 1 · Chapters 1–10</small></button>
+    <button type="button" class="tab-btn" role="tab" id="tab-practical" aria-controls="panel-practical" aria-selected="false" data-tab="practical">Practical<small>Papers 2 &amp; 3 · Sections 11–21</small></button>
+    <button type="button" class="tab-btn" role="tab" id="tab-past-papers" aria-controls="panel-past-papers" aria-selected="false" data-tab="past-papers">Past Papers<small>714 papers · 2019–2026</small></button>
+    <button type="button" class="tab-btn" role="tab" id="tab-resources" aria-controls="panel-resources" aria-selected="false" data-tab="resources">Resources<small>Syllabus · Videos · Help</small></button>
+  </div>
+
+  <!-- ============ THEORY ============ -->
+  <section class="tab-panel active" id="panel-theory" role="tabpanel" aria-labelledby="tab-theory">
+    <div class="do-first"><strong>Do this first:</strong> start with Chapter 1 — it is free, with notes and exam questions. Then work through Chapters 2 to 10 in order.</div>
+    <div class="chapter-list">
+      <article class="chapter-row">
+        <span class="chapter-num free">1</span>
+        <div class="chapter-body">
+          <h4>Types &amp; Components of Computer Systems</h4>
+          <p>Hardware and software — what computers are made of and how the parts work together.</p>
+          <div class="chapter-links">
+            <a href="ict_notes.html#ch1">Open Chapter 1 notes &rarr;</a>
+            <a href="/pdfs/ict-0417-chapter-01.pdf">Download PDF (37 pages) &rarr;</a>
+            <span class="badge badge-free">Free — no sign-in needed</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">2</span>
+        <div class="chapter-body">
+          <h4>Input &amp; Output Devices</h4>
+          <p>Keyboards, mice, screens and printers — how data goes in and out of a computer.</p>
+          <div class="chapter-links">
+            <a href="ict_notes.html#ch2">Open Chapter 2 notes &rarr;</a>
+            <a href="/pdfs/ict-0417-chapter-02.pdf">Download PDF (77 pages) &rarr;</a>
+            <span class="badge badge-lock">&#128274; Sign in required</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">3</span>
+        <div class="chapter-body">
+          <h4>Storage Devices &amp; Media</h4>
+          <p>Hard drives, SSDs, USB and cloud — where data lives and how it is stored.</p>
+          <div class="chapter-links">
+            <a href="ict_notes.html#ch3">Open Chapter 3 notes &rarr;</a>
+            <a href="/pdfs/ict-0417-chapter-03.pdf">Download PDF (53 pages) &rarr;</a>
+            <span class="badge badge-lock">&#128274; Sign in required</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">4</span>
+        <div class="chapter-body">
+          <h4>Networks &amp; the Effects of Using Them</h4>
+          <p>LANs, the internet, and what networks do to us.</p>
+          <div class="chapter-links">
+            <a href="ict_notes.html#ch4">Open Chapter 4 notes &rarr;</a>
+            <a href="/pdfs/ict-0417-chapter-04.pdf">Download PDF (56 pages) &rarr;</a>
+            <span class="badge badge-lock">&#128274; Sign in required</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">5</span>
+        <div class="chapter-body">
+          <h4>The Effects of Using IT</h4>
+          <p>How IT changes work, health and everyday life.</p>
+          <div class="chapter-links">
+            <a href="ict_notes.html#ch5">Open Chapter 5 notes &rarr;</a>
+            <a href="/pdfs/ict-0417-chapter-05.pdf">Download PDF (50 pages) &rarr;</a>
+            <span class="badge badge-lock">&#128274; Sign in required</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">6</span>
+        <div class="chapter-body">
+          <h4>ICT Applications</h4>
+          <p>ICT at work — banks, shops, hospitals, schools and more.</p>
+          <div class="chapter-links">
+            <a href="ict_notes.html#ch6">Open Chapter 6 notes &rarr;</a>
+            <a href="/pdfs/ict-0417-chapter-06.pdf">Download PDF (47 pages) &rarr;</a>
+            <span class="badge badge-lock">&#128274; Sign in required</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">7</span>
+        <div class="chapter-body">
+          <h4>The Systems Life Cycle</h4>
+          <p>How a new computer system is planned, built, tested and checked.</p>
+          <div class="chapter-links">
+            <a href="ict_notes.html#ch7">Open Chapter 7 notes &rarr;</a>
+            <a href="/pdfs/ict-0417-chapter-07.pdf">Download PDF (61 pages) &rarr;</a>
+            <span class="badge badge-lock">&#128274; Sign in required</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">8</span>
+        <div class="chapter-body">
+          <h4>Safety &amp; Security</h4>
+          <p>Keeping data safe — passwords, malware and the law.</p>
+          <div class="chapter-links">
+            <a href="ict_notes.html#ch8">Open Chapter 8 notes &rarr;</a>
+            <a href="/pdfs/ict-0417-chapter-08.pdf">Download PDF (64 pages) &rarr;</a>
+            <span class="badge badge-lock">&#128274; Sign in required</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">9</span>
+        <div class="chapter-body">
+          <h4>Audiences</h4>
+          <p>Who a document or screen is for — and who owns the software.</p>
+          <div class="chapter-links">
+            <a href="ict_notes.html#ch9">Open Chapter 9 notes &rarr;</a>
+            <a href="/pdfs/ict-0417-chapter-09.pdf">Download PDF (50 pages) &rarr;</a>
+            <span class="badge badge-lock">&#128274; Sign in required</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="chapter-row">
+        <span class="chapter-num">10</span>
+        <div class="chapter-body">
+          <h4>Communication</h4>
+          <p>Email, the web and video calls — how we communicate.</p>
+          <div class="chapter-links">
+            <a href="ict_notes.html#ch10">Open Chapter 10 notes &rarr;</a>
+            <a href="/pdfs/ict-0417-chapter-10.pdf">Download PDF (47 pages) &rarr;</a>
+            <span class="badge badge-lock">&#128274; Sign in required</span>
+          </div>
+        </div>
+      </article>
+    </div>
+    <p class="order-note">Work through chapters in order — each chapter builds on the one before it. Every chapter has notes, a recap and exam questions.</p>
+  </section>
+
+  <!-- ============ PRACTICAL ============ -->
+  <section class="tab-panel" id="panel-practical" role="tabpanel" aria-labelledby="tab-practical">
+    <div class="do-first"><strong>Do this first:</strong> learn the foundation skills (Sections 11–16) — you use them in every practical task. Then work through Paper 2, then Paper 3.</div>
+
+    <div class="paper-group">
+      <h3>Paper 2 — Document Production, Databases &amp; Presentations</h3>
+      <p>2h 15m · 70 marks · 30% of your grade. Sections 17–19.</p>
+      <div class="chapter-list">
+        <article class="chapter-row">
+          <span class="chapter-num">17</span>
+          <div class="chapter-body">
+            <h4>Document Production</h4>
+            <p>Word processing — page layout, formatting, find and replace.</p>
+            <div class="chapter-links">
+              <a href="ict_practical.html#sec-17">Open Section 17 &rarr;</a>
+              <span class="badge badge-lock">&#128274; Sign in required</span>
+            </div>
+          </div>
+        </article>
+        <article class="chapter-row">
+          <span class="chapter-num">18</span>
+          <div class="chapter-body">
+            <h4>Databases</h4>
+            <p>Databases — tables, keys, queries and reports.</p>
+            <div class="chapter-links">
+              <a href="ict_practical.html#sec-18">Open Section 18 &rarr;</a>
+              <span class="badge badge-lock">&#128274; Sign in required</span>
+            </div>
+          </div>
+        </article>
+        <article class="chapter-row">
+          <span class="chapter-num">19</span>
+          <div class="chapter-body">
+            <h4>Presentations</h4>
+            <p>Presentations — master slides, animation and slide shows.</p>
+            <div class="chapter-links">
+              <a href="ict_practical.html#sec-19">Open Section 19 &rarr;</a>
+              <span class="badge badge-lock">&#128274; Sign in required</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="paper-group">
+      <h3>Paper 3 — Spreadsheets &amp; Website Authoring</h3>
+      <p>2h 15m · 70 marks · 30% of your grade. Sections 20–21.</p>
+      <div class="chapter-list">
+        <article class="chapter-row">
+          <span class="chapter-num">20</span>
+          <div class="chapter-body">
+            <h4>Spreadsheets</h4>
+            <p>Spreadsheets — formulas, functions and charts.</p>
+            <div class="chapter-links">
+              <a href="ict_practical.html#sec-20">Open Section 20 &rarr;</a>
+              <span class="badge badge-lock">&#128274; Sign in required</span>
+            </div>
+          </div>
+        </article>
+        <article class="chapter-row">
+          <span class="chapter-num">21</span>
+          <div class="chapter-body">
+            <h4>Website Authoring</h4>
+            <p>Website authoring — HTML and CSS web pages.</p>
+            <div class="chapter-links">
+              <a href="ict_practical.html#sec-21">Open Section 21 &rarr;</a>
+              <span class="badge badge-lock">&#128274; Sign in required</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="paper-group">
+      <h3>Foundations — Sections 11–16</h3>
+      <p>Skills used inside Papers 2 and 3. Learn these first.</p>
+      <div class="chapter-list">
+        <article class="chapter-row">
+          <span class="chapter-num">11</span>
+          <div class="chapter-body">
+            <h4>File Management</h4>
+            <p>Folders, file names and file formats.</p>
+            <div class="chapter-links">
+              <a href="ict_practical.html#sec-11">Open Section 11 &rarr;</a>
+              <span class="badge badge-lock">&#128274; Sign in required</span>
+            </div>
+          </div>
+        </article>
+        <article class="chapter-row">
+          <span class="chapter-num">12</span>
+          <div class="chapter-body">
+            <h4>Images</h4>
+            <p>Placing, resizing, cropping and editing images.</p>
+            <div class="chapter-links">
+              <a href="ict_practical.html#sec-12">Open Section 12 &rarr;</a>
+              <span class="badge badge-lock">&#128274; Sign in required</span>
+            </div>
+          </div>
+        </article>
+        <article class="chapter-row">
+          <span class="chapter-num">13</span>
+          <div class="chapter-body">
+            <h4>Layout</h4>
+            <p>Documents, tables, headers and footers.</p>
+            <div class="chapter-links">
+              <a href="ict_practical.html#sec-13">Open Section 13 &rarr;</a>
+              <span class="badge badge-lock">&#128274; Sign in required</span>
+            </div>
+          </div>
+        </article>
+        <article class="chapter-row">
+          <span class="chapter-num">14</span>
+          <div class="chapter-body">
+            <h4>Styles</h4>
+            <p>Styles and house styles — keeping work consistent.</p>
+            <div class="chapter-links">
+              <a href="ict_practical.html#sec-14">Open Section 14 &rarr;</a>
+              <span class="badge badge-lock">&#128274; Sign in required</span>
+            </div>
+          </div>
+        </article>
+        <article class="chapter-row">
+          <span class="chapter-num">15</span>
+          <div class="chapter-body">
+            <h4>Proofing</h4>
+            <p>Spell check, validation and proofreading.</p>
+            <div class="chapter-links">
+              <a href="ict_practical.html#sec-15">Open Section 15 &rarr;</a>
+              <span class="badge badge-lock">&#128274; Sign in required</span>
+            </div>
+          </div>
+        </article>
+        <article class="chapter-row">
+          <span class="chapter-num">16</span>
+          <div class="chapter-body">
+            <h4>Graphs and Charts</h4>
+            <p>Charts — choosing, labelling and formatting them.</p>
+            <div class="chapter-links">
+              <a href="ict_practical.html#sec-16">Open Section 16 &rarr;</a>
+              <span class="badge badge-lock">&#128274; Sign in required</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="paper-group">
+      <h3>Step-by-step guides</h3>
+      <p>Full guides for the three practical tools — open to everyone.</p>
+      <div class="cards">
+        <article class="res-card">
+          <h4>Spreadsheets Guide — Microsoft Excel</h4>
+          <p>Step-by-step Excel guide: formulas, functions, lookups and charts (Section 20).</p>
+          <div class="meta">Practical guide · Section 20</div>
+          <a class="card-link" href="excel_spreadsheet_guide.html">Open Excel guide &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+        <article class="res-card">
+          <h4>Database Guide — Microsoft Access</h4>
+          <p>Step-by-step Access guide: tables, data types, keys, queries and reports (Section 18).</p>
+          <div class="meta">Practical guide · Section 18</div>
+          <a class="card-link" href="ms_access_database_guide.html">Open Access guide &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+        <article class="res-card">
+          <h4>HTML &amp; CSS Guide — Website Authoring</h4>
+          <p>HTML and CSS guide: page structure, styles, tables and hyperlinks (Section 21).</p>
+          <div class="meta">Practical guide · Section 21</div>
+          <a class="card-link" href="web-html-css.html">Open HTML &amp; CSS guide &rarr;</a>
+          <span class="badge badge-free">Free — no sign-in needed</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PAST PAPERS ============ -->
+  <section class="tab-panel" id="panel-past-papers" role="tabpanel" aria-labelledby="tab-past-papers">
+    <div class="do-first"><strong>Do this first:</strong> start with the most recent year. Do the Question Paper first, then check the Mark Scheme.</div>
+    <div class="cards">
+      <article class="res-card">
+        <h4>Past Papers — ICT &amp; Computer Science</h4>
+        <p>Past papers and mark schemes from the SrWL resource library. Papers from March, May/June and October/November sessions.</p>
+        <div class="meta"><b>714 papers</b> · ICT 251 · Computer Science 284 · Other 179 · Years 2019–2026</div>
+        <a class="card-link" href="pastpaper_index.html">Open Past Papers &rarr;</a>
+        <span class="badge badge-free">Free — no sign-in needed</span>
+      </article>
+    </div>
+    <div class="tip-card">
+      <strong>Tip for practical papers:</strong> Practical papers need Source Files — download them from the paper&rsquo;s row before you start.
+    </div>
+  </section>
+
+  <!-- ============ RESOURCES ============ -->
+  <section class="tab-panel" id="panel-resources" role="tabpanel" aria-labelledby="tab-resources">
+    <div class="do-first"><strong>Do this first:</strong> download the syllabus — it tells you exactly what the exam tests. Then use the revision notes and videos to practise.</div>
+    <div class="cards">
+      <article class="res-card">
+        <h4>Syllabus 2026–2028 — Cambridge IGCSE ICT (0417)</h4>
+        <p>Official syllabus: subject content Sections 1–21 and the Paper 1, 2 and 3 assessment.</p>
+        <div class="meta"><b>PDF</b> · 45 pages · 2026–2028</div>
+        <a class="card-link" href="/pdfs/ict-0417-syllabus-2026-2028.pdf">Download syllabus PDF &rarr;</a>
+        <span class="badge badge-free">Free — no sign-in needed</span>
+      </article>
+
+      <article class="res-card">
+        <h4>Theory Revision — Chapters 1–10</h4>
+        <p>Complete theory revision notes covering all 10 theory chapters.</p>
+        <div class="meta"><b>10 chapters</b> · Revision notes</div>
+        <a class="card-link" href="igcse-ict-theory-revision.html">Open revision notes &rarr;</a>
+        <span class="badge badge-free">Free — no sign-in needed</span>
+      </article>
+
+      <article class="res-card">
+        <h4>YouTube Channel — SrWL Learning</h4>
+        <p>Lessons and revision Shorts on the SrWL Learning Channel.</p>
+        <div class="meta">Video lessons · YouTube</div>
+        <a class="card-link" href="https://www.youtube.com/@SayarWaiLin">Watch on YouTube &rarr;</a>
+        <span class="badge badge-free">Free — no sign-in needed</span>
+      </article>
+
+      <article class="res-card">
+        <h4>Python Basics — Video Lessons</h4>
+        <p>Python Basics video lessons on the SrWL Learning Channel.</p>
+        <div class="meta">Video lessons · YouTube</div>
+        <a class="card-link" href="https://www.youtube.com/playlist?list=PLftf_oM79wYM">Watch the playlist &rarr;</a>
+        <span class="badge badge-free">Free — no sign-in needed</span>
+      </article>
+
+      <article class="res-card">
+        <h4>Questions? Ask your teacher</h4>
+        <p>Contact your teacher on Telegram for help with this course.</p>
+        <div class="meta">Telegram</div>
+        <a class="card-link" href="https://t.me/SayarWaiLin">Telegram @SayarWaiLin &rarr;</a>
+        <span class="badge badge-free">Free — no sign-in needed</span>
+      </article>
+    </div>
+  </section>
+
+  <div class="access-note">
+    <strong>No paid tier.</strong> Everything here is free. Some resources are open to everyone, and course notes and practical pages need a free student sign-in — your teacher approves your account, then you open the course from your student dashboard.
+  </div>
+
+  <div class="howto">
+    <h2>How to get access</h2>
+    <ol>
+      <li><strong>Free resources</strong> open to everyone — no account needed.</li>
+      <li><strong>Sign-in resources</strong> (marked &#128274;) need a free student account: sign in with Google on the <a href="login.html">Student sign-in</a> page.</li>
+      <li>Your teacher approves your account. Then open your course from the <a href="student-dashboard.html">student dashboard</a>.</li>
+      <li>Questions? Contact your teacher on Telegram: <a href="https://t.me/SayarWaiLin">@SayarWaiLin</a>.</li>
+    </ol>
+  </div>
+</main>
+
+<footer>
+  <p><strong>SrWL Learning</strong> — Sayar Wai Lin Htet</p>
+  <p><a href="index.html">Home</a> · <a href="my_course.html">Courses</a> · <a href="resources.html">Resources</a> · <a href="login.html">Student sign in</a> · <a href="https://t.me/SayarWaiLin">Telegram @SayarWaiLin</a></p>
+  <p>www.wailinhtet.com</p>
+</footer>
+
+<script>
+(function () {
+  var tabs = ['theory', 'practical', 'past-papers', 'resources'];
+  var buttons = {};
+  var panels = {};
+  tabs.forEach(function (id) {
+    buttons[id] = document.getElementById('tab-' + id);
+    panels[id] = document.getElementById('panel-' + id);
+  });
+
+  function activate(id, updateHash) {
+    if (tabs.indexOf(id) === -1) id = 'theory';
+    tabs.forEach(function (t) {
+      var selected = (t === id);
+      buttons[t].setAttribute('aria-selected', selected ? 'true' : 'false');
+      panels[t].classList.toggle('active', selected);
+    });
+    if (updateHash) {
+      try {
+        history.replaceState(null, '', '#' + id);
+      } catch (e) {
+        location.hash = id;
+      }
+    }
+  }
+
+  tabs.forEach(function (id) {
+    buttons[id].addEventListener('click', function () { activate(id, true); });
+  });
+
+  function fromHash() {
+    var h = (location.hash || '').replace('#', '');
+    activate(tabs.indexOf(h) === -1 ? 'theory' : h, false);
+  }
+
+  window.addEventListener('hashchange', fromHash);
+  document.body.classList.add('tabs-on');
+  fromHash();
+})();
+</script>
+</body>
+</html>
