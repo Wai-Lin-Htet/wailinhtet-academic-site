@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Edexcel IGCSE Computer Science 4CP0 · Theory &amp; Practical Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfbfd; --surface:#ffffff; --surface-2:#f5f5f7; --ink:#1d1d1f; --muted:#6e6e73; --line:rgba(0,0,0,.08);
+  --p1:#0071e3; --p1-soft:rgba(0,113,227,.08); --p2:#ff9500; --p2-soft:rgba(255,149,0,.1); --mm:#34c759; --mm-soft:rgba(52,199,89,.1);
+  --code-bg:#1d1d1f; --code-ink:#f5f5f7; --code-line:#3a3a3c; --code-tag:#98989d;
+  --ok:#34c759; --bad:#d70015;
+  --f-display:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --f-body:'Inter','Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  --f-serif:'Newsreader',serif;
+  --f-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 2px 10px rgba(0,0,0,.03),0 12px 30px rgba(0,0,0,.06);
+  --radius-pill:980px;
+  color-scheme:light;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px);-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.12;margin:0;letter-spacing:-.03em}
+p{margin:0 0 1em}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--p1);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(251,251,253,.8);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;padding-top:10px;padding-bottom:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:600;font-size:.95rem;letter-spacing:-.02em;margin-right:auto;color:var(--ink)}
+.brand .dot{width:7px;height:7px;border-radius:50%;background:#34c759;display:inline-block}
+.brand .chip{font-family:var(--f-mono);font-weight:500;font-size:.72rem;background:var(--ink);color:var(--bg);padding:3px 8px;border-radius:6px;letter-spacing:0}
+.tabs{display:flex;gap:4px;overflow-x:auto;order:3;width:100%;scrollbar-width:none;padding-bottom:2px}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap;padding:7px 14px;border-radius:var(--radius-pill);font-weight:500;font-size:.85rem;color:var(--muted);border:1px solid transparent}
+.tabs a:hover{color:var(--ink);background:var(--surface-2)}
+.tabs a[aria-current="page"]{color:#fff;background:var(--ink)}
+.tabs svg{width:13px;height:13px;flex:none}
+.tools{display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-pill);padding:8px 16px;font-weight:500;font-size:.85rem;text-decoration:none;transition:all .2s cubic-bezier(.16,1,.3,1)}
+.btn:hover{border-color:#a1a1a6}
+.btn.solid{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.solid:hover{background:#000;transform:scale(1.02)}
+.btn.big{padding:12px 22px;font-size:.9rem}
+.btn svg{width:16px;height:16px}
+@media(max-width:520px){.brand .bt{display:none}.btn{padding:7px 13px}}
+@media(min-width:900px){.tabs{order:0;width:auto}.brand{margin-right:0}.tools{margin-left:auto}}
+
+/* ---------- home ---------- */
+.hero{padding:44px 0 40px}
+.hero .wrap{display:grid;gap:36px;align-items:center}
+@media(min-width:900px){.hero .wrap{grid-template-columns:1.15fr .85fr;gap:56px}}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:600;letter-spacing:.03em;padding:.35rem .85rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-pill);color:var(--muted);margin-bottom:1.25rem;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing:-.04em;line-height:1.05;background:linear-gradient(180deg,#1d1d1f 0%,#434344 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1 span{display:block;-webkit-text-fill-color:var(--p1);color:var(--p1);background:none}
+.hero .sub{font-family:var(--f-serif);font-style:italic;font-size:1.2rem;max-width:34em;color:var(--muted);margin:18px 0 26px;font-weight:400;line-height:1.4}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero .by{margin-top:22px;font-size:.85rem;color:var(--muted)}
+.byte{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
+.byte h2{font-size:1.05rem;font-weight:600;margin-bottom:4px}
+.byte .hint{color:var(--muted);font-size:.85rem;margin-bottom:18px}
+.bits{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
+.bit{border:1.5px solid var(--line);background:var(--surface-2);border-radius:10px;padding:10px 0 6px;text-align:center;font-family:var(--f-mono);font-size:1.5rem;font-weight:500;line-height:1}
+.bit small{display:block;margin-top:8px;font-size:.66rem;color:var(--muted);font-weight:400}
+.bit[aria-checked="true"]{background:var(--p1);border-color:var(--p1);color:#fff}
+.bit[aria-checked="true"] small{color:rgba(255,255,255,.8)}
+.readout{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.readout div{background:var(--surface-2);border-radius:12px;padding:10px 12px}
+.readout dt{font-size:.74rem;color:var(--muted)}
+.readout dd{margin:2px 0 0;font-family:var(--f-mono);font-size:1.35rem;font-weight:500;word-break:break-all}
+
+.sec{padding:36px 0}
+.sec .section-eyebrow{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--p1);margin-bottom:.4rem}
+.sec h2{font-size:clamp(1.6rem,3.2vw,2.1rem);font-weight:700;letter-spacing:-.03em}
+.sec .lede{color:var(--muted);max-width:44em;margin:10px 0 26px}
+.papers{display:grid;gap:20px}
+@media(min-width:900px){.papers{grid-template-columns:1.1fr 1fr}}
+.paper{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:all .25s cubic-bezier(.16,1,.3,1)}
+.paper:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.paper header{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:6px}
+.paper h3{font-size:1.35rem;font-weight:700}
+.paper.p1 h3{color:var(--p1)}.paper.p2 h3{color:var(--p2)}
+.paper .meta{color:var(--muted);font-size:.88rem;margin-top:6px}
+.chlist{list-style:none;margin:0;padding:0;flex:1}
+.chlist li{border-bottom:1px solid var(--line)}
+.chlist li:last-child{border-bottom:0}
+.chrow{display:grid;grid-template-columns:44px 1fr;gap:4px 12px;width:100%;text-align:left;background:none;border:0;padding:14px 4px;border-radius:10px;align-items:baseline}
+.chrow:hover{background:var(--surface-2)}
+.chrow .n{font-family:var(--f-display);font-weight:700;font-size:1.6rem;line-height:1;color:var(--p1)}
+.p2 .chrow .n{color:var(--p2)}
+.chrow .t{font-weight:600;font-size:1rem}
+.chrow .d{grid-column:2;color:var(--muted);font-size:.88rem;line-height:1.45}
+.paper .btn{margin-top:14px;align-self:flex-start}
+.mmband{margin-top:20px;background:var(--mm-soft);border:1px solid rgba(52,199,89,.3);border-radius:20px;padding:22px 24px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.mmband h3{font-size:1.25rem;font-weight:700;color:var(--mm)}
+.mmband p{margin:4px 0 0;color:var(--ink);max-width:38em}
+footer.foot{padding:32px 0 60px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);margin-top:24px;text-align:center}
+
+/* ---------- Firebase login gate + free Topic 1 preview (v2 pattern) ---------- */
+/* Signed-out / pending visitors read Topic 1 free. Topics 2-6 and the
+   Practical sections stay locked until Google sign-in + teacher approval. */
+.free-banner{display:none;align-items:center;justify-content:center;gap:14px;position:sticky;top:0;z-index:60;background:#e8f1fd;color:var(--ink);border-bottom:1px solid rgba(0,113,227,.35);padding:10px 16px;text-align:center;font-weight:600;font-size:.92rem}
+.free-banner .free-banner-btn{flex:0 0 auto;background:var(--p1);color:#fff;border:none;padding:8px 16px;border-radius:980px;cursor:pointer;font-weight:600;font-size:.88rem;white-space:nowrap}
+@media (max-width:640px){.free-banner{flex-wrap:wrap;gap:8px}}
+.auth-name{font-weight:600;font-size:.85rem;color:var(--ink);white-space:nowrap}
+/* Locked topics: hide everything inside except the lock panel. */
+body.chapters-locked .chapter[data-ch]:not([data-ch="1"]) > :not(.chapter-lock){display:none}
+.chapter-lock{display:none}
+body.chapters-locked .chapter-lock{display:block;text-align:center;background:var(--surface);border:2px dashed var(--line);border-radius:16px;padding:44px 24px;margin:24px 0}
+.chapter-lock .lock-icon{font-size:2.4rem;line-height:1}
+.chapter-lock h2{margin:10px 0 6px;font-size:1.4rem;color:var(--p1)}
+.chapter-lock p{color:var(--muted);max-width:56ch;margin:0 auto 18px}
+.chapter-lock .lock-btn{background:var(--p1);color:#fff;border:none;padding:12px 22px;border-radius:980px;cursor:pointer;font-weight:600;font-size:1rem}
+.chapter-lock .lock-btn:hover{background:#0062c4}
+/* Lock marks on chapter links while chapters are locked. */
+body.chapters-locked .locked-link::after{content:" \1F512"}
+/* Free preview section (public — visible in every auth state, never locked). */
+.vid{position:relative;aspect-ratio:16/9;margin:16px 0 4px;border-radius:14px;overflow:hidden;background:#000}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.preview-samples{margin-top:20px}
+/* Hard-error overlay (shown only if Firebase fails or the account check fails). */
+.auth-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(29,29,31,.55);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px}
+.auth-card{width:100%;max-width:400px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--p1);border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.25);padding:28px}
+.auth-card h3{font-size:1.4rem;font-weight:700}
+.auth-msg{font-size:.92rem;padding:10px 12px;border-radius:10px;display:none;background:rgba(215,0,21,.08);color:var(--bad);margin-top:12px}
+.auth-msg.show{display:block}
+.auth-submit{margin-top:16px;background:var(--p1);color:#fff;border:none;padding:12px 20px;border-radius:980px;cursor:pointer;font-weight:600;font-size:.95rem}
+.auth-note{margin-top:16px;font-size:.86rem;color:var(--muted);line-height:1.5}
+@media print{.free-banner,.chapter-lock{display:none!important}}
+
+/* ---------- reader (Paper 1 / Paper 2) ---------- */
+.viewhead{padding:34px 0 8px}
+.viewhead h1{font-size:clamp(1.9rem,4.6vw,2.8rem);font-weight:700;letter-spacing:-.035em}
+.viewhead p{color:var(--muted);max-width:42em;margin:8px 0 0}
+.reader{display:grid;gap:20px;padding:20px 0 60px}
+@media(min-width:960px){.reader{grid-template-columns:250px minmax(0,1fr);gap:40px}}
+.chapnav{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+@media(min-width:960px){.chapnav{flex-direction:column;position:sticky;top:calc(env(safe-area-inset-top,0px) + 74px);align-self:start;overflow:visible}}
+.chapnav a{display:flex;gap:10px;align-items:baseline;text-decoration:none;white-space:nowrap;padding:9px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);font-weight:500;font-size:.92rem}
+@media(min-width:960px){.chapnav a{white-space:normal}}
+.chapnav a b{font-family:var(--f-display);font-weight:700;font-size:1.02rem;color:var(--accent)}
+.chapnav a:hover{border-color:var(--accent)}
+.chapnav a[aria-current="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.chapnav a[aria-current="true"] b{color:inherit}
+#view-p1{--accent:var(--p1);--accent-soft:var(--p1-soft)}
+#view-p2{--accent:var(--p2);--accent-soft:var(--p2-soft)}
+.chapter{min-width:0}
+.chead{display:flex;gap:18px;align-items:flex-start;padding:8px 0 22px;border-bottom:2px solid var(--ink);margin-bottom:8px}
+.chead .num{font-family:var(--f-display);font-weight:800;font-size:clamp(3.2rem,8vw,5.4rem);line-height:.8;color:var(--accent);letter-spacing:-.06em}
+.chead h2{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:700;letter-spacing:-.035em}
+.chead p{color:var(--muted);margin:8px 0 0;max-width:40em}
+.chapter h3{font-size:1.35rem;font-weight:700;margin:48px 0 12px;letter-spacing:-.025em}
+.chapter h3 small{font-family:var(--f-mono);font-size:.76rem;font-weight:500;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:6px;margin-right:10px;letter-spacing:0;vertical-align:.18em}
+.chapter h4{font-size:1.05rem;font-weight:600;margin:26px 0 6px;letter-spacing:-.01em}
+.chapter p,.chapter li{max-width:70ch}
+.chapter ul,.chapter ol{padding-left:1.25em;margin:0 0 1em}
+.chapter li{margin:.3em 0}
+.chapter li::marker{color:var(--accent)}
+.chapter code{font-family:var(--f-mono);font-size:.88em;background:var(--surface-2);border:1px solid var(--line);padding:1px 6px;border-radius:5px}
+.chapter pre code{background:none;border:0;padding:0;font-size:inherit}
+.chapter strong{font-weight:600}
+.scroll{overflow-x:auto;margin:14px 0 22px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface-2);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.mono,th.mono{font-family:var(--f-mono);font-size:.88rem}
+table.tt td,table.tt th{text-align:center;font-family:var(--f-mono)}
+table.tt .out{font-weight:700;color:var(--accent)}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 14px 14px 0;padding:14px 18px;margin:20px 0;max-width:74ch}
+.callout p:last-child,.callout ul:last-child{margin-bottom:0}
+.callout .lab{display:block;font-weight:700;font-size:.9rem;margin-bottom:4px}
+.callout.warn{border-color:var(--bad);background:rgba(215,0,21,.06)}
+.terms{display:grid;gap:10px;margin:16px 0 22px}
+@media(min-width:720px){.terms{grid-template-columns:1fr 1fr}}
+.terms div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px}
+.terms dt{font-weight:700;color:var(--accent)}
+.terms dd{margin:2px 0 0;font-size:.94rem}
+pre.code{position:relative;background:var(--code-bg);color:var(--code-ink);border:1px solid var(--code-line);border-radius:14px;padding:34px 18px 16px;margin:14px 0 22px;overflow-x:auto;font-family:var(--f-mono);font-size:.86rem;line-height:1.7;tab-size:4}
+pre.code::before{content:attr(data-lang);position:absolute;top:9px;left:18px;font-size:.72rem;color:var(--code-tag);letter-spacing:.02em}
+.pair{display:grid;gap:0 16px}
+@media(min-width:900px){.pair{grid-template-columns:1fr 1fr}}
+.pair pre.code{margin-top:14px}
+.tree{list-style:none;padding:0!important;margin:14px 0 22px}
+.tree ul{list-style:none;padding-left:22px!important;margin:0;border-left:2px solid var(--line)}
+.tree li{position:relative;margin:6px 0!important;max-width:none!important}
+.tree .node{display:inline-block;background:var(--surface);border:1.5px solid var(--accent);border-radius:8px;padding:4px 12px;font-size:.92rem;font-weight:500}
+.tree > li > .node{background:var(--accent);color:#fff;font-weight:600}
+figure.diagram{margin:16px 0 24px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;overflow-x:auto}
+figure.diagram svg{display:block;margin:0 auto;max-width:100%;height:auto}
+figure.diagram figcaption{color:var(--muted);font-size:.86rem;margin-top:8px;text-align:center}
+.svgt{fill:var(--ink);font-family:var(--f-body);font-size:13px}
+.svgs{fill:var(--surface);stroke:var(--accent);stroke-width:2}
+.svgl{stroke:var(--ink);stroke-width:1.6;fill:none}
+.svgf{fill:var(--ink)}
+.lab-box{background:var(--surface);border:1.5px solid var(--accent);border-radius:18px;padding:18px 20px;margin:22px 0}
+.lab-box h4{margin:0 0 4px!important}
+.lab-box .hint{color:var(--muted);font-size:.9rem;margin-bottom:12px}
+.conv{display:grid;gap:12px}
+@media(min-width:720px){.conv{grid-template-columns:repeat(3,1fr)}}
+.conv label{font-size:.82rem;font-weight:600;display:block;margin-bottom:4px}
+.conv input{font-family:var(--f-mono)}
+.note{color:var(--muted);font-size:.9rem;margin:10px 0 0}
+.sortbox{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.cell{min-width:52px;padding:12px 8px;text-align:center;font-family:var(--f-mono);font-size:1.1rem;font-weight:500;border:2px solid var(--line);border-radius:12px;background:var(--surface-2)}
+.cell.cmp{border-color:var(--accent);background:var(--accent-soft)}
+.cell.swp{border-color:var(--bad);background:rgba(215,0,21,.08)}
+.cell.done{border-color:var(--ok);background:rgba(52,199,89,.1)}
+.rowbtns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.rowbtns input{max-width:280px}
+.gates{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));margin-top:14px}
+.gate{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.gate svg{width:100%;max-width:130px;height:auto;color:var(--ink)}
+.gate b{display:block;font-family:var(--f-display);font-size:1rem}
+.gate .q{display:inline-block;margin-top:6px;font-family:var(--f-mono);font-weight:500;min-width:36px;padding:3px 10px;border-radius:8px;background:var(--line);color:var(--ink)}
+.gate .q.on{background:var(--accent);color:#fff}
+.toggles{display:flex;gap:10px;flex-wrap:wrap}
+.tg{display:inline-flex;align-items:center;gap:10px;border:1.5px solid var(--line);background:var(--surface-2);border-radius:12px;padding:8px 16px;font-family:var(--f-mono);font-weight:500}
+.tg[aria-checked="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:56px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap}
+.pager a{text-decoration:none}
+.pager .sp{flex:1}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body class="chapters-locked">
+
+<!-- FREE PREVIEW BANNER — shown while Topics 2-6 and the Practical sections are locked. -->
+<div class="free-banner" id="freeBanner">
+  <span id="freeBannerMsg">📖 Topic 1 is free — sign in with Google to unlock Topics 2–6 and the Practical sections.</span>
+  <button type="button" class="free-banner-btn" id="freeBannerBtn">Sign in with Google</button>
+</div>
+
+<!-- FIREBASE LOGIN GATE — the overlay below is shown only for hard errors
+     (Firebase not configured / account check failed). Topic 1 is free to
+     read; Topics 2-6 and the Practical sections are locked per-topic until
+     Google sign-in + teacher approval. No passwords are stored on this page. -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-card">
+    <h3>Student Login 📓</h3>
+    <div class="auth-msg show" id="authStatusMsg">Checking your Google sign-in…</div>
+    <button type="button" class="auth-submit" id="authGoLoginBtn" style="display:none;">Go to Login</button>
+    <p class="auth-note">These notes are for approved SrWL Learning students. Sign in with Google on the login page — your teacher approves your account, then your courses appear on your dashboard. Your name and login time are automatically logged in the attendance list.</p>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="https://wailinhtet.com/"><span class="dot"></span> <span class="bt">Wai Lin Htet</span> <span class="chip">4CP0</span></a>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#home" data-tab="home">Topic list</a>
+      <a href="#p1" data-tab="p1">Paper 1 notes</a>
+      <a href="#p2" data-tab="p2">Paper 2 practice</a>
+    </nav>
+    <div class="tools">
+      <a class="btn" href="https://wailinhtet.com/my_course.html">All courses</a>
+      <span id="authUserName" class="auth-name" hidden></span><button class="btn solid" id="authBtn" type="button">Sign in with Google</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- =============== HOME =============== -->
+<section id="view-home">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <div class="hero-badge"><span>Pearson Edexcel IGCSE &bull; 4CP0 &bull; Theory &amp; Practical &bull;</span></div>
+        <h1>Edexcel IGCSE Computer Science <span>Theory &amp; Practical</span></h1>
+        <p class="sub">Theory notes for all six topics, plus Paper 2 Python practice — writing, debugging, algorithms, pseudocode and trace tables. Topic 1 is free — sign in with Google to unlock Topics 2–6 and the Practical sections.</p>
+        <p class="note" style="margin-top:-12px"><strong>Exam map:</strong> Paper 1 — 2 h · 80 marks · 50% (written exam) · Paper 2 — 3 h · 80 marks · 50% (practical exam on a computer, Python) · Grading 9–1 · Exam target: May/June 2027</p>
+        <div class="cta">
+          <button class="btn solid big" type="button" data-go="p1"><span>Start with Topic 1 — it&rsquo;s free</span> <span>&rarr;</span></button>
+          <button class="btn big" type="button" id="seeList">See the topic list</button>
+        </div>
+        <p class="by">Edexcel 4CP0 · Notes by Tr. Wai Lin Htet</p>
+      </div>
+      <div class="byte">
+        <h2>How a computer sees a number</h2>
+        <p class="hint">Tap the bits. Turn them on and off and watch the value change.</p>
+        <div class="bits" id="bits" role="group" aria-label="Eight bits"></div>
+        <dl class="readout">
+          <div><dt>Denary</dt><dd id="rDen">65</dd></div>
+          <div><dt>Hex</dt><dd id="rHex">41</dd></div>
+          <div><dt>ASCII character</dt><dd id="rChr">A</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <section class="sec" id="free-preview">
+    <div class="wrap">
+      <div class="section-eyebrow">Free preview</div>
+      <h2>Try it before you sign in</h2>
+      <p class="lede">No sign-in needed for these — two video lessons and a sample from two topics, so you can see how the notes teach before you join.</p>
+      <div class="papers">
+        <article class="paper">
+          <header>
+            <h3>Pseudocode Revision Part 2</h3>
+            <p class="meta">Questions 4, 5 and 6 from the SrWL 100-mark Pseudocode Practice Paper, IGCSE Computer Science, with English voice-over and subtitles.</p>
+          </header>
+          <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/DgaPfTkrEi0" title="Pseudocode Revision Part 2" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe></div>
+          <a class="btn" href="https://www.youtube.com/watch?v=DgaPfTkrEi0" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+        </article>
+        <article class="paper">
+          <header>
+            <h3>Python Basics – Day 2</h3>
+            <p class="meta">Basic Operations, Conditionals and Loops.</p>
+          </header>
+          <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/eM9oH1uDIGE" title="Python Basics – Day 2" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe></div>
+          <a class="btn" href="https://www.youtube.com/watch?v=eM9oH1uDIGE" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+        </article>
+      </div>
+      <div class="papers preview-samples">
+        <article class="paper">
+          <header>
+            <h3>Pseudocode sample</h3>
+            <p class="meta">Free sample from Topic 1 — Problem Solving. A linear search, in pseudocode.</p>
+          </header>
+<pre class="code" data-lang="Pseudocode">FOR Index ← 1 TO 5
+    IF Names[Index] = "Aung" THEN
+        OUTPUT "Found at position ", Index
+    ENDIF
+NEXT Index</pre>
+        </article>
+        <article class="paper">
+          <header>
+            <h3>Python Basics sample</h3>
+            <p class="meta">Free sample from Topic 2 — Programming. Input, output and casting: input() always returns a string, so cast it before doing arithmetic.</p>
+          </header>
+<pre class="code" data-lang="Python">name = input("Name: ")
+age = int(input("Age: "))
+print("Hello", name)
+print("Next year you will be", age + 1)</pre>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="chapter-list">
+    <div class="wrap">
+      <div class="section-eyebrow">Curriculum</div>
+      <h2>Topic list</h2>
+      <p class="lede">Six topics and four Paper 2 practical sections, in one combined page. Topic 1 is free to read — sign in with Google to unlock Topics 2–6 and the Practical sections.</p>
+      <div class="papers">
+        <article class="paper p1">
+          <header>
+            <h3>Paper 1 · Principles of Computer Science</h3>
+            <p class="meta">2 h · 80 marks · 50% of the grade · written exam · all six topics</p>
+          </header>
+          <ul class="chlist" id="listP1"></ul>
+          <button class="btn solid" type="button" data-go="p1">Open Paper 1 notes</button>
+        </article>
+        <article class="paper p2">
+          <header>
+            <h3>Paper 2 · Application of Computational Thinking</h3>
+            <p class="meta">3 h · 80 marks · 50% of the grade · practical exam on a computer · Python</p>
+          </header>
+          <ul class="chlist" id="listP2"></ul>
+          <button class="btn solid" type="button" data-go="p2">Open Paper 2 practice</button>
+        </article>
+      </div>
+      <div class="mmband">
+        <div>
+          <h3>How to get access</h3>
+          <p>1) Sign in with Google on the login page. 2) Your teacher approves your account. 3) Your courses appear on your dashboard — open this page from there.</p>
+        </div>
+        <button class="btn solid" type="button" data-signin>Sign in with Google</button>
+      </div>
+    </div>
+  </section>
+</section>
+<!-- =============== PAPER 1 =============== -->
+<section id="view-p1" hidden>
+  <div class="wrap">
+    <div class="viewhead">
+      <h1>Paper 1 · Principles of Computer Science</h1>
+      <p>Theory notes for Topics 1 to 6. Each topic follows the syllabus order and ends with practice questions and model answers.</p>
+    </div>
+    <div class="reader" data-reader="p1">
+      <nav class="chapnav" aria-label="Paper 1 topics"></nav>
+      <div class="chapters">
+
+<!-- ======== TOPIC 1 ======== -->
+<article class="chapter" data-ch="1" data-title="Problem Solving" hidden>
+  <div class="chead"><div class="num">1</div><div><h2>Problem Solving</h2><p>What an algorithm is, how to break a problem down, and the four standard algorithms you must know: linear search, binary search, bubble sort and merge sort.</p></div></div>
+
+  <h3><small>1.1</small>Algorithms, decomposition and abstraction</h3>
+  <p>An <strong>algorithm</strong> is a set of precise, ordered steps that solves a problem or completes a task. A good algorithm is clear enough for someone (or a computer) to follow exactly, it always finishes, and it gives the correct answer for every allowed input.</p>
+  <p>Before you write any code, break the problem down:</p>
+  <dl class="terms">
+    <div><dt>Decomposition</dt><dd>Splitting a big problem into smaller sub-problems, each of which is easier to solve. For example, "build a quiz program" splits into: read the questions, ask each question, check the answer, keep the score, show the result.</dd></div>
+    <div><dt>Abstraction</dt><dd>Ignoring details that do not matter for the problem, and keeping only what is needed. A bus timetable app needs the route and the time; it does not need the colour of the bus.</dd></div>
+    <div><dt>Algorithmic thinking</dt><dd>Turning the sub-problems into a clear sequence of steps, in the right order, with decisions (selection) and repeats (iteration) where needed.</dd></div>
+  </dl>
+  <p>Algorithms are written as <strong>pseudocode</strong> or drawn as <strong>flowcharts</strong> before they are coded. Pseudocode uses plain English words with a fixed structure, so it is easy to read and easy to turn into any programming language.</p>
+  <h4>First pseudocode</h4>
+  <p>These are the words you will use again and again: <code>DECLARE</code> to name a variable, <code>←</code> to give it a value, <code>INPUT</code> to read a value, <code>OUTPUT</code> to show one, and <code>IF … THEN … ENDIF</code> to make a decision.</p>
+<pre class="code" data-lang="Pseudocode">DECLARE Height : INTEGER
+INPUT Height
+IF Height &gt;= 170 THEN
+    OUTPUT "Tall"
+ENDIF</pre>
+  <div class="callout"><span class="lab">Exam tip</span> In pseudocode, <code>←</code> means "gets the value of" — it is not an equals sign. <code>Total ← Total + 5</code> means "take the current value of Total, add 5, and store the result back in Total". Writing <code>=</code> instead of <code>←</code> loses marks.</div>
+
+  <h3><small>1.2</small>Searching</h3>
+  <h4>Linear search</h4>
+  <p>A <strong>linear search</strong> checks each item in turn, from the first to the last, until it finds the target or reaches the end. It works on any list — sorted or not.</p>
+<pre class="code" data-lang="Pseudocode">FOR Index ← 1 TO 5
+    IF Names[Index] = "Aung" THEN
+        OUTPUT "Found at position ", Index
+    ENDIF
+NEXT Index</pre>
+  <p>With <em>n</em> items, a linear search makes at most <em>n</em> comparisons. If the item is first, it takes 1 comparison (best case); if it is last or missing, it takes <em>n</em> comparisons (worst case). On average it takes about <em>n</em> ÷ 2 comparisons.</p>
+  <h4>Binary search</h4>
+  <p>A <strong>binary search</strong> only works on a <strong>sorted</strong> list. It compares the target with the middle item: if the target is smaller, it searches the left half; if larger, the right half. Each step throws away half of the list, so it is much faster than a linear search on a long list.</p>
+  <div class="scroll"><table>
+    <tr><th></th><th>Linear search</th><th>Binary search</th></tr>
+    <tr><td>List must be sorted?</td><td>No</td><td>Yes</td></tr>
+    <tr><td>Comparisons (worst case, <em>n</em> items)</td><td><em>n</em></td><td>log<sub>2</sub> <em>n</em>, rounded up</td></tr>
+    <tr><td>Best for</td><td>Short lists, or lists that change often</td><td>Long lists that stay sorted, such as a dictionary</td></tr>
+  </table></div>
+  <h4>Worked example: binary search</h4>
+  <p>Sorted list: <code>3, 7, 12, 19, 24, 31, 38</code>. Find <code>31</code>.</p>
+  <ol>
+    <li>Middle of 7 items is position 4: <code>19</code>. 31 &gt; 19, so search the right half: <code>24, 31, 38</code>.</li>
+    <li>Middle of the right half is <code>31</code>. Found — in only 2 comparisons. A linear search would have needed 6.</li>
+  </ol>
+  <p>With 1,000 sorted items, a binary search needs at most 10 comparisons (2<sup>10</sup> = 1,024), while a linear search could need 1,000.</p>
+  <div class="callout warn"><span class="lab">Common mistakes</span>
+    <ul><li>Using a binary search on an unsorted list — it will give the wrong answer.</li><li>Forgetting that the list must be sorted first; sorting takes time too.</li><li>Mixing up best and worst case: the best case for a linear search is 1 comparison, not 0.</li></ul>
+  </div>
+
+  <h3><small>1.3</small>Sorting</h3>
+  <h4>Bubble sort</h4>
+  <p>A <strong>bubble sort</strong> compares neighbouring pairs and swaps them if they are in the wrong order. After each pass, the largest unsorted item has "bubbled" to the end. Passes repeat until a pass makes no swaps.</p>
+  <div class="lab-box">
+    <h4>Try it: bubble sort stepper</h4>
+    <p class="hint">Type your own numbers, separated by commas, then press Step to watch each comparison.</p>
+    <div class="rowbtns">
+      <input type="text" id="bs-in" value="5, 1, 4, 2, 8" aria-label="Numbers to sort" autocomplete="off">
+      <button class="btn" type="button" id="bs-load">Load</button>
+      <button class="btn solid" type="button" id="bs-step">Step</button>
+      <button class="btn" type="button" id="bs-all">Finish</button>
+    </div>
+    <div class="sortbox" id="bs-cells" aria-live="polite"></div>
+    <p class="note" id="bs-msg"></p>
+  </div>
+  <h4>Worked example: bubble sort</h4>
+  <p>Sort <code>5, 1, 4, 2, 8</code> into ascending order.</p>
+  <ol>
+    <li>Pass 1: 5 &gt; 1 swap → <code>1, 5, 4, 2, 8</code>; 5 &gt; 4 swap → <code>1, 4, 5, 2, 8</code>; 5 &gt; 2 swap → <code>1, 4, 2, 5, 8</code>; 5 &lt; 8 no swap. The 8 is now in its final place.</li>
+    <li>Pass 2: 1 &lt; 4, 4 &gt; 2 swap → <code>1, 2, 4, 5, 8</code>; 4 &lt; 5. The 5 is in place.</li>
+    <li>Pass 3: 1 &lt; 2, 2 &lt; 4 — no swaps. The list is sorted: <code>1, 2, 4, 5, 8</code>.</li>
+  </ol>
+  <h4>Merge sort</h4>
+  <p>A <strong>merge sort</strong> splits the list in half again and again until every piece has one item, then merges the pieces back together in order.</p>
+  <p>Sort <code>38, 27, 43, 3, 9, 82, 10</code>:</p>
+  <ol>
+    <li>Split: <code>[38, 27, 43, 3]</code> and <code>[9, 82, 10]</code>; keep splitting to single items.</li>
+    <li>Merge in order: <code>[27, 38]</code> and <code>[3, 43]</code> merge to <code>[3, 27, 38, 43]</code>; <code>[9, 10, 82]</code> on the other side.</li>
+    <li>Final merge: <code>[3, 9, 10, 27, 38, 43, 82]</code>.</li>
+  </ol>
+  <div class="scroll"><table>
+    <tr><th></th><th>Bubble sort</th><th>Merge sort</th></tr>
+    <tr><td>How it works</td><td>Swaps neighbouring pairs, pass by pass</td><td>Splits the list, then merges it back in order</td></tr>
+    <tr><td>Speed on a long list</td><td>Slow — many comparisons and swaps</td><td>Fast — far fewer comparisons on large lists</td></tr>
+    <tr><td>Extra memory</td><td>None — sorts in place</td><td>Needs extra space for the merged lists</td></tr>
+    <tr><td>Best for</td><td>Short lists, or lists that are nearly sorted</td><td>Long lists, where speed matters</td></tr>
+  </table></div>
+  <div class="callout"><span class="lab">Exam tip</span> When a question asks you to "show the steps" of a sort, write out the list after every swap (bubble sort) or after every merge (merge sort). Examiners give marks for the working, even if the final list has a small slip. Always state how many comparisons a search makes — that is often the mark.</div>
+
+  <h3><small>1.4</small>Practice questions</h3>
+  <p>These are practice questions written for this course — they are not from a real past paper.</p>
+  <ol>
+    <li>Explain the difference between decomposition and abstraction. Give one example of each. [4]</li>
+    <li>A sorted list has 200 items. What is the maximum number of comparisons a binary search needs? Show your working. [2]</li>
+    <li>Use a bubble sort to sort <code>9, 4, 7, 2</code> into ascending order. Show the list after each pass. [4]</li>
+    <li>A list of 500 student names is unsorted and changes every day. Explain whether a linear search or a binary search is better for finding a name in this list. [3]</li>
+  </ol>
+  <div class="callout"><span class="lab">Model answers</span>
+    <ol>
+      <li><strong>Decomposition</strong> is splitting a big problem into smaller sub-problems (e.g. a school app split into login, timetable and homework screens). <strong>Abstraction</strong> is ignoring details that do not matter and keeping only what is needed (e.g. a timetable needs the day and time, not the teacher's favourite colour).</li>
+      <li>2<sup>7</sup> = 128 and 2<sup>8</sup> = 256, so 200 items need at most <strong>8 comparisons</strong>.</li>
+      <li>Pass 1: 9 &gt; 4 swap → <code>4, 9, 7, 2</code>; 9 &gt; 7 swap → <code>4, 7, 9, 2</code>; 9 &gt; 2 swap → <code>4, 7, 2, 9</code>. Pass 2: 4 &lt; 7; 7 &gt; 2 swap → <code>4, 2, 7, 9</code>. Pass 3: 4 &gt; 2 swap → <code>2, 4, 7, 9</code>. Pass 4: no swaps — sorted.</li>
+      <li><strong>Linear search</strong> is better. The list is unsorted, so a binary search cannot be used at all, and sorting it every day would take longer than the search saves. A linear search works on the list as it is.</li>
+    </ol>
+  </div>
+</article>
+
+<!-- ======== TOPIC 2 ======== -->
+<article class="chapter" data-ch="2" data-title="Programming" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Topic 2 — Programming</h2>
+  <p>This topic is for approved SrWL Learning students. Sign in with Google to unlock it — Topic 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">2</div><div><h2>Programming</h2><p>Writing and debugging programs in Python: sequence, selection and iteration, data types, arrays, operators and subprograms.</p></div></div>
+
+  <h3><small>2.1</small>Sequence, selection and iteration</h3>
+  <p>Every program is built from three constructs:</p>
+  <dl class="terms">
+    <div><dt>Sequence</dt><dd>Instructions run one after another, in order. The program starts at the top and works down.</dd></div>
+    <div><dt>Selection</dt><dd>The program chooses a path with a condition — <code>if</code>, <code>elif</code> and <code>else</code> in Python.</dd></div>
+    <div><dt>Iteration</dt><dd>The program repeats a block — a <code>for</code> loop when you know how many times, a <code>while</code> loop when you do not.</dd></div>
+  </dl>
+<pre class="code" data-lang="Python">mark = int(input("Mark (0-100): "))
+if mark &gt;= 50:
+    print("Pass")
+elif mark &gt;= 40:
+    print("Borderline")
+else:
+    print("Fail")</pre>
+  <p><strong>Indentation matters in Python.</strong> The lines inside an <code>if</code> or a loop must be indented by the same amount (usually 4 spaces). A line with the wrong indentation is a syntax error, and a line that is not indented at all runs outside the <code>if</code> or loop — a logic error that is easy to miss.</p>
+
+  <h3><small>2.2</small>Data types, variables and casting</h3>
+  <div class="scroll"><table>
+    <tr><th>Data type</th><th>Meaning</th><th>Python example</th></tr>
+    <tr><td>Integer</td><td>A whole number</td><td class="mono">age = 17</td></tr>
+    <tr><td>Real / float</td><td>A number with a decimal point</td><td class="mono">price = 12.5</td></tr>
+    <tr><td>Boolean</td><td>True or False</td><td class="mono">passed = True</td></tr>
+    <tr><td>Character</td><td>One letter, digit or symbol</td><td class="mono">"A"</td></tr>
+    <tr><td>String</td><td>Text — a sequence of characters</td><td class="mono">name = "Aung"</td></tr>
+  </table></div>
+  <p><code>input()</code> always returns a <strong>string</strong>, even when the user types a number. Cast it before doing arithmetic — otherwise <code>"5" + "5"</code> gives <code>"55"</code>, not <code>10</code>.</p>
+<pre class="code" data-lang="Python">name = input("Name: ")
+age = int(input("Age: "))
+print("Hello", name)
+print("Next year you will be", age + 1)</pre>
+  <div class="scroll"><table>
+    <tr><th>Cast</th><th>Result</th></tr>
+    <tr><td class="mono">int("42")</td><td>42 (whole number)</td></tr>
+    <tr><td class="mono">float("3.5")</td><td>3.5 (decimal)</td></tr>
+    <tr><td class="mono">str(42)</td><td>"42" (text)</td></tr>
+  </table></div>
+  <p>Whole-number division and remainder: <code>17 // 5</code> is 3 and <code>17 % 5</code> is 2 (pseudocode <code>DIV</code> and <code>MOD</code>). Use <code>round(x, 2)</code> to round to 2 decimal places.</p>
+
+  <h3><small>2.3</small>Operators</h3>
+  <div class="scroll"><table>
+    <tr><th>Operator</th><th>Meaning</th><th>Example</th></tr>
+    <tr><td class="mono">+ - * /</td><td>Arithmetic</td><td class="mono">total = price * 3</td></tr>
+    <tr><td class="mono">// %</td><td>Whole-number division, remainder</td><td class="mono">7 // 2 = 3, 7 % 2 = 1</td></tr>
+    <tr><td class="mono">== != &lt; &gt; &lt;= &gt;=</td><td>Comparison (gives True or False)</td><td class="mono">age &gt;= 18</td></tr>
+    <tr><td class="mono">and, or, not</td><td>Boolean (combine conditions)</td><td class="mono">age &gt;= 13 and age &lt;= 19</td></tr>
+  </table></div>
+  <p><strong>Precedence:</strong> brackets first, then <code>*</code> <code>/</code> <code>//</code> <code>%</code>, then <code>+</code> <code>-</code>, then comparisons, then <code>not</code>, <code>and</code>, <code>or</code> last. When in doubt, use brackets — they make the order clear to the reader as well as to the computer.</p>
+  <div class="callout warn"><span class="lab">Common mistakes</span>
+    <ul><li><code>=</code> assigns a value; <code>==</code> compares two values. <code>if age = 18:</code> is a syntax error.</li><li>Forgetting to cast <code>input()</code> before arithmetic.</li><li>Comparing a string with a number, e.g. <code>if mark &gt; "50":</code> — a runtime error.</li></ul>
+  </div>
+
+  <h3><small>2.4</small>Selection and iteration in Python</h3>
+<pre class="code" data-lang="Python">for i in range(1, 6):        # count-controlled: runs 5 times
+    print(i)
+
+count = 1
+while count &lt;= 5:           # condition-controlled: runs while true
+    print(count)
+    count = count + 1</pre>
+  <p>Use a <code>for</code> loop when you know how many times to repeat (a fixed number, or once per item in a list). Use a <code>while</code> loop when the repeat depends on a condition, such as "keep asking until the answer is correct". A <code>while</code> loop with a condition that never becomes false runs forever — always make sure the condition can change inside the loop.</p>
+  <h4>Nested loops and selection</h4>
+<pre class="code" data-lang="Python">for row in range(1, 4):
+    for col in range(1, 4):
+        print(row * col, end=" ")
+    print()</pre>
+  <p>The inner loop runs completely for every single run of the outer loop. Trace tables (Practical 3) are the best way to follow nested loops without getting lost.</p>
+
+  <h3><small>2.5</small>One- and two-dimensional arrays</h3>
+  <p>An <strong>array</strong> stores several values of the same type under one name, each with an index. In Python, arrays are lists. The first item is at index 0.</p>
+<pre class="code" data-lang="Python">scores = [72, 58, 91, 64]     # one-dimensional array (a list)
+print(scores[0])              # 72 — the first item
+print(scores[2])              # 91 — the third item
+scores[1] = 60                # change the second item
+print(len(scores))            # 4 — the number of items
+
+# two-dimensional array: a list of lists (rows and columns)
+grid = [[1, 2, 3],
+        [4, 5, 6]]
+print(grid[1][2])             # 6 — row 1, column 2</pre>
+  <p>To work through an array, loop over its indexes or its items. To find the largest value, start with the first item as the largest so far, then compare each other item in turn.</p>
+
+  <h3><small>2.6</small>Subprograms with parameters</h3>
+  <p>A <strong>subprogram</strong> is a named block of code that does one job. A <strong>function</strong> returns a value; a <strong>procedure</strong> does something but returns nothing. Parameters let the same subprogram work on different values.</p>
+<pre class="code" data-lang="Python">def area(length, width):     # length and width are parameters
+    return length * width
+
+room = area(5, 4)             # call with arguments 5 and 4
+print(room)                   # 20</pre>
+  <p>Variables made inside a subprogram are <strong>local</strong> — they exist only while the subprogram runs. Variables made outside are <strong>global</strong>. A subprogram should use its parameters and its return value, not reach out to global variables: that keeps it reusable and easier to test.</p>
+  <div class="callout"><span class="lab">Exam tip</span> When a question asks you to "write a program", plan it in three lines first: what is the input, what is the processing, what is the output. Then write the code in that order. Check your program by hand with one simple test value before you call it finished — examiners award marks for correct logic even if one line has a small slip.</div>
+
+  <h3><small>2.7</small>Practice questions</h3>
+  <p>These are practice questions written for this course — they are not from a real past paper.</p>
+  <ol>
+    <li>Write a Python program that asks for a temperature in Celsius and prints "Hot" if it is above 30, "Warm" if it is 20 to 30, and "Cold" if it is below 20. [4]</li>
+    <li>Explain the difference between a <code>for</code> loop and a <code>while</code> loop, giving one example of when each should be used. [4]</li>
+    <li>The list <code>marks = [45, 78, 62, 90, 55]</code> holds five test marks. Write Python code to find and print the highest mark. [3]</li>
+    <li>Write a function <code>is_even(number)</code> that returns <code>True</code> if the number is even and <code>False</code> if it is odd. [3]</li>
+  </ol>
+  <div class="callout"><span class="lab">Model answers</span>
+    <ol>
+      <li><pre class="code" data-lang="Python">temp = float(input("Temperature: "))
+if temp &gt; 30:
+    print("Hot")
+elif temp &gt;= 20:
+    print("Warm")
+else:
+    print("Cold")</pre></li>
+      <li>A <code>for</code> loop repeats a fixed number of times or once per item (e.g. print the 12 times-table). A <code>while</code> loop repeats while a condition is true, when the number of repeats is not known in advance (e.g. keep asking for a password until it is correct).</li>
+      <li><pre class="code" data-lang="Python">highest = marks[0]
+for mark in marks:
+    if mark &gt; highest:
+        highest = mark
+print(highest)</pre></li>
+      <li><pre class="code" data-lang="Python">def is_even(number):
+    return number % 2 == 0</pre></li>
+    </ol>
+  </div>
+</article>
+
+<!-- ======== TOPIC 3 ======== -->
+<article class="chapter" data-ch="3" data-title="Data" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Topic 3 — Data</h2>
+  <p>This topic is for approved SrWL Learning students. Sign in with Google to unlock it — Topic 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">3</div><div><h2>Data</h2><p>Binary and hexadecimal, how text, images and sound are stored, storage units, compression and encryption.</p></div></div>
+
+  <h3><small>3.1</small>Binary and hexadecimal</h3>
+  <p>A computer stores everything as binary — patterns of 0 and 1 — because its circuits have two states: off and on. <strong>Hexadecimal</strong> (base 16) is a shorthand for people: one hex digit stands for exactly four bits.</p>
+  <div class="scroll"><table>
+    <tr><th>System</th><th>Base</th><th>Digits used</th></tr>
+    <tr><td>Denary (decimal)</td><td>10</td><td class="mono">0–9</td></tr>
+    <tr><td>Binary</td><td>2</td><td class="mono">0, 1</td></tr>
+    <tr><td>Hexadecimal</td><td>16</td><td class="mono">0–9, A–F (A = 10, F = 15)</td></tr>
+  </table></div>
+  <p>To convert binary to denary, add the place values where the bit is 1: <code>10011100</code> = 128 + 16 + 8 + 4 = <strong>156</strong>. To convert to hex, split into groups of four bits: <code>1001 1100</code> → 9 and C → <code>9C</code>.</p>
+  <div class="lab-box">
+    <h4>Try it: converter</h4>
+    <p class="hint">Type in any box (0 to 255). The other two update.</p>
+    <div class="conv">
+      <div><label for="cv-d">Denary</label><input id="cv-d" type="text" inputmode="numeric" value="156" autocomplete="off"></div>
+      <div><label for="cv-b">Binary (8-bit)</label><input id="cv-b" type="text" inputmode="numeric" value="10011100" autocomplete="off"></div>
+      <div><label for="cv-h">Hexadecimal</label><input id="cv-h" type="text" value="9C" autocomplete="off"></div>
+    </div>
+    <p class="note" id="cv-note"></p>
+  </div>
+  <h4>Binary addition and overflow</h4>
+  <p>Work column by column from the right: 0 + 0 = 0; 0 + 1 = 1; 1 + 1 = 0 carry 1; 1 + 1 + 1 = 1 carry 1. <strong>Overflow</strong> happens when the answer needs more bits than the register holds — in 8 bits the largest value is 255, so 182 + 107 = 289 overflows and the stored answer is wrong.</p>
+  <h4>Negative numbers: two's complement</h4>
+  <p>In two's complement the left-most bit has the value −128 instead of +128, so the 8-bit range is <strong>−128 to +127</strong>. To find −45: write 45 as <code>00101101</code>, invert every bit (<code>11010010</code>), then add 1 (<code>11010011</code>).</p>
+  <h4>Logical shifts</h4>
+  <p>A left shift by 1 multiplies by 2; a right shift by 1 divides by 2 (whole number). Bits that fall off the end are lost, so shifting can lose precision or cause overflow.</p>
+
+  <h3><small>3.2</small>How text, images and sound are stored</h3>
+  <h4>Text</h4>
+  <p>Every character is given a number in a <strong>character set</strong> and stored in binary. <strong>ASCII</strong> uses 7 bits (128 characters: English letters, digits, punctuation). <strong>Unicode</strong> uses up to 32 bits and covers almost every language, including Myanmar script and emoji — but the same text takes more storage than ASCII.</p>
+  <h4>Images</h4>
+  <p>An image is a grid of <strong>pixels</strong>. Each pixel stores a colour as a binary number; the <strong>colour depth</strong> is the number of bits per pixel (24-bit colour = 8 bits each for red, green and blue). The <strong>resolution</strong> is the number of pixels (width × height). File size = width × height × colour depth (in bits) ÷ 8.</p>
+  <p>Worked example: a 1920 × 1080 photo at 24-bit colour = 1920 × 1080 × 24 bits = 49,766,400 bits = <strong>6,220,800 bytes</strong> (about 6 MB) before compression.</p>
+  <h4>Sound</h4>
+  <p>Sound is stored as a series of samples. The <strong>sample rate</strong> is how many samples are taken per second (44,100 per second for CD quality). The <strong>bit depth</strong> is how many bits each sample uses (16 bits for CD). File size = sample rate × bit depth × duration (in seconds) × number of channels ÷ 8.</p>
+  <p>Worked example: 10 seconds of CD-quality stereo sound = 44,100 × 16 × 10 × 2 ÷ 8 = <strong>1,764,000 bytes</strong> (about 1.7 MB).</p>
+  <div class="callout"><span class="lab">Exam tip</span> For file-size questions, write the formula first, then substitute the numbers, then give the answer with its unit. Marks are given for the method even if the final arithmetic slips. Remember: divide bits by 8 to get bytes.</div>
+
+  <h3><small>3.3</small>Storage units</h3>
+  <div class="scroll"><table>
+    <tr><th>Unit</th><th>Size</th></tr>
+    <tr><td>Bit</td><td>One binary digit (0 or 1)</td></tr>
+    <tr><td>Nibble</td><td>4 bits</td></tr>
+    <tr><td>Byte</td><td>8 bits</td></tr>
+    <tr><td>Kilobyte (KB)</td><td>1,024 bytes</td></tr>
+    <tr><td>Megabyte (MB)</td><td>1,024 KB</td></tr>
+    <tr><td>Gigabyte (GB)</td><td>1,024 MB</td></tr>
+    <tr><td>Terabyte (TB)</td><td>1,024 GB</td></tr>
+  </table></div>
+
+  <h3><small>3.4</small>Compression</h3>
+  <p><strong>Compression</strong> makes files smaller so they use less storage and transfer faster.</p>
+  <div class="scroll"><table>
+    <tr><th></th><th>Lossless</th><th>Lossy</th></tr>
+    <tr><td>Original data</td><td>Can be rebuilt exactly</td><td>Some data permanently removed</td></tr>
+    <tr><td>Size reduction</td><td>Smaller</td><td>Much smaller</td></tr>
+    <tr><td>Examples</td><td>PNG, FLAC, ZIP, run-length encoding (RLE)</td><td>JPEG, MP3, MP4</td></tr>
+    <tr><td>Best for</td><td>Text, program files, medical images</td><td>Photos, music and video on the web</td></tr>
+  </table></div>
+  <p><strong>Run-length encoding (RLE):</strong> store each value once with a count of how many times it repeats. <code>AAAABBBCC</code> becomes <code>4A3B2C</code>. It works best on data with long runs, such as simple graphics. Lossy compression works by reducing resolution, colour depth or sample rate and dropping detail people barely notice.</p>
+
+  <h3><small>3.5</small>Encryption</h3>
+  <p><strong>Encryption</strong> scrambles readable <em>plaintext</em> into unreadable <em>ciphertext</em> using an algorithm and a key. It does not stop data being intercepted — it makes intercepted data useless without the key.</p>
+  <h4>Caesar cipher</h4>
+  <p>Each letter is shifted a fixed number of places along the alphabet. With a shift of 3, A → D, B → E, and Z wraps round to C. "HELLO" becomes "KHOOR". It is easy to break: there are only 25 possible shifts, so an attacker can try them all.</p>
+  <h4>Vigenère cipher</h4>
+  <p>Each letter is shifted by a different amount, taken from a keyword that repeats. With the keyword "KEY", the shifts are 10, 4, 24, 10, 4, 24 … (K = 10, E = 4, Y = 24). The same letter encrypts to different letters in different positions, which makes it much harder to break than a Caesar cipher — but it is still breakable if the keyword is short or the message is long.</p>
+  <div class="scroll"><table>
+    <tr><th></th><th>Symmetric encryption</th><th>Asymmetric encryption</th></tr>
+    <tr><td>Keys</td><td>One secret key encrypts and decrypts</td><td>A key pair: public key encrypts, private key decrypts</td></tr>
+    <tr><td>Main problem</td><td>The key must be shared, and could be stolen on the way</td><td>Slower, but the private key is never sent to anyone</td></tr>
+    <tr><td>Used for</td><td>Encrypting large amounts of data</td><td>Exchanging keys safely, for example in HTTPS</td></tr>
+  </table></div>
+  <div class="callout warn"><span class="lab">Common mistakes</span>
+    <ul><li>Saying encryption "stops hacking" — it does not stop data being stolen, it makes stolen data unreadable.</li><li>Confusing compression with encryption: compression makes files smaller, encryption makes them secret.</li><li>Forgetting the unit when you give a file size (bytes, KB or MB).</li></ul>
+  </div>
+
+  <h3><small>3.6</small>Practice questions</h3>
+  <p>These are practice questions written for this course — they are not from a real past paper.</p>
+  <ol>
+    <li>Convert the denary number 200 into binary and hexadecimal. [3]</li>
+    <li>An image is 800 × 600 pixels with a colour depth of 24 bits. Calculate its file size in bytes. [3]</li>
+    <li>Explain one advantage and one disadvantage of lossy compression compared with lossless compression. [4]</li>
+    <li>Encrypt the word "CAT" using a Caesar cipher with a shift of 5. Explain why a Caesar cipher is easy to break. [3]</li>
+  </ol>
+  <div class="callout"><span class="lab">Model answers</span>
+    <ol>
+      <li>200 = 128 + 64 + 8 → binary <code>11001000</code>. Split into nibbles: <code>1100 1000</code> → C and 8 → hexadecimal <code>C8</code>.</li>
+      <li>800 × 600 × 24 = 11,520,000 bits. 11,520,000 ÷ 8 = <strong>1,440,000 bytes</strong>.</li>
+      <li>Advantage: lossy files are much smaller, so they download faster and use less storage. Disadvantage: data is permanently lost, so the quality is lower and the original can never be recovered — unsuitable for text or medical images.</li>
+      <li>C + 5 = H, A + 5 = F, T + 5 = Y → <strong>"HFY"</strong>. It is easy to break because there are only 25 possible shifts, so an attacker can try every shift in seconds.</li>
+    </ol>
+  </div>
+</article>
+
+<!-- ======== TOPIC 4 ======== -->
+<article class="chapter" data-ch="4" data-title="Computers" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Topic 4 — Computers</h2>
+  <p>This topic is for approved SrWL Learning students. Sign in with Google to unlock it — Topic 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">4</div><div><h2>Computers</h2><p>How a computer works: the input–process–output model, the CPU and the fetch–decode–execute cycle, logic gates, operating systems and programming languages.</p></div></div>
+
+  <h3><small>4.1</small>The input–process–output model</h3>
+  <p>Every computer system follows the same pattern: <strong>input</strong> → <strong>process</strong> → <strong>output</strong>, with <strong>storage</strong> holding data and programs.</p>
+  <dl class="terms">
+    <div><dt>Input devices</dt><dd>Keyboard, mouse, scanner, microphone, camera, sensors — they put data into the system.</dd></div>
+    <div><dt>Processor (CPU)</dt><dd>Carries out instructions and calculations on the data.</dd></div>
+    <div><dt>Output devices</dt><dd>Monitor, printer, speakers, actuators — they present results or cause an action.</dd></div>
+    <div><dt>Storage</dt><dd>Main memory (RAM and ROM) for data in use now; secondary storage (hard drive, SSD, USB stick) for data kept long term.</dd></div>
+  </dl>
+  <div class="scroll"><table>
+    <tr><th></th><th>RAM</th><th>ROM</th></tr>
+    <tr><td>Volatile?</td><td>Yes — loses data when power is off</td><td>No — keeps data without power</td></tr>
+    <tr><td>Can it be changed?</td><td>Yes — read and write</td><td>Mostly read-only (holds the boot program)</td></tr>
+    <tr><td>Speed</td><td>Fast</td><td>Slower than RAM</td></tr>
+  </table></div>
+
+  <h3><small>4.2</small>The CPU and the fetch–decode–execute cycle</h3>
+  <p>The <strong>central processing unit (CPU)</strong> follows the <strong>Von Neumann architecture</strong>: program instructions and data are stored together in main memory and fetched one at a time.</p>
+  <dl class="terms">
+    <div><dt>Arithmetic logic unit (ALU)</dt><dd>Carries out calculations and logical comparisons.</dd></div>
+    <div><dt>Control unit (CU)</dt><dd>Fetches and decodes instructions and sends control signals to coordinate the rest of the computer.</dd></div>
+    <div><dt>Program counter (PC)</dt><dd>Holds the address of the next instruction.</dd></div>
+    <div><dt>Memory address register (MAR)</dt><dd>Holds the address of the memory location to be read from or written to.</dd></div>
+    <div><dt>Memory data register (MDR)</dt><dd>Holds the data or instruction just fetched from memory, or about to be written to it.</dd></div>
+    <div><dt>Current instruction register (CIR)</dt><dd>Holds the instruction being decoded and executed.</dd></div>
+    <div><dt>Accumulator (ACC)</dt><dd>Holds the results of ALU calculations.</dd></div>
+  </dl>
+  <p>The <strong>fetch–decode–execute cycle</strong> repeats millions of times a second:</p>
+  <ol>
+    <li><strong>Fetch:</strong> the PC gives the address of the next instruction; the instruction is copied from memory into the MDR, then into the CIR; the PC increases by one.</li>
+    <li><strong>Decode:</strong> the control unit works out what the instruction means.</li>
+    <li><strong>Execute:</strong> the instruction is carried out — by the ALU, or by reading or writing data.</li>
+  </ol>
+  <h4>What makes a CPU faster?</h4>
+  <ul>
+    <li><strong>Clock speed</strong> — more cycles per second (measured in GHz) means more instructions per second. A faster clock also uses more power and makes more heat.</li>
+    <li><strong>Number of cores</strong> — more cores can run more instructions at the same time. This helps most when the software can split its work across cores.</li>
+    <li><strong>Cache size</strong> — a larger cache keeps more instructions and data close to the CPU, so it waits less for main memory.</li>
+    <li><strong>More RAM</strong> helps when a program's data does not fit in memory, but it does not make the CPU itself faster.</li>
+  </ul>
+
+  <h3><small>4.3</small>Logic gates and truth tables</h3>
+  <p>A logic gate takes binary inputs (1 = true / on, 0 = false / off) and gives one output. <strong>NOT</strong> has one input; every other gate you need has two. Try each one:</p>
+  <div class="lab-box">
+    <h4>Try it: gate playground</h4>
+    <p class="hint">Switch A and B on and off. Each gate shows its output. NOT uses only A.</p>
+    <div class="toggles">
+      <button type="button" class="tg" id="tgA" role="switch" aria-checked="false">A = <span>0</span></button>
+      <button type="button" class="tg" id="tgB" role="switch" aria-checked="false">B = <span>0</span></button>
+    </div>
+    <div class="gates" id="gateGrid"></div>
+  </div>
+  <div class="scroll"><table>
+    <tr><th>Gate</th><th>Rule</th><th>Boolean form</th></tr>
+    <tr><td>NOT</td><td>Output is the opposite of the input</td><td class="mono">X = NOT A</td></tr>
+    <tr><td>AND</td><td>Output 1 only when <em>both</em> inputs are 1</td><td class="mono">X = A AND B</td></tr>
+    <tr><td>OR</td><td>Output 1 when <em>at least one</em> input is 1</td><td class="mono">X = A OR B</td></tr>
+    <tr><td>NAND</td><td>NOT AND: the opposite of AND</td><td class="mono">X = NOT (A AND B)</td></tr>
+    <tr><td>NOR</td><td>NOT OR: the opposite of OR</td><td class="mono">X = NOT (A OR B)</td></tr>
+    <tr><td>XOR</td><td>Output 1 when the inputs are <em>different</em></td><td class="mono">X = A XOR B</td></tr>
+  </table></div>
+  <h4>Truth tables</h4>
+  <div class="scroll"><table class="tt">
+    <tr><th>A</th><th>B</th><th>AND</th><th>OR</th><th>NAND</th><th>NOR</th><th>XOR</th></tr>
+    <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+    <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+    <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+  </table></div>
+  <p>Circuits join gates so the output of one is the input of another. Work from the inputs towards the output, and add one column for every gate. With <em>n</em> inputs a truth table has 2<sup>n</sup> rows (two inputs: 4 rows; three inputs: 8 rows). List the input rows in binary counting order.</p>
+  <div class="lab-box">
+    <h4>Try it: truth table builder</h4>
+    <p class="hint">Choose an expression. The table shows the working column for each gate.</p>
+    <div class="rowbtns"><select id="ttSel" aria-label="Expression" style="background:var(--surface-2);color:var(--ink);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit"></select></div>
+    <div class="scroll"><table class="tt" id="ttOut"></table></div>
+  </div>
+  <div class="callout"><span class="lab">Exam tip</span> Fill the truth table one gate at a time and write the working column, even if the question does not ask for it. A wrong final answer can still earn marks for correct working columns. Check that the number of rows is 2<sup>n</sup>.</div>
+
+  <h3><small>4.4</small>Operating systems and utility software</h3>
+  <p>The <strong>operating system (OS)</strong> is the software that manages the computer and lets the user and the programs use it. Its jobs include: managing memory, managing files, providing a user interface, managing hardware and peripherals (with drivers), security (user accounts and passwords), and multitasking (sharing the CPU between programs).</p>
+  <p><strong>Utility software</strong> does maintenance jobs: anti-virus software finds and removes malware; backup software copies files so they can be restored; defragmentation reorganises files on a hard drive so they load faster; compression software makes files smaller.</p>
+
+  <h3><small>4.5</small>High-level and low-level languages</h3>
+  <div class="scroll"><table>
+    <tr><th></th><th>Low-level</th><th>High-level</th></tr>
+    <tr><td>Examples</td><td>Machine code (binary), assembly language</td><td>Python, Java, C#</td></tr>
+    <tr><td>Who it is for</td><td>The processor</td><td>People — closer to English</td></tr>
+    <tr><td>Speed</td><td>Runs fastest, no translation needed</td><td>Needs translating, so usually slower</td></tr>
+    <tr><td>Portability</td><td>Written for one processor only</td><td>Can run on many machines</td></tr>
+  </table></div>
+  <p>High-level code must be translated before the computer can run it. A <strong>compiler</strong> translates the whole program at once into machine code, which is then saved and run; an <strong>interpreter</strong> translates and runs it one line at a time, which is slower but easier for finding errors while you develop. Assembly language is translated by an <strong>assembler</strong>.</p>
+  <div class="callout warn"><span class="lab">Common mistakes</span>
+    <ul><li>Saying ROM is "the same as" secondary storage — ROM is main memory that holds the boot program; a hard drive is secondary storage.</li><li>Mixing up the MAR and the MDR: the MAR holds the <em>address</em>, the MDR holds the <em>data</em>.</li><li>Forgetting that a compiler translates the whole program before it runs, while an interpreter translates line by line as it runs.</li></ul>
+  </div>
+
+  <h3><small>4.6</small>Practice questions</h3>
+  <p>These are practice questions written for this course — they are not from a real past paper.</p>
+  <ol>
+    <li>Describe the three stages of the fetch–decode–execute cycle. [3]</li>
+    <li>A computer has a 2 GHz processor and a 4 GHz processor is fitted. Explain two other ways the computer's performance could be improved. [4]</li>
+    <li>Draw the truth table for <code>X = (A AND B) OR NOT C</code>. [4]</li>
+    <li>State two jobs of an operating system and two examples of utility software. [4]</li>
+  </ol>
+  <div class="callout"><span class="lab">Model answers</span>
+    <ol>
+      <li><strong>Fetch:</strong> the instruction is copied from memory (address in the PC) into the MDR and then the CIR, and the PC increases by one. <strong>Decode:</strong> the control unit works out what the instruction means. <strong>Execute:</strong> the instruction is carried out by the ALU or by reading/writing data.</li>
+      <li>Any two of: add more cores so more instructions run at the same time; increase the cache size so the CPU waits less for memory; add more RAM so programs do not need to use slow secondary storage while running. (Increasing clock speed further would also help but was already done in the question.)</li>
+      <li>Three inputs → 8 rows. Work out the <code>A AND B</code> column, then the <code>NOT C</code> column, then OR them: X = 1 except when A AND B = 0 and C = 1. Rows (A B C → X): 000→1, 001→0, 010→1, 011→0, 100→1, 101→0, 110→1, 111→1.</li>
+      <li>Operating system: any two of managing memory, managing files, providing a user interface, managing hardware/peripherals, security, multitasking. Utility software: any two of anti-virus, backup, defragmentation, compression.</li>
+    </ol>
+  </div>
+</article>
+
+<!-- ======== TOPIC 5 ======== -->
+<article class="chapter" data-ch="5" data-title="Communication and the Internet" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Topic 5 — Communication and the Internet</h2>
+  <p>This topic is for approved SrWL Learning students. Sign in with Google to unlock it — Topic 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">5</div><div><h2>Communication and the Internet</h2><p>How computers talk to each other: networks, the hardware that connects them, the protocols that agree the rules, and how to keep a network safe.</p></div></div>
+
+  <h3><small>5.1</small>Networks</h3>
+  <p>A <strong>network</strong> is two or more computers connected so they can share data and resources, such as printers and files.</p>
+  <div class="scroll"><table>
+    <tr><th></th><th>LAN (Local Area Network)</th><th>WAN (Wide Area Network)</th></tr>
+    <tr><td>Size</td><td>One building or site (a school, an office)</td><td>Across cities or countries — the internet is the largest WAN</td></tr>
+    <tr><td>Speed</td><td>Fast</td><td>Slower (long distances, many routers)</td></tr>
+    <tr><td>Who owns it</td><td>One organisation</td><td>Many owners, linked together</td></tr>
+  </table></div>
+  <p>Network hardware: a <strong>network interface card (NIC)</strong> connects a device to the network and gives it a unique MAC address; a <strong>router</strong> connects networks together and sends packets towards their destination; a <strong>switch</strong> connects devices inside a LAN and sends data only to the device it is for; a <strong>modem</strong> converts digital signals to analogue for a phone line (and back); a <strong>wireless access point (WAP)</strong> lets Wi-Fi devices join the network.</p>
+  <h4>Topologies</h4>
+  <dl class="terms">
+    <div><dt>Star</dt><dd>Every device connects to a central switch. If one cable fails, only that device is affected; if the switch fails, the whole network stops. Most LANs use star.</dd></div>
+    <div><dt>Bus</dt><dd>All devices share one cable. Cheap, but a break in the cable stops the whole network, and only one device can send at a time.</dd></div>
+    <div><dt>Mesh</dt><dd>Devices connect to several others, so there is always another route if one fails. Very reliable, but expensive in cabling.</dd></div>
+  </dl>
+  <h4>Client–server and peer-to-peer</h4>
+  <p>In a <strong>client–server</strong> network, a server provides services (files, email, web pages) and clients request them — the server is powerful, centrally managed and backed up, but expensive. In a <strong>peer-to-peer</strong> network, devices share files directly with each other — cheap and simple, but harder to secure and back up, and a slow device slows everyone.</p>
+
+  <h3><small>5.2</small>Protocols</h3>
+  <p>A <strong>protocol</strong> is a set of rules that devices agree to follow so they can communicate. Without agreed rules, one device's data would be meaningless to another.</p>
+  <div class="scroll"><table>
+    <tr><th>Protocol</th><th>What it does</th></tr>
+    <tr><td>TCP/IP</td><td>The rules of the internet: TCP splits data into packets, numbers them and checks they arrive; IP addresses the packets and routes them.</td></tr>
+    <tr><td>HTTP / HTTPS</td><td>Transfers web pages. HTTPS adds encryption (SSL/TLS), so passwords and card details cannot be read on the way.</td></tr>
+    <tr><td>FTP</td><td>Transfers files between computers.</td></tr>
+    <tr><td>SMTP</td><td>Sends email from a client to a mail server, and between mail servers.</td></tr>
+    <tr><td>DNS</td><td>Turns a domain name (www.wailinhtet.com) into an IP address the computer can use.</td></tr>
+  </table></div>
+  <p>An <strong>IP address</strong> identifies a device on a network (and can change). A <strong>MAC address</strong> is built into the network card and never changes. Data travels in <strong>packets</strong>, each with a header (sender and destination addresses, packet number) and a payload; routers read the header and choose the best route at that moment.</p>
+
+  <h3><small>5.3</small>Network security</h3>
+  <p>Threats to a network:</p>
+  <ul>
+    <li><strong>Malware</strong> — viruses, worms, spyware and ransomware that damage, steal or lock data.</li>
+    <li><strong>Phishing</strong> — fake emails or websites that trick people into giving away passwords.</li>
+    <li><strong>Hacking</strong> — unauthorised access, often through weak passwords or unpatched software.</li>
+    <li><strong>Denial of service (DoS)</strong> — flooding a server with requests so real users cannot get in.</li>
+  </ul>
+  <p>Defences:</p>
+  <ul>
+    <li><strong>Firewall</strong> — software or hardware that checks traffic in and out of the network and blocks anything that breaks its rules.</li>
+    <li><strong>Strong passwords and user access levels</strong> — each user can only reach what they need; accounts are locked after too many wrong tries.</li>
+    <li><strong>Encryption</strong> — data is scrambled so it is useless if intercepted (HTTPS, encrypted Wi-Fi).</li>
+    <li><strong>Anti-malware software and updates</strong> — scans files and patches the holes attackers use.</li>
+    <li><strong>Proxy server</strong> — sits between users and the internet, filtering requests and hiding the internal network.</li>
+  </ul>
+  <div class="callout"><span class="lab">Exam tip</span> When a question asks for "one threat and one way to protect against it", match them: phishing → train users and check the sender's address; malware → anti-malware software and updates; hacking → strong passwords and two-factor authentication. A defence that does not match the threat earns no marks.</div>
+
+  <h3><small>5.4</small>Practice questions</h3>
+  <p>These are practice questions written for this course — they are not from a real past paper.</p>
+  <ol>
+    <li>Explain the difference between a LAN and a WAN. Give one example of each. [4]</li>
+    <li>Describe the jobs of a router and a switch in a network. [4]</li>
+    <li>A school uses a star topology. Explain one advantage and one disadvantage of this choice. [4]</li>
+    <li>A student receives an email asking them to "confirm" their password by clicking a link. Name this threat and describe two ways to protect against it. [3]</li>
+  </ol>
+  <div class="callout"><span class="lab">Model answers</span>
+    <ol>
+      <li>A <strong>LAN</strong> covers a small area such as one building, is fast and owned by one organisation (e.g. a school network). A <strong>WAN</strong> covers a large area such as a country or the world, is slower and owned by many organisations (e.g. the internet).</li>
+      <li>A <strong>router</strong> connects different networks together and forwards packets towards their destination using IP addresses. A <strong>switch</strong> connects devices inside one LAN and sends data only to the device it is addressed to.</li>
+      <li>Advantage: if one cable fails, only that one device is affected — the rest of the network keeps working. Disadvantage: if the central switch fails, the whole network stops.</li>
+      <li><strong>Phishing.</strong> Protection: do not click links in unexpected emails — go to the real website yourself; check the sender's address carefully; never give a password by email; report the email to the teacher or IT staff.</li>
+    </ol>
+  </div>
+</article>
+
+<!-- ======== TOPIC 6 ======== -->
+<article class="chapter" data-ch="6" data-title="The Bigger Picture" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Topic 6 — The Bigger Picture</h2>
+  <p>This topic is for approved SrWL Learning students. Sign in with Google to unlock it — Topic 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">6</div><div><h2>The Bigger Picture</h2><p>What computing means for people and the planet: ethical questions, the law, and the environment.</p></div></div>
+
+  <h3><small>6.1</small>Ethical issues</h3>
+  <p>Technology brings benefits, but it also creates questions with no simple answer. In the exam, you are usually asked to discuss both sides of an issue, not to pick one.</p>
+  <dl class="terms">
+    <div><dt>Privacy</dt><dd>Companies and governments collect huge amounts of personal data. People gain convenience (personalised services, safety) but lose control over who knows what about them. CCTV, location tracking and social media posts can all be used in ways the person did not expect.</dd></div>
+    <div><dt>Surveillance</dt><dd>Cameras, phone tracking and workplace monitoring can make places safer and workplaces fairer — but they can also be used to watch people without good reason, and data collected for one purpose can be used for another.</dd></div>
+    <div><dt>AI and bias</dt><dd>AI systems learn from data. If the data is biased, the system makes unfair decisions — for example, a hiring system trained on past data may favour one group of applicants. Someone must be responsible when an AI system gets it wrong.</dd></div>
+    <div><dt>Digital divide</dt><dd>Not everyone has the same access to computers and the internet. People without access are left behind in education, work and services that move online.</dd></div>
+    <div><dt>Social media and health</dt><dd>Social media connects people and spreads information quickly, but it can also spread false information, encourage addiction and harm mental health, especially for young people.</dd></div>
+  </dl>
+
+  <h3><small>6.2</small>Legal issues</h3>
+  <p>Laws set the rules for how computers and data may be used. The main laws you need to know:</p>
+  <div class="scroll"><table>
+    <tr><th>Law</th><th>What it covers</th></tr>
+    <tr><td>Data Protection Act 2018 (UK, with GDPR)</td><td>Personal data must be collected fairly and lawfully, kept secure, kept no longer than needed, and not shared without a lawful reason. People have the right to see their own data and ask for it to be corrected or deleted.</td></tr>
+    <tr><td>Computer Misuse Act 1990</td><td>It is a crime to access a computer system without permission, to access it with intent to commit a further crime, or to change or delete data without permission. Hacking and writing malware are offences.</td></tr>
+    <tr><td>Copyright, Designs and Patents Act 1988</td><td>Creative work (software, music, films, images, text) belongs to its creator. Copying, sharing or using it without permission — including pirated software and music — is illegal.</td></tr>
+  </table></div>
+  <p>Other legal points: software is usually <strong>licensed</strong>, not sold — the licence says how many computers may use it and what you may do with it. <strong>Open-source</strong> software can be used and changed freely under its licence, but the licence terms still apply.</p>
+
+  <h3><small>6.3</small>Environmental issues</h3>
+  <ul>
+    <li><strong>E-waste:</strong> old phones and computers contain toxic materials (lead, mercury) and valuable metals. Thrown away carelessly, they poison soil and water; recycled properly, the metals can be recovered.</li>
+    <li><strong>Energy use:</strong> data centres, networks and devices use large amounts of electricity. Streaming video and training large AI models use far more energy than most people realise.</li>
+    <li><strong>Manufacturing:</strong> making a device uses raw materials, water and energy, and creates waste — so a phone's environmental cost starts before it is ever switched on.</li>
+    <li><strong>Planned obsolescence:</strong> devices are designed to be replaced rather than repaired, which increases waste. Repairing, reusing and recycling reduce the impact.</li>
+  </ul>
+  <div class="callout"><span class="lab">Exam tip</span> For "discuss" questions, give both sides: a benefit and a drawback, each with a reason. Then finish with a balanced judgement — for example, "on balance, the benefit is greater when the data is protected by law and the user gives informed consent". A one-sided answer cannot reach the top marks.</div>
+
+  <h3><small>6.4</small>Practice questions</h3>
+  <p>These are practice questions written for this course — they are not from a real past paper.</p>
+  <ol>
+    <li>Discuss the ethical issues of a school using CCTV cameras in classrooms. Give one argument for and one against. [4]</li>
+    <li>Explain how the Data Protection Act protects a person's data. Give two rules the Act sets. [4]</li>
+    <li>A student downloads a pirated copy of a program instead of buying it. Which law is broken, and what is one consequence? [2]</li>
+    <li>Describe two environmental problems caused by old computers and phones, and one way each problem can be reduced. [4]</li>
+  </ol>
+  <div class="callout"><span class="lab">Model answers</span>
+    <ol>
+      <li>For: cameras can deter bullying and theft and give evidence if an incident happens. Against: students and teachers lose privacy, and the recordings could be watched or shared without good reason. On balance, cameras in corridors and entrances are more acceptable than in classrooms.</li>
+      <li>Personal data must be collected fairly and lawfully and kept secure; it must not be kept longer than needed; people have the right to see their data and ask for it to be corrected or deleted.</li>
+      <li>The <strong>Copyright, Designs and Patents Act 1988</strong> is broken. Consequences include a fine, and the pirated copy may contain malware.</li>
+      <li>Toxic materials (lead, mercury) can poison soil and water if dumped — reduce by recycling e-waste through proper schemes. Making new devices uses raw materials and energy — reduce by repairing and reusing devices instead of replacing them.</li>
+    </ol>
+  </div>
+</article>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- =============== PAPER 2 =============== -->
+<section id="view-p2" hidden>
+  <div class="wrap">
+    <div class="viewhead">
+      <h1>Paper 2 · Application of Computational Thinking</h1>
+      <p>Practical Python exam practice: writing and debugging programs, modifying starter code, algorithms in code, pseudocode and trace tables.</p>
+    </div>
+    <div class="reader" data-reader="p2">
+      <nav class="chapnav" aria-label="Paper 2 practical sections"></nav>
+      <div class="chapters">
+<!-- ======== PRACTICAL 1 ======== -->
+<article class="chapter" data-ch="7" data-title="Writing and Debugging Python Programs" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Practical 1 — Writing and Debugging Python Programs</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Topic 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">P1</div><div><h2>Writing and Debugging Python Programs</h2><p>Paper 2 is a practical exam on a computer. These sections teach the exam skills: writing programs from a description, finding and fixing errors, testing, and working with files.</p></div></div>
+
+  <h3><small>P1.1</small>From a description to a program</h3>
+  <p>Paper 2 tasks give you a description in words. Before you type any code, plan it in three lines:</p>
+  <ol>
+    <li><strong>Input</strong> — what data comes in, and how (keyboard, a file, a list)?</li>
+    <li><strong>Process</strong> — what must happen to the data (calculations, decisions, repeats)?</li>
+    <li><strong>Output</strong> — what must be shown, and in what format?</li>
+  </ol>
+  <p>Worked example: "A shop gives a 10% discount when the total is over 100,000 kyat. Write a program to ask for the total and print the amount to pay."</p>
+<pre class="code" data-lang="Python">total = float(input("Total: "))
+if total &gt; 100000:
+    pay = total * 0.9
+else:
+    pay = total
+print("Amount to pay:", round(pay, 2))</pre>
+
+  <h3><small>P1.2</small>Errors: finding and fixing them</h3>
+  <div class="scroll"><table>
+    <tr><th>Error type</th><th>What happens</th><th>Example</th></tr>
+    <tr><td>Syntax error</td><td>The program will not run. Python shows an error message and the line number.</td><td class="mono">if age &gt; 18    (missing colon)</td></tr>
+    <tr><td>Runtime error</td><td>The program starts, then crashes. The error message names the line and the problem.</td><td class="mono">print(10 / 0)    (division by zero)</td></tr>
+    <tr><td>Logic error</td><td>The program runs, but the answer is wrong. No error message — you must find it yourself.</td><td class="mono">total = price - discount    (should be +)</td></tr>
+  </table></div>
+  <p>How to debug: read the error message first — it names the line and the kind of error. For logic errors, add temporary <code>print()</code> statements to show the value of a variable at each step, or trace the program by hand. Test with simple numbers you can check in your head.</p>
+
+  <h3><small>P1.3</small>Testing</h3>
+  <p>Choose test data that covers the three cases examiners look for:</p>
+  <dl class="terms">
+    <div><dt>Normal data</dt><dd>Ordinary values the program should accept, e.g. a mark of 75.</dd></div>
+    <div><dt>Boundary data</dt><dd>Values at the edge of what is allowed, e.g. a mark of 0 and a mark of 100 — where programs most often go wrong.</dd></div>
+    <div><dt>Erroneous data</dt><dd>Values the program should reject, e.g. a mark of −5 or 101 — the program should handle them, not crash.</dd></div>
+  </dl>
+  <p>Write a small test table: test data, expected result, actual result, pass or fail. If the actual result differs, that is where the bug is.</p>
+
+  <h3><small>P1.4</small>Reading and writing text files</h3>
+  <p>Paper 2 tasks often give you a file to read and ask you to write results to a file. The pattern is always the same:</p>
+<pre class="code" data-lang="Python">names = []
+with open("names.txt") as f:
+    for line in f:
+        names.append(line.strip())
+
+with open("results.txt", "w") as f:
+    for name in names:
+        f.write(name + "\n")</pre>
+  <p><code>open("names.txt")</code> reads; <code>open("results.txt", "w")</code> writes (and erases the old file, so be careful). <code>line.strip()</code> removes the newline at the end of each line. <code>with</code> closes the file for you when the block ends.</p>
+  <div class="callout"><span class="lab">Exam tip</span> Save your work often during the practical exam, and run your program after every small change — never write 50 lines and test them all at once. If a program crashes, the error message is your best friend: it tells you the line number and the kind of error.</div>
+
+  <h3><small>P1.5</small>Practice questions</h3>
+  <p>These are practice questions written for this course — they are not from a real past paper.</p>
+  <ol>
+    <li>A program asks for a mark (0–100) and prints "Pass" if it is 50 or more. Give one normal, one boundary and one erroneous test value, with the expected result for each. [3]</li>
+    <li>The program below crashes. Name the error type and fix it: <code>age = int(input("Age: "))</code> followed by <code>print("In 10 years: " + age + 10)</code>. [2]</li>
+    <li>Write a program that reads five numbers from the keyboard and prints their total and their average. [4]</li>
+  </ol>
+  <div class="callout"><span class="lab">Model answers</span>
+    <ol>
+      <li>Normal: 75 → "Pass". Boundary: 50 → "Pass" (and 0 → "Fail"). Erroneous: −5 → the program should reject it or ask again, not print "Pass" or crash.</li>
+      <li><strong>Runtime error</strong> (TypeError): you cannot add a string and a number with <code>+</code>. Fix: <code>print("In 10 years:", age + 10)</code> — a comma prints both parts.</li>
+      <li><pre class="code" data-lang="Python">total = 0
+for i in range(5):
+    num = float(input("Number: "))
+    total = total + num
+print("Total:", total)
+print("Average:", total / 5)</pre></li>
+    </ol>
+  </div>
+</article>
+
+<!-- ======== PRACTICAL 2 ======== -->
+<article class="chapter" data-ch="8" data-title="Algorithms in Code" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Practical 2 — Algorithms in Code</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Topic 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">P2</div><div><h2>Algorithms in Code</h2><p>Turning the standard algorithms into Python: linear and binary search, bubble sort and merge sort — and modifying starter code, which is how Paper 2 usually asks for them.</p></div></div>
+
+  <h3><small>P2.1</small>Linear and binary search in Python</h3>
+<pre class="code" data-lang="Python">def linear_search(items, target):
+    for i in range(len(items)):
+        if items[i] == target:
+            return i
+    return -1
+
+names = ["Aung", "Htar", "May", "Zaw"]
+print(linear_search(names, "May"))   # 2
+print(linear_search(names, "Ko"))    # -1 (not found)</pre>
+<pre class="code" data-lang="Python">def binary_search(items, target):   # items MUST be sorted
+    low = 0
+    high = len(items) - 1
+    while low &lt;= high:
+        mid = (low + high) // 2
+        if items[mid] == target:
+            return mid
+        elif items[mid] &lt; target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1</pre>
+  <p>The binary search needs <code>low &lt;= high</code>, not <code>low &lt; high</code> — with <code>&lt;</code> alone, a list with one item left is never checked. Returning <code>-1</code> for "not found" is the standard choice, because −1 can never be a real index.</p>
+
+  <h3><small>P2.2</small>Bubble sort and merge sort in Python</h3>
+<pre class="code" data-lang="Python">def bubble_sort(items):
+    n = len(items)
+    for i in range(n - 1):
+        swapped = False
+        for j in range(n - 1 - i):
+            if items[j] &gt; items[j + 1]:
+                items[j], items[j + 1] = items[j + 1], items[j]
+                swapped = True
+        if not swapped:
+            break
+    return items</pre>
+  <p>The <code>swapped</code> flag is the early stop: if a whole pass makes no swaps, the list is already sorted and the sort can finish. Without it, the sort still works — it just does wasted passes.</p>
+<pre class="code" data-lang="Python">def merge_sort(items):
+    if len(items) &lt;= 1:
+        return items
+    mid = len(items) // 2
+    left = merge_sort(items[:mid])
+    right = merge_sort(items[mid:])
+    result = []
+    i = j = 0
+    while i &lt; len(left) and j &lt; len(right):
+        if left[i] &lt;= right[j]:
+            result.append(left[i]); i += 1
+        else:
+            result.append(right[j]); j += 1
+    result += left[i:] + right[j:]
+    return result</pre>
+
+  <h3><small>P2.3</small>Modifying starter code</h3>
+  <p>Paper 2 often gives you starter code and asks you to change it. Read the starter code first and work out what each part does before you change anything. Common changes: add a new condition, change a loop, add a count, or store results in a list.</p>
+  <p>Worked example — starter code prints the numbers 1 to 10. Task: change it so it prints only the even numbers, and counts how many there are.</p>
+<pre class="code" data-lang="Python"># Starter code
+for i in range(1, 11):
+    print(i)
+
+# Modified code
+count = 0
+for i in range(1, 11):
+    if i % 2 == 0:
+        print(i)
+        count = count + 1
+print("Even numbers:", count)</pre>
+  <div class="callout warn"><span class="lab">Common mistakes</span>
+    <ul><li>Changing the starter code before reading it — you may break a part that already worked.</li><li>Forgetting to reset a counter (like <code>count = 0</code>) before the loop.</li><li>Using <code>range(1, 10)</code> when you need 1 to 10 — <code>range</code> stops one short.</li></ul>
+  </div>
+
+  <h3><small>P2.4</small>Practice questions</h3>
+  <p>These are practice questions written for this course — they are not from a real past paper.</p>
+  <ol>
+    <li>Write a Python function <code>count_above(marks, limit)</code> that returns how many marks in the list are above the limit. [4]</li>
+    <li>The list <code>scores = [88, 45, 92, 61, 73]</code> is unsorted. A program needs to find the score 61. Explain which search you would use and why. Then state how many comparisons it makes in the worst case. [3]</li>
+    <li>Modify the bubble sort in §P2.2 so it sorts into <strong>descending</strong> order. State the one line you change. [2]</li>
+  </ol>
+  <div class="callout"><span class="lab">Model answers</span>
+    <ol>
+      <li><pre class="code" data-lang="Python">def count_above(marks, limit):
+    count = 0
+    for mark in marks:
+        if mark &gt; limit:
+            count = count + 1
+    return count</pre></li>
+      <li>Use a <strong>linear search</strong>: the list is unsorted, so a binary search cannot be used. Worst case it makes <strong>5 comparisons</strong> (the target is last, or not there at all).</li>
+      <li>Change <code>if items[j] &gt; items[j + 1]:</code> to <code>if items[j] &lt; items[j + 1]:</code> — swap when the left item is smaller, so the larger values bubble to the front.</li>
+    </ol>
+  </div>
+</article>
+
+<!-- ======== PRACTICAL 3 ======== -->
+<article class="chapter" data-ch="9" data-title="Pseudocode and Trace Tables" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Practical 3 — Pseudocode and Trace Tables</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Topic 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">P3</div><div><h2>Pseudocode and Trace Tables</h2><p>Paper 2 gives you a pseudocode reference sheet. This section teaches you to read it, write it, and follow it with a trace table — the skill that turns a confusing program into marks.</p></div></div>
+
+  <h3><small>P3.1</small>Reading pseudocode</h3>
+  <p>Pseudocode is not a programming language — it is a way of writing an algorithm so a person can read it. The exam gives you a reference sheet with the exact words it uses. The ones you will meet most often:</p>
+  <div class="scroll"><table>
+    <tr><th>Pseudocode</th><th>Meaning</th><th>Python</th></tr>
+    <tr><td class="mono">DECLARE X : INTEGER</td><td>Create a variable called X</td><td class="mono">x = 0</td></tr>
+    <tr><td class="mono">X ← 5</td><td>Give X the value 5</td><td class="mono">x = 5</td></tr>
+    <tr><td class="mono">INPUT X</td><td>Read a value into X</td><td class="mono">x = input()</td></tr>
+    <tr><td class="mono">OUTPUT X</td><td>Show the value of X</td><td class="mono">print(x)</td></tr>
+    <tr><td class="mono">IF … THEN … ELSE … ENDIF</td><td>Choose a path</td><td class="mono">if … else:</td></tr>
+    <tr><td class="mono">FOR i ← 1 TO 5</td><td>Repeat 5 times</td><td class="mono">for i in range(1, 6):</td></tr>
+    <tr><td class="mono">WHILE … DO … ENDWHILE</td><td>Repeat while true</td><td class="mono">while …:</td></tr>
+    <tr><td class="mono">REPEAT … UNTIL …</td><td>Repeat at least once, until true</td><td class="mono">while True: … if …: break</td></tr>
+    <tr><td class="mono">LENGTH(Text)</td><td>Number of characters</td><td class="mono">len(text)</td></tr>
+    <tr><td class="mono">SUBSTRING(Text, 1, 3)</td><td>Characters 1 to 3</td><td class="mono">text[0:3]</td></tr>
+  </table></div>
+  <p>Read pseudocode the same way you read Python: line by line, top to bottom, following the branches and loops. The only real differences are the words (<code>←</code> instead of <code>=</code>, <code>ENDIF</code> instead of indentation) and the fact that array indexes start at 1 in pseudocode but at 0 in Python.</p>
+
+  <h3><small>P3.2</small>Trace tables</h3>
+  <p>A <strong>trace table</strong> follows a program one line at a time and writes down the value of every variable after each step. It is the best way to find the output of a program — and to find a logic error.</p>
+  <p>Worked example:</p>
+<pre class="code" data-lang="Pseudocode">Total ← 0
+FOR Count ← 1 TO 3
+    INPUT Number
+    Total ← Total + Number
+NEXT Count
+OUTPUT Total</pre>
+  <p>Inputs: 4, 7, 2.</p>
+  <div class="scroll"><table class="tt">
+    <tr><th>Total</th><th>Count</th><th>Number</th><th>Output</th></tr>
+    <tr><td>0</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>0</td><td>1</td><td>4</td><td>–</td></tr>
+    <tr><td>4</td><td>1</td><td>4</td><td>–</td></tr>
+    <tr><td>4</td><td>2</td><td>7</td><td>–</td></tr>
+    <tr><td>11</td><td>2</td><td>7</td><td>–</td></tr>
+    <tr><td>11</td><td>3</td><td>2</td><td>–</td></tr>
+    <tr><td>13</td><td>3</td><td>2</td><td>–</td></tr>
+    <tr><td>13</td><td>3</td><td>2</td><td>13</td></tr>
+  </table></div>
+  <p>Rules for a good trace table: one column per variable (and one for the output); one row per step, not per line of code; write the value only when it changes; never skip the first row, which shows the starting values.</p>
+
+  <h3><small>P3.3</small>Validation and verification</h3>
+  <p>Before data is processed, check it. <strong>Validation</strong> is done by the program: a <strong>range check</strong> (is a mark between 0 and 100?), a <strong>presence check</strong> (is the field empty?), a <strong>type check</strong> (is it a number?), a <strong>length check</strong> (is the password at least 8 characters?). If the data fails, the program asks again instead of crashing or storing bad data.</p>
+  <p><strong>Verification</strong> is done by the person: checking the data was entered correctly — typing it twice and comparing, or reading it back on screen and confirming. Validation checks the data is <em>reasonable</em>; verification checks it is <em>correct</em>.</p>
+  <div class="callout"><span class="lab">Exam tip</span> In a trace table, the most common mistake is writing the new value of a variable in the wrong row — for example, writing the new Total before the INPUT line has run. Follow the lines in order, and change a value only when the line that changes it has run.</div>
+
+  <h3><small>P3.4</small>Practice questions</h3>
+  <p>These are practice questions written for this course — they are not from a real past paper.</p>
+  <ol>
+    <li>Complete the trace table for this pseudocode with the inputs 3 and 5, and state the output. [4]<br><code>Count ← 0</code><br><code>INPUT A</code><br><code>INPUT B</code><br><code>WHILE A &lt; B DO</code><br><code>&nbsp;&nbsp;A ← A + 1</code><br><code>&nbsp;&nbsp;Count ← Count + 1</code><br><code>ENDWHILE</code><br><code>OUTPUT Count</code></li>
+    <li>A program asks for a student's age. Give one validation check that should be used, and explain what the program should do if the check fails. [3]</li>
+    <li>Explain the difference between validation and verification. [2]</li>
+  </ol>
+  <div class="callout"><span class="lab">Model answers</span>
+    <ol>
+      <li>Start: Count = 0. INPUT A = 3, INPUT B = 5. Loop: 3 &lt; 5 → A = 4, Count = 1. Loop: 4 &lt; 5 → A = 5, Count = 2. Loop: 5 &lt; 5 is false, so the loop stops. Output: <strong>2</strong>.</li>
+      <li>Range check: age must be between 0 and 120 (or a sensible school range such as 5 to 25). If it fails, the program should show an error message and ask for the age again, not store the bad value.</li>
+      <li><strong>Validation</strong> is the program checking that data is reasonable (range, type, presence) before it is used. <strong>Verification</strong> is the person checking that data is correct (typing it twice, or checking it on screen).</li>
+    </ol>
+  </div>
+</article>
+
+<!-- ======== PRACTICAL 4 ======== -->
+<article class="chapter" data-ch="10" data-title="Paper 2 Exam Practice" hidden>
+<div class="chapter-lock">
+  <div class="lock-icon">🔒</div>
+  <h2>Practical 4 — Paper 2 Exam Practice</h2>
+  <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Topic 1 is free to read now.</p>
+  <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+</div>
+  <div class="chead"><div class="num">P4</div><div><h2>Paper 2 Exam Practice</h2><p>How the 3-hour practical exam works, how to plan your time, and one full worked exam-style task from start to finish.</p></div></div>
+
+  <h3><small>P4.1</small>How the Paper 2 exam works</h3>
+  <p>Paper 2 is a <strong>3-hour practical exam on a computer</strong> (80 marks, 50% of the qualification). It is a supervised session: you work on the machine, using <strong>Python</strong> (the other approved languages are C# and Java, but this course teaches Python). The exam has two parts: <strong>written questions</strong> (short answers about code, algorithms and data) and <strong>practical tasks</strong> (writing and changing programs on the computer). A <strong>pseudocode reference sheet</strong> is given to you in the exam, so you do not need to memorise the pseudocode words.</p>
+  <p>You may be given <strong>starter code</strong> or <strong>data files</strong> to work with. Your work is saved and marked afterwards — so save often, and make sure your final program is the one you want marked.</p>
+
+  <h3><small>P4.2</small>A time plan for 3 hours</h3>
+  <div class="scroll"><table>
+    <tr><th>Time</th><th>What to do</th></tr>
+    <tr><td>0:00 – 0:15</td><td>Read the whole paper. Note the written questions and the practical tasks, and how many marks each is worth.</td></tr>
+    <tr><td>0:15 – 0:45</td><td>Answer the written questions first — they are quick marks and they warm you up for the coding.</td></tr>
+    <tr><td>0:45 – 2:30</td><td>Work through the practical tasks in order. Read each task fully, plan (input–process–output), then code and test.</td></tr>
+    <tr><td>2:30 – 2:50</td><td>Test everything with the test data in the question. Fix anything that crashes or gives a wrong answer.</td></tr>
+    <tr><td>2:50 – 3:00</td><td>Save all files. Check that the files are in the right place and that your name is on your work if asked.</td></tr>
+  </table></div>
+  <p>If you are stuck on one task for more than 15 minutes, move on and come back to it. Marks are spread across the paper — a half-finished easy task is worth more than a perfect hard one you never reach.</p>
+
+  <h3><small>P4.3</small>Full worked exam-style task</h3>
+  <p><strong>Task:</strong> A club keeps its members' names and ages in a file called <code>members.txt</code> (one member per line, name then age, separated by a comma). Write a program that:</p>
+  <ol>
+    <li>Reads all the members from the file.</li>
+    <li>Counts how many members are under 18.</li>
+    <li>Writes the names of the under-18 members to a file called <code>juniors.txt</code>.</li>
+    <li>Prints the number of junior members.</li>
+  </ol>
+<pre class="code" data-lang="Python">juniors = []
+count = 0
+with open("members.txt") as f:
+    for line in f:
+        parts = line.strip().split(",")
+        name = parts[0]
+        age = int(parts[1])
+        if age &lt; 18:
+            juniors.append(name)
+            count = count + 1
+
+with open("juniors.txt", "w") as f:
+    for name in juniors:
+        f.write(name + "\n")
+
+print("Junior members:", count)</pre>
+  <p>What the examiner is looking for: reading the file line by line, splitting each line on the comma, casting the age to an integer, the condition <code>age &lt; 18</code>, writing the names to the output file, and printing the count. A program that does all of these, even with a small slip in one line, earns most of the marks.</p>
+  <div class="callout warn"><span class="lab">Common mistakes</span>
+    <ul><li>Forgetting to strip the newline, so the age has a hidden character and the cast fails.</li><li>Forgetting to cast the age to an integer, so <code>age &lt; 18</code> compares text with a number and crashes.</li><li>Writing the output file but never closing it or never saving the program — the marker only sees what is saved.</li><li>Spending the whole exam on one hard task and leaving easy marks unanswered.</li></ul>
+  </div>
+
+  <h3><small>P4.4</small>Practice questions</h3>
+  <p>These are practice questions written for this course — they are not from a real past paper.</p>
+  <ol>
+    <li>Paper 2 is 3 hours long and worth 80 marks. How many minutes should you spend, on average, on each mark? [1]</li>
+    <li>A practical task asks you to read numbers from a file, find the largest, and print it. List the four steps you would take before writing any code. [2]</li>
+    <li>Explain why Paper 2 gives you a pseudocode reference sheet, and how you should use it during the exam. [2]</li>
+  </ol>
+  <div class="callout"><span class="lab">Model answers</span>
+    <ol>
+      <li>180 minutes ÷ 80 marks = <strong>about 2 minutes per mark</strong> — so a 10-mark task should take about 20 minutes.</li>
+      <li>Read the task fully; plan input–process–output; write the code in small pieces; test with the test data in the question.</li>
+      <li>So you do not have to memorise the pseudocode words and can spend your time on solving the problem. Use it to check the exact wording (for example <code>LENGTH</code>, <code>SUBSTRING</code>, <code>←</code>) when you read or write pseudocode.</li>
+    </ol>
+  </div>
+</article>
+
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot"><div class="wrap">Pearson Edexcel IGCSE Computer Science 4CP0 revision portal · Notes by Tr. Wai Lin Htet</div></footer>
+
+
+<script>
+(function(){
+'use strict';
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+/* ---------- data ---------- */
+const CH={
+  1:['Problem Solving','Algorithms, decomposition and abstraction; linear search, binary search, bubble sort and merge sort.','p1'],
+  2:['Programming','Sequence, selection and iteration; data types, arrays, operators and subprograms in Python.','p1'],
+  3:['Data','Binary and hexadecimal; how text, images and sound are stored; compression and encryption.','p1'],
+  4:['Computers','Input, process and output; the fetch–decode–execute cycle; logic gates; operating systems and languages.','p1'],
+  5:['Communication and the Internet','Networks, topologies and hardware; protocols; network security.','p1'],
+  6:['The Bigger Picture','Ethical, legal and environmental issues of computing.','p1'],
+  7:['Writing and Debugging Python Programs','From a description to a program; syntax, runtime and logic errors; testing; files.','p2'],
+  8:['Algorithms in Code','Linear and binary search, bubble sort and merge sort in Python; modifying starter code.','p2'],
+  9:['Pseudocode and Trace Tables','Reading pseudocode; trace tables; validation and verification.','p2'],
+  10:['Paper 2 Exam Practice','How the 3-hour practical exam works, a time plan, and a full worked exam-style task.','p2']
+};
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- access state (Firebase gate lives in the module script below) ---------- */
+// The page starts locked (body.chapters-locked): Topic 1 is free and
+// Topics 2-6 + the Practical sections show lock panels until the Firebase module
+// unlocks them. Sign-in buttons carry [data-signin]; this handler works even
+// if the module fails to load (offline), so the call to action never dies.
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-signin]');
+  if(b) location.assign('login.html');
+});
+
+/* ---------- home lists ---------- */
+function disp(paper,k){return paper==='p2'?'P'+(parseInt(k,10)-6):k}
+function rows(paper){
+  return Object.keys(CH).filter(k=>CH[k][2]===paper).map(k=>
+    `<li><button type="button" class="chrow${k==='1'?'':' locked-link'}" data-go="${paper}/${k}"><span class="n">${disp(paper,k)}</span><span class="t">${esc(CH[k][0])}</span><span class="d">${esc(CH[k][1])}</span></button></li>`).join('');
+}
+$('#listP1').innerHTML=rows('p1');
+$('#listP2').innerHTML=rows('p2');
+$('#seeList').addEventListener('click',()=>$('#chapter-list').scrollIntoView({behavior:'smooth',block:'start'}));
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-go]');
+  if(!b) return;
+  const t=b.dataset.go;
+  if(location.hash.replace(/^#/,'')===t) route(); else location.hash=t;
+});
+
+/* ---------- hero byte ---------- */
+(function(){
+  const bits=[0,1,0,0,0,0,0,1], W=[128,64,32,16,8,4,2,1], box=$('#bits');
+  function paint(){
+    box.innerHTML=bits.map((b,i)=>`<button type="button" class="bit" role="switch" aria-checked="${b?'true':'false'}" data-i="${i}" aria-label="Bit worth ${W[i]}">${b}<small>${W[i]}</small></button>`).join('');
+    const v=bits.reduce((s,b,i)=>s+b*W[i],0);
+    $('#rDen').textContent=v;
+    $('#rHex').textContent=v.toString(16).toUpperCase().padStart(2,'0');
+    $('#rChr').textContent=v===32?'space':(v>32&&v<127)?String.fromCharCode(v):'none';
+  }
+  box.addEventListener('click',e=>{const b=e.target.closest('.bit');if(!b)return;const i=+b.dataset.i;bits[i]=bits[i]?0:1;paint();$(`.bit[data-i="${i}"]`,box).focus()});
+  paint();
+})();
+
+/* ---------- readers ---------- */
+const views={};
+['p1','p2'].forEach(paper=>{
+  const r=$(`[data-reader="${paper}"]`), nav=$('.chapnav',r), arts=$$('.chapter',r);
+  const keys=arts.map(a=>a.dataset.ch);
+  const kind=paper==='p2'?'Practical':'Topic';
+  nav.innerHTML=arts.map(a=>`<a href="#${paper}/${a.dataset.ch}" data-ch="${a.dataset.ch}"${a.dataset.ch==='1'?'':' class="locked-link"'}><b>${disp(paper,a.dataset.ch)}</b><span>${esc(a.dataset.title)}</span></a>`).join('');
+  arts.forEach((a,i)=>{
+    const prev=arts[i-1], next=arts[i+1];
+    const p=document.createElement('div');p.className='pager';
+    p.innerHTML=(prev?`<a class="btn${prev.dataset.ch==='1'?'':' locked-link'}" href="#${paper}/${prev.dataset.ch}">Previous: ${kind} ${disp(paper,prev.dataset.ch)}, ${esc(prev.dataset.title)}</a>`:'<span class="sp"></span>')+
+                (next?`<a class="btn solid${next.dataset.ch==='1'?'':' locked-link'}" href="#${paper}/${next.dataset.ch}">Next: ${kind} ${disp(paper,next.dataset.ch)}, ${esc(next.dataset.title)}</a>`:'');
+    a.appendChild(p);
+  });
+  views[paper]={r,nav,arts,keys};
+});
+function showChapter(paper,ch){
+  const v=views[paper];
+  if(!ch||!v.keys.includes(ch)) ch=v.keys[0];
+  v.arts.forEach(a=>a.hidden=a.dataset.ch!==ch);
+  $$('a',v.nav).forEach(a=>a.setAttribute('aria-current',a.dataset.ch===ch?'true':'false'));
+  return ch;
+}
+
+
+/* ---------- router ---------- */
+let lastView=null, lastCh=null;
+function route(){
+  const raw=location.hash.replace(/^#/,'');
+  const [v,sub]=raw.split('/');
+  let view=['p1','p2'].includes(v)?v:'home';
+  // No redirect: locked topics show their lock panel; Topic 1 is free.
+  ['home','p1','p2'].forEach(n=>{$('#view-'+n).hidden=n!==view});
+  $$('.tabs a').forEach(a=>{if(a.dataset.tab===view)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  let ch=null;
+  if(view==='p1'||view==='p2') ch=showChapter(view,sub);
+  if(view!==lastView){window.scrollTo(0,0)}
+  else if(ch&&ch!==lastCh){views[view].r.scrollIntoView({block:'start'})}
+  lastView=view;lastCh=ch;
+  const t={home:'Edexcel IGCSE Computer Science 4CP0 · Theory & Practical Notes',p1:'Paper 1 notes · Edexcel IGCSE Computer Science 4CP0',p2:'Paper 2 practice · Edexcel IGCSE Computer Science 4CP0'};
+  document.title=t[view];
+}
+window.addEventListener('hashchange',route);
+window.__csRoute=route;
+
+/* ---------- ch1 converter ---------- */
+(function(){
+  const d=$('#cv-d'),b=$('#cv-b'),h=$('#cv-h'),note=$('#cv-note');
+  function set(v,src){
+    if(src!=='d')d.value=v;
+    const bin=v.toString(2).padStart(8,'0'), hex=v.toString(16).toUpperCase().padStart(2,'0');
+    if(src!=='b')b.value=bin;
+    if(src!=='h')h.value=hex;
+    note.textContent=`${bin.slice(0,4)} ${bin.slice(4)} → ${hex[0]} ${hex[1]} → denary ${v}`;
+  }
+  const bad=()=>{note.textContent='Enter a whole number from 0 to 255, a binary number of up to 8 bits, or a hex value from 00 to FF.'};
+  d.addEventListener('input',()=>{const v=parseInt(d.value,10);/^\d{1,3}$/.test(d.value.trim())&&v<=255?set(v,'d'):bad()});
+  b.addEventListener('input',()=>{/^[01]{1,8}$/.test(b.value.trim())?set(parseInt(b.value.trim(),2),'b'):bad()});
+  h.addEventListener('input',()=>{/^[0-9a-fA-F]{1,2}$/.test(h.value.trim())?set(parseInt(h.value.trim(),16),'h'):bad()});
+  set(156);
+})();
+
+/* ---------- ch7 bubble sort stepper ---------- */
+(function(){
+  const inp=$('#bs-in'),cells=$('#bs-cells'),msg=$('#bs-msg'),stepB=$('#bs-step'),allB=$('#bs-all');
+  let steps=[],pos=0;
+  function build(a){
+    const n=a.length,arr=a.slice(),done=[];
+    steps=[{arr:arr.slice(),cmp:null,swp:false,done:[],msg:'Start. The list is '+arr.join(', ')+'. Press Step to compare the first pair.'}];
+    for(let i=0;i<n-1;i++){
+      let swapped=false;
+      for(let j=0;j<n-1-i;j++){
+        const x=arr[j],y=arr[j+1];let sw=false;
+        if(x>y){arr[j]=y;arr[j+1]=x;sw=true;swapped=true}
+        steps.push({arr:arr.slice(),cmp:[j,j+1],swp:sw,done:done.slice(),msg:`Pass ${i+1}: is ${x} > ${y}? ${sw?'Yes, so swap them.':'No, so leave them.'}`});
+      }
+      done.push(n-1-i);
+      if(!swapped){
+        for(let k=0;k<n-1-i;k++)done.push(k);
+        steps.push({arr:arr.slice(),cmp:null,swp:false,done:done.slice(),msg:`Pass ${i+1} made no swaps, so the list is sorted: ${arr.join(', ')}.`});
+        return;
+      }
+      steps.push({arr:arr.slice(),cmp:null,swp:false,done:done.slice(),msg:`End of pass ${i+1}: ${arr[n-1-i]} is now in its final place.`});
+    }
+    const all=[...Array(n).keys()];
+    steps.push({arr:arr.slice(),cmp:null,swp:false,done:all,msg:`All passes complete. Sorted: ${arr.join(', ')}.`});
+  }
+  function paint(){
+    const s=steps[pos];
+    cells.innerHTML=s.arr.map((v,i)=>{
+      let c='cell';
+      if(s.cmp&&s.cmp.includes(i))c+=s.swp?' swp':' cmp';
+      else if(s.done.includes(i))c+=' done';
+      return `<div class="${c}">${v}</div>`;
+    }).join('');
+    msg.textContent=s.msg;
+    const end=pos>=steps.length-1;
+    stepB.disabled=end;allB.disabled=end;
+    stepB.style.opacity=allB.style.opacity=end?.5:1;
+  }
+  function load(){
+    const a=inp.value.split(',').map(x=>parseFloat(x.trim())).filter(x=>Number.isFinite(x)).slice(0,10);
+    if(a.length<2){msg.textContent='Enter at least two numbers separated by commas.';return}
+    build(a);pos=0;paint();
+  }
+  $('#bs-load').addEventListener('click',load);
+  stepB.addEventListener('click',()=>{if(pos<steps.length-1){pos++;paint()}});
+  allB.addEventListener('click',()=>{pos=steps.length-1;paint()});
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')load()});
+  load();
+})();
+
+/* ---------- ch10 gates ---------- */
+(function(){
+  const FN={NOT:a=>+!a,AND:(a,b)=>a&b,OR:(a,b)=>a|b,NAND:(a,b)=>+!(a&b),NOR:(a,b)=>+!(a|b),XOR:(a,b)=>a^b};
+  const AND='M30 8H58A22 22 0 0 1 58 52H30Z', OR='M26 8Q62 8 84 30Q62 52 26 52Q40 30 26 8Z';
+  function svg(n){
+    const o={
+      NOT:`<path d="M10 30H30M30 10L74 30L30 50Z M82 30H110" /><circle cx="78" cy="30" r="4"/>`,
+      AND:`<path d="M10 20H30M10 40H30M80 30H110"/><path d="${AND}"/>`,
+      OR:`<path d="M10 20H35M10 40H35M84 30H110"/><path d="${OR}"/>`,
+      NAND:`<path d="M10 20H30M10 40H30M88 30H110"/><path d="${AND}"/><circle cx="84" cy="30" r="4"/>`,
+      NOR:`<path d="M10 20H35M10 40H35M92 30H110"/><path d="${OR}"/><circle cx="88" cy="30" r="4"/>`,
+      XOR:`<path d="M10 20H33M10 40H33M84 30H110"/><path d="${OR}"/><path d="M17 8Q31 30 17 52"/>`
+    }[n];
+    return `<svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${o}</svg>`;
+  }
+  const grid=$('#gateGrid'),A=$('#tgA'),B=$('#tgB');let a=0,b=0;
+  grid.innerHTML=Object.keys(FN).map(n=>`<div class="gate" data-g="${n}">${svg(n)}<b>${n}</b><span class="q">0</span></div>`).join('');
+  function paint(){
+    A.setAttribute('aria-checked',a?'true':'false');B.setAttribute('aria-checked',b?'true':'false');
+    $('span',A).textContent=a;$('span',B).textContent=b;
+    $$('.gate',grid).forEach(g=>{const n=g.dataset.g,v=n==='NOT'?FN.NOT(a):FN[n](a,b);const q=$('.q',g);q.textContent=v;q.classList.toggle('on',!!v);
+      });
+  }
+  A.addEventListener('click',()=>{a=a?0:1;paint()});B.addEventListener('click',()=>{b=b?0:1;paint()});paint();
+
+  const EX=[
+    {t:'X = (A AND B) OR C',v:['A','B','C'],c:[['A AND B',(a,b)=>a&b]],x:(a,b,c)=>(a&b)|c},
+    {t:'X = (A AND B) OR NOT C',v:['A','B','C'],c:[['A AND B',(a,b)=>a&b],['NOT C',(a,b,c)=>+!c]],x:(a,b,c)=>(a&b)|+!c},
+    {t:'X = NOT (A OR B)',v:['A','B'],c:[['A OR B',(a,b)=>a|b]],x:(a,b)=>+!(a|b)},
+    {t:'X = (A XOR B) AND C',v:['A','B','C'],c:[['A XOR B',(a,b)=>a^b]],x:(a,b,c)=>(a^b)&c},
+    {t:'X = NOT (A AND B) AND (B OR C)',v:['A','B','C'],c:[['A AND B',(a,b)=>a&b],['NOT (A AND B)',(a,b)=>+!(a&b)],['B OR C',(a,b,c)=>b|c]],x:(a,b,c)=>(+!(a&b))&(b|c)}
+  ];
+  const sel=$('#ttSel'),out=$('#ttOut');
+  sel.innerHTML=EX.map((e,i)=>`<option value="${i}">${esc(e.t)}</option>`).join('');
+  function tt(){
+    const e=EX[+sel.value],n=e.v.length;
+    let h='<tr>'+e.v.map(v=>`<th>${v}</th>`).join('')+e.c.map(c=>`<th>${esc(c[0])}</th>`).join('')+'<th>X</th></tr>';
+    for(let r=0;r<(1<<n);r++){
+      const bits=e.v.map((_,i)=>(r>>(n-1-i))&1);
+      h+='<tr>'+bits.map(x=>`<td>${x}</td>`).join('')+e.c.map(c=>`<td>${c[1](...bits)}</td>`).join('')+`<td class="out">${e.x(...bits)}</td></tr>`;
+    }
+    out.innerHTML=h;
+  }
+  sel.addEventListener('change',tt);tt();
+})();
+
+/* ---------- start ---------- */
+if(!location.hash) { try{history.replaceState(null,'','#home')}catch(e){} }
+route();
+})();
+</script>
+
+<script type="module">
+  // ===== Firebase Login Gate + Free Topic 1 Preview (v2 pattern, Nov 2026) =====
+  // Access rule: Topic 1 (Problem Solving) is free for everyone. Topics 2-6
+  // and the Practical sections unlock after Google sign-in via the SrWL portal
+  // + teacher approval. No passwords are stored on this page.
+  // The dashboard enrollment + approval remain the real access control; this
+  // check keeps the notes page itself behind the same Google login.
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+  import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+  import { firebaseConfig, firebaseReady } from './assets/portal/firebase-config.js';
+
+  // Tells the offline fallback below that this module loaded.
+  window.__srwlGateRan = true;
+
+  // Google Apps Script Web App URL (attendance logging, same as the ICT notes).
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweswRLHak84m6MkD8DrvxorOaH_ajSIut1uhAitFJDnF1Mrhg_m-vc7nfXaD7ibMBn/exec';
+
+  function logVisit(name, username, event) {
+    if (!SCRIPT_URL) return;
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ name: name, username: username, timestamp: new Date().toISOString(), event: event })
+    }).catch(function (err) { console.warn('Attendance log failed:', err); });
+  }
+
+  const overlay = document.getElementById('authOverlay');
+  const statusMsg = document.getElementById('authStatusMsg');
+  const goLoginBtn = document.getElementById('authGoLoginBtn');
+  const authBtn = document.getElementById('authBtn');
+  const userNameEl = document.getElementById('authUserName');
+  const freeBanner = document.getElementById('freeBanner');
+  const freeBannerMsg = document.getElementById('freeBannerMsg');
+  const freeBannerBtn = document.getElementById('freeBannerBtn');
+  let auth = null;
+
+  function setBanner(text, showButton) {
+    if (freeBannerMsg) freeBannerMsg.textContent = text;
+    if (freeBanner) freeBanner.style.display = 'flex';
+    if (freeBannerBtn) freeBannerBtn.style.display = showButton ? '' : 'none';
+  }
+
+  function hideBanner() {
+    if (freeBanner) freeBanner.style.display = 'none';
+  }
+
+  function showSignedOut() {
+    document.body.classList.add('chapters-locked');
+    if (authBtn) { authBtn.textContent = 'Sign in with Google'; authBtn.classList.add('solid'); }
+    if (userNameEl) userNameEl.hidden = true;
+  }
+
+  function showSignedIn(name) {
+    if (authBtn) { authBtn.textContent = 'Log out'; authBtn.classList.remove('solid'); }
+    if (userNameEl) { userNameEl.textContent = name; userNameEl.hidden = false; }
+  }
+
+  // Free-preview state: Topic 1 readable, Topics 2-6 + Practical sections locked.
+  function lockChapters() {
+    document.body.classList.add('chapters-locked');
+    if (window.__csRoute) window.__csRoute();
+  }
+
+  // Full access: everything unlocked, banner hidden.
+  function unlockChapters(name) {
+    document.body.classList.remove('chapters-locked');
+    hideBanner();
+    if (overlay) overlay.style.display = 'none';
+    showSignedIn(name);
+    if (window.__csRoute) window.__csRoute();
+  }
+
+  // Hard error only: show the full-page overlay (Firebase not configured,
+  // or the account check itself failed).
+  function lockPage(message, showLoginButton) {
+    if (overlay) overlay.style.display = 'flex';
+    if (statusMsg) { statusMsg.textContent = message; statusMsg.className = 'auth-msg show'; }
+    if (goLoginBtn) goLoginBtn.style.display = showLoginButton ? '' : 'none';
+  }
+
+  if (goLoginBtn) goLoginBtn.addEventListener('click', function () { location.assign('login.html'); });
+  if (freeBannerBtn) freeBannerBtn.addEventListener('click', function () { location.assign('login.html'); });
+
+  if (authBtn) {
+    authBtn.addEventListener('click', async function () {
+      if (!auth || !auth.currentUser) { location.assign('login.html'); return; }
+      try { await signOut(auth); } catch (e) { console.warn('Sign-out failed:', e); }
+      location.assign('login.html');
+    });
+  }
+
+  if (!firebaseReady) {
+    lockPage('Firebase is not configured. Please contact your teacher.', false);
+  } else {
+    const app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Same admin check as assets/portal/portal.js: a denied read is not admin.
+    const isAdmin = async (uid) => {
+      try {
+        const snapshot = await getDoc(doc(db, 'admins', uid));
+        return snapshot.exists();
+      } catch (error) {
+        if (error.code === 'permission-denied') return false;
+        throw error;
+      }
+    };
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        // Signed out: no redirect — Topic 1 is free, the rest is locked.
+        showSignedOut();
+        lockChapters();
+        setBanner('📖 Topic 1 is free — sign in with Google to unlock Topics 2–6 and the Practical sections.', true);
+        return;
+      }
+      const displayName = user.displayName || (user.email ? user.email.split('@')[0] : 'Student');
+      try {
+        const admin = await isAdmin(user.uid);
+        let approved = null; // null = could not verify (read denied); dashboard already enforces approval
+        try {
+          const snapshot = await getDoc(doc(db, 'users', user.uid));
+          if (snapshot.exists()) approved = snapshot.data().approved === true;
+        } catch (error) {
+          if (error.code !== 'permission-denied') throw error;
+          console.warn('Could not verify approval - allowing signed-in user. Check Firestore Rules for /users/{uid}.', error);
+        }
+        if (admin || approved === true || approved === null) {
+          unlockChapters(displayName);
+          logVisit(displayName, user.email || user.uid, 'firebase-login');
+        } else {
+          // Signed in, waiting for teacher approval: Topic 1 is free meanwhile.
+          showSignedIn(displayName);
+          lockChapters();
+          setBanner('⏳ Your registration is waiting for teacher approval — you can read Topic 1 meanwhile.', true);
+        }
+      } catch (error) {
+        console.error('Account check failed:', error);
+        lockPage('Unable to verify your account. Please try again or contact your teacher.', true);
+      }
+    });
+  }
+</script>
+<script>
+  // Fallback if the Firebase module above failed to load (e.g. offline).
+  // Topics stay locked (fail closed) but Topic 1 below is still free to read.
+  setTimeout(function () {
+    if (window.__srwlGateRan) return; // module loaded - auth state already handled
+    var banner = document.getElementById('freeBanner');
+    var msg = document.getElementById('freeBannerMsg');
+    if (banner && msg) {
+      banner.style.display = 'flex';
+      msg.textContent = 'Could not reach the sign-in service. Check your connection, then refresh this page. Topic 1 below is still free to read.';
+    }
+  }, 8000);
+</script>
+</body>
+</html>
