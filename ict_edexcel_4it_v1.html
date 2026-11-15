@@ -50,7 +50,7 @@ a{ color:var(--pen); }
 ::selection{ background:var(--highlight); color:#272B33; }
 
 /* ===== Shell ===== */
-#app{ display:none; }
+#app{ display:block; }
 .shell{ display:grid; grid-template-columns:230px 1fr; min-height:100vh; }
 @media (max-width:900px){ .shell{ grid-template-columns:1fr; } }
 
@@ -199,7 +199,7 @@ footer{ text-align:center; padding:50px 20px 70px; color:var(--ink-soft); font-s
 .auth-user button, .tool-btn{
   border:none; background:none; cursor:pointer; color:var(--margin); font-family:'Zilla Slab',serif; font-weight:600; font-size:.8rem;
 }
-#lock-btn{ text-decoration:underline; }
+
 .tool-btn{ background:var(--card); border:1px solid var(--line); border-radius:20px; padding:7px 11px; color:var(--pen); box-shadow:var(--shadow); }
 @media (max-width:640px){ .auth-widget{ top:auto; bottom:14px; right:14px; } }
 
@@ -216,19 +216,106 @@ footer{ text-align:center; padding:50px 20px 70px; color:var(--ink-soft); font-s
 .auth-field input:focus{ border-color:var(--pen); }
 .auth-submit{ margin-top:14px; width:100%; background:var(--pen); color:var(--on-pen); border:none; padding:12px 16px; border-radius:20px; cursor:pointer; font-family:'Zilla Slab',serif; font-weight:600; font-size:.95rem; box-shadow:var(--shadow); }
 .auth-submit:hover{ background:var(--pen-light); }
-#gate-error{ color:var(--warn); font-family:'Zilla Slab',serif; font-size:.85rem; min-height:1.3em; margin-top:8px; }
+
+
+/* ===== Firebase login gate + free Chapter 1 preview (v2 pattern, Nov 2026) ===== */
+#authOverlay{display:none;}
+.auth-msg{
+  font-family:'Zilla Slab',serif; font-size:0.85rem;
+  padding:8px 10px; border-radius:var(--radius); display:none;
+}
+.auth-msg.show{display:block;}
+.auth-msg.err{background:var(--warn-soft); color:var(--warn);}
+.auth-msg.ok{background:var(--tip-soft); color:var(--tip);}
+.auth-note{
+  margin-top:16px; font-size:0.8rem; color:var(--ink-soft);
+  font-family:'Zilla Slab',serif; line-height:1.5;
+}
+.free-banner{
+  display:none; align-items:center; justify-content:center; gap:14px;
+  position:sticky; top:0; z-index:80;
+  background:var(--highlight-soft); color:var(--ink);
+  border-bottom:2px solid var(--highlight);
+  padding:10px 16px; text-align:center;
+  font-family:'Zilla Slab',serif; font-weight:600; font-size:0.95rem;
+}
+.free-banner .free-banner-btn{
+  flex:0 0 auto;
+  background:var(--pen); color:var(--on-pen); border:none;
+  padding:8px 16px; border-radius:20px; cursor:pointer;
+  font-family:'Zilla Slab',serif; font-weight:600; font-size:0.9rem;
+  box-shadow:var(--shadow); white-space:nowrap;
+}
+.free-banner .free-banner-btn:hover{background:var(--pen-light);}
+@media (max-width:640px){ .free-banner{flex-wrap:wrap; gap:8px;} }
+/* Locked chapters: hide everything inside except the lock panel. */
+body.chapters-locked section.locked-chapter > :not(.chapter-lock){display:none;}
+.chapter-lock{display:none;}
+body.chapters-locked .chapter-lock{
+  display:block; text-align:center;
+  background:var(--card); border:2px dashed var(--line); border-radius:12px;
+  padding:44px 24px; margin:24px 0;
+  font-family:'Zilla Slab',serif;
+}
+.chapter-lock .lock-icon{font-size:2.4rem; line-height:1;}
+.chapter-lock h2{margin:10px 0 6px; font-size:1.4rem; color:var(--pen);}
+.chapter-lock p{color:var(--ink-soft); max-width:56ch; margin:0 auto 18px;}
+.chapter-lock .lock-btn{
+  background:var(--pen); color:var(--on-pen); border:none;
+  padding:12px 22px; border-radius:20px; cursor:pointer;
+  font-family:'Zilla Slab',serif; font-weight:600; font-size:1rem;
+  box-shadow:var(--shadow);
+}
+.chapter-lock .lock-btn:hover{background:var(--pen-light);}
+/* Lock marks on contents links while chapters are locked. */
+body.chapters-locked a.locked-link::after{content:" \1F512";}
+@media (min-width:901px){
+  body.chapters-locked .auth-widget{top:60px;}
+}
+@media print{ .free-banner,.chapter-lock{display:none!important;} }
+/* Sign-in pill (shown while signed out). */
+.auth-pill{
+  display:none; align-items:center; gap:8px;
+  background:var(--card); border:1px solid var(--line); border-radius:20px;
+  padding:7px 12px; box-shadow:var(--shadow); cursor:pointer;
+  font-family:'Zilla Slab',serif; font-weight:600; font-size:.85rem; color:var(--pen);
+}
+.auth-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--pen);}
+#authOpenBtn{display:none;}
+/* Exam map (Paper 1 + Paper 2). */
+.exam-map{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:22px;}
+@media (max-width:640px){ .exam-map{grid-template-columns:1fr;} }
+.exam-map .box{margin:0;}
+.exam-map .box h4{color:var(--pen);}
+.exam-map .box p{margin-bottom:.4em; font-size:.92rem;}
+.exam-map .box p:last-child{margin-bottom:0;}
+/* Practical chapter content: code + steps. */
+code{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.88em; background:var(--paper-2); padding:1px 5px; border-radius:3px;}
+pre{background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius); padding:14px 16px; overflow-x:auto; margin:1em 0;}
+pre code{background:none; padding:0; font-size:.85rem;}
+ol.steps{margin:0 0 1em; padding-left:1.4em;}
+ol.steps li{margin-bottom:6px;}
+.box.note h4{color:var(--pen);}
 </style>
 </head>
-<body>
+<body class="chapters-locked">
 
-<div class="auth-overlay" id="gate">
-  <form class="auth-card" id="gate-form" autocomplete="off">
-    <h3>ICT Notebook 📓</h3>
-    <p class="sub">Tr.WaiLinHtet · Unit 1–4 study notes<br>Enter the password to open your notebook.</p>
-    <div class="auth-field"><label for="pw">Password</label><input type="password" id="pw" autocomplete="current-password"></div>
-    <div id="gate-error"></div>
-    <button type="submit" class="auth-submit">Open notebook</button>
-  </form>
+<!-- FREE PREVIEW BANNER — shown while Chapters 2-18 and Exam Prep are locked. -->
+<div class="free-banner" id="freeBanner">
+  <span id="freeBannerMsg">📖 Chapter 1 is free — sign in with Google to unlock Chapters 2–18 and Exam Prep.</span>
+  <button type="button" class="free-banner-btn" id="freeBannerBtn">Sign in with Google</button>
+</div>
+
+<!-- FIREBASE LOGIN GATE — the overlay below is shown only for hard errors.
+     Chapter 1 is free to read; Chapters 2-18 and Exam Prep are locked
+     until Google sign-in + teacher approval. No passwords are stored here. -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-card">
+    <h3>Student Login 📓</h3>
+    <div class="auth-msg show" id="authStatusMsg">Checking your Google sign-in…</div>
+    <button type="button" class="auth-submit" id="authGoLoginBtn" style="display:none;">Go to Login</button>
+    <p class="auth-note">These notes are for approved SrWL Learning students. Sign in with Google on the login page — your teacher approves your account, then your courses appear on your dashboard. Your name and login time are automatically logged in the attendance list.</p>
+  </div>
 </div>
 
 <div id="app">
@@ -236,10 +323,11 @@ footer{ text-align:center; padding:50px 20px 70px; color:var(--ink-soft); font-s
     <button class="tool-btn" id="font-decrease" type="button">A-</button>
     <button class="tool-btn" id="font-increase" type="button">A+</button>
     <button class="tool-btn" id="theme-toggle" type="button">☀ / ☾</button>
-    <div class="auth-user">
-      <div class="avatar">W</div>
-      <span>Student</span>
-      <button id="lock-btn" type="button">Lock</button>
+    <div class="auth-pill" id="authOpenBtn"><span class="dot"></span>Sign in with Google</div>
+    <div class="auth-user" id="authUserBox">
+      <div class="avatar" id="authAvatar">W</div>
+      <span id="authUserName">Student</span>
+      <button id="authLogoutBtn" type="button">log out</button>
     </div>
   </div>
 
@@ -253,13 +341,25 @@ footer{ text-align:center; padding:50px 20px 70px; color:var(--ink-soft); font-s
       <div class="page">
         <section class="cover" id="cover">
           <span class="kicker hand">Edexcel International GCSE</span>
-          <h1>ICT <span>Edexcel 4IT0</span></h1>
-          <div class="subtitle">Exam Revision Notebook — Theory Notes, Chapters 1–12</div>
+          <h1>ICT <span>Edexcel 4IT1</span></h1>
+          <div class="subtitle">Exam Revision Notebook — Theory &amp; Practical Notes, Chapters 1–18</div>
           <div class="byline"><div class="avatar">W</div><div>Notes by <strong>Tr.WaiLinHtet</strong></div></div>
           <div class="meta-row">
-            <div><b>Syllabus:</b> Edexcel International GCSE ICT 4IT0</div>
+            <div><b>Syllabus:</b> Edexcel International GCSE ICT 4IT1</div>
             <div><b>Format:</b> Notebook-style revision notes</div>
             <div><b>Use:</b> Read, revise, tick off before the exam</div>
+          </div>
+          <div class="exam-map">
+            <div class="box">
+              <h4>Paper 1 — Written paper</h4>
+              <p><b>1 hour 30 minutes · 100 marks · 50%</b></p>
+              <p>Topics 1–4 (Units 1–4): Digital Devices, Connectivity, Operating Online, Online Goods and Services.</p>
+            </div>
+            <div class="box">
+              <h4>Paper 2 — Practical</h4>
+              <p><b>3 hours (includes printing time) · 100 marks · 50%</b></p>
+              <p>Topics 5–6 (Units 5–6): Applying ICT and Software Skills. Scenario-based tasks in a one-week window in May/June.</p>
+            </div>
           </div>
           <div class="box tip" style="margin-top:30px; max-width:70ch;">
             <h4>How to use this notebook</h4>
@@ -268,8 +368,14 @@ footer{ text-align:center; padding:50px 20px 70px; color:var(--ink-soft); font-s
           <div class="toc" id="coverToc"></div>
         </section>
 
-        <section class="chapter" id="examprep">
-          <div class="chapter-head"><div class="badge">✎</div><h2>Exam Preparation — Edexcel International GCSE ICT (4IT0)</h2></div>
+        <section class="chapter locked-chapter" id="examprep">
+          <div class="chapter-lock">
+            <div class="lock-icon">🔒</div>
+            <h2>Exam Preparation — Edexcel (4IT1)</h2>
+            <p>This section is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p>
+            <button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>
+          </div>
+          <div class="chapter-head"><div class="badge">✎</div><h2>Exam Preparation — Edexcel International GCSE ICT (4IT1)</h2></div>
           <p class="chapter-intro">Command words, technique tips, and a revision checklist to work through before the exam.</p>
 
           <h3 style="color:var(--pen)">Command words &amp; how many marks they're worth</h3>
@@ -828,6 +934,496 @@ const DATA = [
       ]
     }
   ]
+},
+{
+  unit:"Unit 5", title:"Applying ICT", sub:"Topic 5 — Using software to produce ICT-based solutions",
+  chapters:[
+    {
+      id:"c13", num:13, title:"Document Production",
+      html:`
+      <h4>What you must be able to do</h4>
+      <ul>
+        <li>Organise <b>page layout</b>: page size, page orientation, page margins, number of columns, column width, spacing between columns, and set or remove breaks — page breaks, section breaks and column breaks.</li>
+        <li>Format text: <b>line spacing</b> (single, 1.5 times, double, multiple) and spacing before and after paragraphs; <b>tabulation</b> — left, right, centred and decimal tabs; indented paragraphs and hanging paragraphs; text enhancement — bold, underline, italic, superscript and subscript, changes in case; bulleted and numbered lists.</li>
+        <li>Create, modify, update and apply <b>styles</b> so a document stays consistent — and follow a <b>house style</b> (fixed fonts, colours, sizes and spacing).</li>
+        <li><b>Find and replace</b> text, including matching case and whole words.</li>
+        <li>Add and delete <b>bookmarks</b> and <b>hyperlinks</b>.</li>
+        <li><b>Proof</b> your work: spell check and grammar check; validation routines (range, character, length, type, format, presence); visual verification (transposed numbers, wrong spelling, inconsistent spacing and case); proofreading (blank pages, widows and orphans, split tables, inconsistent styles).</li>
+        <li><b>Mail merge</b>: set up a main document and a data source, insert merge fields, preview the merged letters, then complete the merge.</li>
+      </ul>
+      <p><strong>Know and understand:</strong> <b>pagination</b> — the purpose of setting page, section and column breaks (to control exactly where a page, a section or a column starts). A <b>gutter margin</b> is the extra space left on the inside edge of a page for binding — it is not the same as a normal margin. A <b>house style</b> is a fixed set of fonts, colours, sizes and spacing that an organisation uses on every document so everything it produces looks the same and is easy to recognise.</p>
+      <h4>Images and graphics</h4>
+      <p>Place an image with precision; <b>resize</b> it as specified and maintain or adjust the <b>aspect ratio</b>; <b>crop</b> it; <b>rotate</b> it; <b>reflect (flip)</b> it horizontally or vertically; adjust <b>brightness</b> and <b>contrast</b>; <b>group and layer</b> images (group and ungroup, move to the front or to the back). Reducing the file size of an image can be done by reducing its resolution or its colour depth.</p>
+      <h3>Worked example — format a two-column leaflet</h3>
+      <ol class="steps">
+        <li>Set the columns: <strong>Layout → Columns → Two</strong>. Then <strong>Layout → Columns → More Columns</strong> → set the column width to <code>7 cm</code> and the spacing between columns to <code>1 cm</code>.</li>
+        <li>Set the gutter margin: <strong>Layout → Margins → Custom Margins</strong> → set the gutter to <code>1.5 cm</code> for binding.</li>
+        <li>Set the line spacing: select the heading → <strong>Home → Paragraph → Line Spacing → 1.5</strong>. Set the spacing after each paragraph to <code>6 pt</code>.</li>
+        <li>Set a decimal tab for the price list: click on the ruler to open the Tabs box → set a <strong>decimal tab at 12 cm</strong>. Now prices line up on the decimal point when you press Tab.</li>
+        <li>Find and replace: press <strong>Ctrl + H</strong> → find <code>colour</code>, replace with <code>color</code> → tick <strong>Match case</strong> → <strong>Replace All</strong>. Then check the result — "Match case" means only "colour" with a small c is changed.</li>
+        <li>Add a bookmark: click at the start of the Prices section → <strong>Insert → Bookmark</strong> → name it <code>Prices</code> → <strong>Add</strong>.</li>
+        <li>Add a hyperlink to the bookmark: select the words "See prices" → <strong>Insert → Link → Place in This Document → Prices</strong> → <strong>OK</strong>.</li>
+        <li>Control pagination: put the cursor before the new section → <strong>Layout → Breaks → Page Break</strong>. Never press Enter many times to push text onto the next page.</li>
+      </ol>
+      <h3>Worked example — mail merge a letter to every student</h3>
+      <p>The data source is a spreadsheet with one row per student: <code>FirstName</code>, <code>Surname</code>, <code>Address</code>, <code>Town</code>.</p>
+      <ol class="steps">
+        <li>Write the main document — the letter, with the greeting and address left as placeholders.</li>
+        <li>Connect the data source: <strong>Mailings → Select Recipients → Use an Existing List</strong> → choose the spreadsheet and the correct sheet.</li>
+        <li>Insert the merge fields: click where the name goes → <strong>Mailings → Insert Merge Field → FirstName</strong>, then <code>Surname</code>; do the same for <code>Address</code> and <code>Town</code>. The fields appear as <code>&lt;&lt;FirstName&gt;&gt;</code>.</li>
+        <li>Preview the result: <strong>Mailings → Preview Results</strong> → click through several records to check every letter reads correctly.</li>
+        <li>Complete the merge: <strong>Mailings → Finish &amp; Merge → Print Documents</strong> — or choose <strong>Edit Individual Documents</strong> first, so you can check the merged letters before printing.</li>
+      </ol>
+      <div class="box tip">
+        <h4>Exam tips</h4>
+        <p>A gutter margin is the extra space for binding — do not confuse it with a normal margin. A decimal tab lines numbers up on the decimal point, which is what prices need. "Match case" and "Find whole words only" change what gets replaced — always check the result after replacing. Breaks control where a page, section or column starts; pressing Enter again and again is not a break and will move when the text changes. Superscript is for powers (x²) and subscript is for chemical formulas (H₂O) — the exam tests both. In a mail merge, check that every merge field name matches a column in the data source exactly, and always preview before printing the whole merge. Resizing without locking the aspect ratio stretches the image — examiners check this.</p>
+      </div>`,
+      vocab:[
+        ["gutter margin","extra space on the inside edge of a page, left for binding."],
+        ["pagination","controlling exactly where a page, section or column starts, using breaks."],
+        ["decimal tab","a tab stop that lines numbers up on the decimal point."],
+        ["house style","a fixed set of fonts, colours, sizes and spacing used on every document an organisation produces."],
+        ["mail merge","combining a main document with a data source to produce many personalised copies."],
+        ["merge field","a placeholder in the main document, such as <<FirstName>>, replaced by data from the data source."],
+        ["data source","the file (often a spreadsheet or database table) holding the names and addresses used in a mail merge."],
+        ["bookmark","a named place in a document that a hyperlink can jump to."],
+        ["hanging paragraph","a paragraph where the first line starts at the left margin and the rest of the lines are indented."],
+        ["validation","a check that stops wrong data being entered, e.g. a range check or a presence check."]
+      ],
+      recap:[
+        "Gutter margin = extra space for binding. Decimal tab = numbers line up on the decimal point.",
+        "Styles keep a document consistent — change the style once and every heading using it updates.",
+        "Mail merge = main document + data source + merge fields; always preview before printing the whole merge."
+      ],
+      qa:[
+        ["State what is meant by the term 'gutter margin'. <span class=\"mk\">[1 mark]</span>","The extra space left on the inside edge of a page for binding <span class=\"mk\">(1)</span>."],
+        ["State two ways of formatting text in a document. <span class=\"mk\">[2 marks]</span>","Any two from: line spacing <span class=\"mk\">(1)</span>; tabulation <span class=\"mk\">(1)</span>; indented paragraphs <span class=\"mk\">(1)</span>; bold, underline or italic <span class=\"mk\">(1)</span>; superscript or subscript <span class=\"mk\">(1)</span>; bulleted or numbered lists <span class=\"mk\">(1)</span>."],
+        ["Explain why a house style is used. <span class=\"mk\">[2 marks]</span>","So that every document an organisation produces looks the same <span class=\"mk\">(1)</span> and is easy to recognise / gives a professional image <span class=\"mk\">(1)</span>."],
+        ["Describe how to set a decimal tab. <span class=\"mk\">[2 marks]</span>","Click on the ruler to open the Tabs box <span class=\"mk\">(1)</span> and set a decimal tab at the required position, e.g. 12 cm <span class=\"mk\">(1)</span>."],
+        ["Explain why 'Match case' must be used with care in Find and Replace. <span class=\"mk\">[2 marks]</span>","Because 'Match case' only changes the word with the exact capitalisation typed <span class=\"mk\">(1)</span>, so other capitalisations of the same word are left unchanged <span class=\"mk\">(1)</span>."],
+        ["Describe the three parts of a mail merge. <span class=\"mk\">[3 marks]</span>","A main document — the letter or form <span class=\"mk\">(1)</span>; a data source — the file holding the names and addresses <span class=\"mk\">(1)</span>; merge fields — placeholders in the main document replaced by the data <span class=\"mk\">(1)</span>."]
+      ]
+    },
+    {
+      id:"c14", num:14, title:"Spreadsheets",
+      html:`
+      <h4>What you must be able to do</h4>
+      <ul>
+        <li><strong>Create and edit a spreadsheet model:</strong> insert or delete cells, rows and columns; merge cells; create formulae using cell references; replicate formulae using <strong>absolute and relative cell references</strong> where appropriate; use arithmetic operators — add, subtract, multiply, divide, indices (powers); use <strong>named cells and named ranges</strong>; use functions — SUM, AVERAGE, MAX, MIN, INT, ROUND, COUNT, LOOKUP, VLOOKUP, HLOOKUP, XLOOKUP, IF; use external data sources inside functions; use <strong>nested functions</strong>.</li>
+        <li><strong>Manipulate data:</strong> sort with a single criterion or multiple criteria, ascending or descending; search and select subsets of data with a single criterion or multiple criteria, using operators AND, OR, NOT, &gt;, &lt;, =, &gt;=, &lt;=, &lt;&gt;, and wildcards.</li>
+        <li><strong>Present data:</strong> display formulae or values; adjust row height, column width and cell sizes so all data, labels and formulae are fully visible; wrap text inside cells; hide and display rows and columns; format a spreadsheet — text colour, cell colour, bold, underline, italic, shading; format numbers — decimal places, currency symbols, percentages; use <strong>conditional formatting</strong> to change how a cell looks depending on its contents; set page layout — portrait or landscape orientation, print on a specified number of pages, print area, show or hide gridlines, show or hide row and column headings.</li>
+      </ul>
+      <p><strong>Know and understand:</strong> a <strong>formula</strong> is a calculation you write yourself with cell references and operators, for example <code>=B2+C2</code>. A <strong>function</strong> is a ready-made calculation with a name, for example <code>=SUM(B2:B5)</code>. The <strong>order of operations</strong> is: brackets first, then indices (powers), then multiplication and division, then addition and subtraction — use brackets to make sure a formula works as you mean it. A <strong>relative reference</strong> (B2) moves when you copy a formula; an <strong>absolute reference</strong> ($B$2) stays fixed.</p>
+      <div class="table-responsive">
+        <table>
+          <tr><th>Function</th><th>What it does</th><th>Example</th></tr>
+          <tr><td><code>SUM</code></td><td>Adds a range of numbers</td><td><code>=SUM(B2:B5)</code></td></tr>
+          <tr><td><code>AVERAGE</code></td><td>Mean of a range</td><td><code>=AVERAGE(B2:B5)</code></td></tr>
+          <tr><td><code>MAX</code> / <code>MIN</code></td><td>Largest / smallest value</td><td><code>=MAX(B2:B5)</code></td></tr>
+          <tr><td><code>COUNT</code></td><td>Counts cells with numbers</td><td><code>=COUNT(B2:B5)</code></td></tr>
+          <tr><td><code>INT</code></td><td>Rounds a number down to the integer</td><td><code>=INT(7.8)</code> → 7</td></tr>
+          <tr><td><code>ROUND</code></td><td>Rounds to a set number of decimal places</td><td><code>=ROUND(3.456,2)</code> → 3.46</td></tr>
+          <tr><td><code>IF</code></td><td>Tests a condition, returns one value if true, another if false</td><td><code>=IF(B2&gt;=50,"Pass","Fail")</code></td></tr>
+          <tr><td><code>VLOOKUP</code></td><td>Finds a value in the first column of a table, returns a value from the same row</td><td><code>=VLOOKUP(A2,Grades!$A$2:$B$6,2,FALSE)</code></td></tr>
+          <tr><td><code>HLOOKUP</code></td><td>Same as VLOOKUP, but searches across the first row</td><td><code>=HLOOKUP("Q3",A1:D2,2,FALSE)</code></td></tr>
+          <tr><td><code>XLOOKUP</code></td><td>Modern lookup — no column number needed</td><td><code>=XLOOKUP("Emma",A2:A4,B2:B4)</code></td></tr>
+          <tr><td><code>LOOKUP</code></td><td>Finds a value in one row or column, returns the matching value from another</td><td><code>=LOOKUP("Samit",A2:A4,B2:B4)</code></td></tr>
+        </table>
+      </div>
+      <h3>Worked example — build a grade calculator</h3>
+      <p>Student names are in A2:A5, scores in B2:B5. Cell B1 holds the pass mark, 50. The grade table is on a sheet called <code>Grades</code>, in A2:B6.</p>
+      <ol class="steps">
+        <li>Name the pass mark cell: click cell B1, click in the <strong>Name Box</strong> (left of the formula bar), type <code>PassMark</code> and press Enter. Now the formula can use the name <code>PassMark</code> instead of <code>$B$1</code>.</li>
+        <li>Total and average: in B6 type <code>=SUM(B2:B5)</code>; in B7 type <code>=AVERAGE(B2:B5)</code>; in B8 type <code>=ROUND(AVERAGE(B2:B5),2)</code> to show the average to 2 decimal places.</li>
+        <li>Highest and lowest: in B9 type <code>=MAX(B2:B5)</code>; in B10 type <code>=MIN(B2:B5)</code>; in B11 type <code>=COUNT(B2:B5)</code> to count how many scores there are.</li>
+        <li>Pass or fail: in C2 type <code>=IF(B2&gt;=PassMark,"Pass","Fail")</code>. Copy the formula down to C5 — the relative reference B2 changes to B3, B4, B5, but the named cell PassMark stays fixed.</li>
+        <li>Look up the grade: in D2 type <code>=VLOOKUP(A2,Grades!$A$2:$B$6,2,FALSE)</code>. The <code>$</code> signs make the table range absolute, so it does not move when you copy the formula down. <code>FALSE</code> means exact match — the name must be found exactly. Copy D2 down to D5.</li>
+        <li>Nested function: in E2 type <code>=IF(AVERAGE(B2:B5)&gt;=80,"Distinction",IF(AVERAGE(B2:B5)&gt;=50,"Pass","Fail"))</code>. Count the brackets: every opening bracket needs a closing one.</li>
+        <li>Order of operations: <code>=2+3*4</code> gives 14 (multiplication first). <code>=(2+3)*4</code> gives 20 (brackets first). Use brackets whenever you are not sure.</li>
+        <li>Sort the data: select the table → <strong>Data → Sort</strong> → sort by <code>Score</code>, Largest to Smallest, then add a level → sort by <code>Name</code>, A to Z.</li>
+        <li>Conditional formatting: select B2:B5 → <strong>Home → Conditional Formatting → Highlight Cells Rules → Greater Than</strong> → type <code>80</code> → choose green fill. Now every score above 80 turns green automatically.</li>
+        <li>Page layout: <strong>Page Layout → Orientation → Landscape</strong>; set <strong>Fit to 1 page wide</strong>; set the <strong>Print Area</strong> to A1:E11; untick <strong>Print Gridlines</strong> if the task says so. Check Print Preview — every value must be fully visible, with no <code>###</code> showing in a column that is too narrow.</li>
+        <li>Formula view: <strong>Formulas → Show Formulas</strong> displays the formulae instead of the values. Take a screenshot of the formula view for your evidence, then switch it off again.</li>
+      </ol>
+      <div class="box tip">
+        <h4>Exam tips</h4>
+        <p>A relative reference moves when you copy a formula; an absolute reference (<code>$A$1</code>) does not — always use <code>$</code> on a lookup table range, or the range will slide down and the lookup will break. VLOOKUP needs <code>FALSE</code> for an exact match, and the lookup value must be in the <strong>first</strong> column of the table. Nested IFs need the same number of closing brackets as opening ones — count them. A column that is too narrow shows <code>###</code> instead of the number: widen the column before printing. Always check the printed page shows all data in full.</p>
+      </div>
+      <div class="box note">
+        <h4>Full guide</h4>
+        <p>The complete step-by-step spreadsheet guide — the core modules, the lookup evolution (LOOKUP, VLOOKUP, HLOOKUP, INDEX + MATCH, XLOOKUP, FILTER), the formula finder and the practice quiz — is on the <a href="/excel_spreadsheet_guide">Excel Spreadsheets Guide</a> page.</p>
+      </div>`,
+      vocab:[
+        ["formula","a calculation you write yourself with cell references and operators, e.g. =B2+C2."],
+        ["function","a ready-made calculation with a name, e.g. =SUM(B2:B5)."],
+        ["relative reference","a cell reference, e.g. B2, that moves when the formula is copied."],
+        ["absolute reference","a cell reference with $ signs, e.g. $B$2, that stays fixed when the formula is copied."],
+        ["named cell","a cell given a name, e.g. PassMark, so formulae can use the name instead of the reference."],
+        ["nested function","one function used inside another, e.g. =ROUND(AVERAGE(B2:B5),2)."],
+        ["conditional formatting","formatting that changes how a cell looks depending on its contents."],
+        ["print area","the range of cells set to print, ignoring the rest of the sheet."]
+      ],
+      recap:[
+        "Formula = you write it. Function = ready-made with a name. Brackets first, then indices, then ×/÷, then +/−.",
+        "Relative references move when copied; absolute references ($A$1) stay fixed — use $ on lookup table ranges.",
+        "VLOOKUP needs FALSE for an exact match and the lookup value must be in the first column of the table."
+      ],
+      qa:[
+        ["State the difference between a formula and a function. <span class=\"mk\">[2 marks]</span>","A formula is a calculation written by the user with cell references and operators <span class=\"mk\">(1)</span>; a function is a ready-made calculation with a name <span class=\"mk\">(1)</span>."],
+        ["Explain why an absolute reference is used for a VLOOKUP table range. <span class=\"mk\">[2 marks]</span>","So the table range does not move when the formula is copied down <span class=\"mk\">(1)</span>, otherwise the lookup would search the wrong rows and break <span class=\"mk\">(1)</span>."],
+        ["Write the formula to test whether the value in B2 is 50 or more, showing 'Pass' if true and 'Fail' if false. <span class=\"mk\">[1 mark]</span>","<code>=IF(B2&gt;=50,\"Pass\",\"Fail\")</code> <span class=\"mk\">(1)</span>."],
+        ["State what <code>=ROUND(3.456,2)</code> returns. <span class=\"mk\">[1 mark]</span>","3.46 <span class=\"mk\">(1)</span>."],
+        ["Explain what <code>###</code> in a cell means and how to fix it. <span class=\"mk\">[2 marks]</span>","It means the column is too narrow to show the number <span class=\"mk\">(1)</span>; widen the column until the value is fully visible <span class=\"mk\">(1)</span>."],
+        ["Describe one use of conditional formatting. <span class=\"mk\">[2 marks]</span>","To change how a cell looks depending on its contents <span class=\"mk\">(1)</span>, for example turning every score above 80 green automatically <span class=\"mk\">(1)</span>."]
+      ]
+    },
+    {
+      id:"c15", num:15, title:"Databases",
+      html:`
+      <h4>What you must be able to do</h4>
+      <ul>
+        <li><strong>Create a database structure:</strong> import data from existing files (including <code>.csv</code> and <code>.txt</code>) using specified field names to create tables; set appropriate data types — text, numeric (integer, decimal, currency), date/time, Boolean/logical; set numeric sub-types (percentage, number of decimal places); set the display format of a Boolean/logical field (yes/no, true/false, checkbox); set the display format of date/time data; create and edit <strong>primary and foreign keys</strong>; create <strong>relationships</strong> between tables.</li>
+        <li><strong>Create and use a data entry form:</strong> specified fields, appropriate font styles and sizes, appropriate spacing between fields, character spacing of individual fields, use of white space, radio buttons, check boxes and drop-down menus.</li>
+        <li><strong>Perform calculations:</strong> arithmetic operations or numeric functions in calculated fields and calculated controls — addition, subtraction, multiplication, division, sum, average, maximum, minimum, count.</li>
+        <li><strong>Sort data:</strong> a single criterion or multiple criteria, ascending or descending.</li>
+        <li><strong>Search and select data:</strong> a single criterion or multiple criteria in a query; operators <strong>AND, OR, NOT, LIKE, &gt;, &lt;, =, &gt;=, &lt;=, &lt;&gt;</strong>; wildcards.</li>
+        <li><strong>Present data:</strong> produce reports showing all the required data and labels in full; use report headers and footers (report header, report footer, page header, page footer); set report titles; use different output layouts (tabular or columnar); align data and labels appropriately — right-align numeric data, decimal alignment; control the display format of numeric data — number of decimal places, currency symbol, percentage.</li>
+      </ul>
+      <p><strong>Know and understand:</strong> a <strong>flat-file database</strong> is a single table with no relationships — simple, but data is repeated and it is hard to keep consistent. A <strong>relational database</strong> has several linked tables, uses primary and foreign keys, avoids repeating data, and is more secure and efficient. A <strong>primary key</strong> is a field that is unique for every record and never changes — it identifies the record. A <strong>foreign key</strong> is a primary key from another table, stored in this table to link the two tables. Good form design means: only the fields the user needs, clear labels, sensible spacing and white space, and the right control for each field (drop-down list for a fixed choice, check box for yes/no, radio buttons for one choice from a few).</p>
+      <div class="table-responsive">
+        <table>
+          <tr><th>Data type</th><th>Use it for</th><th>Key properties</th></tr>
+          <tr><td>Short Text</td><td>Names, codes, emails, categories</td><td>Field Size, Required, Indexed</td></tr>
+          <tr><td>Long Text</td><td>Comments, long descriptions</td><td>Usually no indexing</td></tr>
+          <tr><td>Number</td><td>Quantity, counts, numeric identifiers</td><td>Field Size (Integer / Long), Decimal Places</td></tr>
+          <tr><td>Date/Time</td><td>Date of birth, order date, deadline</td><td>Format (Short Date), Input Mask</td></tr>
+          <tr><td>Currency</td><td>Price, fee, cost</td><td>Format Currency, Decimal Places (2)</td></tr>
+          <tr><td>Yes/No</td><td>Flags such as Paid or Active</td><td>Display as checkbox, yes/no, or true/false</td></tr>
+        </table>
+      </div>
+      <h3>Worked example — build a student database and a query</h3>
+      <ol class="steps">
+        <li>Import the data: <strong>External Data → New Data Source → From File → Text File</strong> → select <code>Students.csv</code> → tick <strong>First Row Contains Field Names</strong> → <strong>Finish</strong>.</li>
+        <li>Open the table in <strong>Design View</strong>. Set the data types: <code>StudentID</code> — Short Text; <code>Fee</code> — Currency, 2 decimal places; <code>Paid</code> — Yes/No, display as checkbox; <code>DateJoined</code> — Date/Time, Short Date format.</li>
+        <li>Set the primary key: right-click <code>StudentID</code> → <strong>Primary Key</strong>. Save the table.</li>
+        <li>Create the relationship: <strong>Database Tools → Relationships</strong> → add the <code>Students</code> and <code>Enrolments</code> tables → drag <code>StudentID</code> from Students onto <code>StudentID</code> in Enrolments → tick <strong>Enforce Referential Integrity</strong> → <strong>Create</strong>.</li>
+        <li>Build a query: <strong>Create → Query Design</strong> → add the <code>Students</code> table → drag the fields <code>Surname</code>, <code>Score</code> and <code>Town</code> into the grid.</li>
+        <li>Add criteria: type <code>&gt;=50</code> under <code>Score</code> (only scores of 50 or more); type <code>Like "Sm*"</code> under <code>Surname</code> (only surnames starting with "Sm"). Criteria on the <strong>same row</strong> means AND — both must be true.</li>
+        <li>Add a calculated field: in an empty Field cell type <code>Total: [Quantity]*[UnitPrice]</code>. Access multiplies the two fields for every record. A calculated control on a form or report works the same way.</li>
+        <li>Sort the results: under <code>Surname</code> set Sort to <strong>Ascending</strong>; under <code>Score</code> set Sort to <strong>Descending</strong>. Run the query (<strong>Run</strong>, the red exclamation mark).</li>
+        <li>Make the report: select the query → <strong>Create → Report</strong>. Set the <strong>report title</strong> at the top, add a <strong>report header</strong> with the school name, and a <strong>page footer</strong> with page numbers. Right-align all numeric data and check that every label and every value shows in full — nothing cut off.</li>
+        <li>Take the evidence screenshot of the report in Print Preview and place it in your Evidence Document.</li>
+      </ol>
+      <p><strong>Query operators you must know:</strong> <code>AND</code> (both true), <code>OR</code> (at least one true), <code>NOT</code> (not true), <code>LIKE</code> (matches a pattern), <code>&gt;</code>, <code>&lt;</code>, <code>=</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>&lt;&gt;</code> (not equal). <code>In ("London", "Birmingham")</code> matches a value in a list. <strong>Wildcards:</strong> <code>*</code> matches any number of characters (<code>Sm*</code> finds Smith, Small, Smythe), <code>?</code> matches exactly one character (<code>Sm?th</code> finds Smith and Smyth).</p>
+      <div class="box tip">
+        <h4>Exam tips</h4>
+        <p>Never use a name as a primary key — names can repeat. The primary key and the foreign key must be the same data type, or the relationship will fail. In a query, criteria on the same row means AND and criteria on different rows means OR — this is the most tested rule in the whole section. <code>*</code> matches any characters and <code>?</code> matches one character. A report must show <strong>all</strong> labels and data in full: text cut off at the edge of a column loses marks. Always take the evidence screenshot of the report and of the relationship window.</p>
+      </div>
+      <div class="box note">
+        <h4>Full guide</h4>
+        <p>The complete step-by-step database guide — the workflow (import, data types, primary key, relationships, queries, sort &amp; filter, calculated fields, reports and forms) — is on the <a href="/ms_access_database_guide">Microsoft Access Database Guide</a> page.</p>
+      </div>`,
+      vocab:[
+        ["flat-file database","a single table with no relationships — simple, but data is repeated."],
+        ["relational database","several linked tables using primary and foreign keys, avoiding repeated data."],
+        ["primary key","a field that is unique for every record and never changes — it identifies the record."],
+        ["foreign key","a primary key from another table, stored in this table to link the two tables."],
+        ["query","a search that selects records matching criteria from a table."],
+        ["calculated field","a field in a query that works out a value from other fields, e.g. Total: [Quantity]*[UnitPrice]."],
+        ["report header","a section at the top of a report, shown once — used for the report title and school name."],
+        ["wildcard","a character that stands for other characters in a search — * for any number, ? for exactly one."]
+      ],
+      recap:[
+        "Flat-file = one table, data repeated. Relational = linked tables, primary + foreign keys, no repeated data.",
+        "In a query, criteria on the same row = AND; criteria on different rows = OR.",
+        "* matches any characters, ? matches one character. A report must show all labels and data in full."
+      ],
+      qa:[
+        ["State what is meant by the term 'primary key'. <span class=\"mk\">[1 mark]</span>","A field that is unique for every record and never changes <span class=\"mk\">(1)</span>."],
+        ["Explain why a relational database is better than a flat-file database. <span class=\"mk\">[2 marks]</span>","Data is not repeated across tables <span class=\"mk\">(1)</span>, so it is easier to keep consistent and more efficient / secure <span class=\"mk\">(1)</span>."],
+        ["State the data type for a price field and give one property to set. <span class=\"mk\">[2 marks]</span>","Currency <span class=\"mk\">(1)</span>; format Currency with 2 decimal places <span class=\"mk\">(1)</span>."],
+        ["A query has criteria on the same row. State what this means. <span class=\"mk\">[1 mark]</span>","AND — both criteria must be true <span class=\"mk\">(1)</span>."],
+        ["Write the criteria to find surnames starting with 'Sm'. <span class=\"mk\">[1 mark]</span>","<code>Like \"Sm*\"</code> <span class=\"mk\">(1)</span>."],
+        ["Explain the difference between * and ? as wildcards. <span class=\"mk\">[2 marks]</span>","* matches any number of characters <span class=\"mk\">(1)</span>; ? matches exactly one character <span class=\"mk\">(1)</span>."]
+      ]
+    }
+  ]
+},
+{
+  unit:"Unit 6", title:"Software Skills", sub:"Topic 6 — Functional skills across the software range",
+  chapters:[
+    {
+      id:"c16", num:16, title:"Presentations",
+      html:`
+      <h4>What you must be able to do</h4>
+      <ul>
+        <li>Create a presentation using a text file.</li>
+        <li>Use a <strong>master slide</strong>: insert and edit objects consistently — images, text, shapes, logos, slide headers and footers, placeholder position, automated slide numbering. Format master slide objects — headings, subheadings, bullets, background colour.</li>
+        <li>Edit a presentation: apply a slide layout; insert a new slide; move or delete a slide; insert and edit objects — text (headings, subheadings, bulleted lists), images (still images, video clips, animated images), charts, tables, audio clips (sound), symbols, lines, arrows, call-out boxes and shapes.</li>
+        <li>Add <strong>presenter notes</strong>.</li>
+        <li>Insert and edit a <strong>hyperlink</strong> — link text or an object to a slide inside the presentation, an external file, or an email address.</li>
+        <li>Insert an <strong>action button</strong> and change its settings to navigate to a specified slide or file.</li>
+        <li>Add <strong>alternative text (alt text)</strong> or a screentip to an object.</li>
+        <li>Apply consistent <strong>transitions</strong> between slides and consistent <strong>animation</strong> effects on text, images and other objects.</li>
+        <li><strong>Hide slides</strong> inside a presentation.</li>
+        <li>Output the presentation: display it as a looped on-screen carousel or presenter controlled; print it as full page slides, presenter notes, or handouts.</li>
+      </ul>
+      <h3>Worked example — build a 6-slide talk from a text file</h3>
+      <ol class="steps">
+        <li>Create the presentation from the text file: <strong>New → Open</strong> the outline text file, or <strong>Home → New Slide → Slides from Outline</strong> → select <code>Talk.txt</code>. Each line becomes a slide title or a bullet point.</li>
+        <li>Set up the master slide: <strong>View → Slide Master</strong>. Insert the school logo, the footer text and the slide number field once — they now appear on every slide. Set the heading font, the subheading font, the bullet style and the background colour here.</li>
+        <li>Apply layouts: select each slide → <strong>Home → Layout</strong> → choose <strong>Title and Content</strong> for text slides and <strong>Title Only</strong> for the picture slide.</li>
+        <li>Add objects: <strong>Insert → Pictures</strong> for a still image; <strong>Insert → Chart</strong> for a chart; <strong>Insert → Table</strong> for a table; <strong>Insert → Audio</strong> for a sound clip. Add a call-out box with <strong>Insert → Shapes → Callout</strong>.</li>
+        <li>Add presenter notes: click in the <strong>Notes</strong> pane under a slide and type what the presenter should say.</li>
+        <li>Add a hyperlink: select the logo → <strong>Insert → Link</strong> → type the school website address. Or link text to another slide: <strong>Place in This Document → Slide 6</strong>.</li>
+        <li>Add an action button: <strong>Insert → Shapes → Action Buttons → Home</strong> → draw the button on the last slide → in the Action Settings box choose <strong>Hyperlink to: First Slide</strong> → <strong>OK</strong>.</li>
+        <li>Add alt text: right-click an image → <strong>Edit Alt Text</strong> → type a short description, for example <code>School logo</code>.</li>
+        <li>Make transitions and animation consistent: select all slides → <strong>Transitions → Fade → Apply to All</strong>. Select a bullet list → <strong>Animations → Appear</strong>. Use the same transition and the same animation everywhere.</li>
+        <li>Hide the backup slide: right-click it in the slide pane → <strong>Hide Slide</strong>. It stays in the file but does not show in the slide show.</li>
+        <li>Set up the show: <strong>Slide Show → Set Up Show → Loop continuously until 'Esc'</strong> for a carousel display, or leave it presenter controlled for a talk.</li>
+      </ol>
+      <div class="box tip">
+        <h4>Exam tips</h4>
+        <p>Put repeated items — logo, footer, slide numbers — on the master slide. Never place them on every slide by hand: one slide will always be missed. Transitions and animation must be consistent — mixing five different effects looks unprofessional and loses marks. A hidden slide does not show in the slide show but it still prints, so check the printout. Always check that presenter notes print correctly: choose <strong>Notes Pages</strong> in the print settings, not full page slides, when the task asks for notes.</p>
+      </div>`,
+      vocab:[
+        ["master slide","the slide that controls the design of every slide — logo, footer, fonts, background."],
+        ["presenter notes","notes under a slide that only the presenter sees, saying what to say."],
+        ["action button","a button on a slide that jumps to a specified slide or file when clicked."],
+        ["alt text","a short description of an image, read out by screen readers."],
+        ["transition","the effect used when moving from one slide to the next."],
+        ["animation","an effect applied to text or objects on a slide, e.g. appearing one bullet at a time."],
+        ["hidden slide","a slide kept in the file but not shown in the slide show."],
+        ["handout","a printed version of a presentation with several slides per page."]
+      ],
+      recap:[
+        "Master slide = logo, footer and slide numbers once, on every slide. Never place them by hand on each slide.",
+        "Transitions and animation must be consistent — the same effect everywhere.",
+        "A hidden slide does not show in the slide show, but it still prints."
+      ],
+      qa:[
+        ["State what is meant by the term 'master slide'. <span class=\"mk\">[1 mark]</span>","The slide that controls the design of every slide in the presentation <span class=\"mk\">(1)</span>."],
+        ["Explain why the school logo is placed on the master slide and not on each slide. <span class=\"mk\">[2 marks]</span>","So it appears on every slide automatically <span class=\"mk\">(1)</span> and no slide is missed by placing it by hand <span class=\"mk\">(1)</span>."],
+        ["State the purpose of presenter notes. <span class=\"mk\">[1 mark]</span>","To tell the presenter what to say for each slide <span class=\"mk\">(1)</span>."],
+        ["Describe how to add an action button that returns to the first slide. <span class=\"mk\">[2 marks]</span>","Insert → Shapes → Action Buttons → Home <span class=\"mk\">(1)</span>, draw the button, then set Hyperlink to: First Slide <span class=\"mk\">(1)</span>."],
+        ["State what alt text is for. <span class=\"mk\">[1 mark]</span>","A short description of an image, read out by screen readers <span class=\"mk\">(1)</span>."],
+        ["Explain the difference between a transition and an animation. <span class=\"mk\">[2 marks]</span>","A transition is the effect when moving from one slide to the next <span class=\"mk\">(1)</span>; an animation is an effect on text or objects within a slide <span class=\"mk\">(1)</span>."]
+      ]
+    },
+    {
+      id:"c17", num:17, title:"Website Authoring",
+      html:`
+      <h4>The three web development layers</h4>
+      <ul>
+        <li><strong>Content layer</strong> (HTML) — enter the content and create the structure of a web page.</li>
+        <li><strong>Presentation layer</strong> (CSS) — display and format the elements in a web page.</li>
+        <li><strong>Behaviour layer</strong> (a scripting language) — control elements in a web page. This layer is <strong>not needed</strong> for this exam.</li>
+      </ul>
+      <h4>What you must be able to do — HTML (content layer)</h4>
+      <ul>
+        <li>Place elements in the <strong>head</strong> section: a page title to display in the browser; attach external stylesheets with the correct hierarchy, using a <strong>relative file path</strong>; metatags with the right attributes — charset, name attributes (description, keywords, author, viewport) and content attributes; default target windows.</li>
+        <li>Place content in the <strong>body</strong> section.</li>
+        <li>Insert a <strong>table</strong>: table header (<code>&lt;th&gt;</code>), table rows (<code>&lt;tr&gt;</code>), table data (<code>&lt;td&gt;</code>). Adjust cells to span more than one row or column (<code>rowspan</code>, <code>colspan</code>), set table and cell sizes in pixels or % values, and apply styles to tables.</li>
+        <li>Insert objects: text, images, sound clips, video (display controls, remove controls, autoplay); adjust image or video size and aspect ratio; apply <strong>alternative text</strong>.</li>
+        <li>Use the <code>&lt;div&gt;</code> tag to apply styles and classes.</li>
+        <li>Apply tags to text to display pre-defined styles: <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;li&gt;</code>. Apply <strong>classes</strong> to elements. Apply styles to lists — ordered list (<code>&lt;ol&gt;</code>) and unordered list (<code>&lt;ul&gt;</code>).</li>
+        <li>Create a <strong>bookmark</strong> inside a web page using an <code>id</code> attribute.</li>
+        <li>Create <strong>hyperlinks</strong> from text and images to: a bookmark on the same page; another locally stored web page; a website using its URL; an email address (send mail); and open in a specified location — the same window, a new window, or a window with a specified name.</li>
+      </ul>
+      <p><strong>Know and understand:</strong> the purpose of the head section (metadata — information about the page, not shown on the page) and the body section (the visible content). Tables are used to structure elements in a web page. Metatags define the charset, keywords for search engines, the author, a description of the page, and the viewport (so the page displays correctly on all devices). A hyperlink takes the user to another place. A bookmark is a named place in a page, made with an <code>id</code> attribute, that a link can jump to. An anchor is the link itself (<code>&lt;a&gt;</code>). A <strong>relative file path</strong> gives the location of a file compared with the current page (for example <code>style.css</code> or <code>images/logo.png</code>); an <strong>absolute file path</strong> gives the full location on one computer — absolute paths must <strong>not</strong> be used for hyperlinks to locally saved web pages or objects, because they break on any other computer.</p>
+      <h4>What you must be able to do — CSS (presentation layer)</h4>
+      <ul>
+        <li>Create the presentation layer of a web page. Create generic external styles and inline style attributes: background properties (colour, images), font properties, and table, table row, table header and table data properties — size, background colour, horizontal and vertical alignment, spacing, padding, borders (including collapsed, colour, thickness, visible or invisible).</li>
+        <li>Create <strong>classes</strong> with the same properties (background, font, table properties).</li>
+        <li>Create external styles to be tagged in a web page: <code>h1</code>, <code>h2</code>, <code>h3</code>, <code>p</code>, <code>li</code>.</li>
+        <li>Specify font properties: font family, size, colour, alignment, bold, italic.</li>
+        <li>Attach <strong>comments</strong> to an external stylesheet, and save styles in cascading stylesheet (<code>.css</code>) format.</li>
+      </ul>
+      <p><strong>Know and understand:</strong> in a cascading stylesheet, an <strong>inline style attribute</strong> overrules an attached (external) stylesheet, and when several stylesheets are attached, the last one attached wins for any property they both set. A <strong>style</strong> applies to an HTML tag (every <code>h1</code> looks the same); a <strong>class</strong> can be applied to any element that carries that class name, so the same class can style different tags. Relative file paths must be used for attached stylesheets.</p>
+      <h3>Worked example — build a two-page school website</h3>
+      <p>Save <code>index.html</code> and <code>style.css</code> in the same folder. Use only relative file paths.</p>
+      <ol class="steps">
+        <li>Write the head of <code>index.html</code> — title, metatags, and the stylesheet link (relative path):</li>
+      </ol>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="description" content="SrWL Learning — IGCSE ICT courses"&gt;
+  &lt;meta name="keywords" content="IGCSE, ICT, 4IT1, online classes"&gt;
+  &lt;meta name="author" content="Tr. Wai Lin Htet"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Home — SrWL Learning&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;</code></pre>
+      <ol class="steps" start="2">
+        <li>Write the body — a heading with a class, a table with a spanning cell, an image with alt text, and a bookmark:</li>
+      </ol>
+<pre><code>&lt;body&gt;
+  &lt;h1 class="main-title"&gt;Welcome to SrWL Learning&lt;/h1&gt;
+  &lt;p&gt;IGCSE ICT and Computer Science online classes.&lt;/p&gt;
+
+  &lt;table&gt;
+    &lt;tr&gt;
+      &lt;th colspan="2"&gt;May/June 2027 Courses&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;IGCSE ICT (4IT1)&lt;/td&gt;
+      &lt;td&gt;Theory + Practical&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+
+  &lt;img src="logo.png" alt="SrWL Learning logo" width="200"&gt;
+
+  &lt;h2 id="courses"&gt;Our Courses&lt;/h2&gt;
+  &lt;ul&gt;
+    &lt;li&gt;IGCSE ICT (4IT1)&lt;/li&gt;
+    &lt;li&gt;IGCSE Computer Science (0478)&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/body&gt;</code></pre>
+      <ol class="steps" start="3">
+        <li>Add the hyperlinks — to the bookmark, to the second page, to a website, to an email address, and into a new window:</li>
+      </ol>
+<pre><code>&lt;a href="#courses"&gt;See our courses&lt;/a&gt;
+&lt;a href="courses.html"&gt;Courses page&lt;/a&gt;
+&lt;a href="https://www.wailinhtet.com"&gt;Visit our website&lt;/a&gt;
+&lt;a href="mailto:tr.wailinhtet@gmail.com"&gt;Email us&lt;/a&gt;
+&lt;a href="courses.html" target="_blank"&gt;Open courses in a new window&lt;/a&gt;</code></pre>
+      <ol class="steps" start="4">
+        <li>Add a video with controls and autoplay:</li>
+      </ol>
+<pre><code>&lt;video src="intro.mp4" width="640" controls autoplay&gt;&lt;/video&gt;</code></pre>
+      <ol class="steps" start="5">
+        <li>Write <code>style.css</code> — tag styles, a class, table styles, and a comment:</li>
+      </ol>
+<pre><code>/* SrWL Learning stylesheet — Tr. Wai Lin Htet */
+h1 {
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  color: #0d2a5c;
+  text-align: center;
+}
+p {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #272b33;
+}
+.main-title {
+  background-color: #fcefc0;
+  padding: 12px;
+}
+table {
+  border-collapse: collapse;
+  width: 80%;
+}
+th, td {
+  border: 1px solid #0d2a5c;
+  padding: 8px;
+  text-align: left;
+  vertical-align: top;
+}</code></pre>
+      <ol class="steps" start="6">
+        <li>Save both files, open <code>index.html</code> in a browser, and test every link: the bookmark link must jump to the Courses heading, the <code>courses.html</code> link must open the second page, and the <code>mailto:</code> link must open a new email.</li>
+      </ol>
+      <div class="box tip">
+        <h4>Exam tips</h4>
+        <p>Always use relative file paths for local pages, images and stylesheets — an absolute path works only on your computer and breaks on the examiner's computer. An inline style beats an external stylesheet, and the last attached stylesheet wins — check the hierarchy if a style does not apply. A class (<code>.main-title</code>) can be reused on many elements; an id (<code>#courses</code>) is unique and is used for bookmarks. Every image needs alt text. Check every link target: <code>_blank</code> opens a new window and <code>_self</code> opens in the same window.</p>
+      </div>
+      <div class="box note">
+        <h4>Full guide</h4>
+        <p>The HTML &amp; CSS quick reference — document structure, text, lists, tables, semantic elements, attributes, the box model, fonts, positioning and colours — is on the <a href="/web-html-css">HTML &amp; CSS Cheat Sheet</a> page.</p>
+      </div>`,
+      vocab:[
+        ["content layer","the HTML layer — the content and structure of a web page."],
+        ["presentation layer","the CSS layer — the display and formatting of a web page."],
+        ["relative file path","a file location given compared with the current page, e.g. style.css or images/logo.png."],
+        ["absolute file path","the full location of a file on one computer — must not be used for local links."],
+        ["bookmark","a named place in a web page, made with an id attribute, that a link can jump to."],
+        ["anchor","the link itself — the <a> tag."],
+        ["class","a named style that can be applied to any element carrying that class name."],
+        ["inline style","a style written directly on an element — it overrules an external stylesheet."],
+        ["metatag","a tag in the head section giving information about the page — charset, keywords, author, description, viewport."],
+        ["external stylesheet","a .css file attached to a web page with a link tag."]
+      ],
+      recap:[
+        "Three layers: content (HTML), presentation (CSS), behaviour (scripting — not needed for this exam).",
+        "Relative paths for local pages, images and stylesheets. Absolute paths break on any other computer.",
+        "Inline style beats an external stylesheet; the last attached stylesheet wins. A class can be reused; an id is unique."
+      ],
+      qa:[
+        ["State the three web development layers. <span class=\"mk\">[3 marks]</span>","Content layer (HTML) <span class=\"mk\">(1)</span>; presentation layer (CSS) <span class=\"mk\">(1)</span>; behaviour layer (a scripting language) <span class=\"mk\">(1)</span>."],
+        ["State what is meant by the term 'relative file path'. <span class=\"mk\">[1 mark]</span>","The location of a file given compared with the current page <span class=\"mk\">(1)</span>."],
+        ["Explain why absolute file paths must not be used for hyperlinks to locally saved web pages. <span class=\"mk\">[2 marks]</span>","Because an absolute path gives the full location on one computer <span class=\"mk\">(1)</span>, so the link breaks on any other computer <span class=\"mk\">(1)</span>."],
+        ["State the purpose of a metatag. <span class=\"mk\">[1 mark]</span>","To give information about the page, e.g. charset, keywords, author, description or viewport <span class=\"mk\">(1)</span>."],
+        ["Explain the difference between a style and a class. <span class=\"mk\">[2 marks]</span>","A style applies to an HTML tag, so every h1 looks the same <span class=\"mk\">(1)</span>; a class can be applied to any element carrying that class name <span class=\"mk\">(1)</span>."],
+        ["A stylesheet is not applying as expected. State two rules that decide which style wins. <span class=\"mk\">[2 marks]</span>","An inline style attribute overrules an external stylesheet <span class=\"mk\">(1)</span>; when several stylesheets are attached, the last one attached wins <span class=\"mk\">(1)</span>."]
+      ]
+    },
+    {
+      id:"c18", num:18, title:"File Management",
+      html:`
+      <h4>What you must be able to do</h4>
+      <ul>
+        <li>Locate stored files, and open and import files of different types.</li>
+        <li>Save files in a planned <strong>hierarchical folder structure</strong> (folders inside folders).</li>
+        <li>Save files using <strong>appropriate file names</strong> — exactly as the task tells you.</li>
+        <li>Save and print files in many formats: a document, screenshots, database reports, data tables, graphs/charts, a web page in browser view, and a web page in HTML view.</li>
+        <li>Save and export in an <strong>application file format</strong>: <code>.docx</code>, <code>.doc</code>, <code>.xlsx</code>, <code>.xls</code>, <code>.accdb</code>, <code>.odb</code>, <code>.rtf</code>, <code>.pptx</code>, <code>.ppt</code>.</li>
+        <li>Save and export in a <strong>generic file format</strong>: <code>.csv</code>, <code>.txt</code>, <code>.rtf</code>, <code>.pdf</code>, <code>.css</code>, <code>.htm</code>, <code>.jpg</code>, <code>.png</code>.</li>
+        <li>Compress files (<code>.zip</code>, <code>.rar</code>) to reduce file size for storage or transmission.</li>
+      </ul>
+      <p><strong>Know and understand:</strong> the characteristics and uses of file formats (<code>.css</code>, <code>.csv</code>, <code>.gif</code>, <code>.htm</code>, <code>.jpg</code>, <code>.pdf</code>, <code>.png</code>, <code>.rtf</code>, <code>.txt</code>, <code>.zip</code>, <code>.rar</code>) — and why generic formats are needed. A generic format can be opened on any computer, in any software; an application format usually needs that exact program.</p>
+      <div class="table-responsive">
+        <table>
+          <tr><th>Format</th><th>What it is</th><th>Use it for</th></tr>
+          <tr><td><code>.docx</code></td><td>Word document</td><td>Documents you will edit again</td></tr>
+          <tr><td><code>.xlsx</code></td><td>Excel spreadsheet</td><td>Spreadsheets you will edit again</td></tr>
+          <tr><td><code>.accdb</code></td><td>Access database</td><td>Databases in Microsoft Access</td></tr>
+          <tr><td><code>.pptx</code></td><td>PowerPoint presentation</td><td>Presentations you will edit again</td></tr>
+          <tr><td><code>.csv</code></td><td>Comma-separated values — data only, no formatting</td><td>Moving data between programs (e.g. into a database)</td></tr>
+          <tr><td><code>.pdf</code></td><td>Fixed layout — looks the same on every computer</td><td>Final work, printouts, evidence</td></tr>
+          <tr><td><code>.jpg</code> / <code>.png</code></td><td>Image files</td><td>Photos, screenshots, graphics</td></tr>
+          <tr><td><code>.zip</code> / <code>.rar</code></td><td>Compressed files</td><td>Smaller files for storage or sending</td></tr>
+        </table>
+      </div>
+      <h3>Worked example — set up your exam folders and save in the right format</h3>
+      <ol class="steps">
+        <li>Create a folder called <code>4IT1_Paper2</code>. Inside it, create three sub-folders: <code>Source</code>, <code>Work</code> and <code>Evidence</code>.</li>
+        <li>Copy the source files the exam gives you into <code>Source</code>. <strong>Never change the source files</strong> — work on a copy in <code>Work</code>.</li>
+        <li>Open the copy and save your work with the exact file name the task asks for, for example <code>Task1_Letter.docx</code> in the <code>Work</code> folder.</li>
+        <li>When the task asks for a PDF, use <strong>File → Save As → PDF</strong> (do not just change the file name — the file type must really change).</li>
+        <li>When the task asks for a smaller file, compress it: right-click the folder → <strong>Send to → Compressed (zipped) folder</strong>, or use 7-Zip → <strong>Add to archive → .zip</strong>.</li>
+        <li>Before printing, check the file name, the folder, and the file extension one more time.</li>
+      </ol>
+      <div class="box tip">
+        <h4>Exam tips</h4>
+        <p>Never overwrite the original source files — if you make a mistake you need the original to start again. A file name that does not match the task can lose the mark, even if the work is correct. A <code>.csv</code> file saves data only — all formatting is lost, so never save your finished spreadsheet as <code>.csv</code> unless the task tells you to. Always check the file extension before saving: <code>.docx</code> is not the same as <code>.pdf</code>.</p>
+      </div>`,
+      vocab:[
+        ["hierarchical folder structure","folders inside folders, planned so every file has a known place."],
+        ["application file format","a format tied to one program, e.g. .docx, .xlsx, .accdb, .pptx."],
+        ["generic file format","a format any computer and any software can open, e.g. .csv, .pdf, .jpg, .png."],
+        ["compression","reducing a file's size, e.g. .zip or .rar, for storage or transmission."],
+        ["file extension","the letters after the dot in a file name, showing the file type."],
+        ["evidence","screenshots and printouts that prove the practical work was done."],
+        [".csv","comma-separated values — data only, no formatting."],
+        [".pdf","a fixed-layout format that looks the same on every computer."]
+      ],
+      recap:[
+        "Generic formats open anywhere; application formats usually need their exact program.",
+        "Plan a folder structure first (Source / Work / Evidence) and never change the source files.",
+        ".csv saves data only — all formatting is lost. Check the file extension before saving."
+      ],
+      qa:[
+        ["State what is meant by a hierarchical folder structure. <span class=\"mk\">[1 mark]</span>","Folders inside folders, planned so every file has a known place <span class=\"mk\">(1)</span>."],
+        ["State one application file format and one generic file format. <span class=\"mk\">[2 marks]</span>","Any one application format, e.g. .docx <span class=\"mk\">(1)</span>; any one generic format, e.g. .pdf <span class=\"mk\">(1)</span>."],
+        ["Explain why generic file formats are needed. <span class=\"mk\">[2 marks]</span>","Because a generic format can be opened on any computer, in any software <span class=\"mk\">(1)</span>, while an application format usually needs that exact program <span class=\"mk\">(1)</span>."],
+        ["Explain why a finished spreadsheet must not be saved as .csv. <span class=\"mk\">[2 marks]</span>","Because .csv saves data only <span class=\"mk\">(1)</span> and all formatting is lost <span class=\"mk\">(1)</span>."],
+        ["State the purpose of compressing a file. <span class=\"mk\">[1 mark]</span>","To reduce the file size for storage or transmission <span class=\"mk\">(1)</span>."],
+        ["Explain why the original source files must never be changed. <span class=\"mk\">[2 marks]</span>","So that if a mistake is made, the work can be started again from the original <span class=\"mk\">(1)</span>; changing them also risks losing the evidence of the task <span class=\"mk\">(1)</span>."]
+      ]
+    }
+  ]
 }
 ];
 
@@ -842,13 +1438,13 @@ function el(tag, attrs, html){
 (function(){
   const nav = document.getElementById('sideNav');
   const toc = document.getElementById('coverToc');
-  const items = [['#cover','',  'Cover'], ['#examprep','✎','Exam Prep']];
-  DATA.forEach(u=>u.chapters.forEach(c=>items.push(['#'+c.id, c.num, c.title])));
-  items.forEach(([href,n,t])=>{
-    const li = el('li'); li.innerHTML = `<a href="${href}"><span class="n">${n}</span>${t}</a>`; nav.appendChild(li);
+  const items = [['#cover','',  'Cover', false], ['#examprep','✎','Exam Prep', true]];
+  DATA.forEach(u=>u.chapters.forEach(c=>items.push(['#'+c.id, c.num, c.title, c.id !== 'c1'])));
+  items.forEach(([href,n,t,locked])=>{
+    const li = el('li'); li.innerHTML = `<a href="${href}"${locked ? ' class="locked-link"' : ''}><span class="n">${n}</span>${t}</a>`; nav.appendChild(li);
   });
   DATA.forEach(u=>u.chapters.forEach(c=>{
-    const a = el('a',{href:'#'+c.id}); a.innerHTML = `<span class="num">${c.num}</span> ${c.title}`; toc.appendChild(a);
+    const a = el('a',{href:'#'+c.id}); if(c.id !== 'c1') a.className = 'locked-link'; a.innerHTML = `<span class="num">${c.num}</span> ${c.title}`; toc.appendChild(a);
   }));
 })();
 
@@ -859,6 +1455,12 @@ function el(tag, attrs, html){
     root.appendChild(el('div',{class:'unit-band'}, `${unit.unit}: ${unit.title}<small>${unit.sub}</small>`));
     unit.chapters.forEach(ch=>{
       const sec = el('section',{class:'chapter', id:ch.id});
+      if(ch.id !== 'c1'){
+        sec.classList.add('locked-chapter');
+        const lockDiv = el('div',{class:'chapter-lock'});
+        lockDiv.innerHTML = `<div class="lock-icon">🔒</div><h2>Chapter ${ch.num} — ${ch.title}</h2><p>This chapter is for approved SrWL Learning students. Sign in with Google to unlock it — Chapter 1 is free to read now.</p><button type="button" class="lock-btn" onclick="location.assign('login.html')">Sign in with Google to continue</button>`;
+        sec.appendChild(lockDiv);
+      }
       sec.appendChild(el('div',{class:'chapter-head'}, `<div class="badge">${ch.num}</div><h2>${ch.title}</h2>`));
       sec.appendChild(el('p',{class:'chapter-intro'}, `${unit.unit} · ${unit.sub}`));
       const content = el('div',{class:'content'}, ch.html);
@@ -973,29 +1575,170 @@ themeBtn.addEventListener('click', ()=>{
   applyTheme(next); try{ localStorage.setItem('ict-theme', next || ''); }catch(e){}
 });
 
-/* ---------- login gate ---------- */
-const PASSWORD = "trwailinhtet";
-const gate = document.getElementById('gate');
-const app = document.getElementById('app');
-const form = document.getElementById('gate-form');
-const pwInput = document.getElementById('pw');
-const errEl = document.getElementById('gate-error');
-const lockBtn = document.getElementById('lock-btn');
-function unlock(){ gate.style.display='none'; app.style.display='block'; if(window.__spy) window.__spy(); }
-function lock(){ app.style.display='none'; gate.style.display='flex'; pwInput.value=''; }
-try{ if(sessionStorage.getItem('ict-unlocked') === '1') unlock(); }catch(e){}
-form.addEventListener('submit', e=>{
-  e.preventDefault();
-  if(pwInput.value === PASSWORD){
-    errEl.textContent='';
-    try{ sessionStorage.setItem('ict-unlocked','1'); }catch(err){}
-    unlock();
-  }else{ errEl.textContent='Incorrect password — try again.'; }
-});
-lockBtn.addEventListener('click', ()=>{
-  try{ sessionStorage.removeItem('ict-unlocked'); }catch(e){}
-  lock();
-});
+// Wipe any session left behind by the old local password system.
+try{ sessionStorage.removeItem('ict-unlocked'); }catch(e){}
+</script>
+
+<script type="module">
+  // ===== Firebase Login Gate + Free Chapter 1 Preview (v2 pattern, Nov 2026) =====
+  // Access rule: Chapter 1 is free for everyone. Chapters 2-18 and Exam Prep
+  // unlock after Google sign-in via the SrWL portal + teacher approval.
+  // No passwords are stored on this page. The dashboard enrollment + approval
+  // remain the real access control; this check keeps the notes page itself
+  // behind the same Google login.
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+  import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+  import { firebaseConfig, firebaseReady } from './assets/portal/firebase-config.js';
+
+  // Tells the offline fallback below that this module loaded.
+  window.__srwlGateRan = true;
+
+  // Remove any session left behind by the old local password system.
+  try { sessionStorage.removeItem('ict-unlocked'); } catch (e) { /* storage unavailable - nothing to clean */ }
+
+  // Google Apps Script Web App URL (attendance logging, unchanged)
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweswRLHak84m6MkD8DrvxorOaH_ajSIut1uhAitFJDnF1Mrhg_m-vc7nfXaD7ibMBn/exec';
+
+  function logVisit(name, username, event) {
+    if (!SCRIPT_URL) return;
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ name: name, username: username, timestamp: new Date().toISOString(), event: event })
+    }).catch(function (err) { console.warn('Attendance log failed:', err); });
+  }
+
+  const overlay = document.getElementById('authOverlay');
+  const statusMsg = document.getElementById('authStatusMsg');
+  const goLoginBtn = document.getElementById('authGoLoginBtn');
+  const userBox = document.getElementById('authUserBox');
+  const userNameEl = document.getElementById('authUserName');
+  const avatarEl = document.getElementById('authAvatar');
+  const logoutBtn = document.getElementById('authLogoutBtn');
+  const openBtn = document.getElementById('authOpenBtn');
+  const freeBanner = document.getElementById('freeBanner');
+  const freeBannerMsg = document.getElementById('freeBannerMsg');
+  const freeBannerBtn = document.getElementById('freeBannerBtn');
+
+  function showStatus(text, isError) {
+    if (!statusMsg) return;
+    statusMsg.textContent = text;
+    statusMsg.className = 'auth-msg show ' + (isError ? 'err' : 'ok');
+  }
+
+  function setBanner(text, showButton) {
+    if (freeBannerMsg) freeBannerMsg.textContent = text;
+    if (freeBanner) freeBanner.style.display = 'flex';
+    if (freeBannerBtn) freeBannerBtn.style.display = showButton ? '' : 'none';
+  }
+
+  function hideBanner() {
+    if (freeBanner) freeBanner.style.display = 'none';
+  }
+
+  // Free-preview state: Chapter 1 readable, Chapters 2-18 + Exam Prep locked.
+  function lockChapters() {
+    document.body.classList.add('chapters-locked');
+    if (userBox) userBox.style.display = 'none';
+    if (openBtn) openBtn.style.display = 'flex';
+  }
+
+  // Full access: everything unlocked, banner + sign-in pill hidden.
+  function unlockChapters(name) {
+    document.body.classList.remove('chapters-locked');
+    hideBanner();
+    if (overlay) overlay.style.display = 'none';
+    if (openBtn) openBtn.style.display = 'none';
+    if (userBox) userBox.style.display = 'flex';
+    if (userNameEl) userNameEl.textContent = name;
+    if (avatarEl) avatarEl.textContent = (name || '?').trim().charAt(0).toUpperCase() || '?';
+  }
+
+  // Hard error only: show the full-page overlay (Firebase not configured,
+  // or the account check itself failed).
+  function lockPage(message, showLoginButton) {
+    if (overlay) overlay.style.display = 'flex';
+    if (userBox) userBox.style.display = 'none';
+    if (message) showStatus(message, true);
+    if (goLoginBtn) goLoginBtn.style.display = showLoginButton ? '' : 'none';
+  }
+
+  if (goLoginBtn) goLoginBtn.addEventListener('click', function () { location.assign('login.html'); });
+  if (openBtn) openBtn.addEventListener('click', function () { location.assign('login.html'); });
+  if (freeBannerBtn) freeBannerBtn.addEventListener('click', function () { location.assign('login.html'); });
+
+  if (!firebaseReady) {
+    lockPage('Firebase is not configured. Please contact your teacher.', false);
+  } else {
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Same admin check as assets/portal/portal.js: a denied read is not admin.
+    const isAdmin = async (uid) => {
+      try {
+        const snapshot = await getDoc(doc(db, 'admins', uid));
+        return snapshot.exists();
+      } catch (error) {
+        if (error.code === 'permission-denied') return false;
+        throw error;
+      }
+    };
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', async function () {
+        try { await signOut(auth); } catch (e) { console.warn('Sign-out failed:', e); }
+        location.assign('login.html');
+      });
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        // Signed out: no redirect — Chapter 1 is free, the rest is locked.
+        lockChapters();
+        setBanner('📖 Chapter 1 is free — sign in with Google to unlock Chapters 2–18 and Exam Prep.', true);
+        return;
+      }
+      const displayName = user.displayName || (user.email ? user.email.split('@')[0] : 'Student');
+      try {
+        const admin = await isAdmin(user.uid);
+        let approved = null; // null = could not verify (read denied); dashboard already enforces approval
+        try {
+          const snapshot = await getDoc(doc(db, 'users', user.uid));
+          if (snapshot.exists()) approved = snapshot.data().approved === true;
+        } catch (error) {
+          if (error.code !== 'permission-denied') throw error;
+          console.warn('Could not verify approval - allowing signed-in user. Check Firestore Rules for /users/{uid}.', error);
+        }
+        if (admin || approved === true || approved === null) {
+          unlockChapters(displayName);
+          logVisit(displayName, user.email || user.uid, 'firebase-login');
+        } else {
+          // Signed in, waiting for teacher approval: Chapter 1 is free meanwhile.
+          lockChapters();
+          setBanner('⏳ Your registration is waiting for teacher approval — you can read Chapter 1 meanwhile.', true);
+        }
+      } catch (error) {
+        console.error('Account check failed:', error);
+        lockPage('Unable to verify your account. Please try again or contact your teacher.', true);
+      }
+    });
+  }
+</script>
+<script>
+  // Fallback if the Firebase module above failed to load (e.g. offline).
+  // Chapters stay locked (fail closed) but Chapter 1 below is still free to read.
+  setTimeout(function () {
+    if (window.__srwlGateRan) return; // module loaded - auth state already handled
+    var banner = document.getElementById('freeBanner');
+    var msg = document.getElementById('freeBannerMsg');
+    if (banner && msg) {
+      banner.style.display = 'flex';
+      msg.textContent = 'Could not reach the sign-in service. Check your connection, then refresh this page. Chapter 1 below is still free to read.';
+    }
+  }, 8000);
 </script>
 </body>
 </html>
