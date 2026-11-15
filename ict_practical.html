@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT CIE 0417 — Practical Skills (Papers 2 &amp; 3) by Tr.WaiLinHtet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&family=Literata:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --card:#fff; --on-pen:#fff; --hole:#fff; --tip-border:#c9dcc9; --warn-border:#e6c3b6;
+    --note-h:#8a6d0c; --mark:rgba(244,211,94,0.75); color-scheme:light;
+    --paper:#FBF8F1;
+    --paper-2:#F5F0E4;
+    --line:#DCD4C0;
+    --ink:#272B33;
+    --ink-soft:#5C6070;
+    --pen:#2F4B7C;
+    --pen-light:#5C7AAE;
+    --highlight:#F4D35E;
+    --highlight-soft:#FCEFC0;
+    --margin:#C1495B;
+    --tip:#4F7A5B;
+    --tip-soft:#E4EEE2;
+    --warn:#B5442E;
+    --warn-soft:#F7E3DD;
+    --tab:#EFE7D4;
+    --code:#EFEAE0;
+    --shadow: 0 2px 10px rgba(39,43,51,0.08);
+    --radius: 3px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Literata', Georgia, serif;
+    font-size:17px;
+    line-height:1.65;
+  }
+  h1,h2,h3,h4{
+    font-family:'Zilla Slab', Georgia, serif;
+    color:var(--ink);
+    margin:0 0 .5em 0;
+    line-height:1.2;
+  }
+  p{margin:0 0 1em 0; max-width:70ch;}
+  .hand{font-family:'Caveat', cursive;}
+  a{color:var(--pen);}
+
+  /* ===== Layout shell ===== */
+  .shell{
+    display:grid;
+    grid-template-columns:230px 1fr;
+    min-height:100vh;
+  }
+  @media (max-width:900px){
+    .shell{grid-template-columns:1fr;}
+  }
+
+  /* ===== Sidebar (spiral notebook tabs) ===== */
+  .sidebar{
+    background:var(--tab);
+    border-right:2px solid var(--line);
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+    padding:22px 0 22px 18px;
+    background-image: radial-gradient(circle 4px, var(--hole) 4px, transparent 4px);
+    background-size: 100% 34px;
+    background-position: -4px 10px;
+  }
+  @media (max-width:900px){
+    .sidebar{
+      position:relative; height:auto; padding:14px;
+      background-image:none; border-right:none; border-bottom:2px solid var(--line);
+      overflow-x:auto;
+    }
+  }
+  .side-title{
+    padding:0 14px 16px 20px;
+    font-family:'Caveat', cursive;
+    font-size:1.5rem;
+    color:var(--pen);
+    border-bottom:1px dashed var(--line);
+    margin-bottom:10px;
+  }
+  @media (max-width:900px){ .side-title{display:none;} }
+  .side-nav{list-style:none; margin:0; padding:0 10px 0 20px;}
+  @media (max-width:900px){
+    .side-nav{display:flex; gap:8px; padding:0; white-space:nowrap;}
+  }
+  .side-nav li{margin:2px 0;}
+  .side-nav a{
+    display:block;
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-family:'Zilla Slab', serif;
+    font-size:0.86rem;
+    font-weight:600;
+    padding:8px 10px;
+    border-radius: 4px 0 0 4px;
+    border-left:3px solid transparent;
+  }
+  .side-nav a:hover{color:var(--pen); border-left-color:var(--pen-light);}
+  .side-nav a.active{color:var(--pen); background:var(--paper); border-left-color:var(--pen);}
+  .side-nav .n{color:var(--margin); font-family:'Caveat',cursive; font-size:1.05rem; margin-right:4px;}
+
+  /* ===== Main column ===== */
+  main{padding:0;}
+  .page{
+    position:relative;
+    max-width:840px;
+    margin:0 auto;
+    padding:56px 48px 60px 56px;
+    border-left:2px solid var(--margin);
+    min-height:100vh;
+    background-image: repeating-linear-gradient(var(--paper) 0 33px, var(--line) 33px 34px);
+    background-position: 0 200px;
+  }
+  @media (max-width:640px){
+    .page{padding:36px 20px 44px 26px; border-left-width:1.5px;}
+  }
+
+  /* ===== Cover ===== */
+  .cover{padding-top:6vh; padding-bottom:40px;}
+  .cover .kicker{
+    font-family:'Caveat', cursive;
+    color:var(--margin);
+    font-size:1.3rem;
+    transform:rotate(-2deg);
+    display:inline-block;
+    margin-bottom:6px;
+  }
+  .cover h1{
+    font-size:3.4rem;
+    letter-spacing:-0.5px;
+    font-weight:700;
+  }
+  .cover h1 span{color:var(--pen);}
+  .cover .subtitle{
+    font-family:'Zilla Slab', serif;
+    font-size:1.15rem;
+    color:var(--ink-soft);
+    margin-top:6px;
+  }
+  .cover .byline{
+    margin-top:26px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 18px;
+    background:var(--highlight-soft);
+    border:1px solid var(--highlight);
+    border-radius:var(--radius);
+    font-family:'Zilla Slab', serif;
+    font-weight:600;
+    font-size:0.95rem;
+  }
+  .cover .byline .avatar{
+    width:34px;height:34px;border-radius:50%;
+    background:var(--pen); color:var(--on-pen);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Caveat',cursive; font-size:1.2rem; font-weight:700;
+  }
+  .cover .meta-row{
+    margin-top:22px;
+    display:flex; gap:22px; flex-wrap:wrap;
+    font-size:0.85rem; color:var(--ink-soft);
+    font-family:'Zilla Slab', serif;
+  }
+  .cover .meta-row b{color:var(--ink);}
+
+  .toc{
+    margin-top:38px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+  @media (max-width:640px){ .toc{grid-template-columns:1fr;} }
+  .toc a{
+    text-decoration:none; color:var(--ink);
+    display:flex; align-items:baseline; gap:10px;
+    padding:10px 12px;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    font-family:'Zilla Slab', serif;
+    font-size:0.92rem;
+    font-weight:600;
+  }
+  .toc a:hover{border-color:var(--pen); color:var(--pen);}
+  .toc a .num{font-family:'Caveat',cursive; font-size:1.4rem; color:var(--margin);}
+
+  /* ===== Chapters ===== */
+  .chapter{padding:56px 0; border-top:1px dashed var(--line);}
+  .chapter:first-of-type{border-top:none;}
+  .chapter-head{display:flex; align-items:center; gap:16px; margin-bottom:6px;}
+  .chapter-head .badge{
+    flex:0 0 auto;
+    width:54px;height:54px;border-radius:50%;
+    background:var(--pen); color:var(--on-pen);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Caveat',cursive; font-weight:700; font-size:1.7rem;
+    box-shadow:var(--shadow);
+  }
+  .chapter-head h2{font-size:1.7rem;}
+  .chapter-intro{color:var(--ink-soft); font-style:italic; margin-bottom:22px;}
+
+  figure.clipping{
+    float:right;
+    width:270px;
+    margin:0 0 14px 22px;
+    background:var(--card);
+    padding:10px 10px 34px 10px;
+    box-shadow:var(--shadow);
+    transform:rotate(1.6deg);
+    position:relative;
+  }
+  figure.clipping::before{
+    content:"";
+    position:absolute; top:-10px; left:38%;
+    width:70px; height:22px;
+    background:var(--mark);
+    border:1px solid rgba(0,0,0,0.05);
+    transform:rotate(-4deg);
+  }
+  figure.clipping img{width:100%; display:block; height:170px; object-fit:cover;}
+  figure.clipping figcaption{
+    font-family:'Caveat', cursive;
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    text-align:center;
+    padding-top:8px;
+  }
+  @media (max-width:640px){
+    figure.clipping{float:none; width:100%; margin:0 0 20px 0; transform:none;}
+  }
+
+  h3{font-size:1.18rem; margin-top:1.6em; color:var(--pen);}
+  h3 .tag{
+    display:inline-block;
+    font-family:'Zilla Slab',serif;
+    font-size:0.6em; vertical-align:middle;
+    color:var(--ink-soft); font-weight:400;
+  }
+  h4{font-size:1rem; margin-top:1.2em; font-family:'Zilla Slab',serif; text-transform:none;}
+
+  ul, ol{padding-left:1.3em; max-width:70ch;}
+  li{margin-bottom:0.45em;}
+  strong{color:var(--ink); background:linear-gradient(transparent 60%, var(--highlight-soft) 60%);}
+
+  .term{
+    color:var(--pen);
+    font-weight:600;
+    border-bottom:1px dotted var(--pen-light);
+  }
+
+  /* callout boxes */
+  .box{
+    margin:1.3em 0;
+    padding:14px 18px;
+    border-radius:var(--radius);
+    border:1px solid var(--line);
+    background:var(--paper-2);
+  }
+  .box h4{margin-top:0; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.06em; font-family:'Zilla Slab',serif;}
+  .box.tip{background:var(--tip-soft); border-color:var(--tip-border);}
+  .box.tip h4{color:var(--tip);}
+  .box.warn{background:var(--warn-soft); border-color:var(--warn-border);}
+  .box.warn h4{color:var(--warn);}
+  .box.note{
+    background:var(--highlight-soft); border-color:var(--highlight);
+    transform:rotate(-0.4deg);
+  }
+  .box.note h4{color:var(--note-h);}
+  .box p:last-child, .box ul:last-child{margin-bottom:0;}
+
+  .glossary{
+    display:grid; gap:10px;
+    grid-template-columns:1fr 1fr;
+    margin:1.2em 0;
+  }
+  @media (max-width:640px){ .glossary{grid-template-columns:1fr;} }
+  .glossary .g-item{
+    background:var(--card); border:1px solid var(--line); border-left:4px solid var(--pen);
+    padding:10px 14px; border-radius:var(--radius); box-shadow:var(--shadow);
+  }
+  .glossary .g-item b{display:block; font-family:'Zilla Slab',serif; color:var(--ink); margin-bottom:2px; font-size:0.95rem;}
+  .glossary .g-item span{font-size:0.9rem; color:var(--ink-soft);}
+
+  table{
+    width:100%; border-collapse:collapse; margin:1.3em 0;
+    font-size:0.92rem; background:var(--card); box-shadow:var(--shadow);
+  }
+  caption{caption-side:top; text-align:left; font-family:'Caveat',cursive; font-size:1.2rem; color:var(--margin); margin-bottom:6px;}
+  th, td{border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top;}
+  th{background:var(--pen); color:var(--on-pen); font-family:'Zilla Slab',serif; font-weight:600;}
+  tr:nth-child(even) td{background:var(--paper-2);}
+
+  .flow{
+    display:flex; align-items:center; flex-wrap:wrap; gap:8px;
+    margin:1.2em 0; font-family:'Zilla Slab',serif; font-weight:600; font-size:0.88rem;
+  }
+  .flow .step{
+    background:var(--card); border:1.5px solid var(--pen); color:var(--pen);
+    padding:7px 12px; border-radius:20px;
+  }
+  .flow .arrow{color:var(--margin); font-size:1.1rem;}
+
+  .checklist{list-style:none; padding-left:0; margin:1em 0;}
+  .checklist li{
+    padding-left:30px; position:relative; margin-bottom:8px; font-size:0.96rem;
+  }
+  .checklist li::before{
+    content:"";
+    position:absolute; left:0; top:2px;
+    width:18px; height:18px;
+    border:2px solid var(--pen);
+    border-radius:3px;
+  }
+
+  .recap{
+    margin-top:26px; padding:18px 20px;
+    background:var(--tab); border:1px dashed var(--pen-light); border-radius:var(--radius);
+  }
+  .recap h4{color:var(--pen); margin-top:0; font-size:0.95rem; text-transform:uppercase; letter-spacing:0.05em;}
+
+  /* ===== Exam Practice Questions & Mark Schemes Accordion ===== */
+  .exam-questions{
+    margin-top:34px;
+    padding-top:20px;
+    border-top:2px dashed var(--line);
+  }
+  .exam-questions h3{
+    color:var(--margin);
+    font-size:1.25rem;
+    margin-bottom:14px;
+  }
+  .qa-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--margin);
+    border-radius:var(--radius);
+    padding:14px 16px;
+    margin-bottom:14px;
+    box-shadow:var(--shadow);
+  }
+  .qa-card .q-title{
+    font-family:'Zilla Slab', serif;
+    font-weight:700;
+    color:var(--ink);
+    font-size:0.98rem;
+    margin-bottom:6px;
+  }
+  .qa-card .q-text{
+    font-size:0.93rem;
+    margin-bottom:10px;
+    color:var(--ink);
+  }
+  .qa-card details{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:8px 12px;
+    font-size:0.88rem;
+  }
+  .qa-card summary{
+    cursor:pointer;
+    font-family:'Zilla Slab', serif;
+    font-weight:700;
+    color:var(--pen);
+    user-select:none;
+    outline:none;
+  }
+  .qa-card summary:hover{
+    color:var(--margin);
+  }
+  .qa-card .ms-list{
+    margin:10px 0 4px 0;
+    padding-left:1.2em;
+    color:var(--ink-soft);
+  }
+  .qa-card .ms-list li{
+    margin-bottom:4px;
+  }
+  .qa-card .ms-list strong{
+    background:none;
+    color:var(--ink);
+  }
+
+  footer{
+    text-align:center; padding:50px 20px 70px;
+    color:var(--ink-soft); font-size:0.85rem;
+    border-top:1px dashed var(--line);
+  }
+  footer .hand{font-size:1.3rem; color:var(--pen);}
+
+  ::selection{background:var(--highlight);}
+
+  /* ===== Login / Register UI ===== */
+  .auth-widget{
+    position:fixed;
+    top:16px; right:18px;
+    z-index:60;
+    display:flex; align-items:center; gap:10px;
+  }
+  .auth-pill{
+    display:none;
+    align-items:center; gap:8px;
+    background:var(--highlight-soft);
+    border:1px solid var(--highlight);
+    box-shadow:var(--shadow);
+    padding:8px 16px;
+    border-radius:20px;
+    font-family:'Zilla Slab', serif;
+    font-weight:600;
+    font-size:0.85rem;
+    color:var(--ink);
+    cursor:pointer;
+    transform:rotate(-1deg);
+    transition:transform .15s ease;
+  }
+  .auth-pill:hover{transform:rotate(0deg);}
+  .auth-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--pen);}
+  .auth-user{
+    display:none;
+    align-items:center; gap:10px;
+    background:var(--card);
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    padding:6px 8px 6px 14px;
+    border-radius:20px;
+    font-family:'Zilla Slab', serif;
+    font-size:0.85rem;
+  }
+  .auth-user .avatar-sm{
+    width:26px;height:26px;border-radius:50%;
+    background:var(--pen); color:var(--on-pen);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Caveat',cursive; font-size:1.05rem; font-weight:700;
+  }
+  .auth-user button{
+    border:none; background:none; cursor:pointer;
+    color:var(--margin); font-family:'Zilla Slab',serif; font-weight:600;
+    font-size:0.78rem; text-decoration:underline;
+  }
+  @media (max-width:640px){
+    .auth-widget{top:auto; bottom:14px; right:14px;}
+  }
+
+  /* Full Screen Auth Overlay (Entrance Gate) */
+  .auth-overlay{
+    display:flex;
+    position:fixed; inset:0; z-index:999999;
+    background:rgba(20, 24, 33, 0.85);
+    backdrop-filter:blur(6px);
+    align-items:center; justify-content:center;
+    padding:20px;
+  }
+  .auth-card{
+    width:100%; max-width:400px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:6px solid var(--pen);
+    border-radius:6px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.35);
+    padding:30px 28px;
+    position:relative;
+  }
+  .auth-card h3{
+    margin-top:0; font-size:1.6rem;
+    font-family:'Caveat',cursive; color:var(--pen); font-weight:700;
+  }
+  .auth-tabs{
+    display:flex; gap:4px; margin-bottom:18px;
+    border-bottom:1px dashed var(--line);
+  }
+  .auth-tab{
+    flex:1; text-align:center; padding:8px 4px;
+    font-family:'Zilla Slab',serif; font-weight:600; font-size:0.95rem;
+    color:var(--ink-soft); cursor:pointer; border-bottom:2px solid transparent;
+    margin-bottom:-1px;
+  }
+  .auth-tab.active{color:var(--pen); border-bottom-color:var(--pen);}
+  .auth-form{display:none; flex-direction:column; gap:14px;}
+  .auth-form.active{display:flex;}
+  .auth-field label{
+    display:block; font-family:'Zilla Slab',serif; font-size:0.82rem;
+    font-weight:600; color:var(--ink-soft); margin-bottom:4px;
+    text-transform:uppercase; letter-spacing:0.04em;
+  }
+  .auth-field input{
+    width:100%; padding:10px 12px;
+    border:1px solid var(--line);
+    background:var(--card);
+    border-radius:4px;
+    font-family:'Literata',serif; font-size:0.98rem; color:var(--ink);
+    outline:none;
+  }
+  .auth-field input:focus{border-color:var(--pen);}
+  .auth-submit{
+    margin-top:6px;
+    background:var(--pen); color:var(--on-pen); border:none;
+    padding:12px 16px; border-radius:20px; cursor:pointer;
+    font-family:'Zilla Slab',serif; font-weight:600; font-size:0.95rem;
+    box-shadow:var(--shadow);
+  }
+  .auth-submit:hover{background:var(--pen-light);}
+  .auth-msg{
+    font-family:'Zilla Slab',serif; font-size:0.85rem;
+    padding:8px 10px; border-radius:var(--radius); display:none;
+  }
+  .auth-msg.show{display:block;}
+  .auth-msg.err{background:var(--warn-soft); color:var(--warn);}
+  .auth-msg.ok{background:var(--tip-soft); color:var(--tip);}
+  .auth-note{
+    margin-top:16px; font-size:0.8rem; color:var(--ink-soft);
+    font-family:'Zilla Slab',serif; line-height:1.5;
+  }
+
+  /* ===== Extended notes (merged from detailed summary) ===== */
+  details.extended{margin:2.2em 0 1.6em; background:var(--card); border:1px solid var(--line); border-left:4px solid var(--margin); border-radius:var(--radius); box-shadow:var(--shadow);}
+  details.extended > summary{cursor:pointer; padding:14px 18px; font-family:'Zilla Slab',serif; font-weight:700; font-size:1.05rem; color:var(--pen); list-style:none;}
+  details.extended > summary::-webkit-details-marker{display:none;}
+  details.extended > summary::before{content:"▸ "; color:var(--margin);}
+  details.extended[open] > summary::before{content:"▾ ";}
+  details.extended > summary small{font-weight:400; color:var(--ink-soft); font-size:0.8em; margin-left:6px;}
+  details.extended .ext-body{padding:4px 22px 18px; background-image:none;}
+  details.extended .ext-body h3{font-size:1.1rem; margin-top:1.4em; color:var(--pen);}
+  details.extended .ext-body h4{font-size:1rem; margin-top:1.1em;}
+  details.extended .ext-body p{max-width:none;}
+  details.extended .ext-body ul ul{margin-top:.4em;}
+  .table-responsive{overflow-x:auto; margin:1em 0;}
+  .table-responsive table{margin:0; font-size:0.9rem; min-width:480px;}
+
+  /* ===== Back to top link ===== */
+  .back-to-top{margin-top:24px; text-align:right; font-family:'Zilla Slab', serif; font-size:0.9rem; font-weight:600;}
+  .back-to-top a{text-decoration:none;}
+  .back-to-top a:hover{text-decoration:underline;}
+
+  /* ===== Dark theme ===== */
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --paper:#1B1E26; --paper-2:#232733; --line:#373C4B; --ink:#E6E3DA; --ink-soft:#A5AABA;
+    --pen:#7B9BDA; --pen-light:#9DB6E6; --highlight:#B8962E; --highlight-soft:#3A3420;
+    --margin:#E07A8B; --tip:#7FB48D; --tip-soft:#22302A; --warn:#E5806B; --warn-soft:#3A2622;
+    --tab:#20242F; --code:#2A2E3A; --shadow:0 2px 10px rgba(0,0,0,.45);
+    --card:#262A36; --on-pen:#12151C; --hole:#0F1117; --tip-border:#35503C; --warn-border:#5A3A33;
+    --note-h:#E3C15A; --mark:rgba(184,150,46,.45);
+  }
+  :root[data-theme="dark"] img{filter:brightness(.88);}
+  /* inline-styled elements written with hard-coded light colours */
+  :root[data-theme="dark"] [style*="background: #ffffff"]{background:var(--card)!important;}
+  :root[data-theme="dark"] [style*="background: #fafafa"],
+  :root[data-theme="dark"] [style*="background: #f8fafc"],
+  :root[data-theme="dark"] [style*="background: #f1f5f9"]{background:var(--paper-2)!important;}
+  :root[data-theme="dark"] [style*="#e2e8f0"],
+  :root[data-theme="dark"] [style*="#f1f5f9"],
+  :root[data-theme="dark"] [style*="#cbd5e1"]{border-color:var(--line)!important;}
+  :root[data-theme="dark"] [style*="color: #6d28d9"],
+  :root[data-theme="dark"] [style*="color: #7c3aed"]{color:#B79CF5!important;}
+  :root[data-theme="dark"] [style*="color: #5b21b6"]{color:#C4B0F7!important;}
+  :root[data-theme="dark"] [style*="color: #059669"]{color:#4FD1A1!important;}
+  :root[data-theme="dark"] [style*="color: #065f46"]{color:#6EE0B4!important;}
+  :root[data-theme="dark"] [style*="color: #0284c7"]{color:#5CB8EA!important;}
+  :root[data-theme="dark"] [style*="color: #0369a1"]{color:#7CC4EE!important;}
+  :root[data-theme="dark"] [style*="color: #64748b"]{color:#9AA7BB!important;}
+  :root[data-theme="dark"] [style*="color: #1d4ed8"]{color:#8FB0FF!important;}
+  :root[data-theme="dark"] [style*="color: #1e3a8a"]{color:#9DB8FF!important;}
+  :root[data-theme="dark"] [style*="color: #2563eb"]{color:#7AA2FF!important;}
+  :root[data-theme="dark"] [style*="color: #ea580c"]{color:#F59E5B!important;}
+
+  /* ===== Theme + contents controls ===== */
+  .ctrl-bar{position:fixed; top:12px; left:12px; z-index:70; display:flex; gap:8px;}
+  .ctrl-btn{
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--card); color:var(--ink);
+    border:1px solid var(--line); border-radius:20px;
+    padding:7px 13px; box-shadow:var(--shadow); cursor:pointer;
+    font-family:'Zilla Slab',serif; font-weight:600; font-size:0.85rem; line-height:1;
+  }
+  .ctrl-btn:hover{border-color:var(--pen); color:var(--pen);}
+  .ctrl-btn:focus-visible{outline:2px solid var(--pen); outline-offset:2px;}
+  .sidebar{padding-top:64px;}
+  .sidebar,.shell{transition:none;}
+  body.toc-hidden .shell{grid-template-columns:1fr;}
+  body.toc-hidden .sidebar{display:none;}
+  @media (max-width:900px){
+    .sidebar{padding-top:14px;}
+    .ctrl-bar{top:auto; bottom:14px; left:14px;}
+  }
+  @media print{ .ctrl-bar,.auth-widget{display:none!important;} }
+  html.toc-hidden-pre .shell{grid-template-columns:1fr;}
+  html.toc-hidden-pre .sidebar{display:none;}
+</style>
+<script>
+  // apply saved theme / contents state before paint (no flash)
+  (function(){
+    var t=null,h=null;
+    try{ t=localStorage.getItem('ict0417_theme'); h=localStorage.getItem('ict0417_toc_hidden'); }catch(e){}
+    if(!t) t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
+    document.documentElement.setAttribute('data-theme',t);
+    if(h==='1') document.documentElement.classList.add('toc-hidden-pre');
+  })();
+</script>
+
+<style>
+  /* ===== Practical page additions: code + formula blocks (v1 has no code/pre rules) ===== */
+  code{
+    font-family:Consolas, Menlo, 'Courier New', monospace;
+    background:var(--code);
+    padding:1px 6px;
+    border-radius:3px;
+    font-size:0.88em;
+  }
+  pre{
+    background:var(--code);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:12px 16px;
+    overflow-x:auto;
+    font-size:0.86rem;
+    line-height:1.55;
+    margin:0 0 1em 0;
+  }
+  pre code{background:none; padding:0; font-size:1em;}
+  .steps li{margin-bottom:7px;}
+  .steps li::marker{font-weight:700; color:var(--pen);}
+  .paper-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--pen);
+    border-radius:var(--radius);
+    padding:16px 18px;
+    margin-bottom:16px;
+    box-shadow:var(--shadow);
+  }
+  .paper-card h3{color:var(--pen); margin-bottom:6px;}
+  .paper-card .marks{font-weight:700; color:var(--margin);}
+</style>
+</head>
+
+<body>
+
+<!-- FIREBASE LOGIN GATE — same gate as the Theory notes page (Nov 2026).
+     Access is controlled by the SrWL Learning portal: Google sign-in + teacher approval.
+     This Practical page is fully gated: no free preview chapter.
+     No passwords are stored on this page. -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-card">
+    <h3>Student Login 📓</h3>
+    <div class="auth-msg show" id="authStatusMsg">Checking your Google sign-in…</div>
+    <button type="button" class="auth-submit" id="authGoLoginBtn" style="display:none;">Go to Login</button>
+    <p class="auth-note">These practical lessons are for approved SrWL Learning students. Sign in with Google on the login page — your teacher approves your account, then your courses appear on your dashboard. Your name and login time are automatically logged in the attendance list.</p>
+  </div>
+</div>
+
+<!-- FLOATING PROFILE BADGE -->
+
+<div class="ctrl-bar">
+  <button class="ctrl-btn" id="tocToggle" type="button" aria-controls="sideNav" aria-expanded="true">☰ <span>Hide contents</span></button>
+  <button class="ctrl-btn" id="themeToggle" type="button" aria-label="Switch colour theme"><span id="themeIcon">🌙</span> <span id="themeLabel">Dark</span></button>
+</div>
+
+<div class="auth-widget">
+  <div class="auth-pill" id="authOpenBtn"><span class="dot"></span>Sign in with Google</div>
+  <div class="auth-user" id="authUserBox">
+    <div class="avatar-sm" id="authAvatar">?</div>
+    <span id="authUserName">Student</span>
+    <button id="authLogoutBtn">log out</button>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- SIDEBAR -->
+  <nav class="sidebar" aria-label="Chapter navigation">
+    <div class="side-title">ICT 0417 Practical</div>
+    <ul class="side-nav" id="sideNav">
+      <li><a href="#cover"><span class="n"></span>Cover</a></li>
+      <li><a href="#overview"><span class="n">P2·P3</span>Paper 2 &amp; 3 Overview</a></li>
+      <li><a href="#sec-11"><span class="n">11</span>File management</a></li>
+      <li><a href="#sec-12"><span class="n">12</span>Images</a></li>
+      <li><a href="#sec-13"><span class="n">13</span>Layout</a></li>
+      <li><a href="#sec-14"><span class="n">14</span>Styles</a></li>
+      <li><a href="#sec-15"><span class="n">15</span>Proofing</a></li>
+      <li><a href="#sec-16"><span class="n">16</span>Graphs &amp; charts</a></li>
+      <li><a href="#sec-17"><span class="n">17</span>Document production</a></li>
+      <li><a href="#sec-18"><span class="n">18</span>Databases</a></li>
+      <li><a href="#sec-19"><span class="n">19</span>Presentations</a></li>
+      <li><a href="#sec-20"><span class="n">20</span>Spreadsheets</a></li>
+      <li><a href="#sec-21"><span class="n">21</span>Website authoring</a></li>
+      <li style="margin-top: 10px;">
+        <a href="ict_notes.html" style="font-weight: 700; color: #0284c7; text-decoration: none;">
+          📓 Theory Notes (Ch 1–10)
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <div class="page">
+
+      <!-- COVER -->
+      <section class="cover" id="cover">
+        <span class="kicker hand">Cambridge IGCSE™</span>
+        <h1>ICT <span>CIE 0417</span></h1>
+        <div class="subtitle">Practical Skills — Papers 2 &amp; 3, Sections 11–21</div>
+
+        <div class="byline">
+          <div class="avatar">W</div>
+          <div>Created by <strong>Tr. Wai Lin Htet</strong></div>
+        </div>
+
+        <div class="meta-row">
+          <div><b>Syllabus:</b> Cambridge IGCSE ICT 0417 (2026–2028)</div>
+          <div><b>Format:</b> Step-by-step practical lessons</div>
+          <div><b>Use:</b> Practise each skill, then do it in the exam without help</div>
+        </div>
+
+        <div class="box tip" style="margin-top:30px; max-width:70ch;">
+          <h4>How to use this page</h4>
+          <p style="margin:0;">Work through the chapters in order. Sections 11–16 are foundation skills — you use them inside both practical papers. Sections 17–19 are Paper 2 and Sections 20–21 are Paper 3. Every chapter has three parts: <strong>what you must be able to do</strong>, a <strong>worked example with exact steps</strong>, and <strong>exam tips</strong>. Green boxes are exam tips. Follow the steps exactly, then try the same task with different data.</p>
+        </div>
+
+        <div class="toc" id="table-of-contents">
+          <a href="#overview"><span class="num">P2·P3</span> Paper 2 &amp; Paper 3 Overview</a>
+          <a href="#sec-11"><span class="num">11</span> File management</a>
+          <a href="#sec-12"><span class="num">12</span> Images</a>
+          <a href="#sec-13"><span class="num">13</span> Layout</a>
+          <a href="#sec-14"><span class="num">14</span> Styles</a>
+          <a href="#sec-15"><span class="num">15</span> Proofing</a>
+          <a href="#sec-16"><span class="num">16</span> Graphs and charts</a>
+          <a href="#sec-17"><span class="num">17</span> Document production</a>
+          <a href="#sec-18"><span class="num">18</span> Databases</a>
+          <a href="#sec-19"><span class="num">19</span> Presentations</a>
+          <a href="#sec-20"><span class="num">20</span> Spreadsheets</a>
+          <a href="#sec-21"><span class="num">21</span> Website authoring</a>
+        </div>
+      </section>
+
+      <!-- PAPER 2 / PAPER 3 OVERVIEW -->
+      <section class="chapter" id="overview">
+        <div class="chapter-head"><div class="badge hand">P2·P3</div><h2>Paper 2 &amp; Paper 3 — What the Practical Exams Test</h2></div>
+        <p class="chapter-intro">Two practical tests. Both are 2 hours 15 minutes, 70 marks, and 30% of your final grade. Together they are 60% of the whole IGCSE.</p>
+
+        <div class="paper-card">
+          <h3>Paper 2 — Document Production, Databases and Presentations</h3>
+          <p><span class="marks">2 hours 15 minutes · 70 marks · 30%</span></p>
+          <p>Tests Sections <strong>17 Document production</strong>, <strong>18 Databases</strong> and <strong>19 Presentations</strong> — and you must also use the foundation skills from Sections 11–16 inside your answers.</p>
+        </div>
+
+        <div class="paper-card">
+          <h3>Paper 3 — Spreadsheets and Website Authoring</h3>
+          <p><span class="marks">2 hours 15 minutes · 70 marks · 30%</span></p>
+          <p>Tests Sections <strong>20 Spreadsheets</strong> and <strong>21 Website authoring</strong> — and you must also use the foundation skills from Sections 11–16 inside your answers.</p>
+        </div>
+
+        <div class="box note">
+          <h4>Sections 11–16 are foundation skills</h4>
+          <p>File management, images, layout, styles, proofing, and graphs and charts are not examined on their own. They are the skills you use <strong>inside</strong> Papers 2 and 3 — for example, you place and resize an image (Section 12) inside a document (Section 17), and you build a chart (Section 16) inside a spreadsheet (Section 20) or a presentation (Section 19).</p>
+        </div>
+
+        <div class="box warn">
+          <h4>Evidence rules — read this before every practical exam</h4>
+          <ul>
+            <li><strong>No internet and no email</strong> during both practical papers.</li>
+            <li>Electronic <strong>source files are provided</strong> for each task. They must be loaded onto your computer before the exam starts.</li>
+            <li>Work through the steps of each task <strong>in order</strong>.</li>
+            <li>Produce evidence of your work by taking <strong>screenshots</strong> and placing them in an <strong>Evidence Document</strong>, and by making printouts.</li>
+            <li>Enter your <strong>centre number, candidate number and name</strong> electronically on <strong>every piece of evidence</strong> before it is sent to the printer.</li>
+            <li>Website authoring uses <strong>HTML and CSS only</strong> — no scripting language is required.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- CHAPTER 11 -->
+      <section class="chapter" id="sec-11">
+        <div class="chapter-head"><div class="badge hand">11</div><h2>File management</h2></div>
+        <p class="chapter-intro">Before you can do any practical work, you must find files, save them in the right place with the right name, and export them in the format the task asks for.</p>
+
+        <h3>What you must be able to do</h3>
+        <ul>
+          <li>Locate stored files, and open and import files of different types.</li>
+          <li>Save files in a planned <strong>hierarchical folder structure</strong> (folders inside folders).</li>
+          <li>Save files using <strong>appropriate file names</strong> — exactly as the task tells you.</li>
+          <li>Save and print files in many formats: a document, screenshots, database reports, data tables, graphs/charts, a web page in browser view, and a web page in HTML view.</li>
+          <li>Save and export in an <strong>application file format</strong>: <code>.docx</code>, <code>.doc</code>, <code>.xlsx</code>, <code>.xls</code>, <code>.accdb</code>, <code>.odb</code>, <code>.rtf</code>, <code>.pptx</code>, <code>.ppt</code>.</li>
+          <li>Save and export in a <strong>generic file format</strong>: <code>.csv</code>, <code>.txt</code>, <code>.rtf</code>, <code>.pdf</code>, <code>.css</code>, <code>.htm</code>, <code>.jpg</code>, <code>.png</code>.</li>
+          <li>Compress files (<code>.zip</code>, <code>.rar</code>) to reduce file size for storage or transmission.</li>
+        </ul>
+        <p><strong>Know and understand:</strong> the characteristics and uses of file formats (<code>.css</code>, <code>.csv</code>, <code>.gif</code>, <code>.htm</code>, <code>.jpg</code>, <code>.pdf</code>, <code>.png</code>, <code>.rtf</code>, <code>.txt</code>, <code>.zip</code>, <code>.rar</code>) — and why generic formats are needed. A generic format can be opened on any computer, in any software; an application format usually needs that exact program.</p>
+
+        <div class="table-responsive">
+          <table>
+            <tr><th>Format</th><th>What it is</th><th>Use it for</th></tr>
+            <tr><td><code>.docx</code></td><td>Word document</td><td>Documents you will edit again</td></tr>
+            <tr><td><code>.xlsx</code></td><td>Excel spreadsheet</td><td>Spreadsheets you will edit again</td></tr>
+            <tr><td><code>.accdb</code></td><td>Access database</td><td>Databases in Microsoft Access</td></tr>
+            <tr><td><code>.pptx</code></td><td>PowerPoint presentation</td><td>Presentations you will edit again</td></tr>
+            <tr><td><code>.csv</code></td><td>Comma-separated values — data only, no formatting</td><td>Moving data between programs (e.g. into a database)</td></tr>
+            <tr><td><code>.pdf</code></td><td>Fixed layout — looks the same on every computer</td><td>Final work, printouts, evidence</td></tr>
+            <tr><td><code>.jpg</code> / <code>.png</code></td><td>Image files</td><td>Photos, screenshots, graphics</td></tr>
+            <tr><td><code>.zip</code> / <code>.rar</code></td><td>Compressed files</td><td>Smaller files for storage or sending</td></tr>
+          </table>
+        </div>
+
+        <h3>Worked example — set up your exam folders and save in the right format</h3>
+        <ol class="steps">
+          <li>Create a folder called <code>0417_Paper2</code>. Inside it, create three sub-folders: <code>Source</code>, <code>Work</code> and <code>Evidence</code>.</li>
+          <li>Copy the source files the exam gives you into <code>Source</code>. <strong>Never change the source files</strong> — work on a copy in <code>Work</code>.</li>
+          <li>Open the copy and save your work with the exact file name the task asks for, for example <code>Task1_Letter.docx</code> in the <code>Work</code> folder.</li>
+          <li>When the task asks for a PDF, use <strong>File → Save As → PDF</strong> (do not just change the file name — the file type must really change).</li>
+          <li>When the task asks for a smaller file, compress it: right-click the folder → <strong>Send to → Compressed (zipped) folder</strong>, or use 7-Zip → <strong>Add to archive → .zip</strong>.</li>
+          <li>Before printing, check the file name, the folder, and the file extension one more time.</li>
+        </ol>
+
+        <div class="box tip">
+          <h4>Exam tips</h4>
+          <p>Never overwrite the original source files — if you make a mistake you need the original to start again. A file name that does not match the task can lose the mark, even if the work is correct. A <code>.csv</code> file saves data only — all formatting is lost, so never save your finished spreadsheet as <code>.csv</code> unless the task tells you to. Always check the file extension before saving: <code>.docx</code> is not the same as <code>.pdf</code>.</p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 12 -->
+      <section class="chapter" id="sec-12">
+        <div class="chapter-head"><div class="badge hand">12</div><h2>Images</h2></div>
+        <p class="chapter-intro">You will place images into documents, presentations and web pages — in exactly the size and position the task asks for.</p>
+
+        <h3>What you must be able to do</h3>
+        <ul>
+          <li><strong>Place</strong> an image with precision.</li>
+          <li><strong>Resize</strong> an image as specified, and <strong>maintain or adjust the aspect ratio</strong>.</li>
+          <li><strong>Crop</strong> an image (cut off part of it).</li>
+          <li><strong>Rotate</strong> an image.</li>
+          <li><strong>Reflect (flip)</strong> an image horizontally or vertically.</li>
+          <li>Adjust the <strong>brightness</strong> and the <strong>contrast</strong> of an image.</li>
+          <li><strong>Group and layer</strong> images: group and ungroup, move to the front or to the back.</li>
+        </ul>
+        <p><strong>Know and understand:</strong> reducing the file size of an image can be done by reducing the <strong>resolution</strong> or the <strong>colour depth</strong>.</p>
+
+        <h3>Worked example — place the school logo in a document header</h3>
+        <ol class="steps">
+          <li>Insert the image: <strong>Insert → Pictures → This Device</strong>, then select <code>logo.png</code>.</li>
+          <li>Move it into position: drag it to the top-right corner, or use <strong>Picture Format → Position</strong> to set the exact position.</li>
+          <li>Resize it exactly: <strong>Picture Format → Size</strong> → set the width to <code>4 cm</code>. Keep <strong>Lock aspect ratio</strong> ticked, so the height changes with the width.</li>
+          <li>Crop it: <strong>Picture Format → Crop</strong> → drag the top edge down by 1 cm to remove the empty space above the logo.</li>
+          <li>Fix the brightness: <strong>Picture Format → Corrections</strong> → set Brightness to +10% and Contrast to +10%.</li>
+          <li>Layer it correctly: right-click the logo → <strong>Bring to Front</strong>, so it sits above the banner shape behind it.</li>
+          <li>Group it with the banner: select both objects (hold Ctrl and click each one) → right-click → <strong>Group</strong>. Now they move as one object.</li>
+        </ol>
+
+        <div class="box tip">
+          <h4>Exam tips</h4>
+          <p>Resizing without locking the aspect ratio stretches the image — examiners check this. Cropping removes part of an image; resizing makes the whole image smaller — they are not the same thing. Flip is not the same as rotate: flipping mirrors the image. After grouping, the images move as one — ungroup them if you need to edit one part alone. Reducing resolution makes the file smaller but also makes the image less sharp — only reduce it as far as the task asks.</p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 13 -->
+      <section class="chapter" id="sec-13">
+        <div class="chapter-head"><div class="badge hand">13</div><h2>Layout</h2></div>
+        <p class="chapter-intro">Layout is how a document is built: the text, the objects in it, the tables, and the headers and footers. In this section "document" means any file you work on in Sections 16 to 21.</p>
+
+        <h3>What you must be able to do</h3>
+        <ul>
+          <li>Create a new document or edit an existing one. Enter and modify text and numbers with <strong>total accuracy</strong>.</li>
+          <li>Edit text and numbers: highlight, delete, move, cut, copy, paste, drag and drop.</li>
+          <li>Place objects into the document from many sources: text, image, screenshot, shapes, table, graph or chart, spreadsheet extract, database extract.</li>
+          <li>Wrap text around a table, chart or image: above, below, <strong>square</strong> or <strong>tight</strong>.</li>
+          <li>Work with tables: create a table with a specified number of rows and columns; place text or objects in a table; edit a table (insert or delete rows and columns, merge cells); format a table — horizontal alignment (left, right, centre, fully justified), vertical alignment (top, middle, bottom), show or hide gridlines, wrap text inside a cell, shade or colour cells, adjust row height and column width.</li>
+          <li>Use headers and footers: create or edit them; align their contents consistently (left margin, right margin, centred within margins); place text and automated objects in them — file information, page numbering, total number of pages, date, time.</li>
+        </ul>
+        <p><strong>Know and understand:</strong> the purpose of headers and footers — information that repeats on every page, such as the document title, the page number, or the date.</p>
+
+        <h3>Worked example — build a price table with a header and footer</h3>
+        <ol class="steps">
+          <li>Create the table: <strong>Insert → Table → 3 columns × 4 rows</strong>.</li>
+          <li>Type the headings in the first row: <code>Item</code>, <code>Price</code>, <code>Stock</code>. Then type the data in the rows below.</li>
+          <li>Merge the title row: select the first row → <strong>Table Layout → Merge Cells</strong> → type <code>Price List — 2027</code> and centre it.</li>
+          <li>Format the table: select the heading row → <strong>Table Design → Shading</strong> → light grey. Set the heading cells to horizontal alignment <strong>centre</strong> and vertical alignment <strong>middle</strong>.</li>
+          <li>Adjust the size: drag the column borders until every word is fully visible, or use <strong>Table Layout → AutoFit → AutoFit to Contents</strong>.</li>
+          <li>Add the header: <strong>Insert → Header → Blank</strong> → type <code>Price List — 2027</code> on the left and insert a page number field on the right (<strong>Insert → Page Number</strong>).</li>
+          <li>Add the footer: <strong>Insert → Footer</strong> → type <code>Page X of Y</code> using the page number and total pages fields, centred.</li>
+          <li>Wrap text around the table: select the table → <strong>Table Properties → Text Wrapping → Around</strong>, so the paragraph flows beside it.</li>
+        </ol>
+
+        <div class="box tip">
+          <h4>Exam tips</h4>
+          <p>Check every number twice — "total accuracy" means one wrong digit loses the mark. Gridlines on screen are not the same as borders: gridlines help you see the table while you work, but they do not print unless you add borders. Check Print Preview before you print. The header and footer must be consistent on every page — do not type them on one page only. Merge the cells before you type a title that spans the table, not after.</p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 14 -->
+      <section class="chapter" id="sec-14">
+        <div class="chapter-head"><div class="badge hand">14</div><h2>Styles</h2></div>
+        <p class="chapter-intro">Styles keep a document consistent. Change the style once, and every heading or paragraph that uses it changes too.</p>
+
+        <h3>What you must be able to do</h3>
+        <ul>
+          <li>Create, modify, update and apply <strong>styles</strong> to ensure consistency of presentation.</li>
+          <li>Control the font in a style: font face, type (serif or sans-serif), point size, colour.</li>
+          <li>Control text alignment: left, right, centre, fully justified.</li>
+          <li>Control text enhancement: bold, underline, italic.</li>
+          <li>Control spacing: paragraph spacing (before and after) and line spacing.</li>
+          <li>Control bullets: shape, alignment, line spacing and indent.</li>
+        </ul>
+        <p><strong>Know and understand:</strong> a <strong>corporate house style</strong> — a fixed set of fonts, colours, sizes and spacing that a company uses on every document so that everything it produces looks the same and is easy to recognise. Its purpose is consistency and a professional image.</p>
+
+        <h3>Worked example — create a house style for headings</h3>
+        <ol class="steps">
+          <li>Open the Styles pane: <strong>Home → Styles</strong> → right-click <strong>Heading 1</strong> → <strong>Modify</strong>.</li>
+          <li>Set the font: <strong>Arial</strong> (sans-serif), <strong>16 pt</strong>, <strong>bold</strong>, colour <strong>navy #0D2A5C</strong>.</li>
+          <li>Set the spacing: paragraph spacing <strong>before 12 pt</strong> and <strong>after 6 pt</strong>, line spacing <strong>1.15</strong>.</li>
+          <li>Click <strong>OK</strong>. Now select each chapter heading in the document and click <strong>Heading 1</strong> in the Styles gallery to apply it.</li>
+          <li>To update the style later, modify Heading 1 again — every heading using that style updates automatically. You never need to change the headings one by one.</li>
+          <li>Do the same for the body text: modify the <strong>Normal</strong> style to Arial 11 pt, line spacing 1.15, and apply it to all body paragraphs.</li>
+        </ol>
+
+        <div class="box tip">
+          <h4>Exam tips</h4>
+          <p>Never format headings one by one — use styles, or a later change will miss one heading and the document will look inconsistent. A house style is the point of the question: same fonts, same colours, same spacing everywhere. If the task says "update the style", change the style itself — do not re-format the text directly, because direct formatting overrules the style and will not update. Check bullets too: same shape, same indent, same line spacing on every list.</p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 15 -->
+      <section class="chapter" id="sec-15">
+        <div class="chapter-head"><div class="badge hand">15</div><h2>Proofing</h2></div>
+        <p class="chapter-intro">Proofing is finding and fixing errors before the work is printed — with software tools, and with your own eyes.</p>
+
+        <h3>What you must be able to do</h3>
+        <ul>
+          <li>Use automated software tools — <strong>spell check</strong> and <strong>grammar check</strong> — and make appropriate changes so the work has as few errors as possible.</li>
+          <li>Use <strong>validation routines</strong> to minimise data entry errors.</li>
+          <li>Perform <strong>visual verification</strong>: identify and correct transposed numbers, incorrect spelling, inconsistent character spacing and inconsistent case.</li>
+          <li><strong>Proofread</strong>: identify and correct inconsistent line spacing, remove blank pages and blank slides, remove widows and orphans, fix inconsistent or incorrect styles, and make sure tables and lists are not split over columns or pages/slides.</li>
+        </ul>
+        <p><strong>Know and understand:</strong> spell check suggestions do not always give the correct answer. Validation checks and their uses:</p>
+        <ul>
+          <li><strong>Range check</strong> — the value must be inside a set range (a test score must be 0 to 100).</li>
+          <li><strong>Character check</strong> — only allowed characters are accepted (a name must not contain digits).</li>
+          <li><strong>Length check</strong> — the entry must have a set number of characters (a postcode must be 5 characters).</li>
+          <li><strong>Type check</strong> — the entry must be the right data type (a number, not text).</li>
+          <li><strong>Format check</strong> — the entry must match a pattern (an email must contain @ and a dot).</li>
+          <li><strong>Presence check</strong> — the field must not be left blank.</li>
+        </ul>
+        <p><strong>Verification</strong> means checking data that has already been entered — visual checking and double data entry. Validation stops wrong data being entered; verification finds errors that are already there. You need both.</p>
+
+        <h3>Worked example — proofread a data table before printing</h3>
+        <ol class="steps">
+          <li>Run the spell check: <strong>Review → Spelling &amp; Grammar</strong>. Read each suggestion and accept or reject it one by one — do not click "Change All" without reading.</li>
+          <li>Check the numbers by eye: look for transposed digits, for example <code>2027</code> typed as <code>2072</code>, and for inconsistent case, for example <code>yangon</code> next to <code>Yangon</code>.</li>
+          <li>Check the validation: a "Score" field must accept only 0–100 (range check); a "Postcode" must be exactly 5 characters (length check); an "Email" must contain @ (format check); a "Name" must not be blank (presence check).</li>
+          <li>Open Print Preview. Remove any blank page, fix a table that is split across two pages, and fix a heading left alone at the bottom of a page (a widow) or a single line carried onto the next page (an orphan).</li>
+          <li>Check the spacing: every paragraph the same line spacing, every heading using the same style.</li>
+        </ol>
+
+        <div class="box tip">
+          <h4>Exam tips</h4>
+          <p>Spell check will not catch "form" typed instead of "from" — both are real words, so only your eyes will find it. A validation check stops a wrong value being entered; verification finds errors that are already entered — know the difference, because the exam asks about both. Always proofread on screen <strong>and</strong> in Print Preview: blank pages and split tables only show up in the preview.</p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 16 -->
+      <section class="chapter" id="sec-16">
+        <div class="chapter-head"><div class="badge hand">16</div><h2>Graphs and charts</h2></div>
+        <p class="chapter-intro">A chart turns numbers into a picture. Choose the right chart type, label everything, and format the numbers exactly as the task asks.</p>
+
+        <h3>What you must be able to do</h3>
+        <ul>
+          <li>Select data to produce a graph or chart: contiguous data, non-contiguous data, and specified data ranges.</li>
+          <li>Select the graph or chart type.</li>
+          <li>Label the graph or chart: chart title, legend, sector labels, sector values, percentages, category axis title, value axis title, category axis labels, value axis labels, data value labels.</li>
+          <li>Add a <strong>second data series</strong> and add a <strong>second axis</strong>.</li>
+          <li>Format numerical values to a specified number of decimal places, and display currency symbols.</li>
+          <li>Adjust the maximum and minimum values of an axis scale and set incremental values.</li>
+          <li>Enhance the appearance: extract a pie chart sector, change the colour scheme or fill patterns.</li>
+        </ul>
+
+        <h3>Worked example — column chart of quarterly sales with a second series</h3>
+        <ol class="steps">
+          <li>Select the data: click cell A1 and drag to E3. To add a non-contiguous range, hold <strong>Ctrl</strong> and drag over the second range.</li>
+          <li>Insert the chart: <strong>Insert → Charts → Column Chart → Clustered Column</strong>.</li>
+          <li>Add the title: <strong>Chart Design → Add Chart Element → Chart Title → Above Chart</strong> → type <code>Sales 2026</code>.</li>
+          <li>Add axis titles: <strong>Add Chart Element → Axis Titles → Primary Horizontal</strong> → type <code>Quarter</code>; <strong>Primary Vertical</strong> → type <code>Sales ($)</code>.</li>
+          <li>Add data labels: <strong>Add Chart Element → Data Labels → Outside End</strong>, so each value shows above its column.</li>
+          <li>Add a second series: right-click the 2026 series → <strong>Format Data Series → Plot Series On → Secondary Axis</strong>. Now the chart has two value axes.</li>
+          <li>Set the axis scale: right-click the value axis → <strong>Format Axis</strong> → set Minimum to <code>0</code>, Maximum to <code>1000</code>, Major unit to <code>100</code>.</li>
+          <li>Format the numbers: select the data labels → set Number format to <strong>Currency, $ symbol, 2 decimal places</strong>.</li>
+          <li>For a pie chart: click the largest sector twice to select it alone, then drag it outwards to extract (explode) that sector.</li>
+        </ol>
+
+        <div class="box tip">
+          <h4>Exam tips</h4>
+          <p>Choose the chart type the data needs: a pie chart shows parts of a whole, a column chart compares values, a line chart shows change over time. A missing chart title or axis title loses marks — label everything. Non-contiguous data needs Ctrl + click: selecting the wrong range is the most common error. Always check the axis scale: a chart that starts at 500 instead of 0 makes small differences look huge. The full step-by-step spreadsheet guide, including charts, is on the <a href="/excel_spreadsheet_guide">Excel Spreadsheets Guide</a> page.</p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 17 -->
+      <section class="chapter" id="sec-17">
+        <div class="chapter-head"><div class="badge hand">17</div><h2>Document production</h2></div>
+        <p class="chapter-intro">Paper 2 starts here. Document production is building a finished document: page layout, formatted text, find and replace, and bookmarks and hyperlinks.</p>
+
+        <h3>What you must be able to do</h3>
+        <ul>
+          <li>Organise page layout: page size, page orientation, page margins, number of columns, column width, spacing between columns, and set or remove breaks — page breaks, section breaks and column breaks.</li>
+          <li>Format text: line spacing (single, 1.5 times, double, multiple) and spacing before and after paragraphs; tabulation — left, right, centred and decimal tabs; indented paragraphs and hanging paragraphs; text enhancement — bold, underline, italic, superscript and subscript, changes in case; bulleted and numbered lists.</li>
+          <li>Find and replace text, including matching case and whole words.</li>
+          <li>Add and delete <strong>bookmarks</strong> and <strong>hyperlinks</strong>.</li>
+        </ul>
+        <p><strong>Know and understand:</strong> pagination — the purpose of setting page, section and column breaks (to control exactly where a page, a section or a column starts). A <strong>gutter margin</strong> is the extra space left on the inside edge of a page for binding — it is not the same as a normal margin.</p>
+
+        <h3>Worked example — format a two-column leaflet</h3>
+        <ol class="steps">
+          <li>Set the columns: <strong>Layout → Columns → Two</strong>. Then <strong>Layout → Columns → More Columns</strong> → set the column width to <code>7 cm</code> and the spacing between columns to <code>1 cm</code>.</li>
+          <li>Set the gutter margin: <strong>Layout → Margins → Custom Margins</strong> → set the gutter to <code>1.5 cm</code> for binding.</li>
+          <li>Set the line spacing: select the heading → <strong>Home → Paragraph → Line Spacing → 1.5</strong>. Set the spacing after each paragraph to <code>6 pt</code>.</li>
+          <li>Set a decimal tab for the price list: click on the ruler to open the Tabs box → set a <strong>decimal tab at 12 cm</strong>. Now prices line up on the decimal point when you press Tab.</li>
+          <li>Find and replace: press <strong>Ctrl + H</strong> → find <code>colour</code>, replace with <code>color</code> → tick <strong>Match case</strong> → <strong>Replace All</strong>. Then check the result — "Match case" means only "colour" with a small c is changed.</li>
+          <li>Add a bookmark: click at the start of the Prices section → <strong>Insert → Bookmark</strong> → name it <code>Prices</code> → <strong>Add</strong>.</li>
+          <li>Add a hyperlink to the bookmark: select the words "See prices" → <strong>Insert → Link → Place in This Document → Prices</strong> → <strong>OK</strong>.</li>
+          <li>Control pagination: put the cursor before the new section → <strong>Layout → Breaks → Page Break</strong>. Never press Enter many times to push text onto the next page.</li>
+        </ol>
+
+        <div class="box tip">
+          <h4>Exam tips</h4>
+          <p>A gutter margin is the extra space for binding — do not confuse it with a normal margin. A decimal tab lines numbers up on the decimal point, which is what prices need. "Match case" and "Find whole words only" change what gets replaced — always check the result after replacing. Breaks control where a page, section or column starts; pressing Enter again and again is not a break and will move when the text changes. Superscript is for powers (x²) and subscript is for chemical formulas (H₂O) — the exam tests both.</p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 18 -->
+      <section class="chapter" id="sec-18">
+        <div class="chapter-head"><div class="badge hand">18</div><h2>Databases</h2></div>
+        <p class="chapter-intro">Paper 2 continues with databases: build the structure, enter the data, search it with queries, and present it in reports. Work in Microsoft Access.</p>
+
+        <h3>What you must be able to do</h3>
+        <ul>
+          <li><strong>Create a database structure:</strong> import data from existing files (including <code>.csv</code> and <code>.txt</code>) using specified field names to create tables; set appropriate data types — text, numeric (integer, decimal, currency), date/time, Boolean/logical; set numeric sub-types (percentage, number of decimal places); set the display format of a Boolean/logical field (yes/no, true/false, checkbox); set the display format of date/time data; create and edit <strong>primary and foreign keys</strong>; create <strong>relationships</strong> between tables.</li>
+          <li><strong>Create and use a data entry form:</strong> specified fields, appropriate font styles and sizes, appropriate spacing between fields, character spacing of individual fields, use of white space, radio buttons, check boxes and drop-down menus.</li>
+          <li><strong>Perform calculations:</strong> arithmetic operations or numeric functions in calculated fields and calculated controls — addition, subtraction, multiplication, division, sum, average, maximum, minimum, count.</li>
+          <li><strong>Sort data:</strong> a single criterion or multiple criteria, ascending or descending.</li>
+          <li><strong>Search and select data:</strong> a single criterion or multiple criteria in a query; operators <strong>AND, OR, NOT, LIKE, &gt;, &lt;, =, &gt;=, &lt;=, &lt;&gt;</strong>; wildcards.</li>
+          <li><strong>Present data:</strong> produce reports showing all the required data and labels in full; use report headers and footers (report header, report footer, page header, page footer); set report titles; use different output layouts (tabular or columnar); align data and labels appropriately — right-align numeric data, decimal alignment; control the display format of numeric data — number of decimal places, currency symbol, percentage.</li>
+        </ul>
+        <p><strong>Know and understand:</strong> a <strong>flat-file database</strong> is a single table with no relationships — simple, but data is repeated and it is hard to keep consistent. A <strong>relational database</strong> has several linked tables, uses primary and foreign keys, avoids repeating data, and is more secure and efficient. A <strong>primary key</strong> is a field that is unique for every record and never changes — it identifies the record. A <strong>foreign key</strong> is a primary key from another table, stored in this table to link the two tables. Good form design means: only the fields the user needs, clear labels, sensible spacing and white space, and the right control for each field (drop-down list for a fixed choice, check box for yes/no, radio buttons for one choice from a few).</p>
+
+        <div class="table-responsive">
+          <table>
+            <tr><th>Data type</th><th>Use it for</th><th>Key properties</th></tr>
+            <tr><td>Short Text</td><td>Names, codes, emails, categories</td><td>Field Size, Required, Indexed</td></tr>
+            <tr><td>Long Text</td><td>Comments, long descriptions</td><td>Usually no indexing</td></tr>
+            <tr><td>Number</td><td>Quantity, counts, numeric identifiers</td><td>Field Size (Integer / Long), Decimal Places</td></tr>
+            <tr><td>Date/Time</td><td>Date of birth, order date, deadline</td><td>Format (Short Date), Input Mask</td></tr>
+            <tr><td>Currency</td><td>Price, fee, cost</td><td>Format Currency, Decimal Places (2)</td></tr>
+            <tr><td>Yes/No</td><td>Flags such as Paid or Active</td><td>Display as checkbox, yes/no, or true/false</td></tr>
+          </table>
+        </div>
+
+        <h3>Worked example — build a student database and a query</h3>
+        <ol class="steps">
+          <li>Import the data: <strong>External Data → New Data Source → From File → Text File</strong> → select <code>Students.csv</code> → tick <strong>First Row Contains Field Names</strong> → <strong>Finish</strong>.</li>
+          <li>Open the table in <strong>Design View</strong>. Set the data types: <code>StudentID</code> — Short Text; <code>Fee</code> — Currency, 2 decimal places; <code>Paid</code> — Yes/No, display as checkbox; <code>DateJoined</code> — Date/Time, Short Date format.</li>
+          <li>Set the primary key: right-click <code>StudentID</code> → <strong>Primary Key</strong>. Save the table.</li>
+          <li>Create the relationship: <strong>Database Tools → Relationships</strong> → add the <code>Students</code> and <code>Enrolments</code> tables → drag <code>StudentID</code> from Students onto <code>StudentID</code> in Enrolments → tick <strong>Enforce Referential Integrity</strong> → <strong>Create</strong>.</li>
+          <li>Build a query: <strong>Create → Query Design</strong> → add the <code>Students</code> table → drag the fields <code>Surname</code>, <code>Score</code> and <code>Town</code> into the grid.</li>
+          <li>Add criteria: type <code>&gt;=50</code> under <code>Score</code> (only scores of 50 or more); type <code>Like "Sm*"</code> under <code>Surname</code> (only surnames starting with "Sm"). Criteria on the <strong>same row</strong> means AND — both must be true.</li>
+          <li>Add a calculated field: in an empty Field cell type <code>Total: [Quantity]*[UnitPrice]</code>. Access multiplies the two fields for every record. A calculated control on a form or report works the same way.</li>
+          <li>Sort the results: under <code>Surname</code> set Sort to <strong>Ascending</strong>; under <code>Score</code> set Sort to <strong>Descending</strong>. Run the query (<strong>Run</strong>, the red exclamation mark).</li>
+          <li>Make the report: select the query → <strong>Create → Report</strong>. Set the <strong>report title</strong> at the top, add a <strong>report header</strong> with the school name, and a <strong>page footer</strong> with page numbers. Right-align all numeric data and check that every label and every value shows in full — nothing cut off.</li>
+          <li>Take the evidence screenshot of the report in Print Preview and place it in your Evidence Document.</li>
+        </ol>
+
+        <p><strong>Query operators you must know:</strong> <code>AND</code> (both true), <code>OR</code> (at least one true), <code>NOT</code> (not true), <code>LIKE</code> (matches a pattern), <code>&gt;</code>, <code>&lt;</code>, <code>=</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>&lt;&gt;</code> (not equal). <code>In ("London", "Birmingham")</code> matches a value in a list. <strong>Wildcards:</strong> <code>*</code> matches any number of characters (<code>Sm*</code> finds Smith, Small, Smythe), <code>?</code> matches exactly one character (<code>Sm?th</code> finds Smith and Smyth).</p>
+
+        <div class="box tip">
+          <h4>Exam tips</h4>
+          <p>Never use a name as a primary key — names can repeat. The primary key and the foreign key must be the same data type, or the relationship will fail. In a query, criteria on the same row means AND and criteria on different rows means OR — this is the most tested rule in the whole section. <code>*</code> matches any characters and <code>?</code> matches one character. A report must show <strong>all</strong> labels and data in full: text cut off at the edge of a column loses marks. Always take the evidence screenshot of the report and of the relationship window.</p>
+        </div>
+
+        <div class="box note">
+          <h4>Full guide</h4>
+          <p>The complete step-by-step database guide — the 8-step workflow (import, data types, primary key, relationships, queries, sort &amp; filter, calculated fields, reports and forms) — is on the <a href="/ms_access_database_guide">Microsoft Access Database Guide</a> page.</p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 19 -->
+      <section class="chapter" id="sec-19">
+        <div class="chapter-head"><div class="badge hand">19</div><h2>Presentations</h2></div>
+        <p class="chapter-intro">Paper 2 ends with presentations: build the slides from a text file, make them consistent with a master slide, add links and buttons, and show or print them in the right way.</p>
+
+        <h3>What you must be able to do</h3>
+        <ul>
+          <li>Create a presentation using a text file.</li>
+          <li>Use a <strong>master slide</strong>: insert and edit objects consistently — images, text, shapes, logos, slide headers and footers, placeholder position, automated slide numbering. Format master slide objects — headings, subheadings, bullets, background colour.</li>
+          <li>Edit a presentation: apply a slide layout; insert a new slide; move or delete a slide; insert and edit objects — text (headings, subheadings, bulleted lists), images (still images, video clips, animated images), charts, tables, audio clips (sound), symbols, lines, arrows, call-out boxes and shapes.</li>
+          <li>Add <strong>presenter notes</strong>.</li>
+          <li>Insert and edit a <strong>hyperlink</strong> — link text or an object to a slide inside the presentation, an external file, or an email address.</li>
+          <li>Insert an <strong>action button</strong> and change its settings to navigate to a specified slide or file.</li>
+          <li>Add <strong>alternative text (alt text)</strong> or a screentip to an object.</li>
+          <li>Apply consistent <strong>transitions</strong> between slides and consistent <strong>animation</strong> effects on text, images and other objects.</li>
+          <li><strong>Hide slides</strong> inside a presentation.</li>
+          <li>Output the presentation: display it as a looped on-screen carousel or presenter controlled; print it as full page slides, presenter notes, or handouts.</li>
+        </ul>
+
+        <h3>Worked example — build a 6-slide talk from a text file</h3>
+        <ol class="steps">
+          <li>Create the presentation from the text file: <strong>New → Open</strong> the outline text file, or <strong>Home → New Slide → Slides from Outline</strong> → select <code>Talk.txt</code>. Each line becomes a slide title or a bullet point.</li>
+          <li>Set up the master slide: <strong>View → Slide Master</strong>. Insert the school logo, the footer text and the slide number field once — they now appear on every slide. Set the heading font, the subheading font, the bullet style and the background colour here.</li>
+          <li>Apply layouts: select each slide → <strong>Home → Layout</strong> → choose <strong>Title and Content</strong> for text slides and <strong>Title Only</strong> for the picture slide.</li>
+          <li>Add objects: <strong>Insert → Pictures</strong> for a still image; <strong>Insert → Chart</strong> for a chart; <strong>Insert → Table</strong> for a table; <strong>Insert → Audio</strong> for a sound clip. Add a call-out box with <strong>Insert → Shapes → Callout</strong>.</li>
+          <li>Add presenter notes: click in the <strong>Notes</strong> pane under a slide and type what the presenter should say.</li>
+          <li>Add a hyperlink: select the logo → <strong>Insert → Link</strong> → type the school website address. Or link text to another slide: <strong>Place in This Document → Slide 6</strong>.</li>
+          <li>Add an action button: <strong>Insert → Shapes → Action Buttons → Home</strong> → draw the button on the last slide → in the Action Settings box choose <strong>Hyperlink to: First Slide</strong> → <strong>OK</strong>.</li>
+          <li>Add alt text: right-click an image → <strong>Edit Alt Text</strong> → type a short description, for example <code>School logo</code>.</li>
+          <li>Make transitions and animation consistent: select all slides → <strong>Transitions → Fade → Apply to All</strong>. Select a bullet list → <strong>Animations → Appear</strong>. Use the same transition and the same animation everywhere.</li>
+          <li>Hide the backup slide: right-click it in the slide pane → <strong>Hide Slide</strong>. It stays in the file but does not show in the slide show.</li>
+          <li>Set up the show: <strong>Slide Show → Set Up Show → Loop continuously until 'Esc'</strong> for a carousel display, or leave it presenter controlled for a talk.</li>
+        </ol>
+
+        <div class="box tip">
+          <h4>Exam tips</h4>
+          <p>Put repeated items — logo, footer, slide numbers — on the master slide. Never place them on every slide by hand: one slide will always be missed. Transitions and animation must be consistent — mixing five different effects looks unprofessional and loses marks. A hidden slide does not show in the slide show but it still prints, so check the printout. Always check that presenter notes print correctly: choose <strong>Notes Pages</strong> in the print settings, not full page slides, when the task asks for notes.</p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 20 -->
+      <section class="chapter" id="sec-20">
+        <div class="chapter-head"><div class="badge hand">20</div><h2>Spreadsheets</h2></div>
+        <p class="chapter-intro">Paper 3 starts here. Spreadsheets are the biggest practical topic: build a data model with formulae and functions, sort and search the data, then format it and print it.</p>
+
+        <h3>What you must be able to do</h3>
+        <ul>
+          <li><strong>Create and edit a spreadsheet model:</strong> insert or delete cells, rows and columns; merge cells; create formulae using cell references; replicate formulae using <strong>absolute and relative cell references</strong> where appropriate; use arithmetic operators — add, subtract, multiply, divide, indices (powers); use <strong>named cells and named ranges</strong>; use functions — SUM, AVERAGE, MAX, MIN, INT, ROUND, COUNT, LOOKUP, VLOOKUP, HLOOKUP, XLOOKUP, IF; use external data sources inside functions; use <strong>nested functions</strong>.</li>
+          <li><strong>Manipulate data:</strong> sort with a single criterion or multiple criteria, ascending or descending; search and select subsets of data with a single criterion or multiple criteria, using operators AND, OR, NOT, &gt;, &lt;, =, &gt;=, &lt;=, &lt;&gt;, and wildcards.</li>
+          <li><strong>Present data:</strong> display formulae or values; adjust row height, column width and cell sizes so all data, labels and formulae are fully visible; wrap text inside cells; hide and display rows and columns; format a spreadsheet — text colour, cell colour, bold, underline, italic, shading; format numbers — decimal places, currency symbols, percentages; use <strong>conditional formatting</strong> to change how a cell looks depending on its contents; set page layout — portrait or landscape orientation, print on a specified number of pages, print area, show or hide gridlines, show or hide row and column headings.</li>
+        </ul>
+        <p><strong>Know and understand:</strong> a <strong>formula</strong> is a calculation you write yourself with cell references and operators, for example <code>=B2+C2</code>. A <strong>function</strong> is a ready-made calculation with a name, for example <code>=SUM(B2:B5)</code>. The <strong>order of operations</strong> is: brackets first, then indices (powers), then multiplication and division, then addition and subtraction — use brackets to make sure a formula works as you mean it. A <strong>relative reference</strong> (B2) moves when you copy a formula; an <strong>absolute reference</strong> ($B$2) stays fixed.</p>
+
+        <div class="table-responsive">
+          <table>
+            <tr><th>Function</th><th>What it does</th><th>Example</th></tr>
+            <tr><td><code>SUM</code></td><td>Adds a range of numbers</td><td><code>=SUM(B2:B5)</code></td></tr>
+            <tr><td><code>AVERAGE</code></td><td>Mean of a range</td><td><code>=AVERAGE(B2:B5)</code></td></tr>
+            <tr><td><code>MAX</code> / <code>MIN</code></td><td>Largest / smallest value</td><td><code>=MAX(B2:B5)</code></td></tr>
+            <tr><td><code>COUNT</code></td><td>Counts cells with numbers</td><td><code>=COUNT(B2:B5)</code></td></tr>
+            <tr><td><code>INT</code></td><td>Rounds a number down to the integer</td><td><code>=INT(7.8)</code> → 7</td></tr>
+            <tr><td><code>ROUND</code></td><td>Rounds to a set number of decimal places</td><td><code>=ROUND(3.456,2)</code> → 3.46</td></tr>
+            <tr><td><code>IF</code></td><td>Tests a condition, returns one value if true, another if false</td><td><code>=IF(B2&gt;=50,"Pass","Fail")</code></td></tr>
+            <tr><td><code>VLOOKUP</code></td><td>Finds a value in the first column of a table, returns a value from the same row</td><td><code>=VLOOKUP(A2,Grades!$A$2:$B$6,2,FALSE)</code></td></tr>
+            <tr><td><code>HLOOKUP</code></td><td>Same as VLOOKUP, but searches across the first row</td><td><code>=HLOOKUP("Q3",A1:D2,2,FALSE)</code></td></tr>
+            <tr><td><code>XLOOKUP</code></td><td>Modern lookup — no column number needed</td><td><code>=XLOOKUP("Emma",A2:A4,B2:B4)</code></td></tr>
+            <tr><td><code>LOOKUP</code></td><td>Finds a value in one row or column, returns the matching value from another</td><td><code>=LOOKUP("Samit",A2:A4,B2:B4)</code></td></tr>
+          </table>
+        </div>
+
+        <h3>Worked example — build a grade calculator</h3>
+        <p>Student names are in A2:A5, scores in B2:B5. Cell B1 holds the pass mark, 50. The grade table is on a sheet called <code>Grades</code>, in A2:B6.</p>
+        <ol class="steps">
+          <li>Name the pass mark cell: click cell B1, click in the <strong>Name Box</strong> (left of the formula bar), type <code>PassMark</code> and press Enter. Now the formula can use the name <code>PassMark</code> instead of <code>$B$1</code>.</li>
+          <li>Total and average: in B6 type <code>=SUM(B2:B5)</code>; in B7 type <code>=AVERAGE(B2:B5)</code>; in B8 type <code>=ROUND(AVERAGE(B2:B5),2)</code> to show the average to 2 decimal places.</li>
+          <li>Highest and lowest: in B9 type <code>=MAX(B2:B5)</code>; in B10 type <code>=MIN(B2:B5)</code>; in B11 type <code>=COUNT(B2:B5)</code> to count how many scores there are.</li>
+          <li>Pass or fail: in C2 type <code>=IF(B2&gt;=PassMark,"Pass","Fail")</code>. Copy the formula down to C5 — the relative reference B2 changes to B3, B4, B5, but the named cell PassMark stays fixed.</li>
+          <li>Look up the grade: in D2 type <code>=VLOOKUP(A2,Grades!$A$2:$B$6,2,FALSE)</code>. The <code>$</code> signs make the table range absolute, so it does not move when you copy the formula down. <code>FALSE</code> means exact match — the name must be found exactly. Copy D2 down to D5.</li>
+          <li>Nested function: in E2 type <code>=IF(AVERAGE(B2:B5)&gt;=80,"Distinction",IF(AVERAGE(B2:B5)&gt;=50,"Pass","Fail"))</code>. Count the brackets: every opening bracket needs a closing one.</li>
+          <li>Order of operations: <code>=2+3*4</code> gives 14 (multiplication first). <code>=(2+3)*4</code> gives 20 (brackets first). Use brackets whenever you are not sure.</li>
+          <li>Sort the data: select the table → <strong>Data → Sort</strong> → sort by <code>Score</code>, Largest to Smallest, then add a level → sort by <code>Name</code>, A to Z.</li>
+          <li>Conditional formatting: select B2:B5 → <strong>Home → Conditional Formatting → Highlight Cells Rules → Greater Than</strong> → type <code>80</code> → choose green fill. Now every score above 80 turns green automatically.</li>
+          <li>Page layout: <strong>Page Layout → Orientation → Landscape</strong>; set <strong>Fit to 1 page wide</strong>; set the <strong>Print Area</strong> to A1:E11; untick <strong>Print Gridlines</strong> if the task says so. Check Print Preview — every value must be fully visible, with no <code>###</code> showing in a column that is too narrow.</li>
+          <li>Formula view: <strong>Formulas → Show Formulas</strong> displays the formulae instead of the values. Take a screenshot of the formula view for your Evidence Document, then switch it off again.</li>
+        </ol>
+
+        <div class="box tip">
+          <h4>Exam tips</h4>
+          <p>A relative reference moves when you copy a formula; an absolute reference (<code>$A$1</code>) does not — always use <code>$</code> on a lookup table range, or the range will slide down and the lookup will break. VLOOKUP needs <code>FALSE</code> for an exact match, and the lookup value must be in the <strong>first</strong> column of the table. Nested IFs need the same number of closing brackets as opening ones — count them. A column that is too narrow shows <code>###</code> instead of the number: widen the column before printing. Always check the printed page shows all data in full.</p>
+        </div>
+
+        <div class="box note">
+          <h4>Full guide</h4>
+          <p>The complete step-by-step spreadsheet guide — the 9 core modules, the lookup evolution (LOOKUP, VLOOKUP, HLOOKUP, INDEX + MATCH, XLOOKUP, FILTER), the formula finder and the practice quiz — is on the <a href="/excel_spreadsheet_guide">Excel Spreadsheets Guide</a> page.</p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 21 -->
+      <section class="chapter" id="sec-21">
+        <div class="chapter-head"><div class="badge hand">21</div><h2>Website authoring</h2></div>
+        <p class="chapter-intro">Paper 3 ends with website authoring: build a web page with HTML for the content and CSS for the presentation. No scripting language is required.</p>
+
+        <h3>The three web development layers</h3>
+        <ul>
+          <li><strong>Content layer</strong> (HTML) — enter the content and create the structure of a web page.</li>
+          <li><strong>Presentation layer</strong> (CSS) — display and format the elements in a web page.</li>
+          <li><strong>Behaviour layer</strong> (a scripting language) — control elements in a web page. This layer is <strong>not needed</strong> for this exam.</li>
+        </ul>
+
+        <h3>What you must be able to do — HTML (content layer)</h3>
+        <ul>
+          <li>Place elements in the <strong>head</strong> section: a page title to display in the browser; attach external stylesheets with the correct hierarchy, using a <strong>relative file path</strong>; metatags with the right attributes — charset, name attributes (description, keywords, author, viewport) and content attributes; default target windows.</li>
+          <li>Place content in the <strong>body</strong> section.</li>
+          <li>Insert a <strong>table</strong>: table header (<code>&lt;th&gt;</code>), table rows (<code>&lt;tr&gt;</code>), table data (<code>&lt;td&gt;</code>). Adjust cells to span more than one row or column (<code>rowspan</code>, <code>colspan</code>), set table and cell sizes in pixels or % values, and apply styles to tables.</li>
+          <li>Insert objects: text, images, sound clips, video (display controls, remove controls, autoplay); adjust image or video size and aspect ratio; apply <strong>alternative text</strong>.</li>
+          <li>Use the <code>&lt;div&gt;</code> tag to apply styles and classes.</li>
+          <li>Apply tags to text to display pre-defined styles: <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;li&gt;</code>. Apply <strong>classes</strong> to elements. Apply styles to lists — ordered list (<code>&lt;ol&gt;</code>) and unordered list (<code>&lt;ul&gt;</code>).</li>
+          <li>Create a <strong>bookmark</strong> inside a web page using an <code>id</code> attribute.</li>
+          <li>Create <strong>hyperlinks</strong> from text and images to: a bookmark on the same page; another locally stored web page; a website using its URL; an email address (send mail); and open in a specified location — the same window, a new window, or a window with a specified name.</li>
+        </ul>
+        <p><strong>Know and understand:</strong> the purpose of the head section (metadata — information about the page, not shown on the page) and the body section (the visible content). Tables are used to structure elements in a web page. Metatags define the charset, keywords for search engines, the author, a description of the page, and the viewport (so the page displays correctly on all devices). A hyperlink takes the user to another place. A bookmark is a named place in a page, made with an <code>id</code> attribute, that a link can jump to. An anchor is the link itself (<code>&lt;a&gt;</code>). A <strong>relative file path</strong> gives the location of a file compared with the current page (for example <code>style.css</code> or <code>images/logo.png</code>); an <strong>absolute file path</strong> gives the full location on one computer (for example <code>C:\Users\Name\site\style.css</code>) — absolute paths must <strong>not</strong> be used for hyperlinks to locally saved web pages or objects, because they break on any other computer.</p>
+
+        <h3>What you must be able to do — CSS (presentation layer)</h3>
+        <ul>
+          <li>Create the presentation layer of a web page. Create generic external styles and inline style attributes: background properties (colour, images), font properties, and table, table row, table header and table data properties — size, background colour, horizontal and vertical alignment, spacing, padding, borders (including collapsed, colour, thickness, visible or invisible).</li>
+          <li>Create <strong>classes</strong> with the same properties (background, font, table properties).</li>
+          <li>Create external styles to be tagged in a web page: <code>h1</code>, <code>h2</code>, <code>h3</code>, <code>p</code>, <code>li</code>.</li>
+          <li>Specify font properties: font family, size, colour, alignment, bold, italic.</li>
+          <li>Attach <strong>comments</strong> to an external stylesheet, and save styles in cascading stylesheet (<code>.css</code>) format.</li>
+        </ul>
+        <p><strong>Know and understand:</strong> in a cascading stylesheet, an <strong>inline style attribute</strong> overrules an attached (external) stylesheet, and when several stylesheets are attached, the last one attached wins for any property they both set. A <strong>style</strong> applies to an HTML tag (every <code>h1</code> looks the same); a <strong>class</strong> can be applied to any element that carries that class name, so the same class can style different tags. Relative file paths must be used for attached stylesheets.</p>
+
+        <h3>Worked example — build a two-page school website</h3>
+        <p>Save <code>index.html</code> and <code>style.css</code> in the same folder. Use only relative file paths.</p>
+        <ol class="steps">
+          <li>Write the head of <code>index.html</code> — title, metatags, and the stylesheet link (relative path):</li>
+        </ol>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="description" content="SrWL Learning — IGCSE ICT courses"&gt;
+  &lt;meta name="keywords" content="IGCSE, ICT, 0417, online classes"&gt;
+  &lt;meta name="author" content="Tr. Wai Lin Htet"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Home — SrWL Learning&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;</code></pre>
+        <ol class="steps" start="2">
+          <li>Write the body — a heading with a class, a table with a spanning cell, an image with alt text, and a bookmark:</li>
+        </ol>
+<pre><code>&lt;body&gt;
+  &lt;h1 class="main-title"&gt;Welcome to SrWL Learning&lt;/h1&gt;
+  &lt;p&gt;IGCSE ICT and Computer Science online classes.&lt;/p&gt;
+
+  &lt;table&gt;
+    &lt;tr&gt;
+      &lt;th colspan="2"&gt;May/June 2027 Courses&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;IGCSE ICT (0417)&lt;/td&gt;
+      &lt;td&gt;Theory + Practical&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+
+  &lt;img src="logo.png" alt="SrWL Learning logo" width="200"&gt;
+
+  &lt;h2 id="courses"&gt;Our Courses&lt;/h2&gt;
+  &lt;ul&gt;
+    &lt;li&gt;IGCSE ICT (0417)&lt;/li&gt;
+    &lt;li&gt;IGCSE Computer Science (0478)&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/body&gt;</code></pre>
+        <ol class="steps" start="3">
+          <li>Add the hyperlinks — to the bookmark, to the second page, to a website, to an email address, and into a new window:</li>
+        </ol>
+<pre><code>&lt;a href="#courses"&gt;See our courses&lt;/a&gt;
+&lt;a href="courses.html"&gt;Courses page&lt;/a&gt;
+&lt;a href="https://www.wailinhtet.com"&gt;Visit our website&lt;/a&gt;
+&lt;a href="mailto:tr.wailinhtet@gmail.com"&gt;Email us&lt;/a&gt;
+&lt;a href="courses.html" target="_blank"&gt;Open courses in a new window&lt;/a&gt;</code></pre>
+        <ol class="steps" start="4">
+          <li>Add a video with controls and autoplay:</li>
+        </ol>
+<pre><code>&lt;video src="intro.mp4" width="640" controls autoplay&gt;&lt;/video&gt;</code></pre>
+        <ol class="steps" start="5">
+          <li>Write <code>style.css</code> — tag styles, a class, table styles, and a comment:</li>
+        </ol>
+<pre><code>/* SrWL Learning stylesheet — Tr. Wai Lin Htet */
+h1 {
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  color: #0d2a5c;
+  text-align: center;
+}
+p {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #272b33;
+}
+.main-title {
+  background-color: #fcefc0;
+  padding: 12px;
+}
+table {
+  border-collapse: collapse;
+  width: 80%;
+}
+th, td {
+  border: 1px solid #0d2a5c;
+  padding: 8px;
+  text-align: left;
+  vertical-align: top;
+}</code></pre>
+        <ol class="steps" start="6">
+          <li>Save both files, open <code>index.html</code> in a browser, and test every link: the bookmark link must jump to the Courses heading, the <code>courses.html</code> link must open the second page, and the <code>mailto:</code> link must open a new email.</li>
+        </ol>
+
+        <div class="box tip">
+          <h4>Exam tips</h4>
+          <p>Always use relative file paths for local pages, images and stylesheets — an absolute path such as <code>C:\Users\...</code> works only on your computer and breaks on the examiner's computer. An inline style beats an external stylesheet, and the last attached stylesheet wins — check the hierarchy if a style does not apply. A class (<code>.main-title</code>) can be reused on many elements; an id (<code>#courses</code>) is unique and is used for bookmarks. Every image needs alt text. Check every link target: <code>_blank</code> opens a new window and <code>_self</code> opens in the same window.</p>
+        </div>
+
+        <div class="box note">
+          <h4>Full guide</h4>
+          <p>The HTML &amp; CSS quick reference — document structure, text, lists, tables, semantic elements, attributes, the box model, fonts, positioning and colours — is on the <a href="/web-html-css">HTML &amp; CSS Cheat Sheet</a> page.</p>
+        </div>
+      </section>
+
+      <footer>
+        <p class="hand">SrWL Learning — ICT CIE 0417 Practical Skills</p>
+        <p>Created by Tr. Wai Lin Htet · <a href="https://www.wailinhtet.com">www.wailinhtet.com</a></p>
+        <p>Syllabus: Cambridge IGCSE Information and Communication Technology 0417 (2026–2028)</p>
+        <p><a href="ict_notes.html">← Back to Theory Notes (Chapters 1–10)</a></p>
+      </footer>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  // Highlight the active chapter link on scroll
+  const links = document.querySelectorAll('#sideNav a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  function onScroll(){
+    let current = sections[0];
+    const y = window.scrollY + 140;
+    for(const sec of sections){
+      if(sec.offsetTop <= y) current = sec;
+    }
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+</script>
+
+<script type="module">
+  // ===== Firebase Login Gate (replaces the old local password gate, Nov 2026) =====
+  // Access rule: Google sign-in via the SrWL portal + teacher approval.
+  // No passwords are stored on this page. The dashboard enrollment + approval
+  // remain the real access control; this check keeps the notes page itself
+  // behind the same Google login.
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+  import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+  import { firebaseConfig, firebaseReady } from './assets/portal/firebase-config.js';
+
+  // Remove any credentials left behind by the old local password system.
+  try {
+    localStorage.removeItem('ict0417_users');
+    localStorage.removeItem('ict0417_session');
+  } catch (e) { /* storage unavailable - nothing to clean */ }
+
+  // Google Apps Script Web App URL (attendance logging, unchanged)
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweswRLHak84m6MkD8DrvxorOaH_ajSIut1uhAitFJDnF1Mrhg_m-vc7nfXaD7ibMBn/exec';
+
+  function logVisit(name, username, event) {
+    if (!SCRIPT_URL) return;
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ name: name, username: username, timestamp: new Date().toISOString(), event: event })
+    }).catch(function (err) { console.warn('Attendance log failed:', err); });
+  }
+
+  const overlay = document.getElementById('authOverlay');
+  const statusMsg = document.getElementById('authStatusMsg');
+  const goLoginBtn = document.getElementById('authGoLoginBtn');
+  const userBox = document.getElementById('authUserBox');
+  const userNameEl = document.getElementById('authUserName');
+  const avatarEl = document.getElementById('authAvatar');
+  const logoutBtn = document.getElementById('authLogoutBtn');
+  const openBtn = document.getElementById('authOpenBtn');
+
+  function showStatus(text, isError) {
+    if (!statusMsg) return;
+    statusMsg.textContent = text;
+    statusMsg.className = 'auth-msg show ' + (isError ? 'err' : 'ok');
+  }
+
+  function unlockPage(name) {
+    overlay.style.display = 'none';
+    userBox.style.display = 'flex';
+    userNameEl.textContent = name;
+    avatarEl.textContent = (name || '?').trim().charAt(0).toUpperCase() || '?';
+  }
+
+  function lockPage(message, showLoginButton) {
+    overlay.style.display = 'flex';
+    userBox.style.display = 'none';
+    if (message) showStatus(message, true);
+    if (goLoginBtn) goLoginBtn.style.display = showLoginButton ? '' : 'none';
+  }
+
+  if (goLoginBtn) goLoginBtn.addEventListener('click', function () { location.assign('login.html'); });
+  if (openBtn) openBtn.addEventListener('click', function () { location.assign('login.html'); });
+
+  if (!firebaseReady) {
+    lockPage('Firebase is not configured. Please contact your teacher.', false);
+  } else {
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Same admin check as assets/portal/portal.js: a denied read is not admin.
+    const isAdmin = async (uid) => {
+      try {
+        const snapshot = await getDoc(doc(db, 'admins', uid));
+        return snapshot.exists();
+      } catch (error) {
+        if (error.code === 'permission-denied') return false;
+        throw error;
+      }
+    };
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', async function () {
+        try { await signOut(auth); } catch (e) { console.warn('Sign-out failed:', e); }
+        location.assign('login.html');
+      });
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        lockPage('Please sign in with Google to read these notes. Redirecting to the login page…', true);
+        setTimeout(function () { location.assign('login.html'); }, 2500);
+        return;
+      }
+      const displayName = user.displayName || (user.email ? user.email.split('@')[0] : 'Student');
+      try {
+        const admin = await isAdmin(user.uid);
+        let approved = null; // null = could not verify (read denied); dashboard already enforces approval
+        try {
+          const snapshot = await getDoc(doc(db, 'users', user.uid));
+          if (snapshot.exists()) approved = snapshot.data().approved === true;
+        } catch (error) {
+          if (error.code !== 'permission-denied') throw error;
+          console.warn('Could not verify approval - allowing signed-in user. Check Firestore Rules for /users/{uid}.', error);
+        }
+        if (admin || approved === true || approved === null) {
+          unlockPage(displayName);
+          logVisit(displayName, user.email || user.uid, 'firebase-login');
+        } else {
+          lockPage('Registration received. Your teacher must approve your account before course access is enabled.', false);
+        }
+      } catch (error) {
+        console.error('Account check failed:', error);
+        lockPage('Unable to verify your account. Please try again or contact your teacher.', true);
+      }
+    });
+  }
+</script>
+<script>
+  // Fallback if the Firebase module above failed to load (e.g. offline)
+  setTimeout(function () {
+    var msg = document.getElementById('authStatusMsg');
+    var overlay = document.getElementById('authOverlay');
+    if (msg && overlay && overlay.style.display !== 'none' && msg.textContent.indexOf('Checking your Google sign-in') === 0) {
+      msg.textContent = 'Could not reach the sign-in service. Check your connection, then refresh this page.';
+      msg.className = 'auth-msg show err';
+      var btn = document.getElementById('authGoLoginBtn');
+      if (btn) btn.style.display = '';
+    }
+  }, 8000);
+</script>
+<script>
+  // ===== Theme + hide/show contents =====
+  (function(){
+    var root=document.documentElement, body=document.body;
+    var tocBtn=document.getElementById('tocToggle'), thBtn=document.getElementById('themeToggle');
+    function store(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+    function setTheme(t){
+      root.setAttribute('data-theme',t);
+      document.getElementById('themeIcon').textContent = t==='dark' ? '☀️' : '🌙';
+      document.getElementById('themeLabel').textContent = t==='dark' ? 'Light' : 'Dark';
+      thBtn.setAttribute('aria-pressed', t==='dark');
+    }
+    function setToc(hidden){
+      root.classList.remove('toc-hidden-pre');
+      body.classList.toggle('toc-hidden',hidden);
+      tocBtn.setAttribute('aria-expanded', String(!hidden));
+      tocBtn.querySelector('span').textContent = hidden ? 'Show contents' : 'Hide contents';
+    }
+    setTheme(root.getAttribute('data-theme')||'light');
+    setToc(root.classList.contains('toc-hidden-pre'));
+    thBtn.addEventListener('click',function(){
+      var t=root.getAttribute('data-theme')==='dark'?'light':'dark'; setTheme(t); store('ict0417_theme',t);
+    });
+    tocBtn.addEventListener('click',function(){
+      var h=!body.classList.contains('toc-hidden'); setToc(h); store('ict0417_toc_hidden',h?'1':'0');
+    });
+  })();
+</script>
+</body>
+</html>
