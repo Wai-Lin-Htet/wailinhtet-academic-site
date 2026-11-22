@@ -130,6 +130,10 @@ body.chapters-locked .locked-link::after{content:" \1F512"}
 /* Chapter PDF download link (one per chapter, after the chapter header). */
 .pdf-link{margin:18px 0 4px}
 .pdf-link .btn{font-size:.88rem}
+/* Chapter quiz link (one per chapter, at the end of the chapter). */
+.quiz-link{margin:28px 0 4px;background:var(--p1-soft);border:1px solid rgba(0,113,227,.25);border-radius:16px;padding:20px 22px}
+.quiz-link h3{margin:0 0 6px!important;font-size:1.15rem}
+.quiz-link p{margin:0 0 14px;color:var(--muted)}
 /* Free preview section (public — visible in every auth state, never locked). */
 .vid{position:relative;aspect-ratio:16/9;margin:16px 0 4px;border-radius:14px;overflow:hidden;background:#000}
 .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -547,6 +551,11 @@ Bytes = bits ÷ 8       KiB = bytes ÷ 1024       MiB = KiB ÷ 1024</pre>
     <tr><td>Best for</td><td>Text, program files, medical images</td><td>Photos, music and video on the web</td></tr>
   </table></div>
   <p><strong>Run-length encoding:</strong> store each value once with a count of how many times it repeats. <code>AAAABBBCC</code> becomes <code>4A3B2C</code> (9 characters shrink to 6). It works best on data with long runs, such as simple graphics.</p>
+  <div class="quiz-link">
+    <h3>📝 Chapter 1 Quiz — 30 Questions</h3>
+    <p>Test yourself on Data Representation: 30 multiple-choice questions with an explanation after every answer. 30 marks.</p>
+    <a class="btn solid" href="https://docs.google.com/forms/d/e/1FAIpQLSewyZ9P9yHOnVk5T8w9Eb57qqQl838cDh9PpPM4KFw5SctVzw/viewform" target="_blank" rel="noopener noreferrer">Take the Chapter 1 Quiz →</a>
+  </div>
 </article>
 
 <!-- ======== CHAPTER 2 ======== -->
@@ -626,6 +635,11 @@ Bytes = bits ÷ 8       KiB = bytes ÷ 1024       MiB = KiB ÷ 1024</pre>
     <tr><td>Used for</td><td>Encrypting large amounts of data</td><td>Exchanging keys safely, for example in HTTPS (SSL/TLS)</td></tr>
   </table></div>
   <p>To send a secret message to someone with asymmetric encryption, you encrypt with <em>their public key</em>. Only their private key can decrypt it.</p>
+  <div class="quiz-link">
+    <h3>📝 Chapter 2 Quiz — 30 Questions</h3>
+    <p>Test yourself on Data Transmission: 30 multiple-choice questions with an explanation after every answer. 30 marks.</p>
+    <a class="btn solid" href="https://docs.google.com/forms/d/e/1FAIpQLSf0KiCb3ZGrRSuz1x0HY0lhNuMJRKK4CPrV2-NAYC6cN0LTRg/viewform" target="_blank" rel="noopener noreferrer">Take the Chapter 2 Quiz →</a>
+  </div>
 </article>
 
 <!-- ======== CHAPTER 3 ======== -->
@@ -737,6 +751,11 @@ Bytes = bits ÷ 8       KiB = bytes ÷ 1024       MiB = KiB ÷ 1024</pre>
     <tr><td>Purpose</td><td>Identifies the physical device on a local network</td><td>Identifies where a device is on a network, so packets can be routed</td></tr>
   </table></div>
   <p>IPv6 exists because the world is running out of IPv4 addresses. An IP address can be <strong>static</strong> (never changes, used for servers) or <strong>dynamic</strong> (a new one is given each time a device connects, which is the norm at home).</p>
+  <div class="quiz-link">
+    <h3>📝 Chapter 3 Quiz — 30 Questions</h3>
+    <p>Test yourself on Hardware: 30 multiple-choice questions with an explanation after every answer. 30 marks.</p>
+    <a class="btn solid" href="https://docs.google.com/forms/d/e/1FAIpQLSfzrPB-mgv-fYFzroOLKBWFErDl7E4IU-DDM8I43uVOhMvO2A/viewform" target="_blank" rel="noopener noreferrer">Take the Chapter 3 Quiz →</a>
+  </div>
 </article>
 <!-- ======== CHAPTER 4 ======== -->
 <article class="chapter" data-ch="4" data-title="Software" hidden>
@@ -807,6 +826,11 @@ Bytes = bits ÷ 8       KiB = bytes ÷ 1024       MiB = KiB ÷ 1024</pre>
     <li><strong>Error diagnostics</strong> to point out mistakes and a <strong>debugger</strong> with breakpoints, single-stepping and variable watches.</li>
     <li>A built-in translator (compiler or interpreter) and a <strong>run-time environment</strong> to test the program.</li>
   </ul>
+  <div class="quiz-link">
+    <h3>📝 Chapter 4 Quiz — 30 Questions</h3>
+    <p>Test yourself on Software: 30 multiple-choice questions with an explanation after every answer. 30 marks.</p>
+    <a class="btn solid" href="https://docs.google.com/forms/d/e/1FAIpQLSdrfJx5cxnvrlKuUrvdyMj5I9y8M4juZ9fzUd371Io-ywCQIg/viewform" target="_blank" rel="noopener noreferrer">Take the Chapter 4 Quiz →</a>
+  </div>
 </article>
 
 <!-- ======== CHAPTER 5 ======== -->
@@ -886,6 +910,11 @@ protocol   domain name       path    file name</pre>
     <div><dt>Access levels</dt><dd>Users only see the data they need for their role.</dd></div>
     <div><dt>Software updates</dt><dd>Fix known security holes; turn on automatic updates.</dd></div>
   </dl>
+  <div class="quiz-link">
+    <h3>📝 Chapter 5 Quiz — 30 Questions</h3>
+    <p>Test yourself on The Internet and its Uses: 30 multiple-choice questions with an explanation after every answer. 30 marks.</p>
+    <a class="btn solid" href="https://docs.google.com/forms/d/e/1FAIpQLScKjACe8Ta4AI5s-ZuPmx8rT1rnPl99RPBB5GLXp3jT86RQtg/viewform" target="_blank" rel="noopener noreferrer">Take the Chapter 5 Quiz →</a>
+  </div>
 </article>
 
 <!-- ======== CHAPTER 6 ======== -->
@@ -934,6 +963,11 @@ protocol   domain name       path    file name</pre>
   </dl>
   <p>Uses: medical diagnosis, finding faults in car engines, mineral prospecting, financial advice, chess.</p>
   <div class="callout"><span class="lab">Exam tip</span> For "describe how an automated system works" questions, name the sensor, say what it measures, say what the microprocessor compares it with, and name the actuator and what it does. Generic answers such as "the computer controls it" earn no marks.</div>
+  <div class="quiz-link">
+    <h3>📝 Chapter 6 Quiz — 30 Questions</h3>
+    <p>Test yourself on Automated and Emerging Technologies: 30 multiple-choice questions with an explanation after every answer. 30 marks.</p>
+    <a class="btn solid" href="https://docs.google.com/forms/d/e/1FAIpQLSfcHKop7p3a9LHCV-h2tunY9zuAOqryeCP8R3HOqiEBpXQrOw/viewform" target="_blank" rel="noopener noreferrer">Take the Chapter 6 Quiz →</a>
+  </div>
 </article>
 
       </div>
@@ -1267,6 +1301,11 @@ OUTPUT Total, Count</pre>
     <tr><td></td><td></td><td></td><td></td><td></td><td class="out">14, 2</td></tr>
   </table></div>
   <div class="callout"><span class="lab">Exam tip</span> Write the column headings exactly as the variable names in the algorithm, and include a column for each condition that is tested and for the output. Never skip an iteration, even when nothing changes.</div>
+  <div class="quiz-link">
+    <h3>📝 Chapter 7 Quiz — 30 Questions</h3>
+    <p>Test yourself on Algorithm Design and Problem-solving: 30 multiple-choice questions with an explanation after every answer. 30 marks.</p>
+    <a class="btn solid" href="https://docs.google.com/forms/d/e/1FAIpQLSe-24Ig7FAWwf4y9E03uEyPQpmsVBRM-g1yNCzKJhrLSUEieA/viewform" target="_blank" rel="noopener noreferrer">Take the Chapter 7 Quiz →</a>
+  </div>
 </article>
 <!-- ======== CHAPTER 8 ======== -->
 <article class="chapter" data-ch="8" data-title="Programming" hidden>
@@ -1447,6 +1486,11 @@ for i in range(n - 1):
 print(marks)       # [55, 60, 72, 85, 91]</pre>
   <p>To sort into <strong>descending</strong> order, change <code>&gt;</code> to <code>&lt;</code> in the comparison.</p>
   <div class="callout"><span class="lab">Exam tip</span> In the 15-mark scenario question, write the code in clear steps: declare variables, take input with validation, use a loop to process, then output. Use meaningful variable names and add short comments; marks are given for structure as well as for working code.</div>
+  <div class="quiz-link">
+    <h3>📝 Chapter 8 Quiz — 30 Questions</h3>
+    <p>Test yourself on Programming: 30 multiple-choice questions with an explanation after every answer. 30 marks.</p>
+    <a class="btn solid" href="https://docs.google.com/forms/d/e/1FAIpQLSeiK3wd33nSvcbWFH-d3yT7lyKFKdV1AZsyLkQmGNiX4naIBQ/viewform" target="_blank" rel="noopener noreferrer">Take the Chapter 8 Quiz →</a>
+  </div>
 </article>
 
 <!-- ======== CHAPTER 9 ======== -->
@@ -1516,6 +1560,11 @@ WHERE Class = "10B";           -- result: 233 (67 + 78 + 88)</pre>
   <div class="callout warn"><span class="lab">Common mistakes</span>
     <ul><li>Forgetting the semicolon at the end or the quotes around text.</li><li>Writing fields in <code>SELECT</code> that the question did not ask for.</li><li>Using <code>=</code> when the question needs <code>&gt;=</code> ("at least" means greater than <em>or equal to</em>).</li></ul>
   </div>
+  <div class="quiz-link">
+    <h3>📝 Chapter 9 Quiz — 30 Questions</h3>
+    <p>Test yourself on Databases: 30 multiple-choice questions with an explanation after every answer. 30 marks.</p>
+    <a class="btn solid" href="https://docs.google.com/forms/d/e/1FAIpQLSdXUYBbW32xdzMt25JVuEqMpu5ClhGWinGYHtyFb5Gcm5CWkA/viewform" target="_blank" rel="noopener noreferrer">Take the Chapter 9 Quiz →</a>
+  </div>
 </article>
 
 <!-- ======== CHAPTER 10 ======== -->
@@ -1570,6 +1619,11 @@ WHERE Class = "10B";           -- result: 233 (67 + 78 + 88)</pre>
     <div class="scroll"><table class="tt" id="ttOut"></table></div>
   </div>
   <div class="callout"><span class="lab">Exam tip</span> Fill the truth table one gate at a time and write the working column, even if the question does not ask for it. A wrong final answer can still earn marks for correct working columns. Check that the number of rows is 2<sup>n</sup>.</div>
+  <div class="quiz-link">
+    <h3>📝 Chapter 10 Quiz — 30 Questions</h3>
+    <p>Test yourself on Boolean Logic: 30 multiple-choice questions with an explanation after every answer. 30 marks.</p>
+    <a class="btn solid" href="https://docs.google.com/forms/d/e/1FAIpQLSfsdGVpf1m5UAk3i4l9bGGo6qGx2PwXhRutn4KLeDgaLPTRlQ/viewform" target="_blank" rel="noopener noreferrer">Take the Chapter 10 Quiz →</a>
+  </div>
 </article>
 
       </div>
