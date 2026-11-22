@@ -150,7 +150,7 @@ if (!firebaseReady) {
   // 4CP0 has no course page yet, so it opens the Resources catalogue.
   const COURSES = [
     { courseId: 'ict-0417', courseTitle: 'ICT CIE 0417 — Exam Notebook', resourceUrl: 'ict-0417-course.html' },
-    { courseId: 'cs-0478', courseTitle: 'Computer Science (0478) — IGCSE', resourceUrl: 'https://wai-lin-htet.github.io/CS_IGCSE/' },
+    { courseId: 'cs-0478', courseTitle: 'Computer Science (0478) — IGCSE', resourceUrl: 'cs_notes.html' },
     { courseId: 'ict-4it1', courseTitle: 'IGCSE ICT (4IT1) — Edexcel', resourceUrl: 'ict_edexcel_4it_v1.html' },
     { courseId: 'cs-4cp0', courseTitle: 'Computer Science (4CP0) — Edexcel IGCSE', resourceUrl: 'resources.html' },
     { courseId: 'cs-9618', courseTitle: 'A-Level Computer Science (9618)', resourceUrl: 'CS_9618_Alevel_wh.html' },
