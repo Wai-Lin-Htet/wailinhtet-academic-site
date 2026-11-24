@@ -108,7 +108,7 @@
       <a href="my_course.html">Courses</a>
       <a href="resources.html">Resources</a>
       <a href="pastpaper_index.html">Past Papers</a>
-      <a class="signin-btn" href="login.html">Student sign in</a>
+      <a class="signin-btn" id="headerSigninBtn" href="login.html">Student sign in</a>
     </nav>
   </div>
 </header>
@@ -213,6 +213,26 @@
   <p><a href="index.html">Home</a> · <a href="my_course.html">Courses</a> · <a href="resources.html">Resources</a> · <a href="login.html">Student sign in</a> · <a href="https://t.me/SayarWaiLin">Telegram @SayarWaiLin</a></p>
   <p>www.wailinhtet.com</p>
 </footer>
+
+<script type="module">
+  // Header sign-in button reflects auth state (public page — no gate, just the button).
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+  import { firebaseConfig, firebaseReady } from './assets/portal/firebase-config.js';
+  const btn = document.getElementById('headerSigninBtn');
+  if (btn && firebaseReady) {
+    const app = initializeApp(firebaseConfig);
+    onAuthStateChanged(getAuth(app), (user) => {
+      if (user) {
+        btn.textContent = user.displayName || (user.email ? user.email.split('@')[0] : 'My dashboard');
+        btn.href = 'student-dashboard.html';
+      } else {
+        btn.textContent = 'Student sign in';
+        btn.href = 'login.html';
+      }
+    });
+  }
+</script>
 
 </body>
 </html>

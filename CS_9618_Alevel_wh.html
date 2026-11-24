@@ -283,7 +283,7 @@ figure.diagram figcaption{color:var(--muted);font-size:.86rem;margin-top:8px;tex
       <div>
         <div class="hero-badge"><span>Cambridge International AS &amp; A Level &bull; 9618 &bull; AS + A Level &bull;</span></div>
         <h1>Cambridge AS &amp; A Level Computer Science <span>Theory &amp; Practical</span></h1>
-        <p class="sub">Revision notes for all twenty sections of the 9618 syllabus, with worked examples and exam tips for every paper. Section 1 is free &mdash; sign in with Google to unlock Sections 2&ndash;20.</p>
+        <p class="sub" id="heroSub">Revision notes for all twenty sections of the 9618 syllabus, with worked examples and exam tips for every paper. Section 1 is free &mdash; sign in with Google to unlock Sections 2&ndash;20.</p>
         <p class="note" style="margin-top:-12px"><strong>Exam map:</strong> AS = Papers 1&ndash;2 &middot; A Level = all four papers &middot; 75 marks each &middot; No calculators in any paper &middot; June and November series &middot; Exam target: May/June 2027</p>
         <div class="cta">
           <button class="btn solid big" type="button" data-go="p1"><span>Start with Section 1 &mdash; it&rsquo;s free</span> <span>&rarr;</span></button>
@@ -412,7 +412,7 @@ ENDWHILE</pre>
     <div class="wrap">
       <div class="section-eyebrow">Curriculum</div>
       <h2>Section list</h2>
-      <p class="lede">Twenty sections in syllabus order. Section 1 is free to read &mdash; sign in with Google to unlock Sections 2&ndash;20.</p>
+      <p class="lede" id="listLede">Twenty sections in syllabus order. Section 1 is free to read &mdash; sign in with Google to unlock Sections 2&ndash;20.</p>
       <div class="papers">
         <article class="paper p1">
           <header>
@@ -431,7 +431,7 @@ ENDWHILE</pre>
           <button class="btn solid" type="button" data-go="p2">Open A Level notes</button>
         </article>
       </div>
-      <div class="mmband">
+      <div class="mmband" id="accessBox">
         <div>
           <h3>How to get access</h3>
           <p>1) Sign in with Google on the login page. 2) Your teacher approves your account. 3) Your courses appear on your dashboard &mdash; open this page from there.</p>
@@ -1465,6 +1465,31 @@ route();
   const freeBannerBtn = document.getElementById('freeBannerBtn');
   let auth = null;
 
+  // Hero + section-list copy follows auth state, so a signed-in student never
+  // sees "sign in to unlock" text. Originals are restored on sign-out.
+  const heroSub = document.getElementById('heroSub');
+  const listLede = document.getElementById('listLede');
+  const accessBox = document.getElementById('accessBox');
+  const ORIG_COPY = {
+    hero: heroSub ? heroSub.textContent : '',
+    lede: listLede ? listLede.textContent : ''
+  };
+  function setAccessCopy(mode) {
+    if (mode === 'approved') {
+      if (heroSub) heroSub.textContent = 'Revision notes for all twenty sections of the 9618 syllabus, with worked examples and exam tips for every paper. All twenty sections are unlocked for you.';
+      if (listLede) listLede.textContent = 'Twenty sections in syllabus order. All unlocked \u2014 pick a section below.';
+      if (accessBox) accessBox.style.display = 'none';
+    } else if (mode === 'pending') {
+      if (heroSub) heroSub.textContent = 'Revision notes for all twenty sections of the 9618 syllabus, with worked examples and exam tips for every paper. Section 1 is free to read while your registration waits for teacher approval.';
+      if (listLede) listLede.textContent = 'Twenty sections in syllabus order. Section 1 is free meanwhile \u2014 the rest unlock after teacher approval.';
+      if (accessBox) accessBox.style.display = '';
+    } else {
+      if (heroSub) heroSub.textContent = ORIG_COPY.hero;
+      if (listLede) listLede.textContent = ORIG_COPY.lede;
+      if (accessBox) accessBox.style.display = '';
+    }
+  }
+
   function setBanner(text, showButton) {
     if (freeBannerMsg) freeBannerMsg.textContent = text;
     if (freeBanner) freeBanner.style.display = 'flex';
@@ -1477,6 +1502,7 @@ route();
 
   function showSignedOut() {
     document.body.classList.add('chapters-locked');
+    setAccessCopy('signedOut');
     if (authBtn) { authBtn.textContent = 'Sign in with Google'; authBtn.classList.add('solid'); }
     if (userNameEl) userNameEl.hidden = true;
   }
@@ -1496,6 +1522,7 @@ route();
   function unlockChapters(name) {
     document.body.classList.remove('chapters-locked');
     hideBanner();
+    setAccessCopy('approved');
     if (overlay) overlay.style.display = 'none';
     showSignedIn(name);
     if (window.__csRoute) window.__csRoute();
@@ -1564,6 +1591,7 @@ route();
           // Signed in, waiting for teacher approval: Section 1 is free meanwhile.
           showSignedIn(displayName);
           lockChapters();
+          setAccessCopy('pending');
           setBanner('⏳ Your registration is waiting for teacher approval — you can read Section 1 meanwhile.', true);
         }
       } catch (error) {
