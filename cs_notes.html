@@ -138,6 +138,22 @@ body.chapters-locked .locked-link::after{content:" \1F512"}
 .vid{position:relative;aspect-ratio:16/9;margin:16px 0 4px;border-radius:14px;overflow:hidden;background:#000}
 .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .preview-samples{margin-top:20px}
+/* Video lessons preview — curated from the 0478 Theory playlist (not the raw
+   playlist embed). Full class + Chapter 1 are free for everyone; the rest
+   unlock with Google sign-in + teacher approval, like Chapters 2-10. */
+.vid-feature{margin:0 0 20px}
+.vid-feature h3{font-size:1.35rem;font-weight:700}
+.vid-feature .meta{color:var(--muted);font-size:.88rem;margin-top:6px}
+.vid-feature .vid{margin:16px 0 4px}
+.vid-feature .btn{margin-top:14px}
+body.chapters-locked .vid-locked .vid,body.chapters-locked .vid-locked .vid-watch{display:none}
+.vid-lock{display:none}
+body.chapters-locked .vid-lock{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;background:var(--surface);border:2px dashed var(--line);border-radius:14px;padding:30px 20px;margin:16px 0 4px;min-height:170px}
+.vid-lock .lock-icon{font-size:2rem;line-height:1}
+.vid-lock p{color:var(--muted);max-width:44ch;margin:0}
+.vid-lock .lock-btn{background:var(--p1);color:#fff;border:none;padding:10px 20px;border-radius:980px;cursor:pointer;font-weight:600;font-size:.92rem}
+.vid-lock .lock-btn:hover{background:#0062c4}
+
 /* Hard-error overlay (shown only if Firebase fails or the account check fails). */
 .auth-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(29,29,31,.55);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px}
 .auth-card{width:100%;max-width:400px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--p1);border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.25);padding:28px}
@@ -378,6 +394,110 @@ print("Hello", name)
 print("Next year you will be", age + 1)</pre>
         </article>
       </div>
+    </div>
+  </section>
+
+  <!-- VIDEO LESSONS PREVIEW (DRAFT — curated from the 0478 Theory playlist, not yet live) -->
+  <section class="sec" id="video-lessons">
+    <div class="wrap">
+      <div class="section-eyebrow">Video lessons</div>
+      <h2>Watch the lessons</h2>
+      <p class="lede">Video lessons from the Computer Science 0478 Theory playlist. The full class and Chapter 1 are free to watch — sign in with Google to unlock the rest.</p>
+      <div class="vid-feature">
+        <h3>How Computers Really Work — From Binary to AI (Full Class)</h3>
+        <p class="meta">The complete concept overview — from binary to AI in one 66-minute class · 66:40.</p>
+        <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/oOIjlFVvmJs" title="How Computers Really Work — From Binary to AI (Full Class)" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe></div>
+        <a class="btn" href="https://www.youtube.com/watch?v=oOIjlFVvmJs&amp;list=PLMZRqeDkCMR8&amp;index=2" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+      </div>
+      <div class="papers vid-grid">
+        <article class="paper">
+          <header>
+            <h3>Data Representation — Chapter 1 (Highlights)</h3>
+            <p class="meta">Chapter 1 highlights · 13:42 — binary, hexadecimal, text, images and sound.</p>
+          </header>
+          <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/kWYd8gNrOvs" title="Data Representation — Chapter 1 (Highlights)" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe></div>
+          <a class="btn vid-watch" href="https://www.youtube.com/watch?v=kWYd8gNrOvs" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+        </article>
+        <article class="paper vid-locked">
+          <header>
+            <h3>Data Transmission — Chapter 2 (Highlights)</h3>
+            <p class="meta">Chapter 2 highlights · 13:58 — how data travels and how errors are caught.</p>
+          </header>
+          <div class="vid-lock">
+            <div class="lock-icon">🔒</div>
+            <p>Sign in with Google to unlock this video lesson — the full class and Chapter 1 are free to watch now.</p>
+            <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+          </div>
+          <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/YG4CHW9f2iI" title="Data Transmission — Chapter 2 (Highlights)" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe></div>
+          <a class="btn vid-watch" href="https://www.youtube.com/watch?v=YG4CHW9f2iI" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+        </article>
+        <article class="paper vid-locked">
+          <header>
+            <h3>Hardware — Chapter 3 (Highlights)</h3>
+            <p class="meta">Chapter 3 highlights · 13:22 — CPU, memory, storage and input/output devices.</p>
+          </header>
+          <div class="vid-lock">
+            <div class="lock-icon">🔒</div>
+            <p>Sign in with Google to unlock this video lesson — the full class and Chapter 1 are free to watch now.</p>
+            <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+          </div>
+          <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/QdA6_LiWqRA" title="Hardware — Chapter 3 (Highlights)" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe></div>
+          <a class="btn vid-watch" href="https://www.youtube.com/watch?v=QdA6_LiWqRA" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+        </article>
+        <article class="paper vid-locked">
+          <header>
+            <h3>System and Application Software — Chapter 4 (Highlights)</h3>
+            <p class="meta">Chapter 4 highlights · 12:59 — operating systems, utilities and languages.</p>
+          </header>
+          <div class="vid-lock">
+            <div class="lock-icon">🔒</div>
+            <p>Sign in with Google to unlock this video lesson — the full class and Chapter 1 are free to watch now.</p>
+            <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+          </div>
+          <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/2o-I4__LjCU" title="System and Application Software — Chapter 4 (Highlights)" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe></div>
+          <a class="btn vid-watch" href="https://www.youtube.com/watch?v=2o-I4__LjCU" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+        </article>
+        <article class="paper vid-locked">
+          <header>
+            <h3>Computer Science Explained in 14 Minutes</h3>
+            <p class="meta">The whole subject in 14 minutes — from binary to AI · 14:01.</p>
+          </header>
+          <div class="vid-lock">
+            <div class="lock-icon">🔒</div>
+            <p>Sign in with Google to unlock this video lesson — the full class and Chapter 1 are free to watch now.</p>
+            <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+          </div>
+          <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/PD_qD4dDogg" title="Computer Science Explained in 14 Minutes" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe></div>
+          <a class="btn vid-watch" href="https://www.youtube.com/watch?v=PD_qD4dDogg" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+        </article>
+        <article class="paper vid-locked">
+          <header>
+            <h3>Every Network Device Explained in 10 Minutes</h3>
+            <p class="meta">Hubs, switches, routers and more — every device explained · 10:30.</p>
+          </header>
+          <div class="vid-lock">
+            <div class="lock-icon">🔒</div>
+            <p>Sign in with Google to unlock this video lesson — the full class and Chapter 1 are free to watch now.</p>
+            <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+          </div>
+          <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/cep8Y5n69Gw" title="Every Network Device Explained in 10 Minutes" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe></div>
+          <a class="btn vid-watch" href="https://www.youtube.com/watch?v=cep8Y5n69Gw" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+        </article>
+        <article class="paper vid-locked">
+          <header>
+            <h3>Every PC Component Explained in 10 Minutes</h3>
+            <p class="meta">CPU, RAM, motherboard, GPU and storage — every part explained · 9:48.</p>
+          </header>
+          <div class="vid-lock">
+            <div class="lock-icon">🔒</div>
+            <p>Sign in with Google to unlock this video lesson — the full class and Chapter 1 are free to watch now.</p>
+            <button type="button" class="lock-btn" data-signin>Sign in with Google</button>
+          </div>
+          <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/TBeyekZuTTU" title="Every PC Component Explained in 10 Minutes" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe></div>
+          <a class="btn vid-watch" href="https://www.youtube.com/watch?v=TBeyekZuTTU" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+        </article>
+      </div>
+      <p class="meta" style="margin-top:18px">See the full playlist: <a href="https://www.youtube.com/playlist?list=PLMZRqeDkCMR8" target="_blank" rel="noopener noreferrer">Computer Science 0478 Theory on YouTube</a></p>
     </div>
   </section>
 
